@@ -123,12 +123,12 @@ RSpec.describe TransactionTypeHelper do
 
         context "with bank statement upload" do
           it "returns a hash of formatted key value pairs" do
-            expect(formatted_transactions).to eq [
+            expect(formatted_transactions).to contain_exactly(
               { label: "Financial help from friends or family", value: "£500.00 every week" },
               { label: "Maintenance payments from a former partner", value: "£500.00 every week" },
               { label: "Income from a property or lodger", value: "None" },
               { label: "Pension", value: "None" },
-            ]
+            )
           end
 
           context "and with incoming cash payments" do
@@ -144,10 +144,10 @@ RSpec.describe TransactionTypeHelper do
             end
 
             it "returns a hash of formatted key value pairs for categories which have either regular or cash transactions" do
-              expect(formatted_transactions).to eq [
+              expect(formatted_transactions).to contain_exactly(
                 { label: "Financial help from friends or family", value: "None" },
                 { label: "Maintenance payments from a former partner", value: "£111 in January 2021<br>£222 in February 2021<br>£333 in March 2021" },
-              ]
+              )
             end
           end
         end
@@ -169,13 +169,13 @@ RSpec.describe TransactionTypeHelper do
           end
 
           it "returns a hash of formatted key value pairs" do
-            expect(formatted_transactions).to eq [
+            expect(formatted_transactions).to contain_exactly(
               { label: "Financial help from friends or family", value: "None" },
               { label: "Benefits, charitable or government payments", value: "£106.00" },
               { label: "Maintenance payments from a former partner", value: "None" },
               { label: "Income from a property or lodger", value: "None" },
               { label: "Pension", value: "None" },
-            ]
+            )
           end
         end
       end
@@ -184,12 +184,12 @@ RSpec.describe TransactionTypeHelper do
         let(:individual) { "Partner" }
 
         it "returns a hash of formatted key value pairs" do
-          expect(formatted_transactions).to eq [
+          expect(formatted_transactions).to contain_exactly(
             { label: "Financial help from friends or family", value: "£500.00 every week" },
             { label: "Maintenance payments from a former partner", value: "£500.00 every week" },
             { label: "Income from a property or lodger", value: "None" },
             { label: "Pension", value: "None" },
-          ]
+          )
         end
 
         context "and with incoming cash payments" do
@@ -205,10 +205,10 @@ RSpec.describe TransactionTypeHelper do
           end
 
           it "returns a hash of formatted key value pairs" do
-            expect(formatted_transactions).to eq [
+            expect(formatted_transactions).to contain_exactly(
               { label: "Financial help from friends or family", value: "None" },
               { label: "Maintenance payments from a former partner", value: "£111 in January 2021<br>£222 in February 2021<br>£333 in March 2021" },
-            ]
+            )
           end
         end
       end
@@ -230,12 +230,12 @@ RSpec.describe TransactionTypeHelper do
 
         context "with bank statement upload" do
           it "returns a hash of formatted key value pairs" do
-            expect(formatted_transactions).to eq [
+            expect(formatted_transactions).to contain_exactly(
               { label: "Housing payments", value: "£500.00 every week" },
               { label: "Maintenance payments to a former partner", value: "£500.00 every week" },
               { label: "Childcare payments", value: "None" },
               { label: "Payments towards legal aid in a criminal case", value: "None" },
-            ]
+            )
           end
 
           context "and with outgoing cash payments" do
@@ -251,10 +251,10 @@ RSpec.describe TransactionTypeHelper do
             end
 
             it "returns a hash of formatted key value pairs" do
-              expect(formatted_transactions).to eq [
+              expect(formatted_transactions).to contain_exactly(
                 { label: "Housing payments", value: "None" },
                 { label: "Maintenance payments to a former partner", value: "£111 in January 2021<br>£222 in February 2021<br>£333 in March 2021" },
-              ]
+              )
             end
           end
         end
@@ -276,12 +276,12 @@ RSpec.describe TransactionTypeHelper do
           end
 
           it "returns a hash of formatted key value pairs" do
-            expect(formatted_transactions).to eq [
+            expect(formatted_transactions).to contain_exactly(
               { label: "Housing payments", value: "None" },
               { label: "Maintenance payments to a former partner", value: "£106.00" },
               { label: "Childcare payments", value: "None" },
               { label: "Payments towards legal aid in a criminal case", value: "None" },
-            ]
+            )
           end
         end
       end
@@ -290,12 +290,12 @@ RSpec.describe TransactionTypeHelper do
         let(:individual) { "Partner" }
 
         it "returns a hash of formatted key value pairs" do
-          expect(formatted_transactions).to eq [
+          expect(formatted_transactions).to contain_exactly(
             { label: "Housing payments", value: "£500.00 every week" },
             { label: "Maintenance payments to a former partner", value: "£500.00 every week" },
             { label: "Childcare payments", value: "None" },
             { label: "Payments towards legal aid in a criminal case", value: "None" },
-          ]
+          )
         end
 
         context "and with outgoing cash payments" do
@@ -311,10 +311,10 @@ RSpec.describe TransactionTypeHelper do
           end
 
           it "returns a hash of formatted key value pairs" do
-            expect(formatted_transactions).to eq [
+            expect(formatted_transactions).to contain_exactly(
               { label: "Housing payments", value: "None" },
               { label: "Maintenance payments to a former partner", value: "£111 in January 2021<br>£222 in February 2021<br>£333 in March 2021" },
-            ]
+            )
           end
         end
       end

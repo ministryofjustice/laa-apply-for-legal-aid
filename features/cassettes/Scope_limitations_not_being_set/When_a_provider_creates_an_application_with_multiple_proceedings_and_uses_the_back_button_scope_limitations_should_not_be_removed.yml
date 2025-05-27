@@ -15,7 +15,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:04 GMT
+      - Tue, 27 May 2025 11:12:57 GMT
       content-type:
       - application/json;charset=UTF-8
       transfer-encoding:
@@ -133,7 +133,7 @@ http_interactions:
         \     \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
         \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
         : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Tue, 27 May 2025 09:59:04 GMT
+  recorded_at: Tue, 27 May 2025 11:12:57 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -151,7 +151,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:06 GMT
+      - Tue, 27 May 2025 11:12:58 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -175,9 +175,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 8b86ba440054fbab27aa0f75586f6210
+      - 44b7b0b4a1badc70ba8d60e88f969595
       x-runtime:
-      - '0.111024'
+      - '0.030782'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -601,7 +601,7 @@ http_interactions:
         - enforcement","description":"to be represented on an application for or to
         extend an emergency protection order. Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:06 GMT
+  recorded_at: Tue, 27 May 2025 11:12:58 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -619,7 +619,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:08 GMT
+      - Tue, 27 May 2025 11:13:00 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -643,9 +643,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - bf328e3c4f48cc5652661af74c96161e
+      - 177fb34c9f0fa15819bafbf195334d34
       x-runtime:
-      - '0.027915'
+      - '0.034524'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1069,7 +1069,7 @@ http_interactions:
         - enforcement","description":"to be represented on an application for or to
         extend an emergency protection order. Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:08 GMT
+  recorded_at: Tue, 27 May 2025 11:13:00 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/SE014
@@ -1087,7 +1087,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:08 GMT
+      - Tue, 27 May 2025 11:13:00 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1111,9 +1111,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 838d40e2230152fe0b013aca93cfa2a0
+      - 3f86768f4c31fb9b401ed4f8f564c3b9
       x-runtime:
-      - '0.042252'
+      - '0.011675'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1132,7 +1132,7 @@ http_interactions:
         representation on the return date."}},"service_levels":[{"level":1,"name":"Family
         Help (Higher)","stage":1,"proceeding_default":true},{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":false}]}'
-  recorded_at: Tue, 27 May 2025 09:59:08 GMT
+  recorded_at: Tue, 27 May 2025 11:13:00 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -1150,7 +1150,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:08 GMT
+      - Tue, 27 May 2025 11:13:00 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1174,9 +1174,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 722f62788ddc37e1c7199f469fb3b210
+      - 37a635af00364d6b468b7c774b4a6316
       x-runtime:
-      - '0.034025'
+      - '0.045323'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1312,7 +1312,7 @@ http_interactions:
         and for an enforcement order under section 11J Children Act 1989. Enforcement
         only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:08 GMT
+  recorded_at: Tue, 27 May 2025 11:13:00 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -1330,7 +1330,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:09 GMT
+      - Tue, 27 May 2025 11:13:01 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1354,9 +1354,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c3170fe8f83cba9201a211b662c7f61b
+      - 6d0338af8428353d7869d942a402dc2f
       x-runtime:
-      - '0.051499'
+      - '0.103180'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1492,7 +1492,7 @@ http_interactions:
         and for an enforcement order under section 11J Children Act 1989. Enforcement
         only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:09 GMT
+  recorded_at: Tue, 27 May 2025 11:13:01 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -1510,7 +1510,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:11 GMT
+      - Tue, 27 May 2025 11:13:03 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1534,9 +1534,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 7cb2b8b482299e3e41c08f5409c0173b
+      - e791194ef39b2e8e8fac44d60317def6
       x-runtime:
-      - '0.182654'
+      - '0.043657'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1672,7 +1672,7 @@ http_interactions:
         and for an enforcement order under section 11J Children Act 1989. Enforcement
         only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:11 GMT
+  recorded_at: Tue, 27 May 2025 11:13:03 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/SE003E
@@ -1690,7 +1690,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:11 GMT
+      - Tue, 27 May 2025 11:13:03 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1714,9 +1714,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - d7f8c40711b57893a2a600e8f49f1ea8
+      - '089c3c2b44fb9b5ac408bf9ede913b1c'
       x-runtime:
-      - '0.026593'
+      - '0.007217'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1737,7 +1737,7 @@ http_interactions:
         thereafter to a solicitors report (or if so advised a Counsel''s opinion)
         on the issues and prospects of success."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Tue, 27 May 2025 09:59:11 GMT
+  recorded_at: Tue, 27 May 2025 11:13:03 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -1755,7 +1755,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:12 GMT
+      - Tue, 27 May 2025 11:13:04 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1779,9 +1779,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 487bc71f84bd50339d91a0e8a372e9fc
+      - efc68739cb9aec3d0d7e6c7d3ff501ab
       x-runtime:
-      - '0.049382'
+      - '0.043108'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -1914,7 +1914,7 @@ http_interactions:
         and for an enforcement order under section 11J Children Act 1989. Enforcement
         only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:12 GMT
+  recorded_at: Tue, 27 May 2025 11:13:04 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -1932,7 +1932,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:13 GMT
+      - Tue, 27 May 2025 11:13:05 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1956,9 +1956,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - ee890c2911026d5eca2de98bd1a5dba2
+      - 7539a71aa50e07935299a77f3ca30262
       x-runtime:
-      - '0.043356'
+      - '0.039239'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -2091,7 +2091,7 @@ http_interactions:
         and for an enforcement order under section 11J Children Act 1989. Enforcement
         only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:13 GMT
+  recorded_at: Tue, 27 May 2025 11:13:05 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -2109,7 +2109,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:15 GMT
+      - Tue, 27 May 2025 11:13:06 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -2133,9 +2133,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - db0084750f04c0e56ec1eb3f638ff200
+      - 21e4b913e068e3e49d453dfc0a732669
       x-runtime:
-      - '0.042646'
+      - '0.038967'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -2268,10 +2268,10 @@ http_interactions:
         and for an enforcement order under section 11J Children Act 1989. Enforcement
         only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:15 GMT
+  recorded_at: Tue, 27 May 2025 11:13:06 GMT
 - request:
     method: get
-    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/SE004E
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/SE004A
     body:
       encoding: US-ASCII
       string: ''
@@ -2286,11 +2286,11 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:15 GMT
+      - Tue, 27 May 2025 11:13:06 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '1486'
+      - '1073'
       connection:
       - keep-alive
       x-frame-options:
@@ -2306,40 +2306,33 @@ http_interactions:
       vary:
       - Accept, Origin
       etag:
-      - W/"6ad817d200e520410063feda81b269ce"
+      - W/"4e31e90bf19adf2d1d38554bcc9c0904"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 02bbb4c5db1a427569c28848e32cb22e
+      - b03f3c89e1d326ba6aea21065b39dc94
       x-runtime:
-      - '0.024969'
+      - '0.016998'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"success":true,"ccms_code":"SE004E","meaning":"Specific issue order
-        - enforcement","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","name":"speciied_issue_order_s8_enforcement","description":"to
-        be represented on an application for a specific issue order.  Enforcement
-        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"section
-        8 children (S8)","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"FM019","meaning":"Exchange
-        of Evidence","description":"Limited to all steps up to and including the exchange
-        of evidence (including any welfare officer''s/guardian ad litem''s report)
-        and directions appointments but not including a final contested hearing and
-        thereafter to a solicitors report (or if so advised a Counsel''s opinion)
-        on the issues and prospects of success."},"delegated_functions":{"code":"FM019","meaning":"Exchange
-        of Evidence","description":"Limited to all steps up to and including the exchange
-        of evidence (including any welfare officer''s/guardian ad litem''s report)
-        and directions appointments but not including a final contested hearing and
-        thereafter to a solicitors report (or if so advised a Counsel''s opinion)
-        on the issues and prospects of success."}},"service_levels":[{"level":3,"name":"Full
-        Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Tue, 27 May 2025 09:59:15 GMT
+      string: '{"success":true,"ccms_code":"SE004A","meaning":"Specific issue order
+        - appeal","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","name":"speciied_issue_order_s8_appeal","description":"to
+        be represented on an application for a specific issue order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"section
+        8 children (S8)","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"5000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"CV079","meaning":"Counsel''s
+        Opinion","description":"Limited to obtaining external Counsel''s Opinion or
+        the opinion of an external solicitor with higher court advocacy rights on
+        the information already available."},"delegated_functions":{"code":"CV118","meaning":"Hearing","description":"Limited
+        to all steps up to and including the hearing on [see additional limitation
+        notes]"}},"service_levels":[{"level":3,"name":"Full Representation","stage":8,"proceeding_default":true}]}'
+  recorded_at: Tue, 27 May 2025 11:13:06 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
     body:
       encoding: UTF-8
-      string: '{"current_proceedings":["SE014","SE003E","SE004E"],"allowed_categories":["MAT"],"search_term":""}'
+      string: '{"current_proceedings":["SE014","SE003E","SE004A"],"allowed_categories":["MAT"],"search_term":""}'
     headers:
       Content-Type:
       - application/json
@@ -2351,11 +2344,11 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:16 GMT
+      - Tue, 27 May 2025 11:13:07 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '15481'
+      - '15490'
       connection:
       - keep-alive
       x-frame-options:
@@ -2371,20 +2364,22 @@ http_interactions:
       vary:
       - Accept, Origin
       etag:
-      - W/"2d264b3d7714c88fe7e48912f9fef408"
+      - W/"eb17582e76d80b240e3a62b60a0ec1c8"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - '094b1692af945344cd9aa43b9635168d'
+      - 289e0495dee05a0caaaef08116f95686
       x-runtime:
-      - '0.265837'
+      - '0.035374'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"success":true,"data":[{"ccms_code":"DA004","meaning":"Non-molestation
-        order","description":"to be represented on an application for a non-molestation
-        order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
+      string: '{"success":true,"data":[{"ccms_code":"SE004E","meaning":"Specific issue
+        order - enforcement","description":"to be represented on an application for
+        a specific issue order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        8 children (S8)"},{"ccms_code":"DA004","meaning":"Non-molestation order","description":"to
+        be represented on an application for a non-molestation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
         abuse (DA)"},{"ccms_code":"DA005","meaning":"Occupation order","description":"to
         be represented on an application for an occupation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
         abuse (DA)"},{"ccms_code":"SE004","meaning":"Specific issue order","description":"to
@@ -2457,9 +2452,6 @@ http_interactions:
         only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE003","meaning":"Prohibited steps order","description":"to
         be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
-        8 children (S8)"},{"ccms_code":"SE004A","meaning":"Specific issue order -
-        appeal","description":"to be represented on an application for a specific
-        issue order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE095","meaning":"Enforcement order 11J","description":"to
         be represented on an application for an enforcement order under section 11J
         Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
@@ -2508,7 +2500,7 @@ http_interactions:
         and for an enforcement order under section 11J Children Act 1989. Enforcement
         only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:16 GMT
+  recorded_at: Tue, 27 May 2025 11:13:07 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/SE014
@@ -2526,7 +2518,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:17 GMT
+      - Tue, 27 May 2025 11:13:08 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -2550,9 +2542,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - bbd1327ea7dbfba7ba6797728c804d7e
+      - 353c5beab3dcb97a060450e38eafb0ee
       x-runtime:
-      - '0.004426'
+      - '0.008547'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -2560,7 +2552,7 @@ http_interactions:
       string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:17 GMT
+  recorded_at: Tue, 27 May 2025 11:13:08 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/SE014
@@ -2578,7 +2570,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:18 GMT
+      - Tue, 27 May 2025 11:13:09 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -2602,9 +2594,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - ba79d598f7ee341e24892f749ba18f9c
+      - e5caae033a795f70948e46aa649c28ce
       x-runtime:
-      - '0.001862'
+      - '0.004137'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -2612,7 +2604,7 @@ http_interactions:
       string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:18 GMT
+  recorded_at: Tue, 27 May 2025 11:13:09 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -2630,7 +2622,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:20 GMT
+      - Tue, 27 May 2025 11:13:10 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -2654,9 +2646,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 47374178b73c6f52f5e8fd407bff6e1c
+      - 79cc573b94d72b68d81c2f8c8f3526ab
       x-runtime:
-      - '0.190797'
+      - '0.019163'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -2666,7 +2658,7 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]}}'
-  recorded_at: Tue, 27 May 2025 09:59:19 GMT
+  recorded_at: Tue, 27 May 2025 11:13:10 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -2684,7 +2676,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:20 GMT
+      - Tue, 27 May 2025 11:13:11 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -2708,9 +2700,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 555dc0a3ae46a1316acb878060418267
+      - da91142904c7de9923ab215637d53d3c
       x-runtime:
-      - '0.031222'
+      - '0.009906'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -2720,7 +2712,7 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]}}'
-  recorded_at: Tue, 27 May 2025 09:59:20 GMT
+  recorded_at: Tue, 27 May 2025 11:13:11 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/SE014
@@ -2738,7 +2730,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:21 GMT
+      - Tue, 27 May 2025 11:13:11 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -2762,9 +2754,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 4f3e64999ebdcbfb5faf492c88017d56
+      - 960ed236448554af046fdccc190c15a8
       x-runtime:
-      - '0.125450'
+      - '0.011717'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -2783,7 +2775,7 @@ http_interactions:
         representation on the return date."}},"service_levels":[{"level":1,"name":"Family
         Help (Higher)","stage":1,"proceeding_default":true},{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":false}]}'
-  recorded_at: Tue, 27 May 2025 09:59:21 GMT
+  recorded_at: Tue, 27 May 2025 11:13:11 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/SE014
@@ -2801,7 +2793,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:22 GMT
+      - Tue, 27 May 2025 11:13:12 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -2825,9 +2817,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - '0281bdda13c0ab5c87e2cd4fe9ebbc35'
+      - e65f4837c403d96fed3e6c536c9e9362
       x-runtime:
-      - '0.028821'
+      - '0.006788'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -2846,7 +2838,7 @@ http_interactions:
         representation on the return date."}},"service_levels":[{"level":1,"name":"Family
         Help (Higher)","stage":1,"proceeding_default":true},{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":false}]}'
-  recorded_at: Tue, 27 May 2025 09:59:22 GMT
+  recorded_at: Tue, 27 May 2025 11:13:12 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -2864,7 +2856,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:22 GMT
+      - Tue, 27 May 2025 11:13:12 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -2888,9 +2880,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 82f23b6f2a980c8883206a1554d7df74
+      - 66868a8764d107cd0fd5b2db79197c66
       x-runtime:
-      - '0.052248'
+      - '0.017919'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -2900,7 +2892,7 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]}}'
-  recorded_at: Tue, 27 May 2025 09:59:22 GMT
+  recorded_at: Tue, 27 May 2025 11:13:12 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_scopes
@@ -2918,7 +2910,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:22 GMT
+      - Tue, 27 May 2025 11:13:12 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -2942,9 +2934,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 99e721d24b92380afce5153079e2a6f3
+      - aa8abc2e915705ba6ebc2124e3faedd4
       x-runtime:
-      - '0.065355'
+      - '0.030947'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -2971,7 +2963,7 @@ http_interactions:
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]},{"code":"FM015","meaning":"Section
         37 Report","description":"Limited to a section 37 report only.","additional_params":[]}]}}'
-  recorded_at: Tue, 27 May 2025 09:59:22 GMT
+  recorded_at: Tue, 27 May 2025 11:13:12 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/SE014
@@ -2989,7 +2981,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:23 GMT
+      - Tue, 27 May 2025 11:13:13 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -3013,9 +3005,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - aafc12fad512570e576999db80248c09
+      - 9f9c7ee45f93241980c1153512dbbfed
       x-runtime:
-      - '0.011612'
+      - '0.011509'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -3034,7 +3026,7 @@ http_interactions:
         representation on the return date."}},"service_levels":[{"level":1,"name":"Family
         Help (Higher)","stage":1,"proceeding_default":true},{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":false}]}'
-  recorded_at: Tue, 27 May 2025 09:59:23 GMT
+  recorded_at: Tue, 27 May 2025 11:13:13 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -3052,7 +3044,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:23 GMT
+      - Tue, 27 May 2025 11:13:13 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -3076,9 +3068,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 1c04cf8be38431c56d6a87a0eabf0a9c
+      - 815d78cc764cb3e8031c81352501dacf
       x-runtime:
-      - '0.009380'
+      - '0.010851'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -3088,7 +3080,7 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]}}'
-  recorded_at: Tue, 27 May 2025 09:59:23 GMT
+  recorded_at: Tue, 27 May 2025 11:13:13 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/SE014
@@ -3106,7 +3098,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:24 GMT
+      - Tue, 27 May 2025 11:13:14 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -3130,9 +3122,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 4c82f500620dfaf2b37a331cedbfcbe7
+      - 74b5c0c0ff5ebbed326958aafcc08eb5
       x-runtime:
-      - '0.008325'
+      - '0.001991'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -3140,13 +3132,13 @@ http_interactions:
       string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:24 GMT
+  recorded_at: Tue, 27 May 2025 11:13:14 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
     body:
       encoding: UTF-8
-      string: '{"current_proceedings":["SE014","SE003E","SE004E"],"allowed_categories":["MAT"],"search_term":""}'
+      string: '{"current_proceedings":["SE014","SE003E","SE004A"],"allowed_categories":["MAT"],"search_term":""}'
     headers:
       Content-Type:
       - application/json
@@ -3158,11 +3150,11 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:24 GMT
+      - Tue, 27 May 2025 11:13:14 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '15481'
+      - '15490'
       connection:
       - keep-alive
       x-frame-options:
@@ -3178,20 +3170,22 @@ http_interactions:
       vary:
       - Accept, Origin
       etag:
-      - W/"2d264b3d7714c88fe7e48912f9fef408"
+      - W/"eb17582e76d80b240e3a62b60a0ec1c8"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - be037ed6192aa87068c638df13b39ce5
+      - 68b04c37830a19169a352fb69143ddd3
       x-runtime:
-      - '0.046998'
+      - '0.070642'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"success":true,"data":[{"ccms_code":"DA004","meaning":"Non-molestation
-        order","description":"to be represented on an application for a non-molestation
-        order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
+      string: '{"success":true,"data":[{"ccms_code":"SE004E","meaning":"Specific issue
+        order - enforcement","description":"to be represented on an application for
+        a specific issue order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        8 children (S8)"},{"ccms_code":"DA004","meaning":"Non-molestation order","description":"to
+        be represented on an application for a non-molestation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
         abuse (DA)"},{"ccms_code":"DA005","meaning":"Occupation order","description":"to
         be represented on an application for an occupation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
         abuse (DA)"},{"ccms_code":"SE004","meaning":"Specific issue order","description":"to
@@ -3264,9 +3258,6 @@ http_interactions:
         only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE003","meaning":"Prohibited steps order","description":"to
         be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
-        8 children (S8)"},{"ccms_code":"SE004A","meaning":"Specific issue order -
-        appeal","description":"to be represented on an application for a specific
-        issue order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE095","meaning":"Enforcement order 11J","description":"to
         be represented on an application for an enforcement order under section 11J
         Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
@@ -3315,7 +3306,7 @@ http_interactions:
         and for an enforcement order under section 11J Children Act 1989. Enforcement
         only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:24 GMT
+  recorded_at: Tue, 27 May 2025 11:13:14 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/SE014
@@ -3333,7 +3324,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:26 GMT
+      - Tue, 27 May 2025 11:13:15 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -3357,9 +3348,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - f78cba2dcc1d0b237a3c59a7b99772c7
+      - e44cbf8dce9ec85656b1330ed438f312
       x-runtime:
-      - '0.003475'
+      - '0.003359'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -3367,7 +3358,7 @@ http_interactions:
       string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:25 GMT
+  recorded_at: Tue, 27 May 2025 11:13:15 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/SE014
@@ -3385,7 +3376,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Tue, 27 May 2025 09:59:26 GMT
+      - Tue, 27 May 2025 11:13:16 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -3409,9 +3400,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 4a7df557cd254ba07e6a461bf5022722
+      - 969eb433fd37e35733a2b6ed775f0a48
       x-runtime:
-      - '0.003616'
+      - '0.003158'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -3419,5 +3410,5 @@ http_interactions:
       string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]}'
-  recorded_at: Tue, 27 May 2025 09:59:26 GMT
+  recorded_at: Tue, 27 May 2025 11:13:16 GMT
 recorded_with: VCR 6.3.1
