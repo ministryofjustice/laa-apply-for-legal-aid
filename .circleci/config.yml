@@ -286,22 +286,22 @@ jobs:
     - setup_remote_docker
     - build-and-push-to-ecr
 
-  deploy-uat: &deploy-uat
+  deploy_uat: &deploy_uat
     executor: cloud-platform-executor
     steps:
       - deploy-to-environment:
           environment: uat
 
-  deploy-main-uat:
-    <<: *deploy-uat
+  deploy_main_uat:
+    <<: *deploy_uat
 
-  deploy-staging:
+  deploy_staging:
     executor: cloud-platform-executor
     steps:
       - deploy-to-environment:
           environment: staging
 
-  deploy-production:
+  deploy_production:
     executor: cloud-platform-executor
     steps:
       - deploy-to-environment:
@@ -336,7 +336,7 @@ workflows:
           requires:
           - lint_checks
           <<: *generic-slack-fail-post-step
-      - deploy-uat:
+      - deploy_uat:
           context: laa-apply-for-legalaid-uat
           requires:
           - build_and_push
@@ -361,7 +361,7 @@ workflows:
               only:
                 - /dependabot.*/
           requires:
-          - deploy-uat
+          - deploy_uat
           <<: *generic-slack-fail-post-step
 
   merge_pr:
@@ -383,14 +383,14 @@ workflows:
           requires:
             - lint_checks
           <<: *generic-slack-fail-post-step
-      - deploy-main-uat:
+      - deploy_main_uat:
           context: laa-apply-for-legalaid-uat
           requires:
             - integration_tests
             - unit_tests
             - build_and_push
           <<: *generic-slack-fail-post-step
-      - deploy-staging:
+      - deploy_staging:
           context: laa-apply-for-legalaid-staging
           requires:
             - integration_tests
@@ -437,14 +437,14 @@ workflows:
               ]
             }
           requires:
-            - deploy-main-uat
-            - deploy-staging
+            - deploy_main_uat
+            - deploy_staging
       - hold_production:
           type: approval
           requires:
-            - deploy-main-uat
-            - deploy-staging
-      - deploy-production:
+            - deploy_main_uat
+            - deploy_staging
+      - deploy_production:
           context: laa-apply-for-legalaid-production
           requires:
             - hold_production
