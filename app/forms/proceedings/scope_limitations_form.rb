@@ -111,7 +111,7 @@ module Proceedings
     end
 
     def additional_params_for(code)
-      scopes.find { |scope| scope["code"] == code } ["additional_params"]
+      scopes.find { |scope| scope["code"] == code }["additional_params"]
     end
 
     def additional_hearing_date_param?(code)
@@ -137,7 +137,7 @@ module Proceedings
     end
 
     def mandatory?(type, code)
-      additional_params_for(code).find { |ap| ap["name"] == type } ["mandatory"]
+      additional_params_for(code).find { |ap| ap["name"] == type }["mandatory"]
     end
 
     def validate_hearing_dates
