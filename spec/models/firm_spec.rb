@@ -29,6 +29,11 @@ RSpec.describe "Firm" do
       it "returns all permissions" do
         expect(firm.permissions.all).to contain_exactly(permission2, permission1)
       end
+
+      it "fails occasionalley" do
+        var = [1, 2, 3, 4].sample
+        expect(var).to eq 2
+      end
     end
   end
 
