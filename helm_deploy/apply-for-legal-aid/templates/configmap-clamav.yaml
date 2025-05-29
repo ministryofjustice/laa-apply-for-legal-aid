@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "apply-for-legal-aid.fullname" . }}-clamav-configuration
+  namespace: {{ .Release.Namespace }}
+data:
+  clamd.conf: |-
+    TCPSocket 3310
+    TCPAddr  {{ template "apply-for-legal-aid.fullname" . }}-clamav-service
+
+    # LogTime yes
+    # LogClean yes
+    # LogSyslog no
+    # LogVerbose yes
+    # DatabaseDirectory /var/lib/clamav
+    # TCPSocket 3310
+    # Foreground yes
+    # MaxScanSize \{\{.Values.clamav.limits.scanSize\}\}M
+    # MaxFileSize \{\{.Values.clamav.limits.fileSize\}\}M
+
+    #  Close the connection when the data size limit is exceeded.
+    #  The value should match your MTA's limit for a maximum attachment size.
+    #  Default: 25M
+    # StreamMaxLength \{\{.Values.clamav.limits.scanSize\}\}M
+
+    # Maximum length the queue of pending connections may grow to.
+    # Default: 200
+    # MaxConnectionQueueLength \{\{.Values.clamav.limits.connectionQueueLength\}\}
+
+    # Maximum number of threads running at the same time.
+    # Default: 10
+    # MaxThreads \{\{.Values.clamav.limits.maxThreads\}\}
+
+    # This option specifies how long to wait (in milliseconds) if the send buffer
+    # is full.
+    # Keep this value low to prevent clamd hanging.
+    #
+    # Default: 500
+    # SendBufTimeout \{\{.Values.clamav.limits.sendBufTimeout\}\}

@@ -121,6 +121,7 @@ worker:
 
 clamav:
   replicaCount: 1
+  configFile: clamd.conf
 
 admin:
   allowAdminPassword: true

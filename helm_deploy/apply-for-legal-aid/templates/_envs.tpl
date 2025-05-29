@@ -373,4 +373,6 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: collectHmrcData
+  - name: CLAMD_CONF_FILENAME
+    value: {{ .Values.clamav.configFile }}
 {{- end }}

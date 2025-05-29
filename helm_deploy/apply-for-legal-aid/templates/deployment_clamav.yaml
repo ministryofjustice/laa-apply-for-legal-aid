@@ -39,6 +39,8 @@ spec:
           volumeMounts:
             - name: clamav-signatures-volume
               mountPath: /var/lib/clamav
+            - name: clamav-configuration-volume
+              mountPath: /etc/clamav
           env:
             - name: FRESHCLAM_CHECKS
               value: "24"
@@ -80,7 +82,11 @@ spec:
               type: RuntimeDefault
             capabilities:
               drop: [ "ALL" ]
+              # add: ["NET_ADMIN", "SYS_TIME", "NET_BIND_SERVICE"]
       volumes:
-        - name: clamav-signatures-volume
-          persistentVolumeClaim:
-            claimName: clamav-signatures-pvc
+      - name: clamav-configuration-volume
+        configMap:
+          name: {{ template "apply-for-legal-aid.fullname" . }}-clamav-configuration
+      - name: clamav-signatures-volume
+        persistentVolumeClaim:
+          claimName: clamav-signatures-pvc
