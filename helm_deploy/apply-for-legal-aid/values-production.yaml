@@ -111,6 +111,9 @@ trueLayer:
 worker:
   replicaCount: 2
 
+clamav:
+  replicaCount: 2
+
 admin:
   allowAdminPassword: false
   allowReset: "false"

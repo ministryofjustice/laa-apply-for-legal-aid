@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "apply-for-legal-aid.fullname" . }}-clamav
+  labels:
+    app: {{ template "apply-for-legal-aid.name" . }}
+    chart: {{ template "apply-for-legal-aid.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.clamav.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 100%
+  selector:
+    matchLabels:
+      app: {{ template "apply-for-legal-aid.name" . }}-clamav
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "apply-for-legal-aid.name" . }}-clamav
+        release: {{ .Release.Name }}
+    spec:
+      serviceAccountName: "{{ .Values.service_account.name }}"
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+        runAsGroup: 1000
+      containers:
+        - name: clamav
+          image: ghcr.io/ministryofjustice/clamav-docker/laa-clamav:latest
+          imagePullPolicy: Always
+          ports:
+              containerPort: 3310
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/clamav
+              name: clamav-signatures
+          env:
+            - name: FRESHCLAM_CHECKS
+              value: "24"
+            - name: MIRROR_URL
+              value: https://laa-clamav-mirror-production.apps.live.cloud-platform.service.justice.gov.uk
+          resources:
+            requests:
+              cpu: 25m
+              memory: 1Gi
+            limits:
+              cpu: 500m
+              memory: 3Gi
+              memory: 3Gi
+          startupProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - echo "started" > /tmp/starttest && clamdscan --no-summary /tmp/starttest
+            failureThreshold: 60
+            periodSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: 3310
+            periodSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - clamdscan --no-summary /tmp/starttest
+            periodSeconds: 30
+            failureThreshold: 3
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop: [ "ALL" ]
+  volumeClaimTemplates:
+    - metadata:
+        name: clamav-signatures
+      spec:
+        accessModes:
+        - ReadWriteOnce # allow multiple pods to accessin, but only in the same node
+        resources:
+          requests:
+            storage: 1Gi
+        # storageClassName: standard # do we need to tweak this https://kubernetes.io/docs/concepts/storage/storage-classes/
