@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-clamav-configuration
+  namespace: {{ .Release.Namespace }}
+data:
+  clamd.conf: |-
+    TCPSocket 3310
+    TCPAddr  {{ template "apply-for-legal-aid.fullname" . }}-clamav.{{ .Release.Namespace }}.svc.cluster.local
