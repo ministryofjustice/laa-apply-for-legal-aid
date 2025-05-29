@@ -7,7 +7,7 @@
     <% if @legal_aid_application.proceedings.any? %>
       <h1 class="govuk-heading-xl"><%= t(".existing", count: pluralize(@legal_aid_application.proceedings.count, "proceeding").to_s) %></h1>
 
-      <%= govuk_warning_text(text: "Check that proceedings are under the right matter type") if show_check_proceeding_warning?(@legal_aid_application.proceedings) %>
+      <%= govuk_warning_text(text: "Check that proceedings are under the right matter type") if show_check_proceeding_warning?(@legal_aid_application) %>
 
       <%= govuk_summary_list do |summary_list| %>
         <% @legal_aid_application.proceedings.order(:created_at).each do |proceeding| %>
