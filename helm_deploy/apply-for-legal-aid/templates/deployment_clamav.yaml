@@ -43,9 +43,9 @@ spec:
               mountPath: /etc/clamav
           env:
             - name: FRESHCLAM_CHECKS
-              value: "24"
+              value: "{{ .Values.clamav.freshclamCheck }}"
             - name: MIRROR_URL
-              value: https://laa-clamav-mirror-production.apps.live.cloud-platform.service.justice.gov.uk
+              value: "{{ .Values.clamav.mirror }}"
           resources:
             requests:
               cpu: 25m
