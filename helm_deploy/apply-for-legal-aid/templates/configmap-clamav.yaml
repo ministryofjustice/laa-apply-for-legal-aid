@@ -6,7 +6,7 @@ metadata:
 data:
   clamd.conf: |-
     TCPSocket 3310
-    TCPAddr  {{ template "apply-for-legal-aid.fullname" . }}-clamav-service
+    TCPAddr  {{ template "apply-for-legal-aid.fullname" . }}-clamav
 
     # LogTime yes
     # LogClean yes
