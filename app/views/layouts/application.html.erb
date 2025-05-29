@@ -33,15 +33,21 @@
 
     <%= render partial: "layouts/header" %>
 
+    <%= govuk_service_navigation(service_name: "Apply for civil legal aid", service_url: home_path, current_path: request.fullpath) do |sn|
+          if @scope.in?(%i[in_progress submitted voided delete search])
+            sn.with_navigation_item(text: "Your applications", href: home_path)
+            sn.with_navigation_item(text: "Search", href: search_providers_legal_aid_applications_path)
+          end
+        end %>
+
     <div class="govuk-width-container">
+
       <%= govuk_phase_banner(
             tag: { text: t(".header.phase") },
             text: t(".header.phase_banner_html", link: govuk_link_to(t(".header.feedback"), new_feedback_path, new_tab: true)),
             classes: "no-print",
             html_attributes: { role: "complementary" },
           ) %>
-
-      <%= render partial: "layouts/primary_navigation" if @scope.in?(%i[in_progress submitted voided delete search]) %>
 
       <div class="govuk-grid-row" role="navigation">
         <div class="govuk-grid-column-one-half show-empty">
