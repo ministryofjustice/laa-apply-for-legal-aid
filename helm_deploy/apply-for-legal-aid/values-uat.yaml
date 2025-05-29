@@ -12,7 +12,7 @@ ingress:
   enabled: true
   className: default-non-prod
   whitelist:
-    enabled: true
+    enabled: false
   annotations:
     external-dns.alpha.kubernetes.io/aws-weight: '100'
   path: /
