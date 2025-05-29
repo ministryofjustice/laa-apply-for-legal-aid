@@ -7,7 +7,7 @@ Grover.configure do |config|
     bypass_csp: true,
     cache: false,
     wait_until: "networkidle2",
-    display_url: Rails.configuration.x.application.host_url,
+    # display_url: Rails.configuration.x.application.host_url,
     margin: {
       top: "10mm",
       bottom: "10mm",
