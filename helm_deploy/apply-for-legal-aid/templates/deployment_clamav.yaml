@@ -34,11 +34,11 @@ spec:
           image: ghcr.io/ministryofjustice/clamav-docker/laa-clamav:latest
           imagePullPolicy: Always
           ports:
-              containerPort: 3310
+            - containerPort: 3310
               protocol: TCP
           volumeMounts:
-            - mountPath: /var/lib/clamav
-              name: clamav-signatures
+            - name: clamav-signatures-volume
+              mountPath: /var/lib/clamav
           env:
             - name: FRESHCLAM_CHECKS
               value: "24"
@@ -80,13 +80,7 @@ spec:
               type: RuntimeDefault
             capabilities:
               drop: [ "ALL" ]
-  volumeClaimTemplates:
-    - metadata:
-        name: clamav-signatures
-      spec:
-        accessModes:
-        - ReadWriteOnce # allow multiple pods to accessin, but only in the same node
-        resources:
-          requests:
-            storage: 1Gi
-        # storageClassName: standard # do we need to tweak this https://kubernetes.io/docs/concepts/storage/storage-classes/
+      volumes:
+        - name: clamav-signatures-volume
+          persistentVolumeClaim:
+            claimName: clamav-signatures-pvc
