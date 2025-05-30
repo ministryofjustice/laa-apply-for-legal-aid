@@ -34,6 +34,9 @@ spec:
             - name: http
               containerPort: 3002
               protocol: TCP
+          volumeMounts:
+            - name: clamav-configuration-volume
+              mountPath: config/
           livenessProbe:
             httpGet:
               path: /status
@@ -76,3 +79,7 @@ spec:
       tolerations:
 {{ toYaml . | indent 8 }}
     {{- end }}
+      volumes:
+      - name: clamav-configuration-volume
+        configMap:
+          name: {{ template "apply-for-legal-aid.fullname" . }}-clamav-configuration
