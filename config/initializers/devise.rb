@@ -24,7 +24,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   # This should be over-written if we configure Devise to send via Notify
-  config.mailer_sender = "apply@digital.justice.gov.uk"
+  config.mailer_sender = "apply@justice.gov.uk"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
