@@ -1,5 +1,6 @@
 module Providers
   class MeansReportsController < ProviderBaseController
+    include GroverOptionable
     authorize_with_policy_method :show_submitted_application?
 
     def show
@@ -10,7 +11,7 @@ module Providers
         render "show", layout: "pdf"
       else
         html = render_to_string "show", layout: "pdf"
-        pdf = Grover.new(html).to_pdf
+        pdf = Grover.new(html, style_tag_options:).to_pdf
         send_data pdf, filename: "means_report.pdf", type: "application/pdf", disposition: "inline"
       end
     end

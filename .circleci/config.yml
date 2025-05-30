@@ -59,7 +59,7 @@ executors:
   basic-executor:
     docker:
       - image: cimg/base:2020.01
-  linting-executor:
+  basic-ruby-executor:
     docker:
       - image: cimg/ruby:3.4.4-browsers
         environment:
@@ -132,7 +132,7 @@ commands:
 
 jobs:
   lint_checks:
-    executor: linting-executor
+    executor: basic-ruby-executor
     steps:
     - checkout
     - setup_remote_docker
@@ -265,7 +265,7 @@ jobs:
           - coverage_results
 
   coverage:
-    executor: linting-executor
+    executor: basic-ruby-executor
     steps:
       - attach_workspace:
           at: .

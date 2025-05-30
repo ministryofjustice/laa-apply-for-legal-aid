@@ -33,12 +33,12 @@ RSpec.describe Providers::MeritsReportsController do
     context "when authenticated and authorised" do
       let(:login_provider) { login_as legal_aid_application.provider }
 
-      it "renders the merits report PDF", :aggregate_failures do
+      it "renders the merits report PDF, with inline css", :aggregate_failures do
         expect(response).to have_http_status(:ok)
         expect(response.headers["Content-Type"]).to eq("application/pdf")
         expect(Grover)
           .to have_received(:new)
-          .with(a_string_including("L-123-456"))
+          .with(a_string_including("L-123-456"), hash_including(:style_tag_options))
       end
     end
 
