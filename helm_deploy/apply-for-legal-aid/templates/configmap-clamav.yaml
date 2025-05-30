@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ template "apply-for-legal-aid.fullname" . }}-clamav-configuration
+  name: {{ .Release.Name }}-clamav-configuration
   namespace: {{ .Release.Namespace }}
 data:
   clamd.conf: |-

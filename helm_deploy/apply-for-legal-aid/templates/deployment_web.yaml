@@ -82,4 +82,4 @@ spec:
       volumes:
       - name: clamav-configuration-volume
         configMap:
-          name: {{ template "apply-for-legal-aid.fullname" . }}-clamav-configuration
+          name: {{ .Release.Name }}-clamav-configuration

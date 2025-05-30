@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: clamav-signatures-pvc
+  name: {{ .Release.Name }}-clamav-signatures-pvc
 spec:
   accessModes:
     - ReadWriteOnce
