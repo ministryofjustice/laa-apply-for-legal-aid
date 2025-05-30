@@ -133,7 +133,7 @@ checkFinancialEligibility:
   civil_host: "http://cfe-civil.cfe-civil-production.svc.cluster.local"
 
 email_domain:
-  suffix: "@digital.justice"
+  suffix: "@justice"
 
 policy_disregards_start_date: "2020-12-20"
 mtr_a_start_date: "2024-11-6"

@@ -20,21 +20,21 @@ class TestProviderPopulator
 
   TEST_PROVIDERS = {
     "test1" => ["Test & Co", "test1@example.com", 100],
-    "will-c" => ["Will-c & Co.", "william.clarke@digital.justice.gov.uk", 101],
+    "will-c" => ["Will-c & Co.", "william.clarke@justice.gov.uk", 101],
     "test-sch" => ["Test-sch & Co.", "apply-for-civil-legal-aid@justice.gov.uk", 102],
     "test2" => ["Test2 & Co.", "test2@example.com", 103],
     "test3" => ["Test3 & Co.", "really-really-long-email-address@example.com", 104],
     "firm1-user1" => ["Firm1 & Co.", "firm1-user1@example.com", 105],
     "firm1-user2" => ["Firm1 & Co.", "firm1-user2@example.com", 106],
     "firm2-user1" => ["Firm2 & Co.", "firm2-user1@example.com", 107],
-    "ahernk" => ["Ahern & Co.", "katharine.ahern@digital.justice.gov.uk", 109],
+    "ahernk" => ["Ahern & Co.", "katharine.ahern@justice.gov.uk", 109],
     "MARTIN.RONAN@DAVIDGRAY.CO.UK" => ["David Gray LLP", "martin.ronan@example.com", 494_000],
     "BENREID" => ["Test firm for portal login", "benreid@example.co.uk", 107],
     "HFITZSIMONS@EDWARDHAYES.CO.UK" => ["EDWARD HAYES LLP", "hfitzsimons@example.com", 2_453_773],
     "LHARRISON@TBILAW.CO.UK" => ["LAWRENCE & CO SOLICITORS CDS LLP", "LHARRISON@example.com", 954_474],
     "user-research" => ["User Research Assoc.", "user@resarch.com", 112],
-    "rose" => ["Rose & Co.", "rose.azadkhan@digital.justice.gov.uk", 114],
-    "mkeen" => ["Keen & Co.", "mike.keen@digital.justice.gov.uk", 115],
+    "rose" => ["Rose & Co.", "rose.azadkhan@justice.gov.uk", 114],
+    "mkeen" => ["Keen & Co.", "mike.keen@justice.gov.uk", 115],
   }.freeze
 
   def run
