@@ -82,7 +82,7 @@ spec:
               type: RuntimeDefault
             capabilities:
               drop: [ "ALL" ]
-              # add: ["NET_ADMIN", "SYS_TIME", "NET_BIND_SERVICE"]
+              # add: [ "NET_BIND_SERVICE" ]
       volumes:
       - name: clamav-configuration-volume
         configMap:
