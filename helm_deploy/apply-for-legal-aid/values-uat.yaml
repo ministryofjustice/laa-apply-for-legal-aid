@@ -108,7 +108,10 @@ laa_portal:
   mockSaml: "false"
 
 provider_details:
-  url: "https://ccms-pda.stg.legalservices.gov.uk/api/providerDetails"
+  # url: "https://ccms-pda.stg.legalservices.gov.uk/api/providerDetails" # OLD
+  # url: "https://test-pda-api-laa-ccms-test.apps.live.cloud-platform.service.justice.gov.uk/api/providerDetails/"
+  url: https://development-pda-api-laa-ccms-dev.apps.live.cloud-platform.service.justice.gov.uk/api/providerDetails/
+  # url: "https://preprod-pda-api-laa-ccms-preprod.apps.live.cloud-platform.service.justice.gov.uk/api/providerDetails/"
 
 pda:
   url: "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk"
