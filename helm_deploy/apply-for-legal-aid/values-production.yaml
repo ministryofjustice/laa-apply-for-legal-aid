@@ -113,7 +113,7 @@ worker:
 
 clamav:
   replicaCount: 2
-  configFile: clamd.conf
+  configFile: /etc/clamav/clamd.conf
   freshclamCheck: 24
   mirror: https://laa-clamav-mirror-production.apps.live.cloud-platform.service.justice.gov.uk
 
