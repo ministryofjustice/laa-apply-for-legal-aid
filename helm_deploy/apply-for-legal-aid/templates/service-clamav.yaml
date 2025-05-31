@@ -9,9 +9,13 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  ports:
-    - port: 3310
-      name: clamav
-      targetPort: 3310
   selector:
     service: {{ template "apply-for-legal-aid.fullname" . }}-clamav
+  clusterIP: None
+  ports:
+    # - port: 3310
+    #   name: clamav
+    #   targetPort: 3310
+    - name: zombie-port # Actually, we do not use this port but it is still needed to allow the service to receive TCP traffic.
+      port: 1234
+      targetPort: 1234
