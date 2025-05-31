@@ -111,6 +111,12 @@ trueLayer:
 worker:
   replicaCount: 2
 
+clamav:
+  replicaCount: 2
+  configFile: /etc/clamav/clamd.conf
+  freshclamCheck: 24
+  mirror: https://laa-clamav-mirror-production.apps.live.cloud-platform.service.justice.gov.uk
+
 admin:
   allowAdminPassword: false
   allowReset: "true"
