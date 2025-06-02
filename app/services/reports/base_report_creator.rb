@@ -1,5 +1,7 @@
 module Reports
   class BaseReportCreator
+    include GroverOptionable
+
     def self.call(legal_aid_application)
       new(legal_aid_application).call
     end
@@ -13,7 +15,7 @@ module Reports
   private
 
     def pdf_report
-      Grover.new(html_report).to_pdf
+      Grover.new(html_report, style_tag_options:).to_pdf
     end
 
     def ensure_case_ccms_reference_exists
