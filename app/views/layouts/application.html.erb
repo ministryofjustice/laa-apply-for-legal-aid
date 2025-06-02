@@ -35,7 +35,7 @@
 
     <%= govuk_service_navigation(service_name: "Apply for civil legal aid", service_url: home_path, current_path: request.fullpath) do |sn|
           if @scope.in?(%i[in_progress submitted voided delete search])
-            sn.with_navigation_item(text: "Your applications", href: home_path)
+            sn.with_navigation_item(text: "Your applications", href: home_path, active_when: submitted_providers_legal_aid_applications_path)
             sn.with_navigation_item(text: "Search", href: search_providers_legal_aid_applications_path)
           end
         end %>
