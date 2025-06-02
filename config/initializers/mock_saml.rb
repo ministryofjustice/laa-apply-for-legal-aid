@@ -23,7 +23,7 @@ TestCredentialsStruct = Struct.new(:username, :email)
 Rails.configuration.x.application.mock_saml = ValidTestUsersStruct.new(
   users: [
     TestCredentialsStruct.new("test1", "test1@example.com"),
-    TestCredentialsStruct.new("will-c", "william.clarke@digital.justice.gov.uk"),
+    TestCredentialsStruct.new("will-c", "william.clarke@justice.gov.uk"),
     TestCredentialsStruct.new("test-sch", "apply-for-civil-legal-aid@justice.gov.uk"),
     TestCredentialsStruct.new("test2", "test2@example.com"),
     TestCredentialsStruct.new("test3", "really-really-long-email-address@example.com"),
@@ -33,9 +33,9 @@ Rails.configuration.x.application.mock_saml = ValidTestUsersStruct.new(
     TestCredentialsStruct.new("NEETADESOR", "neeta@example.com"),
     TestCredentialsStruct.new("MARTIN.RONAN@DAVIDGRAY.CO.UK", "martin.ronan@example.com"),
     TestCredentialsStruct.new("HFITZSIMONS@EDWARDHAYES.CO.UK", "hfitzsimons@example.com"),
-    TestCredentialsStruct.new("ahernk", "katharine.ahern@digital.justice.gov.uk"),
-    TestCredentialsStruct.new("rose", "rose.azadkhan@digital.justice.gov.uk"),
-    TestCredentialsStruct.new("mkeen", "mike.keen@digital.justice.gov.uk"),
+    TestCredentialsStruct.new("ahernk", "katharine.ahern@justice.gov.uk"),
+    TestCredentialsStruct.new("rose", "rose.azadkhan@justice.gov.uk"),
+    TestCredentialsStruct.new("mkeen", "mike.keen@justice.gov.uk"),
   ],
   password: "password",
 )
