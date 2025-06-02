@@ -2,7 +2,9 @@ class CurrencyValidator < ActiveModel::Validations::NumericalityValidator
   ONLY_2_DECIMALS_PATTERN = /(\A-?[0-9]+\z)|(\A-?[0-9]*\.[0-9]{,2}\z)/
 
   def validate_each(record, attr_name, value)
+    Rails.logger.info "value=#{value}"
     clean_value = clean_numeric_value(value)
+    Rails.logger.info "clean_value=#{clean_value}"
     super(record, attr_name, clean_value) # this requires the actual attribute symbol, e.g. :cash
 
     replace_error_with_partner(record, attr_name) if any_errors_for?(record, attr_name) && use_partner_labels?(record)

@@ -1,7 +1,6 @@
 module Providers
   class BaseRegularIncomeForm < RegularTransactionForm
     INCOME_TYPES = %w[
-      benefits
       friends_or_family
       maintenance_in
       property_or_lodger
@@ -11,6 +10,20 @@ module Providers
     INCOME_TYPES.each do |income_type|
       attr_accessor :"#{income_type}_amount",
                     :"#{income_type}_frequency"
+    end
+
+    INCOME_TYPES.each do |attribute|
+      # check_box_attribute = :"check_box_#{attribute}"
+      amount_attribute = :"#{attribute}_amount"
+      validates amount_attribute, currency: { greater_than_or_equal_to: 0 }, if: proc { |form| form.__send__(amount_attribute).present? }
+    end
+
+
+    def initialize(params = {})
+      super(params)
+
+      # binding.pry
+      # pp regular_transactions
     end
 
   private

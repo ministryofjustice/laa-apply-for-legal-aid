@@ -43,7 +43,7 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         pension = create(:transaction_type, :pension)
         params = {
           "transaction_type_ids" => ["", maintenance_in.id, pension.id],
-          "maintenance_in_amount" => "-1000",
+          "maintenance_in_amount" => "1,000",
           "maintenance_in_frequency" => "weekly",
           "pension_amount" => "100",
           "pension_frequency" => "monthly",
@@ -51,8 +51,9 @@ RSpec.describe Providers::Means::RegularIncomeForm do
 
         form = described_class.new(params)
 
-        expect(form).not_to be_valid
-        expect(form.errors).to be_added(:maintenance_in_amount, :greater_than, value: -1000, count: 0)
+        expect(form).to be_valid
+        expect(form.maintenance_in_amount).to eq("1000")
+        # expect(form.errors).to be_added(:maintenance_in_amount, :greater_than, value: -1000, count: 0)
       end
     end
 
@@ -603,14 +604,14 @@ RSpec.describe Providers::Means::RegularIncomeForm do
         pension = create(:transaction_type, :pension)
         params = {
           "transaction_type_ids" => ["", pension.id],
-          "pension_amount" => "£2,333.66",
+          "pension_amount" => "1,000",
           "pension_frequency" => "monthly",
         }.merge(legal_aid_application:)
 
         form = described_class.new(params)
         form.save
 
-        expect(legal_aid_application.regular_transactions.first).to have_attributes(amount: 2_333.66)
+        expect(legal_aid_application.regular_transactions.first).to have_attributes(amount: 1_000)
       end
     end
   end

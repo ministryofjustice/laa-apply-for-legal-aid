@@ -99,6 +99,7 @@ module Providers
     def assign_existing_regular_transaction_attributes
       regular_transactions.each do |transaction|
         transaction_type = transaction.transaction_type
+        Rails.logger.info "Assign existing transactions: amount=#{transaction.amount}"
         public_send(:"#{transaction_type.name}_amount=", transaction.amount)
         public_send(:"#{transaction_type.name}_frequency=", transaction.frequency)
       end
@@ -168,7 +169,8 @@ module Providers
     def all_regular_transactions_valid
       regular_transactions.each do |transaction|
         transaction_type = transaction.transaction_type
-        transaction.amount = clean_amount(public_send(:"#{transaction_type.name}_amount"))
+        Rails.logger.info "Building transactions: for: #{transaction.transaction_type.name} amount=#{transaction.amount}"
+        transaction.amount = public_send(:"#{transaction_type.name}_amount")
         transaction.frequency = public_send(:"#{transaction_type.name}_frequency")
 
         next if transaction.valid?
@@ -180,10 +182,11 @@ module Providers
           )
         end
       end
+      true
     end
 
     def clean_amount(amount)
-      amount.to_s.tr("£,", "")
+      amount.to_s.tr("£", "")
     end
 
     def add_regular_transaction_error_to_form(transaction_type, error)
