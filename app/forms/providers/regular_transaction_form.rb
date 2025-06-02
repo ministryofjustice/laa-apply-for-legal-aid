@@ -168,7 +168,7 @@ module Providers
     def all_regular_transactions_valid
       regular_transactions.each do |transaction|
         transaction_type = transaction.transaction_type
-        transaction.amount = clean_amount(public_send(:"#{transaction_type.name}_amount"))
+        transaction.amount = CurrencyCleaner.new(public_send(:"#{transaction_type.name}_amount")).call
         transaction.frequency = public_send(:"#{transaction_type.name}_frequency")
 
         next if transaction.valid?
@@ -180,10 +180,6 @@ module Providers
           )
         end
       end
-    end
-
-    def clean_amount(amount)
-      amount.to_s.tr("£,", "")
     end
 
     def add_regular_transaction_error_to_form(transaction_type, error)
