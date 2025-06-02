@@ -324,7 +324,7 @@ Feature: Checking answers backwards and forwards
 
     And the "Payments your client gets" section's questions and answers should match:
       | question | answer |
-      | Benefits, charitable or government payments | £666.00 |
+      | Benefits, charitable or government payments | £666 |
       | Financial help from friends or family | None |
       | Maintenance payments from a former partner | Yes, but none specified |
       | Income from a property or lodger | None |
@@ -332,7 +332,7 @@ Feature: Checking answers backwards and forwards
 
     And the "Payments your client pays" section's questions and answers should match:
       | question | answer |
-      | Housing payments | £999.00 |
+      | Housing payments | £999 |
       | Childcare payments | None |
       | Maintenance payments to a former partner | Yes, but none specified |
       | Payments towards legal aid in a criminal case | None |

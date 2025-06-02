@@ -41,20 +41,20 @@ Feature: Bank statement upload check your answers
     And the "Payments your client gets" section's questions and answers should match:
       | question | answer |
       | Financial help from friends or family | None |
-      | Maintenance payments from a former partner | £500.00 every week |
+      | Maintenance payments from a former partner | £500 every week |
       | Income from a property or lodger | None |
       | Pension | None |
 
     And the "Payments your client pays" section's questions and answers should match:
       | question | answer |
-      | Housing payments | £1,600.00 total in last 3 months |
+      | Housing payments | £1,600 total in last 3 months |
       | Childcare payments | None |
       | Maintenance payments to a former partner | None |
       | Payments towards legal aid in a criminal case | None |
 
     And the "Housing Benefit" section's questions and answers should match:
       | question | answer |
-      | Amount of Housing benefit | £1,200.00\ntotal in last 3 months |
+      | Amount of Housing benefit | £1,200 total in last 3 months |
 
     When I click Check Your Answers Change link for "bank statements client"
     And I upload an evidence file named "hello_world.pdf"
@@ -77,7 +77,7 @@ Feature: Bank statement upload check your answers
     When I check "My client gets none of these payments in cash"
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
-    And I should see "1,000.00"
+    And I should see "1,000"
     And I should see "every 2 weeks"
 
     When I click Check Your Answers Change link for "Payments your client gets"
@@ -110,7 +110,7 @@ Feature: Bank statement upload check your answers
 
     And I click "Save and continue"
     Then I should be on the "check_income_answers" page showing "Check your answers"
-    And I should see "£500.00"
+    And I should see "£500"
     And I should see "monthly"
 
     When I click Check Your Answers Change link for "Payments your client pays"
