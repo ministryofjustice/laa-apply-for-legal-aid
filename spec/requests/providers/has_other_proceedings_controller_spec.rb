@@ -37,7 +37,13 @@ RSpec.describe Providers::HasOtherProceedingsController, :vcr do
 
     context "when all available proceedings have been added" do
       before do
-        allow(LegalFramework::ProceedingTypes::All).to receive(:call).and_raise(LegalFramework::ProceedingTypes::All::NoMatchingProceedingsFoundError)
+        allow(LegalFramework::ProceedingTypes::All).to receive(:call).and_wrap_original do |original_method, *args|
+          if args.any?
+            raise(LegalFramework::ProceedingTypes::All::NoMatchingProceedingsFoundError)
+          else
+            original_method.call
+          end
+        end
       end
 
       it "renders the limited page" do
