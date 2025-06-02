@@ -10,9 +10,17 @@ module Providers
         render "show", layout: "pdf"
       else
         html = render_to_string "show", layout: "pdf"
-        pdf = Grover.new(html).to_pdf
+        pdf = Grover.new(html, style_tag_options:).to_pdf
         send_data pdf, filename: "means_report.pdf", type: "application/pdf", disposition: "inline"
       end
+    end
+
+  private
+
+    def style_tag_options
+      [
+        content: Rails.root.join("app/assets/builds/application.css").read,
+      ]
     end
   end
 end

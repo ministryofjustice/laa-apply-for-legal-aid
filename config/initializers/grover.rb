@@ -8,7 +8,7 @@ Grover.configure do |config|
     cache: false,
     wait_until: "networkidle2",
     display_url: Rails.configuration.x.application.host_url,
-    style_tag_options: [content: Rails.root.join("app/assets/builds/application.css").read],
+    # style_tag_options: [content: Rails.root.join("app/assets/builds/application.css").read],
     margin: {
       top: "10mm",
       bottom: "10mm",

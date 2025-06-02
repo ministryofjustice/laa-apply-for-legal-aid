@@ -32,7 +32,7 @@ RSpec.describe Providers::MeansReportsController do
         expect(response.headers["Content-Type"]).to eq("application/pdf")
         expect(Grover)
           .to have_received(:new)
-          .with(a_string_including("L-123-456"))
+          .with(a_string_including("L-123-456"), style_tag_options: [content: Rails.root.join("app/assets/builds/application.css").read])
       end
     end
 
