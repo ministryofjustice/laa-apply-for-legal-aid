@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Delete UAT release action
         id: delete_uat
-        uses: ministryofjustice/laa-civil-apply-delete-uat-release@v1.1.0
+        uses: ministryofjustice/laa-civil-apply-delete-uat-release@ap-6061-add-explicit-namespace-to-delete_release
         with:
           release_name_prefix: "apply-"
           delete_all_pvc: true
