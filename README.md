@@ -36,6 +36,7 @@ The laa-apply-for-legal-aid system is a web service for solicitors that provide 
 - [**Legal Framework API Service**](#legal-framework-api-service)
 - [**Troubleshooting**](#troubleshooting)
 - [**Maintenance mode**](#docs/maintenance_mode.md)
+- [**ClamAV setup and implementation**](#malware-check-of-uploaded-files)
 
 
 ## Architecture Diagram
@@ -106,20 +107,9 @@ bin/dev
 
 ### Malware check of uploaded files
 
-ClamAV is used to make sure uploaded files do not contain any malware.
-If you are on Mac, ClamAV would have been installed by running `bin/setup`
+ClamAV (anti-virus) is used to make sure uploaded files do not contain any malware.
 
-On Ubuntu you can install it with:
-```
-sudo apt-get install clamav clamav-daemon -y
-sudo freshclam
-sudo /etc/init.d/clamav-daemon start
-```
-
-You may also need to run:
-```
-sudo apt install clamdscan
-```
+see [docs/clamav.md](./docs/clamav.md) for setup and details.
 
 ### Overcommit
 
