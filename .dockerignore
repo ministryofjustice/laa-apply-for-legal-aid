@@ -3,3 +3,4 @@ log/*
 tmp/*
 Dockerfile
 README.md
+.cache
