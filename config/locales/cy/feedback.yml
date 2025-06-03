@@ -26,5 +26,4 @@ cy:
       contact_name: Name
     thanks:
       close_tab: You can close this tab or page.
-      link: Back to your application
       title: Thank you for your feedback

@@ -25,6 +25,5 @@ en:
       contact_email: Email
       contact_name: Name
     thanks:
-      close_tab: You can close this tab or page.
-      link: Back to your application
+      close_tab: You can close this tab to finish.
       title: Thank you for your feedback

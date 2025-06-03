@@ -64,8 +64,8 @@ Feature: Citizen journey
     Then I should be on a page showing "Confirm the following"
     Then I click "Agree and submit"
     Then I should be on a page showing "You've shared your financial information"
-    Then I click link "feedback"
-    Then I should be on a page showing "How easy or difficult was it to use this service?"
+    Then I click link "feedback (opens in new tab)"
+    Then I should be on a new tab with title "Help us improve the Apply for civil legal aid service"
 
   @javascript @vcr
   Scenario: Follow citizen journey from Accounts page selecting both income and outgoing categories
@@ -96,8 +96,8 @@ Feature: Citizen journey
     Then I should be on a page showing "Confirm the following"
     Then I click "Agree and submit"
     Then I should be on a page showing "You've shared your financial information"
-    Then I click link "feedback"
-    Then I should be on a page showing "How easy or difficult was it to use this service?"
+    Then I click link "feedback (opens in new tab)"
+    Then I should be on a new tab with title "Help us improve the Apply for civil legal aid service"
 
   @javascript
   Scenario: I want to add another bank account via the check your answers page

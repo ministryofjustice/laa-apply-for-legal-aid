@@ -2,8 +2,8 @@ Feature: Provider feedback
   @javascript @vcr @disable-rack-attack
   Scenario: Enter the minimum feedback required within provider journey
     Given I start the journey as far as the applicant page
-    When I click link "feedback"
-    Then I should be on a page with title "Help us improve the Apply for civil legal aid service"
+    When I click link "feedback (opens in new tab)"
+    Then I should be on a new tab with title "Help us improve the Apply for civil legal aid service"
     And I should be on a page showing "If you have problems using this service, email apply-for-civil-legal-aid@justice.gov.uk to get help."
     And I should see a mailto link text "apply-for-civil-legal-aid@justice.gov.uk" for email "apply-for-civil-legal-aid@justice.gov.uk"
     And I should be on a page showing "Help us improve the Apply for civil legal aid service"
@@ -29,14 +29,11 @@ Feature: Provider feedback
     And I click "Send"
     Then I should be on a page with title "Thank you for your feedback"
 
-    When I click link "Back to your application"
-    Then I should be on the Applicant page
-
   @javascript @vcr @disable-rack-attack
   Scenario: Enter all feedback possible within provider journey
     Given I start the journey as far as the applicant page
-    When I click link "feedback"
-    Then I should be on a page with title "Help us improve the Apply for civil legal aid service"
+    When I click link "feedback (opens in new tab)"
+    Then I should be on a new tab with title "Help us improve the Apply for civil legal aid service"
 
     When I choose "No"
     And I fill "feedback-done-all-needed-reason-field" with "could not complete..."
@@ -62,9 +59,6 @@ Feature: Provider feedback
     And I click "Send"
     Then I should be on a page with title "Thank you for your feedback"
 
-    When I click link "Back to your application"
-    Then I should be on the Applicant page
-
   @javascript @vcr @disable-rack-attack
   Scenario: Enter the minimum feedback from provider signout journey
     Given I start the journey as far as the applicant page
@@ -81,6 +75,3 @@ Feature: Provider feedback
     And I choose "Satisfied"
     And I click "Send"
     Then I should be on a page with title "Thank you for your feedback"
-
-    When I click link "Back to your application"
-    Then I should be on a page with title "Sign in - Apply for civil legal aid"
