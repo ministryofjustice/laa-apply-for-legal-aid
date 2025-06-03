@@ -149,6 +149,9 @@ module LaaApplyForLegalAid
 
     config.x.maintenance_mode = ENV.fetch("MAINTENANCE_MODE", nil)&.downcase&.eql?("true")
 
+    # Configures use of clamav service on hosted/production envs, otherwise use local clamav
+    config.x.clamd_conf_filename = ENV.fetch("CLAMD_CONF_FILENAME", "config/clamd.local.conf")
+
     # automatically include locale in the query string when generating urls with url_helpers
     Rails.application.routes.default_url_options[:locale] = I18n.locale
     config.i18n.default_locale = :en
