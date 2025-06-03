@@ -200,7 +200,7 @@ jobs:
     - run:
         name: Install Puppeteer with Chromium
         command: |
-          yarn add puppeteer@22.15.0
+          yarn add puppeteer
     - run:
         name: Setup Code Climate test-reporter
         command: |
