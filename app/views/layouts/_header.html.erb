@@ -2,19 +2,4 @@
   <%= render(partial: "shared/partials/cookie_banner") if display_cookie_banner?(current_provider) %>
 <% end %>
 
-<header class="moj-header" role="banner">
-  <div class="moj-header__container">
-    <div class="moj-header__logo">
-      <%= render(partial: "layouts/header_logo") %>
-      <%= govuk_link_to(t(".legal_aid_agency"), Rails.configuration.x.laa_landing_page_target_url, new_tab: "", class: "moj-header__link moj-header__link--organisation-name") %>
-    </div>
-
-    <div class="moj-header__content">
-      <nav class="moj-header__navigation" aria-label="Account navigation">
-        <ul class="moj-header__navigation-list">
-          <%= user_header_navigation %>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</header>
+<%= render MojComponent::HeaderComponent.new(organisation_name: t(".legal_aid_agency"), url: Rails.configuration.x.laa_landing_page_target_url, nav_items: user_header_navigation) %>
