@@ -108,7 +108,8 @@ laa_portal:
   mockSaml: "true"
 
 provider_details:
-  url: "https://ccms-pda.stg.legalservices.gov.uk/api/providerDetails"
+  url: "https://test-pda-api-laa-ccms-test.apps.live.cloud-platform.service.justice.gov.uk/api/providerDetails/" # Test points CCMS eBS UAT nev
+  # url: https://development-pda-api-laa-ccms-dev.apps.live.cloud-platform.service.justice.gov.uk/api/providerDetails/ # This is also available but may be less stable
 
 pda:
   url: "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk"
