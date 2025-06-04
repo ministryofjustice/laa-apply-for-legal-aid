@@ -31,6 +31,8 @@ en:
         phase_banner_html: This is a new service – your %{link} will help us to improve it.
         title: Apply for civil legal aid
         notice: Notice
+    header:
+      organisation_name: Legal Aid Agency
     logout:
       admin: Admin sign out
       provider: Sign out
