@@ -48,6 +48,11 @@ The ClamAV pod mounts a persistent volume at ClamAV's default location (`/var/li
 > [!NOTE]
 > A custom/private mirror is used because the ClamAV mirrors throttle excessive numbers of requests. The mirror provides an unthrottled source database only used by the LAA alone (needs verification?!).
 
+It is worth noting that the `accessModes` rule used for the ClamAV PVC is `ReadWriteOnce`. This is the most suitable and supported mode for kubernetes and AWS - `ReadWriteMany` is not supported. This [access mode](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) means the PVC can only be mounted by pods in same node of the cluster. We therefore use a `podAffinity` rule in the ClamAV deployment to ensure clamav pods are always using the same node.
+
+> [!CAUTION] Affinity rules are required because consuming pods could be replaced during deployment and these new pods could be assigned to a different node from
+> old pods or other new replica pods. This could therefore result in a "Multi-Attach error for Volume" error during deployment, and a failed deployment of one or more ClamAV pods.
+
 
 ### A note on further customisation
 If further custom configuration of ClamAV is required then a configMap for the ClamAV deployment could be used.
