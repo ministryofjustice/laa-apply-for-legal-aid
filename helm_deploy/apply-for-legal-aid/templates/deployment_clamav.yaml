@@ -10,10 +10,7 @@ metadata:
 spec:
   replicas: {{ .Values.clamav.replicaCount }}
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 0
-      maxSurge: 100%
+    type: Recreate
   selector:
     matchLabels:
       service: {{ template "apply-for-legal-aid.fullname" . }}-clamav
