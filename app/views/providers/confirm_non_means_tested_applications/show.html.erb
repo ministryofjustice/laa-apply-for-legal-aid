@@ -9,5 +9,15 @@
                  t(".title.under_18_now")
                end %>
 
-  <%= interruption_card(heading:, actions: -> { render "actions" }) %>
+  <%= render MojComponent::InterruptionCardComponent.new(heading:) do |card| %>
+    <% card.with_actions do %>
+      <%= next_action_buttons_with_form(
+            url: providers_legal_aid_application_confirm_non_means_tested_applications_path,
+            method: :patch,
+            show_draft: true,
+            inverse_continue: true,
+            continue_button_text: t("generic.continue"),
+          ) %>
+    <% end %>
+  <% end %>
 <% end %>
