@@ -10,6 +10,7 @@ require "json_expressions/rspec"
 require "awesome_print"
 require "pry-rescue/rspec" if Rails.env.development?
 require "super_diff/rspec-rails"
+require "view_component/test_helpers"
 
 # Add additional requires below this line. Rails is not loaded until this point!
 Rails.root.glob("spec/support/**/*.rb").each { |f| require f }
@@ -82,6 +83,7 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Capybara::RSpecMatchers, type: :request
   config.include Capybara::RequestHelpers, type: :request
+  config.include ViewComponent::TestHelpers, type: :component
 end
 
 Shoulda::Matchers.configure do |config|

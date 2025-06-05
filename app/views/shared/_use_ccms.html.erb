@@ -1,7 +1,14 @@
 <%= page_template(page_title: t(".title_html"), head_title: t(".head_title"), template: :basic, column_width: "full") do %>
-  <%= interruption_card(heading: t(".title_html"), actions: -> { render "shared/use_ccms_actions" }) do %>
-    <p><%= body_text %></p>
+  <%= render MojComponent::InterruptionCardComponent.new(heading: t(".title_html")) do |card| %>
+    <% card.with_body do %>
+      <p><%= body_text %></p>
 
-    <%= govuk_list(list, type: :bullet) if local_assigns[:list] %>
+      <%= govuk_list(list, type: :bullet) if local_assigns[:list] %>
+    <% end %>
+
+    <% card.with_actions do %>
+      <%= govuk_button_link_to(t("shared.use_ccms.continue_in_ccms_html"), Rails.configuration.x.laa_landing_page_target_url, inverse: true, role: "button") %>
+      <%= govuk_link_to(t("shared.use_ccms.back_to_applications"), home_path, inverse: true) %>
+    <% end %>
   <% end %>
 <% end %>
