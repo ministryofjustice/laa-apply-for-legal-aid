@@ -12,7 +12,7 @@
         form:,
       ) do %>
 
-    <%= interruption_card(heading: t(".title_html")) %>
+    <%= render MojComponent::InterruptionCardComponent.new(heading: t(".title_html")) %>
 
     <div class="govuk-grid-row govuk-!-margin-top-6">
       <div class="govuk-grid-column-two-thirds">
