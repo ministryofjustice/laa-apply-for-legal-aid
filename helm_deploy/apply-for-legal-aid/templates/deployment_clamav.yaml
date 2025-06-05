@@ -29,6 +29,13 @@ spec:
         fsGroup: 1000
         runAsUser: 1000
         runAsGroup: 1000
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  service: {{ template "apply-for-legal-aid.fullname" . }}-clamav
+              topologyKey: "kubernetes.io/hostname"
       containers:
         - name: clamav
           image: ghcr.io/ministryofjustice/clamav-docker/laa-clamav:latest
