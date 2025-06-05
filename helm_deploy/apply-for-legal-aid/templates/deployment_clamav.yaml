@@ -58,7 +58,6 @@ spec:
             limits:
               cpu: 500m
               memory: 3Gi
-              memory: 3Gi
           startupProbe:
             exec:
               command:
