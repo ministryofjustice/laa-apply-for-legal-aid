@@ -23,6 +23,24 @@ RSpec.describe Flow::Steps::ProviderStart::LimitationsStep, type: :request do
     context "when not overriding the DWP result" do
       it { is_expected.to eq :client_has_partners }
     end
+
+    context "when applying for a PLF non-means proceeding" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_public_law_family_non_means_tested_proceeding) }
+
+      it { is_expected.to eq :check_provider_answers }
+    end
+
+    context "when applying for an SCA non-means proceeding" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_sca_proceedings) }
+
+      it { is_expected.to eq :check_provider_answers }
+    end
+
+    context "when the applicant is under 18 so is non-means tested" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_under_18_applicant) }
+
+      it { is_expected.to eq :check_provider_answers }
+    end
   end
 
   describe "#check_answers" do
