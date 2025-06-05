@@ -433,12 +433,14 @@ en:
       make_links:
         show:
           heading: Do you want to link this application with another one?
-          hint: You can link to another application you've already submitted using this service.
-                Linking to an application that’s already linked to another one will group them together.
+          hint:
+            You can link to another application you've already submitted using this service.
+            Linking to an application that’s already linked to another one will group them together.
           options:
             family_link: Yes, I want to make a family link
-            family_hint: When LAA needs multiple certificates with a shared cost limitation.
-                         The cost limit will be on the certificate of the application you submit first.
+            family_hint:
+              When LAA needs multiple certificates with a shared cost limitation.
+              The cost limit will be on the certificate of the application you submit first.
             legal_link: Yes, I want to make a legal link
             legal_hint: When LAA needs multiple certificates, each with a separate cost limitation.
       find_link_applications:
@@ -572,8 +574,7 @@ en:
         parental_responsibilities:
           error: Select if your client has parental responsibility for any children involved
         child_subject:
-          error:
-            Select yes if your client is a child subject of the proceeding
+          error: Select yes if your client is a child subject of the proceeding
       remove_opponent:
         show: *remove_show
       date_client_told_incidents:
@@ -908,7 +909,7 @@ en:
         single_item: "Use this page to upload %{evidence_type}."
         section_8_evidence: Use this page to upload gateway evidence. This is optional.
         single_non_specific_item: "Use this page to upload %{item}."
-        list_text: 'Use this page to upload:'
+        list_text: "Use this page to upload:"
         benefit_evidence: evidence that your client receives %{benefit}
         client_employment_evidence: evidence of your client's employment
         part_employ_evidence: evidence of the partner's employment
@@ -1021,7 +1022,7 @@ en:
       show:
         h1_no_partner: "Do you have evidence that your client receives %{passporting_benefit}?"
         h1_partner: "Do you have evidence that your client is covered by their partner's %{passporting_benefit}?"
-        evidence_hint: 'For example, a letter from DWP or any other relevant documents.'
+        evidence_hint: "For example, a letter from DWP or any other relevant documents."
         radio_hint_yes: "You'll need to upload supporting evidence later."
     limitations:
       cost_limits:
@@ -1179,7 +1180,7 @@ en:
           h1_heading_with_partner: Does your client or their partner own the home your client usually lives in?
           hint: This is where your client normally lives, even if they have temporarily left their home due to domestic abuse.
           mortgage: Yes, with a mortgage or loan
-          'no': 'No'
+          "no": "No"
           owned_outright: Yes, owned outright
       property_details:
         show:
@@ -1275,7 +1276,7 @@ en:
               check_box_other_person_account: For example, your client is the signatory on a child's account.
               check_box_life_assurance_endowment_policy: Do not include policies that only pay out on death.
             partner:
-              << : *hints
+              <<: *hints
               check_box_other_person_account: For example, your client or their partner is the signatory on a child's account.
           check_box_cash: Money not in a bank account
           check_box_other_person_account: Access to another person's bank account
@@ -1901,7 +1902,7 @@ en:
     review_and_print_applications:
       show:
         heading: Review and print your application
-        print_heading:  Application for legal aid and client declaration
+        print_heading: Application for legal aid and client declaration
         print_button: Print application
         print_your_application: Print your application
         print_the_application:
@@ -1949,7 +1950,7 @@ en:
           - is employed
     use_ccms_employment:
       index:
-        warning_list_title: 'You cannot use this service if your client is:'
+        warning_list_title: "You cannot use this service if your client is:"
         ineligible_employed:
           - self-employed
           - a member of the armed forces
@@ -2017,8 +2018,7 @@ en:
           page_title: Has this proceeding been issued?
       heard_as_alternatives:
         show:
-          error:
-            Select yes if this proceeding will be heard as an alternative to any of the special children act proceedings
+          error: Select yes if this proceeding will be heard as an alternative to any of the special children act proceedings
           page_title:
             single: Will this proceeding be heard as an alternative to the '%{proceeding}' proceeding?
             multiple: Will this proceeding be heard as an alternative to any of the special children act proceedings?
@@ -2072,14 +2072,13 @@ en:
           no_button: No, do not delete it
           warning: You cannot undo this action
     change_of_names:
-        error: Select yes if this proceeding is for a change of name application
-        show:
-          heading: Is this proceeding for a change of name application?
-    change_of_names_interrupts:
-      actions:
-        change: Change your answer
-        applications: Back to your applications
+      error: Select yes if this proceeding is for a change of name application
       show:
+        heading: Is this proceeding for a change of name application?
+    change_of_names_interrupts:
+      show:
+        applications: Back to your applications
+        change: Change your answer
         title_html: Change of name applications are not eligible for legal aid
         paragraph: You can go back and change your answer if this is not a change of name application.
     proceeding_loop:
@@ -2141,13 +2140,11 @@ en:
       enter_limitation_note_error: Enter a limitation note for %{scope_limitation}
     interrupt:
       blocks:
-        actions:
-          applications: Make a new application
         show:
+          applications: Make a new application
           title_html: You cannot submit this application
           body_text: This is because the application will be missing information after recent updates to the service.
           options: "You can (choose one of the following):"
           option_bullets:
             - make a new application for your client if you still need to submit one
             - go back to your applications
-
