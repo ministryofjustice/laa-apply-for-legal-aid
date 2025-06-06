@@ -67,8 +67,8 @@ RSpec.describe "citizen accounts request" do
       end
 
       it "does not display account information" do
-        expect(unescaped_response_body).not_to include(applicant_bank_account_holder.full_name)
-        expect(unescaped_response_body).not_to include("Account")
+        expect(unescaped_response_body).to have_no_content(applicant_bank_account_holder.full_name)
+        expect(unescaped_response_body).to have_no_content("Account")
       end
 
       it "displays a loading message" do
