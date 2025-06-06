@@ -1,9 +1,3 @@
 <%= page_template page_title: t(".title"), back_link: back_button do %>
-  <% if @display_close_tab_msg %>
-    <p><%= t(".close_tab") %></p>
-  <% else %>
-    <p class="govuk-body">
-      <%= govuk_link_to t(".link"), back_path, no_visited_state: true %>
-    </p>
-  <% end %>
+  <p class="govuk-body"><%= t(".close_tab") %></p>
 <% end %>

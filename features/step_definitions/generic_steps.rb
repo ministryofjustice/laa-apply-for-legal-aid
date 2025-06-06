@@ -2,6 +2,12 @@ Then("I should be on a page with title {string}") do |title|
   expect(page).to have_title(title)
 end
 
+Then("I should be on a new tab with title {string}") do |title|
+  new_tab = page.windows.last
+  page.switch_to_window(new_tab)
+  expect(page).to have_title(title)
+end
+
 Then("I should be on a page with title matching {string}") do |title|
   expect(page).to have_title(/#{title}/)
 end
