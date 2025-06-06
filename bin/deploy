@@ -13,7 +13,8 @@ deploy_branch() {
   RELEASE_NAME="apply-$RELEASE_BRANCH"
   RELEASE_HOST="$RELEASE_BRANCH-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk"
   INGRESS_NAME=$(echo "$RELEASE_NAME-apply-for-legal-aid" | cut -c1-53 | sed 's/-$//')
-  IDENTIFIER="$INGRESS_NAME-${K8S_NAMESPACE}-green"
+  INGRESS_IDENTIFIER="$INGRESS_NAME-${K8S_NAMESPACE}-green"
+  PUBLIC_INGRESS_IDENTIFIER="$INGRESS_NAME-public-${K8S_NAMESPACE}-green"
 
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$RELEASE_NAME'..."
 
@@ -25,7 +26,8 @@ deploy_branch() {
                 --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                 --set image.tag="${CIRCLE_SHA1}" \
                 --set ingress.hosts="{$RELEASE_HOST}" \
-                --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$IDENTIFIER" \
+                --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$INGRESS_IDENTIFIER" \
+                --set publicIngress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$PUBLIC_INGRESS_IDENTIFIER" \
                 --set-string clientlessVpnIPs="$CLIENTLESS_VPN_IPS" \
                 --set-string pingdomIPs="$PINGDOM_IPS" \
                 --set-string sharedIPs="$SHARED_IPS"
