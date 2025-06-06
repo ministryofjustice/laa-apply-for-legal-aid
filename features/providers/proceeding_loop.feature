@@ -34,7 +34,7 @@ Feature: Loop through proceeding questions
 
   Scenario: When provider does not accept default levels of service
     Given I search for proceeding type "Child arrangements order CAO Section 8"
-    And I choose a "Child arrangements order (CAO) - residence - appeal" radio button
+    And I choose a "Child arrangements order (CAO) - residence - appeal - vary" radio button
 
     When I click 'Save and continue'
     Then I should be on a page with title "Do you want to add another proceeding?"
@@ -174,7 +174,7 @@ Feature: Loop through proceeding questions
 
   Scenario: When provider accepts default levels of service
     Given I search for proceeding type "Child arrangements order CAO Section 8"
-    And I choose a "Child arrangements order (CAO) - residence - appeal" radio button
+    And I choose a "Child arrangements order (CAO) - residence - appeal - vary" radio button
 
     When I click 'Save and continue'
     Then I should be on a page with title "Do you want to add another proceeding?"
