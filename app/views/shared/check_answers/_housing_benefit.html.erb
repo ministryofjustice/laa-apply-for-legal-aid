@@ -12,16 +12,14 @@
   <%= card.with_summary_list do |summary_list| %>
     <% if @legal_aid_application.applicant_in_receipt_of_housing_benefit? %>
       <% housing_benefit_type = TransactionType.find_by(name: "housing_benefit") %>
+      <% regular_transaction_amount, regular_transaction_frequency = regular_transaction_answer_by_type(
+           legal_aid_application: @legal_aid_application,
+           transaction_type: housing_benefit_type,
+           owner_type: "Applicant",
+         ) %>
       <%= summary_list.with_row do |row| %>
         <%= row.with_key(text: t(".amount"), classes: "govuk-!-width-one-third") %>
-        <%= row.with_value do %>
-          <% regular_transaction_amount, regular_transaction_frequency = regular_transaction_answer_by_type(
-               legal_aid_application: @legal_aid_application,
-               transaction_type: housing_benefit_type,
-               owner_type: "Applicant",
-             ) %>
-          <p><%= regular_transaction_amount %><br><%= regular_transaction_frequency %></p>
-        <% end %>
+        <%= row.with_value(text: [regular_transaction_amount, regular_transaction_frequency].join(" ")) %>
       <% end %>
     <% else %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__housing_benefit_question" }) do |row| %>

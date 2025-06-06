@@ -93,7 +93,7 @@ RSpec.describe TransactionTypeHelper do
                frequency: "weekly")
       end
 
-      it { is_expected.to eq(["£250.00", "every week"]) }
+      it { is_expected.to eq(["£250", "every week"]) }
     end
 
     context "when no regular transactions exist" do
@@ -124,8 +124,8 @@ RSpec.describe TransactionTypeHelper do
         context "with bank statement upload" do
           it "returns a hash of formatted key value pairs" do
             expect(formatted_transactions).to contain_exactly(
-              { label: "Financial help from friends or family", value: "£500.00 every week" },
-              { label: "Maintenance payments from a former partner", value: "£500.00 every week" },
+              { label: "Financial help from friends or family", value: "£500 every week" },
+              { label: "Maintenance payments from a former partner", value: "£500 every week" },
               { label: "Income from a property or lodger", value: "None" },
               { label: "Pension", value: "None" },
             )
@@ -171,7 +171,7 @@ RSpec.describe TransactionTypeHelper do
           it "returns a hash of formatted key value pairs" do
             expect(formatted_transactions).to contain_exactly(
               { label: "Financial help from friends or family", value: "None" },
-              { label: "Benefits, charitable or government payments", value: "£106.00" },
+              { label: "Benefits, charitable or government payments", value: "£106" },
               { label: "Maintenance payments from a former partner", value: "None" },
               { label: "Income from a property or lodger", value: "None" },
               { label: "Pension", value: "None" },
@@ -185,8 +185,8 @@ RSpec.describe TransactionTypeHelper do
 
         it "returns a hash of formatted key value pairs" do
           expect(formatted_transactions).to contain_exactly(
-            { label: "Financial help from friends or family", value: "£500.00 every week" },
-            { label: "Maintenance payments from a former partner", value: "£500.00 every week" },
+            { label: "Financial help from friends or family", value: "£500 every week" },
+            { label: "Maintenance payments from a former partner", value: "£500 every week" },
             { label: "Income from a property or lodger", value: "None" },
             { label: "Pension", value: "None" },
           )
@@ -231,8 +231,8 @@ RSpec.describe TransactionTypeHelper do
         context "with bank statement upload" do
           it "returns a hash of formatted key value pairs" do
             expect(formatted_transactions).to contain_exactly(
-              { label: "Housing payments", value: "£500.00 every week" },
-              { label: "Maintenance payments to a former partner", value: "£500.00 every week" },
+              { label: "Housing payments", value: "£500 every week" },
+              { label: "Maintenance payments to a former partner", value: "£500 every week" },
               { label: "Childcare payments", value: "None" },
               { label: "Payments towards legal aid in a criminal case", value: "None" },
             )
@@ -278,7 +278,7 @@ RSpec.describe TransactionTypeHelper do
           it "returns a hash of formatted key value pairs" do
             expect(formatted_transactions).to contain_exactly(
               { label: "Housing payments", value: "None" },
-              { label: "Maintenance payments to a former partner", value: "£106.00" },
+              { label: "Maintenance payments to a former partner", value: "£106" },
               { label: "Childcare payments", value: "None" },
               { label: "Payments towards legal aid in a criminal case", value: "None" },
             )
@@ -291,8 +291,8 @@ RSpec.describe TransactionTypeHelper do
 
         it "returns a hash of formatted key value pairs" do
           expect(formatted_transactions).to contain_exactly(
-            { label: "Housing payments", value: "£500.00 every week" },
-            { label: "Maintenance payments to a former partner", value: "£500.00 every week" },
+            { label: "Housing payments", value: "£500 every week" },
+            { label: "Maintenance payments to a former partner", value: "£500 every week" },
             { label: "Childcare payments", value: "None" },
             { label: "Payments towards legal aid in a criminal case", value: "None" },
           )

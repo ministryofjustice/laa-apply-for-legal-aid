@@ -6,7 +6,7 @@ module TransactionTypeHelper
     if has_transaction_type && total.zero?
       legal_aid_application.client_uploading_bank_statements? ? t("generic.yes") : t("generic.yes_but_none")
     elsif has_transaction_type && total.positive?
-      legal_aid_application.client_uploading_bank_statements? ? t("generic.yes") : number_to_currency(total)
+      legal_aid_application.client_uploading_bank_statements? ? t("generic.yes") : gds_number_to_currency(total)
     else
       t("generic.none")
     end
@@ -15,7 +15,7 @@ module TransactionTypeHelper
   def regular_transaction_answer_by_type(legal_aid_application:, transaction_type:, owner_type:)
     regular_transaction = legal_aid_application.regular_transactions.find_by(transaction_type:, owner_type:)
     if regular_transaction
-      [number_to_currency(regular_transaction.amount), t("transaction_types.frequencies.#{regular_transaction.frequency}").downcase]
+      [gds_number_to_currency(regular_transaction.amount), t("transaction_types.frequencies.#{regular_transaction.frequency}").downcase]
     else
       t("generic.none")
     end
@@ -62,7 +62,7 @@ private
     legal_aid_application.regular_transactions.where(owner_type: individual).send("#{credit_or_debit}s").to_h do |r|
       [
         r.transaction_type.name,
-        "#{number_to_currency(r.amount)} #{t("transaction_types.frequencies.#{r.frequency}").downcase}",
+        "#{gds_number_to_currency(r.amount)} #{t("transaction_types.frequencies.#{r.frequency}").downcase}",
       ]
     end
   end
@@ -72,7 +72,7 @@ private
 
     labels = transactions.group_by { |ct| ct.transaction_type.name }.transform_values do |group|
       group.map { |ct|
-        t("generic.amount_and_date", amount: gds_number_to_currency(ct.amount, precision: 2), month: ct.transaction_date.strftime("%B %Y"))
+        t("generic.amount_and_date", amount: gds_number_to_currency(ct.amount), month: ct.transaction_date.strftime("%B %Y"))
       }.join("<br>")
     end
 

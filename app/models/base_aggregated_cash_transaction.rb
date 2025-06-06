@@ -96,7 +96,7 @@ private
 
   def clean_attributes(params)
     params.each.with_object({}) do |(k, v), new_hash|
-      new_hash[k] = cash_transaction_amount_field?(k) ? v.to_s.tr("£,", "") : v
+      new_hash[k] = cash_transaction_amount_field?(k) ? CurrencyCleaner.new(v).call : v
     end
   end
 
