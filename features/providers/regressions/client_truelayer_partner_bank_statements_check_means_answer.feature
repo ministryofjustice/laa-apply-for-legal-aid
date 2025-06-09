@@ -13,7 +13,7 @@ Feature: Bank statement upload check your answers
     Then the "Payments your client gets" section's questions and answers should match:
       | question | answer |
       | Benefits, charitable or government payments | None |
-      | Financial help from friends or family | £44.00 |
+      | Financial help from friends or family | £44 |
       | Maintenance payments from a former partner | None |
       | Income from a property or lodger | None |
       | Pension | None |
@@ -22,7 +22,7 @@ Feature: Bank statement upload check your answers
       | question | answer |
       | Benefits, charitable or government payments | None |
       | Financial help from friends or family | None |
-      | Maintenance payments from a former partner | £50.00 every week |
+      | Maintenance payments from a former partner | £50 every week |
       | Income from a property or lodger | None |
       | Pension | None |
 

@@ -41,7 +41,7 @@
       <% end %>
       <%= summary_list.with_row do |row| %>
         <%= row.with_key(text: t(".amount"), classes: "govuk-!-width-one-third") %>
-        <%= row.with_value(text: [number_to_currency(state_benefit.amount), t("transaction_types.frequencies.#{state_benefit.frequency}").downcase].join(" ")) %>
+        <%= row.with_value(text: [gds_number_to_currency(state_benefit.amount), t("transaction_types.frequencies.#{state_benefit.frequency}").downcase].join(" ")) %>
       <% end %>
     <% end %>
   <% end %>
