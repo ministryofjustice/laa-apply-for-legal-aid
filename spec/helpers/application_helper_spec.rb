@@ -27,8 +27,7 @@ RSpec.describe ApplicationHelper do
   describe "#user_header_navigation" do
     context "when called on citizens journey" do
       it "returns no navigation items" do
-        user_header_navigation(header)
-        expect(header.navigation_items).to eq []
+        expect(user_header_navigation).to be_nil
       end
     end
 
@@ -37,8 +36,9 @@ RSpec.describe ApplicationHelper do
 
       context "when provider is signed in" do
         it "returns a link to edit provider details and a logout link" do
-          user_header_navigation(header)
-          expect(header.navigation_items.map(&:text)).to eq ["Test User", "Sign out"]
+          expect(user_header_navigation).to have_css("li", count: 2)
+            .and have_css("li", text: "Test User")
+            .and have_css("li", text: "Sign out")
         end
       end
 
@@ -46,8 +46,8 @@ RSpec.describe ApplicationHelper do
         let(:signed_in) { false }
 
         it "returns a login link" do
-          user_header_navigation(header)
-          expect(header.navigation_items.map(&:text)).to eq ["Sign In"]
+          expect(user_header_navigation).to have_css("li", count: 1)
+            .and have_css("li", text: "Sign In")
         end
       end
     end
@@ -57,8 +57,8 @@ RSpec.describe ApplicationHelper do
 
       context "when admin is signed in" do
         it "returns a logout link" do
-          user_header_navigation(header)
-          expect(header.navigation_items.map(&:text)).to eq ["Admin sign out"]
+          expect(user_header_navigation).to have_css("li", count: 1)
+            .and have_css("li", text: "Admin sign out")
         end
       end
 
@@ -66,8 +66,7 @@ RSpec.describe ApplicationHelper do
         let(:signed_in) { false }
 
         it "returns a login link" do
-          user_header_navigation(header)
-          expect(header.navigation_items.map(&:text)).to eq []
+          expect(user_header_navigation).to be_nil
         end
       end
     end
