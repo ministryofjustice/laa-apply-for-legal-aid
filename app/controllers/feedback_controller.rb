@@ -16,7 +16,6 @@ class FeedbackController < ApplicationController
 
   def create
     initialize_feedback
-    @display_close_tab_msg = params["signed_out"].present?
 
     if @feedback.save
       redirect_to feedback_thanks_path
