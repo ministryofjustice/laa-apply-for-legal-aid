@@ -16,13 +16,13 @@ spec:
       maxSurge: 100%
   selector:
     matchLabels:
-      app: {{ template "apply-for-legal-aid.name" . }}-worker
-      release: {{ .Release.Name }}
+      service: {{ template "apply-for-legal-aid.fullname" . }}-worker
   template:
     metadata:
       labels:
-        app: {{ template "apply-for-legal-aid.name" . }}-worker
+        app: {{ template "apply-for-legal-aid.name" . }}
         release: {{ .Release.Name }}
+        service: {{ template "apply-for-legal-aid.fullname" . }}-worker
     spec:
       serviceAccountName: "{{ .Values.service_account.name }}"
       containers:
