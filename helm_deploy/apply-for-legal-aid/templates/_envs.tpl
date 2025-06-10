@@ -113,8 +113,8 @@ env:
   - name: CCMS_SOA_CLIENT_USERNAME
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: ccmsSoaClientUsername
+        name: dev-ccms-connection
+        key: mpClientUserName
   - name: CCMS_SOA_CLIENT_PASSWORD_TYPE
     valueFrom:
       secretKeyRef:
@@ -123,8 +123,8 @@ env:
   - name: CCMS_SOA_CLIENT_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: ccmsSoaClientPassword
+        name: dev-ccms-connection
+        key: mpClientPassword
   - name: CCMS_SOA_USER_ROLE
     valueFrom:
       secretKeyRef:
