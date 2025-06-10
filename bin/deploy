@@ -3,7 +3,6 @@
 ENVIRONMENT=$1
 
 CLIENTLESS_VPN_IPS="165.1.170.106\,165.1.170.107\,134.231.143.70\,134.231.143.71"
-PINGDOM_IPS=$(curl -s https://my.pingdom.com/probes/ipv4 | tr -d ' ' | tr '\n' ',' | sed 's/,/\\,/g' | sed 's/\\,$//')
 SHARED_IPS=$(curl -s https://raw.githubusercontent.com/ministryofjustice/laa-ip-allowlist/main/cidrs.txt | tr -d ' ' | tr '\n' ',' | sed 's/,/\\,/g' | sed 's/\\,$//')
 
 deploy_branch() {
@@ -13,7 +12,8 @@ deploy_branch() {
   RELEASE_NAME="apply-$RELEASE_BRANCH"
   RELEASE_HOST="$RELEASE_BRANCH-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk"
   INGRESS_NAME=$(echo "$RELEASE_NAME-apply-for-legal-aid" | cut -c1-53 | sed 's/-$//')
-  IDENTIFIER="$INGRESS_NAME-${K8S_NAMESPACE}-green"
+  INGRESS_IDENTIFIER="$INGRESS_NAME-${K8S_NAMESPACE}-green"
+  PUBLIC_INGRESS_IDENTIFIER="$INGRESS_NAME-public-${K8S_NAMESPACE}-green"
 
   echo "Deploying CIRCLE_SHA1: $CIRCLE_SHA1 under release name: '$RELEASE_NAME'..."
 
@@ -25,9 +25,9 @@ deploy_branch() {
                 --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                 --set image.tag="${CIRCLE_SHA1}" \
                 --set ingress.hosts="{$RELEASE_HOST}" \
-                --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$IDENTIFIER" \
+                --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$INGRESS_IDENTIFIER" \
+                --set publicIngress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$PUBLIC_INGRESS_IDENTIFIER" \
                 --set-string clientlessVpnIPs="$CLIENTLESS_VPN_IPS" \
-                --set-string pingdomIPs="$PINGDOM_IPS" \
                 --set-string sharedIPs="$SHARED_IPS"
 }
 
@@ -39,7 +39,6 @@ deploy_main() {
                 --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                 --set image.tag="${CIRCLE_SHA1}" \
                 --set-string clientlessVpnIPs="$CLIENTLESS_VPN_IPS" \
-                --set-string pingdomIPs="$PINGDOM_IPS" \
                 --set-string sharedIPs="$SHARED_IPS"
 }
 

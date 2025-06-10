@@ -1,0 +1,45 @@
+{{- if .Values.publicIngress.enabled -}}
+{{- $fullName := include "apply-for-legal-aid.fullname" . -}}
+{{- $secretName := .Values.ingress.secretName -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $fullName }}-public
+  labels:
+    app: {{ template "apply-for-legal-aid.name" . }}
+    chart: {{ template "apply-for-legal-aid.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations:
+{{- with .Values.publicIngress.annotations }}
+{{ toYaml . | indent 4 }}
+{{- end }}
+spec:
+  ingressClassName: {{ .Values.publicIngress.className }}
+  tls:
+  {{- range .Values.ingress.hosts }}
+  - hosts:
+    - {{ . }}
+    secretName: {{ $secretName }}
+  {{- end }}
+  rules:
+    {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
+      http:
+        paths:
+          - path: /ping
+            pathType: Exact
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  name: http
+          - path: /status
+            pathType: Exact
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  name: http
+    {{- end }}
+{{- end }}
