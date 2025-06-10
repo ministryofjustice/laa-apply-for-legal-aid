@@ -10,7 +10,13 @@ module Flow
             :client_has_partners
           end
         end,
-        check_answers: :check_provider_answers,
+        check_answers: lambda do |application|
+          if application.non_means_tested?
+            :check_provider_answers
+          else
+            :client_has_partners
+          end
+        end,
       )
     end
   end
