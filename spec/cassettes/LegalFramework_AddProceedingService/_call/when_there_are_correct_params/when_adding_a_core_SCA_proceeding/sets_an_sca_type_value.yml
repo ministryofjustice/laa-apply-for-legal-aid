@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.9.2
+      - Faraday v2.13.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,11 +21,11 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 25 Jun 2024 11:07:07 GMT
+      - Tue, 10 Jun 2025 11:28:44 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '1078'
+      - '1063'
       Connection:
       - keep-alive
       X-Frame-Options:
@@ -41,26 +41,26 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"c8b035a7aad4ee2206dfb4d02051ec5e"
+      - W/"8a72a37715d617716cf90bf4ce2d766a"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - ad77dba7e19e63047a96b531e0bd3e62
+      - 4c5fda641564e044e6053f82b15507c9
       X-Runtime:
-      - '0.010983'
+      - '0.013144'
       Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
+      - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"success":true,"ccms_code":"PB004","meaning":"Emergency protection
         order - extend","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","name":"extend_emergency_protection_sca","description":"to
         be represented on an application for or to extend an emergency protection
-        order.","full_s8_only":false,"sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"Special
-        Children Act","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"FM062","meaning":"Final
+        order.","sca_core":true,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"special
+        children act (SCA)","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"FM062","meaning":"Final
         hearing","description":"Limited to all steps up to and including final hearing
         and any action necessary to implement (but not enforce) the order."},"delegated_functions":{"code":"FM062","meaning":"Final
         hearing","description":"Limited to all steps up to and including final hearing
         and any action necessary to implement (but not enforce) the order."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Tue, 25 Jun 2024 11:07:07 GMT
-recorded_with: VCR 6.2.0
+  recorded_at: Tue, 10 Jun 2025 11:28:44 GMT
+recorded_with: VCR 6.3.1
