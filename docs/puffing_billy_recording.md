@@ -1,6 +1,6 @@
 # Puffing-billy stub creating and request cache
 
-Some feature tests excercise application logic that includes aysnchronous javascript
+Some feature tests exercise application logic that includes asynchronous javascript
 calls to external services (APIs). In particular, searching for proceedings and organisations is achieved this through ajax calls to the legal-framework-api. VCR does not intercept browser calls therefore puffing-billy is used. This provides a "rewriting web proxy" to intercept and stub the calls.
 
 VCR and puffing-billy can be used together to achieve stubbing of any calls to external services from the backend and frontend respectively.
@@ -8,7 +8,7 @@ VCR and puffing-billy can be used together to achieve stubbing of any calls to e
 ## Setup
 
 ### Legal Framework API
-This service is explictly called from javascript to search for proceedings and organisations. Therefore we must ensure `.env.test` has `LEGAL_FRAMEWORK_API_HOST` pointing to staging environment.
+This service is explicitly called from javascript to search for proceedings and organisations. Therefore we must ensure `.env.test` has `LEGAL_FRAMEWORK_API_HOST` pointing to staging environment.
 
 ## Stubbing
 While it is possible to record and playback requests, using puffing-billy, in a manner similar to vcr, stubbing a request is the preferred option. To add a stub you should add or extend helper methods in the `features/support/puffing_billy_helper.rb` and then call that in a cucumber step definition that will make the call you wish to stub.
