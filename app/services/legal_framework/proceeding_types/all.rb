@@ -19,7 +19,7 @@ module LegalFramework
         end
       end
 
-      def self.call(legal_aid_application)
+      def self.call(legal_aid_application = nil)
         new(legal_aid_application).call
       end
 
@@ -29,13 +29,17 @@ module LegalFramework
       end
 
       def call
-        parsed_body = JSON.parse(request.body)
-        parsed_body["data"].map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
+        response = request
+        parsed_body = JSON.parse(response.body)
+        data = show_all_proceedings? ? parsed_body : parsed_body["data"]
+        data.map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
       end
 
     private
 
       def request_body
+        return if show_all_proceedings?
+
         {
           current_proceedings: @legal_aid_application.proceedings&.map(&:ccms_code),
           allowed_categories: %w[MAT], # TODO: replace with details from new PDA, for now hardcoded to only current category type
@@ -44,15 +48,23 @@ module LegalFramework
       end
 
       def request
-        conn.post do |request|
-          request.url url
+        conn.send(request_method) do |request|
+          request.url path
           request.headers["Content-Type"] = "application/json"
-          request.body = request_body
+          request.body = request_body unless show_all_proceedings?
         end
       end
 
+      def request_method
+        show_all_proceedings? ? :get : :post
+      end
+
+      def show_all_proceedings?
+        @legal_aid_application.blank?
+      end
+
       def path
-        "/proceeding_types/filter"
+        show_all_proceedings? ? "/proceeding_types/all" : "/proceeding_types/filter"
       end
 
       def headers
