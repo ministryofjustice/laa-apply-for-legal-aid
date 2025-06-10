@@ -1819,6 +1819,7 @@ en:
         no_more_proceedings:
           page_title: You have added all the allowed proceedings
           caption: No more proceedings can be added to the ones you have chosen
+        warning: Check that proceedings are under the right matter type
     providers:
       show:
         account_number: Account number
