@@ -505,7 +505,7 @@ module CCMS
       legal_aid_application&.appeal&.second_appeal? || false
     end
 
-    def case_owner_std_family_merits(_options)
+    def case_owner_std_family_merits?(_options)
       legal_aid_application&.appeal&.second_appeal? ? false : true
     end
 

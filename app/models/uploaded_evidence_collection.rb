@@ -12,10 +12,9 @@ class UploadedEvidenceCollection < ApplicationRecord
 private
 
   def all_evidence_categorised
-    return true unless uncategorised_evidence_exists?
+    return unless uncategorised_evidence_exists?
 
     errors.add(:"uploaded-files-table-container", I18n.t("#{error_path}.uncategorised_evidence"), mandatory_evidence: false)
-    false
   end
 
   def uncategorised_evidence_exists?

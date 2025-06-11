@@ -7,8 +7,8 @@ class StatusController < ApiController
       sidekiq_queue: sidekiq_queue_healthy?,
 
       malware_scanner: {
-        positive: malware_scanner_positive,
-        negative: malware_scanner_negative,
+        positive: malware_scanner_positive?,
+        negative: malware_scanner_negative?,
       },
     }
 
@@ -52,7 +52,7 @@ private
     ActiveRecord::Base.connection.database_exists?
   end
 
-  def malware_scanner_positive
+  def malware_scanner_positive?
     virus_found = MalwareScanner.call(
       file_path: Rails.root.join("spec/fixtures/files/malware.doc"),
       save_result: false,
@@ -63,7 +63,7 @@ private
     true
   end
 
-  def malware_scanner_negative
+  def malware_scanner_negative?
     virus_found = MalwareScanner.call(
       file_path: Rails.root.join("spec/fixtures/files/documents/hello_world.pdf"),
       save_result: false,

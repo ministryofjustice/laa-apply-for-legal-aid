@@ -36,11 +36,11 @@ module Reports
         @line << laa.created_at.strftime("%Y-%m-%d %H:%M:%S")
         @line << laa.ccms_submission_date&.strftime("%Y-%m-%d %H:%M:%S")
         @line << laa.applicant.full_name
-        @line << deleted?(laa)
+        @line << deleted(laa)
         sanitise
       end
 
-      def deleted?(laa)
+      def deleted(laa)
         laa.discarded? ? "Y" : ""
       end
     end

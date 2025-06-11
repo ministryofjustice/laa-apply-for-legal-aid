@@ -3678,7 +3678,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   CASE_OWNER_STD_FAMILY_MERITS:
-    value: "#case_owner_std_family_merits"
+    value: "#case_owner_std_family_merits?"
     br100_meaning: The Case Owner Is The Standard Family Merits Team
     response_type: boolean
     user_defined: false

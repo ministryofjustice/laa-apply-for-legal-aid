@@ -15,7 +15,7 @@ module CCMS
 
         submission.case_add_transaction_id = case_add_requestor.transaction_request_id
         submission.save!
-        create_history(from_state?, submission.aasm_state, xml_request, response) if submission.submit_case!
+        create_history(from_state, submission.aasm_state, xml_request, response) if submission.submit_case!
       rescue *CCMS_SUBMISSION_ERRORS => e
         failed_response = e.respond_to?(:response) ? e&.response : nil
         handle_exception(e, xml_request, response: failed_response)
@@ -24,7 +24,7 @@ module CCMS
 
     private
 
-      def from_state?
+      def from_state
         submission.submission_documents.empty? ? "applicant_ref_obtained" : "document_ids_obtained"
       end
 
