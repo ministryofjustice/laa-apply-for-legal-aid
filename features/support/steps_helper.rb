@@ -1,16 +1,3 @@
-Then("I debug the response body") do
-  fn = Rails.root.join("tmp/debug.html")
-  puts ">>>>>>>>>>>> #{__FILE__}:#{__LINE__} output HTML file://#{fn}".yellow
-  File.open(fn, "w") { |fp| fp.puts page.body }
-  puts ">>>>>>>>>>>> #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
-end
-
-Then("I print the response body html") do
-  puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
-  puts page.body
-  puts ">>>>>>>>>>>>  #{__FILE__}:#{__LINE__} <<<<<<<<<<<<".yellow
-end
-
 Then("I should be on a page showing {string}") do |title|
   expect(page).to have_content(title)
 end
@@ -145,19 +132,6 @@ Then("I answer/change {string} with/to {string}") do |question, answer|
   find(".govuk-fieldset__legend", text: question)
     .sibling(".govuk-radios")
     .find(".govuk-radios__item label", text: answer).click
-end
-
-# This can be used to display the state of the application
-# Usage:
-# Then I display the state of the application from 123
-#
-Then("I display the state of the application from {int}") do |label|
-  if @legal_aid_application.nil?
-    raise "Unable to determine the application to be displayed" if LegalAidApplication.count != 1
-
-    @legal_aid_application = LegalAidApplication.first
-  end
-  puts ">>>>>>>>>>>> #{label} #{@legal_aid_application.reload.state} #{__FILE__}:#{__LINE__} <<<<<<<<<<<<\n"
 end
 
 Then("no checkboxes should be selected") do

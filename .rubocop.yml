@@ -34,3 +34,8 @@ Style/ZeroLengthPredicate:
 
 RSpec/IndexedLet:
   Max: 2
+
+Naming/PredicateMethod:
+  Exclude:
+    - app/forms/providers/regular_transaction_form.rb
+    - lib/tasks/portal/name_validator.rb

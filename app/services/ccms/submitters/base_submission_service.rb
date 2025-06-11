@@ -43,7 +43,7 @@ module CCMS
       end
 
       def format_exception(error)
-        [error.class, error.message, error.backtrace].flatten.join("\n")
+        [error.class, error.message, error.backtrace].join("\n")
       end
 
       def handle_exception(exception, xml_request, response: nil)

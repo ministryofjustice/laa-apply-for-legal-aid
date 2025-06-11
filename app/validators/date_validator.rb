@@ -4,7 +4,7 @@ class DateValidator < ActiveModel::EachValidator
 
   def validate_each(record, attribute, value)
     value = parse_date(value, options[:format]) if value.is_a?(String)
-    return unless valid_date(record, attribute, value)
+    return unless valid_date?(record, attribute, value)
 
     validate_not_in_future(record, attribute, value)
     validate_not_too_early(record, attribute, value)
@@ -19,7 +19,7 @@ private
     nil
   end
 
-  def valid_date(record, attribute, value)
+  def valid_date?(record, attribute, value)
     message = options[:message] || :date_not_valid
     unless value.is_a?(Date)
       record.errors.add(attribute, message)
