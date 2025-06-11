@@ -89,7 +89,6 @@ redis:
   enabled: false
 
 benefit_checker:
-  lscServiceName: eP_9_Tk
   wsdlUrl: "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl"
 
 ccms_soa:

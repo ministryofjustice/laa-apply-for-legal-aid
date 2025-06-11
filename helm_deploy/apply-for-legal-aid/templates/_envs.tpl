@@ -83,7 +83,7 @@ env:
   - name: BC_LSC_SERVICE_NAME
     valueFrom:
       secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
+        name: laa-apply-for-legalaid-secrets
         key: benefitCheckerLscServiceName
   - name: BC_CLIENT_ORG_ID
     valueFrom:
