@@ -95,8 +95,7 @@ redis:
     existingSecretPasswordKey: redisPassword
 
 benefit_checker:
-  lscServiceName: eP_9_Tk
-  wsdlUrl: "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl"
+  wsdlUrl: "https://laa-benefitchecker-uat.apps.live.cloud-platform.service.justice.gov.uk/lsx/lsc-services/benefitChecker?wsdl"
 
 ccms_soa:
   submit_applications: "true"
