@@ -16,18 +16,18 @@ module CFECivil
 
       def main_home
         {
-          value: legal_aid_application.property_value.to_f || 0.0,
-          outstanding_mortgage: legal_aid_application.outstanding_mortgage_amount.to_f || 0.0,
-          percentage_owned: legal_aid_application.percentage_home.to_f || 0.0,
+          value: legal_aid_application.property_value.to_f,
+          outstanding_mortgage: legal_aid_application.outstanding_mortgage_amount.to_f,
+          percentage_owned: legal_aid_application.percentage_home.to_f,
           shared_with_housing_assoc: main_home_shared_with_housing_association_or_landlord?,
         }
       end
 
       def second_home
         {
-          value: other_assets_declaration&.second_home_value.to_f || 0.0,
-          outstanding_mortgage: other_assets_declaration&.second_home_mortgage.to_f || 0.0,
-          percentage_owned: other_assets_declaration&.second_home_percentage.to_f || 0.0,
+          value: other_assets_declaration&.second_home_value.to_f,
+          outstanding_mortgage: other_assets_declaration&.second_home_mortgage.to_f,
+          percentage_owned: other_assets_declaration&.second_home_percentage.to_f,
           shared_with_housing_assoc: false, # Data not gathered for second home
         }
       end

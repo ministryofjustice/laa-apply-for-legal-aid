@@ -92,7 +92,7 @@ class Applicant < ApplicationRecord
   def maintenance_per_month
     return "0.0" unless valid_cfe_result_version?
 
-    sprintf("%<amount>.2f", amount: cfe_result.maintenance_per_month).to_s || "0.0"
+    sprintf("%<amount>.2f", amount: cfe_result.maintenance_per_month || 0)
   end
 
   delegate :type, to: :cfe_result, prefix: true

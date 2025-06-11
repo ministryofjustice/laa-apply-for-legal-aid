@@ -22,7 +22,7 @@ module CFECivil
       {
         "Content-Type" => "application/json",
         "Accept" => "application/json;version=#{CFE_VERSION}",
-        "User-Agent" => "CivilApply/#{HEADER_VERSION} #{HostEnv.environment.to_s || 'missing'}",
+        "User-Agent" => "CivilApply/#{HEADER_VERSION} #{HostEnv.environment || 'missing'}",
       }
     end
   end
