@@ -14,6 +14,7 @@
                               label: { text: t(".labels.#{transaction_type.name}") },
                               hint: { text: t(".hints.#{transaction_type.name}") } do %>
           <%= f.govuk_text_field :"#{transaction_type.name}_amount",
+                                 value: number_to_currency_or_original_string(@form.send("#{transaction_type.name}_amount")),
                                  width: "one-quarter",
                                  prefix_text: "£" %>
           <%= f.govuk_collection_radio_buttons :"#{transaction_type.name}_frequency",

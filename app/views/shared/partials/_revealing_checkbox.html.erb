@@ -25,7 +25,7 @@
     <%= form.govuk_text_field "#{name}#{number}",
                               id: id,
                               label: { text: model.period(number), for: id },
-                              value: model.__send__(:"#{name}#{number}"),
+                              value: number_to_currency_or_original_string(model.__send__(:"#{name}#{number}")),
                               prefix_text: defined?(input_prefix) ? input_prefix : nil,
                               form_group: { class: form_group_classes },
                               class: input_classes,

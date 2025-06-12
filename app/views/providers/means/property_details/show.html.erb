@@ -14,6 +14,7 @@
       <%= form.govuk_text_field :property_value,
                                 label: { text: t(".values_question.#{individual}"), tag: "h2", size: "m" },
                                 hint: { text: t(".values_hint") },
+                                value: number_to_currency_or_original_string(@form.property_value),
                                 prefix_text: t("currency.gbp"),
                                 classes: "govuk-!-margin-top-6",
                                 width: 5 %>
@@ -22,6 +23,7 @@
         <%= form.govuk_text_field :outstanding_mortgage_amount,
                                   label: { text: t(".mortgage_question"), tag: "h2", size: "m" },
                                   hint: { text: t(".mortgage_hint.#{individual}") },
+                                  value: number_to_currency_or_original_string(@form.outstanding_mortgage_amount),
                                   prefix_text: t("currency.gbp"),
                                   width: 5 %>
       <% end %>
