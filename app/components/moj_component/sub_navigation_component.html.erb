@@ -1,0 +1,9 @@
+<% if navigation_items? %>
+  <nav class="moj-sub-navigation" aria-label="Sub navigation">
+    <%= tag.ul class: "moj-sub-navigation__list" do %>
+      <% navigation_items.each do |item| %>
+        <%= item %>
+      <% end %>
+    <% end %>
+  </nav>
+<% end %>
