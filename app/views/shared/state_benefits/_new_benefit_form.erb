@@ -21,6 +21,7 @@
                                 width: "full" %>
       <%= form.govuk_text_field :amount,
                                 width: "one-quarter",
+                                value: number_to_currency_or_original_string(@form.amount),
                                 label: { text: t(".benefits_amount") },
                                 prefix_text: "£" %>
       <%= form.govuk_collection_radio_buttons :frequency,
