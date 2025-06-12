@@ -89,7 +89,6 @@ redis:
   enabled: false
 
 benefit_checker:
-  lscServiceName: w4p_NrT
   wsdlUrl: "https://benefitchecker.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl"
 
 ccms_soa:
