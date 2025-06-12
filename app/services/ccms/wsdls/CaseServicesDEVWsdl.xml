@@ -10,7 +10,7 @@
      xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
     >
     <wsdl:documentation>
-        <abstractWSDL>https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/CaseServices!1.0/CaseProxyService.wsdl</abstractWSDL>
+        <abstractWSDL>http://ccms-soa-managed.laa-development.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/CaseServices/CaseServices_ep?wsdl</abstractWSDL>
     </wsdl:documentation>
     <plnk:partnerLinkType name="CreateCaseApplication">
         <plnk:role name="CreateCaseApplicationProvider">
@@ -50,9 +50,9 @@
 </wsp:Policy>    <wsdl:types>
         <schema xmlns="http://www.w3.org/2001/XMLSchema">
             <import namespace="http://legalservices.gov.uk/CCMS/CaseManagement/Case/1.0/CaseBIM"
-                 schemaLocation="https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/CaseServices/apps/lsc/Schema/BusinessObjects/CCMS/CaseManagement/Case/1.0/CaseBIM.xsd"/>
+                 schemaLocation="http://ccms-soa-managed.laa-development.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/CaseServices/apps/lsc/Schema/BusinessObjects/CCMS/CaseManagement/Case/1.0/CaseBIM.xsd"/>
             <import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
-                 schemaLocation="https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/CaseServices/apps/lsc/Schema/BusinessObjects/Enterprise/External/oasis/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/>
+                 schemaLocation="http://ccms-soa-managed.laa-development.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/CaseServices/apps/lsc/Schema/BusinessObjects/Enterprise/External/oasis/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/>
         </schema>
     </wsdl:types>
     <wsdl:message name="CreateCaseApplicationRequestMessage">
@@ -166,7 +166,7 @@
     </wsdl:binding>
     <wsdl:service name="CaseServices_ep">
         <wsdl:port name="CaseServices_pt" binding="tns:CaseServicesSOAPBinding">
-            <soap:address location="https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/CaseServices/CaseServices_ep"/>
+            <soap:address location="http://ccms-soa-managed.laa-development.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/CaseServices/CaseServices_ep"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
