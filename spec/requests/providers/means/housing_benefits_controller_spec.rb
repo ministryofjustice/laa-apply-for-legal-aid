@@ -46,7 +46,7 @@ RSpec.describe Providers::Means::HousingBenefitsController do
         )
         expect(page).to have_field(
           "providers_means_housing_benefit_form[housing_benefit_amount]",
-          with: housing_benefit.amount,
+          with: housing_benefit.amount.to_i,
         )
         expect(page).to have_field(
           "providers_means_housing_benefit_form[housing_benefit_frequency]",
