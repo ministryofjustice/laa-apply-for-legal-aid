@@ -6,6 +6,7 @@ module Providers
     end
 
     def update
+      remove_partner_if_non_means!
       if form_needs_checking?
         clear_limit_and_reason
         @form = LegalAidApplications::EmergencyCostOverrideForm.new(form_params)
@@ -17,12 +18,23 @@ module Providers
 
   private
 
+    def partner
+      @partner = legal_aid_application.partner
+    end
+
     def no_state_change_required?
       legal_aid_application.entering_applicant_details? || legal_aid_application.checking_applicant_details?
     end
 
     def form_needs_checking?
       @legal_aid_application.emergency_cost_overridable? || @legal_aid_application.substantive_cost_overridable?
+    end
+
+    def remove_partner_if_non_means!
+      return if partner.nil? || !@legal_aid_application.non_means_tested?
+
+      applicant.update!(has_partner: nil)
+      partner.delete
     end
 
     def clear_limit_and_reason

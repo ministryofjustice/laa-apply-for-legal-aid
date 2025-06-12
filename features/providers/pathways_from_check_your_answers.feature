@@ -134,6 +134,9 @@ Feature: Pathways from check your answers
     And I click 'Save and continue'
     Then I should be on the 'limitations' page showing "What you're applying for"
     When I click 'Save and continue'
+    Then I should be on a page showing 'Does your client have a partner?'
+    When I choose 'No'
+    And I click 'Save and continue'
     Then I should be on the 'check_provider_answers' page showing 'Check your answers'
     And I should be on a page showing 'Non-molestation order'
     And I should be on a page showing 'Child arrangements order (CAO) - contact'

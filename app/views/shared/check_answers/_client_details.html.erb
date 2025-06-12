@@ -191,7 +191,7 @@
           end
         end
 
-        if :has_partner.in?(attributes)
+        if :has_partner.in?(attributes) && !@legal_aid_application.non_means_tested?
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__has_partner" }) do |row|
             row.with_key(text: t(".has_partner"))
             row.with_value(text: yes_no(applicant.has_partner?))
