@@ -246,6 +246,15 @@ RSpec.describe Providers::CheckProviderAnswersController do
         end
       end
 
+      context "and the applicant is under 18 for means test purposes" do
+        let(:applicant) { create(:applicant, :with_address, :with_partner_with_no_contrary_interest, date_of_birth: Date.tomorrow - 18.years) }
+        let(:partner) { create(:partner) }
+
+        it "deletes the partner data" do
+          expect { request }.to change { applicant.reload.has_partner? }.from(true).to(false)
+        end
+      end
+
       describe "the cloner service" do
         let(:cloner_double) { instance_double(CopyCase::ClonerService, call: cloner_response) }
         let(:lead_application) { create(:legal_aid_application, :with_proceedings) }
