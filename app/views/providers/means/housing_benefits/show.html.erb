@@ -10,7 +10,10 @@
                                link_errors: true,
                                label: { text: t(".labels.housing_benefit.yes") },
                                checked: @form.housing_benefit_selected? do %>
-        <%= f.govuk_text_field :housing_benefit_amount, width: "one-quarter", prefix_text: "£" %>
+        <%= f.govuk_text_field :housing_benefit_amount,
+                               value: number_to_currency_or_original_string(@form.housing_benefit_amount),
+                               width: "one-quarter",
+                               prefix_text: "£" %>
         <%= f.govuk_collection_radio_buttons :housing_benefit_frequency,
                                              @form.frequency_options,
                                              :itself,
