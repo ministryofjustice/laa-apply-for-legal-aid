@@ -870,9 +870,8 @@ en:
     task_lists:
       show:
         page_title: Make a new application 
-        reference_number: Reference number
-        name: "Name:"
-        application_completeness_detail: You have completed %{completed_count} of %{count} sections
+        para1: Use this list to see your progress.
+        para2: You can go back and edit completed sections if they appear as links. More sections will become editable over time.
         complete: complete
         incomplete: incomplete
     delegated_confirmation:

@@ -19,12 +19,6 @@
   }
 }
 
-.app-task-list__aside {
-  border-top: 3px solid $govuk-brand-colour;
-  @include govuk-responsive-margin(5, "left", $adjustment: 0);
-  @include govuk-responsive-padding(5, "top", $adjustment: 0);
-}
-
 .govuk-task-list__items {
   padding-left: 0;
 }
