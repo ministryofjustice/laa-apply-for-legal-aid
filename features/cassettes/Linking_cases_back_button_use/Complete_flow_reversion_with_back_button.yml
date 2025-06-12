@@ -8,14 +8,14 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Faraday v2.12.2
+      - Faraday v2.13.1
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Fri, 14 Mar 2025 08:52:49 GMT
+      - Thu, 12 Jun 2025 11:36:55 GMT
       content-type:
       - application/json;charset=UTF-8
       transfer-encoding:
@@ -37,8 +37,8 @@ http_interactions:
       string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=SW1H9EA\",\r\n
         \   \"query\" : \"postcode=SW1H9EA\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
         : 5,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
-        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"115\",\r\n    \"lastupdate\"
-        : \"2025-03-13\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
+        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"118\",\r\n    \"lastupdate\"
+        : \"2025-06-11\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
         : [ {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337883\",\r\n      \"UDPRN\"
         : \"23749699\",\r\n      \"ADDRESS\" : \"84, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n
         \     \"BUILDING_NUMBER\" : \"84\",\r\n      \"THOROUGHFARE_NAME\" : \"PETTY
@@ -133,7 +133,7 @@ http_interactions:
         \     \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
         \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
         : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Fri, 14 Mar 2025 08:52:48 GMT
+  recorded_at: Thu, 12 Jun 2025 11:36:55 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/filter
@@ -144,18 +144,18 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.12.2
+      - Faraday v2.13.1
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Fri, 14 Mar 2025 08:52:55 GMT
+      - Thu, 12 Jun 2025 11:37:05 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '56331'
+      - '53377'
       connection:
       - keep-alive
       x-frame-options:
@@ -171,438 +171,438 @@ http_interactions:
       vary:
       - Accept, Origin
       etag:
-      - W/"93565432497c5ce191eac6fbf69b9a81"
+      - W/"3ffe6d90526475d6ad3edfc4e6e2b710"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c65cbf9d1d538a55686d214ee429a337
+      - 776ff8af3f10254b7e55246306f7e82c
       x-runtime:
-      - '0.043986'
+      - '0.030113'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"success":true,"data":[{"ccms_code":"DA001","meaning":"Inherent jurisdiction
-        - high court injunction","description":"to be represented on an application
-        for an injunction, order or declaration under the inherent jurisdiction of
-        the court.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
-        abuse (DA)"},{"ccms_code":"DA002","meaning":"Protection from harassment act
-        1997 under section 5 - vary or discharge","description":"to be represented
-        on an application to vary or discharge an order under section 5 Protection
-        from Harassment Act 1997 where the parties are associated persons (as defined
-        by Part IV Family Law Act 1996).","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
-        abuse (DA)"},{"ccms_code":"DA003","meaning":"Harassment - injunction","description":"to
-        be represented in an action for an injunction under section 3 Protection from
-        Harassment Act 1997.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
+      string: '{"success":true,"data":[{"ccms_code":"DA002","meaning":"Protection
+        from harassment act 1997 under section 5 - vary or discharge","description":"to
+        be represented on an application to vary or discharge an order under section
+        5 Protection from Harassment Act 1997 where the parties are associated persons
+        (as defined by Part IV Family Law Act 1996).","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
         abuse (DA)"},{"ccms_code":"DA004","meaning":"Non-molestation order","description":"to
-        be represented on an application for a non-molestation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
+        be represented on an application for a non-molestation order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
         abuse (DA)"},{"ccms_code":"DA005","meaning":"Occupation order","description":"to
-        be represented on an application for an occupation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
+        be represented on an application for an occupation order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
         abuse (DA)"},{"ccms_code":"DA006","meaning":"Part IV - extend, vary or discharge","description":"to
         be represented on an application to extend, vary or discharge an order under
-        Part IV Family Law Act 1996","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
+        Part IV Family Law Act 1996","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
         abuse (DA)"},{"ccms_code":"DA007","meaning":"Forced marriage protection order","description":"to
-        be represented on an application for a forced marriage protection order","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
+        be represented on an application for a forced marriage protection order","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
         abuse (DA)"},{"ccms_code":"DA020","meaning":"Female genital mutilation (FGM)
         protection order","description":"To be represented on an application for a
         Female Genital Mutilation Protection Order under the Female Genital Mutilation
-        Act.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
+        Act.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
         abuse (DA)"},{"ccms_code":"SE003","meaning":"Prohibited steps order","description":"to
-        be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        be represented on an application for a prohibited steps order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE003A","meaning":"Prohibited steps order
         - appeal","description":"to be represented on an application for a prohibited
-        steps order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        steps order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE003E","meaning":"Prohibited steps order
         - enforcement","description":"to be represented on an application for a prohibited
-        steps order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        steps order.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE004","meaning":"Specific issue order","description":"to
-        be represented on an application for a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        be represented on an application for a specific issue order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE004A","meaning":"Specific issue order -
         appeal","description":"to be represented on an application for a specific
-        issue order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        issue order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE004E","meaning":"Specific issue order -
         enforcement","description":"to be represented on an application for a specific
-        issue order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        issue order.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE007","meaning":"Prohibited steps order -
         vary or discharge","description":"to be represented on an application to vary
-        or discharge a prohibited steps order.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        or discharge a prohibited steps order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE007A","meaning":"Prohibited steps order
         - appeal - vary or discharge","description":"to be represented on an application
-        to vary or discharge a prohibited steps order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        to vary or discharge a prohibited steps order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE007E","meaning":"Prohibited steps order
         - enforcement - vary or discharge","description":"to be represented on an
-        application to vary or discharge a prohibited steps order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        application to vary or discharge a prohibited steps order.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE008","meaning":"Specific issue order - vary
         or discharge","description":"to be represented on an application to vary or
-        discharge a specific issue order.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        discharge a specific issue order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE008A","meaning":"Specific issue order -
         appeal - vary or discharge","description":"to be represented on an application
-        to vary or discharge a specific issue order.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        to vary or discharge a specific issue order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE008E","meaning":"Specific issue order -
         enforcement - vary or discharge","description":"to be represented on an application
-        to vary or discharge a specific issue order.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        to vary or discharge a specific issue order.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE013","meaning":"Child arrangements order
         (CAO) - contact","description":"to be represented on an application for a
-        child arrangements order-who the child(ren) spend time with.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        child arrangements order-who the child(ren) spend time with.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE013A","meaning":"Child arrangements order
         (CAO) - contact - appeal","description":"to be represented on an application
         for a child arrangements order-who the child(ren) spend time with. Appeals
-        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE013E","meaning":"Child arrangements order
         (CAO) - contact - enforcement","description":"to be represented on an application
         for a child arrangements order-who the child(ren) spend time with. Enforcement
-        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE014","meaning":"Child arrangements order
         (CAO) - residence","description":"to be represented on an application for
-        a child arrangements order –where the child(ren) will live","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        a child arrangements order –where the child(ren) will live","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE014A","meaning":"Child arrangements order
         (CAO) - residence - appeal","description":"to be represented on an application
-        for a child arrangements order –where the child(ren) will live. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        for a child arrangements order –where the child(ren) will live. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE014E","meaning":"Child arrangements order
         (CAO) - residence - enforcement","description":"to be represented on an application
         for a child arrangements order –where the child(ren) will live. Enforcement
-        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE015","meaning":"Child arrangements order
         (CAO) - contact - vary","description":"to be represented on an application
         to vary/discharge a child arrangements order-who the child(ren) spend time
-        with.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        with.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE015A","meaning":"Child arrangements order
         (CAO) - contact - appeal - vary","description":"to be represented on an application
         to vary/discharge a child arrangements order-who the child(ren) spend time
-        with. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        with. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE015E","meaning":"Child arrangements order
         (CAO) - contact - enforcement - vary","description":"to be represented on
         an application to vary/discharge a child arrangements order-who the child(ren)
-        spend time with. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        spend time with. Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE016","meaning":"Child arrangements order
         (CAO) - residence - vary","description":"to be represented on an application
         to vary or discharge a child arrangements order –where the child(ren) will
-        live.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        live.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE016A","meaning":"Child arrangements order
         (CAO) - residence - appeal - vary","description":"to be represented on an
         application to vary or discharge a child arrangements order –where the child(ren)
-        will live. Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        will live. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE016E","meaning":"Child arrangements order
         (CAO) - residence - enforcement - vary","description":"to be represented on
         an application to vary or discharge a child arrangements order –where the
-        child(ren) will live. Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        child(ren) will live. Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE095","meaning":"Enforcement order 11J","description":"to
         be represented on an application for an enforcement order under section 11J
-        Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        Children Act 1989.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE095A","meaning":"Enforcement order 11J -
         appeal","description":"to be represented on an application for an enforcement
-        order under section 11J Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        order under section 11J Children Act 1989.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE096E","meaning":"Enforcement order 11J and
         committal","description":"to be represented on an application for committal
         and for an enforcement order under section 11J Children Act 1989. Enforcement
-        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE097","meaning":"Enforcement order 11J -
         revocation","description":"to be represented on an application for the revocation
-        of an enforcement order under section 11J and Schedule A1 Children Act 1989.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        of an enforcement order under section 11J and Schedule A1 Children Act 1989.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE097A","meaning":"Enforcement order 11J -
         revocation - appeal","description":"to be represented on an application for
         the revocation of an enforcement order under section 11J and Schedule A1 Children
-        Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        Act 1989.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE100E","meaning":"Enforcement order 11J -
         amendment following breach","description":"to be represented on an application,
         following breach, for an amendment to an enforcement order or for a further
         enforcement order under section 11J and Schedule A1 Children Act 1989.  Enforcement
-        only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE101A","meaning":"Compensation - appeal","description":"to
         be represented on an application for compensation for financial loss under
-        section 11O Children Act 1989.  Appeals only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        section 11O Children Act 1989.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"SE101E","meaning":"Compensation - enforcement","description":"to
         be represented on an application for compensation for financial loss under
-        section 11O Children Act 1989.  Enforcement only.","full_s8_only":true,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
+        section 11O Children Act 1989.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","ccms_matter":"section
         8 children (S8)"},{"ccms_code":"PB003","meaning":"Child assessment order","description":"to
-        be represented on an application for a child assessment order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        be represented on an application for a child assessment order.","sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
         children act (SCA)"},{"ccms_code":"PB004","meaning":"Emergency protection
         order - extend","description":"to be represented on an application for or
-        to extend an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        to extend an emergency protection order.","sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
         children act (SCA)"},{"ccms_code":"PB005","meaning":"Emergency protection
         order - discharge","description":"to be represented on an application to discharge
-        an emergency protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        an emergency protection order.","sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
         children act (SCA)"},{"ccms_code":"PB006","meaning":"Secure accommodation
         order","description":"to be represented on an application for a secure accommodation
-        order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        order.","sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
         children act (SCA)"},{"ccms_code":"PB026","meaning":"Emergency protection
         order","description":"to be represented on an application for an emergency
-        protection order.","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        protection order.","sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
         children act (SCA)"},{"ccms_code":"PB057","meaning":"Care order","description":"to
-        be represented on an application for a care order","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        be represented on an application for a care order","sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
         children act (SCA)"},{"ccms_code":"PB059","meaning":"Supervision order","description":"to
-        be represented on an application for a supervision order","full_s8_only":false,"sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
+        be represented on an application for a supervision order","sca_core":true,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLW","ccms_matter":"special
         children act (SCA)"},{"ccms_code":"PBM01","meaning":"Declaration for overseas
         adoption","description":"to be represented on an application for a declaration
-        as to an overseas adoption.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        as to an overseas adoption.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM01A","meaning":"Declaration for overseas
         adoption - appeal","description":"to be represented on an application for
-        a declaration as to an overseas adoption.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        a declaration as to an overseas adoption.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM02","meaning":"Adoption - not being held
         in family proceedings court","description":"to be represented on an application
-        for an adoption order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        for an adoption order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM02A","meaning":"Adoption order - appeal","description":"to
-        be represented on an application for an adoption order.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for an adoption order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM02E","meaning":"Adoption order - enforcement","description":"to
-        be represented on an application for an adoption order.  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for an adoption order.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM04","meaning":"Secure accommodation order","description":"to
-        be represented on an application for a secure accommodation order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a secure accommodation order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM22","meaning":"Parental responsibility","description":"to
-        be represented on an application for parental responsibility.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for parental responsibility.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM04A","meaning":"Secure accommodation order
         - appeal","description":"to be represented on an application for a secure
-        accommodation order. Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        accommodation order. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM04E","meaning":"Secure accommodation order
         - enforcement","description":"to be represented on an application for a secure
-        accommodation order. Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        accommodation order. Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM05","meaning":"Contact with a child in
         care","description":"to be represented on an application for contact with
-        a child in care.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        a child in care.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM05A","meaning":"Contact with a child in
         care - appeal","description":"to be represented on an application for contact
-        with a child in care.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
-        law family (PLF)"},{"ccms_code":"PBM05E","meaning":"Contact with a child in
-        care - enforcement","description":"to be represented on an application for
-        contact with a child in care.  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        with a child in care.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        law family (PLF)"},{"ccms_code":"DA001","meaning":"Inherent jurisdiction -
+        high court injunction","description":"to be represented on an application
+        for an injunction, order or declaration under the inherent jurisdiction of
+        the court.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
+        abuse (DA)"},{"ccms_code":"DA003","meaning":"Harassment - injunction","description":"to
+        be represented in an action for an injunction under section 3 Protection from
+        Harassment Act 1997.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","ccms_matter":"domestic
+        abuse (DA)"},{"ccms_code":"PBM05E","meaning":"Contact with a child in care
+        - enforcement","description":"to be represented on an application for contact
+        with a child in care.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM06","meaning":"Supervision order - vary
         or discharge","description":"to be represented on an application to vary or
-        discharge a supervision order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        discharge a supervision order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM06A","meaning":"Supervision order - appeal
         - vary or discharge","description":"to be represented on an application to
-        vary or discharge a supervision order.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        vary or discharge a supervision order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM06E","meaning":"Supervision order - enforcement
         - vary or discharge","description":"to be represented on an application to
-        vary or discharge a supervision order.  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        vary or discharge a supervision order.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM07","meaning":"Care order - discharge","description":"to
-        be represented on an application to discharge a care order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application to discharge a care order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM07A","meaning":"Care order - appeal -
         discharge","description":"to be represented on an application to discharge
-        a care order.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        a care order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM07E","meaning":"Care order - enforcement
         - discharge","description":"to be represented on an application to discharge
-        a care order.  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        a care order.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM08","meaning":"Education supervision order","description":"to
-        be represented on an application for an education supervision order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for an education supervision order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM08A","meaning":"Education supervision
         order - appeal","description":"to be represented on an application for an
-        education supervision order.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        education supervision order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM08E","meaning":"Education supervision
         order - enforcement","description":"to be represented on an application for
-        an education supervision order.  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        an education supervision order.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM09","meaning":"Recovery of children order","description":"to
         be represented on an application for the recovery of a child/children.  Appeals
-        only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM09A","meaning":"Recovery of children order
         - appeal","description":"to be represented on an application for the recovery
-        of a child/children.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        of a child/children.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM09E","meaning":"Recovery of children order
         - enforcement","description":"to be represented on an application for the
-        recovery of a child/children.  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        recovery of a child/children.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM10","meaning":"Child assessment order
         - vary or discharge","description":"to be represented on an application to
-        vary or discharge a child assessment order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        vary or discharge a child assessment order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM10A","meaning":"Child assessment order
         - appeal - vary or discharge","description":"to be represented on an application
-        to vary or discharge a child assessment order. Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        to vary or discharge a child assessment order. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM11","meaning":"End contact with a child
         in care","description":"to be represented on an application to terminate contact
-        with a child/children in care.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        with a child/children in care.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM11A","meaning":"End contact with a child
         in care - appeal","description":"to be represented on an application to terminate
-        contact with a child/children in care.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        contact with a child/children in care.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM11E","meaning":"End contact with a child
         in care - enforcement","description":"to be represented on an application
-        to terminate contact with a child/children in care.  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        to terminate contact with a child/children in care.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM13","meaning":"Substitute supervision
         with care","description":"to be represented on an application to substitute
-        a supervision order with care order under section 39 (4) Children Act 1989.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        a supervision order with care order under section 39 (4) Children Act 1989.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM13A","meaning":"Substitute supervision
         with care - appeal","description":"to be represented on an application to
         substitute a supervision order with care order under section 39 (4) Children
-        Act 1989. Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        Act 1989. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM16","meaning":"Prohibited steps order","description":"to
-        be represented on an application for a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a prohibited steps order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM16A","meaning":"Prohibited steps order
         - appeal","description":"to be represented on an application for a prohibited
-        steps order. Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        steps order. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM16E","meaning":"Prohibited steps order
         - enforcement","description":"to be represented on an application for a prohibited
-        steps order. Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        steps order. Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM17","meaning":"Specific issue order","description":"to
-        be represented on an application for a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a specific issue order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM17A","meaning":"Specific issue order -
         appeal","description":"to be represented on an application for a specific
-        issue order.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        issue order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM17E","meaning":"Specific issue order -
         enforcement","description":"to be represented on an application for a specific
-        issue order.  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        issue order.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM18","meaning":"Child arrangements order
         (CAO) - contact - vary or discharge","description":"to be represented on an
-        application to vary or discharge a contact order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        application to vary or discharge a contact order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM18A","meaning":"Child arrangements order
         (CAO) - contact - appeal - vary or discharge","description":"to be represented
-        on an application to vary or discharge a contact order.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        on an application to vary or discharge a contact order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM18E","meaning":"Child arrangements order
         (CAO) - contact - enforcement - vary or discharge","description":"to be represented
-        on an application to vary or discharge a contact order.  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        on an application to vary or discharge a contact order.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM19","meaning":"Child arrangements order
         (CAO) - residence - vary or discharge","description":"to be represented on
-        an application to vary or discharge a residence order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        an application to vary or discharge a residence order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM19A","meaning":"Child arrangements order
         (CAO) - residence - appeal - vary or discharge","description":"to be represented
-        on an application to vary or discharge a residence order. Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        on an application to vary or discharge a residence order. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM19E","meaning":"Child arrangements order
         (CAO) - residence - enforcement - vary or discharge","description":"to be
         represented on an application to vary or discharge a residence order. Enforcement
-        only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM20","meaning":"Prohibited steps order
         - vary or discharge","description":"to be represented on an application to
-        vary or discharge a prohibited steps order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        vary or discharge a prohibited steps order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM20A","meaning":"Prohibited steps order
         - appeal - vary or discharge","description":"to be represented on an application
-        to vary or discharge a prohibited steps order.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        to vary or discharge a prohibited steps order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM20E","meaning":"Prohibited steps order
         - enforcement - vary or discharge","description":"to be represented on an
-        application to vary or discharge a prohibited steps order.  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        application to vary or discharge a prohibited steps order.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM21","meaning":"Specific issue order -
         vary or discharge","description":"to be represented on an application to vary
-        or discharge a specific issue order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        or discharge a specific issue order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM21A","meaning":"Specific issue order -
         appeal - vary or discharge","description":"to be represented on an application
-        to vary or discharge a specific issue order.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        to vary or discharge a specific issue order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM21E","meaning":"Specific issue order -
         enforcement - vary or discharge","description":"to be represented on an application
-        to vary or discharge a specific issue order.  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        to vary or discharge a specific issue order.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM22A","meaning":"Parental responsibility
         - appeal","description":"to be represented on an application for parental
-        responsibility.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        responsibility.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM23","meaning":"Care order","description":"to
-        be represented on an application for a care order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a care order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM23A","meaning":"Care order - appeal","description":"to
-        be represented on an application for a care order. Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a care order. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM23E","meaning":"Care order - enforcement","description":"to
-        be represented on an application for a care order. Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a care order. Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM24","meaning":"Supervision order","description":"to
-        be represented on an application for a supervision order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a supervision order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM24A","meaning":"Supervision order - appeal","description":"to
-        be represented on an application for a supervision order. Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a supervision order. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM24E","meaning":"Supervision order - enforcement","description":"to
-        be represented on an application for a supervision order. Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a supervision order. Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM26","meaning":"Child assessment order","description":"to
-        be represented on an application for a child assessment order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a child assessment order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM26A","meaning":"Child assessment order
         - appeal","description":"to be represented on an application for a child assessment
-        order.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM26E","meaning":"Child assessment order
         - enforcement","description":"to be represented on an application for a child
-        assessment order.  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        assessment order.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM27","meaning":"Emergency protection order","description":"to
         be represented on an application for or to extend an emergency protection
-        order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM27A","meaning":"Emergency protection order
         - appeal","description":"to be represented on an application for or to extend
-        an emergency protection order. Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        an emergency protection order. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM27E","meaning":"Emergency protection order
         - enforcement","description":"to be represented on an application for or to
-        extend an emergency protection order. Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        extend an emergency protection order. Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM28","meaning":"Emergency protection order
         - discharge","description":"to be represented on an application to discharge
-        an emergency protection order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        an emergency protection order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM28A","meaning":"Emergency protection order
         - appeal - discharge","description":"to be represented on an application to
-        discharge an emergency protection order. Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        discharge an emergency protection order. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM29","meaning":"Exclusion requirement","description":"to
-        be represented on an application to vary/discharge an exclusion requirement.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application to vary/discharge an exclusion requirement.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM29A","meaning":"Exclusion requirement
         - appeal","description":"to be represented on an application to vary/discharge
-        an exclusion requirement.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        an exclusion requirement.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM29E","meaning":"Exclusion requirement
         - enforcement","description":"to be represented on an application to vary/discharge
-        an exclusion requirement.  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        an exclusion requirement.  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM30","meaning":"Placement order","description":"to
-        be represented on an application for a placement order","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a placement order","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM30A","meaning":"Placement order - appeal","description":"to
-        be represented on an application for a placement order. Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a placement order. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM30E","meaning":"Placement order - enforcement","description":"to
-        be represented on an application for a placement order. Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a placement order. Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM32","meaning":"Special guardianship order","description":"to
-        be represented on an application for a Special Guardianship Order","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a Special Guardianship Order","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM32A","meaning":"Special guardianship order
         - appeal","description":"to be represented on an application for a Special
-        Guardianship Order . Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        Guardianship Order . Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM32E","meaning":"Special guardianship order
         - enforcement","description":"to be represented on an application for a Special
-        Guardianship Order . Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        Guardianship Order . Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM33","meaning":"Revocation placement order","description":"to
-        be represented on an application for revocation of a placement order","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for revocation of a placement order","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM33A","meaning":"Revocation placement order
         - appeal","description":"to be represented on an application for revocation
-        of a placement order  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        of a placement order  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM33E","meaning":"Revocation placement order
         - enforcement","description":"to be represented on an application for revocation
-        of a placement order  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        of a placement order  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM35","meaning":"Special guardianship order
         - vary or discharge","description":"To be represented on an application for
-        variation/discharge of a special guardianship order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        variation/discharge of a special guardianship order.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM35A","meaning":"Special guardianship order
         - appeal - vary or discharge","description":"To be represented on an application
-        for variation/discharge of a special guardianship order.  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        for variation/discharge of a special guardianship order.  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM35E","meaning":"Special guardianship order
         - enforcement - vary or discharge","description":"To be represented on an
         application for variation/discharge of a special guardianship order.  Enforcement
-        only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM36","meaning":"Care order - joined party","description":"to
-        be represented on an application for a care order","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        be represented on an application for a care order","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM36A","meaning":"Care order - joined party
         - appeal","description":"to be represented on an application for a care order
-        Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM36E","meaning":"Care order - joined party
         - enforcement","description":"to be represented on an application for a care
-        order Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        order Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM37","meaning":"Supervision order - joined
         party","description":"to be represented on an application for a supervision
-        order","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        order","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM37A","meaning":"Supervision order - joined
         party - appeal","description":"to be represented on an application for a supervision
-        order  Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        order  Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM37E","meaning":"Supervision order - joined
         party - enforcement","description":"to be represented on an application for
-        a supervision order  Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        a supervision order  Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM38","meaning":"Child arrangements order
         (CAO) - contact","description":"to be represented on an application for a
-        child arrangements order - who the child(ren) spend time with","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        child arrangements order - who the child(ren) spend time with","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM38A","meaning":"Child arrangements order
         (CAO) - contact - appeal","description":"to be represented on an application
         for a child arrangements order - who the child(ren) spend time with. Appeals
-        only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM38E","meaning":"Child arrangements order
         (CAO) - contact - enforcement","description":"to be represented on an application
         for a child arrangements order - who the child(ren) spend time with. Enforcement
-        only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM39","meaning":"Child arrangements order
         (CAO) - residence","description":"to be represented on an application for
-        a child arrangements order - where the child(ren) will live.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        a child arrangements order - where the child(ren) will live.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM39A","meaning":"Child arrangements order
         (CAO) - residence - appeal","description":"to be represented on an application
-        for a child arrangements order - where the child(ren) will live. Appeals only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        for a child arrangements order - where the child(ren) will live. Appeals only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM39E","meaning":"Child arrangements order
         (CAO) - residence - enforcement","description":"to be represented on an application
         for a child arrangements order - where the child(ren) will live. Enforcement
-        only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        only.","sca_core":false,"sca_related":false,"non_means_tested_plf":false,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM40","meaning":"Placement order - parent
         or parental responsibility","description":"To represent a parent or person
-        with parental responsibility on an application for a placement order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":true,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        with parental responsibility on an application for a placement order.","sca_core":false,"sca_related":false,"non_means_tested_plf":true,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM40E","meaning":"Placement order - parent
         or parental responsibility - enforcement","description":"To represent a parent
         or person with parental responsibility on an application for a placement order.
-        Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":true,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":true,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM45","meaning":"Adoption order - parent
         or parental responsibility","description":"To represent a parent or person
-        with parental responsibility on an application for an adoption order.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":true,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        with parental responsibility on an application for an adoption order.","sca_core":false,"sca_related":false,"non_means_tested_plf":true,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"},{"ccms_code":"PBM45E","meaning":"Adoption order - parent
         or parental responsibility - enforcement","description":"To represent a parent
         or person with parental responsibility on an application for a placement order.
-        Enforcement only.","full_s8_only":false,"sca_core":false,"sca_related":false,"non_means_tested_plf":true,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
+        Enforcement only.","sca_core":false,"sca_related":false,"non_means_tested_plf":true,"ccms_category_law":"Family","ccms_category_law_code":"MAT","ccms_matter_code":"KPBLB","ccms_matter":"public
         law family (PLF)"}]}'
-  recorded_at: Fri, 14 Mar 2025 08:52:54 GMT
+  recorded_at: Thu, 12 Jun 2025 11:37:05 GMT
 recorded_with: VCR 6.3.1

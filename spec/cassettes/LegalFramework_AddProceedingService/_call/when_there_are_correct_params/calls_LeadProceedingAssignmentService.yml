@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.7.10
+      - Faraday v2.13.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,42 +21,40 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 03 Aug 2023 11:25:43 GMT
+      - Tue, 10 Jun 2025 11:28:44 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '1310'
+      - '1331'
       Connection:
       - keep-alive
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
-      - 1; mode=block
+      - '0'
       X-Content-Type-Options:
       - nosniff
-      X-Download-Options:
-      - noopen
       X-Permitted-Cross-Domain-Policies:
       - none
       Referrer-Policy:
       - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
       Etag:
-      - W/"fbabf0efd65b63f03290a3f99682b0d4"
+      - W/"82a4e7b3a11c8dd645180a8309989800"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - f433b29b6f616fb495052b200f637d87
+      - b1057bfea87648892effd2c9804451e5
       X-Runtime:
-      - '0.009580'
-      Vary:
-      - Accept, Origin
+      - '0.012449'
       Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
+      - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"success":true,"ccms_code":"DA004","meaning":"Non-molestation order","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","name":"nonmolestation_order","description":"to
-        be represented on an application for a non-molestation order.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter":"Domestic
-        abuse","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"AA019","meaning":"Injunction
+        be represented on an application for a non-molestation order.","sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"domestic
+        abuse (DA)","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"AA019","meaning":"Injunction
         FLA-to final hearing","description":"As to proceedings under Part IV Family
         Law Act 1996 limited to all steps up to and including obtaining and serving
         a final order and in the event of breach leading to the exercise of a power
@@ -67,5 +65,5 @@ http_interactions:
         for an interim order; where application is made without notice to include
         representation on the return date."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Thu, 03 Aug 2023 11:25:43 GMT
-recorded_with: VCR 6.2.0
+  recorded_at: Tue, 10 Jun 2025 11:28:44 GMT
+recorded_with: VCR 6.3.1

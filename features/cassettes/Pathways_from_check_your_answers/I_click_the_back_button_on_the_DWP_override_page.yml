@@ -1,0 +1,49 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?> <env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"> <env:Body> <wsdl:check>
+        <wsdl:clientReference>aac9ad9b-0a3a-448a-84bb-c7c4c82d41f3</wsdl:clientReference>
+        <wsdl:nino>JA123456A</wsdl:nino> <wsdl:surname>TEST</wsdl:surname> <wsdl:dateOfBirth>19700101</wsdl:dateOfBirth>
+        <wsdl:dateOfAward>20250612</wsdl:dateOfAward> <wsdl:lscServiceName><BC_LSC_SERVICE_NAME></wsdl:lscServiceName>
+        <wsdl:clientOrgId><BC_CLIENT_ORG_ID></wsdl:clientOrgId> <wsdl:clientUserId><BC_CLIENT_USER_ID></wsdl:clientUserId>
+        </wsdl:check> </env:Body> </env:Envelope>
+    headers:
+      Soapaction:
+      - "#POST"
+      Content-type:
+      - text/xml
+      User-Agent:
+      - Faraday v2.13.1
+  response:
+    status:
+      code: 200
+      message: ''
+    headers:
+      date:
+      - Thu, 12 Jun 2025 11:49:12 GMT
+      content-type:
+      - text/xml;charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      x-amzn-trace-id:
+      - Root=1-684abeb8-23fa46595d7d0b9c16972afd;
+      vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><soapenv:Body><benefitCheckerResponse
+        xmlns="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns1:originalClientRef
+        xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">aac9ad9b-0a3a-448a-84bb-c7c4c82d41f3</ns1:originalClientRef><ns2:benefitCheckerStatus
+        xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Undetermined</ns2:benefitCheckerStatus><ns3:confirmationRef
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1749728952175</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
+  recorded_at: Thu, 12 Jun 2025 11:49:12 GMT
+recorded_with: VCR 6.3.1

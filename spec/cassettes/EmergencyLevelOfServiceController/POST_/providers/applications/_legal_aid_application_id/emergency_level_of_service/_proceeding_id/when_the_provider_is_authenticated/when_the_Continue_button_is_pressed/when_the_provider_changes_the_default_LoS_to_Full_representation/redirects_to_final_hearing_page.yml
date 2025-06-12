@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v1.10.2
+      - Faraday v2.13.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,21 +21,19 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 11 Nov 2022 09:31:12 GMT
+      - Tue, 10 Jun 2025 11:32:47 GMT
       Content-Type:
       - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '1435'
       Connection:
       - keep-alive
       X-Frame-Options:
       - SAMEORIGIN
       X-Xss-Protection:
-      - 1; mode=block
+      - '0'
       X-Content-Type-Options:
       - nosniff
-      X-Download-Options:
-      - noopen
       X-Permitted-Cross-Domain-Policies:
       - none
       Referrer-Policy:
@@ -43,87 +41,31 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"c5b5e59ae2b4dfe1d990d9ffd4306a7e"
+      - W/"a6faf5b40ae4f261a2276ae6e89280be"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - dfe5f30a3683607077043b09f217b661
+      - 55cc0ae64be5ccd98be3e1760736b95d
       X-Runtime:
-      - '0.045328'
+      - '0.012970'
       Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
+      - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
       string: '{"success":true,"ccms_code":"DA001","meaning":"Inherent jurisdiction
-        high court injunction","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","name":"inherent_jurisdiction_high_court_injunction","description":"to
+        - high court injunction","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","name":"inherent_jurisdiction_high_court_injunction","description":"to
         be represented on an application for an injunction, order or declaration under
-        the inherent jurisdiction of the court.","full_s8_only":false,"ccms_category_law":"Family","ccms_matter":"Domestic
-        abuse","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"FM062","meaning":"Final
-        hearing","description":"Limited to all steps up to and including final hearing
-        and any action necessary to implement (but not enforce) the order."},"delegated_functions":{"code":"CV117","meaning":"Interim
+        the inherent jurisdiction of the court.","sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"domestic
+        abuse (DA)","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings)."},"delegated_functions":{"code":"CV117","meaning":"Interim
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Fri, 11 Nov 2022 09:31:12 GMT
-- request:
-    method: post
-    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
-    body:
-      encoding: UTF-8
-      string: '{"proceeding_type_ccms_code":"DA001","delegated_functions_used":true,"client_involvement_type":"A"}'
-    headers:
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Faraday v1.10.2
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Date:
-      - Fri, 11 Nov 2022 09:31:13 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Xss-Protection:
-      - 1; mode=block
-      X-Content-Type-Options:
-      - nosniff
-      X-Download-Options:
-      - noopen
-      X-Permitted-Cross-Domain-Policies:
-      - none
-      Referrer-Policy:
-      - strict-origin-when-cross-origin
-      Vary:
-      - Accept, Origin
-      Etag:
-      - W/"394350725076183ab4ae0116449123c3"
-      Cache-Control:
-      - max-age=0, private, must-revalidate
-      X-Request-Id:
-      - 40e8593ef44c577a8a25a5f536f00ba9
-      X-Runtime:
-      - '0.018651'
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
-    body:
-      encoding: UTF-8
-      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA001","delegated_functions_used":true,"client_involvement_type":"A"},"default_level_of_service":{"level":3,"name":"Full
-        Representation","stage":8},"default_scope":{"code":"CV117","meaning":"Interim
-        order inc. return date","description":"Limited to all steps necessary to apply
-        for an interim order; where application is made without notice to include
-        representation on the return date.","additional_params":[]}}'
-  recorded_at: Fri, 11 Nov 2022 09:31:13 GMT
-recorded_with: VCR 6.1.0
+  recorded_at: Tue, 10 Jun 2025 11:32:47 GMT
+recorded_with: VCR 6.3.1
