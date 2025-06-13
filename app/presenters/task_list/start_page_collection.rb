@@ -18,6 +18,15 @@ module TaskList
     #  - Steps::ProviderStart::ApplicantsStep --> applicants
     #  - Steps::ProviderStart::AboutFinancialMeansStep --> about_financial_means
     #
+    # Body overide:
+    #
+    # If the section's task list cannot be shown and requires text to be displayed instead then the
+    # body_override task key should be added. It's lambda should return the message to be displayed
+    # only if it needs to be displayed. This will override displaying of the tasks for that section
+    # replacing the tasks with the message body provided.
+    #
+    # e.g. body_override: ->(application) { "Not available yet because..." unless application.client_and_case_details_completed? },
+    #
 
     SECTIONS = {
       client_and_case_details: {
@@ -37,6 +46,10 @@ module TaskList
       },
 
       means_assessment: {
+        body_override: lambda { |application|
+          "We may ask you later about your client's income, outgoings, savings, investments, assets, payments and dependants, if it's needed." unless TaskStatus::CheckBenefits.new(application).call.completed?
+        },
+
         # Applicable for non-passported journeys only
         about_financial_means: ->(application) { application.non_passported? }, # Steps::ProviderStart::AboutFinancialMeansStep, # Income assessment # Only applicable for non-passported applications
         check_income_answers: ->(application) { application.non_passported? }, # Steps::ProviderIncome::CheckIncomeAnswersStep,"
@@ -56,6 +69,10 @@ module TaskList
         # Non-passported means assessment result from CFE
         # capital_income_assessment_results: ->(application) { application.non_passported? }, # Steps::ProviderCapital::CapitalIncomeAssessmentResultsStep },
       },
+      merits_assessment: {
+        body_override: ->(application) { "Once the proceedings have been selected, the relevant tasks will appear in this section." unless TaskStatus::CheckBenefits.new(application).call.completed? },
+      },
+      confirm_and_submit: {},
     }.freeze
   end
 end

@@ -36,6 +36,7 @@ module TaskList
           name: name.to_s,
           tasks: displayable_tasks(tasks, application),
           index: show_index ? index : nil,
+          body_override: tasks[:body_override]&.call(application),
         )
       end
     end
