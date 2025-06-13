@@ -34,7 +34,6 @@ module TaskStatus
       @previous_sections ||= [
         Applicants.new(application).call,
         ProceedingsTypes.new(application).call,
-        HasNationalInsuranceNumbers.new(application).call,
       ]
     end
   end

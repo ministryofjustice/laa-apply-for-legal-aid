@@ -6,19 +6,23 @@ module TaskList
     #
     # SECTIONS = {
     #   task_list_section: {
-    #    task_list_item_1: displayed?,
-    #    task_list_item_2: displayed?,
+    #    task_list_item_1 (name after step): displayed?,
+    #    task_list_item_2 (name after step): displayed?,
     #    ....
     #   }
     # }
+    #
+    # Rules: name task list items after the [first] step in its flow.
+    #
+    # e.g.
+    #  - Steps::ProviderStart::ApplicantsStep --> applicants
+    #  - Steps::ProviderStart::AboutFinancialMeansStep --> about_financial_means
+    #
 
     SECTIONS = {
-      client_details: {
+      client_and_case_details: {
         applicants: true, # Steps::ProviderStart::ApplicantsStep
-        has_national_insurance_numbers: true, # Steps::ProviderStart::HasNationalInsuranceNumbersStep
-      },
-
-      about_the_case: {
+        # links_to_another: true, # TODO
         proceedings_types: true, # Steps::ProviderStart::ProceedingsTypesStep,
         check_provider_answers: true, # Steps::ProviderStart::CheckProviderAnswersStep
         check_benefits: true, # Steps::ProviderStart::CheckBenefitsStep
