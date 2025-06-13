@@ -38,7 +38,7 @@ module TaskStatus
     end
 
     def enabled?
-      [COMPLETED, IN_PROGRESS, NOT_STARTED].include?(current_status)
+      [IN_PROGRESS, NOT_STARTED].include?(current_status)
     end
 
     def current_status
