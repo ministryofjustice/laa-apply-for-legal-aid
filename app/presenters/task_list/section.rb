@@ -1,21 +1,24 @@
 module TaskList
   class Section < BaseRenderer
-    attr_reader :tasks, :index
+    attr_reader :tasks, :index, :body_override
 
-    def initialize(application, name:, tasks:, index:)
+    def initialize(application, name:, tasks:, index:, body_override: nil)
       super(application, name:)
 
       @tasks = tasks
       @index = index
+      @body_override = body_override
     end
 
     def render
       tag.li do
         safe_join(
-          [section_header, section_tasks],
+          [section_header, section_body],
         )
       end
     end
+
+  private
 
     def section_header
       tag.h2 class: "govuk-task-list__section" do
@@ -27,6 +30,12 @@ module TaskList
           t!("task_list.heading.#{name}")
         end
       end
+    end
+
+    def section_body
+      return body_override if body_override
+
+      section_tasks
     end
 
     def section_tasks
