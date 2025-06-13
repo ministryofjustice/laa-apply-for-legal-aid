@@ -40,7 +40,6 @@ module TaskStatus
       [
         Applicants.new(application).call,
         ProceedingsTypes.new(application).call,
-        HasNationalInsuranceNumbers.new(application).call,
       ]
     end
   end

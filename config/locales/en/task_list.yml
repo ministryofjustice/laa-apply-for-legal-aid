@@ -1,9 +1,10 @@
 en:
   task_list:
     heading:
-      about_the_case: About the case
-      client_details: About your client
-      means_assessment: Means assessment
+      client_and_case_details: Client and case details
+      means_assessment: Means test
+      merits_assessment: Merits
+      confirm_and_submit: Confirm and submit
     status:
       cannot_start: Cannot start yet
       completed: Completed

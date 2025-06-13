@@ -6,6 +6,7 @@ module TaskStatus
       def forms
         [
           basic_details_form,
+          has_national_insurance_number_form,
           previous_reference_form,
         ]
       end
@@ -14,6 +15,7 @@ module TaskStatus
       # to ensure we "check" we have all the data to consider them complete. e.g. addresses, linked applications.
       def validators
         [
+          has_national_insurance_numbers_validator,
           address_validator,
           linked_applications_validator,
         ]
@@ -21,6 +23,10 @@ module TaskStatus
 
       def basic_details_form
         @basic_details_form ||= ::Applicants::BasicDetailsForm.new(model: applicant)
+      end
+
+      def has_national_insurance_number_form
+        @has_national_insurance_number_form ||= ::Applicants::HasNationalInsuranceNumberForm.new(model: applicant)
       end
 
       def previous_reference_form
