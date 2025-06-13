@@ -12,7 +12,7 @@ module TaskStatus
         status.cannot_start!
         status.not_started! if not_started?
         status.in_progress! if in_progress?
-        status.complete! if completed?
+        status.completed! if completed?
       end
 
       status

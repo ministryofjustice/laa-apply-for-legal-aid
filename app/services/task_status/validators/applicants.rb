@@ -15,7 +15,6 @@ module TaskStatus
       # to ensure we "check" we have all the data to consider them complete. e.g. addresses, linked applications.
       def validators
         [
-          has_national_insurance_numbers_validator,
           address_validator,
           linked_applications_validator,
         ]
