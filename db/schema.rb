@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_09_071703) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_16_134142) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -1151,7 +1151,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_071703) do
   add_foreign_key "child_care_assessments", "proceedings"
   add_foreign_key "citizen_access_tokens", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "dependants", "legal_aid_applications"
-  add_foreign_key "domestic_abuse_summaries", "legal_aid_applications"
+  add_foreign_key "domestic_abuse_summaries", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "dwp_overrides", "legal_aid_applications"
   add_foreign_key "employment_payments", "employments"
   add_foreign_key "employments", "legal_aid_applications"
