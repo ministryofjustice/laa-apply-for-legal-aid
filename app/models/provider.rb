@@ -1,5 +1,7 @@
 class Provider < ApplicationRecord
-  devise :saml_authenticatable, :trackable
+  # devise :saml_authenticatable, :trackable
+  devise :trackable, :omniauthable, omniauth_providers: [:azure_ad]
+
   serialize :roles, coder: YAML
   serialize :offices, coder: YAML
 
