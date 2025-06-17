@@ -941,6 +941,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_133138) do
     t.string "invalid_login_details"
     t.boolean "cookies_enabled"
     t.datetime "cookies_saved_at"
+    t.string "auth_provider", default: "", null: false
+    t.string "auth_subject_uid"
+    t.index ["auth_subject_uid", "auth_provider"], name: "index_providers_on_auth_subject_uid_and_auth_provider", unique: true
     t.index ["firm_id"], name: "index_providers_on_firm_id"
     t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"
     t.index ["type"], name: "index_providers_on_type"

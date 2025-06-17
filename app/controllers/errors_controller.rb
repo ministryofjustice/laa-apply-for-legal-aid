@@ -5,6 +5,8 @@
 # as mentioned here https://guides.rubyonrails.org/configuring.html#config-exceptions-app
 #
 class ErrorsController < ApplicationController
+  skip_before_action :authenticate_provider!
+
   before_action :update_locale, :set_error_name
   def show
     respond_to do |format|

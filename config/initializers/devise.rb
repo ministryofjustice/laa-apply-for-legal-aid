@@ -286,6 +286,31 @@ Devise.setup do |config|
     settings.idp_cert_fingerprint_algorithm = laa_portal_config.idp_cert_fingerprint_algorithm
   end
 
+  # ==> OmniAuth
+  # Add a new OmniAuth provider. Check the wiki for more information on setting
+  # up on your models and hooks.
+  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+
+  config.omniauth(
+    :openid_connect,
+    {
+      name: "azure_ad",
+      scope: %i[openid email profile],
+      response_type: :code,
+      # client_auth_method: :mtls #- Mutual TLS or X.509 certificate validation.
+      client_options: {
+        identifier: ENV.fetch("OMNIAUTH_AZURE_CLIENT_ID", nil),
+        secret: ENV.fetch("OMNIAUTH_AZURE_CLIENT_SECRET", nil),
+        redirect_uri: ENV.fetch("OMNIAUTH_AZURE_REDIRECT_URI", nil),
+      },
+      discovery: true,
+      issuer: "https://login.microsoftonline.com/#{ENV.fetch('OMNIAUTH_AZURE_TENANT_ID', nil)}/v2.0",
+      pkce: true,
+      extra_authorise_params: { tenant: ENV.fetch("OMNIAUTH_AZURE_TENANT_ID", nil) },
+      # strategy_class: OmniAuth::Strategies::OpenIDConnect,
+    },
+  )
+
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
