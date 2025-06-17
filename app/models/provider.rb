@@ -1,6 +1,8 @@
 class Provider < ApplicationRecord
+  encrypts :auth_subject_uid, deterministic: true
+
   # devise :saml_authenticatable, :trackable
-  devise :trackable, :omniauthable, omniauth_providers: [:azure_ad]
+  devise :saml_authenticatable, :trackable, :omniauthable, omniauth_providers: [:azure_ad]
 
   serialize :roles, coder: YAML
   serialize :offices, coder: YAML
@@ -14,6 +16,30 @@ class Provider < ApplicationRecord
   has_many :permissions, through: :actor_permissions
 
   delegate :name, to: :firm, prefix: true, allow_nil: true
+
+  def self.from_omniauth(auth)
+    provider = find_by(auth_subject_uid: auth.uid)
+
+    if provider
+      provider.update!(last_sign_in_at: Time.current)
+    else
+      # find them if they have been created but never logged in
+      # Add a provider with the email address of your external tenant user and modify to have `auth_provider`` value of "azure_ad"
+      provider = find_by(email: auth.info.email, auth_provider: auth.provider, auth_subject_uid: nil)
+
+      if provider
+        provider.update!(
+          auth_subject_uid: auth.uid,
+          username: [auth.info.first_name, auth.info.last_name].join(" "),
+          last_sign_in_at: Time.current,
+        )
+        # else
+        # shall we be creating them
+      end
+    end
+
+    provider
+  end
 
   def update_details
     return unless HostEnv.staging_or_production?

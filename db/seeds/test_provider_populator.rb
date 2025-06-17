@@ -35,6 +35,7 @@ class TestProviderPopulator
     "user-research" => ["User Research Assoc.", "user@resarch.com", 112],
     "rose" => ["Rose & Co.", "rose.azadkhan@justice.gov.uk", 114],
     "mkeen" => ["Keen & Co.", "mike.keen@justice.gov.uk", 115],
+    "joel.sugarman@justice.gov.uk" => ["Sugarman & daughters", "joel.sugarman@justice.gov.uk", 109],
   }.freeze
 
   def run
