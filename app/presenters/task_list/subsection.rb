@@ -1,19 +1,22 @@
 module TaskList
-  class Section < BaseRenderer
-    attr_reader :tasks, :index, :body_override
+  class Subsection < BaseRenderer
+    attr_reader :tasks, :index, :body_override, :sub_name, :display_section_header
+    alias_method :display_section_header?, :display_section_header
 
-    def initialize(application, name:, tasks:, index:, body_override: nil)
+    def initialize(application, name:, sub_name:, tasks:, index:, body_override: nil, display_section_header: true)
       super(application, name:)
 
+      @sub_name = sub_name
       @tasks = tasks
       @index = index
       @body_override = body_override
+      @display_section_header = display_section_header
     end
 
     def render
       tag.li do
         safe_join(
-          [header, body],
+          [header, sub_header, body],
         )
       end
     end
@@ -21,6 +24,8 @@ module TaskList
   private
 
     def header
+      return unless display_section_header?
+
       tag.h2 class: "govuk-task-list__section" do
         if index
           tag.span class: "govuk-task-list__section-number" do
@@ -29,6 +34,12 @@ module TaskList
         else
           t!("task_list.heading.#{name}")
         end
+      end
+    end
+
+    def sub_header
+      tag.h3 class: "govuk-task-list__section" do
+        t!("task_list.heading.#{sub_name}")
       end
     end
 

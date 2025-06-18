@@ -9,6 +9,11 @@ module TaskList
     #    task_list_item_1 (name after step): displayed?,
     #    task_list_item_2 (name after step): displayed?,
     #    ....
+    #    subsections: {
+    #      subsection_name: {
+    #        sub_task_list_item_1 (name after step): displayed?
+    #      }
+    #    }
     #   }
     # }
     #
@@ -50,24 +55,29 @@ module TaskList
           "We may ask you later about your client's income, outgoings, savings, investments, assets, payments and dependants, if it's needed." unless TaskStatus::CheckBenefits.new(application).call.completed?
         },
 
-        # Applicable for non-passported journeys only
-        about_financial_means: ->(application) { application.non_passported? }, # Steps::ProviderStart::AboutFinancialMeansStep, # Income assessment # Only applicable for non-passported applications
-        check_income_answers: ->(application) { application.non_passported? }, # Steps::ProviderIncome::CheckIncomeAnswersStep,"
+        subsections: {
+          financial_information: {
+            # Applicable for non-passported journeys only
+            about_financial_means: ->(application) { application.non_passported? }, # Steps::ProviderStart::AboutFinancialMeansStep, # Income assessment # Only applicable for non-passported applications
+            check_income_answers: ->(application) { application.non_passported? }, # Steps::ProviderIncome::CheckIncomeAnswersStep,"
+          },
+          capital_and_assets: {
+            # Applicable for passported and non-passported journeys but not non-means-tested?!
+            capital_introductions: ->(application) { application.passported? || application.non_passported? }, #  Steps::ProviderCapital::IntroductionsStep, # Capital assessment
 
-        # Applicable for passported and non-passported journeys but not non-means-tested?!
-        capital_introductions: ->(application) { application.passported? || application.non_passported? }, #  Steps::ProviderCapital::IntroductionsStep, # Capital assessment
+            # capital CYA applicable for passported journeys
+            check_passported_answers: ->(application) { application.passported? }, # Steps::ProviderCapital::CheckPassportedAnswersStep,
 
-        # capital CYA applicable for passported journeys
-        check_passported_answers: ->(application) { application.passported? }, # Steps::ProviderCapital::CheckPassportedAnswersStep,
+            # # capital CYA applicable for non-passported journeys
+            check_capital_answers: ->(application) { application.non_passported? }, # Steps::ProviderCapital::CheckCapitalAnswersStep,
 
-        # # capital CYA applicable for non-passported journeys
-        check_capital_answers: ->(application) { application.non_passported? }, # Steps::ProviderCapital::CheckCapitalAnswersStep,
+            # Passported means assessment result from CFE
+            # capital_assessment_results: ->(application) { application.passported? }, # Steps::ProviderCapital::CapitalAssessmentResultsStep,
 
-        # Passported means assessment result from CFE
-        # capital_assessment_results: ->(application) { application.passported? }, # Steps::ProviderCapital::CapitalAssessmentResultsStep,
-
-        # Non-passported means assessment result from CFE
-        # capital_income_assessment_results: ->(application) { application.non_passported? }, # Steps::ProviderCapital::CapitalIncomeAssessmentResultsStep },
+            # Non-passported means assessment result from CFE
+            # capital_income_assessment_results: ->(application) { application.non_passported? }, # Steps::ProviderCapital::CapitalIncomeAssessmentResultsStep },
+          },
+        },
       },
       merits_assessment: {
         body_override: ->(application) { "Once the proceedings have been selected, the relevant tasks will appear in this section." unless TaskStatus::CheckBenefits.new(application).call.completed? },

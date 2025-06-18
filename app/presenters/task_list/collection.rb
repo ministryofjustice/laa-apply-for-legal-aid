@@ -29,16 +29,30 @@ module TaskList
       @all_tasks ||= map(&:items).flatten
     end
 
+    # OPTIMIZE
     def collection
-      @collection ||= sections.map.with_index(1) do |(name, tasks), index|
-        Section.new(
-          application,
-          name: name.to_s,
-          tasks: displayable_tasks(tasks, application),
-          index: show_index ? index : nil,
-          body_override: tasks[:body_override]&.call(application),
-        )
-      end
+      @collection ||= sections.map.with_index(1) { |(name, tasks), index|
+        if tasks.include?(:subsections) && !tasks[:body_override]&.call(application)
+          tasks[:subsections].map.with_index(1) do |(subname, subtasks), subindex|
+            Subsection.new(
+              application,
+              name: name.to_s,
+              sub_name: subname.to_s,
+              tasks: displayable_tasks(subtasks, application),
+              index: show_index ? index : nil,
+              display_section_header: subindex.eql?(1),
+            )
+          end
+        else
+          Section.new(
+            application,
+            name: name.to_s,
+            tasks: displayable_tasks(tasks, application),
+            index: show_index ? index : nil,
+            body_override: tasks[:body_override]&.call(application),
+          )
+        end
+      }.flatten
     end
 
     def sections

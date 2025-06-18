@@ -5,6 +5,8 @@ en:
       means_assessment: Means test
       merits_assessment: Merits
       confirm_and_submit: Confirm and submit
+      financial_information: Financial information
+      capital_and_assets: Capital and assets
     status:
       cannot_start: Cannot start yet
       completed: Completed
