@@ -25,7 +25,7 @@ RSpec.describe Providers::Partners::StudentFinancesController do
         request
 
         expect(page).to have_checked_field("Yes")
-        expect(page).to have_field("partner[student_finance_amount]", with: "1234.56")
+        expect(page).to have_field("partner[student_finance_amount]", with: "1,234.56")
       end
     end
 

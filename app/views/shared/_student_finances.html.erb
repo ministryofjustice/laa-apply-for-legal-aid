@@ -22,6 +22,7 @@
               :student_finance_amount,
               label: { text: t(".amount_label") },
               hint: { text: t(".amount_hint", individual:) },
+              value: number_to_currency_or_original_string(@form.model.student_finance_amount),
               prefix_text: t("currency.gbp"),
               width: "one-quarter",
             ) %>

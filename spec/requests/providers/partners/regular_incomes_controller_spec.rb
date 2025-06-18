@@ -38,7 +38,7 @@ RSpec.describe Providers::Partners::RegularIncomesController do
 
         expect(page).to have_checked_field("Pension")
         pension_amount = page.find_field("providers-partners-regular-income-form-pension-amount-field").value
-        expect(pension_amount).to eq("500.0")
+        expect(pension_amount).to eq("500")
         frequency_amount = page.find_field("providers-partners-regular-income-form-pension-frequency-weekly-field").value
         expect(frequency_amount).to eq("weekly")
       end

@@ -17,7 +17,11 @@
       <% if @capital_disregard.name.in?(["compensation_for_personal_harm", "loss_or_harm_relating_to_this_application"]) %>
         <%= form.govuk_text_field :payment_reason, label: { text: t(".payment_reason") } %>
       <% end %>
-      <%= form.govuk_text_field :amount, width: "one-quarter", label: { text: t(".amount") }, prefix_text: "£" %>
+      <%= form.govuk_text_field :amount,
+                                label: { text: t(".amount") },
+                                value: number_to_currency_or_original_string(@form.amount),
+                                prefix_text: "£",
+                                width: "one-quarter" %>
       <%= form.govuk_text_field :account_name, width: "three-quarters", label: { text: t(".bank_account") }, hint: { text: t(".bank_account_hint") } %>
       <%= form.govuk_date_field :date_received, legend: { text: t(".received_date"), size: "s", class: "govuk-body govuk-!-font-weight-regular" } %>
     <% end %>
