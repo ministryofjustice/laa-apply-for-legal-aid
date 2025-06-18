@@ -23,11 +23,37 @@ RSpec.describe Flow::Steps::ProviderStart::LimitationsStep, type: :request do
     context "when not overriding the DWP result" do
       it { is_expected.to eq :client_has_partners }
     end
+
+    context "when applying for a PLF non-means proceeding" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_public_law_family_non_means_tested_proceeding) }
+
+      it { is_expected.to eq :check_provider_answers }
+    end
+
+    context "when applying for an SCA non-means proceeding" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_sca_proceedings) }
+
+      it { is_expected.to eq :check_provider_answers }
+    end
   end
 
   describe "#check_answers" do
-    subject { described_class.check_answers }
+    subject { described_class.check_answers.call(legal_aid_application) }
 
-    it { is_expected.to be :check_provider_answers }
+    context "when applying for any means proceeding" do
+      it { is_expected.to eq :client_has_partners }
+    end
+
+    context "when applying for a PLF non-means proceeding" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_public_law_family_non_means_tested_proceeding) }
+
+      it { is_expected.to eq :check_provider_answers }
+    end
+
+    context "when applying for an SCA non-means proceeding" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_sca_proceedings) }
+
+      it { is_expected.to eq :check_provider_answers }
+    end
   end
 end

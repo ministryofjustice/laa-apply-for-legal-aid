@@ -167,5 +167,38 @@ RSpec.describe Providers::LimitationsController do
         end
       end
     end
+
+    context "when a partner was previously added" do
+      subject(:patch_request) { patch providers_legal_aid_application_limitations_path(legal_aid_application, params:) }
+
+      let(:params) do
+        { legal_aid_application: { substantive_cost_override: false,
+                                   substantive_cost_requested: nil,
+                                   substantive_cost_reasons: nil,
+                                   emergency_cost_override: false,
+                                   emergency_cost_requested: nil,
+                                   emergency_cost_reasons: nil } }
+      end
+
+      context "when proceedings have changed from means-tested to non-means tested" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_multiple_sca_proceedings) }
+        let(:provider) { legal_aid_application.provider }
+
+        it "removes the partner" do
+          patch_request
+          expect(legal_aid_application.reload.partner).to be_nil
+        end
+      end
+
+      context "when proceedings are means tested" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_proceedings, explicit_proceedings: [:da004], set_lead_proceeding: :da004) }
+        let(:provider) { legal_aid_application.provider }
+
+        it "does not removes the partner" do
+          patch_request
+          expect(legal_aid_application.partner).not_to be_nil
+        end
+      end
+    end
   end
 end
