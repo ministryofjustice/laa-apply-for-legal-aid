@@ -18,7 +18,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (5.5.0)
+    aasm (5.5.1)
       concurrent-ruby (~> 1.0)
     aasm-diagram (0.1.3)
       aasm (~> 5.0, >= 4.12)
@@ -105,15 +105,15 @@ GEM
     attr_extras (7.1.0)
     awesome_print (1.9.2)
     aws-eventstream (1.4.0)
-    aws-partitions (1.1116.0)
-    aws-sdk-core (3.225.2)
+    aws-partitions (1.1117.0)
+    aws-sdk-core (3.226.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
       aws-sigv4 (~> 1.9)
       base64
       jmespath (~> 1, >= 1.6.1)
       logger
-    aws-sdk-kms (1.104.0)
+    aws-sdk-kms (1.105.0)
       aws-sdk-core (~> 3, >= 3.225.0)
       aws-sigv4 (~> 1.5)
     aws-sdk-s3 (1.189.1)
@@ -268,18 +268,18 @@ GEM
     erubi (1.13.1)
     eventmachine (1.2.7)
     eventmachine_httpserver (0.2.1)
-    factory_bot (6.5.3)
+    factory_bot (6.5.4)
       activesupport (>= 6.1.0)
-    factory_bot_rails (6.4.4)
+    factory_bot_rails (6.5.0)
       factory_bot (~> 6.5)
-      railties (>= 5.0.0)
+      railties (>= 6.1.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
     faraday (2.13.1)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
-    faraday-net_http (3.4.0)
+    faraday-net_http (3.4.1)
       net-http (>= 0.5.0)
     ffi (1.17.2)
     ffi (1.17.2-x86_64-darwin)
@@ -569,7 +569,7 @@ GEM
       psych (>= 4.0.0)
     redis (5.4.0)
       redis-client (>= 0.22.0)
-    redis-client (0.24.0)
+    redis-client (0.25.0)
       connection_pool
     regexp_parser (2.10.0)
     reline (0.6.1)
@@ -752,7 +752,7 @@ PLATFORMS
   x86_64-darwin
 
 DEPENDENCIES
-  aasm (~> 5.5.0)
+  aasm (~> 5.5.1)
   aasm-diagram
   action_dispatch-testing-integration-capybara!
   active_model_serializers (~> 0.10.15)
