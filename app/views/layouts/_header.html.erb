@@ -2,19 +2,4 @@
   <%= render(partial: "shared/partials/cookie_banner") if display_cookie_banner?(current_provider) %>
 <% end %>
 
-<header class="moj-header" role="banner">
-  <div class="moj-header__container">
-    <div class="moj-header__logo">
-      <%= render(partial: "layouts/header_logo") %>
-      <a class="moj-header__link moj-header__link--organisation-name" href="#">Legal Aid Agency</a>
-    </div>
-
-    <div class="moj-header__content">
-      <nav class="moj-header__navigation" aria-label="Account navigation">
-        <ul class="moj-header__navigation-list">
-          <%= user_header_navigation %>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</header>
+<%= render MojComponent::HeaderComponent.new(organisation_name: t(".organisation_name"), url: "#", nav_items: user_header_navigation) %>
