@@ -32,13 +32,13 @@ module TaskList
     # OPTIMIZE
     def collection
       @collection ||= sections.map.with_index(1) { |(name, tasks), index|
-        if tasks.include?(:subsections) && !tasks[:body_override]&.call(application)
+        if contains_subsections?(tasks)
           tasks[:subsections].map.with_index(1) do |(subname, subtasks), subindex|
             Subsection.new(
               application,
               name: name.to_s,
               sub_name: subname.to_s,
-              tasks: displayable_tasks(subtasks, application),
+              tasks: subtasks,
               index: show_index ? index : nil,
               display_section_header: subindex.eql?(1),
             )
@@ -47,7 +47,7 @@ module TaskList
           Section.new(
             application,
             name: name.to_s,
-            tasks: displayable_tasks(tasks, application),
+            tasks: tasks,
             index: show_index ? index : nil,
             body_override: tasks[:body_override]&.call(application),
           )
@@ -61,14 +61,8 @@ module TaskList
       self.class::SECTIONS
     end
 
-    def displayable_tasks(tasks, application)
-      tasks.filter { |_task, displayable_method_or_value|
-        if displayable_method_or_value.respond_to?(:call)
-          displayable_method_or_value.call(application)
-        else
-          displayable_method_or_value
-        end
-      }.keys.map(&:to_s)
+    def contains_subsections?(tasks)
+      tasks.include?(:subsections) && !tasks[:body_override]&.call(application)
     end
   end
 end
