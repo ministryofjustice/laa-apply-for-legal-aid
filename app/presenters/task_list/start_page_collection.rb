@@ -82,7 +82,9 @@ module TaskList
       merits_assessment: {
         body_override: ->(application) { "Once the proceedings have been selected, the relevant tasks will appear in this section." unless TaskStatus::CheckBenefits.new(application).call.completed? },
       },
-      confirm_and_submit: {},
+      confirm_and_submit: {
+        confirm_client_declarations: true, # Steps::ProviderMerits::ConfirmClientDeclarationsStep
+      },
     }.freeze
   end
 end
