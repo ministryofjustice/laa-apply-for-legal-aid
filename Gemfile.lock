@@ -235,9 +235,6 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise_saml_authenticatable (2.0.0)
-      devise (> 2.0.0)
-      ruby-saml (~> 1.18)
     dibber (0.7.0)
     diff-lcs (1.6.2)
     discard (1.4.0)
@@ -686,9 +683,6 @@ GEM
     ruby-graphviz (1.2.5)
       rexml
     ruby-progressbar (1.13.0)
-    ruby-saml (1.18.0)
-      nokogiri (>= 1.13.10)
-      rexml
     ruby2_keywords (0.0.5)
     rubyzip (2.4.1)
     securerandom (0.4.1)
@@ -821,7 +815,6 @@ DEPENDENCIES
   cucumber-rails (>= 2.4.0)
   database_cleaner
   devise
-  devise_saml_authenticatable (>= 1.7.0)
   dibber
   discard (~> 1.4)
   dotenv
