@@ -185,6 +185,23 @@ env:
       secretKeyRef:
         name: {{ template "apply-for-legal-aid.fullname" . }}
         key: laaPortalMockSaml
+  - name: OMNIAUTH_AZURE_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: omniauthAzureClientID
+  - name: OMNIAUTH_AZURE_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: omniauthAzureClientSecret
+  - name: OMNIAUTH_AZURE_TENANT_ID
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: omniauthAzureTenantID
+  - name: OMNIAUTH_AZURE_TENANT_ID
+    value: {{ .Values.omniauth_azure.redirect_uri | quote }}
   - name: PROVIDER_DETAILS_URL
     valueFrom:
       secretKeyRef:
