@@ -49,6 +49,8 @@ Rails.application.routes.draw do
     authenticated :provider do
       root to: "start#index", as: :authenticated_root
     end
+
+    delete "sign_out", to: "devise/sessions#destroy", as: :destroy_provider_session
   end
 
   get "auth/failure", to: "auth#failure"

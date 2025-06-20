@@ -2,7 +2,7 @@ class Provider < ApplicationRecord
   encrypts :auth_subject_uid, deterministic: true
 
   # devise :saml_authenticatable, :trackable
-  devise :saml_authenticatable, :trackable, :omniauthable, omniauth_providers: [:azure_ad]
+  devise :trackable, :omniauthable, omniauth_providers: [:azure_ad]
 
   serialize :roles, coder: YAML
   serialize :offices, coder: YAML
