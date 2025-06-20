@@ -49,10 +49,11 @@ module TaskList
         },
       },
       merits_assessment: {
-        body_override: ->(application) { t!("task_list.body_override.merits.requirement_unknown") if application.proceedings.present? },
+        body_override: ->(application) { t!("task_list.body_override.merits.requirement_unknown") if application.proceedings.blank? },
         subsections: {
           about_this_application: {},
           about_the_proceedings: {},
+          supporting_evidence_and_review: {},
         },
       },
       confirm_and_submit: {},
