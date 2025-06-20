@@ -9,6 +9,7 @@ en:
       capital_and_assets: Capital and assets
       about_this_application: About this application
       about_the_proceedings: About the proceedings
+      supporting_evidence_and_review: Supporting evidence and review
     body_override:
       means:
         requirement_unknown: We may ask you later about your client's income, outgoings, savings, investments, assets, payments and dependants, if it's needed.
