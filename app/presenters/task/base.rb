@@ -71,6 +71,8 @@ module Task
 
     def task_name_or_link
       # TODO: Disable all tasks until we are ready to unlock the sections
+      # t!("task_list.task.#{name}")
+      #
       if status.enabled?
         tag.a t!("task_list.task.#{name}"),
               class: "govuk-link govuk-task-list__link",
@@ -79,8 +81,6 @@ module Task
       else
         t!("task_list.task.#{name}")
       end
-
-      # t!("task_list.task.#{name}")
     end
 
     def status_tag
