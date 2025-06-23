@@ -25,6 +25,10 @@ module Providers
           legal_aid_application.lead_linked_application.destroy!
           legal_aid_application.update!(copy_case: nil, copy_case_id: nil)
         end
+        if legal_aid_application.applicant.under_18?
+          legal_aid_application.partner&.destroy!
+          legal_aid_application.applicant.update!(has_partner: false, partner_has_contrary_interest: nil)
+        end
       end
       continue_or_draft
     end
