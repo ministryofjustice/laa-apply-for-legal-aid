@@ -21,7 +21,7 @@ en:
       completed: Completed
       in_progress: In progress
       not_applicable: Not applicable
-      not_started: Not yet started
+      not_started: Not started
       unreachable: Unreachable!
     task:
       about_financial_means: Income assessment
