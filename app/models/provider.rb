@@ -33,8 +33,17 @@ class Provider < ApplicationRecord
           username: [auth.info.first_name, auth.info.last_name].join(" "),
           last_sign_in_at: Time.current,
         )
-        # else
-        # shall we be creating them
+      else
+        firm = Firm.find_by(ccms_id: "823")
+
+        return create!(
+          auth_subject_uid: auth.uid,
+          username: [auth.info.first_name, auth.info.last_name].join(" "),
+          email: auth.info.email,
+          last_sign_in_at: Time.current,
+          auth_provider: auth.provider,
+          firm:,
+        )
       end
     end
 
