@@ -20,9 +20,8 @@ en:
       cannot_start: Cannot start yet
       completed: Completed
       in_progress: In progress
-      not_applicable: Not applicable
+      not_ready: Not ready yet
       not_started: Not started
-      unreachable: Unreachable!
     task:
       about_financial_means: Income assessment
       applicants: Client details
