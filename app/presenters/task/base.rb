@@ -29,8 +29,6 @@ module Task
     end
 
     def render
-      return unless displayed?
-
       tag.li class: "govuk-task-list__item govuk-task-list__item--with-link" do
         safe_join(
           [task_name, status_tag],
@@ -38,13 +36,11 @@ module Task
       end
     end
 
+    # :nocov:
     def path
-      raise "Task::#{name.camelize}.path not implemented. Implement in subclass"
+      raise "Task::#{name.camelize}.path not implemented. Implement in subclass."
     end
-
-    def displayed?
-      true
-    end
+    # :nocov:
 
     # Default for subclasses is to use a "task status" object of the same name.
     # You may prefer to override in subclasses, particularly if additional arguments
