@@ -33,12 +33,14 @@
       <a class="moj-header__link moj-header__link--organisation-name" href="<%= url %>"><%= organisation_name %></a>
     </div>
 
-    <% if nav_items.present? %>
+    <% if navigation_items.any? %>
       <div class="moj-header__content">
         <nav class="moj-header__navigation" aria-label="Account navigation">
-          <ul class="moj-header__navigation-list">
-            <%= nav_items %>
-          </ul>
+          <%= tag.ul class: "moj-header__navigation-list" do %>
+            <% navigation_items.each do |item| %>
+              <%= item %>
+            <% end %>
+          <% end %>
         </nav>
       </div>
     <% end %>
