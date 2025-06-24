@@ -5,12 +5,11 @@ module TaskStatus
     attr_accessor :value
 
     STATUSES = [
-      COMPLETED = StatusData.new(:completed, nil),
+      CANNOT_START = StatusData.new(:cannot_start, nil),
+      NOT_READY = StatusData.new(:not_ready, "govuk-tag govuk-tag--grey"),
+      NOT_STARTED = StatusData.new(:not_started, "govuk-tag govuk-tag--blue"),
       IN_PROGRESS = StatusData.new(:in_progress, "govuk-tag govuk-tag--light-blue"),
-      NOT_STARTED =  StatusData.new(:not_started, "govuk-tag govuk-tag--blue"),
-      CANNOT_START = StatusData.new(:cannot_start, "govuk-tag govuk-tag--grey"),
-      UNREACHABLE = StatusData.new(:unreachable, nil),
-      NOT_APPLICABLE = StatusData.new(:not_applicable, "govuk-tag govuk-tag--grey"),
+      COMPLETED = StatusData.new(:completed, nil),
       UNKNOWN = StatusData.new(:unknown, nil),
     ].freeze
 
@@ -37,6 +36,7 @@ module TaskStatus
       STATUSES.include?(current_status)
     end
 
+    # Eventually COMPLETED will be added to this to unlock
     def enabled?
       [IN_PROGRESS, NOT_STARTED].include?(current_status)
     end
