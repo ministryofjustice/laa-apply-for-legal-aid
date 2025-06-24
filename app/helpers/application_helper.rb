@@ -32,32 +32,28 @@ module ApplicationHelper
     namespace
   end
 
-  def user_header_navigation
+  def user_header_navigation(header)
     return if current_journey == :citizens
-    return admin_header_navigation if current_journey == :admin
+    return admin_header_navigation(header) if current_journey == :admin
 
-    provider_header_navigation
+    provider_header_navigation(header)
   end
 
-  def provider_header_navigation
+  def provider_header_navigation(header)
     if provider_signed_in?
-      safe_join([
-        content_tag(:li, link_to(current_provider.email, providers_provider_path, class: "moj-header__navigation-link"), class: "moj-header__navigation-item"),
-        content_tag(:li, link_to(t("layouts.logout.provider"), destroy_provider_session_path, class: "moj-header__navigation-link", method: :delete), class: "moj-header__navigation-item"),
-      ])
+      header.with_navigation_item(text: current_provider.email, href: providers_provider_path, current: current_page?(providers_provider_path))
+      header.with_navigation_item(text: t("layouts.logout.provider"), href: destroy_provider_session_path, current: false, options: { method: :delete })
     else
       return if Setting.out_of_hours?
 
-      content_tag(:li, link_to(t("layouts.login"), providers_select_office_path, class: "moj-header__navigation-link"), class: "moj-header__navigation-item")
+      header.with_navigation_item(text: t("layouts.login"), href: providers_select_office_path, current: false)
     end
   end
 
-  def admin_header_navigation
+  def admin_header_navigation(header)
     return unless admin_user_signed_in?
 
-    content_tag(:li, class: "moj-header__navigation-item") do
-      link_to(t("layouts.logout.admin"), destroy_admin_user_session_path, class: "moj-header__navigation-link", method: :delete)
-    end
+    header.with_navigation_item(text: t("layouts.logout.admin"), href: destroy_admin_user_session_path, current: false, options: { method: :delete })
   end
 
   def yes_no(boolean)
