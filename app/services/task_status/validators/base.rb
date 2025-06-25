@@ -17,15 +17,19 @@ module TaskStatus
 
     private
 
+      # :nocov:
       # override in subclass
       def forms
         []
       end
+      # :nocov:
 
+      # :nocov:
       # override in subclass
       def validators
         []
       end
+      # :nocov:
     end
   end
 end

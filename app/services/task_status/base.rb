@@ -16,8 +16,10 @@ module TaskStatus
       @application = application
     end
 
+    # :nocov:
     def call
       raise "Implement in subclass"
     end
+    # :nocov:
   end
 end
