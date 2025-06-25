@@ -44,7 +44,10 @@ module ApplicationHelper
         content_tag(:li, link_to(t("layouts.logout.provider"), destroy_provider_session_path, class: "moj-header__navigation-link", method: :delete), class: "moj-header__navigation-item"),
       ])
     else
-      content_tag(:li, link_to(t("layouts.login"), providers_confirm_office_path, class: "moj-header__navigation-link"), class: "moj-header__navigation-item")
+      safe_join([
+        content_tag(:li, link_to("Sign in with EntraID", provider_azure_ad_omniauth_authorize_path, class: "moj-header__navigation-link"), class: "moj-header__navigation-item"),
+        content_tag(:li, link_to(t("layouts.login"), providers_confirm_office_path, class: "moj-header__navigation-link"), class: "moj-header__navigation-item"),
+      ])
     end
   end
 
