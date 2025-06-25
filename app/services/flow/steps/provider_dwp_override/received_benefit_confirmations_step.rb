@@ -5,10 +5,10 @@ module Flow
         path: ->(application) { Steps.urls.providers_legal_aid_application_received_benefit_confirmation_path(application) },
         forward: lambda do |application, has_benefit|
           if has_benefit
-            application.change_state_machine_type("PassportedStateMachine")
+            application.change_state_machine_type("PassportedStateMachine") unless ENV.fetch("EDITABLE_APPLICATIONS", "false") == "true"
             :has_evidence_of_benefits
           else
-            application.change_state_machine_type("NonPassportedStateMachine")
+            application.change_state_machine_type("NonPassportedStateMachine") unless ENV.fetch("EDITABLE_APPLICATIONS", "false") == "true"
             :about_financial_means
           end
         end,
