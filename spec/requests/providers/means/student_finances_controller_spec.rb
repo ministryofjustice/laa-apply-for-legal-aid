@@ -25,7 +25,7 @@ RSpec.describe Providers::Means::StudentFinancesController do
         request
 
         expect(page).to have_checked_field("Yes")
-        expect(page).to have_field("applicant[student_finance_amount]", with: "1234.56")
+        expect(page).to have_field("applicant[student_finance_amount]", with: "1,234.56")
       end
     end
 
@@ -144,7 +144,7 @@ RSpec.describe Providers::Means::StudentFinancesController do
         login_as provider
         request
 
-        expect(applicant.reload.student_finance_amount).to eq(1234.56)
+        expect(applicant.reload.student_finance_amount).to eq(1_234.56)
       end
     end
 
