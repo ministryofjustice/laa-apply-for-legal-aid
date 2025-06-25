@@ -866,6 +866,14 @@ en:
           - you've told your client they may need to repay the legal costs if they keep or gain property or money at the end of their case (the ‘statutory charge’)
           - you'll provide complete and correct information
         continue_button: Agree and continue
+
+    task_lists:
+      show:
+        page_title: Make a new application 
+        para1: Use this list to see your progress.
+        para2: You can go back and edit completed sections if they appear as links. More sections will become editable over time.
+        complete: complete
+        incomplete: incomplete
     delegated_confirmation:
       index:
         page-heading: You told us you've used delegated functions
