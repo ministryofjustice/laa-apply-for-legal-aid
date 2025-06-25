@@ -37,11 +37,14 @@ module TaskStatus
 
       def care_of?
         applicant.correspondence_address_choice.eql?("home") ||
-          (correspondence_address_care_of_form.valid? && home_address_statuses_form.valid?)
+          (correspondence_address_care_of_forms.all?(&:valid?) &&
+           home_address_statuses_form.valid?)
       end
 
-      def correspondence_address_care_of_form
-        ::Addresses::CareOfForm.new(model: applicant.address)
+      def correspondence_address_care_of_forms
+        applicant.addresses.filter_map do |address|
+          ::Addresses::CareOfForm.new(model: address) unless address.location.eql?("home")
+        end
       end
 
       def home_address_statuses_form
