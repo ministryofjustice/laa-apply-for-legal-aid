@@ -1511,10 +1511,10 @@
   dependencies:
     buffer "^6.0.3"
 
-"@ministryofjustice/frontend@^5.1.3":
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-5.1.3.tgz#b85a7978d4f3bd7bf1423be88077ef1578fdd6df"
-  integrity sha512-h6/riC6zDo5scevzZz1RByRo3AnX4k2ywFMTX47Irq9y7keyhalyfO5D0+VAJMpX0ADuNLg3f2tJh+cumH/PBA==
+"@ministryofjustice/frontend@^5.1.4":
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-5.1.4.tgz#5bc8bf60e46dd6141d4651263084a04f90d9bdb8"
+  integrity sha512-mEeQeBUNd1AgqEqCtYzReaWKdQsbstFmkF+Yaw74PCW0Ql8NvXTAq+FVDLHz5MjUqUA7c9C89zV5GyTnpr0Gsg==
 
 "@napi-rs/wasm-runtime@^0.2.11":
   version "0.2.11"
@@ -3677,10 +3677,10 @@ gopd@^1.0.1:
   dependencies:
     get-intrinsic "^1.1.3"
 
-govuk-frontend@^5.10.2:
-  version "5.10.2"
-  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-5.10.2.tgz#616465463a4aa333b01714f90aed5926ad066e6d"
-  integrity sha512-eVYB2rfUCihehZFHQyylt12/OuXq2JLs+70igcrB1FmbepcDqs1XwKiq96hsPbPF9Vn2f6QXO1OatyD3bq5c9Q==
+govuk-frontend@^5.11.0:
+  version "5.11.0"
+  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-5.11.0.tgz#01364ca98e4f5f86102dcb93f7d811d5387d2fec"
+  integrity sha512-RYZDEF1J6nVw5XauQGH+91qplExgHUXfXII7dtIme6I4u3eSvU59yZ0/EFKEwRgTslSqlhJODOnAi5rnQFU5Gw==
 
 graceful-fs@^4.1.15, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.11, graceful-fs@^4.2.9:
   version "4.2.11"
