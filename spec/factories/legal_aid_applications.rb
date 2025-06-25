@@ -403,7 +403,7 @@ FactoryBot.define do
 
         if evaluator.explicit_proceedings.nil?
           traits = %i[da001 da004 se014 se013]
-          (0..evaluator.proceeding_count - 1).each do |i|
+          (0..(evaluator.proceeding_count - 1)).each do |i|
             trait = traits[i]
             lead = evaluator.set_lead_proceeding == trait || (evaluator.set_lead_proceeding == true && trait == :da001)
             create(:proceeding, trait, legal_aid_application: application, lead_proceeding: lead)
