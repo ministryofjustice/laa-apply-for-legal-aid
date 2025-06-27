@@ -1,0 +1,37 @@
+en:
+  task_list:
+    heading:
+      client_and_case_details: Client and case details
+      means_assessment: Means test
+      merits_assessment: Merits
+      confirm_and_submit: Confirm and submit
+      financial_information: Financial information
+      capital_and_assets: Capital and assets
+      about_this_application: About this application
+      about_the_proceedings: About the proceedings
+      supporting_evidence_and_review: Supporting evidence and review
+    body_override:
+      means:
+        requirement_unknown: We may ask you later about your client's income, outgoings, savings, investments, assets, payments and dependants, if it's needed.
+        financial_information_not_needed: You do not need to give financial information because DWP records show that your client gets a passporting benefit.
+      merits:
+        requirement_unknown: Once the proceedings have been selected, the relevant tasks will appear in this section.
+    status:
+      cannot_start: Cannot start yet
+      completed: Completed
+      in_progress: In progress
+      not_ready: Not ready yet
+      not_started: Not started
+    task:
+      about_financial_means: Income assessment
+      applicants: Client details
+      capital_introductions: Capital assessment
+      check_benefits: DWP outcome
+      check_income_answers: Check your income assessment answers
+      check_capital_answers: Check your capital assessment answers (non-passported)
+      check_passported_answers: Check your capital assessment answers (passported)
+      check_provider_answers: Check your answers
+      has_national_insurance_numbers: National Insurance
+      proceedings_types: Proceedings
+      confirm_client_declarations: Confirm declarations and submit application
+

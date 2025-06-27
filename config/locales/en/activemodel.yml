@@ -142,6 +142,7 @@ en:
               inclusion: Select yes if the client has a partner
             no_fixed_residence:
               blank: Select yes if your client has a home address
+              inclusion: Select yes if your client has a home address
             partner_has_contrary_interest:
               inclusion: Select yes if the partner has a contrary interest in the proceedings
             receives_state_benefits:
