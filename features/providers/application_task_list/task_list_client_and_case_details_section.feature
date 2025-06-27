@@ -21,9 +21,11 @@ Feature: Application task list client and case details section
     Then I should be on a page with title "Does your client have a National Insurance number?"
 
     When I go to the application task list
+
     Then the "Client and case details" task list section should contain:
       | name | link_enabled | status |
       | Client details | true | In progress |
+      | Proceedings | false | Cannot start yet |
 
     When I click link "Client details"
     Then I should be on a page showing "Enter your client's details"
@@ -54,3 +56,5 @@ Feature: Application task list client and case details section
     Then the "Client and case details" task list section should contain:
       | name | link_enabled | status |
       | Client details | false | Completed |
+      | Proceedings | true | Not started |
+
