@@ -14,42 +14,9 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require "simplecov"
-require "webmock/rspec"
 require "highline/import"
-require "rspec-sidekiq"
-require "sidekiq/testing"
 
 DummyErrorReturnObj = Struct.new(:message, :code, :body)
-
-WebMock.disable_net_connect!
-
-RSpec::Sidekiq.configure do |config|
-  config.clear_all_enqueued_jobs = true # default => true
-  config.enable_terminal_colours = true # default => true
-  config.warn_when_jobs_not_processed_by_sidekiq = false # default => true
-end
-
-require "vcr"
-
-vcr_debug = ENV["VCR_DEBUG"].to_s == "true"
-record_mode = ENV["VCR_RECORD_MODE"] ? ENV["VCR_RECORD_MODE"].to_sym : :once
-
-VCR.configure do |vcr_config|
-  vcr_config.cassette_library_dir = "spec/cassettes"
-  vcr_config.hook_into :webmock
-  vcr_config.default_cassette_options = {
-    record: record_mode,
-    match_requests_on: [:method, VCR.request_matchers.uri_without_param(:key)],
-  }
-  vcr_config.configure_rspec_metadata!
-  vcr_config.debug_logger = $stdout if vcr_debug
-  vcr_config.filter_sensitive_data("<GOVUK_NOTIFY_API_KEY>") { ENV.fetch("GOVUK_NOTIFY_API_KEY", nil) }
-  vcr_config.filter_sensitive_data("<ORDNANCE_SURVEY_API_KEY>") { ENV.fetch("ORDNANCE_SURVEY_API_KEY", nil) }
-  vcr_config.filter_sensitive_data("<BC_LSC_SERVICE_NAME>") { ENV.fetch("BC_LSC_SERVICE_NAME", nil) }
-  vcr_config.filter_sensitive_data("<BC_CLIENT_ORG_ID>") { ENV.fetch("BC_CLIENT_ORG_ID", nil) }
-  vcr_config.filter_sensitive_data("<BC_CLIENT_USER_ID>") { ENV.fetch("BC_CLIENT_USER_ID", nil) }
-  vcr_config.filter_sensitive_data("<PDA_AUTH_KEY>") { ENV.fetch("PDA_AUTH_KEY", nil) }
-end
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
