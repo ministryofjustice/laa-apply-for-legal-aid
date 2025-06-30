@@ -8,7 +8,7 @@
                     template: :basic,
                     form: do %>
     <%= form.govuk_check_boxes_fieldset :related_orders,
-                                        legend: { text: t(".page_title"), size: "l", tag: "h1" },
+                                        legend: { text: t(".page_title"), size: "xl", tag: "h1" },
                                         caption: { text: @proceeding.meaning, size: "xl" },
                                         form_group: { class: @form.errors.any? ? "govuk-form-group--error" : "" } do %>
       <div class="govuk-hint"><%= t(".hint") %></div>
