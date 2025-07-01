@@ -6,8 +6,6 @@ module Task
     include ActionView::Context
     include Rails.application.routes.url_helpers
 
-    DEFAULT_STATUS_TAG_CLASSES = %w[app-task-list__tag].freeze
-
     def self.build(application, name)
       class_name = "Task::#{name.camelize}"
 
@@ -81,14 +79,12 @@ module Task
 
     def status_tag
       tag.div id: tag_id, class: "govuk-task-list__status" do
-        tag.div class: status_tag_classes do
-          t!("task_list.status.#{status.value}")
-        end
+        tag_component.colour.nil? ? tag_component.text : tag_component.call
       end
     end
 
-    def status_tag_classes
-      DEFAULT_STATUS_TAG_CLASSES | Array(status.tag_classes)
+    def tag_component
+      @tag_component ||= GovukComponent::TagComponent.new(text: t!("task_list.status.#{status.value}"), colour: status.colour)
     end
 
     def tag_id

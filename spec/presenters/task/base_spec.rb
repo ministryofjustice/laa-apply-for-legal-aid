@@ -54,7 +54,7 @@ RSpec.describe Task::Base do
         allow(instance).to receive(:status).and_return(TaskStatus::ValueObject.new.cannot_start!)
 
         expect(page)
-          .to have_css(".govuk-task-list__status .app-task-list__tag", text: "Cannot start yet")
+          .to have_css(".govuk-task-list__status", text: "Cannot start yet")
           .and have_no_css(".govuk-tag")
       end
 
@@ -62,28 +62,28 @@ RSpec.describe Task::Base do
         allow(instance).to receive(:status).and_return(TaskStatus::ValueObject.new.not_ready!)
 
         expect(page)
-          .to have_css(".govuk-task-list__status .app-task-list__tag.govuk-tag.govuk-tag--grey", text: "Not ready")
+          .to have_css(".govuk-task-list__status .govuk-tag.govuk-tag--grey", text: "Not ready")
       end
 
       it "renders status tag with blue colour for not_started" do
         allow(instance).to receive(:status).and_return(TaskStatus::ValueObject.new.not_started!)
 
         expect(page)
-          .to have_css(".govuk-task-list__status .app-task-list__tag.govuk-tag.govuk-tag--blue", text: "Not started")
+          .to have_css(".govuk-task-list__status .govuk-tag.govuk-tag--blue", text: "Not started")
       end
 
       it "renders status tag with light blue colour for in_progress" do
         allow(instance).to receive(:status).and_return(TaskStatus::ValueObject.new.in_progress!)
 
         expect(page)
-          .to have_css(".govuk-task-list__status .app-task-list__tag.govuk-tag.govuk-tag--light-blue", text: "In progress")
+          .to have_css(".govuk-task-list__status .govuk-tag.govuk-tag--light-blue", text: "In progress")
       end
 
       it "renders status tag with no colour for completed" do
         allow(instance).to receive(:status).and_return(TaskStatus::ValueObject.new.completed!)
 
         expect(page)
-          .to have_css(".govuk-task-list__status .app-task-list__tag", text: "Completed")
+          .to have_css(".govuk-task-list__status", text: "Completed")
           .and have_no_css(".govuk-tag")
       end
     end

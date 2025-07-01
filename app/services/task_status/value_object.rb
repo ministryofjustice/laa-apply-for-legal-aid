@@ -1,14 +1,14 @@
 module TaskStatus
-  StatusData = Data.define(:value, :tag_classes)
+  StatusData = Data.define(:value, :colour)
 
   class ValueObject
     attr_accessor :value
 
     STATUSES = [
       CANNOT_START = StatusData.new(:cannot_start, nil),
-      NOT_READY = StatusData.new(:not_ready, "govuk-tag govuk-tag--grey"),
-      NOT_STARTED = StatusData.new(:not_started, "govuk-tag govuk-tag--blue"),
-      IN_PROGRESS = StatusData.new(:in_progress, "govuk-tag govuk-tag--light-blue"),
+      NOT_READY = StatusData.new(:not_ready, "grey"),
+      NOT_STARTED = StatusData.new(:not_started, "blue"),
+      IN_PROGRESS = StatusData.new(:in_progress, "light-blue"),
       COMPLETED = StatusData.new(:completed, nil),
       UNKNOWN = StatusData.new(:unknown, nil),
     ].freeze
@@ -30,7 +30,7 @@ module TaskStatus
     end
 
     # Should this be part of the value object as it represents presentation layer logic?!
-    delegate :tag_classes, to: :current_status
+    delegate :colour, to: :current_status
 
     def valid?
       STATUSES.include?(current_status)
