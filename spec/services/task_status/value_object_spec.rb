@@ -22,31 +22,31 @@ RSpec.describe TaskStatus::ValueObject do
   end
 
   it "responds to expected methods" do
-    expect(object).to respond_to(:value, :value=, :tag_classes)
+    expect(object).to respond_to(:value, :value=, :colour)
   end
 
   it "defaults to unknown status" do
     expect(object).to be_unknown
   end
 
-  describe "#tag_classes" do
+  describe "#colour" do
     it "returns css tag classes associated with the status" do
-      expect(object.tag_classes).to be_nil
+      expect(object.colour).to be_nil
 
       object.cannot_start!
-      expect(object.tag_classes).to be_nil
+      expect(object.colour).to be_nil
 
       object.not_ready!
-      expect(object.tag_classes).to eql "govuk-tag govuk-tag--grey"
+      expect(object.colour).to eql "grey"
 
       object.not_started!
-      expect(object.tag_classes).to eql "govuk-tag govuk-tag--blue"
+      expect(object.colour).to eql "blue"
 
       object.in_progress!
-      expect(object.tag_classes).to eql "govuk-tag govuk-tag--light-blue"
+      expect(object.colour).to eql "light-blue"
 
       object.completed!
-      expect(object.tag_classes).to be_nil
+      expect(object.colour).to be_nil
     end
   end
 
@@ -98,7 +98,7 @@ RSpec.describe TaskStatus::ValueObject do
   describe "#current_status" do
     it "returns a data object matching its own status value" do
       object.not_started!
-      expect(object.current_status).to have_attributes(value: :not_started, tag_classes: "govuk-tag govuk-tag--blue")
+      expect(object.current_status).to have_attributes(value: :not_started, colour: "blue")
     end
 
     it "returns nil when value is not valid" do
