@@ -4,7 +4,7 @@ module Providers
     def index
       proceeding_types
       excluded_codes
-      redirect_to providers_legal_aid_application_has_other_proceedings_path(legal_aid_application) if proceeding_types.count.zero?
+      redirect_to providers_legal_aid_application_has_other_proceedings_path(legal_aid_application) if proceeding_types.none?
     end
 
     # POST /provider/applications/:legal_aid_application_id/proceedings_types

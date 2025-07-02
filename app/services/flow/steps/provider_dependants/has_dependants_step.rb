@@ -12,7 +12,7 @@ module Flow
         end,
         check_answers: lambda do |application|
           if application.has_dependants?
-            if application.dependants.count.positive?
+            if application.dependants.any?
               :has_other_dependants
             else
               :dependants

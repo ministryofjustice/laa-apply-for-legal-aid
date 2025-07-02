@@ -21,7 +21,7 @@ namespace :migrate do
           end
         end
       end
-      raise StandardError, "Not all employments updated" if records.where(owner_id: nil).count.positive?
+      raise StandardError, "Not all employments updated" if records.where(owner_id: nil).any?
     end
     Rails.logger.info "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
     Rails.logger.info "Employments with owner: #{records.where.not(owner_id: nil).count}"

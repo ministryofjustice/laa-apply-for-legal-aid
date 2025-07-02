@@ -68,7 +68,7 @@ module Providers
       @partner = legal_aid_application.partner
       @read_only = legal_aid_application.read_only?
       @address = @applicant.address
-      @show_linked_proceedings = @legal_aid_application.copy_case? && @legal_aid_application.proceedings.count.zero?
+      @show_linked_proceedings = @legal_aid_application.copy_case? && @legal_aid_application.proceedings.none?
       @source_application = @show_linked_proceedings ? LegalAidApplication.find(legal_aid_application.copy_case_id) : legal_aid_application
     end
 

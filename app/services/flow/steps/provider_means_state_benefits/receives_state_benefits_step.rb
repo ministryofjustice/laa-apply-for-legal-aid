@@ -8,7 +8,7 @@ module Flow
         end,
         check_answers: lambda do |application|
           if application.applicant.receives_state_benefits?
-            if application.applicant.state_benefits.count.positive?
+            if application.applicant.state_benefits.any?
               :add_other_state_benefits
             else
               :state_benefits

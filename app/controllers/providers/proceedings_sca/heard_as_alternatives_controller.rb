@@ -35,7 +35,7 @@ module Providers
       end
 
       def amount
-        @amount = if @core_proceedings.count == 1
+        @amount = if @core_proceedings.one?
                     "single"
                   elsif @core_proceedings.count >= 1
                     "multiple"

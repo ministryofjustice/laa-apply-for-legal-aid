@@ -19,7 +19,7 @@ namespace :migrate do
           end
         end
       end
-      raise StandardError, "Not all applications updated" if applications.where(provider_step: property_pages).count.positive?
+      raise StandardError, "Not all applications updated" if applications.where(provider_step: property_pages).any?
     end
     Rails.logger.info "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
     Rails.logger.info "Applications updated: #{LegalAidApplication.where(provider_step: 'property_details').count}"

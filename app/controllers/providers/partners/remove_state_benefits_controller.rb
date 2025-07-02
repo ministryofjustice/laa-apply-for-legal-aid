@@ -11,7 +11,7 @@ module Providers
       def update
         if form.valid?
           regular_transaction&.destroy! if form.remove_state_benefit?
-          if partner_state_benefits.count.zero?
+          if partner_state_benefits.none?
             replace_last_page_in_history(home_path)
           end
           return go_forward(partner_state_benefits.any?)

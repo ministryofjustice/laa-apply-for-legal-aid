@@ -19,7 +19,7 @@ namespace :migrate do
               owner_type: applicant.class,
             )
           end
-          raise StandardError, "Not all legal_aid_application_transaction_types updated" if records.where(owner_id: nil).count.positive?
+          raise StandardError, "Not all legal_aid_application_transaction_types updated" if records.where(owner_id: nil).any?
         end
       end
     end

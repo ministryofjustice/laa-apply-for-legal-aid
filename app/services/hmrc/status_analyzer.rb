@@ -19,9 +19,9 @@ module HMRC
     end
 
     def call
-      return :applicant_not_employed if applicant_not_employed && no_employment_payments
+      return :applicant_not_employed if applicant_not_employed? && no_employment_payments?
 
-      return :applicant_unexpected_employment_data if applicant_not_employed && eligible_employment_payments.any?
+      return :applicant_unexpected_employment_data if applicant_not_employed? && eligible_employment_payments.any?
 
       return :applicant_multiple_employments if has_multiple_employments?
 
@@ -30,11 +30,11 @@ module HMRC
       :applicant_single_employment
     end
 
-    def applicant_not_employed
+    def applicant_not_employed?
       !applicant.employed
     end
 
-    def no_employment_payments
+    def no_employment_payments?
       eligible_employment_payments.empty?
     end
   end

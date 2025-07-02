@@ -43,7 +43,7 @@ module CCMS
     alias_method :restart_current_step!, :process_async!
 
     def sidekiq_running?
-      return :running if Sidekiq::Workers.new.map(&:to_s).to_s.scan(id).count.positive?
+      return :running if Sidekiq::Workers.new.map(&:to_s).to_s.scan(id).any?
       return :in_retry if Sidekiq::RetrySet.new.any? { |job| job.args.include?(id) }
 
       false

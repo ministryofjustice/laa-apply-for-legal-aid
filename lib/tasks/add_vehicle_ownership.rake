@@ -15,7 +15,7 @@ namespace :migrate do
           records.where(owner: nil).find_each do |record|
             record.update!(owner: "client")
           end
-          raise StandardError, "Not all vehicles updated" if records.where(owner: nil).count.positive?
+          raise StandardError, "Not all vehicles updated" if records.where(owner: nil).any?
         end
       end
     end

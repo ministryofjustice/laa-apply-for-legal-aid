@@ -249,7 +249,7 @@ module Reports
         @line << state
         @line << ccms_reason
         @line << (ccms_submission.nil? ? "" : case_ccms_reference)
-        @line << (proceedings.count > 1 ? "Multi" : "Single")
+        @line << (proceedings.many? ? "Multi" : "Single")
       end
 
       def proceeding_details

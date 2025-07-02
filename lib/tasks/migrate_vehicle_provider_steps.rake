@@ -18,7 +18,7 @@ namespace :migrate do
             app.provider_step = "vehicle_details"
             app.save!(touch: false) # this prevents the updated_at date being changed and delaying purging of stale records
           end
-          raise StandardError, "Not all applications updated" if applications.where(provider_step: vehicle_pages).count.positive?
+          raise StandardError, "Not all applications updated" if applications.where(provider_step: vehicle_pages).any?
         end
       end
     end
