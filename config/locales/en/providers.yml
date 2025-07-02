@@ -872,8 +872,10 @@ en:
         page_title: Make a new application 
         para1: Use this list to see your progress.
         para2: You can go back and edit completed sections if they appear as links. More sections will become editable over time.
+        name: "Name:"
         complete: complete
         incomplete: incomplete
+        reference_number: "Reference number:"
     delegated_confirmation:
       index:
         page-heading: You told us you've used delegated functions
@@ -2159,4 +2161,3 @@ en:
           option_bullets:
             - make a new application for your client if you still need to submit one
             - go back to your applications
-

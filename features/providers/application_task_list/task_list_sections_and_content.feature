@@ -16,7 +16,9 @@ Feature: Application task list page sections, subsections and content
     Given I have completed an application as far national insurance number
 
     When I go to the application task list
-    Then I should see section header "1. Client and case details"
+    Then I should see "Name: John Doe"
+    And I should see "Reference number: L-[\w]{3}-[\w]{3}"
+    And I should see section header "1. Client and case details"
     And I should see section header "2. Means test"
     And I should see "We may ask you later about your client's income, outgoings, savings, investments, assets, payments and dependants, if it's needed"
     And I should see section header "3. Merits"

@@ -11,6 +11,21 @@
           <%= t(".para2") %>
         </p>
 
+        <p class="govuk-body">
+          <% unless @legal_aid_application.applicant_full_name.blank? %>
+            <%= t(".name") %>
+            <strong>
+              <%= @legal_aid_application.applicant_full_name %>
+            </strong>
+            <br>
+          <% end %>
+
+          <%= t(".reference_number") %>
+          <strong>
+            <%= @legal_aid_application.application_ref %>
+          </strong>
+        </p>
+
         <%= @task_list.render %>
 
         <p class="govuk-body">
