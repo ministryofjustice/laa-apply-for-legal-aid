@@ -21,7 +21,7 @@ namespace :migrate do
           end
         end
       end
-      raise StandardError, "Not all responses updated" if responses.where(owner_id: nil).count.positive?
+      raise StandardError, "Not all responses updated" if responses.where(owner_id: nil).any?
     end
     Rails.logger.info "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
     Rails.logger.info "HMRCResponse with owner: #{responses.where.not(owner_id: nil).count}"

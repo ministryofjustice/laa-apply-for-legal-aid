@@ -11,7 +11,7 @@ module Providers
 
         if form.valid?
           dependant&.destroy! if form.remove_dependant?
-          if legal_aid_application.dependants.count.zero?
+          if legal_aid_application.dependants.none?
             legal_aid_application.update!(has_dependants: nil)
             replace_last_page_in_history(home_path)
           end

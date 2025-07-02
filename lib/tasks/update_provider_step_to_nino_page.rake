@@ -62,7 +62,7 @@ namespace :migrate do
             app.provider_step = "has_national_insurance_numbers"
             app.save!(touch: false) # this prevents the updated_at date being changed and delaying purging of stale records
           end
-          raise StandardError, "Not all applications updated" if applications.where(provider_step: pages_to_move).count.positive?
+          raise StandardError, "Not all applications updated" if applications.where(provider_step: pages_to_move).any?
         end
       end
     end

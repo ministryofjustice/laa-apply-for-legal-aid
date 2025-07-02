@@ -4,7 +4,7 @@ module Flow
       RemoveOpponentStep = Step.new(
         path: ->(application, opponent) { Steps.urls.providers_legal_aid_application_remove_opponent_path(application, opponent) },
         forward: lambda { |application|
-          application.opponents.count.positive? ? :has_other_opponents : :opponent_types
+          application.opponents.any? ? :has_other_opponents : :opponent_types
         },
       )
     end

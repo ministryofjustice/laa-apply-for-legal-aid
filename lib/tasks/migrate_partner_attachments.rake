@@ -23,13 +23,13 @@ namespace :migrate do
             file.attachment_type = changes[file.attachment_type.to_sym]
             file.save!(touch: false) # this prevents the updated_at date being changed and delaying purging of stale records
           end
-          raise StandardError, "Not all attachments updated" if Attachment.where(attachment_type: changes.keys).count.positive?
+          raise StandardError, "Not all attachments updated" if Attachment.where(attachment_type: changes.keys).any?
 
           documents.each do |file|
             file.document_type = changes[file.document_type.to_sym]
             file.save!(touch: false) # this prevents the updated_at date being changed and delaying purging of stale records
           end
-          raise StandardError, "Not all documents updated" if CCMS::SubmissionDocument.where(document_type: changes.keys).count.positive?
+          raise StandardError, "Not all documents updated" if CCMS::SubmissionDocument.where(document_type: changes.keys).any?
         end
       end
     end

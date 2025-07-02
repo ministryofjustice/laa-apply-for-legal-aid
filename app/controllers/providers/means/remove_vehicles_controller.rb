@@ -11,7 +11,7 @@ module Providers
 
         if form.valid?
           vehicle&.destroy! if form.remove_vehicle?
-          if legal_aid_application.vehicles.count.zero?
+          if legal_aid_application.vehicles.none?
             legal_aid_application.update!(own_vehicle: nil)
             replace_last_page_in_history(home_path)
           end
