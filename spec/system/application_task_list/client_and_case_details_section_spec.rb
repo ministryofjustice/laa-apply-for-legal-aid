@@ -6,7 +6,7 @@ RSpec.describe "Client and case details section", :vcr do
       login_as_a_provider
     end
 
-    scenario "I can view the application task list's basic information" do
+    scenario "I can complete the task list's Client details item" do
       visit "/"
       click_on "Sign in"
 
