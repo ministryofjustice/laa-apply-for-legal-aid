@@ -30,26 +30,11 @@ RSpec.describe "Client and case details section", :vcr do
       @legal_aid_application ||= LegalAidApplication.find(id_from_current_page_url)
       visit providers_legal_aid_application_task_list_path(@legal_aid_application)
 
-      # A way of using equivalent of cucumber table hashes
-      # e.g. like this
-      # Then the "Client and case details" task list section should contain:
-      #   | name | link_enabled | status |
-      #   | Client details | true | In progress |
-      #
-      # cols = %i[name linked_enabled status]
-      # rows = [
-      #   ["Client details", true, "In progress"],
-      # ]
-      # table = rows.map { |row| cols.zip(row).to_h }
-      #
-      heading = page.find("h2.govuk-task-list__section", text: "Client and case details")
-      section_list = heading.ancestor("li")
-
       rows = [
         { name: "Client details", linked_enabled: true, status: "In progress" },
       ]
 
-      within(section_list) do
+      within(section_list_for("Client and case details")) do
         rows.each do |row|
           expect(page).to have_css(".govuk-task-list__name-and-hint", text: row[:name])
           expect(page).to have_link(row[:name]) if row[:link_enabled] == true
@@ -84,22 +69,17 @@ RSpec.describe "Client and case details section", :vcr do
 
       visit providers_legal_aid_application_task_list_path(@legal_aid_application)
 
-      heading = page.find("h2.govuk-task-list__section", text: "Client and case details")
-      section_list = heading.ancestor("li")
-
       rows = [
         { name: "Client details", linked_enabled: false, status: "Completed" },
       ]
 
-      within(section_list) do
+      within(section_list_for("Client and case details")) do
         rows.each do |row|
           expect(page).to have_css(".govuk-task-list__name-and-hint", text: row[:name])
           expect(page).to have_link(row[:name]) if row[:link_enabled] == true
           expect(page).to have_css(".govuk-task-list__status", text: row[:status])
         end
       end
-
-      # screenshot_and_open_image
     end
   end
 end
