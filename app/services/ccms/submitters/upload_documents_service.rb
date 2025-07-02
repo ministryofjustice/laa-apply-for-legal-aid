@@ -47,7 +47,7 @@ module CCMS
       def update_document_status_and_return_response(document, document_upload_requestor)
         tx_id = document_upload_requestor.transaction_request_id
         response = document_upload_requestor.call
-        document.status = if document_upload_response_parser(tx_id, response)
+        document.status = if document_upload_response_parses?(tx_id, response)
                             :uploaded
                           else
                             :failed
@@ -55,7 +55,7 @@ module CCMS
         response
       end
 
-      def document_upload_response_parser(tx_id, response)
+      def document_upload_response_parses?(tx_id, response)
         CCMS::Parsers::DocumentUploadResponseParser
           .new(tx_id, response).success?
       end

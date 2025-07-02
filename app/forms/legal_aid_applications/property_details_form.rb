@@ -14,7 +14,7 @@ module LegalAidApplications
     validates :property_value, presence_partner_optional: { partner_labels: :has_partner_with_no_contrary_interest? }, unless: :draft?
     validates :property_value, allow_blank: true, currency: { greater_than_or_equal_to: 0.0, partner_labels: :has_partner_with_no_contrary_interest? }
 
-    validates :outstanding_mortgage_amount, presence: { unless: :outstanding_mortgage_amount_presence }
+    validates :outstanding_mortgage_amount, presence: { unless: :outstanding_mortgage_amount_presence? }
     validates :outstanding_mortgage_amount, allow_blank: true, currency: { greater_than_or_equal_to: 0.0 }
 
     validates :shared_ownership, presence_partner_optional: { partner_labels: :has_partner_with_no_contrary_interest? }, unless: :draft?
@@ -28,7 +28,7 @@ module LegalAidApplications
 
   private
 
-    def outstanding_mortgage_amount_presence
+    def outstanding_mortgage_amount_presence?
       draft? || model.own_home == "owned_outright"
     end
   end

@@ -150,7 +150,7 @@ module XMLBlockMatchers
     return "Expected all response types to be '#{expected_response_type}', got '#{actual_response_types}'" unless actual_response_types.all?(expected_response_type)
 
     actual_values = actual.search("ResponseValue").map(&:text)
-    return "Expected value '#{formatted_expected_values}', got '#{actual_values}'" unless compare_array(actual_values, formatted_expected_values)
+    return "Expected value '#{formatted_expected_values}', got '#{actual_values}'" unless exact_array_match?(actual_values, formatted_expected_values)
 
     :ok
   end
@@ -165,7 +165,7 @@ module XMLBlockMatchers
     true
   end
 
-  def compare_array(array_one, array_two)
+  def exact_array_match?(array_one, array_two)
     ((array_one - array_two) + (array_two - array_one)).blank?
   end
 end

@@ -231,10 +231,10 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def auto_grant_special_children_act?
-    special_children_act_proceedings? && auto_grant_exclusions
+    special_children_act_proceedings? && auto_grant_exclusions?
   end
 
-  def auto_grant_exclusions
+  def auto_grant_exclusions?
     # If any of these are true then auto-granting should not occur
     # This list is not definitive, it is accurate for the initial release of SCA, Oct 2024
     # e.g. when Apply starts handling high-cost cases we could add a test for claims > £25,000

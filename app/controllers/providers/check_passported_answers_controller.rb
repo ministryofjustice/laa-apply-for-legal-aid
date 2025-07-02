@@ -5,7 +5,7 @@ module Providers
       @proceeding = legal_aid_application.lead_proceeding
       @applicant = legal_aid_application.applicant
       @address = @applicant.addresses.first
-      legal_aid_application.check_passported_answers! unless already_checking_answers
+      legal_aid_application.check_passported_answers! unless already_checking_answers?
     end
 
     def continue
@@ -24,7 +24,7 @@ module Providers
 
   private
 
-    def already_checking_answers
+    def already_checking_answers?
       legal_aid_application.checking_passported_answers?
     end
 
