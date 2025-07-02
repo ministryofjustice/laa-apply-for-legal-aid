@@ -24,6 +24,8 @@ module Providers
     end
 
     def draft_target_endpoint
+      return providers_legal_aid_application_task_list_path(legal_aid_application) if ENV.fetch("EDITABLE_APPLICATIONS", "false") == "true"
+
       ENDPOINT
     end
 
