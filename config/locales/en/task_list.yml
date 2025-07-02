@@ -1,0 +1,28 @@
+en:
+  task_list:
+    heading:
+      client_and_case_details: Client and case details
+      means_assessment: Means test
+      merits_assessment: Merits
+      confirm_and_submit: Confirm and submit
+      financial_information: Financial information
+      capital_and_assets: Capital and assets
+    status:
+      cannot_start: Cannot start yet
+      completed: Completed
+      in_progress: In progress
+      not_applicable: Not applicable
+      not_started: Not yet started
+      unreachable: Unreachable!
+    task:
+      about_financial_means: Income assessment
+      applicants: Client details
+      capital_introductions: Capital assessment
+      check_benefits: DWP outcome
+      check_income_answers: Check your income assessment answers
+      check_capital_answers: Check your capital assessment answers (non-passported)
+      check_passported_answers: Check your capital assessment answers (passported)
+      check_provider_answers: Check your answers
+      has_national_insurance_numbers: National Insurance
+      proceedings_types: Proceedings
+      confirm_client_declarations: Confirm declarations and submit application
