@@ -25,6 +25,7 @@ en:
     task:
       about_financial_means: Income assessment
       applicants: Client details
+      make_link: Link to another application
       capital_introductions: Capital assessment
       check_benefits: DWP outcome
       check_income_answers: Check your income assessment answers
