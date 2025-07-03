@@ -53,7 +53,10 @@ RSpec.describe Admin::FeedbackController do
 
         it "shows pagination" do
           get_request
-          expect(page).to have_css(".govuk-pagination", text: "12\nNext page")
+          expect(page)
+            .to have_css(".govuk-pagination", text: "Next page")
+            .and have_css(".govuk-pagination__link", text: "1")
+            .and have_css(".govuk-pagination__link", text: "2")
         end
       end
     end

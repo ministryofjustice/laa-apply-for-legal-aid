@@ -17,12 +17,12 @@
 # $ BROWSER=true rspec spec/system
 #
 RSpec.configure do |config|
-  config.include Devise::Test::IntegrationHelpers
-  config.include LoginHelpers
-  config.include ScreenshotHelpers
-  config.include GovukFormHelpers
-  config.include CapybaraHelpers
-  config.include TaskListHelpers
+  config.include Devise::Test::IntegrationHelpers, type: :system
+  config.include LoginHelpers, type: :system
+  config.include ScreenshotHelpers, type: :system
+  config.include GovukFormHelpers, type: :system
+  config.include CapybaraHelpers, type: :system
+  config.include TaskListHelpers, type: :system
 
   config.before(:each, type: :system) do |example|
     if ENV["BROWSER"].present?
