@@ -185,7 +185,7 @@ Given(/^I have completed a passported application with a partner with merits$/) 
   login_as @legal_aid_application.provider
 end
 
-Given("I have completed a non-means tested journey with merits") do
+Given("I have completed a non-means-tested journey with merits") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_proceedings,

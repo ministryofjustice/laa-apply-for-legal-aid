@@ -5,7 +5,7 @@ module NationalInsuranceHandling
   private
 
     def has_national_insurance_number?
-      has_national_insurance_number.eql?("true")
+      has_national_insurance_number.in?(["true", true])
     end
 
     def normalise_national_insurance_number
