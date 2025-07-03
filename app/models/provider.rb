@@ -19,6 +19,7 @@ class Provider < ApplicationRecord
 
   def self.from_omniauth(auth)
     provider = find_by(auth_subject_uid: auth.uid)
+    # Maybe add a binding.irb here to read the auth values and check for a claims block?
 
     if provider
       provider.update!(last_sign_in_at: Time.current)
