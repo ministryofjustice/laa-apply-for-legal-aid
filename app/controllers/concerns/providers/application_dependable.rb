@@ -10,6 +10,14 @@ module Providers
       def legal_aid_application_not_required?
         @legal_aid_application_not_required
       end
+
+      def skip_provider_step_update
+        @skip_provider_step_update || []
+      end
+
+      def skip_provider_step_update_for(*actions)
+        @skip_provider_step_update = actions.map(&:to_sym)
+      end
     end
 
     included do
@@ -27,7 +35,7 @@ module Providers
       def set_legal_aid_application
         return if self.class.legal_aid_application_not_required?
 
-        legal_aid_application.update!(provider_step:, provider_step_params:) unless provider_step == :delete
+        legal_aid_application.update!(provider_step:, provider_step_params:) unless provider_step == :delete || self.class.skip_provider_step_update.include?(action_name.to_sym)
       end
 
       def provider_step_params

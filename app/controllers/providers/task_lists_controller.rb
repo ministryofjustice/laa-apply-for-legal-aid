@@ -5,6 +5,9 @@ module Providers
     include Authorizable
     include ApplicationDependable
 
+    skip_back_history_for :show
+    skip_provider_step_update_for :show
+
     def show
       legal_aid_application
 
