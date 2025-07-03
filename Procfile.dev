@@ -1,4 +1,4 @@
-web: bin/rails server -p ${PORT:-3002}
+web: unset PORT && bin/rails server -b "ssl://localhost:3000?key=$HOME/.ssl/localhost.key&cert=$HOME/.ssl/localhost.crt"
 worker: bundle exec sidekiq
 js: yarn build --watch
 css: yarn build:css --watch
