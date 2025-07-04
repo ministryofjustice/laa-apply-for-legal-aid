@@ -3,14 +3,14 @@ require_relative "task_status_validator_shared_examples"
 
 RSpec.describe TaskStatus::Validators::MakeLink do
   subject(:validator) { described_class.new(application) }
-  
+
   let(:complete_linked_application) do
     create(:linked_application,
-            associated_application:,
-            link_type_code:,
-            confirm_link:)
+           associated_application:,
+           link_type_code:,
+           confirm_link:)
   end
-  
+
   let(:associated_application) { create(:legal_aid_application) }
   let(:application) { create(:application, lead_linked_application:) }
   let(:lead_linked_application) { complete_linked_application }
@@ -26,7 +26,7 @@ RSpec.describe TaskStatus::Validators::MakeLink do
 
       it { is_expected.to be_valid }
     end
-  
+
     context "when link is legal" do
       context "when link is not confirmed" do
         let(:link_type_code) { "LEGAL" }

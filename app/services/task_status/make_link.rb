@@ -13,6 +13,10 @@ module TaskStatus
 
   private
 
+    def not_started?
+      application.lead_linked_application.blank?
+    end
+
     def cannot_start?
       # Correct to proceedings complete when available
       !applicants_validator.valid?
@@ -20,10 +24,6 @@ module TaskStatus
 
     def in_progress?
       application.lead_linked_application.present? && !completed?
-    end
-
-    def not_started?
-      application.lead_linked_application.blank?
     end
 
     def completed?

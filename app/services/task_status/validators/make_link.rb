@@ -1,7 +1,6 @@
 module TaskStatus
   module Validators
     class MakeLink < Base
-
       def valid?
         return true if linked_application.confirm_link == false
 
