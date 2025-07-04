@@ -26,40 +26,42 @@ class Provider < ApplicationRecord
   #
   def self.from_omniauth(auth)
     # put a binding.irb here to read the auth values and check for a claims block?
-
-    # Possible mechanism to control which external providers on the new tenant are granted access
-    return unless auth.extra.raw_info.roles.include?("CIVIL_APPLY_PROVIDER")
-
     provider = find_by(auth_subject_uid: auth.uid)
 
     if provider
-      # could potentially change auth_provider name since this is within our control, so update heretoo
-      # (e.g. azure_ad -> entra_id)
+      # could potentially change auth_provider name since this is within our control, so update here too (e.g. azure_ad -> entra_id)
       provider.update!(last_sign_in_at: Time.current, auth_provider: auth.provider)
     else
       provider = find_by(email: auth.info.email, auth_subject_uid: nil)
+
+      username = auth.extra.raw_info["USER_NAME"]
 
       if provider
         provider.update!(
           auth_subject_uid: auth.uid,
           auth_provider: auth.provider,
-          username: [auth.info.first_name, auth.info.last_name].join(" "),
+          # username: [auth.info.first_name, auth.info.last_name].join(" "),
+          username:,
           last_sign_in_at: Time.current,
         )
       else
-        firm = Firm.find_by(ccms_id: "823") # This will need to be acquired by PDA or some other LASSIE solution
+        # firm = Firm.find_by(ccms_id: "823") # This will need to be acquired by PDA or some other LASSIE solution
 
-        return create!(
+        provider = create!(
           auth_subject_uid: auth.uid,
-          username: [auth.info.first_name, auth.info.last_name].join(" "),
+          # username: [auth.info.first_name, auth.info.last_name].join(" "),
+          username:,
           email: auth.info.email,
           last_sign_in_at: Time.current,
           auth_provider: auth.provider,
-          firm:,
-          offices: firm.offices,
+          # firm:,
+          # offices: firm.offices,
         )
       end
     end
+
+    # TODO: move to the after login service or a similar asychronous process
+    provider.update_details_directly
 
     provider
   end
