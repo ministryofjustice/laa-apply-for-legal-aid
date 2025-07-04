@@ -17,16 +17,27 @@ class Provider < ApplicationRecord
 
   delegate :name, to: :firm, prefix: true, allow_nil: true
 
+  # From our point of view we probably want to just create a user (*1 caviate) if not found by their email or username, otherwise update them.
+  #
+  # NB: The auth_subject_uid find_by, in combination with subsequent email find_by, was only used for the assurance tool to prevent anyone except
+  # users we had manually added to the DB from being able to login. This does not meet our use case.
+  #
+  # Our flow can/should rely on ANY user who is on the external EntraID (*1 and who has a certain role in the auth payload TBC)
+  #
   def self.from_omniauth(auth)
+    # put a binding.irb here to read the auth values and check for a claims block?
+
+    # Possible mechanism to control which external providers on the new tenant are granted access
+    return unless auth.extra.raw_info.roles.include?("CIVIL_APPLY_PROVIDER")
+
     provider = find_by(auth_subject_uid: auth.uid)
-    # Maybe add a binding.irb here to read the auth values and check for a claims block?
 
     if provider
-      provider.update!(last_sign_in_at: Time.current)
+      # could potentially change auth_provider name since this is within our control, so update heretoo
+      # (e.g. azure_ad -> entra_id)
+      provider.update!(last_sign_in_at: Time.current, auth_provider: auth.provider)
     else
-      # find them if they have been created but never logged in
-      # Add a provider with the email address of your external tenant user and modify to have `auth_provider`` value of "azure_ad"
-      provider = find_by(email: auth.info.email, auth_provider: auth.provider, auth_subject_uid: nil)
+      provider = find_by(email: auth.info.email, auth_subject_uid: nil)
 
       if provider
         provider.update!(
@@ -36,7 +47,7 @@ class Provider < ApplicationRecord
           last_sign_in_at: Time.current,
         )
       else
-        firm = Firm.find_by(ccms_id: "823")
+        firm = Firm.find_by(ccms_id: "823") # This will need to be acquired by PDA or some other LASSIE solution
 
         return create!(
           auth_subject_uid: auth.uid,
@@ -45,6 +56,7 @@ class Provider < ApplicationRecord
           last_sign_in_at: Time.current,
           auth_provider: auth.provider,
           firm:,
+          offices: firm.offices,
         )
       end
     end
