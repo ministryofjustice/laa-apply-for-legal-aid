@@ -164,7 +164,7 @@ maintenance_mode:
 collect_hmrc_data:
   enabled: "false"
 
-omniauth_azure:
+omniauth_entraid:
   redirect_uri: https://staging.apply-for-legal-aid.service.justice.gov.uk/auth/entra_id/callback
 
 env: staging
