@@ -2,7 +2,7 @@ class Provider < ApplicationRecord
   encrypts :auth_subject_uid, deterministic: true
 
   # devise :saml_authenticatable, :trackable
-  devise :trackable, :omniauthable, omniauth_providers: [:azure_ad]
+  devise :trackable, :omniauthable, omniauth_providers: [:entra_id]
 
   serialize :roles, coder: YAML
   serialize :offices, coder: YAML
@@ -31,6 +31,7 @@ class Provider < ApplicationRecord
       if provider
         provider.update!(
           auth_subject_uid: auth.uid,
+          auth_provider: auth.provider,
           username: [auth.info.first_name, auth.info.last_name].join(" "),
           last_sign_in_at: Time.current,
         )

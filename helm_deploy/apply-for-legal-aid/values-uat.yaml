@@ -172,6 +172,7 @@ collect_hmrc_data:
   enabled: "false"
 
 omniauth_azure:
-  redirect_uri: https://main-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk/auth/azure_ad/callback
+  redirect_uri: https://main-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk/auth/entra_id/callback
 
 env: uat
+
