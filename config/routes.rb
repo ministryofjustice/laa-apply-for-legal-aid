@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   end
 
   get "auth/failure", to: "auth#failure"
+  get "providers/auth/failure", to: "providers/auth#failure"
 
   resource :contact, only: [:show]
   resources :accessibility_statement, only: [:index]
