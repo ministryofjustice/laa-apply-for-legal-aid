@@ -1,6 +1,6 @@
 module Providers
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    def azure_ad
+    def entra_id
       @provider = Provider.from_omniauth(request.env["omniauth.auth"])
 
       if @provider&.persisted?
