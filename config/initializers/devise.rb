@@ -299,14 +299,14 @@ Devise.setup do |config|
       response_type: :code,
       # client_auth_method: :mtls #- Mutual TLS or X.509 certificate validation.
       client_options: {
-        identifier: ENV.fetch("OMNIAUTH_AZURE_CLIENT_ID", nil),
-        secret: ENV.fetch("OMNIAUTH_AZURE_CLIENT_SECRET", nil),
-        redirect_uri: ENV.fetch("OMNIAUTH_AZURE_REDIRECT_URI", nil),
+        identifier: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_ID", nil),
+        secret: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_SECRET", nil),
+        redirect_uri: ENV.fetch("OMNIAUTH_ENTRAID_REDIRECT_URI", nil),
       },
       discovery: true,
-      issuer: "https://login.microsoftonline.com/#{ENV.fetch('OMNIAUTH_AZURE_TENANT_ID', nil)}/v2.0",
+      issuer: "https://login.microsoftonline.com/#{ENV.fetch('OMNIAUTH_ENTRAID_TENANT_ID', nil)}/v2.0",
       pkce: true,
-      extra_authorise_params: { tenant: ENV.fetch("OMNIAUTH_AZURE_TENANT_ID", nil) },
+      extra_authorise_params: { tenant: ENV.fetch("OMNIAUTH_ENTRAID_TENANT_ID", nil) },
       # strategy_class: OmniAuth::Strategies::OpenIDConnect,
     },
   )
