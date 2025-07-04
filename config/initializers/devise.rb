@@ -294,7 +294,7 @@ Devise.setup do |config|
   config.omniauth(
     :openid_connect,
     {
-      name: "azure_ad",
+      name: "entra_id",
       scope: %i[openid email profile],
       response_type: :code,
       # client_auth_method: :mtls #- Mutual TLS or X.509 certificate validation.
