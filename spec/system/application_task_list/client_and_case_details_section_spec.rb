@@ -26,12 +26,12 @@ RSpec.describe "Client and case details section", :vcr do
       govuk_fill_in_date_field(text: "Date of birth", date: 21.years.ago)
       click_on "Save and continue"
 
-      expect(page).to have_css("h1", text: "Does your client have a National Insurance number?")
       @legal_aid_application ||= LegalAidApplication.find(id_from_current_page_url)
       visit providers_legal_aid_application_task_list_path(@legal_aid_application)
 
       rows = [
         { name: "Client details", linked_enabled: true, status: "In progress" },
+        { name: "Link to another application", linked_enabled: false, status: "Cannot start yet" },
       ]
 
       within(section_list_for("Client and case details")) do
@@ -71,6 +71,79 @@ RSpec.describe "Client and case details section", :vcr do
 
       rows = [
         { name: "Client details", linked_enabled: false, status: "Completed" },
+      ]
+
+      within(section_list_for("Client and case details")) do
+        rows.each do |row|
+          expect(page).to have_css(".govuk-task-list__name-and-hint", text: row[:name])
+          expect(page).to have_link(row[:name]) if row[:link_enabled] == true
+          expect(page).to have_css(".govuk-task-list__status", text: row[:status])
+        end
+      end
+    end
+
+    scenario "I can complete the task list's Link to another application item" do
+      visit "/"
+      click_on "Sign in"
+
+      govuk_choose("London")
+      click_on "Save and continue"
+      click_on "Make a new application"
+      click_on "Agree and continue"
+
+      # Client details
+      fill_in("First name", with: "Test")
+      fill_in("Last name", with: "User")
+      govuk_choose("No")
+      govuk_fill_in_date_field(text: "Date of birth", date: 21.years.ago)
+      click_on "Save and continue"
+
+      # NINO
+      govuk_choose("Yes")
+      fill_in("Enter National Insurance number", with: "CB987654A")
+      click_on "Save and continue"
+
+      # Applied before?
+      govuk_choose("No")
+      click_on "Save and continue"
+
+      # Correspondence
+      govuk_choose("My client's UK home address")
+      click_on "Save and continue"
+
+      # Address
+      fill_in("Postcode", with: "SW1H 9EA")
+      click_on "Find address"
+      govuk_choose "Transport For London, 98 Petty France, London, SW1H 9EA"
+      click_on "Use this address"
+
+      @legal_aid_application ||= LegalAidApplication.find(id_from_current_page_url)
+      visit providers_legal_aid_application_task_list_path(@legal_aid_application)
+
+      rows = [
+        { name: "Client details", linked_enabled: false, status: "Completed" },
+        { name: "Link to another application", linked_enabled: true, status: "Not started" },
+      ]
+
+      within(section_list_for("Client and case details")) do
+        rows.each do |row|
+          expect(page).to have_css(".govuk-task-list__name-and-hint", text: row[:name])
+          expect(page).to have_link(row[:name]) if row[:link_enabled] == true
+          expect(page).to have_css(".govuk-task-list__status", text: row[:status])
+        end
+      end
+
+      click_on "Link to another application"
+
+      expect(page).to have_css("h1", text: "Do you want to link this application with another one?")
+      govuk_choose("No")
+      click_on "Save and come back later"
+
+      visit providers_legal_aid_application_task_list_path(@legal_aid_application)
+
+      rows = [
+        { name: "Client details", linked_enabled: false, status: "Completed" },
+        { name: "Link to another application", linked_enabled: false, status: "Completed" },
       ]
 
       within(section_list_for("Client and case details")) do

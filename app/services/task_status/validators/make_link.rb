@@ -1,7 +1,6 @@
 module TaskStatus
   module Validators
     class MakeLink < Base
-
       def valid?
         return true if linked_application.confirm_link == false
 
@@ -26,7 +25,7 @@ module TaskStatus
       end
 
       def copy_form
-        @copy_form ||= ::Providers::LinkApplication::CopyForm.new(model: linked_application)
+        @copy_form ||= ::Providers::LinkApplication::CopyForm.new(model: application)
       end
 
       def linked_application
