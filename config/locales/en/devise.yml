@@ -27,7 +27,7 @@ en:
       unlock_instructions:
         subject: Unlock instructions
     omniauth_callbacks:
-      failure: Could not authenticate you from %{kind} because "%{reason}".
+      failure: Could not authenticate you from %{kind} due to "%{reason}".
       success: Successfully authenticated from %{kind} account.
       unauthorised: Could not authorise you! Ask an admin for access.
     passwords:
