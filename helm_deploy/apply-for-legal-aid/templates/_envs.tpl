@@ -200,7 +200,7 @@ env:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
         key: omniauthAzureTenantID
-  - name: OMNIAUTH_AZURE_TENANT_ID
+  - name: OMNIAUTH_AZURE_REDIRECT_URI
     value: {{ .Values.omniauth_azure.redirect_uri | quote }}
   - name: PROVIDER_DETAILS_URL
     valueFrom:
