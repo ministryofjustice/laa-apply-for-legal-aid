@@ -15,10 +15,11 @@ Rails.application.routes.draw do
     username == "sidekiq" && password == ENV["SIDEKIQ_WEB_UI_PASSWORD"].to_s
   end
 
-  get "/saml/auth" => "saml_idp#new"
-  post "/saml/auth" => "saml_idp#create"
+  # get "/saml/auth" => "saml_idp#new"
+  # post "/saml/auth" => "saml_idp#create"
 
-  devise_for :providers, controllers: { saml_sessions: "saml_sessions" }
+  # devise_for :providers, controllers: { saml_sessions: "saml_sessions" }
+  devise_for :providers, controllers: { omniauth_callbacks: "providers/omniauth_callbacks" }
   devise_for :applicants
   devise_for :admin_users, controllers: { sessions: "admin_users/sessions" }
 
@@ -40,7 +41,20 @@ Rails.application.routes.draw do
     )
   end
 
+  devise_scope :provider do
+    unauthenticated :provider do
+      root "providers/start#index", as: :unauthenticated_root
+    end
+
+    authenticated :provider do
+      root to: "start#index", as: :authenticated_root
+    end
+
+    delete "sign_out", to: "devise/sessions#destroy", as: :destroy_provider_session
+  end
+
   get "auth/failure", to: "auth#failure"
+  get "providers/auth/failure", to: "providers/auth#failure"
 
   resource :contact, only: [:show]
   resources :accessibility_statement, only: [:index]
