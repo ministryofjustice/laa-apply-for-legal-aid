@@ -45,7 +45,7 @@ module ApplicationHelper
       ])
     else
       safe_join([
-        content_tag(:li, link_to("Sign in with EntraID", provider_azure_ad_omniauth_authorize_path, class: "moj-header__navigation-link"), class: "moj-header__navigation-item"),
+        content_tag(:li, link_to("Sign in with EntraID", provider_entra_id_omniauth_authorize_path, class: "moj-header__navigation-link"), class: "moj-header__navigation-item"),
         content_tag(:li, link_to(t("layouts.login"), providers_confirm_office_path, class: "moj-header__navigation-link"), class: "moj-header__navigation-item"),
       ])
     end
