@@ -20,7 +20,7 @@ module Proceedings
     def initialize(*args)
       super
       @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], true))
-      self.additional_params = default_scope["additional_params"]
+      self.additional_params = @defaults.dig("default_scope", "additional_params")
     end
 
     def default_level_of_service

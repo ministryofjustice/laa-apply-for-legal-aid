@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 07 Jul 2025 11:40:44 GMT
+      - Mon, 07 Jul 2025 11:39:57 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -45,9 +45,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 9ce2c11f3fd1b655628aa26ecc75a71e
+      - 7603a4ef01258582ea878fa0d036e32a
       X-Runtime:
-      - '0.003071'
+      - '0.002866'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
@@ -55,7 +55,7 @@ http_interactions:
       string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]}'
-  recorded_at: Mon, 07 Jul 2025 11:40:44 GMT
+  recorded_at: Mon, 07 Jul 2025 11:39:57 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -77,7 +77,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 07 Jul 2025 15:07:41 GMT
+      - Mon, 07 Jul 2025 15:07:42 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -101,9 +101,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - f5446e6e655ae119fb9b765b147a91c8
+      - a14d388cc13086485174c98ed619d4f4
       X-Runtime:
-      - '0.007462'
+      - '0.009772'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
@@ -113,7 +113,7 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]}}'
-  recorded_at: Mon, 07 Jul 2025 15:07:41 GMT
+  recorded_at: Mon, 07 Jul 2025 15:07:42 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -135,7 +135,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 07 Jul 2025 15:07:41 GMT
+      - Mon, 07 Jul 2025 15:07:42 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -159,9 +159,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 5b543e204e7ad72220f065cb8b6b0dd9
+      - ca7533a707618bb4f8ea21f9cf464242
       X-Runtime:
-      - '0.009688'
+      - '0.009575'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
@@ -171,7 +171,7 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]}}'
-  recorded_at: Mon, 07 Jul 2025 15:07:41 GMT
+  recorded_at: Mon, 07 Jul 2025 15:07:42 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/DA001
@@ -193,7 +193,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 07 Jul 2025 15:07:41 GMT
+      - Mon, 07 Jul 2025 15:07:42 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -217,9 +217,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b98c949a793f18cd645ef2b0ec24e912
+      - e65d5098e8349a217d4772e0df67ebfd
       X-Runtime:
-      - '0.003080'
+      - '0.002295'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
@@ -227,7 +227,7 @@ http_interactions:
       string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]}'
-  recorded_at: Mon, 07 Jul 2025 15:07:41 GMT
+  recorded_at: Mon, 07 Jul 2025 15:07:42 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/SE014
@@ -249,7 +249,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Mon, 07 Jul 2025 15:07:41 GMT
+      - Mon, 07 Jul 2025 15:07:42 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -273,9 +273,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 406d247425b5b3d3ce4566ced6c9d611
+      - 61e3ead8b5a5799213156c4d4e1cbd6c
       X-Runtime:
-      - '0.004007'
+      - '0.002754'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
@@ -283,5 +283,5 @@ http_interactions:
       string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
         of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]}'
-  recorded_at: Mon, 07 Jul 2025 15:07:41 GMT
+  recorded_at: Mon, 07 Jul 2025 15:07:42 GMT
 recorded_with: VCR 6.3.1
