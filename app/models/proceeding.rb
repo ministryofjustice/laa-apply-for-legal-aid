@@ -73,4 +73,8 @@ class Proceeding < ApplicationRecord
   def non_sca_used_delegated_functions?
     used_delegated_functions? && !special_children_act?
   end
+
+  def uses_emergency_certificate?
+    !special_children_act?
+  end
 end
