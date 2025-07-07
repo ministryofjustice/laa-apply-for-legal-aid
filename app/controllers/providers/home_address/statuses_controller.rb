@@ -9,6 +9,8 @@ module Providers
       end
 
       def update
+        untrack!(:check_provider_answers)
+
         @form = ::HomeAddress::StatusForm.new(form_params)
         @correspondence_address = applicant.address
 

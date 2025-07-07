@@ -4,6 +4,7 @@ module Providers
     before_action :set_cache_buster
     before_action :update_locale
     include ApplicationDependable
+    include ApplicationTrackable
     include Draftable
     include Authorizable
 

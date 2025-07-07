@@ -8,8 +8,9 @@ module Providers
       end
 
       def update
-        @form = Addresses::CareOfForm.new(form_params)
+        untrack!(:check_provider_answers)
 
+        @form = Addresses::CareOfForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
       end
 

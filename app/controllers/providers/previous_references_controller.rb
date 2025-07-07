@@ -5,6 +5,8 @@ module Providers
     end
 
     def update
+      untrack!(:check_provider_answers)
+
       @form = Applicants::PreviousReferenceForm.new(form_params)
       render :show unless save_continue_or_draft(@form)
     end

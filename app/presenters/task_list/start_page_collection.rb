@@ -39,6 +39,7 @@ module TaskList
       client_and_case_details: {
         applicants: true, # Steps::ProviderStart::ApplicantsStep
         make_link: true, # Steps::ProviderStart::MakeLinkStep
+        check_provider_answers: true, # Steps::ProviderStart::CheckProviderAnswersStep,
       },
       means_assessment: {
         body_override: ->(application) { t!("task_list.body_override.means.requirement_unknown") if application.journey_unknown? || application.non_means_tested? },

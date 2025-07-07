@@ -6,6 +6,8 @@ module Providers
     end
 
     def update
+      untrack!(:check_provider_answers)
+
       @form = Addresses::AddressLookupForm.new(form_params)
       render :show unless save_continue_or_draft(@form)
     end

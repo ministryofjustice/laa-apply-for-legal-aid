@@ -13,6 +13,8 @@ module Providers
     end
 
     def update
+      untrack!(:check_provider_answers)
+
       if params[:address_selection][:list]
         @addresses = build_addresses_from_form_data
         @address_collection = collect_addresses

@@ -1,5 +1,7 @@
 module Providers
   class CheckProviderAnswersController < ProviderBaseController
+    track_as :check_provider_answers
+
     def index
       return redirect_to_client_completed_means if legal_aid_application.provider_assessing_means?
 
@@ -13,6 +15,7 @@ module Providers
     end
 
     def continue
+      track_now!
       update_applicant_age_for_means_test_purposes!
 
       unless draft_selected?
