@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"SE014","delegated_functions_used":true,"client_involvement_type":null}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.13.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Date:
+      - Mon, 07 Jul 2025 15:07:41 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '157'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - c7b5c44e872743d542874b6c688f4b96
+      X-Runtime:
+      - '0.004274'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":false,"errors":["The property ''#/client_involvement_type''
+        value nil did not match one of the following values: A, D, W, Z, I in schema
+        file://#"]}'
+  recorded_at: Mon, 07 Jul 2025 15:07:41 GMT
+recorded_with: VCR 6.3.1
