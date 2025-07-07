@@ -15,6 +15,7 @@ module TaskStatus
         [
           client_involvement_type_forms,
           delegated_functions_forms,
+          emergency_defaults_forms,
         ].flatten
       end
 
@@ -27,6 +28,14 @@ module TaskStatus
       def delegated_functions_forms
         proceedings.map do |proceeding|
           Proceedings::DelegatedFunctionsForm.new(model: proceeding)
+        end
+      end
+
+      def emergency_defaults_forms
+        proceedings.map do |proceeding|
+          next unless proceeding.uses_emergency_certificate?
+
+          Proceedings::EmergencyDefaultsForm.new(model: proceeding)
         end
       end
     end
