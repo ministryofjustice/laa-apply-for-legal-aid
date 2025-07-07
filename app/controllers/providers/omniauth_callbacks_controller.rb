@@ -18,5 +18,11 @@ module Providers
       Rails.logger.error "omniauth error authenticating a user!"
       redirect_to unauthenticated_root_path
     end
+
+  protected
+
+    def after_sign_in_path_for(resource)
+      providers_confirm_office_path(resource)
+    end
   end
 end
