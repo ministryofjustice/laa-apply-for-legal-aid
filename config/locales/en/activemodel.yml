@@ -693,7 +693,7 @@ en:
             client_involvement_type_ccms_code:
               blank: Select your client's role in this proceeding
             accepted_emergency_defaults:
-              blank: Select yes if you accept the default service level and scope for the emergency application
+              inclusion: Select yes if you accept the default service level and scope for the emergency application
             accepted_substantive_defaults:
               blank: Select yes if you accept the default service level and scope for the substantive application
             emergency_level_of_service:

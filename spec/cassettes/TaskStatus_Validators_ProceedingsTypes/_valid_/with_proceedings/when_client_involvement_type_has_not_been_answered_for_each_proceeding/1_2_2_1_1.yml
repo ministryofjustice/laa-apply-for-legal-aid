@@ -21,7 +21,7 @@ http_interactions:
       message: Bad Request
     headers:
       Date:
-      - Tue, 08 Jul 2025 08:15:16 GMT
+      - Tue, 08 Jul 2025 13:56:29 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -43,9 +43,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 2944690aa893daabf157d0bb9a18ffae
+      - 8d63b89af38e34c32fe4da82585ae914
       X-Runtime:
-      - '0.004116'
+      - '0.005946'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
@@ -53,7 +53,7 @@ http_interactions:
       string: '{"success":false,"errors":["The property ''#/client_involvement_type''
         value nil did not match one of the following values: A, D, W, Z, I in schema
         file://#"]}'
-  recorded_at: Tue, 08 Jul 2025 08:15:16 GMT
+  recorded_at: Tue, 08 Jul 2025 13:56:29 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -75,7 +75,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 08 Jul 2025 08:15:16 GMT
+      - Tue, 08 Jul 2025 13:56:30 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -99,9 +99,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 5e30ba19834a3b560eaa3fe3991c0215
+      - c22c065d3fb8d7ffaab972f5bd4a99ba
       X-Runtime:
-      - '0.007405'
+      - '0.009093'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
@@ -111,5 +111,5 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]}}'
-  recorded_at: Tue, 08 Jul 2025 08:15:16 GMT
+  recorded_at: Tue, 08 Jul 2025 13:56:30 GMT
 recorded_with: VCR 6.3.1
