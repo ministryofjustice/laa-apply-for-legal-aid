@@ -7,7 +7,7 @@ module Proceedings
                   :hearing_date,
                   :limitation_note
 
-    validates :accepted_emergency_defaults, presence: { unless: :draft? }
+    validates :accepted_emergency_defaults, inclusion: ["true", "false", true, false], unless: :draft?
     validates :hearing_date, presence: true, if: :hearing_date_required?
     validates :hearing_date,
               date: {
