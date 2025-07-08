@@ -23,7 +23,7 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                                 client_involvement_type_description: "Applicant/claimant/petitioner",
                                 used_delegated_functions: true,
                                 used_delegated_functions_on: 5.days.ago,
-                                accepted_emergency_defaults: Time.zone.today,
+                                accepted_emergency_defaults: true,
                                 emergency_level_of_service:,
                                 emergency_level_of_service_name:,
                                 emergency_level_of_service_stage:)
@@ -33,7 +33,7 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
   let(:client_involvement_type_description) { "Applicant/claimant/petitioner" }
   let(:used_delegated_functions) { true }
   let(:used_delegated_functions_on) { 5.days.ago }
-  let(:accepted_emergency_defaults) { Time.zone.today }
+  let(:accepted_emergency_defaults) { true }
   let(:emergency_level_of_service) { "3" }
   let(:emergency_level_of_service_name) { "Full Representation" }
   let(:emergency_level_of_service_stage) { "8" }
@@ -77,17 +77,36 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
         end
 
         context "and emergency certificate is used" do
-          context "and emergency application has not been answered for each proceeding" do
+          context "and emergency default question has not been answered for each proceeding" do
             let(:accepted_emergency_defaults) { nil }
-            let(:emergency_level_of_service) { nil }
-            let(:emergency_level_of_service_name) { nil }
-            let(:emergency_level_of_service_stage) { nil }
 
             it { is_expected.not_to be_valid }
           end
 
-          context "and emergency application has been answered for each proceeding" do
-            it { is_expected.to be_valid }
+          context "and emergency defaults question has been answered for each proceeding and is false" do
+            let(:accepted_emergency_defaults) { false }
+
+            context "and the emergency level of service has not been answered for each proceeding" do
+              let(:emergency_level_of_service) { nil }
+
+              it { is_expected.not_to be_valid }
+            end
+
+            context "and emergency level of service has been answered for each proceeding" do
+              context "and emergency level of service is family help (higher)" do
+                let(:emergency_level_of_service) { "1" }
+                let(:emergency_level_of_service_name) { "Family Help (Higher)" }
+
+                it { is_expected.to be_valid }
+              end
+
+              context "and emergency level of service is full representation" do
+                let(:emergency_level_of_service) { "3" }
+                let(:emergency_level_of_service_name) { "Full Representation" }
+
+                it { is_expected.to be_valid }
+              end
+            end
           end
         end
       end
