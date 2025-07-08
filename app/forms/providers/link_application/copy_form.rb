@@ -5,7 +5,7 @@ module Providers
 
       attr_accessor :copy_case
 
-      validates :copy_case, presence: true, unless: :draft?
+      validates :copy_case, inclusion: [true, false, "true", "false"], unless: :draft?
 
       def save
         model.update!(copy_case_id: ActiveRecord::Type::Boolean.new.cast(copy_case) ? model.target_application.id : nil)

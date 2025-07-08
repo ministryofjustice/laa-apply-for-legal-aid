@@ -452,7 +452,7 @@ en:
         legal_aid_application:
           attributes:
             copy_case:
-              blank: Select yes if you want to copy the proceedings and merits information from the application you linked to
+              inclusion: Select yes if you want to copy the proceedings and merits information from the application you linked to
             copy_case_confirmation:
               blank: Select yes if you want to copy the application
             search_ref:
