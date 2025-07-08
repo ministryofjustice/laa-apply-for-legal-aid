@@ -57,6 +57,8 @@ module Backable
     end
 
     def add_page_to_history
+      return if request.fullpath.include?("statement_of_case_upload/list")
+
       page_history_service.write(page_history << request.fullpath)
     end
 
