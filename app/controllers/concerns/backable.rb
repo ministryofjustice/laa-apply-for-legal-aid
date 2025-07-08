@@ -1,6 +1,7 @@
 module Backable
   extend ActiveSupport::Concern
   HISTORY_SIZE = 20
+  EXCLUDED_BACK_PATHS = %w[statement_of_case_upload/list].freeze
 
   class_methods do
     def skip_back_history_actions
@@ -57,7 +58,7 @@ module Backable
     end
 
     def add_page_to_history
-      return if request.fullpath.include?("statement_of_case_upload/list")
+      return if EXCLUDED_BACK_PATHS.any? { |path| request.fullpath.include? path }
 
       page_history_service.write(page_history << request.fullpath)
     end
