@@ -1,11 +1,11 @@
 ---
 http_interactions:
 - request:
-    method: get
-    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/DA001
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"DA001","delegated_functions_used":true,"client_involvement_type":null}'
     headers:
       Content-Type:
       - application/json
@@ -17,15 +17,15 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 200
-      message: OK
+      code: 400
+      message: Bad Request
     headers:
       Date:
-      - Thu, 03 Jul 2025 15:29:48 GMT
+      - Tue, 08 Jul 2025 08:15:16 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '320'
+      - '157'
       Connection:
       - keep-alive
       X-Frame-Options:
@@ -40,28 +40,26 @@ http_interactions:
       - strict-origin-when-cross-origin
       Vary:
       - Accept, Origin
-      Etag:
-      - W/"634b8c627a1b078b5d1fffcb51ca2121"
       Cache-Control:
-      - max-age=0, private, must-revalidate
+      - no-cache
       X-Request-Id:
-      - f573bfeb706c8ea98c4d65b864ad4ce2
+      - 2944690aa893daabf157d0bb9a18ffae
       X-Runtime:
-      - '0.037020'
+      - '0.004116'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
-        of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
-        party"}]}'
-  recorded_at: Thu, 03 Jul 2025 15:29:48 GMT
+      string: '{"success":false,"errors":["The property ''#/client_involvement_type''
+        value nil did not match one of the following values: A, D, W, Z, I in schema
+        file://#"]}'
+  recorded_at: Tue, 08 Jul 2025 08:15:16 GMT
 - request:
-    method: get
-    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/SE013
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"SE014","delegated_functions_used":true,"client_involvement_type":"A"}'
     headers:
       Content-Type:
       - application/json
@@ -77,11 +75,11 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 03 Jul 2025 15:29:48 GMT
+      - Tue, 08 Jul 2025 08:15:16 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '320'
+      - '478'
       Connection:
       - keep-alive
       X-Frame-Options:
@@ -97,19 +95,21 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"634b8c627a1b078b5d1fffcb51ca2121"
+      - W/"e3662e528ef090ff8b1405f4c4132dfd"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 602deafadc6f8ae2f8b24e70930ee284
+      - 5e30ba19834a3b560eaa3fe3991c0215
       X-Runtime:
-      - '0.002071'
+      - '0.007405'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
-        of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
-        party"}]}'
-  recorded_at: Thu, 03 Jul 2025 15:29:48 GMT
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"SE014","delegated_functions_used":true,"client_involvement_type":"A"},"default_level_of_service":{"level":1,"name":"Family
+        Help (Higher)","stage":1},"default_scope":{"code":"CV117","meaning":"Interim
+        order inc. return date","description":"Limited to all steps necessary to apply
+        for an interim order; where application is made without notice to include
+        representation on the return date.","additional_params":[]}}'
+  recorded_at: Tue, 08 Jul 2025 08:15:16 GMT
 recorded_with: VCR 6.3.1
