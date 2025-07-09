@@ -6,7 +6,7 @@ RSpec.describe TaskStatus::Validators::MakeLink do
 
   let(:application) { create(:legal_aid_application, copy_case:) }
 
-  let(:lead_linked_application) do # The link
+  let(:lead_linked_application) do
     create(:linked_application,
            link_type_code:,
            confirm_link:,
@@ -15,7 +15,7 @@ RSpec.describe TaskStatus::Validators::MakeLink do
            target_application_id: original_application.id)
   end
 
-  let(:original_application) { create(:legal_aid_application, copy_case:, application_ref: "L-JFR-9JW") }
+  let(:original_application) { create(:legal_aid_application, copy_case:) }
   let(:link_type_code) { nil }
   let(:confirm_link) { nil }
   let(:copy_case) { nil }

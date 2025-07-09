@@ -18,7 +18,6 @@ module TaskStatus
     end
 
     def cannot_start?
-      # Correct to proceedings complete when available
       !applicants_validator.valid?
     end
 
