@@ -130,6 +130,15 @@ module Proceedings
       @limitation_notes ||= scopes.filter_map { |scope| scope["code"] if additional_limitation_note_param?(scope["code"]) }
     end
 
+    # def grouped_validator
+    #   binding.irb
+    #   return errors.add "no scopes" if scopes.nil?
+
+    #   validate_scope_selected
+    #   validate_hearing_dates
+    #   validate_limitation_notes
+    # end
+
     def validate_scope_selected
       return if draft?
 
