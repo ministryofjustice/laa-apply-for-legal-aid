@@ -1,8 +1,7 @@
 class LegalAidApplication < ApplicationRecord
   include Discard::Model
+  include Reviewable::Model
   include DelegatedFunctions
-
-  store :tracked, coder: JSON
 
   ProceedingStruct = Struct.new(:name, :meaning, :matter_type, :category_of_law, :proceeding)
 

@@ -21,8 +21,6 @@ RSpec.describe TaskStatus::CheckProviderAnswers do
   describe "#call" do
     subject(:status) { instance.call }
 
-    let(:application) { create(:application, applicant:) }
-
     context "without all previous tasks completed" do
       let(:applicant) do
         complete_applicant.update!(national_insurance_number: "JA")
@@ -36,7 +34,7 @@ RSpec.describe TaskStatus::CheckProviderAnswers do
       let(:applicant) { complete_applicant }
 
       before do
-        application.tracked.delete(:check_provider_answers)
+        application.reviewed.delete(:check_provider_answers)
         application.save!
       end
 
@@ -47,7 +45,7 @@ RSpec.describe TaskStatus::CheckProviderAnswers do
       let(:applicant) { complete_applicant }
 
       before do
-        application.tracked[:check_provider_answers] = Time.current
+        application.reviewed[:check_provider_answers] = Time.current
         application.save!
       end
 
@@ -58,7 +56,7 @@ RSpec.describe TaskStatus::CheckProviderAnswers do
       let(:applicant) { complete_applicant }
 
       before do
-        application.tracked[:check_provider_answers] = nil
+        application.reviewed[:check_provider_answers] = nil
         application.save!
       end
 

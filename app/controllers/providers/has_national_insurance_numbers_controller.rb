@@ -1,11 +1,13 @@
 module Providers
   class HasNationalInsuranceNumbersController < ProviderBaseController
+    reviewed_by :legal_aid_application, :check_provider_answers
+
     def show
       @form = Applicants::HasNationalInsuranceNumberForm.new(model: applicant)
     end
 
     def update
-      untrack!(:check_provider_answers)
+      unreview!
 
       @form = Applicants::HasNationalInsuranceNumberForm.new(form_params)
       render :show unless save_continue_or_draft(@form)

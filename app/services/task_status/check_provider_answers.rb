@@ -28,39 +28,19 @@ module TaskStatus
   private
 
     def not_started?
-      startable? && !previously_reviewed?
+      startable? && !application.previously_reviewed?(:check_provider_answers)
     end
 
     def review?
-      startable? && requires_review?
+      startable? && application.requires_review?(:check_provider_answers)
     end
 
     def completed?
-      startable? && currently_reviewed?
+      startable? && application.currently_reviewed?(:check_provider_answers)
     end
 
     def startable?
       previous_items_completed?
-    end
-
-    # See ApplicationTrackable
-    # Tracking CYA review status relies on the check_provider_answers controller setting
-    # tracked to include a { check_provider_answers: timestamp }
-    # key-value pair AND all other controllers for the "section" setting
-    # the value for this key to nil if they are visited.
-    #
-
-    def currently_reviewed?
-      application.tracked[:check_provider_answers].present?
-    end
-
-    def previously_reviewed?
-      application.tracked.include?(:check_provider_answers)
-    end
-
-    def requires_review?
-      previously_reviewed? &&
-        application.tracked[:check_provider_answers].nil?
     end
 
     def previous_items_completed?

@@ -1,11 +1,13 @@
 module Providers
   class PreviousReferencesController < ProviderBaseController
+    reviewed_by :legal_aid_application, :check_provider_answers
+
     def show
       @form = Applicants::PreviousReferenceForm.new(model: applicant)
     end
 
     def update
-      untrack!(:check_provider_answers)
+      unreview!
 
       @form = Applicants::PreviousReferenceForm.new(form_params)
       render :show unless save_continue_or_draft(@form)

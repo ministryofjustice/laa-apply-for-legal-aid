@@ -1,12 +1,14 @@
 module Providers
   module HomeAddress
     class NonUkHomeAddressesController < ProviderBaseController
+      reviewed_by :legal_aid_application, :check_provider_answers
+
       def show
         @form = Addresses::NonUkHomeAddressForm.new(model: non_uk_home_address)
       end
 
       def update
-        untrack!(:check_provider_answers)
+        unreview!
 
         @form = Addresses::NonUkHomeAddressForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
