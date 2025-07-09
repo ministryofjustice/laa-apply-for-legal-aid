@@ -4,6 +4,8 @@ module TaskStatus
       def valid?
         return false if proceedings.empty?
 
+        return false if emergency_scope_limitations.any?(false)
+
         super
       end
 
@@ -17,6 +19,8 @@ module TaskStatus
           delegated_functions_forms,
           emergency_defaults_forms,
           emergency_level_of_service_forms,
+          # emergency_scope_limitation_forms - doesn't use validator in the same way,
+          final_hearings_emergency_forms,
         ].flatten.compact
       end
 
@@ -43,6 +47,12 @@ module TaskStatus
       def emergency_level_of_service_forms
         proceedings.filter_map do |proceeding|
           Proceedings::EmergencyLevelOfServiceForm.new(model: proceeding) unless proceeding.accepted_emergency_defaults?
+        end
+      end
+
+      def emergency_scope_limitations
+        proceedings.map do |proceeding|
+          proceeding.scope_limitations.where(scope_type: :emergency).any? if proceeding.emergency_level_of_service.to_i.eql?(1)
         end
       end
     end
