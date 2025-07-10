@@ -69,4 +69,8 @@ class Proceeding < ApplicationRecord
   def domestic_abuse?
     ccms_matter_code == "MINJN"
   end
+
+  def uses_emergency_certificate?
+    !special_children_act?
+  end
 end
