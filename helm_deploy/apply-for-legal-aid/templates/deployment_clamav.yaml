@@ -52,6 +52,7 @@ spec:
               value: "{{ .Values.clamav.freshclamCheck }}"
             - name: MIRROR_URL
               value: "{{ .Values.clamav.mirror }}"
+          command: ["/init-unprivileged"]
           resources:
             requests:
               cpu: 25m
