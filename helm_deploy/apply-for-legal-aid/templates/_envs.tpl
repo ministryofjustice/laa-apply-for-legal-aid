@@ -18,10 +18,7 @@ env:
   - name: POSTGRES_HOST
     value: {{ printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" }}
   - name: POSTGRES_DATABASE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: postgresqlDatabase
+    value: {{ .Values.postgresql.auth.Database | quote }}
   {{ else }}
   - name: POSTGRES_USER
     valueFrom:
@@ -76,10 +73,7 @@ env:
   - name: RAILS_LOG_TO_STDOUT
     value: "true"
   - name: HOST
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: deployHost
+    value: {{ .Values.deploy.host | quote }}
   - name: BC_LSC_SERVICE_NAME
     valueFrom:
       secretKeyRef:
@@ -96,15 +90,9 @@ env:
         name: laa-apply-for-legalaid-secrets
         key: benefitCheckerClientUserId
   - name: BC_WSDL_URL
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: benefitCheckerWsdlUrl
+    value: {{ .Values.benefit_checker.wsdlUrl | quote }}
   - name: CCMS_SOA_SUBMIT_APPLICATIONS
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: ccmsSoaSubmitApplications
+    value: {{ .Values.ccms_soa.submit_applications | quote }}
   - name: CCMS_SOA_AWS_GATEWAY_API_KEY
     valueFrom:
       secretKeyRef:
@@ -116,60 +104,33 @@ env:
         name: laa-apply-for-legalaid-secrets
         key: ccmsSoaClientUsername
   - name: CCMS_SOA_CLIENT_PASSWORD_TYPE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: ccmsSoaClientPasswordType
+    value: {{ .Values.ccms_soa.clientPasswordType | quote }}
   - name: CCMS_SOA_CLIENT_PASSWORD
     valueFrom:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
         key: ccmsSoaClientPassword
   - name: CCMS_SOA_USER_ROLE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: ccmsSoaUserRole
+    value: {{ .Values.ccms_soa.userRole | quote }}
   - name: CCMS_SOA_CASE_SERVICES_WSDL
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: ccmsSoaCaseServicesWsdl
+    value: {{ .Values.ccms_soa.caseServicesWsdl | quote }}
   - name: CCMS_SOA_CLIENT_PROXY_SERVICE_WSDL
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: ccmsSoaClientProxyServiceWsdl
+    value: {{ .Values.ccms_soa.clientProxyServiceWsdl | quote }}
   - name: CCMS_SOA_DOCUMENT_SERVICES_WSDL
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: ccmsSoaDocumentServicesWsdl
+    value: {{ .Values.ccms_soa.documentServicesWsdl | quote }}
   - name: CCMS_SOA_GET_REFERENCE_DATA_WSDL
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: ccmsSoaGetReferenceDataWsdl
+    value: {{ .Values.ccms_soa.getReferenceDataWsdl | quote }}
   - name: LAA_PORTAL_IDP_SSO_TARGET_URL
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: laaPortalIdpSsoTargetUrl
+    value: {{ .Values.laa_portal.idpSsoTargetUrl | quote }}
   - name: LAA_PORTAL_IDP_SLO_TARGET_URL
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: laaPortalIdpSloTargetUrl
+    value: {{ .Values.laa_portal.idpSloTargetUrl | quote }}
   - name: LAA_PORTAL_IDP_CERT
     valueFrom:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
         key: laaPortalIdpCert
   - name: LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: laaPortalIdpCertFingerprintAlgorithm
+    value: {{ .Values.laa_portal.idpCertFingerprintAlgorithm | quote }}
   - name: LAA_PORTAL_CERTIFICATE
     valueFrom:
       secretKeyRef:
@@ -181,20 +142,11 @@ env:
         name: laa-apply-for-legalaid-secrets
         key: laaPortalSecretKey
   - name: LAA_PORTAL_MOCK_SAML
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: laaPortalMockSaml
+    value: {{ .Values.laa_portal.mockSaml | quote }}
   - name: PROVIDER_DETAILS_URL
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: providerDetailsUrl
+    value: {{ .Values.provider_details.url | quote }}
   - name: PDA_URL
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: pdaUrl
+    value: {{ .Values.pda.url | quote }}
   - name: PDA_AUTH_KEY
     valueFrom:
       secretKeyRef:
@@ -211,10 +163,7 @@ env:
         name: laa-apply-for-legalaid-secrets
         key: trueLayerClientSecret
   - name: TRUE_LAYER_ENABLE_MOCK
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: trueLayerEnableMock
+    value: {{ .Values.trueLayer.enableMock | quote }}
   - name: GOOGLE_CLIENT_ID
     valueFrom:
       secretKeyRef:
@@ -258,44 +207,23 @@ env:
         name: apply-for-legal-aid-s3-instance-output
         key: bucket_name
   - name: ADMIN_ALLOW_RESET
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: adminAllowReset
+    value: {{ .Values.admin.allowReset | quote }}
   - name: ADMIN_ALLOW_CREATE_TEST_APPLICATIONS
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: adminAllowCreateTestApplications
+    value: {{ .Values.admin.allowCreateTestApplications | quote }}
   - name: GOOGLE_TAG_MANAGER_TRACKING_ID
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: googleTagManagerTrackingId
+    value: {{ .Values.google_tag_manager.trackingId | quote }}
   - name: KUBERNETES_DEPLOYMENT
     value: "true"
   - name: METRICS_SERVICE_HOST
     value: {{ template "apply-for-legal-aid.fullname" . }}-metrics
   - name: CFE_CIVIL_HOST
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: checkFinancialEligibilityCivilHost
+    value: {{ .Values.checkFinancialEligibility.civil_host | quote }}
   - name: APPLY_EMAIL
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: email_domainSuffix
+    value: {{ .Values.email_domain.suffix | quote }}
   - name: ADMIN_SHOW_FORM
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: adminShowForm
+    value: {{ .Values.admin.showForm | quote }}
   - name: POLICY_DISREGARDS_START_DATE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: policyDisregardsStartDate
+    value: {{ .Values.policy_disregards_start_date | quote }}
   - name: MTR_A_START_DATE
     value: {{ .Values.mtr_a_start_date | quote }}
   - name: LEGAL_FRAMEWORK_API_HOST
@@ -314,10 +242,7 @@ env:
         name: laa-apply-for-legalaid-secrets
         key: slackAlertEmail
   - name: HMRC_API_HOST
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: hmrcApiHost
+    value: {{ .Values.hmrc_interface.host | quote  }}
   - name: HMRC_API_UID
     valueFrom:
       secretKeyRef:
@@ -329,15 +254,9 @@ env:
         name: laa-apply-for-legalaid-secrets
         key: hmrcApiSecret
   - name: HMRC_DURATION_CHECK
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: hmrcDurationCheck
+    value: {{ .Values.hmrc_interface.duration | quote  }}
   - name: HMRC_USE_DEV_MOCK
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: hmrcUseDevMock
+    value: {{ .Values.hmrc_interface.hmrc_use_dev_mock | quote  }}
   - name: RESEARCH_PANEL_FORM_LINK
     valueFrom:
       secretKeyRef:
@@ -359,20 +278,14 @@ env:
         name: laa-apply-for-legalaid-secrets
         key: encryptionKeyDerivationSalt
   - name: MAINTENANCE_MODE
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: maintenanceMode
+    value: {{ .Values.maintenance_mode.enabled | quote  }}
   - name: SLACK_ALERT_WEBHOOK
     valueFrom:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
         key: slackAlertWebhook
   - name: COLLECT_HMRC_DATA
-    valueFrom:
-      secretKeyRef:
-        name: {{ template "apply-for-legal-aid.fullname" . }}
-        key: collectHmrcData
+    value: {{ .Values.collect_hmrc_data.enabled | quote  }}
   - name: CLAMD_CONF_FILENAME
     value: {{ .Values.clamav.configFile }}
 {{- end }}
