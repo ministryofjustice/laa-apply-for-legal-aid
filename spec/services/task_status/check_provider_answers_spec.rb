@@ -41,11 +41,22 @@ RSpec.describe TaskStatus::CheckProviderAnswers do
       it { is_expected.to be_not_started }
     end
 
-    context "with all previous tasks completed and CYA having been reviewed" do
+    context "with all previous tasks completed and CYA having been marked as in_progress" do
       let(:applicant) { complete_applicant }
 
       before do
-        application.reviewed[:check_provider_answers] = Time.current
+        application.reviewed[:check_provider_answers] = { status: "in_progress", at: Time.current }
+        application.save!
+      end
+
+      it { is_expected.to be_in_progress }
+    end
+
+    context "with all previous tasks completed and CYA having been marked as completed" do
+      let(:applicant) { complete_applicant }
+
+      before do
+        application.reviewed[:check_provider_answers] = { status: "completed", at: Time.current }
         application.save!
       end
 

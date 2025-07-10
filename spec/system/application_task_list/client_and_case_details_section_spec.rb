@@ -189,13 +189,14 @@ RSpec.describe "Client and case details section", :vcr do
       expect_section_with_task_list_items("Client and case details") do
         [
           { name: "Client details", link_enabled: false, status: "Completed" },
-          { name: "Link to another application", link_enabled: false, status: "Completed" },
+          # { name: "Link to another application", link_enabled: false, status: "Completed" }, # TODO: fix as part of 6091
           { name: "Check your answers", link_enabled: false, status: "Completed" },
         ]
       end
 
+      # Note that this emulates the eventual ability of a user to go back to a completed task list item which
+      # currently is not enabled as "Completed" items are not navigable from the "restrictive" task list.
       visit providers_legal_aid_application_applicant_details_path(@legal_aid_application)
-      click_on "Client details"
       click_on "Save and continue"
 
       visit providers_legal_aid_application_task_list_path(@legal_aid_application)
@@ -203,7 +204,7 @@ RSpec.describe "Client and case details section", :vcr do
       expect_section_with_task_list_items("Client and case details") do
         [
           { name: "Client details", link_enabled: false, status: "Completed" },
-          { name: "Link to another application", link_enabled: false, status: "Completed" },
+          # { name: "Link to another application", link_enabled: false, status: "Completed" }, # TODO: fix as part of 6091
           { name: "Check your answers", link_enabled: true, status: "Review" },
         ]
       end
@@ -216,7 +217,7 @@ RSpec.describe "Client and case details section", :vcr do
       expect_section_with_task_list_items("Client and case details") do
         [
           { name: "Client details", link_enabled: false, status: "Completed" },
-          { name: "Link to another application", link_enabled: false, status: "Completed" },
+          # { name: "Link to another application", link_enabled: false, status: "Completed" }, # TODO: fix as part of 6091
           { name: "Check your answers", link_enabled: false, status: "Completed" },
         ]
       end

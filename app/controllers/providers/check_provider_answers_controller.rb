@@ -15,8 +15,9 @@ module Providers
     end
 
     def continue
-      reviewed!
       update_applicant_age_for_means_test_purposes!
+
+      draft_selected? ? review_in_progress! : review_completed!
 
       unless draft_selected?
         if cloner_should_run?

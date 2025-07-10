@@ -2,14 +2,16 @@ module Providers
   module LinkApplication
     class MakeLinksController < ProviderBaseController
       prefix_step_with :link_application
+      reviewed_by :legal_aid_application, :check_provider_answers
 
       def show
         @form = Providers::LinkApplication::MakeLinkForm.new(model: linked_application)
       end
 
       def update
-        @form = Providers::LinkApplication::MakeLinkForm.new(form_params)
+        unreview!
 
+        @form = Providers::LinkApplication::MakeLinkForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
       end
 

@@ -30,8 +30,12 @@ module Reviewable
         self.class.reviewable_name
       end
 
-      def reviewed!
-        send(reviewable_object).reviewed!(reviewable_name)
+      def review_in_progress!
+        send(reviewable_object).review_in_progress!(reviewable_name)
+      end
+
+      def review_completed!
+        send(reviewable_object).review_completed!(reviewable_name)
       end
 
       def unreview!
