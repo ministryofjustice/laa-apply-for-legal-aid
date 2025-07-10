@@ -14,7 +14,7 @@ RSpec.describe Providers::LinkApplication::CopyForm, type: :form do
 
       it "raises an error" do
         expect(described_form.save).to be false
-        expect(described_form.errors[:copy_case]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.copy_case.blank")]
+        expect(described_form.errors[:copy_case]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.copy_case.inclusion")]
       end
     end
 
