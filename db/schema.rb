@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_07_133138) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_09_140406) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -678,6 +678,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_133138) do
     t.boolean "separate_representation_required"
     t.boolean "plf_court_order"
     t.text "reviewed"
+    t.boolean "confirm_dwp_result"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"
