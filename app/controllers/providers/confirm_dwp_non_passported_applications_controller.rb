@@ -1,9 +1,11 @@
 module Providers
   class ConfirmDWPNonPassportedApplicationsController < ProviderBaseController
     include ApplicantDetailsCheckable
+    include DWPOutcomeHelper
     helper_method :display_hmrc_text?
 
     def show
+      reset_confirm_dwp_status!
       delete_check_benefits_from_history
       @form = Providers::ConfirmDWPNonPassportedApplicationsForm.new(model: partner)
     end
@@ -14,6 +16,7 @@ module Providers
       @form = Providers::ConfirmDWPNonPassportedApplicationsForm.new(form_params)
 
       if @form.valid?
+        update_confirm_dwp_status(@form.correct_dwp_result?)
         remove_dwp_override if correct_dwp_result?
         update_joint_benefit_response
         update_application_state
