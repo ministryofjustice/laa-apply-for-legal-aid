@@ -188,6 +188,10 @@ Feature: Merits task list
     And I should see 'hello_world.pdf'
     And I should see 1 uploaded files
     When I click 'Save and continue'
+    When I click link 'Back'
+    Then I should be on a page showing "Upload statement of case"
+    When I click 'Save and continue'
+
     Then I should be on the 'matter_opposed_reason' page showing "Why is the Section 8 matter opposed by your client or the other party?"
     And I fill "Reason" with "Because it is opposed."
     And I click 'Save and continue'

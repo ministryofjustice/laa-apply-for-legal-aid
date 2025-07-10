@@ -5,6 +5,7 @@ RSpec.describe "Backable", :vcr do
   let(:address_lookup_path) { providers_legal_aid_application_correspondence_address_lookup_path(application) }
   let(:address_path) { providers_legal_aid_application_correspondence_address_manual_path(application) }
   let(:proceeding_type_path) { providers_legal_aid_application_proceedings_types_path(application) }
+  let(:statement_of_case_upload_list_path) { list_providers_legal_aid_application_statement_of_case_upload_path(application) }
   let(:address_params) do
     {
       address:
@@ -53,6 +54,17 @@ RSpec.describe "Backable", :vcr do
         get "#{address_path}&back=true"
         get address_path
         expect(response.body).to have_back_link("#{address_lookup_path}&back=true")
+      end
+    end
+
+    context "when we have uploaded a statement of case in the merits task list" do
+      before do
+        get statement_of_case_upload_list_path
+        get proceeding_type_path
+      end
+
+      it "does not link to the list_statement_of_case_upload_list_path" do
+        expect(response.body).to have_back_link("#{address_path}&back=true")
       end
     end
   end
