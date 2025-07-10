@@ -136,7 +136,7 @@ metadata:
       .........
       containers:
         - name: clamav
-          image: ghcr.io/ministryofjustice/clamav-docker/laa-clamav:latest
+          image: clamav/clamav-debian:stable
           imagePullPolicy: Always
           ports:
             - containerPort: 3310
