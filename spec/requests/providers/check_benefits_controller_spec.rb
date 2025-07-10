@@ -20,9 +20,15 @@ RSpec.describe Providers::CheckBenefitsController do
       expect(response).to have_http_status(:ok)
     end
 
-    it "resets confirm_dwp_result to nil" do
-      get_request
-      expect(application.confirm_dwp_result).to be_nil
+    context "when confirm_dwp_result is false" do
+      before do
+        application.confirm_dwp_result = false
+      end
+
+      it "resets confirm_dwp_result to nil" do
+        get_request
+        expect(application.reload.confirm_dwp_result).to be_nil
+      end
     end
 
     it "generates a new check_benefit_result" do
@@ -125,6 +131,10 @@ RSpec.describe Providers::CheckBenefitsController do
         {
           continue_button: "Continue",
         }
+      end
+
+      it "updates confirm_dwp_result to true" do
+        expect(application.reload.confirm_dwp_result).to be true
       end
 
       context "when the check_benefit_results is positive" do
