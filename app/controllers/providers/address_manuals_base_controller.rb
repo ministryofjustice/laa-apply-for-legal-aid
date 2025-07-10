@@ -5,8 +5,6 @@ module Providers
     end
 
     def update
-      unreview!
-
       @form = Addresses::AddressForm.new(form_params)
       render :show unless save_continue_or_draft(@form)
     end

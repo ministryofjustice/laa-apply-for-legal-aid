@@ -13,8 +13,6 @@ module Providers
     end
 
     def update
-      unreview!
-
       if params[:address_selection][:list]
         @addresses = build_addresses_from_form_data
         @address_collection = collect_addresses

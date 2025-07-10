@@ -10,8 +10,6 @@ module Providers
       end
 
       def update
-        unreview!
-
         @form = ::HomeAddress::StatusForm.new(form_params)
         @correspondence_address = applicant.address
 
