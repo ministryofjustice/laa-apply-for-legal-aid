@@ -20,6 +20,11 @@ RSpec.describe Providers::CheckBenefitsController do
       expect(response).to have_http_status(:ok)
     end
 
+    it "resets confirm_dwp_result to nil" do
+      get_request
+      expect(application.confirm_dwp_result).to be_nil
+    end
+
     it "generates a new check_benefit_result" do
       expect { get_request }.to change(BenefitCheckResult, :count).by(1)
     end
