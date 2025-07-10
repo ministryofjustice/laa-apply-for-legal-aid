@@ -33,6 +33,7 @@ en:
       check_capital_answers: Check your capital assessment answers (non-passported)
       check_passported_answers: Check your capital assessment answers (passported)
       check_provider_answers: Check your answers
+      dwp_outcome: DWP outcome
       has_national_insurance_numbers: National Insurance
       proceedings_types: Proceedings
       confirm_client_declarations: Confirm declarations and submit application
