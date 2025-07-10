@@ -252,7 +252,7 @@ Feature: Review and print your application
     And I should not see any change links
 
   Scenario: For a non-means tested journey
-    Given I have completed a non-means tested journey with merits
+    Given I have completed a non-means-tested journey with merits
     When I view the review and print your application page
 
     Then the following sections should exist:
