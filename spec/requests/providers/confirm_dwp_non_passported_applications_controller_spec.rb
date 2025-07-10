@@ -25,6 +25,17 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
       it "returns success" do
         expect(response).to be_successful
       end
+
+      context "when confirm_dwp_result is false" do
+        before do
+          application.confirm_dwp_result = false
+        end
+
+        it "resets confirm_dwp_result to nil" do
+          get_request
+          expect(application.reload.confirm_dwp_result).to be_nil
+        end
+      end
     end
 
     describe "back link" do
@@ -103,6 +114,11 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           expect(application.reload.state).to eq "applicant_details_checked"
         end
 
+        it "sets the legal_aid_application confirm_dwp_result field to be true" do
+          patch_request
+          expect(application.reload.confirm_dwp_result).to be true
+        end
+
         it "redirects to the next page" do
           patch_request
           expect(response).to have_http_status(:redirect)
@@ -154,6 +170,11 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           expect(application.reload.state).to eq "overriding_dwp_result"
         end
 
+        it "sets the legal_aid_application confirm_dwp_result field to be false" do
+          patch_request
+          expect(application.reload.confirm_dwp_result).to be false
+        end
+
         it "redirects to the next page" do
           patch_request
           expect(response).to have_http_status(:redirect)
@@ -201,6 +222,11 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
         it "sets the applicant shared benefit field to true" do
           patch_request
           expect(application.reload.applicant.shared_benefit_with_partner).to be true
+        end
+
+        it "sets the legal_aid_application confirm_dwp_result field to be false" do
+          patch_request
+          expect(application.reload.confirm_dwp_result).to be false
         end
 
         it "redirects to the next page" do

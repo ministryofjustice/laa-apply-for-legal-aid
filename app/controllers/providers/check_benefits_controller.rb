@@ -2,8 +2,10 @@ module Providers
   class CheckBenefitsController < ProviderBaseController
     include ApplicantDetailsCheckable
     include BenefitCheckSkippable
+    include DWPOutcomeHelper
 
     def show
+      reset_confirm_dwp_status(legal_aid_application)
       details_checked! unless details_checked? || legal_aid_application.non_passported?
       @applicant = legal_aid_application.applicant
       return skip_benefit_check_and_go_forward! if known_issue_prevents_benefit_check?
@@ -14,6 +16,7 @@ module Providers
     end
 
     def update
+      update_confirm_dwp_status(legal_aid_application, true)
       continue_or_draft
     end
 
