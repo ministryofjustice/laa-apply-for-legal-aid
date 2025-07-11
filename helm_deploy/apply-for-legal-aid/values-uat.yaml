@@ -108,16 +108,16 @@ ccms_soa:
   submit_applications: "true"
   clientPasswordType: "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText"
   userRole: EXTERNAL
-  caseServicesWsdl: CaseServicesUATWsdl.xml
-  clientProxyServiceWsdl: ClientProxyServiceUATWsdl.xml
-  documentServicesWsdl: DocumentServicesUATWsdl.xml
-  getReferenceDataWsdl: GetReferenceDataUATWsdl.xml
+  caseServicesWsdl: CaseServicesDEVWsdl.xml
+  clientProxyServiceWsdl: ClientProxyServiceDEVWsdl.xml
+  documentServicesWsdl: DocumentServicesDEVWsdl.xml
+  getReferenceDataWsdl: GetReferenceDataDEVWsdl.xml
 
 laa_portal:
   idpSsoTargetUrl: "https://portal.uat.legalservices.gov.uk/oamfed/idp/samlv20"
   idpSloTargetUrl: "https://portal.uat.legalservices.gov.uk/oam/server/logout"
   idpCertFingerprintAlgorithm: "<idp-cert-fingerprint-alg-goes-here>"
-  mockSaml: "true"
+  mockSaml: "false"
 
 provider_details:
   url: "https://test-pda-api-laa-ccms-test.apps.live.cloud-platform.service.justice.gov.uk/api/providerDetails/" # Test points CCMS eBS UAT nev
