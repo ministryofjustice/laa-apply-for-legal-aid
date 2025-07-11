@@ -27,8 +27,9 @@ spec:
       serviceAccountName: "{{ .Values.service_account.name }}"
       securityContext:
         fsGroup: 1000
-        runAsUser: 1000
-        runAsGroup: 1000
+        runAsUser: 10000
+        runAsGroup: 10000
+        runAsNonRoot: true
       affinity:
         podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -38,7 +39,7 @@ spec:
               topologyKey: "kubernetes.io/hostname"
       containers:
         - name: clamav
-          image: ghcr.io/ministryofjustice/clamav-docker/laa-clamav:latest
+          image: clamav/clamav-debian:stable
           imagePullPolicy: Always
           ports:
             - containerPort: 3310
@@ -51,6 +52,7 @@ spec:
               value: "{{ .Values.clamav.freshclamCheck }}"
             - name: MIRROR_URL
               value: "{{ .Values.clamav.mirror }}"
+          command: ["/init-unprivileged"]
           resources:
             requests:
               cpu: 25m
@@ -82,6 +84,7 @@ spec:
           securityContext:
             runAsNonRoot: true
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             seccompProfile:
               type: RuntimeDefault
             capabilities:
