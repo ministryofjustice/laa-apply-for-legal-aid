@@ -146,7 +146,6 @@ foreman start -f Procfile
 Ensure you have an `.env.test` file. This can be the same as your .env.development file. In addition you should set the following.
 
 Set `BC_USE_DEV_MOCK=true` to mock the call to the benefits checker.
-Set `LAA_PORTAL_MOCK_SAML=true` to mock any calls to portal SAML auth.
 Set `LEGAL_FRAMEWORK_API_HOST=<staging api>`
 Set `CFE_CIVIL_HOST=<staging api>`
 Set `HMRC_API_HOST=<staging api>`
@@ -215,70 +214,63 @@ helm delete --namespace=laa-apply-for-legalaid-uat <name-of-the-release>
 ## Dev: running locally
 ### Authentication
 
-#### Live
+#### Live (TO REDO)
 
-Authentication is made to the LAA portal, which sends back a packet of data like this:
+Authentication is made to the EntraID external tenant, which sends back a packet of data like this:
 
-```
-{
-  "USER_EMAIL"=>[“a.user@example.com”],
-  "LAA_APP_ROLES"=>["CWA_XXLSC_EM_ACT_REP,EMI,CCMS_Apply"],
-  "LAA_ACCOUNTS"=>[“9X999X”]
-}
-```
 
-These are translated by the devise_saml_authenticatable module to the appropriate fields on the provider using the mapping specified in `config/attribute-map.yml`.
+#### Development(TO REDO)
 
-#### Development
+User login on dev can be mocked out by adding the the following settings (TO REDO)
 
-User login on dev can be mocked out by adding the the following settings
-
-```
-LAA_PORTAL_IDP_SSO_TARGET_URL=http://localhost:3002/saml/auth
-LAA_PORTAL_MOCK_SAML=true
-```
-
-This will enable you to login as a provider with the usernames specified in `config/initializers/mock_saml.rb`.
+~~This will enable you to login as a provider with the usernames specified in `config/initializers/mock_saml.rb`.
 Not that the provider firm_id is the same for `firm1-user1` and `firm1-user2`; all other users will belong to
-different firms.  The password for all users is `password`.
+different firms.  The password for all users is `password`.~~
 
 
-### Post-authentication provider details retrieval
-Once the provider has been authenticated, either by the portal or by the mock-saml mechanism described above,
+### Post-authentication provider details retrieval (TO REDO)
+~~Once the provider has been authenticated, either by the portal or by the mock-saml mechanism described above,
 an after_action method `#update_provider_details` on the `SamlSessionsController` is executed. This will call
 the `update_details` method on the current_provider (a Provider object supplied by Devise) which generates
-a background job to query the provider details API and updates any details that have changed on the provider record.
+a background job to query the provider details API and updates any details that have changed on the provider record.~~
 
 
-### Signing out of the application
+### Signing out of the application (TO REDO)
 
-When using the mock-saml in development or on UAT, sign out works in the way you'd expect: Clicking signout takes you
-to a page confirming your're signed out, and going to the start url will redirect you to the sign-in page.
+~~When using the mock-saml in development or on UAT, sign out works in the way you'd expect: Clicking signout takes you
+to a page confirming your're signed out, and going to the start url will redirect you to the sign-in page.~~
 
-When using the portal for authentication, (on staging or live, or if configured as described below, on localhost), the
+~~When using the portal for authentication, (on staging or live, or if configured as described below, on localhost), the
 sign out link takes you to a feedback page, but doesn't really sign you out.  This is a side effect of using the
 portal Single Sign On system. You're not signed out until you tell the portal you've signed out, and when you do that,
 you are signed out of all other applications at the same time. (Behind the scenes, the Devise `authenticate_provider!`
-method contacts the portal to see if your signed in, and if so, repopulates the session with the required data).
+method contacts the portal to see if your signed in, and if so, repopulates the session with the required data).~~
 
-You can sign out of the portal by going to https://portal.stg.legalservices.gov.uk/oam/server/logout
+~~You can sign out of the portal by going to https://portal.stg.legalservices.gov.uk/oam/server/logout~~
 
-### How to set up localhost to use the portal
+### How to set up localhost to use the EntraId
 
-Setting up localhost to use the portal staging environment for signing in rather than the mock is fairly straightforward:
+To run the app locally using Azure EntraID for authentication you will need to run the rails server over TLS. This is because any redirect URI setup for the local host in the App registration is using `https` for security reasons.
 
-* change the values of the following environment variables in your .env file to the same values as in the Staging environment:
-    * LAA_PORTAL_MOCK_SAML=false
-    * LAA_PORTAL_IDP_CERT=<value from staging>
-    * LAA_PORTAL_IDP_SLO_TARGET_URL=https://portal.stg.legalservices.gov.uk/oam/server/logout
-    * LAA_PORTAL_SECRET_KEY=<value from staging>
-    * LAA_PORTAL_IDP_SSO_TARGET_URL=https://portal.stg.legalservices.gov.uk/oamfed/idp/samlv20
-    * LAA_PORTAL_CERTIFICATE=<value from staging>
-    * LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM=<idp-cert-fingerprint-alg-goes-here>
+### Setup localhost to use self-signed certificate for TLS
 
-  Note that the value for LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM is <idp-cert-fingerprint-alg-goes-here> and not replaced with anything else.
+see [rails development using self-signed certificate](https://madeintandem.com/blog/rails-local-development-https-using-self-signed-ssl-certificate/)
 
-* Use the BENREID credientials from staging to log in (This use is set up as part of the `db:seed` rake task)
+```sh
+# create dir to store them, anywhere
+mkdir ~/.ssl/
+
+# generate self-signed cert and key, output to the dir created
+# you will be asked a load of questions but can leave them blank
+openssl req -x509 -sha256 -nodes -newkey rsa:2048 -days 365 -keyout ~/.ssl/localhost.key -out ~/.ssl/localhost.crt
+
+# run rails server using the self-signed certificate
+rails s -b "ssl://localhost:3000?key=$HOME/.ssl/localhost.key&cert=$HOME/.ssl/localhost.crt"
+```
+note: running `bin/setup` will give you the option to generate this certificate via its script.
+
+You can now open `https://localhost:3000` and login. Your browser will probably issue a warning about certificates and prevent you from continuing. For chrome you can select choose to navigate to the site anyway via an "Advanced options" link or similar.
+
 
 ### Benefits checker
 

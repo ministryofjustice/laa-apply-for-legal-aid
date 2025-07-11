@@ -120,29 +120,8 @@ env:
     value: {{ .Values.ccms_soa.documentServicesWsdl | quote }}
   - name: CCMS_SOA_GET_REFERENCE_DATA_WSDL
     value: {{ .Values.ccms_soa.getReferenceDataWsdl | quote }}
-  - name: LAA_PORTAL_IDP_SSO_TARGET_URL
-    value: {{ .Values.laa_portal.idpSsoTargetUrl | quote }}
-  - name: LAA_PORTAL_IDP_SLO_TARGET_URL
-    value: {{ .Values.laa_portal.idpSloTargetUrl | quote }}
-  - name: LAA_PORTAL_IDP_CERT
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: laaPortalIdpCert
-  - name: LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM
-    value: {{ .Values.laa_portal.idpCertFingerprintAlgorithm | quote }}
-  - name: LAA_PORTAL_CERTIFICATE
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: laaPortalCertificate
-  - name: LAA_PORTAL_SECRET_KEY
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: laaPortalSecretKey
-  - name: LAA_PORTAL_MOCK_SAML
-    value: {{ .Values.laa_portal.mockSaml | quote }}
+  - name: OMNIAUTH_ENTRAID_MOCK_AUTH
+    value: {{ .Values.omniauth_entra_id.mock_auth | quote }}
   - name: OMNIAUTH_ENTRAID_CLIENT_ID
     valueFrom:
       secretKeyRef:

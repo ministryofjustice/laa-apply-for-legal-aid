@@ -83,7 +83,7 @@ RSpec.describe Applicants::HasNationalInsuranceNumberForm, type: :form do
       let(:params) { { model: applicant, has_national_insurance_number: "true", national_insurance_number: "JS130161E" } }
 
       before do
-        allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(in_test_mode)
+        allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth).and_return(in_test_mode)
         call_save
       end
 

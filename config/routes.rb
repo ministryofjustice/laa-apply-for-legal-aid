@@ -15,10 +15,6 @@ Rails.application.routes.draw do
     username == "sidekiq" && password == ENV["SIDEKIQ_WEB_UI_PASSWORD"].to_s
   end
 
-  # get "/saml/auth" => "saml_idp#new"
-  # post "/saml/auth" => "saml_idp#create"
-
-  # devise_for :providers, controllers: { saml_sessions: "saml_sessions" }
   devise_for :providers, controllers: { omniauth_callbacks: "providers/omniauth_callbacks" }
   devise_for :applicants
   devise_for :admin_users, controllers: { sessions: "admin_users/sessions" }
