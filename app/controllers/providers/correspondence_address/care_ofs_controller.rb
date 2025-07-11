@@ -2,6 +2,7 @@ module Providers
   module CorrespondenceAddress
     class CareOfsController < ProviderBaseController
       prefix_step_with :correspondence_address
+      reviewed_by :legal_aid_application, :check_provider_answers
 
       def show
         @form = Addresses::CareOfForm.new(model: address)
@@ -9,7 +10,6 @@ module Providers
 
       def update
         @form = Addresses::CareOfForm.new(form_params)
-
         render :show unless save_continue_or_draft(@form)
       end
 

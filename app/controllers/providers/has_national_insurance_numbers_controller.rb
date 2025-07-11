@@ -1,5 +1,7 @@
 module Providers
   class HasNationalInsuranceNumbersController < ProviderBaseController
+    reviewed_by :legal_aid_application, :check_provider_answers
+
     def show
       @form = Applicants::HasNationalInsuranceNumberForm.new(model: applicant)
     end

@@ -2,6 +2,7 @@ module Providers
   module LinkApplication
     class FindLinkApplicationsController < ProviderBaseController
       prefix_step_with :link_application
+      reviewed_by :legal_aid_application, :check_provider_answers
 
       def show
         @form = Providers::LinkApplication::FindLinkApplicationForm.new(model: linked_application)

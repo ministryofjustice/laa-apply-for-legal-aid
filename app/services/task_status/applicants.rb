@@ -12,8 +12,6 @@ module TaskStatus
 
   private
 
-    delegate :applicant, to: :application
-
     def completed?
       applicants_validator.valid?
     end

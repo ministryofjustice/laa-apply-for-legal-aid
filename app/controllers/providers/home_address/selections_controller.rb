@@ -2,6 +2,7 @@ module Providers
   module HomeAddress
     class SelectionsController < AddressSelectionsBaseController
       prefix_step_with :home_address
+      reviewed_by :legal_aid_application, :check_provider_answers
 
     private
 

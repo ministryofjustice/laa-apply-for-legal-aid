@@ -1,5 +1,7 @@
 module Providers
   class CheckProviderAnswersController < ProviderBaseController
+    review_as :legal_aid_application, :check_provider_answers
+
     def index
       return redirect_to_client_completed_means if legal_aid_application.provider_assessing_means?
 
@@ -14,6 +16,8 @@ module Providers
 
     def continue
       update_applicant_age_for_means_test_purposes!
+
+      draft_selected? ? review_in_progress! : review_completed!
 
       unless draft_selected?
         if cloner_should_run?

@@ -2,6 +2,7 @@ module Providers
   module CorrespondenceAddress
     class SelectionsController < AddressSelectionsBaseController
       prefix_step_with :correspondence_address
+      reviewed_by :legal_aid_application, :check_provider_answers
 
     private
 

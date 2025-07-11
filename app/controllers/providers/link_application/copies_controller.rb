@@ -2,6 +2,7 @@ module Providers
   module LinkApplication
     class CopiesController < ProviderBaseController
       prefix_step_with :link_application
+      reviewed_by :legal_aid_application, :check_provider_answers
 
       before_action :lead_application_reference
 

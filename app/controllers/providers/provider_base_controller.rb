@@ -6,6 +6,7 @@ module Providers
     include ApplicationDependable
     include Draftable
     include Authorizable
+    include Reviewable::Controller
 
   private
 

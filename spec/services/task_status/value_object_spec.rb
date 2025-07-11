@@ -14,6 +14,8 @@ RSpec.describe TaskStatus::ValueObject do
         :not_started?,
         :in_progress!,
         :in_progress?,
+        :review!,
+        :review?,
         :completed!,
         :completed?,
         :unknown!,
@@ -45,14 +47,17 @@ RSpec.describe TaskStatus::ValueObject do
       object.in_progress!
       expect(object.colour).to eql "light-blue"
 
+      object.review!
+      expect(object.colour).to eql "yellow"
+
       object.completed!
       expect(object.colour).to be_nil
     end
   end
 
   describe "#valid?" do
-    it "returns false then current status is a valid option" do
-      object.completed!
+    it "returns false when current status is a valid option" do
+      object.value = :completed
       expect(object).to be_valid
     end
 
@@ -80,6 +85,11 @@ RSpec.describe TaskStatus::ValueObject do
 
     it "returns true when in_progress" do
       object.in_progress!
+      expect(object).to be_enabled
+    end
+
+    it "returns true when review" do
+      object.review!
       expect(object).to be_enabled
     end
 

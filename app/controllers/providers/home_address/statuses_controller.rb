@@ -2,6 +2,7 @@ module Providers
   module HomeAddress
     class StatusesController < ProviderBaseController
       prefix_step_with :home_address
+      reviewed_by :legal_aid_application, :check_provider_answers
 
       def show
         @form = ::HomeAddress::StatusForm.new(model: applicant)
