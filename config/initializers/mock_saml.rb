@@ -20,6 +20,7 @@ end
 
 TestCredentialsStruct = Struct.new(:username, :email)
 
+# TODO: can we get rid of this
 Rails.configuration.x.application.mock_saml = ValidTestUsersStruct.new(
   users: [
     TestCredentialsStruct.new("test1", "test1@example.com"),

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_16_134142) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_07_133138) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -677,6 +677,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_16_134142) do
     t.boolean "case_cloned"
     t.boolean "separate_representation_required"
     t.boolean "plf_court_order"
+    t.text "reviewed"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"
@@ -940,6 +941,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_16_134142) do
     t.string "invalid_login_details"
     t.boolean "cookies_enabled"
     t.datetime "cookies_saved_at"
+    t.string "auth_provider", default: "", null: false
+    t.string "auth_subject_uid"
+    t.index ["auth_subject_uid", "auth_provider"], name: "index_providers_on_auth_subject_uid_and_auth_provider", unique: true
     t.index ["firm_id"], name: "index_providers_on_firm_id"
     t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"
     t.index ["type"], name: "index_providers_on_type"
