@@ -17,7 +17,7 @@ module NationalInsuranceHandling
     end
 
     def test_level_validation?
-      Rails.configuration.x.laa_portal.mock_saml == "true"
+      Rails.configuration.x.omniauth_entraid.mock_auth == "true"
     end
 
     def validate_national_insurance_number

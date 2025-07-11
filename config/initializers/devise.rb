@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
-require Rails.root.join("app/lib/id_p_settings_adapter")
+# require Rails.root.join("app/lib/id_p_settings_adapter")
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  require Rails.root.join "app/lib/omni_auth/strategies/entra_id_oidc"
+
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
@@ -262,29 +264,6 @@ Devise.setup do |config|
   # You can set a handler object that takes the response for a failed SAML request and the strategy,
   # and implements a #handle method. This method can then redirect the user, return error messages, etc.
   # config.saml_failed_callback = nil
-  # laa_portal_config = Rails.configuration.x.laa_portal
-  # Configure with your SAML settings (see ruby-saml's README for more information: https://github.com/onelogin/ruby-saml).
-  # config.saml_configure do |settings|
-  #   settings.security[:digest_method]    = XMLSecurity::Document::SHA256
-  #   settings.security[:signature_method] = XMLSecurity::Document::RSA_SHA256
-  #   settings.security[:authn_requests_signed]   = true
-  #   settings.security[:want_assertions_signed]  = true
-  #   # settings.security[:embed_sign] = true
-  #
-  #   settings.certificate = laa_portal_config.certificate
-  #   settings.private_key = laa_portal_config.secret_key
-  #
-  #   settings.assertion_consumer_service_url     = "#{Rails.configuration.x.application.host_url}/providers/saml/auth"
-  #   settings.assertion_consumer_service_binding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
-  #   settings.name_identifier_format             = "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
-  #   settings.issuer                             = "apply"
-  #   settings.authn_context                      = "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport"
-  #   settings.idp_slo_target_url                 = laa_portal_config.idp_slo_target_url
-  #   settings.idp_sso_target_url                 = laa_portal_config.idp_sso_target_url
-  #   settings.idp_cert = laa_portal_config.idp_cert
-  #
-  #   settings.idp_cert_fingerprint_algorithm = laa_portal_config.idp_cert_fingerprint_algorithm
-  # end
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
@@ -307,7 +286,7 @@ Devise.setup do |config|
       issuer: "https://login.microsoftonline.com/#{ENV.fetch('OMNIAUTH_ENTRAID_TENANT_ID', nil)}/v2.0",
       pkce: true,
       extra_authorise_params: { tenant: ENV.fetch("OMNIAUTH_ENTRAID_TENANT_ID", nil) },
-      # strategy_class: OmniAuth::Strategies::OpenIDConnect,
+      strategy_class: OmniAuth::Strategies::EntraIdOidc,
     },
   )
 
