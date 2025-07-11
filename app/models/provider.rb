@@ -40,22 +40,16 @@ class Provider < ApplicationRecord
         provider.update!(
           auth_subject_uid: auth.uid,
           auth_provider: auth.provider,
-          # username: [auth.info.first_name, auth.info.last_name].join(" "),
           username:,
           last_sign_in_at: Time.current,
         )
       else
-        # firm = Firm.find_by(ccms_id: "823") # This will need to be acquired by PDA or some other LASSIE solution
-
         provider = create!(
           auth_subject_uid: auth.uid,
-          # username: [auth.info.first_name, auth.info.last_name].join(" "),
           username:,
           email: auth.info.email,
           last_sign_in_at: Time.current,
           auth_provider: auth.provider,
-          # firm:,
-          # offices: firm.offices,
         )
       end
     end
@@ -85,8 +79,9 @@ class Provider < ApplicationRecord
     firm.nil? ? [] : firm.permissions
   end
 
+  # TODO: AP-6146: will need to change this or remove/replace entirely
   def ccms_apply_role?
-    return true if Rails.configuration.x.laa_portal.mock_saml == "true"
+    return true if Rails.configuration.x.omniauth_entraid.mock_auth == "true"
 
     return false if roles.nil?
 

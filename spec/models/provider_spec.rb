@@ -65,7 +65,7 @@ RSpec.describe Provider do
   describe "#cms_apply_role?" do
     let(:provider) { create(:provider, roles:) }
 
-    before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(false) }
+    before { allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth).and_return(false) }
 
     context "with ccms_apply_role_present" do
       let(:roles) { "EMI,PUI_XXCCMS_BILL_PREPARATION,ZZZ,CCMS_Apply" }

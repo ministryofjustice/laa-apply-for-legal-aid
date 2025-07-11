@@ -72,15 +72,6 @@ module LaaApplyForLegalAid
 
     config.x.google_tag_manager_tracking_id = ENV.fetch("GOOGLE_TAG_MANAGER_TRACKING_ID", nil)
 
-    config.x.laa_portal.idp_slo_target_url             = ENV.fetch("LAA_PORTAL_IDP_SLO_TARGET_URL", nil)
-    config.x.laa_portal.idp_sso_target_url             = ENV.fetch("LAA_PORTAL_IDP_SSO_TARGET_URL", nil)
-    config.x.laa_portal.idp_cert                       = ENV.fetch("LAA_PORTAL_IDP_CERT", nil)
-    config.x.laa_portal.idp_cert_fingerprint_algorithm = ENV.fetch("LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM", nil)
-    config.x.laa_portal.mock_saml = ENV.fetch("LAA_PORTAL_MOCK_SAML", nil)
-
-    config.x.laa_portal.certificate = ENV.fetch("LAA_PORTAL_CERTIFICATE", nil)
-    config.x.laa_portal.secret_key = ENV.fetch("LAA_PORTAL_SECRET_KEY", nil)
-
     config.x.kubernetes_deployment = ENV["KUBERNETES_DEPLOYMENT"] == "true"
 
     config.govuk_notify_templates = YAML.load_file(Rails.root.join("config/govuk_notify_templates.yml")).symbolize_keys
@@ -94,6 +85,8 @@ module LaaApplyForLegalAid
     config.x.admin_portal.password = ENV.fetch("ADMIN_PASSWORD", nil)
 
     config.x.email_domain.suffix = ENV.fetch("APPLY_EMAIL", nil)
+
+    config.x.omniauth_entraid.mock_auth = ENV.fetch("OMNIAUTH_ENTRAID_MOCK_AUTH", nil)
 
     config.x.provider_details.url = ENV.fetch("PROVIDER_DETAILS_URL", nil)
     config.x.pda.url = ENV.fetch("PDA_URL", nil)

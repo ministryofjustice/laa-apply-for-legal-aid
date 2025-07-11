@@ -113,11 +113,9 @@ ccms_soa:
   documentServicesWsdl: DocumentServicesUATWsdl.xml
   getReferenceDataWsdl: GetReferenceDataUATWsdl.xml
 
-laa_portal:
-  idpSsoTargetUrl: "https://portal.uat.legalservices.gov.uk/oamfed/idp/samlv20"
-  idpSloTargetUrl: "https://portal.uat.legalservices.gov.uk/oam/server/logout"
-  idpCertFingerprintAlgorithm: "<idp-cert-fingerprint-alg-goes-here>"
-  mockSaml: "true"
+omniauth_entraid:
+  mock_auth: "false"
+  idp_sso_target_url: <not-sure-if-needed-but-could-point-to-silas/lassie-frontend>
 
 provider_details:
   url: "https://test-pda-api-laa-ccms-test.apps.live.cloud-platform.service.justice.gov.uk/api/providerDetails/" # Test points CCMS eBS UAT nev
