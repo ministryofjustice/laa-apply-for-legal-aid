@@ -695,7 +695,7 @@ en:
             accepted_emergency_defaults:
               inclusion: Select yes if you accept the default service level and scope for the emergency application
             accepted_substantive_defaults:
-              blank: Select yes if you accept the default service level and scope for the substantive application
+              inclusion: Select yes if you accept the default service level and scope for the substantive application
             emergency_level_of_service:
               blank: Select a level of service
             substantive_level_of_service:
