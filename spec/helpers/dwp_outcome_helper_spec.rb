@@ -4,7 +4,7 @@ RSpec.describe DWPOutcomeHelper do
   let(:application) { create(:legal_aid_application) }
 
   describe "#reset_confirm_dwp_status" do
-    subject(:call_method) { helper.reset_confirm_dwp_status(application) }
+    subject(:call_method) { helper.reset_confirm_dwp_status!(application) }
 
     before { call_method }
 
@@ -16,7 +16,7 @@ RSpec.describe DWPOutcomeHelper do
   end
 
   describe "#update_confirm_dwp_result" do
-    subject(:call_method) { helper.update_confirm_dwp_status(application, true) }
+    subject(:call_method) { helper.update_confirm_dwp_status!(application, true) }
 
     before { call_method }
 
