@@ -39,6 +39,14 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                                 emergency_level_of_service_stage:)
   end
 
+  let(:emergency_final_hearing) do
+    create(:final_hearing, proceeding: proceeding_one,
+                           work_type: :emergency,
+                           listed: emergency_final_hearing_listed,
+                           date: emergency_final_hearing_date,
+                           details: emergency_final_hearing_details)
+  end
+  let(:substantive_final_hearing) { create(:final_hearing, proceeding: proceeding_one, work_type: :substantive, listed: true, date: 2.days.ago) }
   let(:scope_limitation) { create(:scope_limitation, :emergency, proceeding: proceeding_one) }
   let(:client_involvement_type_ccms_code) { "A" }
   let(:client_involvement_type_description) { "Applicant/claimant/petitioner" }
@@ -48,6 +56,9 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
   let(:emergency_level_of_service) { "3" }
   let(:emergency_level_of_service_name) { "Full Representation" }
   let(:emergency_level_of_service_stage) { "8" }
+  let(:emergency_final_hearing_date) { 2.days.ago }
+  let(:emergency_final_hearing_listed) { true }
+  let(:emergency_final_hearing_details) { "Reason for not listing" }
 
   it_behaves_like "a task status validator"
 
@@ -61,6 +72,11 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
         proceeding_one
         proceeding_two
         scope_limitation
+        substantive_final_hearing
+        emergency_final_hearing
+
+        create(:final_hearing, proceeding: proceeding_two, work_type: :substantive, listed: true)
+        create(:final_hearing, proceeding: proceeding_two, work_type: :emergency, listed: true)
       end
 
       context "when client involvement type has not been answered for each proceeding" do
@@ -127,6 +143,38 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                 let(:emergency_level_of_service_name) { "Full Representation" }
 
                 it { is_expected.to be_valid }
+
+                context "and final hearing has not been chosen for each proceeding" do
+                  let(:emergency_final_hearing) { nil }
+
+                  it { is_expected.not_to be_valid }
+                end
+
+                context "and final hearing is listed" do
+                  context "with a hearing date" do
+                    it { is_expected.to be_valid }
+                  end
+
+                  context "without a hearing date" do
+                    let(:emergency_final_hearing_date) { nil }
+
+                    it { is_expected.not_to be_valid }
+                  end
+                end
+
+                context "and final hearing is not listed" do
+                  let(:emergency_final_hearing_listed) { false }
+
+                  context "with a reason" do
+                    it { is_expected.to be_valid }
+                  end
+
+                  context "without a reason" do
+                    let(:emergency_final_hearing_details) { nil }
+
+                    it { is_expected.not_to be_valid }
+                  end
+                end
               end
             end
           end

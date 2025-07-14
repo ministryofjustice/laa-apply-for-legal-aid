@@ -73,4 +73,16 @@ class Proceeding < ApplicationRecord
   def uses_emergency_certificate?
     !special_children_act?
   end
+
+  def family_help_higher?
+    emergency_level_of_service.to_i.eql?(1)
+  end
+
+  def full_representation?
+    emergency_level_of_service.to_i.eql?(3)
+  end
+
+  def emergency_final_hearing
+    final_hearings.emergency.first || final_hearings.build(work_type: :emergency)
+  end
 end

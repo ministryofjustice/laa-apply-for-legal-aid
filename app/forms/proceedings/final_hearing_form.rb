@@ -12,8 +12,8 @@ module Proceedings
 
     attr_writer :date
 
-    validates :work_type, inclusion: { in: %i[substantive emergency] }
-    validates :listed, inclusion: { in: %w[true false] }
+    validates :work_type, inclusion: { in: [:substantive, :emergency, "substantive", "emergency"] }
+    validates :listed, inclusion: { in: [true, false, "true", "false"] }
     validates :date, date: true, allow_nil: true, if: :date_required?
     validates :date, presence: true, if: :date_required?
     validates :details, presence: true, if: :details_required?
@@ -43,11 +43,11 @@ module Proceedings
     end
 
     def date_required?
-      listed.to_s == "true"
+      listed.to_s.in? [true, "true"]
     end
 
     def details_required?
-      listed.to_s == "false"
+      listed.to_s.in? [false, "false"]
     end
 
     def exclude_from_model
