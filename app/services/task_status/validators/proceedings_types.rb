@@ -19,10 +19,11 @@ module TaskStatus
           delegated_functions_forms,
           emergency_defaults_forms,
           emergency_level_of_service_forms,
-          # emergency_scope_limitation_forms - doesn't use validator in the same way,
           final_hearings_emergency_forms,
+          # emergency_scope_limitation_forms - doesn't use validator in the same way,
           substantive_defaults_forms,
           substantive_level_of_service_forms,
+          final_hearings_substantive_forms,
         ].flatten.compact
       end
 
@@ -52,19 +53,19 @@ module TaskStatus
         end
       end
 
-      def emergency_scope_limitations
-        proceedings.map do |proceeding|
-          proceeding.scope_limitations.emergency.any? unless proceeding.accepted_emergency_defaults?
-        end
-      end
-
       def final_hearings_emergency_forms
         proceedings.filter_map do |proceeding|
-          next unless proceeding.full_representation?
+          next unless proceeding.emergency_full_representation?
 
           Proceedings::FinalHearingForm.new(model: proceeding.emergency_final_hearing,
                                             listed: proceeding.emergency_final_hearing&.listed,
                                             date: proceeding.emergency_final_hearing&.date)
+        end
+      end
+
+      def emergency_scope_limitations
+        proceedings.map do |proceeding|
+          proceeding.scope_limitations.emergency.any? unless proceeding.accepted_emergency_defaults?
         end
       end
 
@@ -77,6 +78,16 @@ module TaskStatus
       def substantive_level_of_service_forms
         proceedings.filter_map do |proceeding|
           Proceedings::SubstantiveLevelOfServiceForm.new(model: proceeding) unless proceeding.accepted_substantive_defaults?
+        end
+      end
+
+      def final_hearings_substantive_forms
+        proceedings.filter_map do |proceeding|
+          next unless proceeding.substantive_full_representation?
+
+          Proceedings::FinalHearingForm.new(model: proceeding.substantive_final_hearing,
+                                            listed: proceeding.substantive_final_hearing&.listed,
+                                            date: proceeding.substantive_final_hearing&.date)
         end
       end
     end

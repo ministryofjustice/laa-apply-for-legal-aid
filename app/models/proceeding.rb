@@ -78,11 +78,19 @@ class Proceeding < ApplicationRecord
     emergency_level_of_service.to_i.eql?(1)
   end
 
-  def full_representation?
+  def emergency_full_representation?
     emergency_level_of_service.to_i.eql?(3)
+  end
+
+  def substantive_full_representation?
+    substantive_level_of_service.to_i.eql?(3)
   end
 
   def emergency_final_hearing
     final_hearings.emergency.first || final_hearings.build(work_type: :emergency)
+  end
+
+  def substantive_final_hearing
+    final_hearings.substantive.first || final_hearings.build(work_type: :substantive)
   end
 end
