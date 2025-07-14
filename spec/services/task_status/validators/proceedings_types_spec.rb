@@ -24,6 +24,7 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                         accepted_emergency_defaults:,
                         accepted_substantive_defaults:,
                         emergency_level_of_service:,
+                        substantive_level_of_service:,
                         emergency_level_of_service_name:,
                         emergency_level_of_service_stage:)
   end
@@ -36,9 +37,10 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                                 used_delegated_functions_on: 5.days.ago,
                                 accepted_emergency_defaults: true,
                                 accepted_substantive_defaults: true,
-                                emergency_level_of_service:,
-                                emergency_level_of_service_name:,
-                                emergency_level_of_service_stage:)
+                                emergency_level_of_service: "3",
+                                substantive_level_of_service: "3",
+                                emergency_level_of_service_name: "Full Representation",
+                                emergency_level_of_service_stage: "8")
   end
 
   let(:emergency_final_hearing) do
@@ -57,6 +59,7 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
   let(:accepted_emergency_defaults) { true }
   let(:accepted_substantive_defaults) { true }
   let(:emergency_level_of_service) { "3" }
+  let(:substantive_level_of_service) { "3" }
   let(:emergency_level_of_service_name) { "Full Representation" }
   let(:emergency_level_of_service_stage) { "8" }
   let(:emergency_final_hearing_date) { 2.days.ago }
@@ -193,6 +196,28 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
           let(:accepted_substantive_defaults) { false }
 
           it { is_expected.to be_valid }
+
+          context "and the substantive level of service has not been answered for each proceeding" do
+            let(:substantive_level_of_service) { nil }
+
+            it { is_expected.not_to be_valid }
+          end
+
+          context "and substantive level of service has been answered for each proceeding" do
+            context "and substantive level of service is family help (higher)" do
+              let(:substantive_level_of_service) { "1" }
+              let(:substantive_level_of_service_name) { "Family Help (Higher)" }
+
+              it { is_expected.to be_valid }
+            end
+
+            context "and substantive level of service is full representation" do
+              let(:substantive_level_of_service) { "3" }
+              let(:substantive_level_of_service_name) { "Full Representation" }
+
+              it { is_expected.to be_valid }
+            end
+          end
         end
       end
     end
