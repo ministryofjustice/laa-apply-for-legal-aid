@@ -47,6 +47,8 @@ spec:
           volumeMounts:
             - name: clamav-signatures-volume
               mountPath: /var/lib/clamav
+            - name: tmp
+              mountPath: /tmp
           env:
             - name: FRESHCLAM_CHECKS
               value: "{{ .Values.clamav.freshclamCheck }}"
@@ -93,3 +95,5 @@ spec:
       - name: clamav-signatures-volume
         persistentVolumeClaim:
           claimName: {{ .Release.Name }}-clamav-signatures-pvc
+      - name: tmp
+        emptyDir: {}
