@@ -52,7 +52,17 @@ module TaskStatus
 
       def emergency_scope_limitations
         proceedings.map do |proceeding|
-          proceeding.scope_limitations.where(scope_type: :emergency).any? if proceeding.emergency_level_of_service.to_i.eql?(1)
+          proceeding.scope_limitations.emergency.any? if proceeding.family_help_higher?
+        end
+      end
+
+      def final_hearings_emergency_forms
+        proceedings.filter_map do |proceeding|
+          next unless proceeding.full_representation?
+
+          Proceedings::FinalHearingForm.new(model: proceeding.emergency_final_hearing,
+                                            listed: proceeding.emergency_final_hearing&.listed,
+                                            date: proceeding.emergency_final_hearing&.date)
         end
       end
     end
