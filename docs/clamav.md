@@ -21,14 +21,14 @@ sudo apt install clamdscan
 
 Hosted environments implement the ClamAV anti-virus software through a combination of
 
-- a deployment to generate one or more pods in which a custom LAA image of ClamAV is containerised.
+- a deployment to generate one or more pods in which a ClamAV image is containerised.
 - a service that exposes the ClamAV container over TCP
 - a persistentvolumeclaim (pvc) to persist the ClamAV "virus signature" database for sharing between ClamAV container replicas
 - a volumeMount that exposes the pvc to the ClamAV container as a filesystem volume
 - a configmap used by the web/app containers to configure/point their local ClamAV CLI at the containerised ClamAV installation
 
 ### Communication between our components
-The ClamAV pod or pods contain a single container each. This container uses a [custom ClamAV image maintained by the LAA](https://github.com/ministryofjustice/clamav-docker/pkgs/container/clamav-docker%2Flaa-clamav). The container opens ports 3310 (default for ClamAV). A separate service object exposes this container's ports over TCP. The service does not need to explicitly expose an IP within the cluster (`ClusterIP: None`) nor a specific port (see `zombie-port`). This is because the traffic is within the cluster (and its namespace) so TCP can be used instead of HTTP. The service therefore exposes a zombie-port of 1234 simply to allow TCP to the container. The container already opens port 3310 so no further config is needed in that respect. Note that the service is associated with the clamav pod via its `spec.selector.service` metadata config, as common for all service/deployments.
+The ClamAV pod or pods contain a single container each. This container uses the original clamav/clamav-debian:stable image. The container opens ports 3310 (default for ClamAV). A separate service object exposes this container's ports over TCP. The service does not need to explicitly expose an IP within the cluster (`ClusterIP: None`) nor a specific port (see `zombie-port`). This is because the traffic is within the cluster (and its namespace) so TCP can be used instead of HTTP. The service therefore exposes a zombie-port of 1234 simply to allow TCP to the container. The container already opens port 3310 so no further config is needed in that respect. Note that the service is associated with the clamav pod via its `spec.selector.service` metadata config, as common for all service/deployments.
 
 The web container (deployment/pod) is configured to communicate with the ClamAV pod on its internal cluster location over TCP on port 3310
 
