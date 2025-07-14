@@ -47,6 +47,8 @@ spec:
           volumeMounts:
             - name: clamav-signatures-volume
               mountPath: /var/lib/clamav
+            - name: clamav-log
+              mountPath: /var/log/clamav
             - name: tmp
               mountPath: /tmp
           env:
@@ -95,5 +97,7 @@ spec:
       - name: clamav-signatures-volume
         persistentVolumeClaim:
           claimName: {{ .Release.Name }}-clamav-signatures-pvc
+      - name: clamav-log
+        emptyDir: {}
       - name: tmp
         emptyDir: {}
