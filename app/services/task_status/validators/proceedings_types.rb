@@ -21,6 +21,7 @@ module TaskStatus
           emergency_level_of_service_forms,
           # emergency_scope_limitation_forms - doesn't use validator in the same way,
           final_hearings_emergency_forms,
+          substantive_defaults_forms,
         ].flatten.compact
       end
 
@@ -52,7 +53,7 @@ module TaskStatus
 
       def emergency_scope_limitations
         proceedings.map do |proceeding|
-          proceeding.scope_limitations.emergency.any? if proceeding.family_help_higher?
+          proceeding.scope_limitations.emergency.any? unless proceeding.accepted_emergency_defaults?
         end
       end
 
@@ -63,6 +64,12 @@ module TaskStatus
           Proceedings::FinalHearingForm.new(model: proceeding.emergency_final_hearing,
                                             listed: proceeding.emergency_final_hearing&.listed,
                                             date: proceeding.emergency_final_hearing&.date)
+        end
+      end
+
+      def substantive_defaults_forms
+        proceedings.filter_map do |proceeding|
+          Proceedings::SubstantiveDefaultsForm.new(model: proceeding)
         end
       end
     end
