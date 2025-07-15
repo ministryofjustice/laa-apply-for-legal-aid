@@ -101,15 +101,15 @@ env:
   - name: CCMS_SOA_CLIENT_USERNAME
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: ccmsSoaClientUsername
+        name: dev-ccms-connection
+        key: mpClientUserName
   - name: CCMS_SOA_CLIENT_PASSWORD_TYPE
     value: {{ .Values.ccms_soa.clientPasswordType | quote }}
   - name: CCMS_SOA_CLIENT_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: ccmsSoaClientPassword
+        name: dev-ccms-connection
+        key: mpClientPassword
   - name: CCMS_SOA_USER_ROLE
     value: {{ .Values.ccms_soa.userRole | quote }}
   - name: CCMS_SOA_CASE_SERVICES_WSDL
