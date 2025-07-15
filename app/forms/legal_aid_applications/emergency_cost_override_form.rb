@@ -5,7 +5,7 @@ module LegalAidApplications
     attr_accessor :emergency_cost_override, :emergency_cost_requested, :emergency_cost_reasons,
                   :substantive_cost_override, :substantive_cost_requested, :substantive_cost_reasons
 
-    validates :emergency_cost_override, presence: true, unless: :emergency_ignorable?
+    validates :emergency_cost_override, inclusion: [true, false, "true", "false"], unless: :emergency_ignorable?
     validates :emergency_cost_reasons, presence: true, if: :requested_emergency_override?
     validates(
       :emergency_cost_requested,
@@ -14,7 +14,7 @@ module LegalAidApplications
       if: :requested_emergency_override?,
     )
 
-    validates :substantive_cost_override, presence: true, unless: :substantive_ignorable?
+    validates :substantive_cost_override, inclusion: [true, false, "true", "false"], unless: :substantive_ignorable?
     validates :substantive_cost_reasons, presence: true, if: :requested_substantive_override?
     validates(
       :substantive_cost_requested,

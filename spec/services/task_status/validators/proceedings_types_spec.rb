@@ -4,13 +4,28 @@ require_relative "task_status_validator_shared_examples"
 RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
   subject(:validator) { described_class.new(application) }
 
-  let(:application) { create(:application) }
+  let(:application) do
+    create(:application, emergency_cost_override:,
+                         emergency_cost_reasons:,
+                         emergency_cost_requested:,
+                         substantive_cost_override:,
+                         substantive_cost_reasons:,
+                         substantive_cost_requested:)
+  end
+
+  let(:emergency_cost_override) { true }
+  let(:emergency_cost_reasons) { "Reasons" }
+  let(:emergency_cost_requested) { 5_000 }
+  let(:substantive_cost_override) { true }
+  let(:substantive_cost_reasons) { "Reasons" }
+  let(:substantive_cost_requested) { 25_000 }
+
   let(:proceeding_one) do
     create(:proceeding, legal_aid_application: application,
                         ccms_code: "DA001",
                         meaning: "Inherent jurisdiction high court injunction",
                         description: "to be represented on an application for an injunction, order or declaration under the inherent jurisdiction of the court.",
-                        substantive_cost_limitation: 25_000,
+                        substantive_cost_limitation:,
                         delegated_functions_cost_limitation: rand(1...1_000_000.0).round(2),
                         name: "inherent_jurisdiction_high_court_injunction",
                         matter_type: "Domestic Abuse",
@@ -31,6 +46,7 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
 
   let(:proceeding_two) do
     create(:proceeding, :se014, legal_aid_application: application,
+                                substantive_cost_limitation:,
                                 client_involvement_type_ccms_code: "A",
                                 client_involvement_type_description: "Applicant/claimant/petitioner",
                                 used_delegated_functions: true,
@@ -77,6 +93,7 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
   let(:substantive_final_hearing_date) { 2.days.ago }
   let(:substantive_final_hearing_listed) { true }
   let(:substantive_final_hearing_details) { "Reason for not listing" }
+  let(:substantive_cost_limitation) { 25_000 }
 
   it_behaves_like "a task status validator"
 
@@ -273,6 +290,56 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
               end
             end
           end
+        end
+      end
+
+      context "when emergency cost is overridable" do
+        context "and emergency cost override form has been answered for each proceeding" do
+          context "and yes has been selected" do
+            it { is_expected.to be_valid }
+          end
+
+          context "and no has been selected" do
+            let(:emergency_cost_override) { false }
+            let(:emergency_cost_reasons) { nil }
+            let(:emergency_cost_requested) { nil }
+
+            it { is_expected.to be_valid }
+          end
+        end
+
+        context "and emergency cost override form has not been answered for each proceeding" do
+          let(:emergency_cost_override) { nil }
+          let(:emergency_cost_reasons) { nil }
+          let(:emergency_cost_requested) { nil }
+
+          it { is_expected.not_to be_valid }
+        end
+      end
+
+      context "when substantive cost is overridable" do
+        let(:substantive_cost_limitation) { 15_000 }
+
+        context "and substantive cost override form has been answered for each proceeding" do
+          context "and yes has been selected" do
+            it { is_expected.to be_valid }
+          end
+
+          context "and no has been selected" do
+            let(:substantive_cost_override) { false }
+            let(:substantive_cost_reasons) { nil }
+            let(:substantive_cost_requested) { nil }
+
+            it { is_expected.to be_valid }
+          end
+        end
+
+        context "and substantive cost override form has not been answered for each proceeding" do
+          let(:substantive_cost_override) { nil }
+          let(:substantive_cost_reasons) { nil }
+          let(:substantive_cost_requested) { nil }
+
+          it { is_expected.not_to be_valid }
         end
       end
     end
