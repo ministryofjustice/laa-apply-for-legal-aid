@@ -27,6 +27,7 @@ module TaskStatus
           substantive_level_of_service_forms,
           final_hearings_substantive_forms,
           # substantive_scope_limitation_forms - doesn't use validator in the same way,
+          emergency_cost_override_form,
         ].flatten.compact
       end
 
@@ -98,6 +99,10 @@ module TaskStatus
         proceedings.map do |proceeding|
           proceeding.scope_limitations.substantive.any? unless proceeding.accepted_substantive_defaults?
         end
+      end
+
+      def emergency_cost_override_form
+        LegalAidApplications::EmergencyCostOverrideForm.new(model: application)
       end
     end
   end

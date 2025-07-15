@@ -480,7 +480,7 @@ en:
             in_scope_of_laspo:
               blank: Select yes if the Section 8 proceedings you're applying for are in scope of LASPO
             emergency_cost_override:
-              blank: Select yes if you want to request a higher emergency cost limit
+              inclusion: Select yes if you want to request a higher emergency cost limit
             emergency_cost_requested:
               blank: Enter a new emergency cost limit
               not_a_number: Emergency cost limit must be an amount of money, like 2,500
@@ -488,7 +488,7 @@ en:
             emergency_cost_reasons:
               blank: Tell us why you need a higher emergency cost limit
             substantive_cost_override:
-              blank: Select yes if you want to request a higher substantive cost limit
+              inclusion: Select yes if you want to request a higher substantive cost limit
             substantive_cost_requested:
               blank: Enter a new substantive cost limit
               not_a_number: Substantive cost limit must be an amount of money, like 2,500
