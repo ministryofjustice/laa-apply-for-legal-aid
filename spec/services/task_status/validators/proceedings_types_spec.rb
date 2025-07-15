@@ -50,7 +50,6 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                            date: emergency_final_hearing_date,
                            details: emergency_final_hearing_details)
   end
-  let(:scope_limitation) { create(:scope_limitation, :emergency, proceeding: proceeding_one) }
 
   let(:substantive_final_hearing) do
     create(:final_hearing, proceeding: proceeding_one,
@@ -59,6 +58,9 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                            date: substantive_final_hearing_date,
                            details: substantive_final_hearing_details)
   end
+
+  let(:emergency_scope_limitation) { create(:scope_limitation, :emergency, proceeding: proceeding_one) }
+  let(:substantive_scope_limitation) { create(:scope_limitation, :substantive, proceeding: proceeding_one) }
   let(:client_involvement_type_ccms_code) { "A" }
   let(:client_involvement_type_description) { "Applicant/claimant/petitioner" }
   let(:used_delegated_functions) { true }
@@ -87,7 +89,8 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
       before do
         proceeding_one
         proceeding_two
-        scope_limitation
+        emergency_scope_limitation
+        substantive_scope_limitation
         substantive_final_hearing
         emergency_final_hearing
 
@@ -148,7 +151,7 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                 end
 
                 context "and the emergency scope limitations have not been answered for each proceeding" do
-                  let(:scope_limitation) { nil }
+                  let(:emergency_scope_limitation) { nil }
 
                   it { is_expected.not_to be_valid }
                 end
@@ -219,6 +222,16 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
               let(:substantive_level_of_service_name) { "Family Help (Higher)" }
 
               it { is_expected.to be_valid }
+
+              context "and the substantive scope limitations have been answered for each proceeding" do
+                it { is_expected.to be_valid }
+              end
+
+              context "and the substantive scope limitations have not been answered for each proceeding" do
+                let(:substantive_scope_limitation) { nil }
+
+                it { is_expected.not_to be_valid }
+              end
             end
 
             context "and substantive level of service is full representation" do

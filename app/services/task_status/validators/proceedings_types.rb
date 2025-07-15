@@ -6,6 +6,8 @@ module TaskStatus
 
         return false if emergency_scope_limitations.any?(false)
 
+        return false if substantive_scope_limitations.any?(false)
+
         super
       end
 
@@ -24,6 +26,7 @@ module TaskStatus
           substantive_defaults_forms,
           substantive_level_of_service_forms,
           final_hearings_substantive_forms,
+          # substantive_scope_limitation_forms - doesn't use validator in the same way,
         ].flatten.compact
       end
 
@@ -88,6 +91,12 @@ module TaskStatus
           Proceedings::FinalHearingForm.new(model: proceeding.substantive_final_hearing,
                                             listed: proceeding.substantive_final_hearing&.listed,
                                             date: proceeding.substantive_final_hearing&.date)
+        end
+      end
+
+      def substantive_scope_limitations
+        proceedings.map do |proceeding|
+          proceeding.scope_limitations.substantive.any? unless proceeding.accepted_substantive_defaults?
         end
       end
     end
