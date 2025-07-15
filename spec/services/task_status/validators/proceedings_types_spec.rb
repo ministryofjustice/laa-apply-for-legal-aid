@@ -198,78 +198,78 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
             end
           end
         end
+      end
 
-        context "and substantive default question has not been answered for each proceeding" do
-          let(:accepted_substantive_defaults) { nil }
+      context "when substantive default question has not been answered for each proceeding" do
+        let(:accepted_substantive_defaults) { nil }
+
+        it { is_expected.not_to be_valid }
+      end
+
+      context "when substantive defaults question has been answered for each proceeding and is false" do
+        let(:accepted_substantive_defaults) { false }
+
+        it { is_expected.to be_valid }
+
+        context "and the substantive level of service has not been answered for each proceeding" do
+          let(:substantive_level_of_service) { nil }
 
           it { is_expected.not_to be_valid }
         end
 
-        context "and substantive defaults question has been answered for each proceeding and is false" do
-          let(:accepted_substantive_defaults) { false }
+        context "and substantive level of service has been answered for each proceeding" do
+          context "and substantive level of service is family help (higher)" do
+            let(:substantive_level_of_service) { "1" }
+            let(:substantive_level_of_service_name) { "Family Help (Higher)" }
 
-          it { is_expected.to be_valid }
+            it { is_expected.to be_valid }
 
-          context "and the substantive level of service has not been answered for each proceeding" do
-            let(:substantive_level_of_service) { nil }
+            context "and the substantive scope limitations have been answered for each proceeding" do
+              it { is_expected.to be_valid }
+            end
 
-            it { is_expected.not_to be_valid }
+            context "and the substantive scope limitations have not been answered for each proceeding" do
+              let(:substantive_scope_limitation) { nil }
+
+              it { is_expected.not_to be_valid }
+            end
           end
 
-          context "and substantive level of service has been answered for each proceeding" do
-            context "and substantive level of service is family help (higher)" do
-              let(:substantive_level_of_service) { "1" }
-              let(:substantive_level_of_service_name) { "Family Help (Higher)" }
+          context "and substantive level of service is full representation" do
+            let(:substantive_level_of_service) { "3" }
+            let(:substantive_level_of_service_name) { "Full Representation" }
 
-              it { is_expected.to be_valid }
+            it { is_expected.to be_valid }
 
-              context "and the substantive scope limitations have been answered for each proceeding" do
+            context "and final hearing has not been chosen for each proceeding" do
+              let(:substantive_final_hearing) { nil }
+
+              it { is_expected.not_to be_valid }
+            end
+
+            context "and final hearing is listed" do
+              context "with a hearing date" do
                 it { is_expected.to be_valid }
               end
 
-              context "and the substantive scope limitations have not been answered for each proceeding" do
-                let(:substantive_scope_limitation) { nil }
+              context "without a hearing date" do
+                let(:substantive_final_hearing_date) { nil }
 
                 it { is_expected.not_to be_valid }
               end
             end
 
-            context "and substantive level of service is full representation" do
-              let(:substantive_level_of_service) { "3" }
-              let(:substantive_level_of_service_name) { "Full Representation" }
+            context "and final hearing is not listed" do
+              let(:substantive_final_hearing_listed) { false }
 
-              it { is_expected.to be_valid }
+              context "with a reason" do
+                it { is_expected.to be_valid }
+              end
 
-              context "and final hearing has not been chosen for each proceeding" do
-                let(:substantive_final_hearing) { nil }
+              context "without a reason" do
+                let(:substantive_final_hearing_details) { nil }
 
                 it { is_expected.not_to be_valid }
-              end
-
-              context "and final hearing is listed" do
-                context "with a hearing date" do
-                  it { is_expected.to be_valid }
-                end
-
-                context "without a hearing date" do
-                  let(:substantive_final_hearing_date) { nil }
-
-                  it { is_expected.not_to be_valid }
-                end
-              end
-
-              context "and final hearing is not listed" do
-                let(:substantive_final_hearing_listed) { false }
-
-                context "with a reason" do
-                  it { is_expected.to be_valid }
-                end
-
-                context "without a reason" do
-                  let(:substantive_final_hearing_details) { nil }
-
-                  it { is_expected.not_to be_valid }
-                end
               end
             end
           end
