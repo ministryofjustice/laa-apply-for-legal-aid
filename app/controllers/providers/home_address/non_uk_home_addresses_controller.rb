@@ -1,6 +1,8 @@
 module Providers
   module HomeAddress
     class NonUkHomeAddressesController < ProviderBaseController
+      reviewed_by :legal_aid_application, :check_provider_answers
+
       def show
         @form = Addresses::NonUkHomeAddressForm.new(model: non_uk_home_address)
       end

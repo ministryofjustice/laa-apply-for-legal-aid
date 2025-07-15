@@ -1,5 +1,7 @@
 module Providers
   class ApplicantDetailsController < ProviderBaseController
+    reviewed_by :legal_aid_application, :check_provider_answers
+
     def show
       @form = Applicants::BasicDetailsForm.new(model: applicant)
     end

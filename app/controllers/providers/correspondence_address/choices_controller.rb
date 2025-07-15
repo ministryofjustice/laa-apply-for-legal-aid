@@ -2,6 +2,7 @@ module Providers
   module CorrespondenceAddress
     class ChoicesController < ProviderBaseController
       prefix_step_with :correspondence_address
+      reviewed_by :legal_aid_application, :check_provider_answers
 
       def show
         @form = Addresses::ChoiceForm.new(model: applicant)
@@ -10,7 +11,6 @@ module Providers
 
       def update
         @form = Addresses::ChoiceForm.new(form_params)
-
         render :show unless save_continue_or_draft(@form)
       end
 

@@ -2,6 +2,7 @@ module Providers
   module LinkApplication
     class ConfirmLinksController < ProviderBaseController
       prefix_step_with :link_application
+      reviewed_by :legal_aid_application, :check_provider_answers
 
       def show
         @form = Providers::LinkApplication::ConfirmLinkForm.new(model: linked_application)

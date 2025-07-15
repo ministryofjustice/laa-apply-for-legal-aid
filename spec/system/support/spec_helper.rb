@@ -23,6 +23,7 @@ RSpec.configure do |config|
   config.include GovukFormHelpers, type: :system
   config.include CapybaraHelpers, type: :system
   config.include TaskListHelpers, type: :system
+  config.include StepHelpers, type: :system
 
   config.before(:each, type: :system) do |example|
     if ENV["BROWSER"].present?
