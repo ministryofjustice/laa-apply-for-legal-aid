@@ -19,6 +19,11 @@ ingress:
       if ($scheme = http) {
         return 444;
       }
+
+      error_page 403 = @holding;
+      location @holding {
+        return 302 https://laa-holding-page-production.apps.live.cloud-platform.service.justice.gov.uk$request_uri;
+      }
   path: /
 
 publicIngress:
@@ -29,6 +34,11 @@ publicIngress:
     nginx.ingress.kubernetes.io/server-snippet: |
       if ($scheme = http) {
         return 444;
+      }
+
+      error_page 403 = @holding;
+      location @holding {
+        return 302 https://laa-holding-page-production.apps.live.cloud-platform.service.justice.gov.uk$request_uri;
       }
 # We usually recommend not to specify default resources and to leave this as a conscious
 # choice for the user. This also increases chances charts run on environments with little
