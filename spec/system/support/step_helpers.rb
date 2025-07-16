@@ -51,7 +51,9 @@ module StepHelpers
     govuk_choose "Transport For London, 98 Petty France, London, SW1H 9EA"
     click_on "Use this address"
 
-    nil if step_name == :make_link
+    expect(page).to have_css("h1", text: "Linking cases")
+
+    nil if step_name == :link_application
   end
 
   def create_an_application_and_complete_client_details(with_partner)
