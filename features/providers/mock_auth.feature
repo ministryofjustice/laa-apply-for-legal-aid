@@ -1,6 +1,6 @@
-Feature: Mock saml test
+Feature: Mock auth for provider login
   @javascript
-  Scenario: A provider can login with mock saml data from the start page
+  Scenario: A provider can login with mock auth data from the start page
     Given the provider account has been created
     And I visit the root page
     And I click link 'start'

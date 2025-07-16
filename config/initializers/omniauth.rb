@@ -6,12 +6,16 @@ end
 OmniAuth.config.allowed_request_methods = %i[post get]
 OmniAuth.config.silence_get_warning = true # Warnings silenced for now.  See ticket AP-2098 for attempts to resolve this
 OmniAuth.config.logger = Rails.logger
-# normally in dev mode, if the user fails to authenticate, an exception is raised.
+
+# Normally in dev mode, if the user fails to authenticate, an exception is raised.
 # This block here makes sure that dev behaviour is the same as production, i.e.
 # is redirectied to /auth/failure
 #
+# TODO: originally this was to handle truelayer auth errors but entraid auth failures for providers
+# also need handling/considering.
+#
 OmniAuth.config.on_failure = proc do |env|
-  AlertManager.capture_message("Omniauth error: #{env['omniauth.error']} and message: #{env['omniauth.error']&.error_reason}")
+  AlertManager.capture_message("Omniauth error: #{env['omniauth.error']} and message: #{env['omniauth.error']}")
   OmniAuth::FailureEndpoint.new(env).redirect_to_failure
 end
 

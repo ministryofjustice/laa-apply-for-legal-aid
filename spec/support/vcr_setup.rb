@@ -24,5 +24,9 @@ VCR.configure do |vcr_config|
   vcr_config.filter_sensitive_data("<BC_LSC_SERVICE_NAME>") { ENV.fetch("BC_LSC_SERVICE_NAME", nil) }
   vcr_config.filter_sensitive_data("<BC_CLIENT_ORG_ID>") { ENV.fetch("BC_CLIENT_ORG_ID", nil) }
   vcr_config.filter_sensitive_data("<BC_CLIENT_USER_ID>") { ENV.fetch("BC_CLIENT_USER_ID", nil) }
+  vcr_config.filter_sensitive_data("<OMNIAUTH_ENTRAID_CLIENT_ID>") { ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_ID", nil) }
+  vcr_config.filter_sensitive_data("<OMNIAUTH_ENTRAID_CLIENT_SECRET>") { ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_SECRET", nil) }
+  vcr_config.filter_sensitive_data("<OMNIAUTH_ENTRAID_REDIRECT_URI>") { ENV.fetch("OMNIAUTH_ENTRAID_REDIRECT_URI", nil) }
+  vcr_config.filter_sensitive_data("<OMNIAUTH_ENTRAID_TENANT_ID>") { ENV.fetch("OMNIAUTH_ENTRAID_TENANT_ID", nil) }
   vcr_config.filter_sensitive_data("<PDA_AUTH_KEY>") { ENV.fetch("PDA_AUTH_KEY", nil) }
 end
