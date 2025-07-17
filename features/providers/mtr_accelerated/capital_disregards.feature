@@ -49,7 +49,7 @@ Feature: mandatory and discretionary capital disregards questions and flow
       | .govuk-checkboxes__label  | Variant Creutzfeldt-Jakob disease (vCJD) Trust payment |
       | .govuk-checkboxes__label  | Welsh Independent Living Grant |
       | .govuk-checkboxes__label  | Windrush Compensation Scheme payment |
-  
+
     And I should see "For example, Pensioner Cost of Living Payment, Cost of Living Payment"
     And I should see "Includes Infected Blood Interim Compensation Payment Scheme"
     And I select "Infected Blood Support Scheme payment"
@@ -62,9 +62,9 @@ Feature: mandatory and discretionary capital disregards questions and flow
 
     When I click "Save and continue"
     Then I should be on a page showing "Add details for 'Infected Blood Support Scheme payment'"
-    
+
     When I click "Save and continue"
-    Then I should see govuk error summary "Enter a number for the amount received"
+    Then I should see govuk error summary "Enter the amount received, like 1,000 or 20.30"
     And I should see govuk error summary "Enter which account the payment is in"
     And I should see govuk error summary "Enter a date in the correct format for when the payment is received"
 

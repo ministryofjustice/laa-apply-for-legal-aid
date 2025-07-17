@@ -111,7 +111,7 @@ RSpec.describe Providers::Means::SavingsAndInvestmentsController do
 
             it "displays an error" do
               patch_request
-              expect(response.body).to match(html_compare("The value of money that's not in a bank account must be an amount of money, like 60,000"))
+              expect(response.body).to match(html_compare("Enter the amount of money that's not in a bank account, like 1,000 or 20.30"))
               expect(response.body).to match("govuk-error-message")
               expect(response.body).to match("govuk-form-group--error")
             end
