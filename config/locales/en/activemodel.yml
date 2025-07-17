@@ -898,32 +898,32 @@ en:
             offline_current_accounts:
               blank: Enter the total amount in your client's current accounts
               greater_than_or_equal_to: Total in client's current accounts must be 0 or more
-              not_a_number: "Enter the amount of savings, like 1,000 or 20.30"
+              not_a_number: "Enter the amount in current accounts, like 1,000 or 20.30"
               too_many_decimals: Total in client's current accounts must not include more than 2 decimal numbers
             offline_savings_accounts:
               blank: Enter the total amount in your client's savings accounts
               greater_than_or_equal_to: Total in client's savings accounts must be 0 or more
-              not_a_number: Enter the amount of savings, like 1,000 or 20.30
+              not_a_number: Enter the amount in savings accounts, like 1,000 or 20.30
               too_many_decimals: Total in client's savings accounts must not include more than 2 decimal numbers
             partner_offline_current_accounts:
               blank: Enter the total amount in the partner's current accounts
               greater_than_or_equal_to: Total in partners' current accounts must be 0 or more
-              not_a_number: Total in partners' current accounts must be an amount of money, like 60,000
+              not_a_number: Enter the amount in current accounts for partner, like 1,000 or 20.30
               too_many_decimals: Total in partners' current accounts must not include more than 2 decimal numbers
             partner_offline_savings_accounts:
               blank: Enter the total amount in the partner's savings accounts
               greater_than_or_equal_to: Total in partners' savings accounts must be 0 or more
-              not_a_number: Total in partners' savings accounts must be an amount of money, like 60,000
+              not_a_number: Enter the amount in savings accounts for partner, like 1,000 or 20.30
               too_many_decimals: Total in partners' savings accounts must not include more than 2 decimal numbers
             joint_offline_current_accounts:
               blank: Enter the total amount in your client and their partner's joint current accounts
               greater_than_or_equal_to: Total in joint current accounts must be 0 or more
-              not_a_number: Total in joint current accounts must be an amount of money, like 60,000
+              not_a_number: Enter the amount in joint current accounts, like 1,000 or 20.30
               too_many_decimals: Total in joint current accounts must not include more than 2 decimal numbers
             joint_offline_savings_accounts:
               blank: Enter the total amount in your client and their partner's joint savings accounts
               greater_than_or_equal_to: Total in joint savings accounts must be 0 or more
-              not_a_number: Total in joint savings accounts must be an amount of money, like 60,000
+              not_a_number: Enter the amount in joint savings accounts, like 1,000 or 20.30
               too_many_decimals: Total in joint savings accounts must not include more than 2 decimal numbers
             life_assurance_endowment_policy:
               blank: Enter the total value of life assurance policies
