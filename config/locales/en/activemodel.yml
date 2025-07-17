@@ -156,7 +156,7 @@ en:
               inclusion: Select yes if your client receives student finance
             student_finance_amount:
               blank: Enter the total amount of student finance this academic year
-              too_many_decimals: &student_error Student loan amount must be an amount of money, like 10,000
+              too_many_decimals: &student_error Enter the amount of student finance, like 1,000 or 20.30
               not_a_number: *student_error
               greater_than_or_equal_to: *student_error
             applied_previously:
@@ -380,7 +380,7 @@ en:
               inclusion: Select yes if your partner receives student finance
             student_finance_amount:
               blank: Enter the total amount of student finance this academic year
-              too_many_decimals: &student_error Student loan amount must be an amount of money, like 10,000
+              too_many_decimals: &student_error Enter the amount of student finance, like 1,000 or 20.30
               not_a_number: *student_error
               greater_than_or_equal_to: *student_error
             base:
@@ -509,14 +509,14 @@ en:
               blank_with_partner: Enter how much the home your client and their partner lives in is worth
               greater_than_or_equal_to: How much the home your client lives in in must be 0 or more
               greater_than_or_equal_to_with_partner: How much the home your client and their partner lives in must be 0 or more
-              not_a_number: How much the home your client lives in must be an amount of money, like 60,000
+              not_a_number: Enter the amount the home is worth, like 1,000 or 20.30
               not_a_number_with_partner: The value of the home your client and their partner live in must be a number, like 60,000
               too_many_decimals: The value of the home your client lives in cannot include more than 2 decimal places
               too_many_decimals_with_partner: The value of the home your client and their partner live in cannot include more than 2 decimal places
             outstanding_mortgage_amount:
               blank: Enter how much is left to pay on the mortgage
               greater_than_or_equal_to: The amount left to pay on the mortgage must be 0 or more
-              not_a_number: The amount left to pay on the mortgage must be a number, like 60,000
+              not_a_number: Enter the amount of mortgage left to pay, like 1,000 or 20.30
               too_many_decimals: The amount left to pay on the mortgage cannot include more than 2 decimal places
             shared_ownership:
               blank: Select yes if your client owns the home with anyone else
@@ -574,11 +574,11 @@ en:
             valuable_items_value:
               blank: Enter the estimated total value of valuable items
               greater_than_or_equal_to: Estimated value must be £500 or more
-              not_a_number: Estimated valuable items value must be an amount of money, like 60,000
+              not_a_number: Enter the amount for the worth valuable items, like 1,000 or 20.30
               too_many_decimals: Estimated valuable items value must not include more than 2 decimal numbers
               blank_with_partner: Enter the value of any valuable items worth £500 or more for both your client and their partner
               greater_than_or_equal_to_with_partner: Estimated value must be £500 or more
-              not_a_number_with_partner: Estimated valuable items value must be an amount of money, like 60,000
+              not_a_number_with_partner: Enter the amount for the worth valuable items, like 1,000 or 20.30
               too_many_decimals_with_partner: Estimated valuable items value must not include more than 2 decimal numbers
             land_value:
               blank: Enter the estimated land value
@@ -679,8 +679,8 @@ en:
             account_name:
               blank: Enter which account the payment is in
             amount:
-              not_a_number: Enter a number for the amount received
-              blank: Enter a number for the amount received
+              not_a_number: &capital_disregards_amount_error Enter the amount received, like 1,000 or 20.30
+              blank: *capital_disregards_amount_error
               too_many_decimals: Amount received must not include more than 2 decimal numbers
             date_received:
               blank: Enter a date in the correct format for when the payment is received
@@ -754,7 +754,7 @@ en:
               blank: Select yes if your client receives Housing Benefit
             housing_benefit_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount of Housing Benefit received
+              not_a_number: Enter the amount of Housing Benefit, like 1,000 or 20.30
               too_many_decimals: Enter a number with no more than 2 decimal places
             housing_benefit_frequency:
               inclusion: Select how often your client receives Housing Benefit
@@ -764,7 +764,7 @@ en:
               blank: Enter the name of the benefit
             amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount of benefit received
+              not_a_number: Enter the amount of money, like 1,000 or 20.30
               too_many_decimals: Enter a number with no more than 2 decimal places
             frequency:
               inclusion: "Select how often %{party} gets the benefit"
@@ -777,31 +777,31 @@ en:
           attributes: &regular_income_attributes
             benefits_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount of benefits received
+              not_a_number: Enter the amount of money, like 1,000 or 20.30
               too_many_decimals: Enter a number with no more than 2 decimal places
             benefits_frequency:
               inclusion: Select how often your client receives benefits
             friends_or_family_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount received from friends or family
+              not_a_number: Enter the amount received from friends or family, like 1,000 or 20.30
               too_many_decimals: Enter a number with no more than 2 decimal places
             friends_or_family_frequency:
               inclusion: Select how often your client receives income from friends or family
             maintenance_in_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount of maintenance received
+              not_a_number: Enter the amount of maintenance received, like 1,000 or 20.30
               too_many_decimals: Enter a number with no more than 2 decimal places
             maintenance_in_frequency:
               inclusion: Select how often your client receives maintenance
             property_or_lodger_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount received from property or lodgers
+              not_a_number: Enter the amount received from property or lodgers, like 1,000 or 20.30
               too_many_decimals: Enter a number with no more than 2 decimal places
             property_or_lodger_frequency:
               inclusion: Select how often your client receives income from property or lodgers
             pension_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount of pension received
+              not_a_number: Enter the amount of pension received, like 1,000 or 20.30
               too_many_decimals: Enter a number with no more than 2 decimal places
             pension_frequency:
               inclusion: Select how often your client receives pension income
@@ -889,21 +889,21 @@ en:
             cash:
               blank: Enter the value of money that's not in a bank account for your client
               greater_than_or_equal_to: The value of money that's not in a bank account must be 0 or more
-              not_a_number: The value of money that's not in a bank account must be an amount of money, like 60,000
+              not_a_number: Enter the amount of money that's not in a bank account, like 1,000 or 20.30
               too_many_decimals: The value of money that's not in a bank account must not include more than 2 decimal numbers
               blank_with_partner: Enter the value of money that's not in a bank account for both your client and their partner
               greater_than_or_equal_to_with_partner: The value of money that's not in a bank account must be 0 or more
-              not_a_number_with_partner: The value of money that's not in a bank account must be an amount of money, like 60,000
+              not_a_number_with_partner: Enter the amount of money that's not in a bank account, like 1,000 or 20.30
               too_many_decimals_with_partner: The value of money that's not in a bank account must not include more than 2 decimal numbers
             offline_current_accounts:
               blank: Enter the total amount in your client's current accounts
               greater_than_or_equal_to: Total in client's current accounts must be 0 or more
-              not_a_number: "Total in client's current accounts must be an amount of money, like 60,000"
+              not_a_number: "Enter the amount of savings, like 1,000 or 20.30"
               too_many_decimals: Total in client's current accounts must not include more than 2 decimal numbers
             offline_savings_accounts:
               blank: Enter the total amount in your client's savings accounts
               greater_than_or_equal_to: Total in client's savings accounts must be 0 or more
-              not_a_number: Total in client's savings accounts must be an amount of money, like 60,000
+              not_a_number: Enter the amount of savings, like 1,000 or 20.30
               too_many_decimals: Total in client's savings accounts must not include more than 2 decimal numbers
             partner_offline_current_accounts:
               blank: Enter the total amount in the partner's current accounts
@@ -999,7 +999,7 @@ en:
               blank: Select who owns the vehicle
             estimated_value:
               blank: Enter how much the vehicle is worth
-              not_a_number: How much the vehicle is worth must be an amount of money, like 5,000
+              not_a_number: Enter the amount the vehicle is worth, like 1,000 or 20.30
               greater_than_or_equal_to: How much the vehicle is worth must be 0 or more
               too_many_decimals: How much the vehicle is worth cannot include more than 2 decimal numbers
             payment_remaining:

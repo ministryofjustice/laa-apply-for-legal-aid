@@ -49,7 +49,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
       shared_examples_for "it has an error" do
         let(:attribute_map) do
           {
-            cash: /value of money that's/i,
+            cash: /of money that's/i,
             other_person_account: /other people's.*account/,
             national_savings: /certificates and.*bonds/i,
             plc_shares: /shares/,
@@ -84,7 +84,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
       context "when the amounts are not numbers" do
         let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
-        let(:expected_error) { /must be an amount of money, like 60,000/ }
+        let(:expected_error) { /amount of money/ }
 
         it_behaves_like "it has an error"
       end
@@ -93,7 +93,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         context "and are not bank account attributes" do
           let(:attribute_map) do
             {
-              cash: /value of money that's/i,
+              cash: /of money that's/i,
               other_person_account: /other people's accounts/,
               national_savings: /certificates and.*bonds/i,
               plc_shares: /shares/,
