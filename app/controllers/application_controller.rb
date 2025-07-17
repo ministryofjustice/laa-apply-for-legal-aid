@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include YourApplicationsHelper
   # helper_method :omniauth_login_start_path
 
-  before_action :authenticate_provider!
+  # before_action :authenticate_provider!
 
 private
 

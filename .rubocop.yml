@@ -23,6 +23,11 @@ Lint/AmbiguousBlockAssociation:
   Exclude:
   - 'spec/**/*'
 
+# TODO: Remove me before merging AP-6125
+Lint/EmptyClass:
+  Exclude:
+  - 'app/services/flow/flow_steps.rb'
+
 Style/CombinableLoops:
   Exclude:
     - app/views/providers/means_reports/_income_details.html.erb
