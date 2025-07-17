@@ -35,7 +35,7 @@ RSpec.describe LegalAidApplications::PropertyDetailsForm, type: :form do
       context "when the value is non numeric" do
         let(:property_value) { "BOB" }
 
-        it { expect(described_form.errors[:property_value]).to eq ["How much the home your client lives in must be an amount of money, like 60,000"] }
+        it { expect(described_form.errors[:property_value]).to eq ["Enter the amount the home is worth, like 1,000 or 20.30"] }
       end
 
       context "when the value is below zero" do
