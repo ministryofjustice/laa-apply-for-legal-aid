@@ -4,6 +4,29 @@
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
+if Rails.env.test?
+  OmniAuth.config.test_mode = true
+
+  OmniAuth.config.mock_auth[:entra_id] = OmniAuth::AuthHash.new({
+    provider: "entra_id",
+    uid: "mock-user-123",
+    info: {
+      name: "Mock Dev User",
+      email: "martin.ronan@example.com",
+    },
+    credentials: {
+      token: "mock_token_abc123",
+      expires_at: Time.zone.now.to_i + 1.week,
+    },
+    extra: {
+      raw_info: {
+        oid: "mock-oid-entra",
+        "USER_NAME" => "MARTIN.RONAN@DAVIDGRAY.CO.UK",
+      },
+    },
+  })
+end
+
 Devise.setup do |config|
   require Rails.root.join "app/lib/omni_auth/strategies/entra_id_oidc"
 
