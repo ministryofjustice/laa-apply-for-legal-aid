@@ -28,7 +28,7 @@ class TestProviderPopulator
     "firm1-user2" => ["Firm1 & Co.", "firm1-user2@example.com", 106],
     "firm2-user1" => ["Firm2 & Co.", "firm2-user1@example.com", 107],
     "ahernk" => ["Ahern & Co.", "katharine.ahern@justice.gov.uk", 109],
-    "MARTIN.RONAN@DAVIDGRAY.CO.UK" => ["David Gray LLP", "martin.ronan@example.com", 494_000],
+    "MARTIN.RONAN@DAVIDGRAY.CO.UK" => ["David Gray LLP", "martin.ronan@example.com", 494_000, "mock-user-123"],
     "BENREID" => ["Test firm for portal login", "benreid@example.co.uk", 107],
     "HFITZSIMONS@EDWARDHAYES.CO.UK" => ["EDWARD HAYES LLP", "hfitzsimons@example.com", 2_453_773],
     "LHARRISON@TBILAW.CO.UK" => ["LAWRENCE & CO SOLICITORS CDS LLP", "LHARRISON@example.com", 954_474],
@@ -47,7 +47,7 @@ class TestProviderPopulator
 private
 
   def populate_provider(username, details)
-    firm_name, email, contact_id = details
+    firm_name, email, contact_id, auth_subject_uid = details
     firm = populate_firm(firm_name)
     return if Provider.exists?(username:)
 
@@ -57,6 +57,7 @@ private
       contact_id:,
       firm:,
       offices: firm.offices,
+      auth_subject_uid:,
     )
   end
 
