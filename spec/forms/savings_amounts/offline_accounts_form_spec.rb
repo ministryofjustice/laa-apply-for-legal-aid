@@ -49,12 +49,12 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
       shared_examples_for "it has an error" do
         let(:attribute_map) do
           {
-            offline_current_accounts: /total.*current accounts/i,
-            offline_savings_accounts: /total.*savings accounts/i,
-            partner_offline_current_accounts: /total.*current accounts/i,
-            partner_offline_savings_accounts: /total.*savings accounts/i,
-            joint_offline_current_accounts: /total.*current accounts/i,
-            joint_offline_savings_accounts: /total.*savings accounts/i,
+            offline_current_accounts: /amount.*current accounts/i,
+            offline_savings_accounts: /amount.*savings accounts/i,
+            partner_offline_current_accounts: /amount.*current accounts/i,
+            partner_offline_savings_accounts: /amount.*savings accounts/i,
+            joint_offline_current_accounts: /amount.*current accounts/i,
+            joint_offline_savings_accounts: /amount.*savings accounts/i,
           }
         end
         it "returns false" do
@@ -65,36 +65,6 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
           described_form.save!
           attributes.each do |attr|
             error_message = described_form.errors[attr].first
-            expect(error_message).to match(expected_error)
-            expect(error_message).to match(attribute_map[attr.to_sym])
-          end
-        end
-
-        it "does not update the model" do
-          expect { described_form.save }.not_to change { savings_amount.reload.updated_at }
-        end
-      end
-
-      shared_examples_for "it has a not a number error" do
-        let(:attribute_map) do
-          {
-            offline_current_accounts: /amount.*savings/i,
-            offline_savings_accounts: /amount.*savings/i,
-            partner_offline_current_accounts: /total.*current accounts/i,
-            partner_offline_savings_accounts: /total.*savings accounts/i,
-            joint_offline_current_accounts: /total.*current accounts/i,
-            joint_offline_savings_accounts: /total.*savings accounts/i,
-          }
-        end
-        it "returns false" do
-          expect(described_form.save).to be(false)
-        end
-
-        it "generates errors" do
-          described_form.save!
-          attributes.each do |attr|
-            error_message = described_form.errors[attr].first
-            expected_error = attr.starts_with?("partner") || attr.starts_with?("joint") ? expected_partner_error : expected_applicant_error
             expect(error_message).to match(expected_error)
             expect(error_message).to match(attribute_map[attr.to_sym])
           end
@@ -114,10 +84,9 @@ RSpec.describe SavingsAmounts::OfflineAccountsForm, type: :form do
 
       context "when amounts are not numbers" do
         let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
-        let(:expected_applicant_error) { /Enter the amount of savings, like 1,000 or 20.30/ }
-        let(:expected_partner_error) { /must be an amount of money, like 60,000/ }
+        let(:expected_error) { /Enter the amount in.*accounts.*, like 1,000 or 20.30/ }
 
-        it_behaves_like "it has a not a number error"
+        it_behaves_like "it has an error"
       end
 
       context "when amounts have a £ symbol" do
