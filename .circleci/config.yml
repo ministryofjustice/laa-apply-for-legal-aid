@@ -201,11 +201,6 @@ jobs:
         name: Install Puppeteer with Chromium
         command: |
           yarn add puppeteer
-    - run:
-        name: Setup Code Climate test-reporter
-        command: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
-          chmod +x ./tmp/cc-test-reporter
     - run: bundle exec rails assets:precompile
     - run:
         name: Run ruby tests
