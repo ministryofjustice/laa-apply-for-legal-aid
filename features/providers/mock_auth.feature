@@ -4,7 +4,4 @@ Feature: Mock auth for provider login
     Given the provider account has been created
     And I visit the root page
     And I click link 'start'
-    When I enter the email address 'test1@example.com'
-    And I enter the password 'password'
-    And I submit to saml
     Then I should be on a page with title "Select the account number of the office handling this application"
