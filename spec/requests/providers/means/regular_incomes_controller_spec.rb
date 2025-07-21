@@ -45,12 +45,12 @@ RSpec.describe Providers::Means::RegularIncomesController do
     end
 
     context "when the provider is not authenticated" do
-      it "redirects to the provider login page" do
+      it "redirects to the root page" do
         legal_aid_application = create(:legal_aid_application, :with_applicant)
 
         get providers_legal_aid_application_means_regular_incomes_path(legal_aid_application)
 
-        expect(response).to redirect_to(new_provider_session_path)
+        expect(response).to redirect_to(root_path)
       end
     end
   end
@@ -195,12 +195,12 @@ RSpec.describe Providers::Means::RegularIncomesController do
     end
 
     context "when the provider is not authenticated" do
-      it "redirects to the provider login page" do
+      it "redirects to the root page" do
         legal_aid_application = create(:legal_aid_application, :with_applicant)
 
         patch providers_legal_aid_application_means_regular_incomes_path(legal_aid_application)
 
-        expect(response).to redirect_to(new_provider_session_path)
+        expect(response).to redirect_to(root_path)
       end
     end
   end
