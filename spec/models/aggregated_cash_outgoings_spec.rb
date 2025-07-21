@@ -181,7 +181,7 @@ RSpec.describe AggregatedCashOutgoings do
         end
 
         it "populates the errors" do
-          error_msg = "Amount must not include more than 2 decimal numbers"
+          error_msg = "Enter the amount of money, like 1,000 or 20.30"
           expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg
         end
       end
@@ -292,7 +292,7 @@ RSpec.describe AggregatedCashOutgoings do
 
           it "populates the errors" do
             call_update
-            expect(aco.errors[:maintenance_out3]).to include "Amount must not include more than 2 decimal numbers"
+            expect(aco.errors[:maintenance_out3]).to include "Enter the amount of money, like 1,000 or 20.30"
           end
         end
 

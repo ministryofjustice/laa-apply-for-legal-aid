@@ -3,14 +3,14 @@ en:
   errors:
     aggregated_cash_income:
       blank: "Enter the cash amount received %{category} in %{month}"
-      invalid_type: Enter the amount of money, like 1,000 or 20.30
+      invalid_type: &aggregated_cash_income_error Enter the amount of money, like 1,000 or 20.30
       negative: Amount must be more than or equal to zero
-      too_many_decimals: Amount must not include more than 2 decimal numbers
+      too_many_decimals: *aggregated_cash_income_error
     aggregated_cash_outgoings:
       blank: "Enter the cash amount paid %{category} in %{month}"
-      invalid_type: Enter the amount of money, like 1,000 or 20.30
+      invalid_type: &aggregated_cash_outgoings_error Enter the amount of money, like 1,000 or 20.30
       negative: Amount must be more than or equal to zero
-      too_many_decimals: Amount must not include more than 2 decimal numbers
+      too_many_decimals: *aggregated_cash_outgoings_error
     applicant_bank_accounts:
       blank: Select yes if your client has savings accounts they cannot access online
     address:
