@@ -18,9 +18,9 @@ RSpec.describe Providers::Partners::RegularOutgoingsController do
         expect(response).to have_http_status(:found)
       end
 
-      it "redirects to the provider login page" do
+      it "redirects to the root page" do
         request
-        expect(response).to redirect_to(new_provider_session_path)
+        expect(response).to redirect_to(root_path)
       end
     end
 
