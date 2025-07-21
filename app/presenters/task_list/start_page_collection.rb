@@ -46,6 +46,7 @@ module TaskList
         subsections: {
           financial_information: {
             body_override: ->(application) { t!("task_list.body_override.means.financial_information_not_needed") if application.passported? },
+            employment_incomes: true, # Steps::ProviderIncome::EmploymentIncomesStep
           },
           capital_and_assets: {},
         },
