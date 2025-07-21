@@ -54,9 +54,6 @@ class Provider < ApplicationRecord
       end
     end
 
-    # TODO: move to the after login service or a similar asychronous process
-    provider.update_details_directly
-
     provider
   end
 
