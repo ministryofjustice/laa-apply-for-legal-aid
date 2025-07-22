@@ -110,6 +110,7 @@ ccms_soa:
 omniauth_entraid:
   mock_auth: "false"
   idp_sso_target_url: <not-sure-if-needed-but-could-point-to-silas/lassie-frontend>
+  redirect_uri: https://staging.apply-for-legal-aid.service.justice.gov.uk/auth/entra_id/callback
 
 provider_details:
   url: "https://preprod-pda-api-laa-ccms-preprod.apps.live.cloud-platform.service.justice.gov.uk/api/providerDetails/"
@@ -161,8 +162,5 @@ maintenance_mode:
 
 collect_hmrc_data:
   enabled: "false"
-
-omniauth_entraid:
-  redirect_uri: https://staging.apply-for-legal-aid.service.justice.gov.uk/auth/entra_id/callback
 
 env: staging
