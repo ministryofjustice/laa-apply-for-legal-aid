@@ -137,13 +137,13 @@ RSpec.describe AggregatedCashOutgoings do
         end
 
         it "populates the errors" do
-          expect(aco.errors[:maintenance_out1][0]).to eq error_msg("in maintenance", month1_name)
-          expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg("for housing", month1_name)
-          expect(aco.errors[:rent_or_mortgage3][0]).to eq error_msg("for housing", month3_name)
+          expect(aco.errors[:maintenance_out1][0]).to eq error_msg("maintenance", month1_name)
+          expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg("housing", month1_name)
+          expect(aco.errors[:rent_or_mortgage3][0]).to eq error_msg("housing", month3_name)
         end
 
         def error_msg(name, month)
-          "Enter the cash amount paid #{name} in #{month}"
+          "Enter the amount paid for #{name} in #{month}, like 1,000 or 20.30"
         end
       end
 
@@ -168,7 +168,7 @@ RSpec.describe AggregatedCashOutgoings do
         end
 
         it "populates the errors" do
-          error_msg = "Enter the amount of money, like 1,000 or 20.30"
+          error_msg = "Enter the amount paid for housing in June, like 1,000 or 20.30"
           expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg
         end
       end
@@ -181,7 +181,7 @@ RSpec.describe AggregatedCashOutgoings do
         end
 
         it "populates the errors" do
-          error_msg = "Enter the amount of money, like 1,000 or 20.30"
+          error_msg = "Enter the amount paid for housing in June, like 1,000 or 20.30"
           expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg
         end
       end
@@ -274,7 +274,7 @@ RSpec.describe AggregatedCashOutgoings do
 
           it "populates the errors" do
             call_update
-            expect(aco.errors[:rent_or_mortgage2]).to include "Enter the amount of money, like 1,000 or 20.30"
+            expect(aco.errors[:rent_or_mortgage2]).to include "Enter the amount paid for housing in May, like 1,000 or 20.30"
           end
         end
 
@@ -292,7 +292,7 @@ RSpec.describe AggregatedCashOutgoings do
 
           it "populates the errors" do
             call_update
-            expect(aco.errors[:maintenance_out3]).to include "Enter the amount of money, like 1,000 or 20.30"
+            expect(aco.errors[:maintenance_out3]).to include "Enter the amount paid for maintenance in April, like 1,000 or 20.30"
           end
         end
 
@@ -328,7 +328,7 @@ RSpec.describe AggregatedCashOutgoings do
 
           it "populates the errors" do
             call_update
-            expect(aco.errors[:rent_or_mortgage1]).to include "Enter the cash amount paid for housing in #{month1_name}"
+            expect(aco.errors[:rent_or_mortgage1]).to include "Enter the amount paid for housing in #{month1_name}, like 1,000 or 20.30"
           end
         end
       end

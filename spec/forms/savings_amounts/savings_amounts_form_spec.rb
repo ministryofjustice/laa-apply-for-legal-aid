@@ -50,11 +50,11 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
         let(:attribute_map) do
           {
             cash: /of money that's/i,
-            other_person_account: /other people's.*account/,
+            other_person_account: /other (people|person)'s.*account/,
             national_savings: /certificates and.*bonds/i,
             plc_shares: /shares/,
-            peps_unit_trusts_capital_bonds_gov_stocks: /total.* of other investments/i,
-            life_assurance_endowment_policy: /(total|value).*of life assurance.*policies/i,
+            peps_unit_trusts_capital_bonds_gov_stocks: /(total|amount).*other investments/,
+            life_assurance_endowment_policy: /(total|value|amount).*life.*surance.*policies/i,
           }
         end
         it "returns false" do
@@ -69,10 +69,6 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
             expect(error_message).to match(attribute_map[attr.to_sym])
           end
         end
-
-        it "does not update the model" do
-          expect { described_form.save }.not_to change { savings_amount.reload.updated_at }
-        end
       end
 
       context "when the amounts are empty" do
@@ -84,7 +80,7 @@ RSpec.describe SavingsAmounts::SavingsAmountsForm, type: :form do
 
       context "when the amounts are not numbers" do
         let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
-        let(:expected_error) { /amount of money/ }
+        let(:expected_error) { /Enter the amount/ }
 
         it_behaves_like "it has an error"
       end

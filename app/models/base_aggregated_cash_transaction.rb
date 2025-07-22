@@ -176,9 +176,9 @@ private
 
       next if value.blank?
 
-      errors.add(value_attr, I18n.t("errors.#{self.class.to_s.underscore}.invalid_type")) unless number?(value)
+      errors.add(value_attr, I18n.t("errors.#{self.class.to_s.underscore}.invalid_type", category: I18n.t("transaction_types.names.error_message.#{category}"), month: month_name(i))) unless number?(value)
       errors.add(value_attr, I18n.t("errors.#{self.class.to_s.underscore}.negative")) unless valid_amount?(value)
-      errors.add(value_attr, I18n.t("errors.#{self.class.to_s.underscore}.too_many_decimals")) unless CurrencyValidator::ONLY_2_DECIMALS_PATTERN.match?(value.to_s)
+      errors.add(value_attr, I18n.t("errors.#{self.class.to_s.underscore}.too_many_decimals", category: I18n.t("transaction_types.names.error_message.#{category}"), month: month_name(i))) unless CurrencyValidator::ONLY_2_DECIMALS_PATTERN.match?(value.to_s)
     end
   end
 

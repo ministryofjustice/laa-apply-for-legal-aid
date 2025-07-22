@@ -15,15 +15,15 @@ en:
         rent_or_mortgage: Housing payments
         salary: Salary or wages
       error_message:
-        benefits: in benefits
-        friends_or_family: from friends or family
-        maintenance_in: in maintenance
-        property_or_lodger: from a property or lodger
-        pension: in pension payments
-        rent_or_mortgage: for housing
-        child_care: for childcare
-        maintenance_out: in maintenance
-        legal_aid: towards legal aid
+        benefits: benefits
+        friends_or_family: friends or family
+        maintenance_in: maintenance
+        property_or_lodger: a property or lodger
+        pension: pension payments
+        rent_or_mortgage: housing
+        child_care: childcare
+        maintenance_out: maintenance
+        legal_aid: legal aid
     frequencies:
       weekly: Every week
       two_weekly: Every 2 weeks
