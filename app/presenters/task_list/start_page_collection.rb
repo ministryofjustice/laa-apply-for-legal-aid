@@ -25,7 +25,7 @@ module TaskList
     #  - Steps::ProviderStart::ApplicantsStep --> applicants
     #  - Steps::ProviderStart::AboutFinancialMeansStep --> about_financial_means
     #
-    # Body overide:
+    # Body override:
     #
     # If the section's task list cannot be shown and requires text to be displayed instead then the
     # body_override task key should be added. It's lambda should return the message to be displayed
@@ -39,8 +39,8 @@ module TaskList
       client_and_case_details: {
         applicants: true, # Steps::ProviderStart::ApplicantsStep
         make_link: true, # Steps::ProviderStart::MakeLinkStep
-        check_provider_answers: true, # Steps::ProviderStart::CheckProviderAnswersStep,
-        dwp_outcome: true, # Steps::ProviderDWPOverride::ConfirmDWPNonPassportedApplicationsStep
+        check_provider_answers: true, # Steps::ProviderStart::CheckProviderAnswersStep
+        dwp_outcome: true, # Steps::ProviderDWPOverride::ReceivedBenefitConfirmationsStep
       },
       means_assessment: {
         body_override: ->(application) { t!("task_list.body_override.means.requirement_unknown") if application.journey_unknown? || application.non_means_tested? },
