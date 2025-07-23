@@ -18,7 +18,7 @@ module Providers
     end
 
     def update
-      update_confirm_dwp_status!(legal_aid_application, true)
+      confirm_dwp_status_correct!(legal_aid_application)
       continue_or_draft
     end
   end

@@ -15,13 +15,13 @@ RSpec.describe DWPOutcomeHelper do
     end
   end
 
-  describe "#update_confirm_dwp_result" do
-    subject(:call_method) { helper.update_confirm_dwp_status!(application, true) }
+  describe "#confirm_dwp_status_correct" do
+    subject(:call_method) { helper.confirm_dwp_status_correct!(application) }
 
     before { call_method }
 
     it "updates confirm_dwp_result to true" do
-      expect(application.confirm_dwp_result).to be_truthy
+      expect(application.confirm_dwp_result).to be "dwp_correct"
     end
   end
 end

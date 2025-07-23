@@ -11,7 +11,7 @@ module Providers
     end
 
     def update
-      update_confirm_dwp_status!(legal_aid_application, true)
+      confirm_dwp_status_correct!(legal_aid_application)
       mark_as_benefit_check_skipped!("no_means_test_required")
       mark_as_cfe_result_skipped!
 
