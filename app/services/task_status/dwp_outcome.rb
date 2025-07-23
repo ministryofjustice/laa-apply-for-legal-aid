@@ -14,25 +14,23 @@ module TaskStatus
   private
 
     def not_ready?
-      true
-      # TODO: update once validator is ready
-      # !check_your_answers_validator.valid?
+      !check_provider_answers_completed?
     end
 
     def not_started?
-      application.confirm_dwp_result.nil?
-      # TODO: update once CYA validator is ready
-      # check_your_answers_validator.valid? && application.confirm_dwp_result.nil?
+      check_provider_answers_completed? && application.confirm_dwp_result.nil?
     end
 
     def in_progress?
-      application.confirm_dwp_result == false
-      # TODO: update once CYA validator is ready
-      # check_your_answers_validator.valid? && application.confirm_dwp_result == false
+      check_provider_answers_completed? && application.confirm_dwp_result == false
     end
 
     def completed?
       application.confirm_dwp_result == true
+    end
+
+    def check_provider_answers_completed?
+      CheckProviderAnswers.new(application).call.completed?
     end
   end
 end
