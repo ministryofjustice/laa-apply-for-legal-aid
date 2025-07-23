@@ -34,6 +34,52 @@ module StepHelpers
     click_on "Save and continue"
     expect(page).to have_css("h1", text: "Has your client applied for civil legal aid before?")
 
-    nil if step_name == :previous_references
+    return if step_name == :previous_references
+
+    govuk_choose("No")
+    click_on "Save and continue"
+
+    return if step_name == :correspondence_address
+
+    govuk_choose("My client's UK home address")
+    click_on("Save and continue")
+
+    fill_in("Postcode", with: "SW1H 9EA")
+    click_on "Find address"
+
+    govuk_choose "Transport For London, 98 Petty France, London, SW1H 9EA"
+    click_on "Use this address"
+
+    return if step_name == :proceedings_types
+
+    fill_in("proceeding-search-input", with: "Non-molestation order")
+    click_on "Non-molestation order"
+    click_on("Save and continue")
+
+    govuk_choose("No")
+    click_on("Save and continue")
+
+    govuk_choose("Applicant, claimant or petitioner")
+    click_on("Save and continue")
+
+    # Delegated functions
+    govuk_choose("No")
+    click_on("Save and continue")
+
+    govuk_choose("Yes")
+    click_on("Save and continue")
+
+    # Limitations
+    click_on("Save and continue")
+
+    # Partner
+    govuk_choose("No")
+    click_on("Save and continue")
+
+    return if step_name == :check_provider_answers
+
+    # Check your answers
+    click_on("Save and continue")
+    nil if step_name == :confirm_dwp_non_passported_applications
   end
 end

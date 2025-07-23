@@ -10,6 +10,19 @@ FactoryBot.define do
       applicant { build(:applicant, with_bank_accounts:) }
     end
 
+    trait :with_complete_applicant do
+      applicant do
+        build(:applicant,
+              has_national_insurance_number: true,
+              national_insurance_number: "JA123456D",
+              applied_previously: false,
+              previous_reference: nil,
+              correspondence_address_choice: "home",
+              addresses: [build(:address, location: "home", lookup_used: true)],
+              employed: nil)
+      end
+    end
+
     trait :with_employed_applicant do
       # use :with_bank_accounts: 2 to create 2 bank accounts for the applicant
       transient do
