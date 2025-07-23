@@ -3,7 +3,7 @@ module TaskStatus
     def call
       status = ValueObject.new
 
-      status.not_ready! if not_ready?
+      # status.not_ready! if not_ready?
       status.not_started! if not_started?
       status.in_progress! if in_progress?
       status.completed! if completed?
@@ -14,7 +14,7 @@ module TaskStatus
   private
 
     def not_ready?
-      false
+      true
       # TODO: application.confirm_dwp_result != true
     end
 
@@ -23,11 +23,15 @@ module TaskStatus
     end
 
     def in_progress?
-      applicant.employed? && application.full_employment_details.nil? && applicant.extra_employment_information.nil?
+      applicant.employed && !employment_incomes_validator.valid?
     end
 
     def completed?
-      application.full_employment_details.present? || !applicant.extra_employment_information.nil?
+      applicant.employed && employment_incomes_validator.valid?
+    end
+
+    def employment_incomes_validator
+      @employment_incomes_validator ||= Validators::EmploymentIncomes.new(application)
     end
   end
 end
