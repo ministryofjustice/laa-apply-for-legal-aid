@@ -46,6 +46,8 @@ Rails.application.configure do
 
   config.x.logs_faraday_response = false
 
+  config.x.laa_landing_page_target_url = "https://example.com/"
+
   # Policy Disregards feature flag
   config.x.policy_disregards_start_date = Date.parse("2021-1-8")
 
