@@ -234,7 +234,6 @@ en:
         option_no: No, my client gets a passporting benefit
         option_partner: No, my client gets a joint passporting benefit with their partner
         hmrc_text: If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.
-        error: Select yes if the DWP records are correct
 
     confirm_multiple_delegated_functions_dates:
       show:
@@ -869,7 +868,7 @@ en:
 
     task_lists:
       show:
-        page_title: Make a new application 
+        page_title: Make a new application
         para1: Use this list to see your progress.
         para2: You can go back and edit completed sections if they appear as links. More sections will become editable over time.
         name: "Name:"
