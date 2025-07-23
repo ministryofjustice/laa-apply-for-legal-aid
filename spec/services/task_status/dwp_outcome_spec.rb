@@ -4,31 +4,39 @@ RSpec.describe TaskStatus::DWPOutcome do
   describe "#call" do
     subject(:task_status) { described_class.new(application).call }
 
-    # TODO: add this spec in when check your answers validation is available
-    # context "when check_your_answers is not completed" do
-    # let(:application) { create(:application) }
-    #
-    #   it "returns the status of :not_ready" do
-    #     expect(task_status.value).to eq(:not_ready)
-    #   end
-    # end
+    let(:application) { create(:application, :with_complete_applicant, confirm_dwp_result:) }
+    let(:confirm_dwp_result) { nil }
 
-    context "with `confirm_dwp_result=nil`" do
-      let(:application) { create(:application) }
+    context "when check_your_answers is not completed" do
+      before do
+        application.reviewed[:check_provider_answers] = { status: "in_progress", at: Time.current }
+        application.save!
+      end
 
-      it { is_expected.to be_not_started }
+      it { is_expected.to be_not_ready }
     end
 
-    context "with `confirm_dwp_result=false`" do
-      let(:application) { create(:application, confirm_dwp_result: false) }
+    context "when check_your_answers is completed" do
+      before do
+        application.reviewed[:check_provider_answers] = { status: "completed", at: Time.current }
+        application.save!
+      end
 
-      it { is_expected.to be_in_progress }
-    end
+      context "when confirm_dwp_result is nil" do
+        it { is_expected.to be_not_started }
+      end
 
-    context "with `confirm_dwp_result=true`" do
-      let(:application) { create(:application, confirm_dwp_result: true) }
+      context "when confirm_dwp_result is false" do
+        let(:confirm_dwp_result) { false }
 
-      it { is_expected.to be_completed }
+        it { is_expected.to be_in_progress }
+      end
+
+      context "when confirm_dwp_result is true" do
+        let(:confirm_dwp_result) { true }
+
+        it { is_expected.to be_completed }
+      end
     end
   end
 end
