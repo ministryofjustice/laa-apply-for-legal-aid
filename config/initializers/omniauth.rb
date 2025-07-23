@@ -31,4 +31,12 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     Rails.configuration.x.google_oauth2.client_id,
     Rails.configuration.x.google_oauth2.client_secret,
   )
+  provider(
+    :entra_id,
+    client_id: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_ID", nil),
+    client_secret: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_SECRET", nil),
+    tenant_id: ENV.fetch("OMNIAUTH_ENTRAID_TENANT_ID", nil),
+    authorize_params: { prompt: "select_account" },
+    strategy_class: OmniAuth::Strategies::EntraIdOidc,
+  )
 end
