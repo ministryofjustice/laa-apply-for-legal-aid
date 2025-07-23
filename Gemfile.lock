@@ -94,10 +94,8 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
-    aes_key_wrap (1.1.0)
     ast (2.4.3)
     attr_extras (7.1.0)
-    attr_required (1.0.2)
     awesome_print (1.9.2)
     aws-eventstream (1.4.0)
     aws-partitions (1.1133.0)
@@ -141,7 +139,6 @@ GEM
       parser (>= 2.4)
       smart_properties
     bigdecimal (3.2.2)
-    bindata (2.5.1)
     binding_of_caller (1.0.1)
       debug_inspector (>= 1.2.0)
     bootsnap (1.18.6)
@@ -250,8 +247,6 @@ GEM
     em-websocket (0.5.3)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0)
-    email_validator (2.2.4)
-      activemodel
     erb (5.0.2)
     erb_lint (0.9.0)
       activesupport
@@ -274,8 +269,6 @@ GEM
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
-    faraday-follow_redirects (0.3.0)
-      faraday (>= 1, < 3)
     faraday-net_http (3.4.1)
       net-http (>= 0.5.0)
     ffi (1.17.2)
@@ -357,18 +350,7 @@ GEM
     jmespath (1.6.2)
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
-<<<<<<< HEAD
     json (2.13.0)
-=======
-    json (2.12.2)
-    json-jwt (1.16.7)
-      activesupport (>= 4.2)
-      aes_key_wrap
-      base64
-      bindata
-      faraday (~> 2.0)
-      faraday-follow_redirects
->>>>>>> 52899eb12 (Add omniauthable)
     json_expressions (0.9.0)
     jsonapi-renderer (0.2.2)
     jwt (2.10.2)
@@ -397,7 +379,6 @@ GEM
     matrix (0.4.3)
     method_source (1.1.0)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.9)
     minitest (5.25.5)
     msgpack (1.8.0)
     multi_json (1.17.0)
@@ -418,9 +399,6 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.18.9)
-      mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
     nokogiri (1.18.9-x86_64-darwin)
       racc (~> 1.4)
     notiffany (0.1.3)
@@ -447,6 +425,9 @@ GEM
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
       rack-protection
+    omniauth-entra-id (3.1.0)
+      jwt (>= 2.9.2)
+      omniauth-oauth2 (~> 1.8)
     omniauth-google-oauth2 (1.2.1)
       jwt (>= 2.9.2)
       oauth2 (~> 2.0)
@@ -458,22 +439,6 @@ GEM
     omniauth-rails_csrf_protection (1.0.2)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
-    omniauth_openid_connect (0.8.0)
-      omniauth (>= 1.9, < 3)
-      openid_connect (~> 2.2)
-    openid_connect (2.3.1)
-      activemodel
-      attr_required (>= 1.0.0)
-      email_validator
-      faraday (~> 2.0)
-      faraday-follow_redirects
-      json-jwt (>= 1.16)
-      mail
-      rack-oauth2 (~> 2.2)
-      swd (~> 2.0)
-      tzinfo
-      validate_url
-      webfinger (~> 2.0)
     optimist (3.2.1)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
@@ -532,13 +497,6 @@ GEM
     rack (3.1.16)
     rack-attack (6.7.0)
       rack (>= 1.0, < 4)
-    rack-oauth2 (2.2.1)
-      activesupport
-      attr_required
-      faraday (~> 2.0)
-      faraday-follow_redirects
-      json-jwt (>= 1.11.0)
-      rack (>= 2.1.0)
     rack-pjax (1.1.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
@@ -730,11 +688,6 @@ GEM
       attr_extras (>= 6.2.4)
       diff-lcs
       patience_diff
-    swd (2.0.3)
-      activesupport (>= 3)
-      attr_required (>= 0.0.5)
-      faraday (~> 2.0)
-      faraday-follow_redirects
     sys-uname (1.3.1)
       ffi (~> 1.1)
     table_print (1.5.7)
@@ -752,9 +705,6 @@ GEM
     unicode-emoji (4.0.4)
     uri (1.0.3)
     useragent (0.16.11)
-    validate_url (1.0.15)
-      activemodel (>= 3.0.0)
-      public_suffix
     vcr (6.3.1)
       base64
     version_gem (1.1.8)
@@ -768,10 +718,6 @@ GEM
       descendants_tracker (~> 0.0, >= 0.0.3)
     warden (1.2.9)
       rack (>= 2.0.9)
-    webfinger (2.1.3)
-      activesupport
-      faraday (~> 2.0)
-      faraday-follow_redirects
     webmock (3.25.1)
       addressable (>= 2.8.0)
       crack (>= 0.3.2)
@@ -787,7 +733,6 @@ GEM
     zeitwerk (2.7.3)
 
 PLATFORMS
-  ruby
   x86_64-darwin
 
 DEPENDENCIES
@@ -842,10 +787,10 @@ DEPENDENCIES
   nokogiri (>= 1.12.5)
   oauth
   omniauth (>= 2.0.0)
+  omniauth-entra-id
   omniauth-google-oauth2 (>= 0.8.1)
   omniauth-oauth2 (>= 1.7.1)
   omniauth-rails_csrf_protection (~> 1.0)
-  omniauth_openid_connect (= 0.8.0)
   ostruct
   overcommit
   pagy

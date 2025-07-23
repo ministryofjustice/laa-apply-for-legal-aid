@@ -2,7 +2,8 @@ class Provider < ApplicationRecord
   encrypts :auth_subject_uid, deterministic: true
 
   # devise :saml_authenticatable, :trackable
-  devise :trackable, :omniauthable, omniauth_providers: [:entra_id]
+  # devise :trackable, :omniauthable, omniauth_providers: [:entra_id]
+  devise :trackable
 
   serialize :roles, coder: YAML
   serialize :offices, coder: YAML
@@ -79,6 +80,7 @@ class Provider < ApplicationRecord
   # TODO: AP-6146: will need to change this or remove/replace entirely
   def ccms_apply_role?
     return true if Rails.configuration.x.omniauth_entraid.mock_auth == "true"
+    return true if auth_provider.eql?("entra_id") && auth_subject_uid.present?
 
     return false if roles.nil?
 

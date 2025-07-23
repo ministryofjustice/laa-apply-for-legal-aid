@@ -267,31 +267,6 @@ Devise.setup do |config|
   # and implements a #handle method. This method can then redirect the user, return error messages, etc.
   # config.saml_failed_callback = nil
 
-  # ==> OmniAuth
-  # Add a new OmniAuth provider. Check the wiki for more information on setting
-  # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-
-  config.omniauth(
-    :openid_connect,
-    {
-      name: "entra_id",
-      scope: %i[openid email profile],
-      response_type: :code,
-      # client_auth_method: :mtls #- Mutual TLS or X.509 certificate validation.
-      client_options: {
-        identifier: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_ID", nil),
-        secret: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_SECRET", nil),
-        redirect_uri: ENV.fetch("OMNIAUTH_ENTRAID_REDIRECT_URI", nil),
-      },
-      discovery: true,
-      issuer: "https://login.microsoftonline.com/#{ENV.fetch('OMNIAUTH_ENTRAID_TENANT_ID', nil)}/v2.0",
-      pkce: true,
-      extra_authorise_params: { tenant: ENV.fetch("OMNIAUTH_ENTRAID_TENANT_ID", nil) },
-      strategy_class: OmniAuth::Strategies::EntraIdOidc,
-    },
-  )
-
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
