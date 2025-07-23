@@ -22,12 +22,14 @@ module Providers
 
   protected
 
-    def update_provider_details
-      ProviderAfterLoginService.call(@provider)
-    end
-
     def after_sign_in_path_for(resource)
       providers_confirm_office_path(resource)
+    end
+
+  private
+
+    def update_provider_details
+      ProviderAfterLoginService.call(@provider)
     end
   end
 end
