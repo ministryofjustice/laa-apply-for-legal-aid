@@ -1,6 +1,6 @@
 module OmniAuth
   module Strategies
-    class EntraIdOidc < OmniAuth::Strategies::OpenIDConnect
+    class EntraIdOidc < OmniAuth::Strategies::EntraId
       # we may only need the user_name attribute to query PDA for offices and firms
       # info { { user_name:, email:, roles:, office_codes: } }
       info { { user_name:, office_codes: } }
