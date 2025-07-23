@@ -4,8 +4,8 @@ module DWPOutcomeHelper
     legal_aid_application.save!
   end
 
-  def update_confirm_dwp_status!(legal_aid_application, new_status)
-    legal_aid_application.update!(confirm_dwp_result: new_status)
+  def confirm_dwp_status_correct!(legal_aid_application)
+    legal_aid_application.update!(confirm_dwp_result: "dwp_correct")
     legal_aid_application.save!
   end
 end
