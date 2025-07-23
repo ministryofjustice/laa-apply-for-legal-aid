@@ -8,6 +8,16 @@ module Providers
     include Authorizable
     include Reviewable::Controller
 
+  protected
+
+    def authenticate_provider!
+      if provider_signed_in?
+        super
+      else
+        redirect_to "/auth/entra_id"
+      end
+    end
+
   private
 
     def display_employment_income?
