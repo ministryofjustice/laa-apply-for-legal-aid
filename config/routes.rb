@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     username == "sidekiq" && password == ENV["SIDEKIQ_WEB_UI_PASSWORD"].to_s
   end
 
-  devise_for :providers, controllers: { sessions: "providers/sessions", omniauth_callbacks: "providers/omniauth_callbacks" }
+  devise_for :providers, controllers: { sessions: "providers/sessions" }
   devise_for :applicants
   devise_for :admin_users, controllers: { sessions: "admin_users/sessions" }
 
@@ -45,6 +45,13 @@ Rails.application.routes.draw do
     authenticated :provider do
       root to: "start#index", as: :authenticated_root
     end
+
+    match(
+      "auth/entra_id/callback",
+      to: "providers/omniauth_callbacks#entra_id",
+      via: %i[get puts],
+      as: :provider_entra_id_omniauth_callback,
+    )
 
     delete "/providers/sign_out", to: "providers/sessions#destroy", as: :destroy_provider_session
   end
