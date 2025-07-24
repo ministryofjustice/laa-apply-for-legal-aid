@@ -121,7 +121,7 @@ env:
   - name: CCMS_SOA_GET_REFERENCE_DATA_WSDL
     value: {{ .Values.ccms_soa.getReferenceDataWsdl | quote }}
   - name: OMNIAUTH_ENTRAID_MOCK_AUTH
-    value: {{ .Values.omniauth_entra_id.mock_auth | quote }}
+    value: {{ .Values.omniauth_entraid.mock_auth | quote }}
   - name: OMNIAUTH_ENTRAID_CLIENT_ID
     valueFrom:
       secretKeyRef:
