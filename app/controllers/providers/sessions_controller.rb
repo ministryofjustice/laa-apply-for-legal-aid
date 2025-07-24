@@ -1,7 +1,6 @@
 module Providers
   class SessionsController < Devise::SessionsController
     def destroy
-      flash[:notice] = t("devise.sessions.destroy.notice")
       session["signed_out"] = true
       session["feedback_return_path"] = destroy_provider_session_path
       super
