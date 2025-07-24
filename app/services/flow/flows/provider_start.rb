@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderStart < FlowSteps
+    class ProviderStart
       STEPS = {
         providers_home: Steps::ProvidersHomeStep,
         delete: Steps::DeleteStep,
