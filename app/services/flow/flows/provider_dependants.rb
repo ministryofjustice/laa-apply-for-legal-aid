@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderDependants < FlowSteps
+    class ProviderDependants
       STEPS = {
         has_dependants: Steps::ProviderDependants::HasDependantsStep,
         dependants: Steps::ProviderDependants::DependantsStep,

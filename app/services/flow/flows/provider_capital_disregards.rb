@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderCapitalDisregards < FlowSteps
+    class ProviderCapitalDisregards
       STEPS = {
         capital_disregards_discretionary: Steps::ProviderCapitalDisregards::DiscretionaryStep,
         capital_disregards_mandatory: Steps::ProviderCapitalDisregards::MandatoryStep,
