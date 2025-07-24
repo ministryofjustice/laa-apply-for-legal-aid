@@ -49,7 +49,7 @@ Rails.application.routes.draw do
       as: :provider_entra_id_omniauth_callback,
     )
 
-    get "/providers/sign_in", to: "providers/sessions#new", as: :new_provider_session
+    get "/auth/entra_id", to: "providers/sessions#new", as: :new_provider_session
     post "/providers/sign_in", to: "providers/sessions#create", as: :provider_session
     delete "/providers/sign_out", to: "providers/sessions#destroy", as: :destroy_provider_session
   end
