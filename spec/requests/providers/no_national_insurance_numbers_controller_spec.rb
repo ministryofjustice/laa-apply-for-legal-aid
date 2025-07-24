@@ -36,9 +36,9 @@ RSpec.describe Providers::NoNationalInsuranceNumbersController do
           expect(response).to render_template("providers/no_national_insurance_numbers/show")
         end
 
-        context "when confirm_dwp_result is false" do
+        context "when confirm_dwp_result is not nil" do
           before do
-            application.confirm_dwp_result = false
+            application.confirm_dwp_result = "dwp_correct"
           end
 
           it "resets confirm_dwp_result to nil" do
@@ -78,9 +78,9 @@ RSpec.describe Providers::NoNationalInsuranceNumbersController do
       context "when continuing" do
         let(:params) { { continue_button: "irrelevant" } }
 
-        it "updates confirm_dwp_result to true" do
+        it "updates confirm_dwp_result to dwp_correct" do
           request
-          expect(application.reload.confirm_dwp_result).to be true
+          expect(application.reload.confirm_dwp_result).to eq "dwp_correct"
         end
 
         it "redirects to the next page" do
