@@ -86,7 +86,7 @@ RSpec.describe Providers::Partners::StateBenefitsController do
       it "returns an the same page with the expected errors showing" do
         expect(response).to have_http_status(:unprocessable_content)
         expect(response.body).to include("Enter the name of the benefit")
-        expect(response.body).to include("Enter the amount of benefit received")
+        expect(response.body).to include("Enter the amount of money, like 1,000 or 20.30")
         expect(response.body).to include("Select how often the partner gets the benefit")
       end
     end
@@ -123,7 +123,7 @@ RSpec.describe Providers::Partners::StateBenefitsController do
       it "returns an the same page with the expected errors showing" do
         expect(response).to have_http_status(:unprocessable_content)
         expect(response.body).to include("Enter the name of the benefit")
-        expect(response.body).to include("Enter the amount of benefit received")
+        expect(response.body).to include("Enter the amount of money, like 1,000 or 20.30")
         expect(response.body).to include("Select how often the partner gets the benefit")
       end
     end

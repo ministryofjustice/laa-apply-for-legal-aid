@@ -111,7 +111,7 @@ RSpec.describe "providers offine accounts" do
 
             it "displays an error" do
               patch_request
-              expect(response.body).to have_content("Total in client's current accounts must be an amount of money, like 60,000")
+              expect(response.body).to have_content("Enter the amount in current accounts, like 1,000 or 20.30")
               expect(response.body).to match("govuk-error-message")
               expect(response.body).to match("govuk-form-group--error")
             end
@@ -184,7 +184,7 @@ RSpec.describe "providers offine accounts" do
 
           it "displays an error" do
             patch_request
-            expect(response.body).to have_content("Total in client's current accounts must be an amount of money, like 60,000")
+            expect(response.body).to have_content("Enter the amount in current accounts, like 1,000 or 20.30")
             expect(response.body).to match("govuk-error-message")
             expect(response.body).to match("govuk-form-group--error")
           end
