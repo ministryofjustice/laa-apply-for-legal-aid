@@ -12,7 +12,7 @@
   "dependencies": {
     "@ministryofjustice/frontend": "^5.1.5",
     "@rails/ujs": "^7.1.501",
-    "axios": "^1.10.0",
+    "axios": "^1.11.0",
     "core-js": "^3.44.0",
     "dropzone": "^6.0.0-beta.2",
     "esbuild": "^0.25.8",
