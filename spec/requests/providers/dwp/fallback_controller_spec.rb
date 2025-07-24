@@ -25,9 +25,9 @@ RSpec.describe Providers::DWP::FallbackController do
         expect(response).to be_successful
       end
 
-      context "when confirm_dwp_result is false" do
+      context "when confirm_dwp_result is not nil" do
         before do
-          application.confirm_dwp_result = false
+          application.confirm_dwp_result = "dwp_correct"
         end
 
         it "resets confirm_dwp_result to nil" do
@@ -104,9 +104,9 @@ RSpec.describe Providers::DWP::FallbackController do
           end
         end
 
-        it "sets the legal_aid_application confirm_dwp_result field to be true" do
+        it "sets the legal_aid_application confirm_dwp_result field to be dwp_correct" do
           patch_request
-          expect(application.reload.confirm_dwp_result).to be true
+          expect(application.reload.confirm_dwp_result).to eq "dwp_correct"
         end
 
         it "redirects to the next page" do
@@ -167,9 +167,9 @@ RSpec.describe Providers::DWP::FallbackController do
           end
         end
 
-        it "sets the legal_aid_application confirm_dwp_result field to be false" do
+        it "sets the legal_aid_application confirm_dwp_result field to be joint_with_partner_false" do
           patch_request
-          expect(application.reload.confirm_dwp_result).to be false
+          expect(application.reload.confirm_dwp_result).to eq "joint_with_partner_false"
         end
 
         it "redirects to the next page" do
@@ -221,9 +221,9 @@ RSpec.describe Providers::DWP::FallbackController do
           expect(application.reload.applicant.shared_benefit_with_partner).to be true
         end
 
-        it "sets the legal_aid_application confirm_dwp_result field to be false" do
+        it "sets the legal_aid_application confirm_dwp_result field to be joint_with_partner_true" do
           patch_request
-          expect(application.reload.confirm_dwp_result).to be false
+          expect(application.reload.confirm_dwp_result).to eq "joint_with_partner_true"
         end
 
         it "redirects to the next page" do
