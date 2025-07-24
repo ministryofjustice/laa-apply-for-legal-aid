@@ -38,10 +38,6 @@ Rails.application.routes.draw do
   end
 
   devise_scope :provider do
-    unauthenticated :provider do
-      root "providers/start#index", as: :unauthenticated_root
-    end
-
     authenticated :provider do
       root to: "start#index", as: :authenticated_root
     end
@@ -53,6 +49,8 @@ Rails.application.routes.draw do
       as: :provider_entra_id_omniauth_callback,
     )
 
+    get "/providers/sign_in", to: "providers/sessions#new", as: :new_provider_session
+    post "/providers/sign_in", to: "providers/sessions#create", as: :provider_session
     delete "/providers/sign_out", to: "providers/sessions#destroy", as: :destroy_provider_session
   end
 
