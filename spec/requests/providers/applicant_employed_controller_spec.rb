@@ -3,12 +3,12 @@ require "rails_helper"
 RSpec.describe Providers::ApplicantEmployedController do
   describe "GET /providers/applications/:legal_aid_application_id/applicant_employed" do
     context "when the provider is not authenticated" do
-      it "redirects the user to the root page" do
+      it "redirects the user to the login page" do
         legal_aid_application = create(:legal_aid_application)
 
         get providers_legal_aid_application_applicant_employed_index_path(legal_aid_application)
 
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(new_provider_session_path)
       end
     end
 
@@ -38,12 +38,12 @@ RSpec.describe Providers::ApplicantEmployedController do
 
   describe "POST /providers/applications/:legal_aid_application_id/applicant_employed" do
     context "when the provider is not authenticated" do
-      it "redirects the user to the root page" do
+      it "redirects the user to the login page" do
         legal_aid_application = create(:legal_aid_application)
 
         post providers_legal_aid_application_applicant_employed_index_path(legal_aid_application), params: {}
 
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(new_provider_session_path)
       end
     end
 
