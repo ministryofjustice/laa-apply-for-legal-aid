@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class CitizenStart < FlowSteps
+    class CitizenStart
       STEPS = {
         legal_aid_applications: Steps::CitizenStart::LegalAidApplicationsStep,
         consents: Steps::CitizenStart::ConsentsStep,

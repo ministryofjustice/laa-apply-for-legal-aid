@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/dev-develop/ruby-saml-idp.git
-  revision: e8c9ba90a0f868e03d033133df1d2b035b9b65a9
-  branch: master
-  specs:
-    ruby-saml-idp (0.3.2)
-
-GIT
   remote: https://github.com/thoughtbot/action_dispatch-testing-integration-capybara.git
   revision: b4811cb0a6f3e96630c379c06293e9b82f068bb4
   tag: v0.1.1
@@ -232,9 +225,6 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise_saml_authenticatable (2.0.0)
-      devise (> 2.0.0)
-      ruby-saml (~> 1.18)
     dibber (0.7.0)
     diff-lcs (1.6.2)
     discard (1.4.0)
@@ -389,7 +379,6 @@ GEM
     matrix (0.4.3)
     method_source (1.1.0)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.9)
     minitest (5.25.5)
     msgpack (1.8.0)
     multi_json (1.17.0)
@@ -410,9 +399,6 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.18.9)
-      mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
     nokogiri (1.18.9-x86_64-darwin)
       racc (~> 1.4)
     notiffany (0.1.3)
@@ -439,6 +425,9 @@ GEM
       hashie (>= 3.4.6)
       rack (>= 2.2.3)
       rack-protection
+    omniauth-entra-id (3.1.0)
+      jwt (>= 2.9.2)
+      omniauth-oauth2 (~> 1.8)
     omniauth-google-oauth2 (1.2.1)
       jwt (>= 2.9.2)
       oauth2 (~> 2.0)
@@ -648,9 +637,6 @@ GEM
     ruby-graphviz (1.2.5)
       rexml
     ruby-progressbar (1.13.0)
-    ruby-saml (1.18.0)
-      nokogiri (>= 1.13.10)
-      rexml
     ruby2_keywords (0.0.5)
     rubyzip (2.4.1)
     securerandom (0.4.1)
@@ -747,7 +733,6 @@ GEM
     zeitwerk (2.7.3)
 
 PLATFORMS
-  ruby
   x86_64-darwin
 
 DEPENDENCIES
@@ -771,7 +756,6 @@ DEPENDENCIES
   cucumber-rails (>= 2.4.0)
   database_cleaner
   devise
-  devise_saml_authenticatable (>= 1.7.0)
   dibber
   discard (~> 1.4)
   dotenv
@@ -803,6 +787,7 @@ DEPENDENCIES
   nokogiri (>= 1.12.5)
   oauth
   omniauth (>= 2.0.0)
+  omniauth-entra-id
   omniauth-google-oauth2 (>= 0.8.1)
   omniauth-oauth2 (>= 1.7.1)
   omniauth-rails_csrf_protection (~> 1.0)
@@ -830,7 +815,6 @@ DEPENDENCIES
   rspec_junit_formatter
   rubocop-govuk
   rubocop-performance
-  ruby-saml-idp!
   selenium-webdriver
   sentry-rails (>= 4.8.0)
   sentry-ruby

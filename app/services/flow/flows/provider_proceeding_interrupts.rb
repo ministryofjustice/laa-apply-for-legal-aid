@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderProceedingInterrupts < FlowSteps
+    class ProviderProceedingInterrupts
       STEPS = {
         related_orders: Steps::Provider::ProceedingInterrupts::RelatedOrdersStep,
       }.freeze

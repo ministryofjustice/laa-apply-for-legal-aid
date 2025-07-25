@@ -63,7 +63,7 @@ RSpec.describe Partners::DetailsForm, type: :form do
       let(:valid_nino) { "JA123456D" }
 
       before do
-        allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(in_test_mode)
+        allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth).and_return(in_test_mode)
       end
 
       context "with normal validation" do

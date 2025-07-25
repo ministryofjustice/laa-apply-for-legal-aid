@@ -13,10 +13,10 @@
 
       <div class="actions govuk-button-group">
         <%= f.govuk_submit t(".button") %>
-        <%= govuk_link_to(t(".google_login"), omniauth_login_start_path(:google_oauth2), method: :post) %>
+        <%= govuk_link_to(t(".google_login"), "/auth/google_oauth2", method: :post) %>
       </div>
     <% end %>
   <% else %>
-    <%= govuk_link_to(t(".google_login"), omniauth_login_start_path(:google_oauth2), method: :post) %>
+    <%= govuk_link_to(t(".google_login"), "/auth/google_oauth2", method: :post) %>
   <% end %>
 <% end %>

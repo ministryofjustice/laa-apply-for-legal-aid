@@ -108,11 +108,9 @@ ccms_soa:
   documentServicesWsdl: DocumentServicesPRODWsdl.xml
   getReferenceDataWsdl: GetReferenceDataPRODWsdl.xml
 
-laa_portal:
-  idpSsoTargetUrl: "https://portal.legalservices.gov.uk/oamfed/idp/samlv20"
-  idpSloTargetUrl: "https://portal.legalservices.gov.uk/LAALogin/pages/applicationLogout.jsp"
-  idpCertFingerprintAlgorithm: "<idp-cert-fingerprint-alg-goes-here>"
-  mockSaml: "false"
+omniauth_entraid:
+  mock_auth: "false"
+  idp_sso_target_url: <not-sure-if-needed-but-could-point-to-silas/lassie-frontend>
 
 provider_details:
   url: https://production-pda-api-laa-ccms-prod.apps.live.cloud-platform.service.justice.gov.uk/api/providerDetails/

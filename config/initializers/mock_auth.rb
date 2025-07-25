@@ -20,7 +20,8 @@ end
 
 TestCredentialsStruct = Struct.new(:username, :email)
 
-Rails.configuration.x.application.mock_saml = ValidTestUsersStruct.new(
+# TODO: can we get rid of this
+Rails.configuration.x.lassie.mock_auth = ValidTestUsersStruct.new(
   users: [
     TestCredentialsStruct.new("test1", "test1@example.com"),
     TestCredentialsStruct.new("will-c", "william.clarke@justice.gov.uk"),

@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderPartner < FlowSteps
+    class ProviderPartner
       STEPS = {
         client_has_partners: Steps::Partner::ClientHasPartnersStep,
         contrary_interests: Steps::Partner::ContraryInterestsStep,

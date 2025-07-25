@@ -50,7 +50,6 @@ module Admin
       Rails.configuration.x.admin_portal.allow_create_test_applications
     end
 
-    # Note this action uses the mock_saml setting to determine if it should be enabled
     def destroy_enabled?
       Rails.configuration.x.admin_portal.allow_reset
     end
