@@ -38,6 +38,13 @@ class TestProviderPopulator
     "joel.sugarman@justice.gov.uk" => ["Sugarman & daughters", "joel.sugarman@justice.gov.uk", 109],
   }.freeze
 
+  def self.call(name)
+    data = TEST_PROVIDERS[name]
+    return if data.nil?
+
+    new.send(:populate_provider, name, data)
+  end
+
   def run
     return if HostEnv.production?
 
