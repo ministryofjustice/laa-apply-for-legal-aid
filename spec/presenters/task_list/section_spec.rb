@@ -69,7 +69,6 @@ RSpec.describe TaskList::Section do
       end
 
       it "render section header without an index number" do
-        pp render
         expect(page)
           .to have_css("h2.govuk-task-list__section", text: "Client and case details")
           .and have_no_css("h2", text: "1")
