@@ -31,6 +31,10 @@ class Setting < ApplicationRecord
     setting.collect_hmrc_data
   end
 
+  def self.benefit_checker_unavailable?
+    setting.benefit_checker_unavailable
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

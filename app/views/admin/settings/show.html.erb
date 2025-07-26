@@ -66,6 +66,16 @@
           legend: { text: t(".labels.collect_hmrc_data") },
         ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+          :benefit_checker_unavailable,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          hint: { text: t(".hints.benefit_checker_unavailable") },
+          legend: { text: t(".labels.benefit_checker_unavailable") },
+        ) %>
+
     <%= form.govuk_submit(t("generic.submit")) %>
   <% end %>
 <% end %>
