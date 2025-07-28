@@ -34,7 +34,7 @@ RSpec.describe Applicants::StudentFinanceForm, type: :form do
 
       it "adds custom blank error message" do
         error_messages = instance.errors.messages.values.flatten
-        expect(error_messages).to include("Student loan amount must be an amount of money, like 10,000")
+        expect(error_messages).to include("Enter the amount of student finance, like 1,000 or 20.30")
       end
     end
 
@@ -47,7 +47,7 @@ RSpec.describe Applicants::StudentFinanceForm, type: :form do
 
       it "adds custom too many decimals error message" do
         error_messages = instance.errors.messages.values.flatten
-        expect(error_messages).to include("Student loan amount must be an amount of money, like 10,000")
+        expect(error_messages).to include("Enter the amount of student finance, like 1,000 or 20.30")
       end
     end
 
@@ -60,7 +60,7 @@ RSpec.describe Applicants::StudentFinanceForm, type: :form do
 
       it "adds custom invalid error message" do
         error_messages = instance.errors.messages.values.flatten
-        expect(error_messages).to include("Student loan amount must be an amount of money, like 10,000")
+        expect(error_messages).to include("Enter the amount of student finance, like 1,000 or 20.30")
       end
     end
 
@@ -73,7 +73,7 @@ RSpec.describe Applicants::StudentFinanceForm, type: :form do
 
       it "adds custom invalid error message" do
         error_messages = instance.errors.messages.values.flatten
-        expect(error_messages).to include("Student loan amount must be an amount of money, like 10,000")
+        expect(error_messages).to include("Enter the amount of student finance, like 1,000 or 20.30")
       end
     end
 

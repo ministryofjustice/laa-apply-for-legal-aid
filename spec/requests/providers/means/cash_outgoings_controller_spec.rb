@@ -245,6 +245,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
 
     context "with invalid params" do
       let(:params) { invalid_params }
+      let(:expected_month) { (Time.zone.today - 1.month).strftime("%B") }
 
       before { request }
 
@@ -253,12 +254,11 @@ RSpec.describe Providers::Means::CashOutgoingsController do
       end
 
       it "shows an error for no amount entered" do
-        expected_month = (Time.zone.today - 1.month).strftime("%B")
-        expect(response.body).to include(I18n.t("errors.aggregated_cash_outgoings.blank", category: "in maintenance", month: expected_month))
+        expect(response.body).to include(I18n.t("errors.aggregated_cash_outgoings.blank", category: "maintenance", month: expected_month))
       end
 
       it "shows an error for an invalid type" do
-        expect(response.body).to include(I18n.t("errors.aggregated_cash_outgoings.invalid_type"))
+        expect(response.body).to include(I18n.t("errors.aggregated_cash_outgoings.invalid_type", category: "maintenance", month: expected_month))
       end
 
       it "shows an error for a negtive amount" do
@@ -266,7 +266,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
       end
 
       it "shows an error for an amount with too many decimals" do
-        expect(response.body).to include(I18n.t("errors.aggregated_cash_outgoings.too_many_decimals"))
+        expect(response.body).to include(I18n.t("errors.aggregated_cash_outgoings.too_many_decimals", category: "maintenance", month: expected_month))
       end
     end
 

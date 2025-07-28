@@ -35,7 +35,7 @@ RSpec.describe LegalAidApplications::PropertyDetailsForm, type: :form do
       context "when the value is non numeric" do
         let(:property_value) { "BOB" }
 
-        it { expect(described_form.errors[:property_value]).to eq ["How much the home your client lives in must be an amount of money, like 60,000"] }
+        it { expect(described_form.errors[:property_value]).to eq ["Enter the amount the home is worth, like 300,000"] }
       end
 
       context "when the value is below zero" do
@@ -47,7 +47,7 @@ RSpec.describe LegalAidApplications::PropertyDetailsForm, type: :form do
       context "when the value has too many decimals" do
         let(:property_value) { "10,000.050" }
 
-        it { expect(described_form.errors[:property_value]).to eq ["The value of the home your client lives in cannot include more than 2 decimal places"] }
+        it { expect(described_form.errors[:property_value]).to eq ["Enter the amount the home is worth, like 300,000"] }
       end
     end
 

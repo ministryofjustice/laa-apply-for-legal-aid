@@ -156,7 +156,7 @@ en:
               inclusion: Select yes if your client receives student finance
             student_finance_amount:
               blank: Enter the total amount of student finance this academic year
-              too_many_decimals: &student_error Student loan amount must be an amount of money, like 10,000
+              too_many_decimals: &student_error Enter the amount of student finance, like 1,000 or 20.30
               not_a_number: *student_error
               greater_than_or_equal_to: *student_error
             applied_previously:
@@ -380,7 +380,7 @@ en:
               inclusion: Select yes if your partner receives student finance
             student_finance_amount:
               blank: Enter the total amount of student finance this academic year
-              too_many_decimals: &student_error Student loan amount must be an amount of money, like 10,000
+              too_many_decimals: &student_error Enter the amount of student finance, like 1,000 or 20.30
               not_a_number: *student_error
               greater_than_or_equal_to: *student_error
             base:
@@ -509,15 +509,15 @@ en:
               blank_with_partner: Enter how much the home your client and their partner lives in is worth
               greater_than_or_equal_to: How much the home your client lives in in must be 0 or more
               greater_than_or_equal_to_with_partner: How much the home your client and their partner lives in must be 0 or more
-              not_a_number: How much the home your client lives in must be an amount of money, like 60,000
+              not_a_number: &property_value_error Enter the amount the home is worth, like 300,000
               not_a_number_with_partner: The value of the home your client and their partner live in must be a number, like 60,000
-              too_many_decimals: The value of the home your client lives in cannot include more than 2 decimal places
+              too_many_decimals: *property_value_error
               too_many_decimals_with_partner: The value of the home your client and their partner live in cannot include more than 2 decimal places
             outstanding_mortgage_amount:
               blank: Enter how much is left to pay on the mortgage
               greater_than_or_equal_to: The amount left to pay on the mortgage must be 0 or more
-              not_a_number: The amount left to pay on the mortgage must be a number, like 60,000
-              too_many_decimals: The amount left to pay on the mortgage cannot include more than 2 decimal places
+              not_a_number: &outstanding_mortgage_amount_error Enter the amount of mortgage left to pay, like 300,000
+              too_many_decimals: *outstanding_mortgage_amount_error
             shared_ownership:
               blank: Select yes if your client owns the home with anyone else
               blank_with_partner: Select whether your client or their partner own the home with anyone else
@@ -574,48 +574,48 @@ en:
             valuable_items_value:
               blank: Enter the estimated total value of valuable items
               greater_than_or_equal_to: Estimated value must be £500 or more
-              not_a_number: Estimated valuable items value must be an amount of money, like 60,000
-              too_many_decimals: Estimated valuable items value must not include more than 2 decimal numbers
+              not_a_number: &valuable_items_value_error Enter an amount for the worth of valuable items, like 10,000
+              too_many_decimals: *valuable_items_value_error
               blank_with_partner: Enter the value of any valuable items worth £500 or more for both your client and their partner
               greater_than_or_equal_to_with_partner: Estimated value must be £500 or more
-              not_a_number_with_partner: Estimated valuable items value must be an amount of money, like 60,000
-              too_many_decimals_with_partner: Estimated valuable items value must not include more than 2 decimal numbers
+              not_a_number_with_partner: *valuable_items_value_error
+              too_many_decimals_with_partner: *valuable_items_value_error
             land_value:
               blank: Enter the estimated land value
               greater_than_or_equal_to: Estimated land value must be 0 or more
-              not_a_number: Estimated land value must be an amount of money, like 60,000
-              too_many_decimals: Estimated land value must not include more than 2 decimal numbers
+              not_a_number: &land_value_error Enter an amount for value of land, like 300,000
+              too_many_decimals: *land_value_error
               blank_with_partner: Enter the value of land for both your client and their partner
               greater_than_or_equal_to_with_partner: Estimated land value must be 0 or more
-              not_a_number_with_partner: Estimated land value must be an amount of money, like 60,000
-              too_many_decimals_with_partner: Estimated land value must not include more than 2 decimal numbers
+              not_a_number_with_partner: *land_value_error
+              too_many_decimals_with_partner: *land_value_error
             inherited_assets_value:
               blank: Enter the estimated value of estate
               greater_than_or_equal_to: Estimated money assets value must be 0 or more
-              not_a_number: Estimated estate value must be an amount of money, like 60,000
-              too_many_decimals: Estimated money assets value must not include more than 2 decimal numbers
+              not_a_number: &inherited_assets_value_error Enter an amount for value of estate, like 300,000
+              too_many_decimals: *inherited_assets_value_error
               blank_with_partner: Enter the value of money or assets from the estate of a person who has died for both your client and their partner
               greater_than_or_equal_to_with_partner: Estimated money assets value must be 0 or more
-              not_a_number_with_partner: Estimated estate value must be an amount of money, like 60,000
-              too_many_decimals_with_partner: Estimated money assets value must not include more than 2 decimal numbers
+              not_a_number_with_partner: *inherited_assets_value_error
+              too_many_decimals_with_partner: *inherited_assets_value_error
             money_owed_value:
               blank: Enter the estimated value of money owed
               greater_than_or_equal_to: Estimated money owed value must be 0 or more
-              not_a_number: Estimated money owed must be an amount of money, like 60,000
-              too_many_decimals: Estimated money owed value must not include more than 2 decimal numbers
+              not_a_number: &money_owed_value_error Enter the amount owed, like 1,000 or 20.30
+              too_many_decimals: *money_owed_value_error
               blank_with_partner: Enter the amount owed for both your client and their partner
               greater_than_or_equal_to_with_partner: Estimated money owed value must be 0 or more
-              not_a_number_with_partner: Estimated money owed must be an amount of money, like 60,000
-              too_many_decimals_with_partner: Estimated money owed value must not include more than 2 decimal numbers
+              not_a_number_with_partner: *money_owed_value_error
+              too_many_decimals_with_partner: *money_owed_value_error
             second_home_mortgage:
               blank: Enter outstanding mortgage amount
               greater_than_or_equal_to: Estimated second home mortgage must be 0 or more
-              not_a_number: Outstanding mortgage amount must be an amount of money, like 60,000
-              too_many_decimals: Estimated second home mortgage must not include more than 2 decimal numbers
+              not_a_number: &second_home_mortgage_error Enter the outstanding mortgage amount, like 10,000
+              too_many_decimals: *second_home_mortgage_error
               blank_with_partner: Enter the outstanding mortgage amount for the second property or holiday home for both your client and their partner
               greater_than_or_equal_to_with_partner: Estimated second home mortgage must be 0 or more
-              not_a_number_with_partner: Outstanding mortgage amount must be an amount of money, like 60,000
-              too_many_decimals_with_partner: Estimated second home mortgage must not include more than 2 decimal numbers
+              not_a_number_with_partner: *second_home_mortgage_error
+              too_many_decimals_with_partner: *second_home_mortgage_error
             second_home_percentage:
               blank: Enter property percentage share
               greater_than_or_equal_to: Estimated second home percentage value must be 0 or more
@@ -628,30 +628,30 @@ en:
             second_home_value:
               blank: Enter the estimated property value
               greater_than_or_equal_to: Estimated second home value must be 0 or more
-              not_a_number: Estimated value must be an amount of money, like 60,000
-              too_many_decimals: Estimated second home value must not include more than 2 decimal numbers
+              not_a_number: &second_home_value_error Enter an amount for value of second property, like 300,000
+              too_many_decimals: *second_home_value_error
               blank_with_partner: Enter the value of the second property or holiday home for both your client and their partner
               greater_than_or_equal_to_with_partner: Estimated second home value must be 0 or more
-              not_a_number_with_partner: Estimated value must be an amount of money, like 60,000
-              too_many_decimals_with_partner: Estimated second home value must not include more than 2 decimal numbers
+              not_a_number_with_partner: *second_home_value_error
+              too_many_decimals_with_partner: *second_home_value_error
             timeshare_property_value:
               blank: Enter the estimated timeshare property value
               greater_than_or_equal_to: Estimated timeshare value must be 0 or more
-              not_a_number: Estimated timeshare property value must be an amount of money, like 60,000
-              too_many_decimals: Estimated timeshare value must not include more than 2 decimal numbers
+              not_a_number: &timeshare_property_value_error Enter an amount for value of timeshare property, like 300,000
+              too_many_decimals: *timeshare_property_value_error
               blank_with_partner: Enter the value of the timeshare property, minus any loan and sale costs for both your client and their partner
               greater_than_or_equal_to_with_partner: Estimated timeshare value must be 0 or more
-              not_a_number_with_partner: Estimated timeshare property value must be an amount of money, like 60,000
-              too_many_decimals_with_partner: Estimated timeshare value must not include more than 2 decimal numbers
+              not_a_number_with_partner: *timeshare_property_value_error
+              too_many_decimals_with_partner: *timeshare_property_value_error
             trust_value:
               blank: Enter the estimated value of trust
               greater_than_or_equal_to: Estimated trust value must be 0 or more
-              not_a_number: Estimated trust value must be an amount of money, like 60,000
-              too_many_decimals: Estimated trust value must not include more than 2 decimal numbers
+              not_a_number: &trust_value_error Enter an amount for trust value, like 300,000
+              too_many_decimals: *trust_value_error
               blank_with_partner: Enter the value of interest in a trust for both your client and their partner
               greater_than_or_equal_to_with_partner: Estimated trust value must be 0 or more
-              not_a_number_with_partner: Estimated trust value must be an amount of money, like 60,000
-              too_many_decimals_with_partner: Estimated trust value must not include more than 2 decimal numbers
+              not_a_number_with_partner: *trust_value_error
+              too_many_decimals_with_partner: *trust_value_error
             base:
               none_and_another_option_selected: If you select 'None of these assets', you cannot select any of the other options
               citizens:
@@ -679,9 +679,9 @@ en:
             account_name:
               blank: Enter which account the payment is in
             amount:
-              not_a_number: Enter a number for the amount received
+              not_a_number: &capital_disregards_amount_error Enter the amount received, like 1,000 or 20.30
               blank: Enter a number for the amount received
-              too_many_decimals: Amount received must not include more than 2 decimal numbers
+              too_many_decimals: *capital_disregards_amount_error
             date_received:
               blank: Enter a date in the correct format for when the payment is received
               date_not_valid: Enter a date in the correct format for when the payment is received
@@ -754,8 +754,8 @@ en:
               blank: Select yes if your client receives Housing Benefit
             housing_benefit_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount of Housing Benefit received
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              not_a_number: &housing_benefit_amount_error Enter the amount of Housing Benefit, like 1,000 or 20.30
+              too_many_decimals: *housing_benefit_amount_error
             housing_benefit_frequency:
               inclusion: Select how often your client receives Housing Benefit
         regular_transaction:
@@ -764,8 +764,8 @@ en:
               blank: Enter the name of the benefit
             amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount of benefit received
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              not_a_number: &regular_transaction_amount_error Enter the amount of money, like 1,000 or 20.30
+              too_many_decimals: *regular_transaction_amount_error
             frequency:
               inclusion: "Select how often %{party} gets the benefit"
         related_orders:
@@ -777,32 +777,32 @@ en:
           attributes: &regular_income_attributes
             benefits_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount of benefits received
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              not_a_number: &benefits_amount_error Enter the amount of money, like 1,000 or 20.30
+              too_many_decimals: *benefits_amount_error
             benefits_frequency:
               inclusion: Select how often your client receives benefits
             friends_or_family_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount received from friends or family
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              not_a_number: &friends_or_family_amount_error Enter the amount received from friends or family, like 1,000 or 20.30
+              too_many_decimals: *friends_or_family_amount_error
             friends_or_family_frequency:
               inclusion: Select how often your client receives income from friends or family
             maintenance_in_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount of maintenance received
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              not_a_number: &maintenance_in_amount_error Enter the amount of maintenance received, like 1,000 or 20.30
+              too_many_decimals: *maintenance_in_amount_error
             maintenance_in_frequency:
               inclusion: Select how often your client receives maintenance
             property_or_lodger_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount received from property or lodgers
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              not_a_number: &property_or_lodger_amount_error Enter the amount received from property or lodgers, like 1,000 or 20.30
+              too_many_decimals: *property_or_lodger_amount_error
             property_or_lodger_frequency:
               inclusion: Select how often your client receives income from property or lodgers
             pension_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount of pension received
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              not_a_number: &pension_amount_error Enter the amount of pension received, like 1,000 or 20.30
+              too_many_decimals: *pension_amount_error
             pension_frequency:
               inclusion: Select how often your client receives pension income
             transaction_type_ids:
@@ -812,26 +812,26 @@ en:
           attributes: &regular_outgoings_attributes
             rent_or_mortgage_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount paid for housing
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              not_a_number: &rent_or_mortgage_amount_error Enter the amount paid for housing, like 1,000 or 20.30
+              too_many_decimals: *rent_or_mortgage_amount_error
             rent_or_mortgage_frequency:
               inclusion: Select how often your client makes housing payments
             child_care_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount paid for childcare
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              not_a_number: &child_care_amount_error Enter the amount paid for childcare, like 1,000 or 20.30
+              too_many_decimals: *child_care_amount_error
             child_care_frequency:
               inclusion: Select how often your client makes childcare payments
             maintenance_out_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount paid for maintenance
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              not_a_number: &maintenance_out_amount_error Enter the amount paid for maintenance, like 1,000 or 20.30
+              too_many_decimals: *maintenance_out_amount_error
             maintenance_out_frequency:
               inclusion: Select how often your client makes maintenance payments
             legal_aid_amount:
               greater_than: Enter a number greater than 0
-              not_a_number: Enter the amount paid for legal aid
-              too_many_decimals: Enter a number with no more than 2 decimal places
+              not_a_number: &legal_aid_amount_error Enter the amount paid for legal aid, like 1,000 or 20.30
+              too_many_decimals: *legal_aid_amount_error
             legal_aid_frequency:
               inclusion: Select how often your client makes legal aid payments
             transaction_type_ids:
@@ -889,87 +889,87 @@ en:
             cash:
               blank: Enter the value of money that's not in a bank account for your client
               greater_than_or_equal_to: The value of money that's not in a bank account must be 0 or more
-              not_a_number: The value of money that's not in a bank account must be an amount of money, like 60,000
-              too_many_decimals: The value of money that's not in a bank account must not include more than 2 decimal numbers
+              not_a_number: &savings_amount_cash_error Enter the amount of money that's not in a bank account, like 1,000 or 20.30
+              too_many_decimals: *savings_amount_cash_error
               blank_with_partner: Enter the value of money that's not in a bank account for both your client and their partner
               greater_than_or_equal_to_with_partner: The value of money that's not in a bank account must be 0 or more
-              not_a_number_with_partner: The value of money that's not in a bank account must be an amount of money, like 60,000
-              too_many_decimals_with_partner: The value of money that's not in a bank account must not include more than 2 decimal numbers
+              not_a_number_with_partner: &savings_amount_partner_cash_error Enter the amount of money that's not in a bank account, like 1,000 or 20.30
+              too_many_decimals_with_partner: *savings_amount_partner_cash_error
             offline_current_accounts:
               blank: Enter the total amount in your client's current accounts
               greater_than_or_equal_to: Total in client's current accounts must be 0 or more
-              not_a_number: "Total in client's current accounts must be an amount of money, like 60,000"
-              too_many_decimals: Total in client's current accounts must not include more than 2 decimal numbers
+              not_a_number: &offline_current_accounts_error Enter the amount in current accounts, like 1,000 or 20.30
+              too_many_decimals: *offline_current_accounts_error
             offline_savings_accounts:
               blank: Enter the total amount in your client's savings accounts
               greater_than_or_equal_to: Total in client's savings accounts must be 0 or more
-              not_a_number: Total in client's savings accounts must be an amount of money, like 60,000
-              too_many_decimals: Total in client's savings accounts must not include more than 2 decimal numbers
+              not_a_number: &offline_savings_accounts_error Enter the amount in savings accounts, like 1,000 or 20.30
+              too_many_decimals: *offline_savings_accounts_error
             partner_offline_current_accounts:
               blank: Enter the total amount in the partner's current accounts
               greater_than_or_equal_to: Total in partners' current accounts must be 0 or more
-              not_a_number: Total in partners' current accounts must be an amount of money, like 60,000
-              too_many_decimals: Total in partners' current accounts must not include more than 2 decimal numbers
+              not_a_number: &partner_offline_current_accounts_error Enter the amount in current accounts for partner, like 1,000 or 20.30
+              too_many_decimals: *partner_offline_current_accounts_error
             partner_offline_savings_accounts:
               blank: Enter the total amount in the partner's savings accounts
               greater_than_or_equal_to: Total in partners' savings accounts must be 0 or more
-              not_a_number: Total in partners' savings accounts must be an amount of money, like 60,000
-              too_many_decimals: Total in partners' savings accounts must not include more than 2 decimal numbers
+              not_a_number: &partner_offline_savings_accounts_error Enter the amount in savings accounts for partner, like 1,000 or 20.30
+              too_many_decimals: *partner_offline_savings_accounts_error
             joint_offline_current_accounts:
               blank: Enter the total amount in your client and their partner's joint current accounts
               greater_than_or_equal_to: Total in joint current accounts must be 0 or more
-              not_a_number: Total in joint current accounts must be an amount of money, like 60,000
-              too_many_decimals: Total in joint current accounts must not include more than 2 decimal numbers
+              not_a_number: &joint_offline_current_accounts_error Enter the amount in joint current accounts, like 1,000 or 20.30
+              too_many_decimals: *joint_offline_current_accounts_error
             joint_offline_savings_accounts:
               blank: Enter the total amount in your client and their partner's joint savings accounts
               greater_than_or_equal_to: Total in joint savings accounts must be 0 or more
-              not_a_number: Total in joint savings accounts must be an amount of money, like 60,000
-              too_many_decimals: Total in joint savings accounts must not include more than 2 decimal numbers
+              not_a_number: &joint_offline_savings_accounts_error Enter the amount in joint savings accounts, like 1,000 or 20.30
+              too_many_decimals: *joint_offline_savings_accounts_error
             life_assurance_endowment_policy:
               blank: Enter the total value of life assurance policies
               greater_than_or_equal_to: Total of life assurance policies must be 0 or more
-              not_a_number: Total of life assurance policies must be an amount of money, like 60,000
-              too_many_decimals: Estimated life assurance policies value must not include more than 2 decimal numbers
+              not_a_number: &life_assurance_policy_error Enter the amount for life insurance policies, like 1,000 or 20.30
+              too_many_decimals: *life_assurance_policy_error
               blank_with_partner: Enter the value of life assurance or endowment policies not linked to a mortgage for both your client and their partner
               greater_than_or_equal_to_with_partner: Total of life assurance policies must be 0 or more
-              not_a_number_with_partner: Total of life assurance policies must be an amount of money, like 60,000
-              too_many_decimals_with_partner: Estimated life assurance policies value must not include more than 2 decimal numbers
+              not_a_number_with_partner: *life_assurance_policy_error
+              too_many_decimals_with_partner: *life_assurance_policy_error
             national_savings:
               blank: Enter the total value of certificates and bonds
               greater_than_or_equal_to: Total of certificates and bonds must be 0 or more
-              not_a_number: Total of certificates and bonds must be an amount of money, like 60,000
-              too_many_decimals: Estimated trust value must not include more than 2 decimal numbers
+              not_a_number: &national_savings_error Enter the amount for certificates and bonds, like 1,000 or 20.30
+              too_many_decimals: *national_savings_error
               blank_with_partner: Enter the value of ISAs, National Savings Certificates and Premium Bonds for both your client and their partner
               greater_than_or_equal_to_with_partner: Total of certificates and bonds must be 0 or more
-              not_a_number_with_partner: Total of certificates and bonds must be an amount of money, like 60,000
-              too_many_decimals_with_partner: Estimated trust value must not include more than 2 decimal numbers
+              not_a_number_with_partner: *national_savings_error
+              too_many_decimals_with_partner: *national_savings_error
             other_person_account:
               blank: Enter the estimated total in other people's accounts
               greater_than_or_equal_to: Total in other people's accounts must be 0 or more
-              not_a_number: Total in other people's accounts must be an amount of money, like 60,000
-              too_many_decimals: Estimated other people's accounts value must not include more than 2 decimal numbers
+              not_a_number: &other_person_account_error Enter the amount of money in another person's bank account, like 1,000 or 20.30
+              too_many_decimals: *other_person_account_error
               blank_with_partner: Enter the value that can be accessed from another person's bank account for both your client and their partner
               greater_than_or_equal_to_with_partner: Total in other people's accounts must be 0 or more
-              not_a_number_with_partner: Total in other people's accounts must be an amount of money, like 60,000
-              too_many_decimals_with_partner: Estimated other people's accounts value must not include more than 2 decimal numbers
+              not_a_number_with_partner: *other_person_account_error
+              too_many_decimals_with_partner: *other_person_account_error
             peps_unit_trusts_capital_bonds_gov_stocks:
               blank: Enter the total value of other investments
               greater_than_or_equal_to: Total of other investments must be 0 or more
-              not_a_number: Total of other investments must be an amount of money, like 60,000
-              too_many_decimals: Estimated other investments value must not include more than 2 decimal numbers
+              not_a_number: &peps_unit_trusts_capital_bonds_gov_stocks_error Enter the amount for other investments, like 1,000 or 20.30
+              too_many_decimals: *peps_unit_trusts_capital_bonds_gov_stocks_error
               blank_with_partner: Enter the total value of other investments for both your client and their partner
               greater_than_or_equal_to_with_partner: Total of other investments must be 0 or more
-              not_a_number_with_partner: Total of other investments must be an amount of money, like 60,000
-              too_many_decimals_with_partner: Estimated other investments value must not include more than 2 decimal numbers
+              not_a_number_with_partner: *peps_unit_trusts_capital_bonds_gov_stocks_error
+              too_many_decimals_with_partner: *peps_unit_trusts_capital_bonds_gov_stocks_error
             plc_shares:
               blank: Enter the total value of shares
               greater_than_or_equal_to: Total of shares must be 0 or more
-              not_a_number: Total of shares must be an amount of money, like 60,000
-              too_many_decimals: Estimated shares value must not include more than 2 decimal numbers
+              not_a_number: &plc_shares_error Enter the amount for shares, like 1,000 or 20.30
+              too_many_decimals: *plc_shares_error
               blank_with_partner: Enter the value of shares in a PLC for both your client and their partner
               greater_than_or_equal_to_with_partner: Total of shares must be 0 or more
-              not_a_number_with_partner: Total of shares must be an amount of money, like 60,000
-              too_many_decimals_with_partner: Estimated shares value must not include more than 2 decimal numbers
+              not_a_number_with_partner: *plc_shares_error
+              too_many_decimals_with_partner: *plc_shares_error
         setting:
           attributes:
             mock_true_layer_data:
@@ -999,9 +999,9 @@ en:
               blank: Select who owns the vehicle
             estimated_value:
               blank: Enter how much the vehicle is worth
-              not_a_number: How much the vehicle is worth must be an amount of money, like 5,000
+              not_a_number: &vehicle_estimated_value_error Enter the amount the vehicle is worth, like 10,000
               greater_than_or_equal_to: How much the vehicle is worth must be 0 or more
-              too_many_decimals: How much the vehicle is worth cannot include more than 2 decimal numbers
+              too_many_decimals: *vehicle_estimated_value_error
             payment_remaining:
               blank: Enter the amount left to pay
               not_a_number: The amount left to pay must be an amount of money, like 5,000

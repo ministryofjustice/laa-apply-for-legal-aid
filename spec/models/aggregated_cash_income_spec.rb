@@ -187,9 +187,9 @@ RSpec.describe AggregatedCashIncome do
         end
 
         it "populates the errors" do
-          expect(aci.errors[:maintenance_in1][0]).to eq "Enter the cash amount received in maintenance in #{month1_name}"
-          expect(aci.errors[:benefits1][0]).to eq "Enter the cash amount received in benefits in #{month1_name}"
-          expect(aci.errors[:benefits3][0]).to eq "Enter the cash amount received in benefits in #{month3_name}"
+          expect(aci.errors[:maintenance_in1][0]).to eq "Enter the amount received from maintenance in #{month1_name}, like 1,000 or 20.30"
+          expect(aci.errors[:benefits1][0]).to eq "Enter the amount received from benefits in #{month1_name}, like 1,000 or 20.30"
+          expect(aci.errors[:benefits3][0]).to eq "Enter the amount received from benefits in #{month3_name}, like 1,000 or 20.30"
         end
       end
 
@@ -214,7 +214,7 @@ RSpec.describe AggregatedCashIncome do
         end
 
         it "populates the errors" do
-          error_msg = "Amount must be an amount of money, like 1,000"
+          error_msg = "Enter the amount received from benefits in #{month1_name}, like 1,000 or 20.30"
           expect(aci.errors[:benefits1][0]).to eq error_msg
         end
       end
@@ -227,7 +227,7 @@ RSpec.describe AggregatedCashIncome do
         end
 
         it "populates the errors" do
-          error_msg = "Amount must not include more than 2 decimal numbers"
+          error_msg = "Enter the amount received from benefits in #{month1_name}, like 1,000 or 20.30"
           expect(aci.errors[:benefits1][0]).to eq error_msg
         end
       end
@@ -324,7 +324,7 @@ RSpec.describe AggregatedCashIncome do
 
           it "populates the errors" do
             call_update
-            expect(aci.errors[:benefits2]).to include "Amount must be an amount of money, like 1,000"
+            expect(aci.errors[:benefits2]).to include "Enter the amount received from benefits in #{month2_name}, like 1,000 or 20.30"
           end
         end
 
@@ -342,7 +342,7 @@ RSpec.describe AggregatedCashIncome do
 
           it "populates the errors" do
             call_update
-            expect(aci.errors[:maintenance_in3]).to include "Amount must not include more than 2 decimal numbers"
+            expect(aci.errors[:maintenance_in3]).to include "Enter the amount received from maintenance in #{month3_name}, like 1,000 or 20.30"
           end
         end
 
@@ -378,7 +378,7 @@ RSpec.describe AggregatedCashIncome do
 
           it "populates the errors" do
             call_update
-            expect(aci.errors[:benefits1]).to include "Enter the cash amount received in benefits in #{month1_name}"
+            expect(aci.errors[:benefits1]).to include "Enter the amount received from benefits in #{month1_name}, like 1,000 or 20.30"
           end
         end
       end

@@ -41,8 +41,8 @@ RSpec.describe Partners::OfflineAccountsForm, type: :form do
       shared_examples_for "it has an error" do
         let(:attribute_map) do
           {
-            partner_offline_current_accounts: /total.*current accounts/i,
-            partner_offline_savings_accounts: /total.*savings accounts/i,
+            partner_offline_current_accounts: /amount.*current accounts/i,
+            partner_offline_savings_accounts: /amount.*savings accounts/i,
           }
         end
         it "returns false" do
@@ -72,7 +72,7 @@ RSpec.describe Partners::OfflineAccountsForm, type: :form do
 
       context "when amounts are not numbers" do
         let(:amount_params) { attributes.index_with { |_attr| Faker::Lorem.word } }
-        let(:expected_error) { /must be an amount of money, like 60,000/ }
+        let(:expected_error) { /Enter the amount in .* accounts for partner, like 1,000 or 20.30/ }
 
         it_behaves_like "it has an error"
       end

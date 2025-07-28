@@ -108,12 +108,13 @@ RSpec.describe Providers::Means::CashIncomesController do
       end
 
       it "shows an error for no amount entered" do
-        expect(response.body).to include(I18n.t("errors.aggregated_cash_income.blank", category: "in maintenance",
+        expect(response.body).to include(I18n.t("errors.aggregated_cash_income.blank", category: "maintenance",
                                                                                        month: (Time.zone.today - 1.month).strftime("%B")))
       end
 
       it "shows an error for an invalid amount" do
-        expect(response.body).to include(I18n.t("errors.aggregated_cash_income.invalid_type"))
+        expect(response.body).to include(I18n.t("errors.aggregated_cash_income.invalid_type", category: "maintenance",
+                                                                                              month: (Time.zone.today - 1.month).strftime("%B")))
       end
 
       it "shows an error for a negtive amount" do
@@ -121,7 +122,8 @@ RSpec.describe Providers::Means::CashIncomesController do
       end
 
       it "shows an error for an amount with too many decimals" do
-        expect(response.body).to include(I18n.t("errors.aggregated_cash_income.too_many_decimals"))
+        expect(response.body).to include(I18n.t("errors.aggregated_cash_income.too_many_decimals", category: "maintenance",
+                                                                                                   month: (Time.zone.today - 1.month).strftime("%B")))
       end
     end
 

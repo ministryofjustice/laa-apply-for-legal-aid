@@ -74,7 +74,7 @@ RSpec.describe Providers::Means::CapitalDisregards::AddDetailsForm do
 
       it "adds an error message" do
         error_messages = form.errors.messages.values.flatten
-        expect(error_messages).to include("Amount received must not include more than 2 decimal numbers")
+        expect(error_messages).to include("Enter the amount received, like 1,000 or 20.30")
       end
     end
 
