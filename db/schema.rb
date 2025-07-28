@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_07_133138) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_28_145133) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -437,6 +437,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_133138) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_citizen_access_tokens_on_legal_aid_application_id"
+  end
+
+  create_table "contracts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "office_id", null: false
+    t.string "category_of_law"
+    t.string "sub_category_of_law"
+    t.string "authorisation_type"
+    t.string "new_matters"
+    t.string "contractual_devolved_powers"
+    t.string "remainder_authorisation"
+    t.index ["office_id"], name: "index_contracts_on_office_id"
   end
 
   create_table "debugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1151,6 +1162,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_133138) do
   add_foreign_key "chances_of_successes", "proceedings", on_delete: :cascade
   add_foreign_key "child_care_assessments", "proceedings"
   add_foreign_key "citizen_access_tokens", "legal_aid_applications", on_delete: :cascade
+  add_foreign_key "contracts", "offices"
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "domestic_abuse_summaries", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "dwp_overrides", "legal_aid_applications"
