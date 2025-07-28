@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?> <env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"
+        xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"> <env:Body> <wsdl:check>
+        <wsdl:clientReference>6ffd821d-cb8a-4f6e-8509-6f4b089a130f</wsdl:clientReference>
+        <wsdl:nino>JA293483A</wsdl:nino> <wsdl:surname>WALKER</wsdl:surname> <wsdl:dateOfBirth>19800110</wsdl:dateOfBirth>
+        <wsdl:dateOfAward>20250710</wsdl:dateOfAward> <wsdl:lscServiceName/> <wsdl:clientOrgId/>
+        <wsdl:clientUserId/> </wsdl:check> </env:Body> </env:Envelope>
+    headers:
+      Soapaction:
+      - "#POST"
+      Content-Type:
+      - text/xml
+      User-Agent:
+      - Faraday v2.13.2
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 503
+      message: Service Temporarily Unavailable
+    headers:
+      Server:
+      - awselb/2.0
+      Date:
+      - Thu, 10 Jul 2025 16:50:33 GMT
+      Content-Type:
+      - text/html
+      Content-Length:
+      - '162'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "<html>\r\n<head><title>503 Service Temporarily Unavailable</title></head>\r\n<body>\r\n<center><h1>503
+        Service Temporarily Unavailable</h1></center>\r\n</body>\r\n</html>\r\n"
+  recorded_at: Thu, 10 Jul 2025 16:50:33 GMT
+recorded_with: VCR 6.3.1
