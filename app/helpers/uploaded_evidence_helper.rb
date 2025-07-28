@@ -14,7 +14,7 @@ private
     content_tag(:div, class: "govuk-body") do
       if legal_aid_application.section_8_proceedings?
         t("#{prefix}.section_8_evidence")
-      elsif evidence_type_translation.present?
+      elsif evidence_type_translation.present? # TODO: Make work for single ppt ben evidence
         t("#{prefix}.single_item", evidence_type: evidence_type_translation)
       else
         t("#{prefix}.single_non_specific_item", item: t("#{prefix}.#{evidence}"))

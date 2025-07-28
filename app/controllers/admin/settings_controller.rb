@@ -23,7 +23,8 @@ module Admin
                                 allow_welsh_translation
                                 enable_ccms_submission
                                 linked_applications
-                                collect_hmrc_data])
+                                collect_hmrc_data
+                                benefit_checker_unavailable])
     end
 
     def setting
