@@ -54,6 +54,7 @@ Rails.application.routes.draw do
     delete "/providers/sign_out", to: "providers/sessions#destroy", as: :destroy_provider_session
   end
 
+  # TODO: 29 JUL check both of these are needed, I suspect not - CB
   get "auth/failure", to: "auth#failure"
   get "providers/auth/failure", to: "providers/auth#failure"
 
