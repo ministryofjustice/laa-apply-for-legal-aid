@@ -105,7 +105,7 @@ GEM
     attr_extras (7.1.0)
     awesome_print (1.9.2)
     aws-eventstream (1.4.0)
-    aws-partitions (1.1133.0)
+    aws-partitions (1.1137.0)
     aws-sdk-core (3.227.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
@@ -113,7 +113,7 @@ GEM
       base64
       jmespath (~> 1, >= 1.6.1)
       logger
-    aws-sdk-kms (1.107.0)
+    aws-sdk-kms (1.108.0)
       aws-sdk-core (~> 3, >= 3.227.0)
       aws-sigv4 (~> 1.5)
     aws-sdk-s3 (1.194.0)
@@ -275,7 +275,7 @@ GEM
       railties (>= 6.1.0)
     faker (3.5.2)
       i18n (>= 1.8.11, < 2)
-    faraday (2.13.3)
+    faraday (2.13.4)
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
@@ -360,7 +360,7 @@ GEM
     jmespath (1.6.2)
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
-    json (2.13.0)
+    json (2.13.2)
     json_expressions (0.9.0)
     jsonapi-renderer (0.2.2)
     jwt (2.10.2)
@@ -379,7 +379,7 @@ GEM
     loofah (2.24.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
-    lumberjack (1.3.2)
+    lumberjack (1.3.3)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -459,12 +459,13 @@ GEM
       rexml (>= 3.3.9)
     pagy (9.3.5)
     parallel (1.27.0)
-    parser (3.3.8.0)
+    parser (3.3.9.0)
       ast (~> 2.4.1)
       racc
     patience_diff (1.2.0)
       optimist (~> 3.0)
-    pg (1.5.9)
+    pg (1.6.0)
+    pg (1.6.0-x86_64-darwin)
     pg_dump_anonymize (0.1.2)
     pp (0.6.2)
       prettyprint
@@ -648,7 +649,7 @@ GEM
     ruby-graphviz (1.2.5)
       rexml
     ruby-progressbar (1.13.0)
-    ruby-saml (1.18.0)
+    ruby-saml (1.18.1)
       nokogiri (>= 1.13.10)
       rexml
     ruby2_keywords (0.0.5)
@@ -696,7 +697,7 @@ GEM
       version_gem (>= 1.1.8, < 3)
     spring (4.3.0)
     stringio (3.1.7)
-    strong_migrations (2.4.0)
+    strong_migrations (2.5.0)
       activerecord (>= 7.1)
     super_diff (0.16.0)
       attr_extras (>= 6.2.4)
