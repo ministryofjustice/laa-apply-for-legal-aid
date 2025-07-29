@@ -56,6 +56,8 @@ class Provider < ApplicationRecord
     end
 
     provider
+  rescue StandardError
+    nil
   end
 
   def update_details
