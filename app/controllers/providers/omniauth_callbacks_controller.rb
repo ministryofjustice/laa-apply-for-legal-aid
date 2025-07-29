@@ -5,8 +5,8 @@ module Providers
 
       if @provider&.persisted?
         flash[:notice] = I18n.t "devise.sessions.signed_in"
-        sign_in_and_redirect @provider, event: :authentication
         update_provider_details
+        sign_in_and_redirect @provider, event: :authentication
       else
         flash[:notice] = I18n.t "devise.omniauth_callbacks.unauthorised"
         Rails.logger.error "Couldn't login user"
