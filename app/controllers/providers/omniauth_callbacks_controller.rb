@@ -22,8 +22,8 @@ module Providers
 
   protected
 
-    def after_sign_in_path_for(resource)
-      providers_confirm_office_path(resource)
+    def after_sign_in_path_for(_resource)
+      providers_confirm_office_path
     end
 
   private
