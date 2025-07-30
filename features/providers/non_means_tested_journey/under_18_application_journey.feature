@@ -1,6 +1,6 @@
 Feature: Under 18 applicant journey
 
-  @javascript @vcr
+  @javascript @vcr @stub_pda_provider_details
   Scenario: Completes a minimal application for applicant that is under 18
     Given I am logged in as a provider
 
@@ -24,7 +24,7 @@ Feature: Under 18 applicant journey
     And I enter national insurance number 'CB987654A'
     And I click 'Save and continue'
     Then I should be on a page showing "Has your client applied for civil legal aid before?"
-    
+
     Then I choose "No"
     And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"
