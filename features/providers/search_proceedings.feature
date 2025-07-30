@@ -1,6 +1,6 @@
 Feature: Search proceedings
 
-@javascript @vcr
+@javascript @vcr @stub_pda_contracts_endpoint
   Scenario: No results returned is seen on screen when invalid proceeding search entered
     Given I am logged in as a provider
     Given I visit the application service
@@ -34,7 +34,7 @@ Feature: Search proceedings
     When I search for proceeding type "cakes"
     Then the proceeding type result list on page returns a "No results found." message
 
-  @javascript @vcr
+  @javascript @vcr @stub_pda_contracts_endpoint
   Scenario: I am able to clear proceeding on the proceeding page
     Given I am logged in as a provider
     Given I visit the application service

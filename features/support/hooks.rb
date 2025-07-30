@@ -27,3 +27,7 @@ Around("@disable-rack-attack") do |_scenario, block|
   block.call
   Rack::Attack.enabled = true
 end
+
+Before("@stub_pda_contracts_endpoint") do
+  allow(PDA::ContractsCreator).to receive(:call).and_return(true) # this stubs out calls to the pda contracts endpoint
+end

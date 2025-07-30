@@ -1,5 +1,5 @@
 Feature: Search applications
-  @javascript @vcr
+  @javascript @vcr @stub_pda_contracts_endpoint
   Scenario: Going to the search page
     Given I am logged in as a provider
     And An application has been created
