@@ -1,5 +1,5 @@
 Feature: Linking cases back button use
-  @javascript @vcr
+  @javascript @vcr @stub_pda_provider_details
   Scenario: Complete flow reversion with back button
     Given I have created and submitted an application with the application reference 'L-123-456'
     And the feature flag for linked_applications is enabled

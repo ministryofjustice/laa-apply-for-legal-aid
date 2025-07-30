@@ -40,6 +40,7 @@ RSpec.describe "provider selects office" do
 
   describe "PATCH providers/select_office" do
     subject(:patch_request) { patch providers_select_office_path, params: }
+    before { allow(PDA::ProviderDetails).to receive(:call).and_return(true) } # this stubs out calls to the pda schedules endpoint
 
     let(:params) do
       {

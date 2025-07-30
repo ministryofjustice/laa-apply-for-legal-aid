@@ -1,6 +1,6 @@
 Feature: Selecting office
 
-  @javascript
+  @javascript @stub_pda_provider_details
   Scenario: I am able to select an office
     Given I am logged in as a provider
     Then I visit the select office page
@@ -8,7 +8,7 @@ Feature: Selecting office
     Then I click 'Save and continue'
     Then I should be on a page showing 'Your applications'
 
-  @javascript
+  @javascript @stub_pda_provider_details
   Scenario: I am able to confirm my office
     Given I am logged in as a provider
     Given I have an existing office

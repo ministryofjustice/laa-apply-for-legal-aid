@@ -1,5 +1,5 @@
 Feature: Emergency cost override
-  @javascript @vcr
+  @javascript @vcr @stub_pda_provider_details
   Scenario: Provider is prompted to override emergency cost limitation
     Given I start the journey as far as the applicant page
     When I enter name 'Test', 'User'
