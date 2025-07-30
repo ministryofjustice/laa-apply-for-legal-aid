@@ -15,6 +15,8 @@ module Providers
         if form.confirm_office?
           # TODO: This is a temp call while we debug the contract endpoint retrieval and storage
           ProviderContractDetailsWorker.perform_async(firm.offices.first.code)
+          PDA::ContractsCreator.call(firm.offices.first.code)
+
           return redirect_to home_path
         end
 
