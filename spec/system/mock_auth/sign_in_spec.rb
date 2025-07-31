@@ -8,7 +8,7 @@ RSpec.describe "The mock entra path works as expected" do
       TestProviderPopulator.call("MARTIN.RONAN@DAVIDGRAY.CO.UK")
     end
 
-    scenario "I can complete the task list's Check your answers item" do
+    scenario "I can see the confirm office choice list" do
       visit "/"
       click_link "Sign in"
       expect(page).to have_css("h1", text: "Select the account number of the office handling this application")
