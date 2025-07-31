@@ -50,12 +50,18 @@ RSpec.describe "provider selects office" do
     context "when the provider is authenticated" do
       before do
         allow(ProviderContractDetailsWorker).to receive(:perform_async).and_return(true)
+        stub_contracts(office_code: second_office.code)
         login_as provider
         patch_request
       end
 
       it "updates the record" do
         expect(provider.reload.selected_office.id).to eq second_office.id
+      end
+
+      it "creates contract data" do
+        expect(second_office.contracts.count).to eq 3
+        expect(second_office.contracts.pluck(:category_of_law)).to contain_exactly("MAT", "MSC", "PCW")
       end
 
       it "redirects to the legal aid applications page" do
@@ -90,5 +96,45 @@ RSpec.describe "provider selects office" do
         end
       end
     end
+  end
+
+  def stub_contracts(office_code:)
+    stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-offices/#{office_code}/office-contract-details})
+    .to_return(
+      status: 200,
+      body: office_contracts_json,
+      headers: { "Content-Type" => "application/json; charset=utf-8" },
+    )
+  end
+
+  def office_contracts_json
+    {
+      contracts: [
+        {
+          categoryOfLaw: "MAT",
+          subCategoryLaw: "Not Applicable",
+          authorisationType: "Schedule",
+          newMatters: "Yes",
+          contractualDevolvedPowers: "Yes - Excluding JR Proceedings",
+          remainderAuthorisation: "Yes",
+        },
+        {
+          categoryOfLaw: "MSC",
+          subCategoryLaw: "Not Applicable",
+          authorisationType: "Schedule",
+          newMatters: "Yes",
+          contractualDevolvedPowers: "Yes - Excluding JR Proceedings",
+          remainderAuthorisation: "Yes",
+        },
+        {
+          categoryOfLaw: "PCW",
+          subCategoryLaw: "Not Applicable",
+          authorisationType: "Schedule",
+          newMatters: "Yes",
+          contractualDevolvedPowers: "No",
+          remainderAuthorisation: "Yes",
+        },
+      ],
+    }.to_json
   end
 end

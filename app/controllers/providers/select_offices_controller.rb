@@ -13,6 +13,7 @@ module Providers
       if @form.save
         # TODO: This is a temp call while we debug the contract endpoint retrieval and storage
         ProviderContractDetailsWorker.perform_async(Office.find(form_params[:selected_office_id]).code)
+        PDA::ContractsCreator.call(Office.find(form_params[:selected_office_id]).code)
         redirect_to home_path
       else
         render :show

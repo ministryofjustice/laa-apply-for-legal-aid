@@ -76,12 +76,18 @@ RSpec.describe "provider confirm office" do
     context "when the provider is authenticated" do
       before do
         allow(ProviderContractDetailsWorker).to receive(:perform_async).and_return(true)
+        stub_contracts(office_code: firm.offices.first.code)
         login_as provider
         patch_request
       end
 
       it "redirects to the legal aid applications page" do
         expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
+      end
+
+      it "creates contract data" do
+        expect(firm.offices.first.contracts.count).to eq 3
+        expect(firm.offices.first.contracts.pluck(:category_of_law)).to contain_exactly("MAT", "MSC", "PCW")
       end
 
       context "when the params are invalid - nothing specified" do
@@ -108,5 +114,45 @@ RSpec.describe "provider confirm office" do
         end
       end
     end
+  end
+
+  def stub_contracts(office_code:)
+    stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-offices/#{office_code}/office-contract-details})
+    .to_return(
+      status: 200,
+      body: office_contracts_json,
+      headers: { "Content-Type" => "application/json; charset=utf-8" },
+    )
+  end
+
+  def office_contracts_json
+    {
+      contracts: [
+        {
+          categoryOfLaw: "MAT",
+          subCategoryLaw: "Not Applicable",
+          authorisationType: "Schedule",
+          newMatters: "Yes",
+          contractualDevolvedPowers: "Yes - Excluding JR Proceedings",
+          remainderAuthorisation: "Yes",
+        },
+        {
+          categoryOfLaw: "MSC",
+          subCategoryLaw: "Not Applicable",
+          authorisationType: "Schedule",
+          newMatters: "Yes",
+          contractualDevolvedPowers: "Yes - Excluding JR Proceedings",
+          remainderAuthorisation: "Yes",
+        },
+        {
+          categoryOfLaw: "PCW",
+          subCategoryLaw: "Not Applicable",
+          authorisationType: "Schedule",
+          newMatters: "Yes",
+          contractualDevolvedPowers: "No",
+          remainderAuthorisation: "Yes",
+        },
+      ],
+    }.to_json
   end
 end
