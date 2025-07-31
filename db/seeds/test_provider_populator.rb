@@ -64,6 +64,7 @@ private
       contact_id:,
       firm:,
       offices: firm.offices,
+      auth_provider: auth_subject_uid.present? ? "entra_id" : "",
       auth_subject_uid:,
     )
   end
