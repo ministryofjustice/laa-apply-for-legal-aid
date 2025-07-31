@@ -10,4 +10,8 @@ module GovukFormHelpers
   def govuk_choose(locator, **)
     choose(locator, **, visible: :hidden)
   end
+
+  def govuk_check(locator, **)
+    check(locator, **, visible: :hidden)
+  end
 end
