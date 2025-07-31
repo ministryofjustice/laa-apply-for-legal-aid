@@ -1,13 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Providers::OmniauthCallbacksController do
-  around do |example|
-    OmniAuth.config.test_mode = true
-    example.run
-    OmniAuth.config.mock_auth[:entra_id] = nil
-    OmniAuth.config.test_mode = false
-  end
-
   describe "GET /auth/entra_id/callback" do
     subject(:get_request) do
       get provider_entra_id_omniauth_callback_path
