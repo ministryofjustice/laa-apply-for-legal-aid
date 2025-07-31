@@ -32,11 +32,21 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     Rails.configuration.x.google_oauth2.client_secret,
   )
   provider(
-    :entra_id,
-    client_id: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_ID", nil),
-    client_secret: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_SECRET", nil),
-    tenant_id: ENV.fetch("OMNIAUTH_ENTRAID_TENANT_ID", nil),
-    authorize_params: { prompt: "select_account" },
-    strategy_class: OmniAuth::Strategies::EntraIdOidc,
+    :openid_connect,
+    {
+      name: :entra_id,
+      scope: %i[openid email],
+      response_type: :code,
+      send_nonce: true,
+      client_options: {
+        identifier: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_ID", nil),
+        secret: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_SECRET", nil),
+        redirect_uri: ENV.fetch("OMNIAUTH_ENTRAID_REDIRECT_URI", nil),
+      },
+      discovery: true,
+      pkce: true,
+      issuer: "https://login.microsoftonline.com/#{ENV.fetch('OMNIAUTH_ENTRAID_TENANT_ID', nil)}/v2.0",
+      strategy_class: OmniAuth::Strategies::Silas,
+    },
   )
 end
