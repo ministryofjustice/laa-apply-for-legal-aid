@@ -139,4 +139,51 @@ RSpec.describe Provider do
       end
     end
   end
+
+  describe ".from_omniauth" do
+    let(:raw_info) { { USER_NAME: "LEGACY@FIRM.COM", LAA_ACCOUNTS: "AAAAB" } }
+    let(:auth) do
+      OmniAuth::AuthHash.new(
+        {
+          provider: "govuk",
+          uid: auth_subject_uid,
+          info: {
+            first_name: "first", last_name: "last", email: "test@test.com", description: "desc", roles: "a,b"
+          },
+          extra: {
+            raw_info:,
+          },
+        },
+      )
+    end
+    let(:auth_subject_uid) { SecureRandom.uuid }
+
+    context "when passed a new user" do
+      it "creates a new record" do
+        expect { described_class.from_omniauth(auth) }.to change(described_class, :count).by(1)
+      end
+    end
+
+    context "when passed an existing user" do
+      let(:provider) do
+        described_class.create(email: "test@test.com",
+                               username: "LEGACY@FIRM.COM",
+                               name: "Marty Ronan",
+                               auth_provider: "govuk",
+                               auth_subject_uid:)
+        # office codes deliberately left blank
+      end
+
+      it "updates the existing record" do
+        expect { described_class.from_omniauth(auth) }.to change { provider.reload.office_codes }.from(nil).to("AAAAB")
+      end
+    end
+
+    context "when data is missing from the auth payload" do
+      let(:raw_info) { {} }
+      # simulates a breakdown in entra claim enrichment
+
+      it { expect(described_class.from_omniauth(auth)).to be_nil }
+    end
+  end
 end

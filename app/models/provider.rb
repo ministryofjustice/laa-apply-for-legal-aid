@@ -26,36 +26,14 @@ class Provider < ApplicationRecord
   # Our flow can/should rely on ANY user who is on the external EntraID (*1 and who has a certain role in the auth payload TBC)
   #
   def self.from_omniauth(auth)
-    # put a binding.irb here to read the auth values and check for a claims block?
-    provider = find_by(auth_subject_uid: auth.uid)
-
-    if provider
-      # could potentially change auth_provider name since this is within our control, so update here too (e.g. azure_ad -> entra_id)
-      provider.update!(last_sign_in_at: Time.current, auth_provider: auth.provider)
-    else
-      provider = find_by(email: auth.info.email, auth_subject_uid: nil)
-
-      username = auth.extra.raw_info["USER_NAME"]
-
-      if provider
-        provider.update!(
-          auth_subject_uid: auth.uid,
-          auth_provider: auth.provider,
-          username:,
-          last_sign_in_at: Time.current,
-        )
-      else
-        provider = create!(
-          auth_subject_uid: auth.uid,
-          username:,
-          email: auth.info.email,
-          last_sign_in_at: Time.current,
-          auth_provider: auth.provider,
-        )
-      end
+    find_or_initialize_by(auth_provider: auth.provider, auth_subject_uid: auth.uid).tap do |record|
+      record.update!(
+        name: [auth.info.first_name, auth.info.last_name].join(" "),
+        username: auth.extra.raw_info.USER_NAME,
+        email: auth.info.email,
+        office_codes: [auth.extra.raw_info.LAA_ACCOUNTS].join(":"),
+      )
     end
-
-    provider
   rescue StandardError
     nil
   end
