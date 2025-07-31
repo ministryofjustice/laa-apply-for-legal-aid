@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_07_133138) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_31_075330) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -1002,6 +1002,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_133138) do
     t.string "govuk_message_id"
   end
 
+  create_table "schedules", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "office_id", null: false
+    t.string "area_of_law"
+    t.string "category_of_law"
+    t.string "authorisation_status"
+    t.string "status"
+    t.date "start_date"
+    t.date "end_date"
+    t.boolean "cancelled"
+    t.integer "license_indicator"
+    t.string "devolved_power_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["office_id"], name: "index_schedules_on_office_id"
+  end
+
   create_table "scope_limitations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "proceeding_id", null: false
     t.integer "scope_type"
@@ -1186,6 +1202,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_133138) do
   add_foreign_key "regular_transactions", "transaction_types"
   add_foreign_key "savings_amounts", "legal_aid_applications"
   add_foreign_key "scheduled_mailings", "legal_aid_applications", on_delete: :cascade
+  add_foreign_key "schedules", "offices"
   add_foreign_key "scope_limitations", "proceedings"
   add_foreign_key "specific_issues", "proceedings"
   add_foreign_key "statement_of_cases", "legal_aid_applications", on_delete: :cascade
