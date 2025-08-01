@@ -141,10 +141,6 @@ RSpec.describe AggregatedCashOutgoings do
           expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg("housing", month1_name)
           expect(aco.errors[:rent_or_mortgage3][0]).to eq error_msg("housing", month3_name)
         end
-
-        def error_msg(name, month)
-          "Enter the amount paid for #{name} in #{month}, like 1,000 or 20.30"
-        end
       end
 
       context "with amount negative" do
@@ -168,8 +164,7 @@ RSpec.describe AggregatedCashOutgoings do
         end
 
         it "populates the errors" do
-          error_msg = "Enter the amount paid for housing in June, like 1,000 or 20.30"
-          expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg
+          expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg("housing", month1_name)
         end
       end
 
@@ -181,8 +176,7 @@ RSpec.describe AggregatedCashOutgoings do
         end
 
         it "populates the errors" do
-          error_msg = "Enter the amount paid for housing in June, like 1,000 or 20.30"
-          expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg
+          expect(aco.errors[:rent_or_mortgage1][0]).to eq error_msg("housing", month1_name)
         end
       end
 
@@ -274,7 +268,7 @@ RSpec.describe AggregatedCashOutgoings do
 
           it "populates the errors" do
             call_update
-            expect(aco.errors[:rent_or_mortgage2]).to include "Enter the amount paid for housing in May, like 1,000 or 20.30"
+            expect(aco.errors[:rent_or_mortgage2]).to include error_msg("housing", month2_name)
           end
         end
 
@@ -292,7 +286,7 @@ RSpec.describe AggregatedCashOutgoings do
 
           it "populates the errors" do
             call_update
-            expect(aco.errors[:maintenance_out3]).to include "Enter the amount paid for maintenance in April, like 1,000 or 20.30"
+            expect(aco.errors[:maintenance_out3]).to include error_msg("maintenance", month3_name)
           end
         end
 
@@ -402,6 +396,10 @@ RSpec.describe AggregatedCashOutgoings do
         end
       end
     end
+  end
+
+  def error_msg(name, month)
+    "Enter the amount paid for #{name} in #{month}, like 1,000 or 20.30"
   end
 
   def valid_params
