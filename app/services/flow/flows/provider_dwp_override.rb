@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderDWPOverride < FlowSteps
+    class ProviderDWPOverride
       STEPS = {
         confirm_dwp_non_passported_applications: Steps::ProviderDWPOverride::ConfirmDWPNonPassportedApplicationsStep,
         check_client_details: Steps::ProviderDWPOverride::CheckClientDetailsStep,

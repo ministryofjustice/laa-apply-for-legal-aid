@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderMeansStateBenefits < FlowSteps
+    class ProviderMeansStateBenefits
       STEPS = {
         receives_state_benefits: Steps::ProviderMeansStateBenefits::ReceivesStateBenefitsStep,
         state_benefits: Steps::ProviderMeansStateBenefits::StateBenefitsStep,

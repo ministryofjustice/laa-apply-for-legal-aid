@@ -28,14 +28,22 @@ class TestProviderPopulator
     "firm1-user2" => ["Firm1 & Co.", "firm1-user2@example.com", 106],
     "firm2-user1" => ["Firm2 & Co.", "firm2-user1@example.com", 107],
     "ahernk" => ["Ahern & Co.", "katharine.ahern@justice.gov.uk", 109],
-    "MARTIN.RONAN@DAVIDGRAY.CO.UK" => ["David Gray LLP", "martin.ronan@example.com", 494_000],
+    "MARTIN.RONAN@DAVIDGRAY.CO.UK" => ["David Gray LLP", "martin.ronan@example.com", 494_000, "mock-user-123"],
     "BENREID" => ["Test firm for portal login", "benreid@example.co.uk", 107],
     "HFITZSIMONS@EDWARDHAYES.CO.UK" => ["EDWARD HAYES LLP", "hfitzsimons@example.com", 2_453_773],
     "LHARRISON@TBILAW.CO.UK" => ["LAWRENCE & CO SOLICITORS CDS LLP", "LHARRISON@example.com", 954_474],
     "user-research" => ["User Research Assoc.", "user@resarch.com", 112],
     "rose" => ["Rose & Co.", "rose.azadkhan@justice.gov.uk", 114],
     "mkeen" => ["Keen & Co.", "mike.keen@justice.gov.uk", 115],
+    "joel.sugarman@justice.gov.uk" => ["Sugarman & daughters", "joel.sugarman@justice.gov.uk", 109],
   }.freeze
+
+  def self.call(name)
+    data = TEST_PROVIDERS[name]
+    return if data.nil?
+
+    new.send(:populate_provider, name, data)
+  end
 
   def run
     return if HostEnv.production?
@@ -46,7 +54,7 @@ class TestProviderPopulator
 private
 
   def populate_provider(username, details)
-    firm_name, email, contact_id = details
+    firm_name, email, contact_id, auth_subject_uid = details
     firm = populate_firm(firm_name)
     return if Provider.exists?(username:)
 
@@ -56,6 +64,8 @@ private
       contact_id:,
       firm:,
       offices: firm.offices,
+      auth_provider: auth_subject_uid.present? ? "entra_id" : "",
+      auth_subject_uid:,
     )
   end
 

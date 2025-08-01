@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
-require Rails.root.join("app/lib/id_p_settings_adapter")
+# require Rails.root.join("app/lib/id_p_settings_adapter")
 
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
+
 Devise.setup do |config|
+  require Rails.root.join "app/lib/omni_auth/strategies/silas"
+  OmniAuth::Strategies::Silas.mock_auth if ENV["OMNIAUTH_ENTRAID_MOCK_AUTH"] == "true"
+
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
@@ -234,14 +238,14 @@ Devise.setup do |config|
   # ==> Configuration for :saml_authenticatable
 
   # Create user if the user does not exist. (Default is false)
-  config.saml_create_user = true
+  # config.saml_create_user = true
 
   # Update the attributes of the user after a successful login. (Default is false)
-  config.saml_update_user = true
+  # config.saml_update_user = true
 
   # Set the default user key. The user will be looked up by this key. Make
   # sure that the Authentication Response includes the attribute.
-  config.saml_default_user_key = :username
+  # config.saml_default_user_key = :username
 
   # Optional. This stores the session index defined by the IDP during login.  If provided it will be used as a salt
   # for the user's session to facilitate an IDP initiated logout request.
@@ -249,11 +253,11 @@ Devise.setup do |config|
 
   # You can set this value to use Subject or SAML assertation as info to which email will be compared.
   # If you don't set it then email will be extracted from SAML assertation attributes.
-  config.saml_use_subject = true
+  # config.saml_use_subject = true
 
   # You can support multiple IdPs by setting this value to a class that implements a #settings method which takes
   # an IdP entity id as an argument and returns a hash of idp settings for the corresponding IdP.
-  config.idp_settings_adapter = IdPSettingsAdapter
+  # config.idp_settings_adapter = IdPSettingsAdapter
 
   # You provide you own method to find the idp_entity_id in a SAML message in the case of multiple IdPs
   # by setting this to a custom reader class, or use the default.
@@ -262,29 +266,6 @@ Devise.setup do |config|
   # You can set a handler object that takes the response for a failed SAML request and the strategy,
   # and implements a #handle method. This method can then redirect the user, return error messages, etc.
   # config.saml_failed_callback = nil
-  laa_portal_config = Rails.configuration.x.laa_portal
-  # Configure with your SAML settings (see ruby-saml's README for more information: https://github.com/onelogin/ruby-saml).
-  config.saml_configure do |settings|
-    settings.security[:digest_method]    = XMLSecurity::Document::SHA256
-    settings.security[:signature_method] = XMLSecurity::Document::RSA_SHA256
-    settings.security[:authn_requests_signed]   = true
-    settings.security[:want_assertions_signed]  = true
-    # settings.security[:embed_sign] = true
-
-    settings.certificate = laa_portal_config.certificate
-    settings.private_key = laa_portal_config.secret_key
-
-    settings.assertion_consumer_service_url     = "#{Rails.configuration.x.application.host_url}/providers/saml/auth"
-    settings.assertion_consumer_service_binding = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
-    settings.name_identifier_format             = "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified"
-    settings.issuer                             = "apply"
-    settings.authn_context                      = "urn:oasis:names:tc:SAML:2.0:ac:classes:PasswordProtectedTransport"
-    settings.idp_slo_target_url                 = laa_portal_config.idp_slo_target_url
-    settings.idp_sso_target_url                 = laa_portal_config.idp_sso_target_url
-    settings.idp_cert = laa_portal_config.idp_cert
-
-    settings.idp_cert_fingerprint_algorithm = laa_portal_config.idp_cert_fingerprint_algorithm
-  end
 
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for

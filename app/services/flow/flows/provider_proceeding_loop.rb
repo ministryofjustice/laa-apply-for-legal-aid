@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderProceedingLoop < FlowSteps
+    class ProviderProceedingLoop
       STEPS = {
         client_involvement_type: Steps::ProviderProceedingLoop::ClientInvolvementTypeStep,
         delegated_functions: Steps::ProviderProceedingLoop::DelegatedFunctionsStep,

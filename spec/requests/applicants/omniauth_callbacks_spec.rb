@@ -1,13 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "applicants omniauth call back" do
-  around do |example|
-    OmniAuth.config.test_mode = true
-    example.run
-    OmniAuth.config.mock_auth[:true_layer] = nil
-    OmniAuth.config.test_mode = false
-  end
-
   let(:token) { SecureRandom.uuid }
   let(:expires_at) { 1.hour.from_now.round }
   let(:true_layer_expires_at) { expires_at.to_i }
@@ -27,6 +20,10 @@ RSpec.describe "applicants omniauth call back" do
 
     stub_true_layer
     ImportBankDataWorker.clear
+  end
+
+  after do
+    OmniAuth.config.mock_auth[:true_layer] = nil
   end
 
   describe "GET /applicants/auth/true_layer/callback" do

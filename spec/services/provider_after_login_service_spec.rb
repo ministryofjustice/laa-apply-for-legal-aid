@@ -9,7 +9,7 @@ RSpec.describe ProviderAfterLoginService do
     context "when the provider does not have CCMS_Apply role" do
       let(:provider) { create(:provider, :created_by_devise, :without_ccms_apply_role) }
 
-      before { allow(Rails.configuration.x.laa_portal).to receive(:mock_saml).and_return(false) }
+      before { allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth).and_return(false) }
 
       it "updates the provider invalid login details" do
         call
