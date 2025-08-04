@@ -30,20 +30,24 @@ module PDA
 
   private
 
+    def destroy_existing_schedules
+      Office.find_by(code: @office_code)&.schedules&.destroy_all
+    end
+
     def firm
       @firm ||= Firm.find_or_create_by!(ccms_id: result.dig("firm", "ccmsFirmId"))
+    end
+
+    def office
+      @office = Office.find_or_initialize_by(code: @office_code)
     end
 
     def update_firm
       firm.update!(name: result.dig("firm", "firmName"))
     end
 
-    def destroy_existing_schedules
-      Office.find_by(code: @office_code)&.schedules&.destroy_all
-    end
-
     def update_office
-      office.update!(code: result.dig("office", "firmOfficeCode"), firm:)
+      office.update!(ccms_id: result.dig("office", "ccmsFirmOfficeId"), firm:)
     end
 
     def create_schedules
@@ -58,7 +62,7 @@ module PDA
                            start_date: result_schedule["scheduleStartDate"].to_date,
                            end_date: result_schedule["scheduleEndDate"].to_date,
                            license_indicator: result_line["maximumLicenseCount"],
-                           devolved_power_status: result_line["evolvedPowersStatus"])
+                           devolved_power_status: result_line["devolvedPowersStatus"])
           Rails.logger.info("#{self.class} - Schedule #{result_schedule['areaOfLaw']} #{result_line['categoryOfLaw']} created for #{@office_code}")
         end
       end
@@ -85,10 +89,6 @@ module PDA
 
     def response
       @response ||= query_api
-    end
-
-    def office
-      @office = Office.find_or_initialize_by(ccms_id: result.dig("office", "ccmsFirmOfficeId"))
     end
 
     def query_api

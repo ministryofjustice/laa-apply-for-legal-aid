@@ -5,70 +5,75 @@ RSpec.describe PDA::ProviderDetails do
     subject(:call) { described_class.call(office.code) }
 
     before do
-      firm.offices << office
+      firm.offices << office if office
       stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{office_code}/schedules")
         .to_return(body:, status:)
     end
 
-    let(:firm) { create(:firm, name: "original firm name") }
+    let(:firm) { create(:firm, name: "original firm name", ccms_id: "56789") }
     let(:office) { create(:office, code: office_code, ccms_id: "12345") }
     let(:office_code) { "4A497U" }
+    let(:ccms_office_id) { 12_345 }
+    let(:ccms_firm_id) { 56_789 }
+    let(:body) do
+      {
+        firm: {
+          firmId: 1639,
+          ccmsFirmId: ccms_firm_id,
+          firmName: "updated firm name",
+        },
+        office: {
+          firmOfficeCode: "4A497U",
+          ccmsFirmOfficeId: ccms_office_id,
+        },
+        schedules:,
+      }.to_json
+    end
 
     context "when the office has schedules applicable to civil apply" do
       let(:status) { 200 }
-      let(:body) do
-        {
-          firm: {
-            firmId: 1639,
-            ccmsFirmId: firm.ccms_id,
-            firmName: "updated firm name",
+      let(:schedules) do
+        [
+          {
+            contractType: "Standard",
+            contractStatus: "Open",
+            contractAuthorizationStatus: "APPROVED",
+            contractStartDate: "2024-09-01",
+            contractEndDate: "2026-06-30",
+            areaOfLaw: "LEGAL HELP",
+            scheduleType: "Standard",
+            scheduleAuthorizationStatus: "APPROVED",
+            scheduleStatus: "Open",
+            scheduleStartDate: "2024-09-01",
+            scheduleEndDate: "2025-08-31",
+            scheduleLines: [
+              {
+                areaOfLaw: "LEGAL HELP",
+                categoryOfLaw: "MAT",
+                description: "Legal Help (Civil).Family",
+                devolvedPowersStatus: "Yes - Excluding JR Proceedings",
+                dpTypeOfChange: nil,
+                dpReasonForChange: nil,
+                dpDateOfChange: nil,
+                remainderWorkFlag: "N/A",
+                minimumCasesAllowedCount: "0",
+                maximumCasesAllowedCount: "0",
+                minimumToleranceCount: "0",
+                maximumToleranceCount: "0",
+                minimumLicenseCount: "0",
+                maximumLicenseCount: "1",
+                workInProgressCount: "0",
+                outreach: nil,
+                cancelFlag: "N",
+                cancelReason: nil,
+                cancelDate: nil,
+                closedDate: nil,
+                closedReason: nil,
+              },
+            ],
+            nmsAuths: [],
           },
-          office: {
-            firmOfficeCode: "4A497U",
-            ccmsFirmOfficeId: office.ccms_id,
-          },
-          schedules: [
-            {
-              contractType: "Standard",
-              contractStatus: "Open",
-              contractAuthorizationStatus: "APPROVED",
-              contractStartDate: "2024-09-01",
-              contractEndDate: "2026-06-30",
-              areaOfLaw: "LEGAL HELP",
-              scheduleType: "Standard",
-              scheduleAuthorizationStatus: "APPROVED",
-              scheduleStatus: "Open",
-              scheduleStartDate: "2024-09-01",
-              scheduleEndDate: "2025-08-31",
-              scheduleLines: [
-                {
-                  areaOfLaw: "LEGAL HELP",
-                  categoryOfLaw: "MAT",
-                  description: "Legal Help (Civil).Family",
-                  devolvedPowersStatus: "Yes - Excluding JR Proceedings",
-                  dpTypeOfChange: nil,
-                  dpReasonForChange: nil,
-                  dpDateOfChange: nil,
-                  remainderWorkFlag: "N/A",
-                  minimumCasesAllowedCount: "0",
-                  maximumCasesAllowedCount: "0",
-                  minimumToleranceCount: "0",
-                  maximumToleranceCount: "0",
-                  minimumLicenseCount: "0",
-                  maximumLicenseCount: "1",
-                  workInProgressCount: "0",
-                  outreach: nil,
-                  cancelFlag: "N",
-                  cancelReason: nil,
-                  cancelDate: nil,
-                  closedDate: nil,
-                  closedReason: nil,
-                },
-              ],
-              nmsAuths: [],
-            },
-          ],
-        }.to_json
+        ]
       end
 
       it "associates the contracts with the correct office" do
@@ -86,109 +91,145 @@ RSpec.describe PDA::ProviderDetails do
         expect(firm.reload.name).to eq "updated firm name"
       end
 
-      context "when the office code changes" do
-        let(:office) { create(:office, code: "1A29C", ccms_id: "12345") }
+      context "when the office ccms_id changes" do
+        let(:ccms_office_id) { 54_321 }
 
         it "updates the office details" do
           described_class.call(office_code)
-          expect(office.reload.code).to eq office_code
+          office.reload
+          expect(office.firm).to eq firm
+          expect(office.code).to eq office_code
+          expect(office.ccms_id).to eq "54321"
+          expect(office.schedules.count).to eq 1
+        end
+      end
+
+      context "when the office does not exist" do
+        before { firm.offices = [] }
+
+        let(:office) { nil }
+
+        it "creates the office" do
+          described_class.call(office_code)
+          office = Office.find_by(code: office_code)
+          expect(office.firm).to eq firm
+          expect(office.ccms_id).to eq "12345"
+          expect(office.schedules.count).to eq 1
+        end
+      end
+
+      context "when the firm does not exist" do
+        let(:firm) { nil }
+        let(:office) { nil }
+
+        it "creates the firm" do
+          described_class.call(office_code)
+          firm = Firm.find_by(ccms_id: "56789")
+          expect(firm.name).to eq "updated firm name"
+          expect(firm.offices.count).to eq 1
+        end
+
+        it "creates the office" do
+          described_class.call(office_code)
+          office = Office.find_by(code: office_code)
+          expect(office.ccms_id).to eq "12345"
+          expect(office.schedules.count).to eq 1
+        end
+      end
+
+      context "when there are existing schedules belonging to the office" do
+        before { office.schedules << Schedule.new(area_of_law: "Legal Help", category_of_law: "HOU") }
+
+        it "deletes any existing schedules belonging to the office" do
+          call
+          expect(office.schedules.pluck(:category_of_law)).to contain_exactly("MAT")
         end
       end
     end
 
     context "when the office does not have schedules applicable to civil apply" do
       let(:status) { 200 }
-      let(:body) do
-        {
-          firm: {
-            firmId: 1639,
-            ccmsFirmId: firm.ccms_id,
+      let(:schedules) do
+        [
+          {
+            contractType: "Standard",
+            contractStatus: "Open",
+            contractAuthorizationStatus: "APPROVED",
+            contractStartDate: "2024-09-01",
+            contractEndDate: "2026-06-30",
+            areaOfLaw: "LEGAL HELP",
+            scheduleType: "Standard",
+            scheduleAuthorizationStatus: "APPROVED",
+            scheduleStatus: "Open",
+            scheduleStartDate: "2024-09-01",
+            scheduleEndDate: "2025-08-31",
+            scheduleLines: [
+              {
+                areaOfLaw: "LEGAL HELP",
+                categoryOfLaw: "HOU",
+                description: "Legal Help (Civil).Housing",
+                devolvedPowersStatus: "No",
+                dpTypeOfChange: nil,
+                dpReasonForChange: nil,
+                dpDateOfChange: nil,
+                remainderWorkFlag: "No",
+                minimumCasesAllowedCount: "0",
+                maximumCasesAllowedCount: "0",
+                minimumToleranceCount: "0",
+                maximumToleranceCount: "0",
+                minimumLicenseCount: "0",
+                maximumLicenseCount: "0",
+                workInProgressCount: "0",
+                outreach: nil,
+                cancelFlag: "N",
+                cancelReason: nil,
+                cancelDate: nil,
+                closedDate: nil,
+                closedReason: nil,
+              },
+            ],
+            nmsAuths: [],
           },
-          office: {
-            firmOfficeCode: "4A497U",
-            ccmsFirmOfficeId: office.ccms_id,
+          {
+            contractType: "Standard",
+            contractStatus: "Open",
+            contractAuthorizationStatus: "APPROVED",
+            contractStartDate: "2022-10-01",
+            contractEndDate: "2025-09-30",
+            areaOfLaw: "CRIME LOWER",
+            scheduleType: "Standard",
+            scheduleAuthorizationStatus: "APPROVED",
+            scheduleStatus: "Open",
+            scheduleStartDate: "2023-10-01",
+            scheduleEndDate: "2025-09-30",
+            scheduleLines: [
+              {
+                areaOfLaw: "CRIME LOWER",
+                categoryOfLaw: "INVEST",
+                description: "Crime Lower.Criminal Investigations and Criminal Proceedings",
+                devolvedPowersStatus: nil,
+                dpTypeOfChange: nil,
+                dpReasonForChange: nil,
+                dpDateOfChange: nil,
+                remainderWorkFlag: nil,
+                minimumCasesAllowedCount: "0",
+                maximumCasesAllowedCount: "1",
+                minimumToleranceCount: nil,
+                maximumToleranceCount: nil,
+                minimumLicenseCount: nil,
+                maximumLicenseCount: nil,
+                workInProgressCount: "0",
+                outreach: nil,
+                cancelFlag: "N",
+                cancelReason: nil,
+                cancelDate: nil,
+                closedDate: nil,
+                closedReason: nil,
+              },
+            ],
+            nmsAuths: [],
           },
-          schedules: [
-            {
-              contractType: "Standard",
-              contractStatus: "Open",
-              contractAuthorizationStatus: "APPROVED",
-              contractStartDate: "2024-09-01",
-              contractEndDate: "2026-06-30",
-              areaOfLaw: "LEGAL HELP",
-              scheduleType: "Standard",
-              scheduleAuthorizationStatus: "APPROVED",
-              scheduleStatus: "Open",
-              scheduleStartDate: "2024-09-01",
-              scheduleEndDate: "2025-08-31",
-              scheduleLines: [
-                {
-                  areaOfLaw: "LEGAL HELP",
-                  categoryOfLaw: "HOU",
-                  description: "Legal Help (Civil).Housing",
-                  devolvedPowersStatus: "No",
-                  dpTypeOfChange: nil,
-                  dpReasonForChange: nil,
-                  dpDateOfChange: nil,
-                  remainderWorkFlag: "No",
-                  minimumCasesAllowedCount: "0",
-                  maximumCasesAllowedCount: "0",
-                  minimumToleranceCount: "0",
-                  maximumToleranceCount: "0",
-                  minimumLicenseCount: "0",
-                  maximumLicenseCount: "0",
-                  workInProgressCount: "0",
-                  outreach: nil,
-                  cancelFlag: "N",
-                  cancelReason: nil,
-                  cancelDate: nil,
-                  closedDate: nil,
-                  closedReason: nil,
-                },
-              ],
-              nmsAuths: [],
-            },
-            {
-              contractType: "Standard",
-              contractStatus: "Open",
-              contractAuthorizationStatus: "APPROVED",
-              contractStartDate: "2022-10-01",
-              contractEndDate: "2025-09-30",
-              areaOfLaw: "CRIME LOWER",
-              scheduleType: "Standard",
-              scheduleAuthorizationStatus: "APPROVED",
-              scheduleStatus: "Open",
-              scheduleStartDate: "2023-10-01",
-              scheduleEndDate: "2025-09-30",
-              scheduleLines: [
-                {
-                  areaOfLaw: "CRIME LOWER",
-                  categoryOfLaw: "INVEST",
-                  description: "Crime Lower.Criminal Investigations and Criminal Proceedings",
-                  devolvedPowersStatus: nil,
-                  dpTypeOfChange: nil,
-                  dpReasonForChange: nil,
-                  dpDateOfChange: nil,
-                  remainderWorkFlag: nil,
-                  minimumCasesAllowedCount: "0",
-                  maximumCasesAllowedCount: "1",
-                  minimumToleranceCount: nil,
-                  maximumToleranceCount: nil,
-                  minimumLicenseCount: nil,
-                  maximumLicenseCount: nil,
-                  workInProgressCount: "0",
-                  outreach: nil,
-                  cancelFlag: "N",
-                  cancelReason: nil,
-                  cancelDate: nil,
-                  closedDate: nil,
-                  closedReason: nil,
-                },
-              ],
-              nmsAuths: [],
-            },
-          ],
-        }.to_json
+        ]
       end
 
       it "does not create any schedules" do
@@ -206,6 +247,15 @@ RSpec.describe PDA::ProviderDetails do
         expect(Rails.logger).to receive(:info).with("#{described_class} - No schedules found for 4A497U")
         call
         expect(office.schedules.count).to eq(0)
+      end
+
+      context "when there are existing schedules belonging to the office" do
+        before { office.schedules << Schedule.new(area_of_law: "Legal Help", category_of_law: "MAT") }
+
+        it "deletes any existing schedules belonging to the office" do
+          call
+          expect(office.schedules.count).to eq(0)
+        end
       end
     end
 
