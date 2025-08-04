@@ -6,6 +6,6 @@ RSpec.describe Flow::Steps::CitizenStart::TrueLayerStep, type: :request do
   describe "#path" do
     subject(:path) { described_class.path.call(legal_aid_application) }
 
-    it { is_expected.to eql omniauth_login_start_path(:true_layer) }
+    it { is_expected.to eql "/auth/true_layer" }
   end
 end
