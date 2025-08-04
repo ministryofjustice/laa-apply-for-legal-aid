@@ -93,11 +93,6 @@ env:
     value: {{ .Values.benefit_checker.wsdlUrl | quote }}
   - name: CCMS_SOA_SUBMIT_APPLICATIONS
     value: {{ .Values.ccms_soa.submit_applications | quote }}
-  - name: CCMS_SOA_AWS_GATEWAY_API_KEY
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: ccmsSoaAwsGatewayApiKey
   - name: CCMS_SOA_CLIENT_USERNAME
     valueFrom:
       secretKeyRef:

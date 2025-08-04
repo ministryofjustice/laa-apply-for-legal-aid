@@ -60,7 +60,6 @@ module LaaApplyForLegalAid
     config.x.capital_result.lower_limit = 3000.00
 
     config.x.ccms_soa.submit_applications_to_ccms = ENV["CCMS_SOA_SUBMIT_APPLICATIONS"] == "true"
-    config.x.ccms_soa.aws_gateway_api_key         = ENV.fetch("CCMS_SOA_AWS_GATEWAY_API_KEY", nil)
     config.x.ccms_soa.client_username             = ENV.fetch("CCMS_SOA_CLIENT_USERNAME", nil)
     config.x.ccms_soa.client_password_type        = ENV.fetch("CCMS_SOA_CLIENT_PASSWORD_TYPE", nil)
     config.x.ccms_soa.client_password             = ENV.fetch("CCMS_SOA_CLIENT_PASSWORD", nil)
