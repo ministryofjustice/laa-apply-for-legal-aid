@@ -143,7 +143,7 @@ module CCMS
 
       describe "wsdl_location" do
         it "points to correct location" do
-          expect(requestor.__send__(:wsdl_location)).to match("app/services/ccms/wsdls/ClientProxyServiceWsdl.xml")
+          expect(requestor.__send__(:wsdl_location)).to match("app/services/ccms/wsdls/ClientProxyServiceUATWsdl.xml")
         end
       end
 

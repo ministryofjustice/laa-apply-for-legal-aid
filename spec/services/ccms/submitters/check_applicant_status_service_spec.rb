@@ -8,7 +8,7 @@ module CCMS
       let(:submission) { create(:submission, :applicant_submitted) }
       let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
       let(:response_body) { ccms_data_from_file "applicant_add_status_response.xml" }
-      let(:endpoint) { "https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/ClientServices/ClientServices_ep" }
+      let(:endpoint) { "https://ccms-soa-managed.laa-test.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/ClientServices/ClientServices_ep" }
 
       around do |example|
         VCR.turn_off!
