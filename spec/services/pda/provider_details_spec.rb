@@ -5,11 +5,13 @@ RSpec.describe PDA::ProviderDetails do
     subject(:call) { described_class.call(office.code) }
 
     before do
+      firm.offices << office
       stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{office_code}/schedules")
         .to_return(body:, status:)
     end
 
-    let(:office) { create(:office, code: office_code) }
+    let(:firm) { create(:firm, name: "original firm name") }
+    let(:office) { create(:office, code: office_code, ccms_id: "12345") }
     let(:office_code) { "4A497U" }
 
     context "when the office has schedules applicable to civil apply" do
@@ -18,9 +20,12 @@ RSpec.describe PDA::ProviderDetails do
         {
           firm: {
             firmId: 1639,
+            ccmsFirmId: firm.ccms_id,
+            firmName: "updated firm name",
           },
           office: {
             firmOfficeCode: "4A497U",
+            ccmsFirmOfficeId: office.ccms_id,
           },
           schedules: [
             {
@@ -75,6 +80,20 @@ RSpec.describe PDA::ProviderDetails do
         call
         expect(office.schedules.pluck(:category_of_law)).to contain_exactly("MAT")
       end
+
+      it "updates the firm details" do
+        call
+        expect(firm.reload.name).to eq "updated firm name"
+      end
+
+      context "when the office code changes" do
+        let(:office) { create(:office, code: "1A29C", ccms_id: "12345") }
+
+        it "updates the office details" do
+          described_class.call(office_code)
+          expect(office.reload.code).to eq office_code
+        end
+      end
     end
 
     context "when the office does not have schedules applicable to civil apply" do
@@ -83,9 +102,11 @@ RSpec.describe PDA::ProviderDetails do
         {
           firm: {
             firmId: 1639,
+            ccmsFirmId: firm.ccms_id,
           },
           office: {
             firmOfficeCode: "4A497U",
+            ccmsFirmOfficeId: office.ccms_id,
           },
           schedules: [
             {
