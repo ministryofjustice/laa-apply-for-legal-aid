@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe PDA::SchedulesCreator do
+RSpec.describe PDA::ProviderDetails do
   describe ".call" do
     subject(:call) { described_class.call(office.code) }
 
@@ -71,7 +71,7 @@ RSpec.describe PDA::SchedulesCreator do
       end
 
       it "creates the schedules with the correct category of law" do
-        expect(Rails.logger).to receive(:info).with("PDA::SchedulesCreator - Schedule LEGAL HELP MAT created for 4A497U")
+        expect(Rails.logger).to receive(:info).with("#{described_class} - Schedule LEGAL HELP MAT created for 4A497U")
         call
         expect(office.schedules.pluck(:category_of_law)).to contain_exactly("MAT")
       end
@@ -171,7 +171,7 @@ RSpec.describe PDA::SchedulesCreator do
       end
 
       it "does not create any schedules" do
-        # expect(Rails.logger).to receive(:info).with("PDA::SchedulesCreator - No applicable schedules found for 4A497U")
+        expect(Rails.logger).to receive(:info).with("#{described_class} - No applicable schedules found for 4A497U")
         call
         expect(office.schedules.count).to eq(0)
       end
@@ -182,7 +182,7 @@ RSpec.describe PDA::SchedulesCreator do
       let(:body) { "" }
 
       it "does not create any schedules" do
-        expect(Rails.logger).to receive(:info).with("PDA::SchedulesCreator - No schedules found for 4A497U")
+        expect(Rails.logger).to receive(:info).with("#{described_class} - No schedules found for 4A497U")
         call
         expect(office.schedules.count).to eq(0)
       end
@@ -193,7 +193,7 @@ RSpec.describe PDA::SchedulesCreator do
       let(:status) { 500 }
 
       it "raises ApiError" do
-        expect { call }.to raise_error(PDA::SchedulesCreator::ApiError, "API Call Failed: (500) An error has occurred")
+        expect { call }.to raise_error(PDA::ProviderDetails::ApiError, "API Call Failed: (500) An error has occurred")
       end
     end
   end
