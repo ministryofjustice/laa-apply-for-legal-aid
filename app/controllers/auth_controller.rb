@@ -4,10 +4,10 @@ class AuthController < ApplicationController
   def failure
     # redirect to consents page if it was an applicant failing to login at his bank
     #
-    if auth_error_during_bank_login?
-      redirect_to error_path(:access_denied)
-    else
+    if during_citizen_bank_login?
       redirect_to citizens_consent_path(auth_failure: true)
+    else
+      redirect_to error_path(:access_denied)
     end
   end
 
@@ -17,9 +17,9 @@ private
     @origin ||= params[:origin]
   end
 
-  def auth_error_during_bank_login?
-    return true if origin.nil?
+  def during_citizen_bank_login?
+    return false if origin.blank?
 
-    URI(origin).path != "/citizens/banks"
+    URI(origin).path == "/citizens/banks"
   end
 end
