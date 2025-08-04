@@ -17,10 +17,10 @@ module PDA
     def call
       raise ApiError, "API Call Failed: (#{response.status}) #{response.body}" unless response.success?
 
-      office.schedules.destroy_all
+      destroy_existing_schedules
       if response.status == 200
-        # update_firm
-        # update_office
+        update_firm
+        update_office
         create_schedules
         Rails.logger.info("#{self.class} - No applicable schedules found for #{@office_code}") if office.schedules.empty?
       else
@@ -30,18 +30,20 @@ module PDA
 
   private
 
+    def firm
+      @firm ||= Firm.find_or_create_by!(ccms_id: result.dig("firm", "ccmsFirmId"))
+    end
+
     def update_firm
-      result_firm = result["firm"]
-      Firm.find_or_create_by!(ccms_id: result_firm["ccmsFirmId"]).tap do |firm|
-        firm.update!(name: result_firm["firmName"])
-      end
+      firm.update!(name: result.dig("firm", "firmName"))
+    end
+
+    def destroy_existing_schedules
+      Office.find_by(code: @office_code)&.schedules&.destroy_all
     end
 
     def update_office
-      result_office = result["office"]
-      Office.find_or_create_by!(ccms_id: result_office).tap do |office|
-        office.update!(code: result_office["firmOfficeCode"])
-      end
+      office.update!(code: result.dig("office", "firmOfficeCode"), firm:)
     end
 
     def create_schedules
@@ -63,7 +65,7 @@ module PDA
     end
 
     def result
-      JSON.parse(response.body)
+      @result ||= JSON.parse(response.body)
     end
 
     def url
@@ -86,7 +88,7 @@ module PDA
     end
 
     def office
-      @office = Office.find_by(code: @office_code)
+      @office = Office.find_or_initialize_by(ccms_id: result.dig("office", "ccmsFirmOfficeId"))
     end
 
     def query_api
