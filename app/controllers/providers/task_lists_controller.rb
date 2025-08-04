@@ -1,6 +1,5 @@
 module Providers
   class TaskListsController < ApplicationController
-    before_action :authenticate_provider!
     before_action :update_locale
     include Authorizable
     include ApplicationDependable

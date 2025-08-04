@@ -13,7 +13,7 @@ module Providers
   private
 
     def portal_url
-      uri = URI(Rails.configuration.x.laa_portal.idp_sso_target_url)
+      uri = URI(Rails.configuration.x.laa_landing_page_target_url)
       "#{uri.scheme}://#{uri.host}"
     end
   end
