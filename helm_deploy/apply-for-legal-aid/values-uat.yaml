@@ -113,11 +113,11 @@ ccms_soa:
   documentServicesWsdl: DocumentServicesUATWsdl.xml
   getReferenceDataWsdl: GetReferenceDataUATWsdl.xml
 
-laa_portal:
-  idpSsoTargetUrl: "https://portal.uat.legalservices.gov.uk/oamfed/idp/samlv20"
-  idpSloTargetUrl: "https://portal.uat.legalservices.gov.uk/oam/server/logout"
-  idpCertFingerprintAlgorithm: "<idp-cert-fingerprint-alg-goes-here>"
-  mockSaml: "true"
+omniauth_entraid:
+  mock_auth: "false"
+  idp_sso_target_url: <not-sure-if-needed-but-could-point-to-silas/lassie-frontend>
+  # redirect_uri: https://main-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk/auth/entra_id/callback
+  redirect_uri: https://ap-6125-use-oidc-entraid-login-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk/auth/entra_id/callback # TODO: should be moved to the deploy script per branch
 
 provider_details:
   url: "https://test-pda-api-laa-ccms-test.apps.live.cloud-platform.service.justice.gov.uk/api/providerDetails/" # Test points CCMS eBS UAT nev
