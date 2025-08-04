@@ -15,10 +15,7 @@ Rails.application.routes.draw do
     username == "sidekiq" && password == ENV["SIDEKIQ_WEB_UI_PASSWORD"].to_s
   end
 
-  get "/saml/auth" => "saml_idp#new"
-  post "/saml/auth" => "saml_idp#create"
-
-  devise_for :providers, controllers: { saml_sessions: "saml_sessions" }
+  devise_for :providers, controllers: { sessions: "providers/sessions" }
   devise_for :applicants
   devise_for :admin_users, controllers: { sessions: "admin_users/sessions" }
 
@@ -40,7 +37,26 @@ Rails.application.routes.draw do
     )
   end
 
+  devise_scope :provider do
+    authenticated :provider do
+      root to: "start#index", as: :authenticated_root
+    end
+
+    match(
+      "auth/entra_id/callback",
+      to: "providers/omniauth_callbacks#entra_id",
+      via: %i[get puts],
+      as: :provider_entra_id_omniauth_callback,
+    )
+
+    get "/auth/entra_id", to: "providers/sessions#new", as: :new_provider_session
+    post "/providers/sign_in", to: "providers/sessions#create", as: :provider_session
+    delete "/providers/sign_out", to: "providers/sessions#destroy", as: :destroy_provider_session
+  end
+
+  # TODO: 29 JUL check both of these are needed, I suspect not - CB
   get "auth/failure", to: "auth#failure"
+  get "providers/auth/failure", to: "providers/auth#failure"
 
   resource :contact, only: [:show]
   resources :accessibility_statement, only: [:index]
