@@ -31,6 +31,7 @@ en:
         phase_banner_html: This is a new service – your %{link} will help us to improve it.
         title: Apply for civil legal aid
         notice: Notice
+        my_profile: My profile
     logout:
       admin: Admin sign out
       provider: Sign out
