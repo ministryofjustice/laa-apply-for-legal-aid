@@ -115,29 +115,25 @@ env:
     value: {{ .Values.ccms_soa.documentServicesWsdl | quote }}
   - name: CCMS_SOA_GET_REFERENCE_DATA_WSDL
     value: {{ .Values.ccms_soa.getReferenceDataWsdl | quote }}
-  - name: LAA_PORTAL_IDP_SSO_TARGET_URL
-    value: {{ .Values.laa_portal.idpSsoTargetUrl | quote }}
-  - name: LAA_PORTAL_IDP_SLO_TARGET_URL
-    value: {{ .Values.laa_portal.idpSloTargetUrl | quote }}
-  - name: LAA_PORTAL_IDP_CERT
+  - name: OMNIAUTH_ENTRAID_MOCK_AUTH
+    value: {{ .Values.omniauth_entraid.mock_auth | quote }}
+  - name: OMNIAUTH_ENTRAID_CLIENT_ID
     valueFrom:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
-        key: laaPortalIdpCert
-  - name: LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM
-    value: {{ .Values.laa_portal.idpCertFingerprintAlgorithm | quote }}
-  - name: LAA_PORTAL_CERTIFICATE
+        key: omniauthAzureClientID
+  - name: OMNIAUTH_ENTRAID_CLIENT_SECRET
     valueFrom:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
-        key: laaPortalCertificate
-  - name: LAA_PORTAL_SECRET_KEY
+        key: omniauthAzureClientSecret
+  - name: OMNIAUTH_ENTRAID_TENANT_ID
     valueFrom:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
-        key: laaPortalSecretKey
-  - name: LAA_PORTAL_MOCK_SAML
-    value: {{ .Values.laa_portal.mockSaml | quote }}
+        key: omniauthAzureTenantID
+  - name: OMNIAUTH_ENTRAID_REDIRECT_URI
+    value: {{ .Values.omniauth_entraid.redirect_uri | quote }}
   - name: PROVIDER_DETAILS_URL
     value: {{ .Values.provider_details.url | quote }}
   - name: PDA_URL
