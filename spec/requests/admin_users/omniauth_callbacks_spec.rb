@@ -1,16 +1,6 @@
 require "rails_helper"
 
 RSpec.describe "admin users omniauth call back" do
-  around do |example|
-    OmniAuth.config.test_mode = true
-    example.run
-    OmniAuth.config.mock_auth[:google_oauth2] = nil
-    OmniAuth.config.test_mode = false
-  end
-
-  let(:token) { SecureRandom.uuid }
-  let(:expires_at) { 1.hour.from_now.round }
-  let(:google_expires_at) { expires_at.to_i }
   let!(:admin_user) { create(:admin_user) }
   let(:email) { admin_user.email }
   let(:target_url) { admin_settings_url }
@@ -21,6 +11,10 @@ RSpec.describe "admin users omniauth call back" do
       info: { email: },
       origin: target_url,
     )
+  end
+
+  after do
+    OmniAuth.config.mock_auth[:google_oauth2] = nil
   end
 
   describe "GET /auth/google_oauth2/callback" do
