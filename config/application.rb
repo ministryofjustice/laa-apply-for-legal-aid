@@ -59,6 +59,8 @@ module LaaApplyForLegalAid
     config.x.capital_result.upper_limit = 8000.00
     config.x.capital_result.lower_limit = 3000.00
 
+    config.x.laa_landing_page_target_url = ENV.fetch("LAA_LANDING_PAGE_TARGET_URL", nil)
+
     config.x.ccms_soa.submit_applications_to_ccms = ENV["CCMS_SOA_SUBMIT_APPLICATIONS"] == "true"
     config.x.ccms_soa.client_username             = ENV.fetch("CCMS_SOA_CLIENT_USERNAME", nil)
     config.x.ccms_soa.client_password_type        = ENV.fetch("CCMS_SOA_CLIENT_PASSWORD_TYPE", nil)
@@ -70,15 +72,6 @@ module LaaApplyForLegalAid
     config.x.ccms_soa.getReferenceDataWsdl        = ENV.fetch("CCMS_SOA_GET_REFERENCE_DATA_WSDL", "GetReferenceDataUATWsdl.xml")
 
     config.x.google_tag_manager_tracking_id = ENV.fetch("GOOGLE_TAG_MANAGER_TRACKING_ID", nil)
-
-    config.x.laa_portal.idp_slo_target_url             = ENV.fetch("LAA_PORTAL_IDP_SLO_TARGET_URL", nil)
-    config.x.laa_portal.idp_sso_target_url             = ENV.fetch("LAA_PORTAL_IDP_SSO_TARGET_URL", nil)
-    config.x.laa_portal.idp_cert                       = ENV.fetch("LAA_PORTAL_IDP_CERT", nil)
-    config.x.laa_portal.idp_cert_fingerprint_algorithm = ENV.fetch("LAA_PORTAL_IDP_CERT_FINGERPRINT_ALGORITHM", nil)
-    config.x.laa_portal.mock_saml = ENV.fetch("LAA_PORTAL_MOCK_SAML", nil)
-
-    config.x.laa_portal.certificate = ENV.fetch("LAA_PORTAL_CERTIFICATE", nil)
-    config.x.laa_portal.secret_key = ENV.fetch("LAA_PORTAL_SECRET_KEY", nil)
 
     config.x.kubernetes_deployment = ENV["KUBERNETES_DEPLOYMENT"] == "true"
 
@@ -93,6 +86,8 @@ module LaaApplyForLegalAid
     config.x.admin_portal.password = ENV.fetch("ADMIN_PASSWORD", nil)
 
     config.x.email_domain.suffix = ENV.fetch("APPLY_EMAIL", nil)
+
+    config.x.omniauth_entraid.mock_auth = ENV.fetch("OMNIAUTH_ENTRAID_MOCK_AUTH", nil)
 
     config.x.provider_details.url = ENV.fetch("PROVIDER_DETAILS_URL", nil)
     config.x.pda.url = ENV.fetch("PDA_URL", nil)
