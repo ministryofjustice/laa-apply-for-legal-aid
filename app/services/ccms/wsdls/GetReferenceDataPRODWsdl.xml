@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <wsdl:definitions name="GetReferenceData" targetNamespace="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/GetReferenceData"
-  xmlns:ns2="http://schemas.oracle.com/bpel/extension" 
-  xmlns:ns1="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM" 
-  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" 
-  xmlns:client="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/GetReferenceData" 
-  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
-  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+  xmlns:ns2="http://schemas.oracle.com/bpel/extension"
+  xmlns:ns1="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM"
+  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+  xmlns:client="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/GetReferenceData"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
   xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
   <wsdl:documentation>
-    <abstractWSDL>https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/GetReferenceData!10.0/GetReferenceData.wsdl</abstractWSDL>
+    <abstractWSDL>https://ccms-soa-managed.laa-production.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/GetReferenceData/getreferencedata_ep?wsdl</abstractWSDL>
   </wsdl:documentation>
   <plnk:partnerLinkType name="GetReferenceData">
     <plnk:role name="GetReferenceDataProvider">
@@ -16,8 +16,8 @@
     </plnk:role>
   </plnk:partnerLinkType>
   <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
-    xmlns="http://schemas.xmlsoap.org/ws/2004/09/policy" 
-    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="wss_username_token_service_policy" 
+    xmlns="http://schemas.xmlsoap.org/ws/2004/09/policy"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="wss_username_token_service_policy"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <sp:SupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
       <wsp:Policy>
@@ -29,11 +29,11 @@
       </wsp:Policy>
     </sp:SupportingTokens>
   </wsp:Policy>
-  <wsdl:import namespace="http://schemas.oracle.com/bpel/extension" location="https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/GetReferenceData/getreferencedata_ep?WSDL=RuntimeFault.wsdl" />
+  <wsdl:import namespace="http://schemas.oracle.com/bpel/extension" location="https://ccms-soa-managed.laa-production.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/GetReferenceData/getreferencedata_ep?WSDL=RuntimeFault.wsdl" />
   <wsdl:types>
     <schema xmlns="http://www.w3.org/2001/XMLSchema">
-      <import namespace="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM" schemaLocation="https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/GetReferenceData/apps/lsc/Schema/BusinessObjects/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM.xsd" />
-      <import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/GetReferenceData/apps/lsc/Schema/BusinessObjects/Enterprise/External/oasis/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" />
+      <import namespace="http://legalservices.gov.uk/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM" schemaLocation="https://ccms-soa-managed.laa-production.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/GetReferenceData/apps/lsc/Schema/BusinessObjects/CCMS/Common/ReferenceData/1.0/ReferenceDataBIM.xsd" />
+      <import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="https://ccms-soa-managed.laa-production.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/GetReferenceData/apps/lsc/Schema/BusinessObjects/Enterprise/External/oasis/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" />
     </schema>
   </wsdl:types>
   <wsdl:message name="GetReferenceDataRequestMessage">
@@ -67,7 +67,7 @@
   </wsdl:binding>
   <wsdl:service name="getreferencedata_ep">
     <wsdl:port name="GetReferenceData_pt" binding="client:GetReferenceDataSOAPBinding">
-      <soap:address location="https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/GetReferenceData/getreferencedata_ep" />
+      <soap:address location="https://ccms-soa-managed.laa-production.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/GetReferenceData/getreferencedata_ep" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
