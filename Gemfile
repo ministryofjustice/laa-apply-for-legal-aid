@@ -31,10 +31,10 @@ gem "bootsnap", ">= 1.1.0", require: false
 
 # Authentication
 gem "devise" # User authentication
-gem "devise_saml_authenticatable", ">= 1.7.0"
 gem "omniauth", ">= 2.0.0"
 gem "omniauth-google-oauth2", ">= 0.8.1"
 gem "omniauth-oauth2", ">= 1.7.1" # Provide Oauth2 strategy framework
+gem "omniauth_openid_connect"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 
 # Improve backtrace in nested error recues
@@ -50,9 +50,6 @@ gem "pagy"
 gem "dibber"
 # Gathers data from user browser - OS and Browser name
 gem "browser"
-
-# Used to mock saml request in UAT
-gem "ruby-saml-idp", github: "dev-develop/ruby-saml-idp", branch: "master"
 
 # Used to encode sample (mock) TrueLayer transaction IDs as JSON
 gem "jwt"
