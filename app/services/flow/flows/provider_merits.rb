@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderMerits < FlowSteps
+    class ProviderMerits
       STEPS = {
         start_involved_children_task: Steps::ProviderMerits::StartInvolvedChildrenTaskStep,
         involved_children: Steps::ProviderMerits::InvolvedChildrenStep,

@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderIncome < FlowSteps
+    class ProviderIncome
       STEPS = {
         client_completed_means: Steps::ProviderIncome::ClientCompletedMeansStep,
         employment_incomes: Steps::ProviderIncome::EmploymentIncomesStep,
