@@ -483,8 +483,8 @@ GEM
       racc
     patience_diff (1.2.0)
       optimist (~> 3.0)
-    pg (1.6.0)
-    pg (1.6.0-x86_64-darwin)
+    pg (1.6.1-arm64-darwin)
+    pg (1.6.1-x86_64-darwin)
     pg_dump_anonymize (0.1.2)
     pp (0.6.2)
       prettyprint
