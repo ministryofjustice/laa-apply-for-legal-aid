@@ -3,9 +3,9 @@ module OmniAuth
     class Silas < OmniAuth::Strategies::OpenIDConnect
       # we may only need the user_name attribute to query PDA for offices and firms
       # info { { user_name:, email:, roles:, office_codes: } }
-      info { { user_name:, office_codes: } }
+      # info { { user_name:, office_codes: } }
 
-    private
+      # private
 
       # The `LAA_ACCOUNTS` custom claim can be either a single office code (as a string)
       # or multiple office codes (as an array). Here we normalizes the value to always
@@ -14,18 +14,20 @@ module OmniAuth
       # NOTE: We may not need these regardless as we retrieve this data from Provider details API
       # (PDA) usually.
       #
-      def office_codes
-        [*user_info.raw_attributes.fetch("LAA_ACCOUNTS")]
-      end
+      # TODO: Fix or remove. It is not usable currently
+      # def office_codes
+      #   [*user_info.raw_attributes.fetch("LAA_ACCOUNTS")]
+      # end
 
       # def email
       #   user_info.email
       # end
 
       # # This should be provided by custom "claim" in the EntraID response payload
-      def user_name
-        user_info.raw_attributes.fetch("USER_NAME", nil)
-      end
+      # TODO: Fix or remove. It is not usable currently
+      # def user_name
+      #   user_info.raw_attributes.fetch("USER_NAME", nil)
+      # end
 
       # Access to Civil Apply will be managed by LASSIE (a.k.a SILAS) and EntraID.
       # Setting roles as `ACCESS_CIVIL_APPLY` here until that is confirmed.
@@ -53,7 +55,7 @@ module OmniAuth
               raw_info: {
                 oid: "mock-oid-entra",
                 "USER_NAME" => "MARTIN.RONAN@DAVIDGRAY.CO.UK",
-                "LAA_ACCOUNTS" => "A1234B",
+                "LAA_ACCOUNTS" => %w[0X395U 2N078D A123456],
               },
             },
           })

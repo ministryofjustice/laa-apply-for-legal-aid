@@ -1,30 +1,38 @@
 module PDA
   class ProviderDetails
     ApiError = Class.new(StandardError)
+    ValidDetailsNotFound = Class.new(StandardError)
 
     # Only save schedule details that are relevant to civily apply
     APPLICABLE_CATEGORIES_OF_LAW = %w[MAT].freeze
     APPLICABLE_AREAS_OF_LAW = ["LEGAL HELP", "CIVIL FUNDING"].freeze
 
-    def initialize(office_code)
+    def initialize(provider, office_code)
+      @provider = provider
       @office_code = office_code
     end
 
-    def self.call(office_code)
-      new(office_code).call
+    def self.call(provider, office_code)
+      new(provider, office_code).call
     end
 
     def call
       raise ApiError, "API Call Failed: (#{response.status}) #{response.body}" unless response.success?
 
       destroy_existing_schedules
+
+      # TODO??: create/update firm and office if they exists in PDA at all rather than if exists WITH a schedule??
+      # Since schedules can expire we would eventually have offices without active schedules anyway so why not just create
+      # and update the firm/office regardless, then handle schedule logic
       if response.status == 200
         update_firm
         update_office
+        update_provider
         create_schedules
         Rails.logger.info("#{self.class} - No applicable schedules found for #{@office_code}") if office.schedules.empty?
       else
         Rails.logger.info("#{self.class} - No schedules found for #{@office_code}")
+        raise ValidDetailsNotFound, "No valid details found for office account number #{@office_code}"
       end
     end
 
@@ -48,6 +56,13 @@ module PDA
 
     def update_office
       office.update!(ccms_id: result.dig("office", "ccmsFirmOfficeId"), firm:)
+    end
+
+    def update_provider
+      @provider.firm = firm
+      @provider.offices << office unless @provider.offices.include?(office)
+      @provider.selected_office_id = office.id
+      @provider.save!
     end
 
     def create_schedules

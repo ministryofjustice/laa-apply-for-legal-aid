@@ -1,12 +1,13 @@
 Feature: Linking cases back button use
   @javascript @vcr @stub_pda_provider_details
   Scenario: Complete flow reversion with back button
-    Given I have created and submitted an application with the application reference 'L-123-456'
+    Given I am logged in as a provider
+    And I have created and submitted an application with the application reference 'L-123-456'
     And the feature flag for linked_applications is enabled
 
     When I visit the application service
     And I click link "Sign in"
-    And I choose 'London'
+    And I choose '0X395U'
     And I click 'Save and continue'
     And I click link "Make a new application"
     Then I should be on the 'providers/declaration' page showing 'Declaration'

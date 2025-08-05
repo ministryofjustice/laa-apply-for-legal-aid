@@ -3,9 +3,7 @@
 Given(/^I am logged in as a provider$/) do
   @registered_provider = create(:provider, username: "test_provider")
   login_as @registered_provider
-  firm = @registered_provider.firm
-  @registered_provider.offices << create(:office, firm:, code: "London")
-  @registered_provider.offices << create(:office, firm:, code: "Manchester")
+  @registered_provider.office_codes = "0X395U:2N078D:A123456"
 end
 
 Given(/^I visit the application service$/) do
@@ -200,7 +198,7 @@ Given("I start the journey as far as the applicant page") do
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Sign in"
-    Then I choose 'London'
+    Then I choose '0X395U'
     Then I click 'Save and continue'
     And I click link "Make a new application"
     Then I should be on the 'providers/declaration' page showing 'Declaration'

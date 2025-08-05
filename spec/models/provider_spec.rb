@@ -141,7 +141,6 @@ RSpec.describe Provider do
   end
 
   describe ".from_omniauth" do
-    let(:raw_info) { { USER_NAME: "LEGACY@FIRM.COM", LAA_ACCOUNTS: "AAAAB" } }
     let(:auth) do
       OmniAuth::AuthHash.new(
         {
@@ -156,6 +155,8 @@ RSpec.describe Provider do
         },
       )
     end
+
+    let(:raw_info) { { USER_NAME: "LEGACY@FIRM.COM", LAA_ACCOUNTS: "AAAAB" } }
     let(:auth_subject_uid) { SecureRandom.uuid }
 
     context "when passed a new user" do
@@ -164,7 +165,7 @@ RSpec.describe Provider do
       end
     end
 
-    context "when passed an existing user" do
+    context "when passed an existing user with single office code as a string" do
       let(:provider) do
         described_class.create(email: "test@test.com",
                                username: "LEGACY@FIRM.COM",
@@ -174,8 +175,25 @@ RSpec.describe Provider do
         # office codes deliberately left blank
       end
 
-      it "updates the existing record" do
+      it "updates the existing record office_codes" do
         expect { described_class.from_omniauth(auth) }.to change { provider.reload.office_codes }.from(nil).to("AAAAB")
+      end
+    end
+
+    context "when passed an existing user with multiple office codes as array" do
+      let(:raw_info) { { USER_NAME: "LEGACY@FIRM.COM", LAA_ACCOUNTS: %w[AAAAA BBBBB] } }
+
+      let(:provider) do
+        described_class.create(email: "test@test.com",
+                               username: "LEGACY@FIRM.COM",
+                               name: "Marty Ronan",
+                               auth_provider: "govuk",
+                               auth_subject_uid:)
+        # office codes deliberately left blank
+      end
+
+      it "updates the existing record office_codes" do
+        expect { described_class.from_omniauth(auth) }.to change { provider.reload.office_codes }.from(nil).to("AAAAA:BBBBB")
       end
     end
 

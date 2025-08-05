@@ -2,14 +2,8 @@ module Providers
   class OfficeForm < BaseForm
     form_for Provider
 
-    attr_accessor :selected_office_id
+    attr_accessor :selected_office_code
 
-    validates :selected_office_id, presence: true
-
-    delegate :firm, to: :model
-
-    before_validation do
-      self.selected_office_id = nil unless selected_office_id.in?(model.offices.pluck(:id))
-    end
+    validates :selected_office_code, presence: true
   end
 end

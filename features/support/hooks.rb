@@ -1,4 +1,5 @@
 require "super_diff/rspec-rails"
+require_relative "../../spec/services/pda/provider_details_request_stubs"
 
 # before, after and around hooks for feature tests
 #
@@ -30,4 +31,13 @@ end
 
 Before("@stub_pda_provider_details") do
   allow(PDA::ProviderDetails).to receive(:call).and_return(true) # this stubs out calls to the pda schedules endpoint
+end
+
+Around("@stub_office_schedules") do |_scenario, block|
+  stub_office_schedules_for_0x395u
+  stub_office_schedules_not_found_for("2N078D")
+  stub_office_schedules_not_found_for("A123456")
+
+  # turn off vcr to allow stubs to function
+  VCR.turned_off { block.call }
 end

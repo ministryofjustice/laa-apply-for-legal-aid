@@ -9,7 +9,7 @@ Given("I start the journey without cookie preferences") do
 
     When I visit the application service
     And I click link "Sign in"
-    Then I choose 'London'
+    Then I choose '0X395U'
     Then I click 'Save and continue'
     Then I am on the legal aid applications page
     And I should see 'Cookies on Apply for civil legal aid'
@@ -27,7 +27,7 @@ Given("I start the journey with expired cookie preferences") do
 
     When I visit the application service
     And I click link "Sign in"
-    Then I choose 'London'
+    Then I choose '0X395U'
     Then I click 'Save and continue'
     Then I am on the legal aid applications page
     And I should see 'Cookies on Apply for civil legal aid'
