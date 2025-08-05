@@ -11,16 +11,10 @@ module Providers
       @form = Providers::OfficeForm.new(form_params)
 
       if @form.valid?
-        provider = form_params[:model]
-
-        # NOTE: This updates the firm, and creates/updates the office and associates with the provider if
-        # necessary (marking as the selected office as well)
-        # TODO: This will silently add no office to provider if the office exists but has no schedule
-        PDA::ProviderDetails.call(provider, form_params[:selected_office_code])
-
-        # TODO: remove?! This is a temp call while we debug the contract endpoint retrieval and storage
-        ProviderContractDetailsWorker.perform_async(form_params[:selected_office_code])
-
+        # office = current_provider.offices.find_or_create_by!(code: @form.selected_office_code)
+        # TODO: This is a temp call while we debug the contract endpoint retrieval and storage
+        # ProviderContractDetailsWorker.perform_async(Office.find(form_params[:selected_office_code]))
+        PDA::ProviderDetails.call(form_params[:selected_office_code])
         redirect_to home_path
       else
         render :show
@@ -34,8 +28,6 @@ module Providers
 
     def form_params
       merge_with_model(current_provider) do
-        next {} unless params[:provider]
-
         params.expect(provider: [:selected_office_code])
       end
     end
