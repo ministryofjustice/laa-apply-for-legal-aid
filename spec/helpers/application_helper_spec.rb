@@ -37,7 +37,7 @@ RSpec.describe ApplicationHelper do
       context "when provider is signed in" do
         it "returns a link to edit provider details and a logout link" do
           expect(user_header_navigation).to have_css("li", count: 2)
-            .and have_css("li", text: "Test User")
+            .and have_css("li", text: "My profile")
             .and have_css("li", text: "Sign out")
         end
       end
