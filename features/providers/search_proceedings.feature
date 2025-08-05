@@ -5,7 +5,7 @@ Feature: Search proceedings
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Sign in"
-    Then I choose 'London'
+    Then I choose '0X395U'
     Then I click 'Save and continue'
     And I click link "Make a new application"
     Then I should be on the 'providers/declaration' page showing 'Declaration'
@@ -39,7 +39,7 @@ Feature: Search proceedings
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Sign in"
-    Then I choose 'London'
+    Then I choose '0X395U'
     Then I click 'Save and continue'
     And I click link "Make a new application"
     Then I should be on the 'providers/declaration' page showing 'Declaration'

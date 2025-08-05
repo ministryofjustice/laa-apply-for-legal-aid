@@ -8,7 +8,7 @@ module StepHelpers
     visit "/"
     click_on "Sign in"
 
-    govuk_choose("London")
+    govuk_choose("0X395U")
     click_on "Save and continue"
     click_on "Make a new application"
 

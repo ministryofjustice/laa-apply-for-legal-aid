@@ -27,15 +27,24 @@ class Provider < ApplicationRecord
   #
   def self.from_omniauth(auth)
     find_or_initialize_by(auth_provider: auth.provider, auth_subject_uid: auth.uid).tap do |record|
+      # NOTEL: SILAS is currently returning a single office code as a string and multiple as an array of strings.
+      # This handles both scenarios
+      office_codes = auth.extra.raw_info.LAA_ACCOUNTS
+
       record.update!(
         name: [auth.info.first_name, auth.info.last_name].join(" "),
         username: auth.extra.raw_info.USER_NAME,
         email: auth.info.email,
-        office_codes: [auth.extra.raw_info.LAA_ACCOUNTS].join(":"),
+        office_codes: [office_codes].join(":"),
       )
     end
-  rescue StandardError
+  rescue StandardError => e
+    Rails.logger.info("#{__method__}: omniauth enountered error #{e}")
     nil
+  end
+
+  def silas_office_codes
+    @silas_office_codes ||= office_codes.split(":") || []
   end
 
   def update_details
