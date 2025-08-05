@@ -20,7 +20,7 @@ module Providers
   protected
 
     def after_sign_in_path_for(_resource)
-      providers_confirm_office_path
+      providers_select_office_path
     end
 
   private

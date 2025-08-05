@@ -14,7 +14,9 @@ module Providers
         # office = current_provider.offices.find_or_create_by!(code: @form.selected_office_code)
         # TODO: This is a temp call while we debug the contract endpoint retrieval and storage
         # ProviderContractDetailsWorker.perform_async(Office.find(form_params[:selected_office_code]))
-        PDA::ProviderDetails.call(form_params[:selected_office_code])
+        pda = PDA::ProviderDetails.new(form_params[:selected_office_code])
+        pda.call
+        current_provider.update!(firm: pda.firm)
         redirect_to home_path
       else
         render :show

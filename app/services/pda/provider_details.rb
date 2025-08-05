@@ -28,14 +28,14 @@ module PDA
       end
     end
 
+    def firm
+      @firm ||= Firm.find_or_create_by!(ccms_id: result.dig("firm", "ccmsFirmId"))
+    end
+
   private
 
     def destroy_existing_schedules
       Office.find_by(code: @office_code)&.schedules&.destroy_all
-    end
-
-    def firm
-      @firm ||= Firm.find_or_create_by!(ccms_id: result.dig("firm", "ccmsFirmId"))
     end
 
     def office
