@@ -15,7 +15,7 @@ module CCMS
       end
       let(:chances_of_success) { create(:chances_of_success, application_proceeding_type: legal_aid_application.lead_application_proceeding_type) }
       let(:submission) { create(:submission, :applicant_ref_obtained, legal_aid_application:, case_ccms_reference: Faker::Number.number) }
-      let(:endpoint) { "https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/DocumentServices/DocumentServices_ep" }
+      let(:endpoint) { "https://ccms-soa-managed.laa-test.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/DocumentServices/DocumentServices_ep" }
       let(:history) { SubmissionHistory.where(submission_id: submission.id).last }
       let(:document_id_request) { ccms_data_from_file "document_id_request.xml" }
       let(:response_body) { ccms_data_from_file "document_id_response.xml" }

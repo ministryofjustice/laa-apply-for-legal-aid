@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<wsdl:definitions name="ClientService" targetNamespace="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientServices" 
-  xmlns:ns1="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM" 
-  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" 
-  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
-  xmlns:tns="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientServices" 
-  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+<wsdl:definitions name="ClientService" targetNamespace="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientServices"
+  xmlns:ns1="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM"
+  xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:tns="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientServices"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
   xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
   <wsdl:documentation>
-    <abstractWSDL>https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/ClientServices!10.0/ClientProxyService.wsdl</abstractWSDL>
+    <abstractWSDL>https://ccms-soa-managed.laa-production.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/ClientServices/ClientServices_ep?wsdl</abstractWSDL>
   </wsdl:documentation>
   <plnk:partnerLinkType name="CreateClient">
     <plnk:role name="CreateClientProvider">
@@ -30,8 +30,8 @@
     </plnk:role>
   </plnk:partnerLinkType>
   <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
-    xmlns="http://schemas.xmlsoap.org/ws/2004/09/policy" 
-    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="wss_username_token_service_policy" 
+    xmlns="http://schemas.xmlsoap.org/ws/2004/09/policy"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="wss_username_token_service_policy"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <sp:SupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
       <wsp:Policy>
@@ -45,8 +45,8 @@
   </wsp:Policy>
   <wsdl:types>
     <schema xmlns="http://www.w3.org/2001/XMLSchema">
-      <import namespace="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM" schemaLocation="https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/ClientServices/apps/lsc/Schema/BusinessObjects/CCMS/ClientManagement/Client/1.0/ClientBIM.xsd" />
-      <import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/ClientServices/apps/lsc/Schema/BusinessObjects/Enterprise/External/oasis/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" />
+      <import namespace="http://legalservices.gov.uk/CCMS/ClientManagement/Client/1.0/ClientBIM" schemaLocation="https://ccms-soa-managed.laa-production.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/ClientServices/apps/lsc/Schema/BusinessObjects/CCMS/ClientManagement/Client/1.0/ClientBIM.xsd" />
+      <import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="https://ccms-soa-managed.laa-production.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/ClientServices/apps/lsc/Schema/BusinessObjects/Enterprise/External/oasis/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" />
     </schema>
   </wsdl:types>
   <wsdl:message name="CreateClientRequestMessage">
@@ -140,7 +140,7 @@
   </wsdl:binding>
   <wsdl:service name="ClientServices_ep">
     <wsdl:port name="ClientServices_pt" binding="tns:ClientServicesSOAPBinding">
-      <soap:address location="https://ccmssoagateway.legalservices.gov.uk/ccmssoa/soa-infra/services/default/ClientServices/ClientServices_ep" />
+      <soap:address location="https://ccms-soa-managed.laa-production.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/ClientServices/ClientServices_ep" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

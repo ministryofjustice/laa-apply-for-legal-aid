@@ -23,7 +23,7 @@ RSpec.describe Faraday::SoapCall do
 
     describe "with a wsdl file" do
       let(:initial_object) { Rails.root.join("app/services/ccms/wsdls/", Rails.configuration.x.ccms_soa.getReferenceDataWsdl).to_s }
-      let(:expected) { "https://ccmssoagateway.dev.legalservices.gov.uk/ccmssoa/soa-infra/services/default/GetReferenceData!1.5*soa_92fe5600-6b1b-4d91-a97f-36e3955ae196/getreferencedata_ep" }
+      let(:expected) { "https://ccms-soa-managed.laa-test.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/GetReferenceData/getreferencedata_ep" }
 
       it { expect(faraday_soap_call.url).to eql(expected) }
     end

@@ -60,15 +60,14 @@ module LaaApplyForLegalAid
     config.x.capital_result.lower_limit = 3000.00
 
     config.x.ccms_soa.submit_applications_to_ccms = ENV["CCMS_SOA_SUBMIT_APPLICATIONS"] == "true"
-    config.x.ccms_soa.aws_gateway_api_key         = ENV.fetch("CCMS_SOA_AWS_GATEWAY_API_KEY", nil)
     config.x.ccms_soa.client_username             = ENV.fetch("CCMS_SOA_CLIENT_USERNAME", nil)
     config.x.ccms_soa.client_password_type        = ENV.fetch("CCMS_SOA_CLIENT_PASSWORD_TYPE", nil)
     config.x.ccms_soa.client_password             = ENV.fetch("CCMS_SOA_CLIENT_PASSWORD", nil)
     config.x.ccms_soa.user_role                   = ENV.fetch("CCMS_SOA_USER_ROLE", nil)
-    config.x.ccms_soa.caseServicesWsdl            = ENV.fetch("CCMS_SOA_CASE_SERVICES_WSDL", "CaseServicesWsdl.xml")
-    config.x.ccms_soa.clientProxyServiceWsdl      = ENV.fetch("CCMS_SOA_CLIENT_PROXY_SERVICE_WSDL", "ClientProxyServiceWsdl.xml")
-    config.x.ccms_soa.documentServicesWsdl        = ENV.fetch("CCMS_SOA_DOCUMENT_SERVICES_WSDL", "DocumentServicesWsdl.xml")
-    config.x.ccms_soa.getReferenceDataWsdl        = ENV.fetch("CCMS_SOA_GET_REFERENCE_DATA_WSDL", "GetReferenceDataWsdl.xml")
+    config.x.ccms_soa.caseServicesWsdl            = ENV.fetch("CCMS_SOA_CASE_SERVICES_WSDL", "CaseServicesUATWsdl.xml")
+    config.x.ccms_soa.clientProxyServiceWsdl      = ENV.fetch("CCMS_SOA_CLIENT_PROXY_SERVICE_WSDL", "ClientProxyServiceUATWsdl.xml")
+    config.x.ccms_soa.documentServicesWsdl        = ENV.fetch("CCMS_SOA_DOCUMENT_SERVICES_WSDL", "DocumentServicesUATWsdl.xml")
+    config.x.ccms_soa.getReferenceDataWsdl        = ENV.fetch("CCMS_SOA_GET_REFERENCE_DATA_WSDL", "GetReferenceDataUATWsdl.xml")
 
     config.x.google_tag_manager_tracking_id = ENV.fetch("GOOGLE_TAG_MANAGER_TRACKING_ID", nil)
 
