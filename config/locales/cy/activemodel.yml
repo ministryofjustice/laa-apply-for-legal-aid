@@ -380,7 +380,7 @@ cy:
               blank: detnarg eb dluohs dia lagel yhw su lleT
         provider:
           attributes:
-            selected_office_id:
+            selected_office_code:
               blank: rebmun tnuocca na tceleS
             username:
               already_exists: emanresu taht htiw resu a ydaerla si erehT

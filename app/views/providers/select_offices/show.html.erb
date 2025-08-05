@@ -1,12 +1,10 @@
-<%= page_template page_title: t(".h1-heading", firm: firm.name), template: :basic do %>
+<%= page_template page_title: t(".h1-heading"), template: :basic do %>
   <%= form_with(model: @form, url: providers_select_office_path, method: :patch, local: true) do |form| %>
 
     <%= form.govuk_error_summary %>
-
-    <%= form.govuk_collection_radio_buttons(:selected_office_id,
-                                            @form.model.offices,
-                                            :id,
-                                            :code,
+    <%= form.govuk_collection_radio_buttons(:selected_office_code, @form.model.office_codes.to_s.split(":").map { |code| [code, code] },
+                                            :first,
+                                            :second,
                                             legend: {
                                               text: content_for(:page_title),
                                               tag: "h1",
