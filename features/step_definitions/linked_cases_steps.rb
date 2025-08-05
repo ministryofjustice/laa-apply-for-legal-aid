@@ -6,14 +6,9 @@ Given("I have created and submitted an application with the application referenc
     :with_merits_submitted_at,
     :with_proceedings,
     applicant: create(:applicant, first_name: "Catelyn", last_name: "Stark"),
-    provider: create(:provider),
+    provider: @registered_provider,
     application_ref:,
   )
-  @provider = @legal_aid_application.provider
-  firm = @provider.firm
-  @provider.offices << create(:office, firm:, code: "London")
-  @provider.offices << create(:office, firm:, code: "Manchester")
-  login_as @provider
 end
 
 Given("I complete the non-passported journey as far as check your answers for linking") do
@@ -40,7 +35,7 @@ Given("I complete the non-passported journey as far as check your answers for li
     :at_entering_applicant_details,
     :with_proceedings,
     applicant:,
-    provider: @provider,
+    provider: @registered_provider,
   )
 
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))

@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe PDA::ProviderDetails do
   describe ".call" do
-    subject(:call) { described_class.call(office.code) }
+    subject(:call) { described_class.call(provider, office.code) }
 
     before do
       firm.offices << office if office
@@ -10,11 +10,13 @@ RSpec.describe PDA::ProviderDetails do
         .to_return(body:, status:)
     end
 
+    let(:provider) { create(:provider) }
     let(:firm) { create(:firm, name: "original firm name", ccms_id: "56789") }
     let(:office) { create(:office, code: office_code, ccms_id: "12345") }
     let(:office_code) { "4A497U" }
     let(:ccms_office_id) { 12_345 }
     let(:ccms_firm_id) { 56_789 }
+
     let(:body) do
       {
         firm: {
@@ -95,7 +97,7 @@ RSpec.describe PDA::ProviderDetails do
         let(:ccms_office_id) { 54_321 }
 
         it "updates the office details" do
-          described_class.call(office_code)
+          described_class.call(provider, office_code)
           office.reload
           expect(office.firm).to eq firm
           expect(office.code).to eq office_code
@@ -110,7 +112,7 @@ RSpec.describe PDA::ProviderDetails do
         let(:office) { nil }
 
         it "creates the office" do
-          described_class.call(office_code)
+          described_class.call(provider, office_code)
           office = Office.find_by(code: office_code)
           expect(office.firm).to eq firm
           expect(office.ccms_id).to eq "12345"
@@ -123,14 +125,14 @@ RSpec.describe PDA::ProviderDetails do
         let(:office) { nil }
 
         it "creates the firm" do
-          described_class.call(office_code)
+          described_class.call(provider, office_code)
           firm = Firm.find_by(ccms_id: "56789")
           expect(firm.name).to eq "updated firm name"
           expect(firm.offices.count).to eq 1
         end
 
         it "creates the office" do
-          described_class.call(office_code)
+          described_class.call(provider, office_code)
           office = Office.find_by(code: office_code)
           expect(office.ccms_id).to eq "12345"
           expect(office.schedules.count).to eq 1
@@ -245,7 +247,7 @@ RSpec.describe PDA::ProviderDetails do
 
       it "does not create any schedules" do
         expect(Rails.logger).to receive(:info).with("#{described_class} - No schedules found for 4A497U")
-        call
+        expect { call }.to raise_error(PDA::ProviderDetails::ValidDetailsNotFound)
         expect(office.schedules.count).to eq(0)
       end
 
@@ -253,7 +255,7 @@ RSpec.describe PDA::ProviderDetails do
         before { office.schedules << Schedule.new(area_of_law: "Legal Help", category_of_law: "MAT") }
 
         it "deletes any existing schedules belonging to the office" do
-          call
+          expect { call }.to raise_error(PDA::ProviderDetails::ValidDetailsNotFound)
           expect(office.schedules.count).to eq(0)
         end
       end

@@ -726,7 +726,7 @@ en:
           attributes:
             cookies_enabled:
               blank: Select if you would like to enable cookies
-            selected_office_id:
+            selected_office_code:
               blank: Select an account number
             username:
               already_exists: There is already a user with that username

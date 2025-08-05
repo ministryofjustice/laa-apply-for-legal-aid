@@ -20,7 +20,7 @@ module Providers
   protected
 
     def after_sign_in_path_for(_resource)
-      providers_confirm_office_path
+      providers_select_office_path
     end
 
   private
@@ -36,10 +36,6 @@ module Providers
       ].present?
     rescue StandardError
       false
-    end
-
-    def update_provider_details
-      ProviderAfterLoginService.call(@provider)
     end
   end
 end
