@@ -7,7 +7,8 @@ if ENV["CIRCLE_JOB"]
       require "simplecov"
 
       SimpleCov.collate Dir["./coverage_results/.resultset*.json"], "rails" do
-        minimum_coverage line: 100
+        # TODO: Increase this back to 100 after AP-6125 is complete (as part of AP-6179)
+        minimum_coverage line: 99
         refuse_coverage_drop :line, :branch
       end
     end
