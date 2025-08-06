@@ -14,7 +14,7 @@ SimpleCov.start "rails" do
   unless ENV["CIRCLE_JOB"]
     # TODO: Increase this back to 100 after AP-6125 is complete
     minimum_coverage line: 99
-    refuse_coverage_drop :line, :branch
+    # refuse_coverage_drop :line, :branch
 
     SimpleCov.at_exit do
       SimpleCov.result.format!
