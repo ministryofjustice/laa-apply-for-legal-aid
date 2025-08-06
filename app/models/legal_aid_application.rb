@@ -9,6 +9,8 @@ class LegalAidApplication < ApplicationRecord
   SHARED_OWNERSHIP_NO_REASONS = %w[no_sole_owner].freeze
   SHARED_OWNERSHIP_REASONS =  SHARED_OWNERSHIP_YES_REASONS + SHARED_OWNERSHIP_NO_REASONS
 
+  BLOCKED_OR_COMPLETED_STEPS = %w[end_of_applications submitted_applications use_ccms use_ccms_employed use_ccms_under16s].freeze
+
   WORKING_DAYS_TO_COMPLETE_SUBSTANTIVE_APPLICATION = 20
   MAX_SUBSTANTIVE_COST_LIMIT = 25_000
 
@@ -620,7 +622,7 @@ class LegalAidApplication < ApplicationRecord
 
   def expired?
     [
-      expired_by_2023_surname_at_birth_issue?,
+      expired_by_2025_incident?,
     ].any?
   end
 
@@ -728,13 +730,9 @@ class LegalAidApplication < ApplicationRecord
 
 private
 
-  def expired_by_2023_surname_at_birth_issue?
-    created_at.year < 2024 &&
-      (provider_step.nil? || %i[end_of_applications
-                                submitted_applications
-                                use_ccms
-                                use_ccms_employed
-                                use_ccms_under16s].exclude?(provider_step.to_sym))
+  def expired_by_2025_incident?
+    created_at < "2025/08/01".to_date &&
+      (provider_step.nil? || BLOCKED_OR_COMPLETED_STEPS.map(&:to_sym).exclude?(provider_step.to_sym))
   end
 
   def client_not_given_consent_to_open_banking?

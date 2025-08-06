@@ -136,14 +136,14 @@ RSpec.describe ProvidersHelper do
       end
     end
 
-    context "when the application predates the 2023 surname at birth issue" do
+    context "when the application predates the 2025 incident" do
       let(:legal_aid_application) do
-        travel_to Date.parse("2023-12-25") do
+        travel_to Date.parse("2025-7-31") do
           create(:legal_aid_application, :with_multiple_proceedings_inc_section8, provider_step:)
         end
       end
 
-      context "and the provider step is not in the expired_by_2023_surname_at_birth_issue expiry exclusion list" do
+      context "and the provider step is not in the list of blocked or completed steps" do
         let(:provider_step) { "chances_of_success" }
 
         it "routes to the block page" do
@@ -152,7 +152,7 @@ RSpec.describe ProvidersHelper do
         end
       end
 
-      context "and the provider step is in the expired_by_2023_surname_at_birth_issue expiry exclusion list" do
+      context "and the provider step is in the list of blocked or completed steps" do
         let(:provider_step) { "submitted_applications" }
 
         it "routes to the submitted application page" do
