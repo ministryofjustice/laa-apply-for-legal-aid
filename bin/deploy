@@ -2,8 +2,7 @@
 
 ENVIRONMENT=$1
 
-CLIENTLESS_VPN_IPS="165.1.170.106\,165.1.170.107\,134.231.143.70\,134.231.143.71"
-SHARED_IPS=$(curl -s https://raw.githubusercontent.com/ministryofjustice/laa-ip-allowlist/main/cidrs.txt | tr -d ' ' | tr '\n' ',' | sed 's/,/\\,/g' | sed 's/\\,$//')
+PINGDOM_IPS=$(curl -s https://my.pingdom.com/probes/ipv4 | tr -d ' ' | tr '\n' ',' | sed 's/,/\\,/g' | sed 's/\\,$//')
 
 deploy_branch() {
   # Convert the branch name into a string that can be turned into a valid URL
@@ -27,8 +26,7 @@ deploy_branch() {
                 --set ingress.hosts="{$RELEASE_HOST}" \
                 --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$INGRESS_IDENTIFIER" \
                 --set publicIngress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$PUBLIC_INGRESS_IDENTIFIER" \
-                --set-string clientlessVpnIPs="$CLIENTLESS_VPN_IPS" \
-                --set-string sharedIPs="$SHARED_IPS"
+                --set-string pingdomIPs="$PINGDOM_IPS"
 }
 
 deploy_main() {
@@ -38,8 +36,7 @@ deploy_main() {
                 --values ./helm_deploy/apply-for-legal-aid/values-"$ENVIRONMENT".yaml \
                 --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                 --set image.tag="${CIRCLE_SHA1}" \
-                --set-string clientlessVpnIPs="$CLIENTLESS_VPN_IPS" \
-                --set-string sharedIPs="$SHARED_IPS"
+                --set-string pingdomIPs="$PINGDOM_IPS"
 }
 
 if [[ "$ENVIRONMENT" == "uat" ]]; then

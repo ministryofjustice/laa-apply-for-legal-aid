@@ -15,9 +15,6 @@ metadata:
 {{- with .Values.ingress.annotations }}
 {{ toYaml . | indent 4 }}
 {{- end }}
-{{- if .Values.ingress.whitelist.enabled }}
-    nginx.ingress.kubernetes.io/whitelist-source-range: "{{ include "apply-for-legal-aid.whitelist" $ }}"
-{{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
