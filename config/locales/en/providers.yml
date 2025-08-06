@@ -869,7 +869,7 @@ en:
 
     task_lists:
       show:
-        page_title: Make a new application 
+        page_title: Make a new application
         para1: Use this list to see your progress.
         para2: You can go back and edit completed sections if they appear as links. More sections will become editable over time.
         name: "Name:"
@@ -972,6 +972,17 @@ en:
     add_another_partner_state_benefits:
       show:
         error: Select yes if the partner gets other benefits, charitable or government payments
+    invalid_schedules:
+      show:
+        h1-heading: You cannot use this service
+        paragraph-1: The office you selected does not have a family contract with the Legal Aid Agency (LAA).
+        paragraph-2: A family contract allows you to use Apply for civil legal aid for special children act, domestic abuse (except domestic abuse protection orders), section 8 and public law family cases.
+        actions_text: 'You can do one of the following:'
+        button_text: Choose a different office
+        actions_list_html:
+            - go back and choose a different office
+            - apply in <a href="https://portal.legalservices.gov.uk/"><abbr title='Client and Cost Management System'>CCMS</abbr></a> for all other proceedings
+            - <a href="mailto:%{team_email}">contact online support</a> (if you think this is wrong, and you should have access)
     legal_aid_applications:
       index:
         heading_1: Your applications

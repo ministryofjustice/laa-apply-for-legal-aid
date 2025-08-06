@@ -13,12 +13,17 @@ module Providers
       if @form.valid?
         provider = form_params[:model]
 
-        PDA::ProviderDetails.call(provider, form_params[:selected_office_code])
+        pda = PDA::ProviderDetails.new(provider, form_params[:selected_office_code])
+        pda.call
 
         # TODO: remove?! This is a temp call while we debug the contract endpoint retrieval and storage
         ProviderContractDetailsWorker.perform_async(form_params[:selected_office_code])
 
-        redirect_to your_applications_default_tab_path
+        if pda.has_valid_schedules?
+          redirect_to your_applications_default_tab_path
+        else
+          redirect_to providers_invalid_schedules_path
+        end
       else
         render :show
       end
