@@ -34,12 +34,5 @@ spec:
                 name: {{ $fullName }}
                 port:
                   name: http
-          - path: /status
-            pathType: Exact
-            backend:
-              service:
-                name: {{ $fullName }}
-                port:
-                  name: http
     {{- end }}
 {{- end }}
