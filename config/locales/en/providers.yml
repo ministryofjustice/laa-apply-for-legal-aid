@@ -869,7 +869,7 @@ en:
 
     task_lists:
       show:
-        page_title: Make a new application 
+        page_title: Make a new application
         para1: Use this list to see your progress.
         para2: You can go back and edit completed sections if they appear as links. More sections will become editable over time.
         name: "Name:"
@@ -2156,7 +2156,7 @@ en:
           applications: Make a new application
         show:
           title_html: You cannot submit this application
-          body_text: This is because the application will be missing information after recent updates to the service.
+          body_text: This is because the service has been offline, and the information in your application may no longer be up to date.
           options: "You can (choose one of the following):"
           option_bullets:
             - make a new application for your client if you still need to submit one
