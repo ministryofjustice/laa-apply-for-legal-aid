@@ -8,7 +8,7 @@ Given("I start the journey without cookie preferences") do
     And I have not yet updated my cookie preferences
 
     When I visit the application service
-    And I click link "Sign in"
+    And I click link "Start"
     Then I choose 'London'
     Then I click 'Save and continue'
     Then I am on the legal aid applications page
@@ -26,7 +26,7 @@ Given("I start the journey with expired cookie preferences") do
     And I have expired cookie preferences
 
     When I visit the application service
-    And I click link "Sign in"
+    And I click link "Start"
     Then I choose 'London'
     Then I click 'Save and continue'
     Then I am on the legal aid applications page

@@ -4,7 +4,7 @@ Feature: Loop through proceeding questions
   Background:
     Given I am logged in as a provider
     And I visit the application service
-    And I click link "Sign in"
+    And I click link "Start"
     Then I choose 'London'
     Then I click 'Save and continue'
     And I click link "Make a new application"

@@ -5,7 +5,7 @@ Feature: Non-means-tested applicant journey with use of delegation functions
     And I am logged in as a provider
 
     When I visit the application service
-    And I click link "Sign in"
+    And I click link "Start"
     Then I choose 'London'
     Then I click 'Save and continue'
     And I click link "Make a new application"

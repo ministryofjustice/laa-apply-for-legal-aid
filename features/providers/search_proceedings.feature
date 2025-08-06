@@ -4,7 +4,7 @@ Feature: Search proceedings
   Scenario: No results returned is seen on screen when invalid proceeding search entered
     Given I am logged in as a provider
     Given I visit the application service
-    And I click link "Sign in"
+    And I click link "Start"
     Then I choose 'London'
     Then I click 'Save and continue'
     And I click link "Make a new application"
@@ -38,7 +38,7 @@ Feature: Search proceedings
   Scenario: I am able to clear proceeding on the proceeding page
     Given I am logged in as a provider
     Given I visit the application service
-    And I click link "Sign in"
+    And I click link "Start"
     Then I choose 'London'
     Then I click 'Save and continue'
     And I click link "Make a new application"
