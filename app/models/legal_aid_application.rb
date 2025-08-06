@@ -150,9 +150,9 @@ class LegalAidApplication < ApplicationRecord
 
   scope :voided_applications, lambda {
                                 includes(:applicant, :chances_of_success)
-                                  .where(created_at: ...Date.new(2024))
+                                  .where(created_at: ...Date.new(2025, 8, 1))
                                   .where("provider_step IS NULL OR provider_step NOT IN (?)",
-                                         %w[end_of_applications submitted_applications use_ccms use_ccms_employed use_ccms_under16s])
+                                         BLOCKED_OR_COMPLETED_STEPS)
                                   .latest
                               }
 

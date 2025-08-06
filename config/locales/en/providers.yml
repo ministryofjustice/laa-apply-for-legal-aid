@@ -1016,7 +1016,7 @@ en:
       destroy: You deleted the application
       voided:
         heading: Applications you cannot submit
-        paragraph: These applications will be missing information because updates were made to the service.
+        paragraph: These applications may be outdated or missing information because of service updates or periods of downtime.
     delete:
       show:
         page_title: Are you sure you want to delete this application?
@@ -2156,7 +2156,7 @@ en:
           applications: Make a new application
         show:
           title_html: You cannot submit this application
-          body_text: This is because the service has been offline, and the information in your application may no longer be up to date.
+          body_text: These applications may be outdated or missing information because of service updates or periods of downtime.
           options: "You can (choose one of the following):"
           option_bullets:
             - make a new application for your client if you still need to submit one
