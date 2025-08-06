@@ -16,8 +16,12 @@ module Providers
         # ProviderContractDetailsWorker.perform_async(Office.find(form_params[:selected_office_code]))
         pda = PDA::ProviderDetails.new(form_params[:selected_office_code])
         pda.call
-        current_provider.update!(firm: pda.firm)
-        redirect_to home_path
+        if pda.has_valid_schedules?
+          current_provider.update!(firm: pda.firm)
+          redirect_to home_path
+        else
+          redirect_to providers_invalid_schedules_path
+        end
       else
         render :show
       end

@@ -3,9 +3,9 @@ module PDA
     ApiError = Class.new(StandardError)
     ValidDetailsNotFound = Class.new(StandardError)
 
-    # Only save schedule details that are relevant to civily apply
+    # Only save schedule details that are relevant to civil apply
     APPLICABLE_CATEGORIES_OF_LAW = %w[MAT].freeze
-    APPLICABLE_AREAS_OF_LAW = ["LEGAL HELP", "CIVIL FUNDING"].freeze
+    APPLICABLE_AREAS_OF_LAW = ["LEGAL HELP"].freeze
 
     def initialize(provider, office_code)
       @provider = provider
@@ -40,6 +40,14 @@ module PDA
       @firm ||= Firm.find_or_create_by!(ccms_id: result.dig("firm", "ccmsFirmId"))
     end
 
+    def has_valid_schedules?
+      return false if @schedules.nil?
+
+      @schedules.any? do |schedule|
+        ScheduleValidator.call(schedule)
+      end
+    end
+
   private
 
     def destroy_existing_schedules
@@ -48,6 +56,10 @@ module PDA
 
     def office
       @office = Office.find_or_initialize_by(code: @office_code)
+    end
+
+    def schedules
+      @schedules ||= office.schedules
     end
 
     def update_firm
