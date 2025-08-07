@@ -26,6 +26,9 @@ deploy_branch() {
                 --set ingress.hosts="{$RELEASE_HOST}" \
                 --set ingress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$INGRESS_IDENTIFIER" \
                 --set publicIngress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$PUBLIC_INGRESS_IDENTIFIER" \
+                --set omniauth_entraid.redirect_uri="https://${RELEASE_HOST}/auth/entra_id/callback" \
+                --set-string clientlessVpnIPs="$CLIENTLESS_VPN_IPS" \
+                --set-string sharedIPs="$SHARED_IPS"
                 --set-string pingdomIPs="$PINGDOM_IPS"
 }
 
