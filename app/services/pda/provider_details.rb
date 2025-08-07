@@ -41,9 +41,9 @@ module PDA
     end
 
     def has_valid_schedules?
-      return false if @schedules.nil?
+      return false if schedules.nil?
 
-      @schedules.any? do |schedule|
+      schedules.any? do |schedule|
         ScheduleValidator.call(schedule)
       end
     end
