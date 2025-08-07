@@ -35,6 +35,7 @@ end
 
 Around("@stub_office_schedules") do |_scenario, block|
   stub_office_schedules_for_0x395u
+  stub_provider_user_for_test_provider
   stub_office_schedules_not_found_for("2N078D")
   stub_office_schedules_not_found_for("A123456")
 
