@@ -1,7 +1,6 @@
 module PDA
   class ProviderDetails
     ApiError = Class.new(StandardError)
-    ValidDetailsNotFound = Class.new(StandardError)
 
     # Only save schedule details that are relevant to civil apply
     APPLICABLE_CATEGORIES_OF_LAW = %w[MAT].freeze
@@ -32,12 +31,7 @@ module PDA
         Rails.logger.info("#{self.class} - No applicable schedules found for #{@office_code}") if office.schedules.empty?
       else
         Rails.logger.info("#{self.class} - No schedules found for #{@office_code}")
-        raise ValidDetailsNotFound, "No valid details found for office account number #{@office_code}"
       end
-    end
-
-    def firm
-      @firm ||= Firm.find_or_create_by!(ccms_id: result.dig("firm", "ccmsFirmId"))
     end
 
     def has_valid_schedules?
@@ -52,6 +46,10 @@ module PDA
 
     def destroy_existing_schedules
       Office.find_by(code: @office_code)&.schedules&.destroy_all
+    end
+
+    def firm
+      @firm ||= Firm.find_or_create_by!(ccms_id: result.dig("firm", "ccmsFirmId"))
     end
 
     def office

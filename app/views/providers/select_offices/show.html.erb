@@ -2,14 +2,19 @@
   <%= form_with(model: @form, url: providers_select_office_path, method: :patch, local: true) do |form| %>
 
     <%= form.govuk_error_summary %>
-    <%= form.govuk_collection_radio_buttons(:selected_office_code, @form.model.office_codes.to_s.split(":").map { |code| [code, code] },
-                                            :first,
-                                            :second,
-                                            legend: {
-                                              text: content_for(:page_title),
-                                              tag: "h1",
-                                              size: "xl",
-                                            }) %>
+
+    <%= form.govuk_collection_radio_buttons(
+          :selected_office_code,
+          @form.model.silas_office_codes,
+          :to_s,
+          :to_s,
+          legend: {
+            text: content_for(:page_title),
+            tag: "h1",
+            size: "xl",
+          },
+        ) %>
+
     <%= next_action_buttons(form:) %>
   <% end %>
 <% end %>
