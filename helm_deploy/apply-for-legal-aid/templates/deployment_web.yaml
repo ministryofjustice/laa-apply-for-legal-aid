@@ -39,13 +39,13 @@ spec:
               mountPath: /etc/clamav
           livenessProbe:
             httpGet:
-              path: /status
+              path: /ping
               port: http
             initialDelaySeconds: 60
             timeoutSeconds: 10
           readinessProbe:
             httpGet:
-              path: /status
+              path: /ping
               port: http
             initialDelaySeconds: 60
             timeoutSeconds: 10

@@ -11,8 +11,6 @@ service:
 ingress:
   enabled: true
   className: default-non-prod
-  whitelist:
-    enabled: true
   annotations:
     external-dns.alpha.kubernetes.io/aws-weight: '100'
     nginx.ingress.kubernetes.io/server-snippet: |
@@ -24,6 +22,8 @@ ingress:
 publicIngress:
   enabled: true
   className: default-non-prod
+  whitelist:
+    enabled: true
   annotations:
     external-dns.alpha.kubernetes.io/aws-weight: "100"
     nginx.ingress.kubernetes.io/server-snippet: |
