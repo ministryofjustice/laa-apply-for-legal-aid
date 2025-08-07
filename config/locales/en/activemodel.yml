@@ -451,6 +451,8 @@ en:
               blank: Enter details of the incident
         legal_aid_application:
           attributes:
+            confirm_dwp_result:
+              inclusion: Select yes if the DWP records are correct
             copy_case:
               inclusion: Select yes if you want to copy the proceedings and merits information from the application you linked to
             copy_case_confirmation:
