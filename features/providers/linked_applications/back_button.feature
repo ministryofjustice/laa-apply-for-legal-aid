@@ -5,7 +5,7 @@ Feature: Linking cases back button use
     And the feature flag for linked_applications is enabled
 
     When I visit the application service
-    And I click link "Sign in"
+    And I click link "Start"
     And I choose 'London'
     And I click 'Save and continue'
     And I click link "Make a new application"

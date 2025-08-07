@@ -16,5 +16,5 @@ Feature: Start page
     And I should see "special children act"
     And I should see "public law family"
 
-    When I click link "Sign in"
+    When I click link "Start"
     Then I should be on a page with title "Select the account number"

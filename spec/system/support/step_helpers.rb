@@ -6,7 +6,7 @@ module StepHelpers
   #
   def fill_in_client_and_case_details_until_step(step_name)
     visit "/"
-    click_on "Sign in"
+    click_on "Start"
 
     govuk_choose("London")
     click_on "Save and continue"
