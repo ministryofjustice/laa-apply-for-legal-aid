@@ -62,6 +62,16 @@ RSpec.describe "provider selects office" do
     ]
   end
 
+  let(:user) do
+    {
+      user: {
+        userId: 98_765,
+        ccmsContactId: 87_654,
+        userLogin: provider.username,
+      },
+    }.to_json
+  end
+
   describe "GET providers/select_office" do
     subject(:get_request) { get providers_select_office_path }
 
@@ -120,6 +130,9 @@ RSpec.describe "provider selects office" do
           stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules")
             .to_return(body:, status: 200)
 
+          stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}")
+            .to_return(body: user, status: 200)
+
           allow(ProviderContractDetailsWorker)
             .to receive(:perform_async).and_return(true)
 
@@ -128,6 +141,7 @@ RSpec.describe "provider selects office" do
 
         it "updates the record" do
           expect(provider.reload.selected_office.code).to eq "0X395U"
+          expect(provider.reload.contact_id).to eq 87_654
         end
 
         it "redirects to the legal aid applications page" do

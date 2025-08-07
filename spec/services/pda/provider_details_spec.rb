@@ -8,6 +8,8 @@ RSpec.describe PDA::ProviderDetails do
       firm.offices << office if office
       stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{office_code}/schedules")
         .to_return(body:, status:)
+      stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}")
+        .to_return(body: user, status:)
     end
 
     let(:provider) { create(:provider) }
@@ -16,6 +18,51 @@ RSpec.describe PDA::ProviderDetails do
     let(:office_code) { "4A497U" }
     let(:ccms_office_id) { 12_345 }
     let(:ccms_firm_id) { 56_789 }
+    let(:status) { 200 }
+
+    let(:schedules) do
+      [
+        {
+          contractType: "Standard",
+          contractStatus: "Open",
+          contractAuthorizationStatus: "APPROVED",
+          contractStartDate: "2024-09-01",
+          contractEndDate: "2026-06-30",
+          areaOfLaw: "LEGAL HELP",
+          scheduleType: "Standard",
+          scheduleAuthorizationStatus: "APPROVED",
+          scheduleStatus: "Open",
+          scheduleStartDate: "2024-09-01",
+          scheduleEndDate: "2025-08-31",
+          scheduleLines: [
+            {
+              areaOfLaw: "LEGAL HELP",
+              categoryOfLaw: "MAT",
+              description: "Legal Help (Civil).Family",
+              devolvedPowersStatus: "Yes - Excluding JR Proceedings",
+              dpTypeOfChange: nil,
+              dpReasonForChange: nil,
+              dpDateOfChange: nil,
+              remainderWorkFlag: "N/A",
+              minimumCasesAllowedCount: "0",
+              maximumCasesAllowedCount: "0",
+              minimumToleranceCount: "0",
+              maximumToleranceCount: "0",
+              minimumLicenseCount: "0",
+              maximumLicenseCount: "1",
+              workInProgressCount: "0",
+              outreach: nil,
+              cancelFlag: "N",
+              cancelReason: nil,
+              cancelDate: nil,
+              closedDate: nil,
+              closedReason: nil,
+            },
+          ],
+          nmsAuths: [],
+        },
+      ]
+    end
 
     let(:body) do
       {
@@ -32,52 +79,17 @@ RSpec.describe PDA::ProviderDetails do
       }.to_json
     end
 
-    context "when the office has schedules applicable to civil apply" do
-      let(:status) { 200 }
-      let(:schedules) do
-        [
-          {
-            contractType: "Standard",
-            contractStatus: "Open",
-            contractAuthorizationStatus: "APPROVED",
-            contractStartDate: "2024-09-01",
-            contractEndDate: "2026-06-30",
-            areaOfLaw: "LEGAL HELP",
-            scheduleType: "Standard",
-            scheduleAuthorizationStatus: "APPROVED",
-            scheduleStatus: "Open",
-            scheduleStartDate: "2024-09-01",
-            scheduleEndDate: "2025-08-31",
-            scheduleLines: [
-              {
-                areaOfLaw: "LEGAL HELP",
-                categoryOfLaw: "MAT",
-                description: "Legal Help (Civil).Family",
-                devolvedPowersStatus: "Yes - Excluding JR Proceedings",
-                dpTypeOfChange: nil,
-                dpReasonForChange: nil,
-                dpDateOfChange: nil,
-                remainderWorkFlag: "N/A",
-                minimumCasesAllowedCount: "0",
-                maximumCasesAllowedCount: "0",
-                minimumToleranceCount: "0",
-                maximumToleranceCount: "0",
-                minimumLicenseCount: "0",
-                maximumLicenseCount: "1",
-                workInProgressCount: "0",
-                outreach: nil,
-                cancelFlag: "N",
-                cancelReason: nil,
-                cancelDate: nil,
-                closedDate: nil,
-                closedReason: nil,
-              },
-            ],
-            nmsAuths: [],
-          },
-        ]
-      end
+    let(:user) do
+      {
+        user: {
+          userId: 98_765,
+          ccmsContactId: 87_654,
+          userLogin: provider.username,
+        },
+      }.to_json
+    end
 
+    context "when the office has schedules applicable to civil apply" do
       it "associates the contracts with the correct office" do
         expect { call }.to change { office.schedules.count }.from(0).to(1)
       end
@@ -91,6 +103,11 @@ RSpec.describe PDA::ProviderDetails do
       it "updates the firm details" do
         call
         expect(firm.reload.name).to eq "updated firm name"
+      end
+
+      it "updates the provider details" do
+        call
+        expect(provider.contact_id).to eq 87_654
       end
 
       context "when the office ccms_id changes" do
@@ -150,7 +167,6 @@ RSpec.describe PDA::ProviderDetails do
     end
 
     context "when the office does not have schedules applicable to civil apply" do
-      let(:status) { 200 }
       let(:schedules) do
         [
           {
@@ -261,7 +277,24 @@ RSpec.describe PDA::ProviderDetails do
       end
     end
 
-    context "when there is an error calling the api" do
+    context "when PDA returns no details for the provider user" do
+      before { stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}").to_return(body: "", status: 204) }
+
+      it "raises ValidDetailsNotFound" do
+        expect(Rails.logger).to receive(:info).with("#{described_class} - No provider details found for #{provider.username}")
+        expect { call }.to raise_error(PDA::ProviderDetails::ValidDetailsNotFound, "No provider details found for #{provider.username}")
+      end
+
+      context "when there is an error calling the provider-users endpoint" do
+        before { stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}").to_return(body: "An error has occurred", status: 500) }
+
+        it "raises ApiError" do
+          expect { call }.to raise_error(PDA::ProviderDetails::ApiError, "API Call Failed: provider-users (500) An error has occurred")
+        end
+      end
+    end
+
+    context "when there is an error calling the provider-offices schedules endpoint" do
       let(:body) { "An error has occurred" }
       let(:status) { 500 }
 

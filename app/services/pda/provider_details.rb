@@ -62,6 +62,7 @@ module PDA
       @provider.firm = firm
       @provider.offices << office unless @provider.offices.include?(office)
       @provider.selected_office_id = office.id
+      @provider.contact_id = contact_id
       @provider.save!
     end
 
@@ -108,6 +109,24 @@ module PDA
 
     def query_api
       conn.get url
+    end
+
+    def contact_id
+      response = conn.get("#{Rails.configuration.x.pda.url}/provider-users/#{encoded_username}")
+      if response.success?
+        if response.status == 200
+          JSON.parse(response.body).dig("user", "ccmsContactId")
+        else
+          Rails.logger.info("#{self.class} - No provider details found for #{@provider.username}")
+          raise ValidDetailsNotFound, "No provider details found for #{@provider.username}"
+        end
+      else
+        raise ApiError, "API Call Failed: provider-users (#{response.status}) #{response.body}"
+      end
+    end
+
+    def encoded_username
+      @encoded_username ||= URI.encode_www_form_component(@provider.username).gsub("+", "%20")
     end
   end
 end
