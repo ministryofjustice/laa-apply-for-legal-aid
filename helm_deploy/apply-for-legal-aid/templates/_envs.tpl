@@ -133,7 +133,7 @@ env:
         name: laa-apply-for-legalaid-secrets
         key: omniauthAzureTenantID
   - name: OMNIAUTH_ENTRAID_REDIRECT_URI
-    value: {{ .Values.omniauth_entraid.redirect_uri | quote }}
+    value: {{ .Values.branch_builder.omniauth_azure_redirect_uri }}
   - name: PROVIDER_DETAILS_URL
     value: {{ .Values.provider_details.url | quote }}
   - name: PDA_URL

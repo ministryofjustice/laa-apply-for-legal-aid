@@ -22,6 +22,7 @@ deploy_branch() {
                 --namespace=${K8S_NAMESPACE} \
                 --values ./helm_deploy/apply-for-legal-aid/values-uat.yaml \
                 --set deploy.host="$RELEASE_HOST" \
+                --set branch_builder.omniauth_azure_redirect_uri="https://${RELEASE_HOST}/auth/entra_id/callback" \
                 --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                 --set image.tag="${CIRCLE_SHA1}" \
                 --set ingress.hosts="{$RELEASE_HOST}" \
