@@ -13,6 +13,9 @@ module Providers
       if @form.valid?
         provider = form_params[:model]
 
+        # NOTE: This updates the firm, and creates/updates the office and associates with the provider if
+        # necessary (marking as the selected office as well)
+        # TODO: This will silently add no office to provider if the office exists but has no schedule
         pda = PDA::ProviderDetails.new(provider, form_params[:selected_office_code])
         pda.call
 
