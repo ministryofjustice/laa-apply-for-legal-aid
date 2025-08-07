@@ -1,11 +1,10 @@
 module PDA
   class ProviderDetails
     ApiError = Class.new(StandardError)
-    ValidDetailsNotFound = Class.new(StandardError)
 
-    # Only save schedule details that are relevant to civily apply
+    # Only save schedule details that are relevant to civil apply
     APPLICABLE_CATEGORIES_OF_LAW = %w[MAT].freeze
-    APPLICABLE_AREAS_OF_LAW = ["LEGAL HELP", "CIVIL FUNDING"].freeze
+    APPLICABLE_AREAS_OF_LAW = ["LEGAL HELP"].freeze
 
     def initialize(provider, office_code)
       @provider = provider
@@ -32,7 +31,14 @@ module PDA
         Rails.logger.info("#{self.class} - No applicable schedules found for #{@office_code}") if office.schedules.empty?
       else
         Rails.logger.info("#{self.class} - No schedules found for #{@office_code}")
-        raise ValidDetailsNotFound, "No valid details found for office account number #{@office_code}"
+      end
+    end
+
+    def has_valid_schedules?
+      return false if schedules.nil?
+
+      schedules.any? do |schedule|
+        ScheduleValidator.call(schedule)
       end
     end
 
@@ -48,6 +54,10 @@ module PDA
 
     def office
       @office = Office.find_or_initialize_by(code: @office_code)
+    end
+
+    def schedules
+      @schedules ||= office.schedules
     end
 
     def update_firm
