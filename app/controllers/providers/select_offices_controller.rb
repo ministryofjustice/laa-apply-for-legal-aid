@@ -18,7 +18,7 @@ module Providers
         # TODO: remove?! This is a temp call while we debug the contract endpoint retrieval and storage
         ProviderContractDetailsWorker.perform_async(form_params[:selected_office_code])
 
-        redirect_to home_path
+        redirect_to your_applications_default_tab_path
       else
         render :show
       end
