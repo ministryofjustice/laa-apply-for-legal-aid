@@ -7,7 +7,7 @@ module Test
       raise "Test Error Generated - to test the reporting of errors"
     rescue StandardError => e
       AlertManager.capture_exception(e)
-      redirect_to home_path
+      redirect_to root_path
     end
 
     def untrapped_error
