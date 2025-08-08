@@ -16,6 +16,11 @@ FactoryBot.define do
       client_involvement_type_description { nil }
     end
 
+    trait :with_cit_a do
+      client_involvement_type_ccms_code { "A" }
+      client_involvement_type_description { "Applicant/claimant/petitioner" }
+    end
+
     trait :with_cit_d do
       client_involvement_type_ccms_code { "D" }
       client_involvement_type_description { "Defendant/Respondent" }
