@@ -1,4 +1,4 @@
-FROM ministryofjustice/apply-base:latest-3.4.4
+FROM ministryofjustice/apply-base:latest-3.4.5
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Apply for civil legal aid team (apply-for-civil-legal-aid@justice.gov.uk)" \
