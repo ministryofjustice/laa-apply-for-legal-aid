@@ -1,12 +1,12 @@
 Feature: Non-means-tested applicant journey without use of delegation functions
 
-  @javascript @vcr
+  @javascript @vcr @stub_pda_provider_details
   Scenario: Completes an application for applicant that is under 18
     Given I am logged in as a provider
 
     When I visit the application service
     And I click link "Start"
-    Then I choose 'London'
+    Then I choose '0X395U'
     Then I click 'Save and continue'
     And I click link "Make a new application"
     Then I should be on the 'providers/declaration' page showing 'Declaration'
@@ -24,7 +24,7 @@ Feature: Non-means-tested applicant journey without use of delegation functions
     And I enter national insurance number 'CB987654A'
     And I click 'Save and continue'
     Then I should be on a page showing "Has your client applied for civil legal aid before?"
-    
+
     Then I choose "No"
     And I click "Save and continue"
     Then I should be on a page showing "Where should we send your client's correspondence?"

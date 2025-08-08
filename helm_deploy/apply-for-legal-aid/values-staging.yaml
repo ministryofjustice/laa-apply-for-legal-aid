@@ -107,11 +107,9 @@ ccms_soa:
   documentServicesWsdl: DocumentServicesSTGWsdl.xml
   getReferenceDataWsdl: GetReferenceDataSTGWsdl.xml
 
-laa_portal:
-  idpSsoTargetUrl: "https://portal.stg.legalservices.gov.uk/oamfed/idp/samlv20"
-  idpSloTargetUrl: "https://portal.stg.legalservices.gov.uk/oam/server/logout"
-  idpCertFingerprintAlgorithm: "<idp-cert-fingerprint-alg-goes-here>"
-  mockSaml: "false"
+omniauth_entraid:
+  mock_auth: "false"
+  redirect_uri: https://staging.apply-for-legal-aid.service.justice.gov.uk/auth/entra_id/callback
 
 provider_details:
   url: "https://preprod-pda-api-laa-ccms-preprod.apps.live.cloud-platform.service.justice.gov.uk/api/providerDetails/"

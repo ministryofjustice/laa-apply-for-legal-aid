@@ -18,7 +18,6 @@ RSpec.describe Providers::ProvidersController do
 
   it "displays provider data" do
     expect(unescaped_response_body).to include(provider.name)
-    expect(unescaped_response_body).to include(provider.username)
     expect(unescaped_response_body).to include(provider.email)
   end
 end

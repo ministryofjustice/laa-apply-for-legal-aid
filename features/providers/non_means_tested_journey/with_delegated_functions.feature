@@ -1,12 +1,12 @@
 Feature: Non-means-tested applicant journey with use of delegation functions
 
-  @javascript @vcr
+  @javascript @vcr @stub_pda_provider_details
   Scenario: Completes a minimal application for applicant that was under 18 at time of earliest delegated function
     And I am logged in as a provider
 
     When I visit the application service
     And I click link "Start"
-    Then I choose 'London'
+    Then I choose '0X395U'
     Then I click 'Save and continue'
     And I click link "Make a new application"
     Then I should be on the 'providers/declaration' page showing 'Declaration'

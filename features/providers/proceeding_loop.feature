@@ -1,11 +1,12 @@
 @javascript @vcr
+
 Feature: Loop through proceeding questions
 
   Background:
     Given I am logged in as a provider
     And I visit the application service
     And I click link "Start"
-    Then I choose 'London'
+    Then I choose '0X395U'
     Then I click 'Save and continue'
     And I click link "Make a new application"
     Then I should be on the 'providers/declaration' page showing 'Declaration'
@@ -32,6 +33,7 @@ Feature: Loop through proceeding questions
     Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
 
+  @stub_pda_provider_details
   Scenario: When provider does not accept default levels of service
     Given I search for proceeding type "Child arrangements order CAO Section 8"
     And I choose a "Child arrangements order (CAO) - residence - appeal - vary" radio button
@@ -172,6 +174,7 @@ Feature: Loop through proceeding questions
     When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a partner?"
 
+  @stub_pda_provider_details
   Scenario: When provider accepts default levels of service
     Given I search for proceeding type "Child arrangements order CAO Section 8"
     And I choose a "Child arrangements order (CAO) - residence - appeal - vary" radio button
@@ -264,6 +267,7 @@ Feature: Loop through proceeding questions
     When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a partner?"
 
+  @stub_pda_provider_details
   Scenario: No preselected emergency or substantive levels of service
     Given I search for proceeding type "Enforcement order 11J"
     And I choose "Enforcement order 11J"

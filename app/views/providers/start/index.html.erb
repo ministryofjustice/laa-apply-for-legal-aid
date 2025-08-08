@@ -1,5 +1,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
+    <%= render(partial: "layouts/flash") %>
+
     <h1 class="govuk-heading-xl"><%= t(".heading") %></h1>
 
     <p class="govuk-body"><%= t(".intro") %></p>
@@ -15,6 +17,6 @@
     <p class="govuk-body"><%= t(".use_ccms_para_html") %></p>
     <p class="govuk-body"><%= t(".progress_saved") %></p>
 
-    <%= govuk_start_button(text: provider_signed_in? ? t("generic.start") : t("generic.sign_in"), href: providers_confirm_office_path, html_attributes: { id: "start" }) %>
+    <%= govuk_start_button(text: provider_signed_in? ? t("generic.start") : t("generic.sign_in"), href: providers_select_office_path, html_attributes: { id: "start" }) %>
   </div>
 </div>

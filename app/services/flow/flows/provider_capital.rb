@@ -1,6 +1,6 @@
 module Flow
   module Flows
-    class ProviderCapital < FlowSteps
+    class ProviderCapital
       STEPS = {
         capital_introductions: Steps::ProviderCapital::IntroductionsStep,
         own_homes: Steps::ProviderCapital::OwnHomesStep,

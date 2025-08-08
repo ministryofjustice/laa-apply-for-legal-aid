@@ -1,5 +1,8 @@
 class Provider < ApplicationRecord
-  devise :saml_authenticatable, :trackable
+  encrypts :auth_subject_uid, deterministic: true
+
+  devise :trackable
+
   serialize :roles, coder: YAML
   serialize :offices, coder: YAML
 
@@ -13,13 +16,37 @@ class Provider < ApplicationRecord
 
   delegate :name, to: :firm, prefix: true, allow_nil: true
 
+  # Our flow can/should rely on ANY user who is on the external EntraID (and who has a certain role in the auth payload TBC)
+  # NOTE: SILAS is currently returning a single office code as a string and multiple as an array of strings. This handles
+  # both scenarios.
+  def self.from_omniauth(auth)
+    find_or_initialize_by(auth_provider: auth.provider, auth_subject_uid: auth.uid).tap do |record|
+      office_codes = auth.extra.raw_info.LAA_ACCOUNTS
+
+      record.update!(
+        name: [auth.info.first_name, auth.info.last_name].join(" "),
+        username: auth.extra.raw_info.USER_NAME,
+        email: auth.info.email,
+        office_codes: [office_codes].join(":"),
+      )
+    end
+  rescue StandardError => e
+    Rails.logger.info("#{__method__}: omniauth enountered error #{e}")
+    nil
+  end
+
+  def silas_office_codes
+    @silas_office_codes ||= office_codes.split(":") || []
+  end
+
+  # TODO: AP-6181 - remove as not needed for SILAS integration
   def update_details
     return unless HostEnv.staging_or_production?
 
-    # only schedule a background job to update details for staging and live
     ProviderDetailsCreatorWorker.perform_async(id)
   end
 
+  # TODO: AP-6181 - remove as not needed for SILAS integration
   def update_details_directly
     ProviderDetailsCreator.call(self)
   end
@@ -32,8 +59,10 @@ class Provider < ApplicationRecord
     firm.nil? ? [] : firm.permissions
   end
 
+  # TODO: AP-6181: will need to change this or remove/replace entirely
   def ccms_apply_role?
-    return true if Rails.configuration.x.laa_portal.mock_saml == "true"
+    return true if Rails.configuration.x.omniauth_entraid.mock_auth == "true"
+    return true if auth_provider.eql?("entra_id") && auth_subject_uid.present?
 
     return false if roles.nil?
 

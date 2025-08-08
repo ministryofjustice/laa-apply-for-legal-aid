@@ -6,12 +6,13 @@ end
 OmniAuth.config.allowed_request_methods = %i[post get]
 OmniAuth.config.silence_get_warning = true # Warnings silenced for now.  See ticket AP-2098 for attempts to resolve this
 OmniAuth.config.logger = Rails.logger
-# normally in dev mode, if the user fails to authenticate, an exception is raised.
+
+# Normally in dev mode if the user fails to authenticate an exception is raised.
 # This block here makes sure that dev behaviour is the same as production, i.e.
-# is redirectied to /auth/failure
+# is redirected to /auth/failure.
 #
 OmniAuth.config.on_failure = proc do |env|
-  AlertManager.capture_message("Omniauth error: #{env['omniauth.error']} and message: #{env['omniauth.error']&.error_reason}")
+  AlertManager.capture_message("Omniauth error: #{env['omniauth.error']} and message: #{env['omniauth.error']}")
   OmniAuth::FailureEndpoint.new(env).redirect_to_failure
 end
 
@@ -26,5 +27,23 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     :google_oauth2,
     Rails.configuration.x.google_oauth2.client_id,
     Rails.configuration.x.google_oauth2.client_secret,
+  )
+  provider(
+    :openid_connect,
+    {
+      name: :entra_id,
+      scope: %i[openid email],
+      response_type: :code,
+      send_nonce: true,
+      client_options: {
+        identifier: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_ID", nil),
+        secret: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_SECRET", nil),
+        redirect_uri: ENV.fetch("OMNIAUTH_ENTRAID_REDIRECT_URI", nil),
+      },
+      discovery: true,
+      pkce: true,
+      issuer: "https://login.microsoftonline.com/#{ENV.fetch('OMNIAUTH_ENTRAID_TENANT_ID', nil)}/v2.0",
+      strategy_class: OmniAuth::Strategies::Silas,
+    },
   )
 end

@@ -1,7 +1,8 @@
 Feature: Starting a case with no linking or copying
 
 Background: I have started an application and not linked or copied it
-  Given I have created and submitted an application with the application reference 'L-123-456'
+  Given I am logged in as a provider
+  And I have created and submitted an application with the application reference 'L-123-456'
   And the feature flag for linked_applications is enabled
 
   When I complete the non-passported journey as far as check your answers for linking
