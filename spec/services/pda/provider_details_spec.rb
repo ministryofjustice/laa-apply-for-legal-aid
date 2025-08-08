@@ -101,13 +101,14 @@ RSpec.describe PDA::ProviderDetails do
       end
 
       it "updates the firm details" do
-        call
-        expect(firm.reload.name).to eq "updated firm name"
+        expect { call }
+          .to change { firm.reload.name }
+            .from("original firm name")
+            .to("updated firm name")
       end
 
-      it "updates the provider details" do
-        call
-        expect(provider.contact_id).to eq 87_654
+      it "updates the provider contact_id" do
+        expect { call }.to change { provider.reload.contact_id }.from(nil).to(87_654)
       end
 
       context "when the office ccms_id changes" do
@@ -299,7 +300,7 @@ RSpec.describe PDA::ProviderDetails do
       let(:status) { 500 }
 
       it "raises ApiError" do
-        expect { call }.to raise_error(PDA::ProviderDetails::ApiError, "API Call Failed: (500) An error has occurred")
+        expect { call }.to raise_error(PDA::ProviderDetails::ApiError, "API Call Failed retrieving office schedules: (500) An error has occurred")
       end
     end
   end
