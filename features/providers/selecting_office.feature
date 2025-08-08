@@ -1,6 +1,6 @@
 Feature: Selecting office
 
-  @javascript @stub_office_schedules
+  @javascript @stub_office_schedules_and_user
   Scenario: I am able to select an office
     Given I am logged in as a provider
     Then I visit the select office page
@@ -8,7 +8,7 @@ Feature: Selecting office
     Then I click 'Save and continue'
     Then I should be on a page showing 'Your applications'
 
-  @javascript @stub_office_schedules
+  @javascript @stub_office_schedules_and_user
   Scenario: I am unable to select an office that does not exist in PDA
     Given I am logged in as a provider
     Then I visit the select office page
