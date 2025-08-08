@@ -2,11 +2,7 @@ class ApplicationController < ActionController::Base
   layout "application"
 
   include Backable
-  # include OmniauthPathHelper
   include YourApplicationsHelper
-  # helper_method :omniauth_login_start_path
-
-  # before_action :authenticate_provider!
 
 private
 

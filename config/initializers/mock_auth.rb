@@ -20,7 +20,7 @@ end
 
 TestCredentialsStruct = Struct.new(:username, :email)
 
-# TODO: can we get rid of this
+# TODO: can we get rid of this or replace for silas mocking (AP-6185)
 Rails.configuration.x.lassie.mock_auth = ValidTestUsersStruct.new(
   users: [
     TestCredentialsStruct.new("test1", "test1@example.com"),

@@ -110,7 +110,6 @@ ccms_soa:
 
 omniauth_entraid:
   mock_auth: "false"
-  idp_sso_target_url: <not-sure-if-needed-but-could-point-to-silas/lassie-frontend>
   redirect_uri: https://apply-for-legal-aid.service.justice.gov.uk/auth/entra_id/callback
 
 provider_details:

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# require Rails.root.join("app/lib/id_p_settings_adapter")
-
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 
@@ -257,7 +255,7 @@ Devise.setup do |config|
 
   # You can support multiple IdPs by setting this value to a class that implements a #settings method which takes
   # an IdP entity id as an argument and returns a hash of idp settings for the corresponding IdP.
-  # config.idp_settings_adapter = IdPSettingsAdapter
+  # config.idp_settings_adapter = nil
 
   # You provide you own method to find the idp_entity_id in a SAML message in the case of multiple IdPs
   # by setting this to a custom reader class, or use the default.
