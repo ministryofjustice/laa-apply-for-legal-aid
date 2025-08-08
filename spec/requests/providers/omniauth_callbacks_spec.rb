@@ -16,6 +16,12 @@ RSpec.describe "provider omniauth call back" do
       it "signs in the provider and redirects to select office path" do
         expect(get_request).to redirect_to(providers_select_office_path)
       end
+
+      it "displays sign in success message" do
+        get_request
+        follow_redirect!
+        expect(response.body).to include("Signed in successfully")
+      end
     end
 
     context "when the provider is unknown" do
@@ -27,7 +33,7 @@ RSpec.describe "provider omniauth call back" do
         expect(get_request).to redirect_to(root_path)
       end
 
-      it "displays failure information" do
+      it "displays sign in failure message" do
         get_request
         follow_redirect!
         expect(response.body).to include("Could not authorise you! Ask an admin for access")
