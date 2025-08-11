@@ -99,7 +99,7 @@ gem "strong_migrations"
 
 group :development, :test do
   gem "awesome_print", "~> 1.9.2"
-  gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem "byebug"
   gem "dotenv"
   gem "erb_lint", "0.9.0", require: false
   gem "hirb"
