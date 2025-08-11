@@ -32,28 +32,6 @@ RSpec.describe Provider do
     end
   end
 
-  describe "#cms_apply_role?" do
-    let(:provider) { create(:provider, roles:) }
-
-    before { allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth).and_return(false) }
-
-    context "with ccms_apply_role_present" do
-      let(:roles) { "EMI,PUI_XXCCMS_BILL_PREPARATION,ZZZ,CCMS_Apply" }
-
-      it "returns true" do
-        expect(provider.ccms_apply_role?).to be true
-      end
-    end
-
-    context "with ccms_apply role absent" do
-      let(:roles) { "EMI,PUI_XXCCMS_BILL_PREPARATION,ZZZ" }
-
-      it "returns true" do
-        expect(provider.ccms_apply_role?).to be false
-      end
-    end
-  end
-
   describe "#invalid_login?" do
     let(:provider) { create(:provider, invalid_login_details: details) }
 

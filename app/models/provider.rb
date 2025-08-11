@@ -47,16 +47,6 @@ class Provider < ApplicationRecord
     firm.nil? ? [] : firm.permissions
   end
 
-  # TODO: AP-6181: will need to change this or remove/replace entirely
-  def ccms_apply_role?
-    return true if Rails.configuration.x.omniauth_entraid.mock_auth == "true"
-    return true if auth_provider.eql?("entra_id") && auth_subject_uid.present?
-
-    return false if roles.nil?
-
-    roles.split(",").include?("CCMS_Apply")
-  end
-
   def invalid_login?
     invalid_login_details.present?
   end
