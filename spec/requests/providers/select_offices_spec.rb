@@ -73,6 +73,11 @@ RSpec.describe "provider selects office" do
     }.to_json
   end
 
+  around do |example|
+    # We rely on webmock and stubs so we do not want to use VCR
+    VCR.turned_off { example.run }
+  end
+
   describe "GET providers/select_office" do
     subject(:get_request) { get providers_select_office_path }
 

@@ -109,7 +109,7 @@ ccms_soa:
   getReferenceDataWsdl: GetReferenceDataPRODWsdl.xml
 
 omniauth_entraid:
-  mock_auth: "false"
+  mock_auth: false
   redirect_uri: https://apply-for-legal-aid.service.justice.gov.uk/auth/entra_id/callback
 
 provider_details:

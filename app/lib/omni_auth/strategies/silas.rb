@@ -45,6 +45,8 @@ module OmniAuth
             uid: "mock-user-123",
             info: {
               name: "Mock Dev User",
+              first_name: "Martin",
+              last_name: "Ronan",
               email: "martin.ronan@example.com",
             },
             credentials: {

@@ -117,6 +117,18 @@ env:
     value: {{ .Values.ccms_soa.getReferenceDataWsdl | quote }}
   - name: OMNIAUTH_ENTRAID_MOCK_AUTH
     value: {{ .Values.omniauth_entraid.mock_auth | quote }}
+  {{ if .Values.omniauth_entraid.mock_auth }}
+  - name: OMNIAUTH_ENTRAID_MOCK_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: omniauthAzureMockUsername
+  - name: OMNIAUTH_ENTRAID_MOCK_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: omniauthAzureMockPassword
+  {{ end }}
   - name: OMNIAUTH_ENTRAID_CLIENT_ID
     valueFrom:
       secretKeyRef:

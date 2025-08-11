@@ -216,30 +216,36 @@ helm delete --namespace=laa-apply-for-legalaid-uat <name-of-the-release>
 
 #### Live (TO REDO)
 
-Authentication is made to the EntraID external tenant, which sends back a packet of data like this:
+Authentication is made to the EntraID external tenant (a.k.a SiLAS), which sends back a packet of data similar to that seen in the `mock_auth` return value in `app/lib/omni_auth/strategies/silas.rb`. This is used to find or create the user, along with associated office codes/LAA account numbers (Active record `Office` associations are created later however - see PDA retrieval).
 
+#### Development
 
-#### Development(TO REDO)
+User login on dev can be turned on by adding the following settings to your `.env.development`
 
-User login on dev can be mocked out by adding the the following settings (TO REDO)
+```shell
+OMNIAUTH_ENTRAID_MOCK_AUTH=true
+OMNIAUTH_ENTRAID_MOCK_USERNAME="martin.ronan@example.com"
+OMNIAUTH_ENTRAID_MOCK_PASSWORD="set-me-to-whatever"
+```
 
-~~This will enable you to login as a provider with the usernames specified in `config/initializers/mock_saml.rb`.
-Not that the provider firm_id is the same for `firm1-user1` and `firm1-user2`; all other users will belong to
-different firms.  The password for all users is `password`.~~
+This will direct you to provide a username/email and password to login as that user. The user will have specific mocked responses from EntraID (SiLAS) (see `app/lib/omni_auth/strategies/silas.rb`) and the Provider Data API (see `app/services/pda/mock_provider_details.rb`).
 
+> [!NOTE]
+> On UAT you can also enable this mock behaviour and use the password available in the AWS secrets manager/Kubernetes secret to
+> login.
 
-### Post-authentication provider details retrieval (TO REDO)
-~~Once the provider has been authenticated, either by the portal or by the mock-saml mechanism described above,
-an after_action method `#update_provider_details` on the `SamlSessionsController` is executed. This will call
-the `update_details` method on the current_provider (a Provider object supplied by Devise) which generates
+### Selected office's provider data retrieval
+Once the provider has been authenticated, either by EntraID/SiLAS or by mock_auth, mentioned above,
+a "Select the account number..." page is shown. Selecting an account number (a.k.a office code) and continuing will
+call the "Provide data API" (PDA) for the selected office and user. This will be mocked in
 a background job to query the provider details API and updates any details that have changed on the provider record.~~
 
 
 ### Signing out of the application (TO REDO)
 
-~~When using the mock-saml in development or on UAT, sign out works in the way you'd expect: Clicking signout takes you
-to a page confirming your're signed out, and going to the start url will redirect you to the sign-in page.~~
+When using the mock auth in development or on UAT, sign out works in the way you'd expect, destroying the session: Clicking signout takes you to a page confirming you're signed out, and going to the start url will redirect you to the sign-in page.
 
+TODO: Once the flow for signout is confirmed
 ~~When using the portal for authentication, (on staging or live, or if configured as described below, on localhost), the
 sign out link takes you to a feedback page, but doesn't really sign you out.  This is a side effect of using the
 portal Single Sign On system. You're not signed out until you tell the portal you've signed out, and when you do that,

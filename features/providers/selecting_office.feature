@@ -3,9 +3,9 @@ Feature: Selecting office
   @javascript @stub_office_schedules_and_user
   Scenario: I am able to select an office
     Given I am logged in as a provider
-    Then I visit the select office page
-    Then I choose '0X395U'
-    Then I click 'Save and continue'
+    When I visit the select office page
+    And I choose '0X395U'
+    And I click 'Save and continue'
     Then I should be on a page showing 'Your applications'
 
   @javascript @stub_office_schedules_and_user
@@ -15,6 +15,14 @@ Feature: Selecting office
     Then I choose 'A123456'
     Then I click 'Save and continue'
     Then I should be on a page showing 'The office you selected does not have a family contract with the Legal Aid Agency (LAA).'
+
+  @javascript @mock_auth_enabled @vcr_turned_off
+  Scenario: I am able to select an office when mock auth is enabled
+    Given I am logged in as a provider with username "MARTIN.RONAN@DAVIDGRAY.CO.UK"
+    When I visit the select office page
+    And I choose '0X395U'
+    And I click 'Save and continue'
+    Then I should be on a page showing 'Your applications'
 
 # TODO: Remove or reinstate depending on whether feature is removed/reinstated
 #  @javascript @stub_office_schedules_and_user

@@ -35,7 +35,26 @@ end
 
 Before("@stub_office_schedules_and_user") do
   stub_office_schedules_for_0x395u
-  stub_provider_user_for_test_provider
+  stub_provider_user_for("test_provider")
   stub_office_schedules_not_found_for("2N078D")
   stub_office_schedules_not_found_for("A123456")
+
+  VCR.turned_off { block.call }
+
+  # Unstub
+  WebMock.reset!
+end
+
+Before("@mock_auth_enabled") do |_scenario, _block|
+  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth).and_return(true)
+  Rails.application.reload_routes!
+end
+
+After("@mock_auth_enabled") do |_scenario, _block|
+  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth).and_call_original
+  Rails.application.reload_routes!
+end
+
+Around("@vcr_turned_off") do |_scenario, block|
+  VCR.turned_off { block.call }
 end

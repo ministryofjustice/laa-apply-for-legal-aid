@@ -87,14 +87,14 @@ RSpec.describe Applicants::HasNationalInsuranceNumberForm, type: :form do
         call_save
       end
 
-      context "when configured to use mock entra id login" do
-        let(:in_test_mode) { "true" }
+      context "when configured to use provider mock auth login" do
+        let(:in_test_mode) { true }
 
         it { expect(instance).to be_valid, "was invalid with errors: #{instance.errors.messages}" }
       end
 
-      context "when configured to use real entra id login" do
-        let(:in_test_mode) { "false" }
+      context "when configured to use provider real auth login" do
+        let(:in_test_mode) { false }
 
         it { expect(instance).not_to be_valid }
 

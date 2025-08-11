@@ -38,7 +38,11 @@ Rails.application.routes.draw do
 
   devise_scope :provider do
     authenticated :provider do
-      root to: "start#index", as: :authenticated_root
+      root to: "providers/start#index", as: :authenticated_root
+    end
+
+    unauthenticated :provider do
+      root to: "providers/start#index", as: :unauthenticated_root
     end
 
     match(
@@ -48,8 +52,14 @@ Rails.application.routes.draw do
       as: :provider_entra_id_omniauth_callback,
     )
 
-    get "/auth/entra_id", to: "providers/sessions#new", as: :new_provider_session
-    post "/providers/sign_in", to: "providers/sessions#create", as: :provider_session
+    if Rails.configuration.x.omniauth_entraid.mock_auth
+      get "providers/sign_in", to: "providers/mock_auth_sessions#new", as: :new_provider_session
+      post "providers/sign_in", to: "providers/mock_auth_sessions#create", as: :provider_session
+    else
+      get "/auth/entra_id", to: "providers/sessions#new", as: :new_provider_session
+      post "/providers/sign_in", to: "providers/sessions#create", as: :provider_session
+    end
+
     delete "/providers/sign_out", to: "providers/sessions#destroy", as: :destroy_provider_session
   end
 
