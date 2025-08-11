@@ -134,6 +134,11 @@ env:
         key: omniauthAzureTenantID
   - name: OMNIAUTH_ENTRAID_REDIRECT_URI
     value: {{ .Values.omniauth_entraid.redirect_uri | quote }}
+  - name: LAA_LANDING_PAGE_TARGET_URL
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: laaLandingPageURL
   - name: PROVIDER_DETAILS_URL
     value: {{ .Values.provider_details.url | quote }}
   - name: PDA_URL
