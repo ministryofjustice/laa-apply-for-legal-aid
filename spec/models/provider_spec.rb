@@ -112,34 +112,6 @@ RSpec.describe Provider do
     end
   end
 
-  describe "#newly_created_by_devise?" do
-    context "with sign_in_count of 1" do
-      context "with no firm" do
-        let(:provider) { create(:provider, :created_by_devise) }
-
-        it "returns true" do
-          expect(provider.newly_created_by_devise?).to be true
-        end
-      end
-
-      context "when firm exists" do
-        let(:provider) { create(:provider, sign_in_count: 1) }
-
-        it "returns false" do
-          expect(provider.newly_created_by_devise?).to be false
-        end
-      end
-    end
-
-    context "with login count greater than 1" do
-      let(:provider) { create(:provider, sign_in_count: 4) }
-
-      it "returns false" do
-        expect(provider.newly_created_by_devise?).to be false
-      end
-    end
-  end
-
   describe ".from_omniauth" do
     let(:auth) do
       OmniAuth::AuthHash.new(

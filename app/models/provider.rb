@@ -73,10 +73,6 @@ class Provider < ApplicationRecord
     invalid_login_details.present?
   end
 
-  def newly_created_by_devise?
-    firm_id.nil?
-  end
-
   def provider_details_api_error?
     invalid_login_details == "provider_details_api_error"
   end

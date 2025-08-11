@@ -19,7 +19,7 @@ class ProviderAfterLoginService
 private
 
   def check_provider_details_api
-    if @provider.newly_created_by_devise?
+    if @provider.firm_id.nil?
       call_provider_details_api
     else
       @provider.update_details
