@@ -32,6 +32,8 @@ en:
         title: Apply for civil legal aid
         notice: Notice
         my_profile: My profile
+    header:
+      legal_aid_agency: Legal Aid Agency
     logout:
       admin: Admin sign out
       provider: Sign out
