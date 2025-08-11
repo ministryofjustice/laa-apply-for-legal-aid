@@ -1,36 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Provider do
-  let(:firm) { create(:firm) }
-  let(:provider) { create(:provider, firm:) }
-
-  describe "#update_details" do
-    context "when firm exists" do
-      it "does not call provider details creator immediately" do
-        expect(ProviderDetailsCreator).not_to receive(:call).with(provider)
-        provider.update_details
-      end
-
-      context "when staging or production" do
-        before { allow(HostEnv).to receive(:staging_or_production?).and_return(true) }
-
-        it "schedules a background job" do
-          expect(ProviderDetailsCreatorWorker).to receive(:perform_async).with(provider.id)
-          provider.update_details
-        end
-      end
-
-      context "when not staging or production" do
-        before { allow(HostEnv).to receive(:staging_or_production?).and_return(false) }
-
-        it "does not schedule a background job" do
-          expect(ProviderDetailsCreatorWorker).not_to receive(:perform_async).with(provider.id)
-          provider.update_details
-        end
-      end
-    end
-  end
-
   describe "#user_permissions" do
     context "with no permissions for provider and their firm" do
       let(:firm) { create(:firm, :with_no_permissions) }

@@ -39,18 +39,6 @@ class Provider < ApplicationRecord
     @silas_office_codes ||= office_codes.split(":") || []
   end
 
-  # TODO: AP-6181 - remove as not needed for SILAS integration
-  def update_details
-    return unless HostEnv.staging_or_production?
-
-    ProviderDetailsCreatorWorker.perform_async(id)
-  end
-
-  # TODO: AP-6181 - remove as not needed for SILAS integration
-  def update_details_directly
-    ProviderDetailsCreator.call(self)
-  end
-
   def user_permissions
     permissions.empty? ? firm_permissions : permissions
   end
@@ -75,9 +63,5 @@ class Provider < ApplicationRecord
 
   def provider_details_api_error?
     invalid_login_details == "provider_details_api_error"
-  end
-
-  def clear_invalid_login!
-    update!(invalid_login_details: nil)
   end
 end
