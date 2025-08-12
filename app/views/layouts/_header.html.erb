@@ -6,7 +6,7 @@
   <div class="moj-header__container">
     <div class="moj-header__logo">
       <%= render(partial: "layouts/header_logo") %>
-      <a class="moj-header__link moj-header__link--organisation-name" href="#">Legal Aid Agency</a>
+      <%= govuk_link_to(t(".legal_aid_agency"), Rails.configuration.x.laa_landing_page_target_url, new_tab: "", class: "moj-header__link moj-header__link--organisation-name") %>
     </div>
 
     <div class="moj-header__content">

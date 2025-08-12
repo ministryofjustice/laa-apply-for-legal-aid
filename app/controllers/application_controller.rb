@@ -2,7 +2,9 @@ class ApplicationController < ActionController::Base
   layout "application"
 
   include Backable
+  include HomePathHelper
   include YourApplicationsHelper
+  helper_method :home_path
 
 private
 

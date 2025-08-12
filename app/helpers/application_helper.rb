@@ -1,5 +1,6 @@
 module ApplicationHelper
   include YourApplicationsHelper
+  include HomePathHelper
 
   def html_title
     default = t("shared.page-title.suffix")
