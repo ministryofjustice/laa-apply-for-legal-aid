@@ -23,7 +23,8 @@ module Admin
                                 allow_welsh_translation
                                 enable_ccms_submission
                                 linked_applications
-                                collect_hmrc_data])
+                                collect_hmrc_data
+                                mock_entra_id])
     end
 
     def setting

@@ -81,6 +81,7 @@ en:
           enable_evidence_upload: Enable the new evidence upload feature
           linked_applications: Enable linking and copying cases
           collect_hmrc_data: Collect HMRC data
+          mock_entra_id: Mock EntraID data
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
           manually_review_all_cases: |
@@ -91,6 +92,7 @@ en:
           enable_evidence_upload: Select Yes to enable the new evidence upload feature for solicitors
           linked_applications: Select Yes to enable the linking and copying cases feature for solicitors
           collect_hmrc_data: Select Yes to enable calls to HMRC for employment data
+          mock_entra_id: Select Yes and EntraID data will be replaced by mock data
 
       update:
         notice: Settings have been updated
