@@ -8,7 +8,7 @@ RSpec.describe "Client and case details section - Client details", :vcr do
     end
 
     # TODO: we navigate to the task list directly at time of writing but eventually we should be
-    # navigating using  the on-screen button "Save and go to task lisst" or similar.
+    # navigating using  the on-screen button "Save and go to task list" or similar.
     #
 
     scenario "I can complete the task list's Client details item" do

@@ -14,7 +14,7 @@ Feature: Selecting office
     Then I visit the select office page
     Then I choose 'A123456'
     Then I click 'Save and continue'
-    Then I should be on a page showing 'No valid details found for office account number A123456'
+    Then I should be on a page showing 'The office you selected does not have a family contract with the Legal Aid Agency (LAA).'
 
 # TODO: Remove or reinstate depending on whether feature is removed/reinstated
 #  @javascript @stub_office_schedules_and_user
