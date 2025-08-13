@@ -981,8 +981,8 @@ en:
         button_text: Choose a different office
         actions_list_html:
             - go back and choose a different office
-            - apply in <a href="https://portal.legalservices.gov.uk/"><abbr title='Client and Cost Management System'>CCMS</abbr></a> for all other proceedings
-            - <a href="mailto:%{team_email}">contact online support</a> (if you think this is wrong, and you should have access)
+            - apply in <a class="govuk-link govuk-link--inverse" href="https://portal.legalservices.gov.uk/"><abbr title='Client and Cost Management System'>CCMS</abbr></a> for all other proceedings
+            - <a class="govuk-link govuk-link--inverse" href="mailto:%{team_email}">contact online support</a> (if you think this is wrong, and you should have access)
     invalid_logins:
       show:
         permission_title: You do not have permission to view this page
