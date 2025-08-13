@@ -30,7 +30,7 @@
 
         <image src="/assets/images/moj-logotype-crest-2024.png" xlink:href="" class="moj-header__logotype-crest-fallback-image" width="40" height="40"></image>
       </svg>
-      <a class="moj-header__link moj-header__link--organisation-name" href="<%= url %>"><%= organisation_name %></a>
+      <%= govuk_link_to organisation_name, url, new_tab:, class: "moj-header__link moj-header__link--organisation-name" %>
     </div>
 
     <% if navigation_items.any? %>
