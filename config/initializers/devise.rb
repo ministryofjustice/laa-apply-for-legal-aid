@@ -4,9 +4,6 @@
 # Many of these configuration options can be set straight in your model.
 
 Devise.setup do |config|
-  require Rails.root.join "app/lib/omni_auth/strategies/silas"
-  OmniAuth::Strategies::Silas.mock_auth if ENV["OMNIAUTH_ENTRAID_MOCK_AUTH"] == "true"
-
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.

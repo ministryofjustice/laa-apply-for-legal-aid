@@ -10,7 +10,15 @@ RSpec.describe "provider omniauth call back" do
       get provider_entra_id_omniauth_callback_path
     end
 
-    before { OmniAuth::Strategies::Silas.mock_auth }
+    around do |example|
+      OmniAuth.config.test_mode = true
+      OmniAuth::Strategies::Silas.mock_auth
+
+      example.run
+
+      OmniAuth.config.mock_auth[:entra_id] = nil
+      OmniAuth.config.test_mode = false
+    end
 
     context "when the provider is known and authorised" do
       it "signs in the provider and redirects to select office path" do
