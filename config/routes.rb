@@ -52,7 +52,7 @@ Rails.application.routes.draw do
       as: :provider_entra_id_omniauth_callback,
     )
 
-    if Rails.configuration.x.omniauth_entraid.mock_auth
+    if Rails.configuration.x.omniauth_entraid.mock_auth_enabled
       get "providers/sign_in", to: "providers/mock_auth_sessions#new", as: :new_provider_session
       post "providers/sign_in", to: "providers/mock_auth_sessions#create", as: :provider_session
     else

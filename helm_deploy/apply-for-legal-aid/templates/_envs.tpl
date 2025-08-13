@@ -115,9 +115,9 @@ env:
     value: {{ .Values.ccms_soa.documentServicesWsdl | quote }}
   - name: CCMS_SOA_GET_REFERENCE_DATA_WSDL
     value: {{ .Values.ccms_soa.getReferenceDataWsdl | quote }}
-  - name: OMNIAUTH_ENTRAID_MOCK_AUTH
-    value: {{ .Values.omniauth_entraid.mock_auth | quote }}
-  {{ if .Values.omniauth_entraid.mock_auth }}
+  - name: OMNIAUTH_ENTRAID_MOCK_AUTH_ENABLED
+    value: {{ .Values.omniauth_entraid.mock_auth_enabled | quote }}
+  {{ if .Values.omniauth_entraid.mock_auth_enabled }}
   - name: OMNIAUTH_ENTRAID_MOCK_USERNAME
     valueFrom:
       secretKeyRef:

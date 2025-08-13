@@ -46,12 +46,12 @@ Before("@stub_office_schedules_and_user") do
 end
 
 Before("@mock_auth_enabled") do |_scenario, _block|
-  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth).and_return(true)
+  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_return(true)
   Rails.application.reload_routes!
 end
 
 After("@mock_auth_enabled") do |_scenario, _block|
-  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth).and_call_original
+  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_call_original
   Rails.application.reload_routes!
 end
 

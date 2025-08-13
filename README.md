@@ -223,7 +223,7 @@ Authentication is made to the EntraID external tenant (a.k.a SiLAS), which sends
 User login on dev can be turned on by adding the following settings to your `.env.development`
 
 ```shell
-OMNIAUTH_ENTRAID_MOCK_AUTH=true
+OMNIAUTH_ENTRAID_MOCK_AUTH_ENABLED=true
 OMNIAUTH_ENTRAID_MOCK_USERNAME="martin.ronan@example.com"
 OMNIAUTH_ENTRAID_MOCK_PASSWORD="set-me-to-whatever"
 ```

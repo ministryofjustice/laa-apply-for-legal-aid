@@ -97,7 +97,7 @@ gem "view_component"
 # Catching unsafe migrations in development
 gem "strong_migrations"
 
-# Only used for mocking certain Provider Data API calls when mock_auth enabled
+# Only used for test suite and for mocking certain Provider Data API calls when mock_auth_enabled
 gem "webmock"
 
 group :development, :test do
