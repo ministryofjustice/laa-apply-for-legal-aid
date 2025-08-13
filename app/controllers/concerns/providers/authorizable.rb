@@ -17,6 +17,7 @@ module Providers
 
     included do
       include Pundit::Authorization
+
       before_action :authorize_portal_user?
       before_action :authorize_legal_aid_application
       rescue_from Pundit::NotAuthorizedError, with: :provider_not_authorized

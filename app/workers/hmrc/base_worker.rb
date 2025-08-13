@@ -2,6 +2,7 @@ module HMRC
   class BaseWorker
     include Sidekiq::Worker
     include Sidekiq::Status::Worker
+
     attr_accessor :retry_count
 
     MAX_RETRIES = 10

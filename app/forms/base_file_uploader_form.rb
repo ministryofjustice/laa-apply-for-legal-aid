@@ -1,5 +1,6 @@
 class BaseFileUploaderForm < BaseForm
   include MalwareScanning
+
   MAX_FILE_SIZE = 7.megabytes
 
   ALLOWED_CONTENT_TYPES = %w[

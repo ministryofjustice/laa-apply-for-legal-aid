@@ -1,6 +1,7 @@
 class PdfConverterWorker
   include Sidekiq::Worker
   include Sidekiq::Status::Worker
+
   attr_accessor :retry_count
 
   ALERT_ON_RETRY_COUNT = 3

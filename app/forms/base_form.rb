@@ -2,6 +2,7 @@ class BaseForm
   include ActiveModel::Model
   include ActiveModel::Validations::Callbacks
   include ActiveSupport::Callbacks
+
   define_callbacks :save, :validation
 
   attr_writer :model

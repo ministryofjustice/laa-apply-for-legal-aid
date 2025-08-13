@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe DependantHelper do
   include ApplicationHelper
+
   let(:dependant) { create(:dependant) }
 
   describe "#dependant_hash" do

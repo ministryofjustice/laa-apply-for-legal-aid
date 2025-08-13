@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe Providers::SubmittedApplicationsController do
   include ActionView::Helpers::NumberHelper
+
   let(:firm) { create(:firm) }
   let(:login) { login_as legal_aid_application.provider }
   let(:html) { Nokogiri::HTML(response.body) }

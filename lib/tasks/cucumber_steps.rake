@@ -6,6 +6,7 @@ namespace :cucumber do
   task :steps do
     require "hirb"
     extend Hirb::Console
+
     puts "CUCUMBER steps:"
     puts ""
     step_definition_dir = "features/step_definitions"

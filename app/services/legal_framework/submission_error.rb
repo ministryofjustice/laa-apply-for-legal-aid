@@ -1,6 +1,7 @@
 module LegalFramework
   class SubmissionError < StandardError
     include Nesty::NestedError
+
     attr_reader :http_status
 
     def initialize(message, http_status = nil)

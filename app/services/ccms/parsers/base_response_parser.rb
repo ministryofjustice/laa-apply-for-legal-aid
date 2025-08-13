@@ -2,6 +2,7 @@ module CCMS
   module Parsers
     class BaseResponseParser
       include MessageLogger
+
       attr_reader :transaction_request_id, :response, :success, :message
 
       def initialize(tx_request_id, response)

@@ -1,6 +1,7 @@
 module Providers
   class CheckPassportedAnswersController < ProviderBaseController
     include ::DurationLogger
+
     def show
       @proceeding = legal_aid_application.lead_proceeding
       @applicant = legal_aid_application.applicant
