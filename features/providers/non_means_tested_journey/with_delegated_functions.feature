@@ -1,6 +1,6 @@
 Feature: Non-means-tested applicant journey with use of delegation functions
 
-  @javascript @vcr @stub_pda_provider_details
+  @javascript @vcr @stub_office_schedules_and_user
   Scenario: Completes a minimal application for applicant that was under 18 at time of earliest delegated function
     And I am logged in as a provider
 

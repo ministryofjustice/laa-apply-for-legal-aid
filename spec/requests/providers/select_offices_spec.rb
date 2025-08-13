@@ -192,6 +192,26 @@ RSpec.describe "provider selects office" do
           expect(response.body).to include("Select an account number")
         end
       end
+
+      context "when the user cannot be found" do
+        before do
+          stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules")
+            .to_return(body:, status: 200)
+
+          stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}")
+            .to_return(body: nil, status: 204)
+
+          allow(ProviderContractDetailsWorker)
+            .to receive(:perform_async).and_return(true)
+
+          patch_request
+        end
+
+        it "renders the page with flash message" do
+          expect(response).to render_template :show
+          expect(flash[:error]).to eq "No CCMS username found for #{provider.email}"
+        end
+      end
     end
   end
 end

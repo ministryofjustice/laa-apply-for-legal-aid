@@ -1,5 +1,5 @@
 Feature: Applicant details
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_office_schedules_and_user
   Scenario: Completes the application using address lookup with multiple proceedings
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
@@ -139,7 +139,7 @@ Feature: Applicant details
     Then I should be on a page showing 'Delegated functions' with a date of 2 days ago using '%-d %B %Y' format
     Then I should be on a page showing 'Delegated functions' with a date of 35 days ago using '%-d %B %Y' format
 
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_office_schedules_and_user
   Scenario: Completes the application using address lookup
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
@@ -208,7 +208,7 @@ Feature: Applicant details
     Then I click 'Send link'
     Then I am on the application confirmation page
 
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_office_schedules_and_user
   Scenario: Completes the application using address lookup with building number name
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
@@ -232,7 +232,7 @@ Feature: Applicant details
     Then I click 'Use this address'
     And I should be on a page showing "What does your client want legal aid for?"
 
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_office_schedules_and_user
   Scenario: Completes the application using manual address
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
@@ -319,7 +319,7 @@ Feature: Applicant details
     Then I click 'Send link'
     Then I am on the application confirmation page
 
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_office_schedules_and_user
   Scenario: I can see that the applicant receives benefits
     Given I start the journey as far as the applicant page
     And a "bank holiday" exists in the database
@@ -382,7 +382,7 @@ Feature: Applicant details
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
 
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_office_schedules_and_user
   Scenario: I can see that the applicant does not receive benefits
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'Paul'
@@ -453,7 +453,7 @@ Feature: Applicant details
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client receives a passporting benefit"
 
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_office_schedules_and_user
   Scenario: Allows return to, and proceed from, Delegated Function date view
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'

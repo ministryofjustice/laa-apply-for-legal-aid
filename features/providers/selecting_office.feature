@@ -17,7 +17,7 @@ Feature: Selecting office
     Then I should be on a page showing 'No valid details found for office account number A123456'
 
 # TODO: Remove or reinstate depending on whether feature is removed/reinstated
-#  @javascript @stub_pda_provider_details
+#  @javascript @stub_office_schedules_and_user
 #  Scenario: I am able to confirm my office
 #    Given I am logged in as a provider
 #    Given I have an existing office

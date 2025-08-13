@@ -30,6 +30,9 @@ module Providers
       else
         render :show
       end
+    rescue PDA::ProviderDetails::UserNotFound => e
+      flash.now[:error] = e.message
+      render :show
     end
 
   private
