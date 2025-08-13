@@ -22,10 +22,6 @@ When(/^I visit the root page/) do
   visit root_path
 end
 
-When(/^I submit to saml/) do
-  click_button "Sign in"
-end
-
 Given("I have an existing office") do
   office = @registered_provider.firm.offices.find_by(code: "London")
   @registered_provider.update!(selected_office: office)

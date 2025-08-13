@@ -11,12 +11,6 @@ module Providers
       end
     end
 
-    def failure
-      flash[:alert] = I18n.t "devise.omniauth_callbacks.failure"
-      Rails.logger.error "omniauth error authenticating a user!"
-      redirect_to root_path
-    end
-
   protected
 
     def after_sign_in_path_for(_resource)

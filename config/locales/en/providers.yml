@@ -972,16 +972,6 @@ en:
     add_another_partner_state_benefits:
       show:
         error: Select yes if the partner gets other benefits, charitable or government payments
-    invalid_logins:
-      show:
-        permission_title: You do not have permission to view this page
-        error_title: We are unable to log you in to the Apply service
-        provider_details_api_error:
-          html: 'There was an error retrieving your details from CCMS. Please try again later, or email <a href="mailto:%{team_email}">%{team_email}</a> if the issue persists.'
-        role:
-          html: Email <a href="mailto:%{team_email}">%{team_email}</a> if you think you do have permission to view this page.
-        api_details_user_not_found:
-          html: Your login details were not found on the CCMS system.  Please check your credentials and try again.  If the issue persists, please email <a href="mailto:%{team_email}">%{team_email}</a>
     legal_aid_applications:
       index:
         heading_1: Your applications

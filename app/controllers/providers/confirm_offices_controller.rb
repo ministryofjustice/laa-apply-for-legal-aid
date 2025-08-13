@@ -44,8 +44,6 @@ module Providers
     end
 
     def determine_where_next
-      return providers_invalid_login_path if current_provider.invalid_login?
-
       if firm.offices.one?
         # TODO: This is a temp call while we debug the contract endpoint retrieval and storage
         ProviderContractDetailsWorker.perform_async(firm.offices.first.code)

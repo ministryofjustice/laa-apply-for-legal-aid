@@ -39,49 +39,11 @@ class Provider < ApplicationRecord
     @silas_office_codes ||= office_codes.split(":") || []
   end
 
-  # TODO: AP-6181 - remove as not needed for SILAS integration
-  def update_details
-    return unless HostEnv.staging_or_production?
-
-    ProviderDetailsCreatorWorker.perform_async(id)
-  end
-
-  # TODO: AP-6181 - remove as not needed for SILAS integration
-  def update_details_directly
-    ProviderDetailsCreator.call(self)
-  end
-
   def user_permissions
     permissions.empty? ? firm_permissions : permissions
   end
 
   def firm_permissions
     firm.nil? ? [] : firm.permissions
-  end
-
-  # TODO: AP-6181: will need to change this or remove/replace entirely
-  def ccms_apply_role?
-    return true if Rails.configuration.x.omniauth_entraid.mock_auth == "true"
-    return true if auth_provider.eql?("entra_id") && auth_subject_uid.present?
-
-    return false if roles.nil?
-
-    roles.split(",").include?("CCMS_Apply")
-  end
-
-  def invalid_login?
-    invalid_login_details.present?
-  end
-
-  def newly_created_by_devise?
-    firm_id.nil?
-  end
-
-  def provider_details_api_error?
-    invalid_login_details == "provider_details_api_error"
-  end
-
-  def clear_invalid_login!
-    update!(invalid_login_details: nil)
   end
 end
