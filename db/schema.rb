@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_31_075330) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_12_154747) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -938,7 +938,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_31_075330) do
     t.string "email"
     t.boolean "portal_enabled", default: true
     t.integer "contact_id"
-    t.string "invalid_login_details"
     t.boolean "cookies_enabled"
     t.datetime "cookies_saved_at"
     t.string "auth_provider", default: "", null: false
@@ -1044,6 +1043,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_31_075330) do
     t.datetime "cfe_compare_run_at"
     t.boolean "linked_applications", default: false, null: false
     t.boolean "collect_hmrc_data", default: false, null: false
+    t.boolean "mock_entra_id", default: false, null: false
   end
 
   create_table "specific_issues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

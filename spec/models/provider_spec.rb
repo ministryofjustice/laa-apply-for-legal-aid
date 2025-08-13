@@ -32,34 +32,6 @@ RSpec.describe Provider do
     end
   end
 
-  describe "#invalid_login?" do
-    let(:provider) { create(:provider, invalid_login_details: details) }
-
-    context "when details are nil" do
-      let(:details) { nil }
-
-      it "returns false" do
-        expect(provider.invalid_login?).to be false
-      end
-    end
-
-    context "when details are empty string" do
-      let(:details) { "" }
-
-      it "returns false" do
-        expect(provider.invalid_login?).to be false
-      end
-    end
-
-    context "when details are present" do
-      let(:details) { "role" }
-
-      it "returns true" do
-        expect(provider.invalid_login?).to be true
-      end
-    end
-  end
-
   describe ".from_omniauth" do
     let(:auth) do
       OmniAuth::AuthHash.new(

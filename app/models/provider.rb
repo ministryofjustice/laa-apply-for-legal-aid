@@ -46,12 +46,4 @@ class Provider < ApplicationRecord
   def firm_permissions
     firm.nil? ? [] : firm.permissions
   end
-
-  def invalid_login?
-    invalid_login_details.present?
-  end
-
-  def provider_details_api_error?
-    invalid_login_details == "provider_details_api_error"
-  end
 end
