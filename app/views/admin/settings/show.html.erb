@@ -66,6 +66,16 @@
           legend: { text: t(".labels.collect_hmrc_data") },
         ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+          :mock_entra_id,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          hint: { text: t(".hints.mock_entra_id") },
+          legend: { text: t(".labels.mock_entra_id") },
+        ) %>
+
     <%= form.govuk_submit(t("generic.submit")) %>
   <% end %>
 <% end %>
