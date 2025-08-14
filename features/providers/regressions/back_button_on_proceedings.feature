@@ -1,5 +1,5 @@
 Feature: Using the back button on proceedings should not lock a user out
-  @javascript @vcr @stub_office_schedules_and_user
+  @javascript @vcr @stub_pda_provider_details
   Scenario: When a provider is adding proceedings and uses the back button they should route to the list of proceedings first
     Given I start the journey as far as the applicant page
     When I enter name 'Test', 'User'

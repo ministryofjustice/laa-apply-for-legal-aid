@@ -25,7 +25,7 @@ Feature: Selecting office
     Then I should be on a page showing 'Your applications'
 
 # TODO: Remove or reinstate depending on whether feature is removed/reinstated
-#  @javascript @stub_office_schedules_and_user
+#  @javascript @stub_pda_provider_details
 #  Scenario: I am able to confirm my office
 #    Given I am logged in as a provider
 #    Given I have an existing office
