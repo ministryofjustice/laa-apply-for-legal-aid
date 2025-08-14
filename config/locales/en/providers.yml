@@ -369,6 +369,7 @@ en:
         section_next:
           heading: What happens next
           content: We'll use your client's name, date of birth and National Insurance number to check their benefit status with the Department for Work and Pensions (DWP).
+          content_without_benefit_checker: As the LAA currently has no ability to check your client's benefit status with Department for Work and Pensions (DWP) we will ask further questions about benefits.
         banner:
           your_client_needs_to: Your client needs to complete their part of the application before you can continue.
         sent_email_text: "We've sent an email to %{email}"
