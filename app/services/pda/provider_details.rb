@@ -1,11 +1,11 @@
 module PDA
   class ProviderDetails
     ApiError = Class.new(StandardError)
-    ValidDetailsNotFound = Class.new(StandardError)
+    UserNotFound = Class.new(StandardError)
 
     # Only save schedule details that are relevant to civil apply
     APPLICABLE_CATEGORIES_OF_LAW = %w[MAT].freeze
-    APPLICABLE_AREAS_OF_LAW = ["LEGAL HELP", "CIVIL FUNDING"].freeze
+    APPLICABLE_AREAS_OF_LAW = ["LEGAL HELP"].freeze
 
     def initialize(provider, office_code)
       @provider = provider
@@ -32,7 +32,14 @@ module PDA
         Rails.logger.info("#{self.class} - No applicable schedules found for #{@office_code}") if office.schedules.empty?
       else
         Rails.logger.info("#{self.class} - No schedules found for #{@office_code}")
-        raise ValidDetailsNotFound, "No valid details found for office account number #{@office_code}"
+      end
+    end
+
+    def has_valid_schedules?
+      return false if schedules.nil?
+
+      schedules.any? do |schedule|
+        ScheduleValidator.call(schedule)
       end
     end
 
@@ -48,6 +55,10 @@ module PDA
 
     def office
       @office = Office.find_or_initialize_by(code: @office_code)
+    end
+
+    def schedules
+      @schedules ||= office.schedules
     end
 
     def update_firm
@@ -93,8 +104,8 @@ module PDA
         if user_detail_response.status == 200
           JSON.parse(user_detail_response.body).dig("user", "ccmsContactId")
         else
-          Rails.logger.info("#{self.class} - No provider details found for #{@provider.username}")
-          raise ValidDetailsNotFound, "No provider details found for #{@provider.username}"
+          Rails.logger.info("#{self.class} - No provider details found for #{@provider.email}")
+          raise UserNotFound, "No CCMS username found for #{@provider.email}"
         end
       else
         raise ApiError, "API Call Failed: provider-users (#{user_detail_response.status}) #{user_detail_response.body}"

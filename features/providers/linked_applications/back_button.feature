@@ -1,5 +1,5 @@
 Feature: Linking cases back button use
-  @javascript @vcr @stub_pda_provider_details
+  @javascript @vcr @stub_office_schedules_and_user
   Scenario: Complete flow reversion with back button
     Given I am logged in as a provider
     And I have created and submitted an application with the application reference 'L-123-456'

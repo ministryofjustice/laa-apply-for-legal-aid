@@ -18,6 +18,7 @@ RSpec.describe "provider selects office" do
     }.to_json
   end
 
+  let(:devolved_powers_status) { "Yes - Excluding JR Proceedings" }
   let(:schedules) do
     [
       {
@@ -37,7 +38,7 @@ RSpec.describe "provider selects office" do
             areaOfLaw: "LEGAL HELP",
             categoryOfLaw: "MAT",
             description: "Legal Help (Civil).Family",
-            devolvedPowersStatus: "Yes - Excluding JR Proceedings",
+            devolvedPowersStatus: devolved_powers_status,
             dpTypeOfChange: nil,
             dpReasonForChange: nil,
             dpDateOfChange: nil,
@@ -139,13 +140,22 @@ RSpec.describe "provider selects office" do
           patch_request
         end
 
-        it "updates the record" do
-          expect(provider.reload.selected_office.code).to eq "0X395U"
-          expect(provider.reload.contact_id).to eq 87_654
+        context "when the selected office has valid schedules" do
+          it "updates the record" do
+            expect(provider.reload.selected_office.code).to eq "0X395U"
+          end
+
+          it "redirects to the legal aid applications page" do
+            expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
+          end
         end
 
-        it "redirects to the legal aid applications page" do
-          expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
+        context "when the selected office has no valid schedules" do
+          let(:devolved_powers_status) { "No" }
+
+          it "redirects to the invalid schedules page" do
+            expect(response).to redirect_to providers_invalid_schedules_path
+          end
         end
       end
 
@@ -164,9 +174,8 @@ RSpec.describe "provider selects office" do
           expect(provider.reload.selected_office_id).to be_blank
         end
 
-        it "renders the page with flash message" do
-          expect(response).to render_template :show
-          expect(flash[:error]).to eq "No valid details found for office account number #{selected_office_code}"
+        it "redirects to the invalid schedules page" do
+          expect(response).to redirect_to providers_invalid_schedules_path
         end
       end
 
@@ -181,6 +190,26 @@ RSpec.describe "provider selects office" do
 
         it "the response includes the error message" do
           expect(response.body).to include("Select an account number")
+        end
+      end
+
+      context "when the user cannot be found" do
+        before do
+          stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules")
+            .to_return(body:, status: 200)
+
+          stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}")
+            .to_return(body: nil, status: 204)
+
+          allow(ProviderContractDetailsWorker)
+            .to receive(:perform_async).and_return(true)
+
+          patch_request
+        end
+
+        it "renders the page with flash message" do
+          expect(response).to render_template :show
+          expect(flash[:error]).to eq "No CCMS username found for #{provider.email}"
         end
       end
     end

@@ -2,140 +2,127 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.os.uk/search/places/v1/postcode?key=<ORDNANCE_SURVEY_API_KEY>&lr=EN&postcode=SW1H9EA
+    uri: https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk/provider-offices/0X395U/schedules
     body:
       encoding: US-ASCII
       string: ''
     headers:
+      Accept:
+      - application/json
+      X-Authorization:
+      - "<PDA_AUTH_KEY>"
       User-Agent:
-      - Faraday v2.13.2
+      - Faraday v2.13.4
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
       Date:
-      - Thu, 10 Jul 2025 15:03:55 GMT
+      - Wed, 13 Aug 2025 14:04:38 GMT
       Content-Type:
-      - application/json;charset=UTF-8
+      - application/json
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Vary:
-      - Origin,Accept-Encoding,key
-      Omse-Category:
-      - premium
-      Omse-Transaction-Count:
-      - '60'
-      Omse-Premium-Count:
+      Request-Id:
+      - e088eb0d-a83c-4365-bfa0-bbf88b733037
+      Request-Handler:
+      - laa-pda-api-deployment-6d99c67c96-g4284
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
       - '0'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
+      X-Frame-Options:
+      - DENY
     body:
-      encoding: ASCII-8BIT
-      string: "{\r\n  \"header\" : {\r\n    \"uri\" : \"https://api.os.uk/search/places/v1/postcode?lr=EN&postcode=SW1H9EA\",\r\n
-        \   \"query\" : \"postcode=SW1H9EA\",\r\n    \"offset\" : 0,\r\n    \"totalresults\"
-        : 5,\r\n    \"format\" : \"JSON\",\r\n    \"dataset\" : \"DPA\",\r\n    \"lr\"
-        : \"EN\",\r\n    \"maxresults\" : 100,\r\n    \"epoch\" : \"119\",\r\n    \"lastupdate\"
-        : \"2025-07-09\",\r\n    \"output_srs\" : \"EPSG:27700\"\r\n  },\r\n  \"results\"
-        : [ {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337883\",\r\n      \"UDPRN\"
-        : \"23749699\",\r\n      \"ADDRESS\" : \"84, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n
-        \     \"BUILDING_NUMBER\" : \"84\",\r\n      \"THOROUGHFARE_NAME\" : \"PETTY
-        FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\" : \"SW1H
-        9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529526.39,\r\n
-        \     \"Y_COORDINATE\" : 179490.43,\r\n      \"STATUS\" : \"APPROVED\",\r\n
-        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
-        \"CR07\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Restaurant / Cafeteria\",\r\n
-        \     \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
-        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
-        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
-        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
-        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
-        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042216527\",\r\n
-        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"LAST_UPDATE_DATE\" : \"10/02/2016\",\r\n
-        \     \"ENTRY_DATE\" : \"19/03/2001\",\r\n      \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n
-        \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
-        : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1B\"\r\n    }\r\n  },
-        {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033650067\",\r\n      \"UDPRN\"
-        : \"56825040\",\r\n      \"ADDRESS\" : \"BRITISH TRANSPORT POLICE, 98, PETTY
-        FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"BRITISH TRANSPORT
-        POLICE\",\r\n      \"BUILDING_NUMBER\" : \"98\",\r\n      \"THOROUGHFARE_NAME\"
-        : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\"
-        : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529558.47,\r\n
-        \     \"Y_COORDINATE\" : 179482.17,\r\n      \"STATUS\" : \"APPROVED\",\r\n
-        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
-        \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Office / Work Studio\",\r\n
-        \     \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
-        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
-        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
-        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
-        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
-        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042217066\",\r\n
-        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"PARENT_UPRN\" : \"100023337884\",\r\n
-        \     \"LAST_UPDATE_DATE\" : \"14/02/2022\",\r\n      \"ENTRY_DATE\" : \"19/03/2021\",\r\n
-        \     \"BLPU_STATE_DATE\" : \"19/03/2021\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
-        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
-        : \"1Q\"\r\n    }\r\n  }, {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337884\",\r\n
-        \     \"UDPRN\" : \"23749702\",\r\n      \"ADDRESS\" : \"TRANSPORT FOR LONDON,
-        98, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"TRANSPORT
-        FOR LONDON\",\r\n      \"BUILDING_NUMBER\" : \"98\",\r\n      \"THOROUGHFARE_NAME\"
-        : \"PETTY FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\"
-        : \"SW1H 9EA\",\r\n      \"RPC\" : \"1\",\r\n      \"X_COORDINATE\" : 529558.47,\r\n
-        \     \"Y_COORDINATE\" : 179482.17,\r\n      \"STATUS\" : \"APPROVED\",\r\n
-        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
-        \"PP\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Property Shell\",\r\n
-        \     \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
-        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
-        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
-        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
-        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
-        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042217066\",\r\n
-        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"LAST_UPDATE_DATE\" : \"30/03/2021\",\r\n
-        \     \"ENTRY_DATE\" : \"19/03/2001\",\r\n      \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n
-        \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
-        : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1F\"\r\n    }\r\n  },
-        {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"100023337882\",\r\n      \"UDPRN\"
-        : \"23749700\",\r\n      \"ADDRESS\" : \"100, PETTY FRANCE, LONDON, SW1H 9EA\",\r\n
-        \     \"BUILDING_NUMBER\" : \"100\",\r\n      \"THOROUGHFARE_NAME\" : \"PETTY
-        FRANCE\",\r\n      \"POST_TOWN\" : \"LONDON\",\r\n      \"POSTCODE\" : \"SW1H
-        9EA\",\r\n      \"RPC\" : \"2\",\r\n      \"X_COORDINATE\" : 529619.99,\r\n
-        \     \"Y_COORDINATE\" : 179499.2,\r\n      \"STATUS\" : \"APPROVED\",\r\n
-        \     \"LOGICAL_STATUS_CODE\" : \"1\",\r\n      \"CLASSIFICATION_CODE\" :
-        \"CT08\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\" : \"Station / Interchange
-        / Terminal / Halt\",\r\n      \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n      \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\"
-        : \"CITY OF WESTMINSTER\",\r\n      \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\"
-        : \"This record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
-        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
-        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
-        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000042216526\",\r\n
-        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"LAST_UPDATE_DATE\" : \"24/08/2021\",\r\n
-        \     \"ENTRY_DATE\" : \"19/03/2001\",\r\n      \"BLPU_STATE_DATE\" : \"19/03/2001\",\r\n
-        \     \"LANGUAGE\" : \"EN\",\r\n      \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\"
-        : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\" : \"1A\"\r\n    }\r\n  },
-        {\r\n    \"DPA\" : {\r\n      \"UPRN\" : \"10033648845\",\r\n      \"UDPRN\"
-        : \"54770395\",\r\n      \"ADDRESS\" : \"C P S, 102, PETTY FRANCE, LONDON,
-        SW1H 9EA\",\r\n      \"ORGANISATION_NAME\" : \"C P S\",\r\n      \"BUILDING_NUMBER\"
-        : \"102\",\r\n      \"THOROUGHFARE_NAME\" : \"PETTY FRANCE\",\r\n      \"POST_TOWN\"
-        : \"LONDON\",\r\n      \"POSTCODE\" : \"SW1H 9EA\",\r\n      \"RPC\" : \"2\",\r\n
-        \     \"X_COORDINATE\" : 529576.0,\r\n      \"Y_COORDINATE\" : 179549.0,\r\n
-        \     \"STATUS\" : \"APPROVED\",\r\n      \"LOGICAL_STATUS_CODE\" : \"1\",\r\n
-        \     \"CLASSIFICATION_CODE\" : \"CO01\",\r\n      \"CLASSIFICATION_CODE_DESCRIPTION\"
-        : \"Office / Work Studio\",\r\n      \"LOCAL_CUSTODIAN_CODE\" : 5990,\r\n
-        \     \"LOCAL_CUSTODIAN_CODE_DESCRIPTION\" : \"CITY OF WESTMINSTER\",\r\n
-        \     \"COUNTRY_CODE\" : \"E\",\r\n      \"COUNTRY_CODE_DESCRIPTION\" : \"This
-        record is within England\",\r\n      \"POSTAL_ADDRESS_CODE\" : \"D\",\r\n
-        \     \"POSTAL_ADDRESS_CODE_DESCRIPTION\" : \"A record which is linked to
-        PAF\",\r\n      \"BLPU_STATE_CODE\" : \"2\",\r\n      \"BLPU_STATE_CODE_DESCRIPTION\"
-        : \"In use\",\r\n      \"TOPOGRAPHY_LAYER_TOID\" : \"osgb1000001796535716\",\r\n
-        \     \"WARD_CODE\" : \"E05013806\",\r\n      \"PARENT_UPRN\" : \"10033604583\",\r\n
-        \     \"LAST_UPDATE_DATE\" : \"06/07/2020\",\r\n      \"ENTRY_DATE\" : \"15/06/2020\",\r\n
-        \     \"BLPU_STATE_DATE\" : \"15/06/2020\",\r\n      \"LANGUAGE\" : \"EN\",\r\n
-        \     \"MATCH\" : 1.0,\r\n      \"MATCH_DESCRIPTION\" : \"EXACT\",\r\n      \"DELIVERY_POINT_SUFFIX\"
-        : \"1N\"\r\n    }\r\n  } ]\r\n}"
-  recorded_at: Thu, 10 Jul 2025 15:03:55 GMT
+      encoding: UTF-8
+      string: '{"firm":{"firmNumber":"1639","firmId":1639,"ccmsFirmId":19148,"parentFirmId":0,"firmName":"DAVID
+        GRAY LLP","firmType":"Legal Services Provider","constitutionalStatus":"LLP","solicitorAdvocateYN":null,"advocateLevel":null,"barCouncilRoll":null,"companyHouseNumber":null},"office":{"firmOfficeId":4545,"ccmsFirmOfficeId":137570,"firmOfficeCode":"0X395U","officeName":"0X395U,OLD
+        COUNTY COURT","officeCodeAlt":"DAVID GRAY LLP","type":"Legal Services Supplier
+        (Civil/Crime/Both/Mediator)"},"pds":false,"schedules":[{"contractType":"Standard","contractDescription":"2024
+        Standard Civil Contract","contractNumber":"1034798","contractReference":"01/0X395U/2024/1","contractStatus":"Open","contractAuthorizationStatus":"APPROVED","contractStartDate":"2024-09-01","contractEndDate":"2026-06-30","areaOfLaw":"LEGAL
+        HELP","scheduleType":"Standard","scheduleNumber":"0X395U/2024/01","scheduleContractNumber":"1034798","scheduleContractReference":"01/0X395U/2024/1","scheduleAuthorizationStatus":"APPROVED","scheduleStatus":"Open","scheduleStartDate":"2024-09-01","scheduleEndDate":"2025-08-31","scheduleLines":[{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"AAP","description":"Legal Help (Civil).Claims Against
+        Public Authorities","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"COM","description":"Legal Help (Civil).Community Care","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"CON","description":"Legal Help (Civil).Consumer General
+        Contract","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"DEB","description":"Legal Help (Civil).Debt","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"DISC","description":"Legal Help (Civil).Discrimination","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"EDU","description":"Legal Help (Civil).Education","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"EMP","description":"Legal Help (Civil).Employment","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"HOU","description":"Legal Help (Civil).Housing","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"IMMAS","description":"Legal Help (Civil).Immigration
+        - Asylum","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"IMMOT","description":"Legal Help (Civil).Immigration","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"MAT","description":"Legal Help (Civil).Family","devolvedPowersStatus":"Yes
+        - Excluding JR Proceedings","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"N/A","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"1","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"MED","description":"Legal Help (Civil).Clinical Negligence","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"MHE","description":"Legal Help (Civil).Mental Health","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"MSC","description":"Legal Help (Civil).Residual(Miscellaneous)","devolvedPowersStatus":"Yes
+        - Excluding JR Proceedings","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"N/A","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"1","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"PI","description":"Legal Help (Civil).Personal Injury","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"PUB","description":"Legal Help (Civil).Public Law","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"WB","description":"Legal Help (Civil).Welfare Benefits","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null},{"areaOfLaw":"LEGAL
+        HELP","categoryOfLaw":"ELA","description":"Legal Help (Civil).Early Legal
+        Advice","devolvedPowersStatus":"No","dpTypeOfChange":null,"dpReasonForChange":null,"dpDateOfChange":null,"remainderWorkFlag":"No","minimumCasesAllowedCount":"0","maximumCasesAllowedCount":"0","minimumToleranceCount":"0","maximumToleranceCount":"0","minimumLicenseCount":"0","maximumLicenseCount":"0","workInProgressCount":"0","outreach":null,"cancelFlag":"N","cancelReason":null,"cancelDate":null,"closedDate":null,"closedReason":null}],"nmsAuths":[]}]}'
+  recorded_at: Wed, 13 Aug 2025 14:04:38 GMT
+- request:
+    method: get
+    uri: https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk/provider-users/System%20Tester
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      X-Authorization:
+      - "<PDA_AUTH_KEY>"
+      User-Agent:
+      - Faraday v2.13.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 204
+      message: ''
+    headers:
+      Date:
+      - Wed, 13 Aug 2025 14:04:38 GMT
+      Connection:
+      - keep-alive
+      Request-Id:
+      - 1505bf22-1061-441c-a450-8035ff1b382b
+      Request-Handler:
+      - laa-pda-api-deployment-6d99c67c96-mzqkq
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - '0'
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Pragma:
+      - no-cache
+      Expires:
+      - '0'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Frame-Options:
+      - DENY
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Wed, 13 Aug 2025 14:04:38 GMT
 recorded_with: VCR 6.3.1

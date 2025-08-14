@@ -13,16 +13,24 @@ module Providers
       if @form.valid?
         provider = form_params[:model]
 
-        PDA::ProviderDetails.call(provider, form_params[:selected_office_code])
+        # NOTE: This updates the firm, and creates/updates the office and associates with the provider if
+        # necessary (marking as the selected office as well)
+        # TODO: This will silently add no office to provider if the office exists but has no schedule
+        pda = PDA::ProviderDetails.new(provider, form_params[:selected_office_code])
+        pda.call
 
         # TODO: remove?! This is a temp call while we debug the contract endpoint retrieval and storage
         ProviderContractDetailsWorker.perform_async(form_params[:selected_office_code])
 
-        redirect_to your_applications_default_tab_path
+        if pda.has_valid_schedules?
+          redirect_to your_applications_default_tab_path
+        else
+          redirect_to providers_invalid_schedules_path
+        end
       else
         render :show
       end
-    rescue PDA::ProviderDetails::ValidDetailsNotFound => e
+    rescue PDA::ProviderDetails::UserNotFound => e
       flash.now[:error] = e.message
       render :show
     end

@@ -1,5 +1,5 @@
 Feature: Adding an SCA Secure Accommodation Order proceeding sets all client_involvement_types to Child
-  @javascript @vcr @stub_pda_provider_details
+  @javascript @vcr @stub_office_schedules_and_user
   Scenario: When a provider is adding proceedings and only adds a Secure Accommodation Order
     Given I start the journey as far as the applicant page
 

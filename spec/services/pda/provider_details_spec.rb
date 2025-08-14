@@ -264,16 +264,14 @@ RSpec.describe PDA::ProviderDetails do
 
       it "does not create any schedules" do
         expect(Rails.logger).to receive(:info).with("#{described_class} - No schedules found for 4A497U")
-        expect { call }.to raise_error(PDA::ProviderDetails::ValidDetailsNotFound)
-        expect(office.schedules.count).to eq(0)
+        expect { call }.not_to change(office.schedules, :count)
       end
 
       context "when there are existing schedules belonging to the office" do
         before { office.schedules << Schedule.new(area_of_law: "Legal Help", category_of_law: "MAT") }
 
         it "deletes any existing schedules belonging to the office" do
-          expect { call }.to raise_error(PDA::ProviderDetails::ValidDetailsNotFound)
-          expect(office.schedules.count).to eq(0)
+          expect { call }.to change(office.schedules, :count).to(0)
         end
       end
     end
@@ -281,9 +279,9 @@ RSpec.describe PDA::ProviderDetails do
     context "when PDA returns no details for the provider user" do
       before { stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}").to_return(body: "", status: 204) }
 
-      it "raises ValidDetailsNotFound" do
-        expect(Rails.logger).to receive(:info).with("#{described_class} - No provider details found for #{provider.username}")
-        expect { call }.to raise_error(PDA::ProviderDetails::ValidDetailsNotFound, "No provider details found for #{provider.username}")
+      it "raises a UserNotFound error" do
+        expect(Rails.logger).to receive(:info).with("#{described_class} - No provider details found for #{provider.email}")
+        expect { call }.to raise_error(PDA::ProviderDetails::UserNotFound, "No CCMS username found for #{provider.email}")
       end
 
       context "when there is an error calling the provider-users endpoint" do
