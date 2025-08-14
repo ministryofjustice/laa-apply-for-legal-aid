@@ -38,13 +38,13 @@ module OmniAuth
 
       class << self
         def mock_auth
-          OmniAuth.config.test_mode = true
-
           OmniAuth.config.mock_auth[:entra_id] = OmniAuth::AuthHash.new({
             provider: "entra_id",
             uid: "mock-user-123",
             info: {
               name: "Mock Dev User",
+              first_name: "Martin",
+              last_name: "Ronan",
               email: "martin.ronan@example.com",
             },
             credentials: {

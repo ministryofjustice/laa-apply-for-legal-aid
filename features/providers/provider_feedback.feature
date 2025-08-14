@@ -1,5 +1,5 @@
 Feature: Provider feedback
-  @javascript @vcr @disable-rack-attack @stub_office_schedules_and_user
+  @javascript @vcr @disable-rack-attack @stub_pda_provider_details
   Scenario: Enter the minimum feedback required within provider journey
     Given I start the journey as far as the applicant page
     When I click link "feedback (opens in new tab)"
@@ -29,7 +29,7 @@ Feature: Provider feedback
     And I click "Send"
     Then I should be on a page with title "Thank you for your feedback"
 
-  @javascript @vcr @disable-rack-attack @stub_office_schedules_and_user
+  @javascript @vcr @disable-rack-attack @stub_pda_provider_details
   Scenario: Enter all feedback possible within provider journey
     Given I start the journey as far as the applicant page
     When I click link "feedback (opens in new tab)"
@@ -59,7 +59,7 @@ Feature: Provider feedback
     And I click "Send"
     Then I should be on a page with title "Thank you for your feedback"
 
-  @javascript @vcr @disable-rack-attack @stub_office_schedules_and_user
+  @javascript @vcr @disable-rack-attack @stub_pda_provider_details
   Scenario: Enter the minimum feedback from provider signout journey
     Given I start the journey as far as the applicant page
     When I click link "Sign out"

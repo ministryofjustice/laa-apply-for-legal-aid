@@ -97,6 +97,9 @@ gem "view_component"
 # Catching unsafe migrations in development
 gem "strong_migrations"
 
+# Only used for test suite and for mocking certain Provider Data API calls when mock_auth_enabled
+gem "webmock"
+
 group :development, :test do
   gem "awesome_print", "~> 1.9.2"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
@@ -152,5 +155,4 @@ group :test do
   gem "super_diff"
   gem "table_print", require: false
   gem "vcr"
-  gem "webmock"
 end

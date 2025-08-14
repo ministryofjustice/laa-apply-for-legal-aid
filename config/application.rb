@@ -87,7 +87,9 @@ module LaaApplyForLegalAid
 
     config.x.email_domain.suffix = ENV.fetch("APPLY_EMAIL", nil)
 
-    config.x.omniauth_entraid.mock_auth = ENV.fetch("OMNIAUTH_ENTRAID_MOCK_AUTH", nil)
+    config.x.omniauth_entraid.mock_auth_enabled = ENV.fetch("OMNIAUTH_ENTRAID_MOCK_AUTH_ENABLED", "false") == "true"
+    config.x.omniauth_entraid.mock_username = ENV.fetch("OMNIAUTH_ENTRAID_MOCK_USERNAME", nil)
+    config.x.omniauth_entraid.mock_password = ENV.fetch("OMNIAUTH_ENTRAID_MOCK_PASSWORD", nil)
 
     config.x.provider_details.url = ENV.fetch("PROVIDER_DETAILS_URL", nil)
     config.x.pda.url = ENV.fetch("PDA_URL", nil)

@@ -1,11 +1,4 @@
 # features/step_definitions/civil_application_journey.feature
-
-Given(/^I am logged in as a provider$/) do
-  @registered_provider = create(:provider, username: "test_provider")
-  login_as @registered_provider
-  @registered_provider.office_codes = "0X395U:2N078D:A123456"
-end
-
 Given(/^I visit the application service$/) do
   visit providers_root_path
 end

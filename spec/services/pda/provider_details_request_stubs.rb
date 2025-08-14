@@ -113,15 +113,6 @@ def stub_office_schedules_for_0x395u
     )
 end
 
-def stub_provider_user_for_test_provider
-  stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-users/test_provider})
-    .to_return(
-      status: 200,
-      body: provider_user_json,
-      headers: { "Content-Type" => "application/json; charset=utf-8" },
-    )
-end
-
 # Taken from:
 #  https://laa-provider-details-api-preprod.apps.live.cloud-platform.service.justice.gov.uk/provider-offices/0X395U/schedules
 #
@@ -681,6 +672,15 @@ def office_schedules_json
       },
     ],
   }.to_json
+end
+
+def stub_provider_user_for(username)
+  stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-users/#{username}})
+    .to_return(
+      status: 200,
+      body: provider_user_json,
+      headers: { "Content-Type" => "application/json; charset=utf-8" },
+    )
 end
 
 def provider_user_json

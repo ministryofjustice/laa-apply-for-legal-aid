@@ -10,11 +10,25 @@ RSpec.describe "provider omniauth call back" do
       get provider_entra_id_omniauth_callback_path
     end
 
-    before { OmniAuth::Strategies::Silas.mock_auth }
+    around do |example|
+      OmniAuth.config.test_mode = true
+      OmniAuth::Strategies::Silas.mock_auth
+
+      example.run
+
+      OmniAuth.config.mock_auth[:entra_id] = nil
+      OmniAuth.config.test_mode = false
+    end
 
     context "when the provider is known and authorised" do
       it "signs in the provider and redirects to select office path" do
         expect(get_request).to redirect_to(providers_select_office_path)
+      end
+
+      it "displays sign in success message" do
+        get_request
+        follow_redirect!
+        expect(response.body).to include("Signed in successfully")
       end
     end
 
@@ -27,7 +41,7 @@ RSpec.describe "provider omniauth call back" do
         expect(get_request).to redirect_to(root_path)
       end
 
-      it "displays failure information" do
+      it "displays sign in failure message" do
         get_request
         follow_redirect!
         expect(response.body).to include("Could not authorise you! Ask an admin for access")

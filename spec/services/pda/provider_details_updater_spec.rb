@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe PDA::ProviderDetails do
+RSpec.describe PDA::ProviderDetailsUpdater do
   describe ".call" do
     subject(:call) { described_class.call(provider, office.code) }
 
@@ -281,14 +281,14 @@ RSpec.describe PDA::ProviderDetails do
 
       it "raises a UserNotFound error" do
         expect(Rails.logger).to receive(:info).with("#{described_class} - No provider details found for #{provider.email}")
-        expect { call }.to raise_error(PDA::ProviderDetails::UserNotFound, "No CCMS username found for #{provider.email}")
+        expect { call }.to raise_error(PDA::ProviderDetailsUpdater::UserNotFound, "No CCMS username found for #{provider.email}")
       end
 
       context "when there is an error calling the provider-users endpoint" do
         before { stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}").to_return(body: "An error has occurred", status: 500) }
 
         it "raises ApiError" do
-          expect { call }.to raise_error(PDA::ProviderDetails::ApiError, "API Call Failed: provider-users (500) An error has occurred")
+          expect { call }.to raise_error(PDA::ProviderDetailsUpdater::ApiError, "API Call Failed: provider-users (500) An error has occurred")
         end
       end
     end
@@ -298,7 +298,7 @@ RSpec.describe PDA::ProviderDetails do
       let(:status) { 500 }
 
       it "raises ApiError" do
-        expect { call }.to raise_error(PDA::ProviderDetails::ApiError, "API Call Failed retrieving office schedules: (500) An error has occurred")
+        expect { call }.to raise_error(PDA::ProviderDetailsUpdater::ApiError, "API Call Failed retrieving office schedules: (500) An error has occurred")
       end
     end
   end

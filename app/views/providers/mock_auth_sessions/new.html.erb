@@ -1,0 +1,10 @@
+<h1 class="govuk-heading-m"><%= t(".page_heading") %></h2>
+
+<%= form_with(model: resource || resource_name.to_s.camelcase.constantize.new, scope: resource_name, url: provider_session_path(resource_name)) do |form| %>
+  <%= page_template head_title: t(".page_heading"), form:, template: :basic, back_link: :none do %>
+    <%= form.govuk_email_field :email, label: { text: t(".email") }, autofocus: true, autocomplete: "email" %>
+    <%= form.govuk_password_field :password, label: { text: t(".password") }, autocomplete: "current-password" %>
+
+    <%= form.govuk_submit t(".sign_in") %>
+  <% end %>
+<% end %>

@@ -52,6 +52,7 @@ RSpec.describe HostEnv do
           expect(described_class.uat?).to be false
           expect(described_class.staging?).to be false
           expect(described_class.production?).to be false
+          expect(described_class.not_production?).to be true
           expect(described_class.staging_or_production?).to be false
         end
       end
@@ -74,6 +75,7 @@ RSpec.describe HostEnv do
           expect(described_class.uat?).to be true
           expect(described_class.staging?).to be false
           expect(described_class.production?).to be false
+          expect(described_class.not_production?).to be true
           expect(described_class.staging_or_production?).to be false
         end
       end
@@ -96,6 +98,7 @@ RSpec.describe HostEnv do
           expect(described_class.uat?).to be false
           expect(described_class.staging?).to be true
           expect(described_class.production?).to be false
+          expect(described_class.not_production?).to be true
           expect(described_class.staging_or_production?).to be true
         end
       end
@@ -118,6 +121,7 @@ RSpec.describe HostEnv do
           expect(described_class.uat?).to be false
           expect(described_class.staging?).to be false
           expect(described_class.production?).to be true
+          expect(described_class.not_production?).to be false
           expect(described_class.staging_or_production?).to be true
         end
       end

@@ -5,16 +5,19 @@ RSpec.describe "admin users omniauth call back" do
   let(:email) { admin_user.email }
   let(:target_url) { admin_settings_url }
 
-  before do
+  around do |example|
+    OmniAuth.config.test_mode = true
+
     OmniAuth.config.add_mock(
       :google_oauth2,
       info: { email: },
       origin: target_url,
     )
-  end
 
-  after do
+    example.run
+
     OmniAuth.config.mock_auth[:google_oauth2] = nil
+    OmniAuth.config.test_mode = false
   end
 
   describe "GET /auth/google_oauth2/callback" do
