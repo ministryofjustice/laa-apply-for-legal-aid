@@ -1,6 +1,7 @@
 module Providers
   class ConfirmDWPNonPassportedApplicationsController < ProviderBaseController
     include ApplicantDetailsCheckable
+
     helper_method :display_hmrc_text?
 
     def show

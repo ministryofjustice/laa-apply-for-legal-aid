@@ -6,6 +6,7 @@ module CCMS
   class SubmissionProcessWorker
     include Sidekiq::Worker
     include Sidekiq::Status::Worker
+
     attr_accessor :retry_count, :submission
 
     MAX_RETRIES = 10

@@ -4,6 +4,7 @@ class ProviderContractDetailsWorker
   # Once that change over is complete, the aim is that this can be removed.
   include Sidekiq::Worker
   include Sidekiq::Status::Worker
+
   sidekiq_options retry: false
 
   def perform(office_code)

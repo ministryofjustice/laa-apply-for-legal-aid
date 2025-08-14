@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include Backable
   include HomePathHelper
   include YourApplicationsHelper
+
   helper_method :home_path
 
 private

@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
   include ActionView::Helpers::NumberHelper
+
   let(:login_provider) { login_as legal_aid_application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/capital_income_assessment_result" do

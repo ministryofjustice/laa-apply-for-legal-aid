@@ -1,6 +1,7 @@
 module Providers
   class MeritsReportsController < ProviderBaseController
     include GroverOptionable
+
     authorize_with_policy_method :show_submitted_application?
 
     def show

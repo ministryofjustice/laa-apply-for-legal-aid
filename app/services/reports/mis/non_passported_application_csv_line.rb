@@ -2,6 +2,7 @@ module Reports
   module MIS
     class NonPassportedApplicationCsvLine
       include Sanitisable
+
       attr_reader :laa
 
       delegate :provider, to: :laa

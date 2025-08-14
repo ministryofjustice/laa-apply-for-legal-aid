@@ -1,6 +1,7 @@
 module Proceedings
   class ScopeLimitationsForm < BaseForm
     include ActiveModel::Model
+
     form_for Proceeding
 
     attr_accessor :draft, :scopes, :scope_codes, :scope_type

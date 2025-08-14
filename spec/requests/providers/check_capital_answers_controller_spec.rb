@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe Providers::CheckCapitalAnswersController do
   include ActionView::Helpers::NumberHelper
+
   let(:provider) { create(:provider) }
   let(:applicant) { create(:applicant) }
   let(:partner) { nil }

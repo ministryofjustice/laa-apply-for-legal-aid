@@ -1,6 +1,7 @@
 module Citizens
   class CitizenBaseController < FlowBaseController
     include ApplicationFromSession
+
     before_action :authenticate_with_devise
     before_action :check_not_complete
     before_action :set_cache_buster
