@@ -3,6 +3,7 @@ require "rails_helper"
 class DummyDocumentCategory
   include ActiveModel::Model
   include ActiveModel::Validations
+
   validates_with DocumentCategoryValidator
 end
 

@@ -70,6 +70,7 @@ en:
         understands_terms_of_court_order_details: Tell us why you think the court would enforce a breach of an order
       application_merits_task_statement_of_case:
         statement: Enter your client's statement of case
+      # No longer used?
       setting:
         mock_true_layer_data:
           <<: *true_false

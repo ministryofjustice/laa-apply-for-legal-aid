@@ -19,6 +19,7 @@ module Providers
 
   private
 
+    # TODO
     def check_benefits
       redirect_to error_path(:benefit_checker_down) unless legal_aid_application.add_benefit_check_result
     end

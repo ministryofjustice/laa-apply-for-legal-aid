@@ -66,6 +66,16 @@
           legend: { text: t(".labels.collect_hmrc_data") },
         ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+          :collect_dwp_data,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          hint: { text: t(".hints.collect_dwp_data") },
+          legend: { text: t(".labels.collect_dwp_data") },
+        ) %>
+
     <%= form.govuk_submit(t("generic.submit")) %>
   <% end %>
 <% end %>

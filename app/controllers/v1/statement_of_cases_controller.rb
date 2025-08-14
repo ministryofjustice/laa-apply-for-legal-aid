@@ -1,6 +1,7 @@
 module V1
   class StatementOfCasesController < ApiController
     include MalwareScanning
+
     ATTACHMENT_TYPE = "statement_of_case".freeze
 
     def create

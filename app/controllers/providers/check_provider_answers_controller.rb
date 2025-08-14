@@ -1,5 +1,7 @@
 module Providers
   class CheckProviderAnswersController < ProviderBaseController
+    include BenefitCheckSkippable
+
     review_as :legal_aid_application, :check_provider_answers
 
     def index
@@ -15,6 +17,8 @@ module Providers
     end
 
     def continue
+      mark_as_benefit_check_skipped!("benefit_checker_unavailable") if !Setting.collect_dwp_data?
+
       update_applicant_age_for_means_test_purposes!
 
       draft_selected? ? review_in_progress! : review_completed!

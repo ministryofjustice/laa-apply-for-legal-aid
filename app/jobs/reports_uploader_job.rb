@@ -1,5 +1,6 @@
 class ReportsUploaderJob < ApplicationJob
   include Sidekiq::Status::Worker
+
   def perform
     log "starting at #{Time.zone.now}"
     unless admin_report.application_details_report&.blob.nil?

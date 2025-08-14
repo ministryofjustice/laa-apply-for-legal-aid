@@ -31,6 +31,10 @@ class Setting < ApplicationRecord
     setting.collect_hmrc_data
   end
 
+  def self.collect_dwp_data?
+    setting.collect_dwp_data
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end

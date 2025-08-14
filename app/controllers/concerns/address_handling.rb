@@ -26,7 +26,7 @@ private
   end
 
   def hyphen_safe_titleize(sentence)
-    sentence.to_s&.split&.map(&:capitalize)&.join(" ")
+    sentence.to_s.split&.map(&:capitalize)&.join(" ")
   end
 
   def titleize_addresses

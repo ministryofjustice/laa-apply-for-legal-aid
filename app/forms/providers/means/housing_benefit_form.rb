@@ -2,6 +2,7 @@ module Providers
   module Means
     class HousingBenefitForm < RegularTransactionForm
       include ApplicantOwner
+
       attr_accessor :housing_benefit_amount, :housing_benefit_frequency
 
       delegate :applicant_in_receipt_of_housing_benefit, to: :legal_aid_application

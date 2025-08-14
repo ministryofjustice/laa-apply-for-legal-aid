@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe "check your answers requests" do
   include ActionView::Helpers::NumberHelper
+
   let(:firm) { create(:firm) }
   let(:has_restrictions) { true }
   let(:restrictions_details) { Faker::Lorem.paragraph }

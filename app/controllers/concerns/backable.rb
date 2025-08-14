@@ -1,5 +1,6 @@
 module Backable
   extend ActiveSupport::Concern
+
   HISTORY_SIZE = 20
   EXCLUDED_BACK_PATHS = %w[statement_of_case_upload/list].freeze
 
