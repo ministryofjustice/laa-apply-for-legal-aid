@@ -13,7 +13,8 @@ module Providers
       if @form.valid?
         provider = form_params[:model]
 
-        pda = if Rails.configuration.x.omniauth_entraid.mock_auth_enabled
+        pda = if Rails.configuration.x.omniauth_entraid.mock_auth_enabled && HostEnv.not_production?
+          PDA::MockProviderDetails.call(provider, form_params[:selected_office_code])
         else
           PDA::ProviderDetails.call(provider, form_params[:selected_office_code])
         end

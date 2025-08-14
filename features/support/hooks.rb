@@ -58,3 +58,24 @@ end
 Around("@vcr_turned_off") do |_scenario, block|
   VCR.turned_off { block.call }
 end
+
+Before("@mock_auth_enabled_on_production") do |_scenario, _block|
+  # turn on entra id auth mocking.
+  OmniAuth.config.test_mode = true
+  OmniAuth::Strategies::Silas.mock_auth
+
+  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_return(true)
+  allow(HostEnv).to receive(:environment).and_return(:production)
+  Rails.application.reload_routes!
+end
+
+After("@mock_auth_enabled_on_production") do |_scenario, _block|
+  # unmock entraid auth
+  OmniAuth.config.mock_auth[:entra_id] = nil
+  OmniAuth.config.test_mode = true
+
+  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_call_original
+  allow(HostEnv).to receive(:environment).and_call_original
+
+  Rails.application.reload_routes!
+end

@@ -26,3 +26,12 @@ Feature: Sign in
     When I click link 'Sign out'
     Then I should be on a page with title "Help us improve the Apply for civil legal aid service"
     And I should see "You have been signed out"
+
+  @javascript @mock_auth_enabled_on_production
+  Scenario: I am unable to use mock user login on the production environment even when it is enabled
+    When I visit the root page
+    Then I should see "Providers can use this service to apply for civil legal aid for their clients"
+
+    When I click link "Sign in"
+    Then I should be on a page with title "Select the account number of the office handling this application"
+    And I should see "Signed in successfully"

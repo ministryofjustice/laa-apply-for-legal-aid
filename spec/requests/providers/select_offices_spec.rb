@@ -218,5 +218,36 @@ RSpec.describe "provider selects office" do
         end
       end
     end
+
+    context "when mock auth enabled" do
+      before do
+        login_as provider
+        allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_return(true)
+      end
+
+      context "and host environment is production" do
+        before do
+          allow(HostEnv).to receive(:environment).and_return(:production)
+        end
+
+        it "calls the real PDA service" do
+          allow(PDA::ProviderDetails).to receive(:call)
+          patch_request
+          expect(PDA::ProviderDetails).to have_received(:call)
+        end
+      end
+
+      context "and host environment is NOT production" do
+        before do
+          allow(HostEnv).to receive(:environment).and_return(:staging)
+        end
+
+        it "calls the mock PDA service" do
+          allow(PDA::MockProviderDetails).to receive(:call)
+          patch_request
+          expect(PDA::MockProviderDetails).to have_received(:call)
+        end
+      end
+    end
   end
 end
