@@ -1,5 +1,5 @@
 module PDA
-  class ProviderDetails
+  class ProviderDetailsUpdater
     ApiError = Class.new(StandardError)
     UserNotFound = Class.new(StandardError)
 

@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe PDA::MockProviderDetails do
+RSpec.describe PDA::MockProviderDetailsUpdater do
   describe ".call" do
     subject(:call) { described_class.call(provider, office_code) }
 

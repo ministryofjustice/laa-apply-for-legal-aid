@@ -19,6 +19,7 @@ RSpec.describe "provider selects office" do
   end
 
   let(:devolved_powers_status) { "Yes - Excluding JR Proceedings" }
+
   let(:schedules) do
     [
       {
@@ -231,9 +232,11 @@ RSpec.describe "provider selects office" do
         end
 
         it "calls the real PDA service" do
-          allow(PDA::ProviderDetails).to receive(:call)
+          a_double = instance_double(PDA::ProviderDetailsUpdater, call: nil, has_valid_schedules?: nil)
+
+          allow(PDA::ProviderDetailsUpdater).to receive(:new).and_return(a_double)
           patch_request
-          expect(PDA::ProviderDetails).to have_received(:call)
+          expect(PDA::ProviderDetailsUpdater).to have_received(:new)
         end
       end
 
@@ -243,9 +246,10 @@ RSpec.describe "provider selects office" do
         end
 
         it "calls the mock PDA service" do
-          allow(PDA::MockProviderDetails).to receive(:call)
+          a_double = instance_double(PDA::MockProviderDetailsUpdater, call: nil, has_valid_schedules?: nil)
+          allow(PDA::MockProviderDetailsUpdater).to receive(:new).and_return(a_double)
           patch_request
-          expect(PDA::MockProviderDetails).to have_received(:call)
+          expect(PDA::MockProviderDetailsUpdater).to have_received(:new)
         end
       end
     end

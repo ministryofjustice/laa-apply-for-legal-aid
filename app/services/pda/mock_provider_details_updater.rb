@@ -2,7 +2,7 @@ require "webmock"
 require Rails.root.join("spec/services/pda/provider_details_request_stubs")
 
 module PDA
-  class MockProviderDetails < ProviderDetails
+  class MockProviderDetailsUpdater < ProviderDetailsUpdater
     include WebMock::API
 
     def initialize(provider, office_code)
