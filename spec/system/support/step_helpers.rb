@@ -36,4 +36,15 @@ module StepHelpers
 
     nil if step_name == :previous_references
   end
+
+  def create_an_application_and_complete_client_details(with_partner)
+    applicant = with_partner ? :with_applicant : :with_applicant_and_partner
+    @legal_aid_application = create(
+      :application,
+      :with_proceedings,
+      :at_entering_applicant_details,
+      applicant,
+      provider: @registered_provider,
+    )
+  end
 end
