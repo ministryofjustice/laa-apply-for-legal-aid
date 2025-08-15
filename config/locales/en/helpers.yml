@@ -70,15 +70,6 @@ en:
         understands_terms_of_court_order_details: Tell us why you think the court would enforce a breach of an order
       application_merits_task_statement_of_case:
         statement: Enter your client's statement of case
-      setting:
-        mock_true_layer_data:
-          <<: *true_false
-        manually_review_all_cases:
-          <<: *true_false
-        allow_welsh_translation:
-          <<: *true_false
-        enable_evidence_upload:
-          <<: *true_false
     legend:
       providers_means_housing_benefit_form:
         housing_benefit_frequency: Select frequency
