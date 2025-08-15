@@ -1043,6 +1043,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_21_145938) do
     t.datetime "cfe_compare_run_at"
     t.boolean "linked_applications", default: false, null: false
     t.boolean "collect_hmrc_data", default: false, null: false
+    t.boolean "collect_dwp_data", default: true, null: false
   end
 
   create_table "specific_issues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
