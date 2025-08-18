@@ -59,7 +59,7 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
         end
 
         it "adds the CCMS contact_id to the provider" do
-          expect { call }.to change { provider.reload.contact_id }.from(nil).to(234_567)
+          expect { call }.to change { provider.reload.contact_id }.from(nil).to(494_000)
         end
       end
     end
@@ -92,7 +92,7 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
         expect { call }
           .to change { provider.reload.contact_id }
             .from(654_321)
-            .to(234_567)
+            .to(494_000)
       end
     end
   end

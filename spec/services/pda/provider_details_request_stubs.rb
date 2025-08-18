@@ -699,8 +699,8 @@ def provider_user_json
       companyHouseNumber: nil,
     },
     user: {
-      userId: 12_345,
-      ccmsContactId: 234_567,
+      userId: 63_025,
+      ccmsContactId: 494_000,
       userLogin: "MARTIN.RONAN@DAVIDGRAY.CO.UK",
       name: "Ronan, Martin",
       emailAddress: "martin.ronan@davidgray.co.uk",
