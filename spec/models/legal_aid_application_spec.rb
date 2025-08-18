@@ -232,6 +232,45 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#benefit_check_status" do
+    let(:benefit_check_response) do
+      {
+        benefit_checker_status:,
+        confirmation_ref: SecureRandom.hex,
+      }
+    end
+
+    before do
+      legal_aid_application.save!
+      allow(BenefitCheckService).to receive(:call).with(legal_aid_application).and_return(benefit_check_response)
+      legal_aid_application.add_benefit_check_result
+    end
+
+    context "when the benefit check service returns a positive outcome" do
+      let(:benefit_checker_status) { "Yes" }
+
+      it { expect(legal_aid_application.benefit_check_status).to be :positive }
+    end
+
+    context "when the benefit check service returns a negative outcome" do
+      let(:benefit_checker_status) { "No" }
+
+      it { expect(legal_aid_application.benefit_check_status).to be :negative }
+    end
+
+    context "when the benefit check service returns an undetermined outcome" do
+      let(:benefit_checker_status) { "Undetermined" }
+
+      it { expect(legal_aid_application.benefit_check_status).to be :negative }
+    end
+
+    context "when benefit check service is down" do
+      let(:benefit_check_response) { false }
+
+      it { expect(legal_aid_application.benefit_check_status).to be :unsuccessful }
+    end
+  end
+
   describe "#lead_application_proceeding_type" do
     context "when application proceeding types exist" do
       let!(:legal_aid_application) do

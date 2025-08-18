@@ -369,6 +369,14 @@ class LegalAidApplication < ApplicationRecord
     )
   end
 
+  def benefit_check_status
+    if benefit_check_result.nil?
+      :unsuccessful
+    else
+      applicant_receives_benefit? ? :positive : :negative
+    end
+  end
+
   # TODO: this logic is placeholder only for now and needs checking
   # Logic: Until a benefit checks has been performed we do not know if they
   # are passported (nor non-passported). Equally, if they have not reached
