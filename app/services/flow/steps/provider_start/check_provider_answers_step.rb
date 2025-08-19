@@ -8,7 +8,7 @@ module Flow
             application.change_state_machine_type(application.special_children_act_proceedings? ? "SpecialChildrenActStateMachine" : "NonMeansTestedStateMachine")
             :confirm_non_means_tested_applications
           else
-            application.applicant.national_insurance_number? ? :check_benefits : :no_national_insurance_numbers
+            application.applicant.national_insurance_number? ? :dwp_results : :no_national_insurance_numbers
           end
         end,
       )

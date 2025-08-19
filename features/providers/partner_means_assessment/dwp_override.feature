@@ -6,7 +6,10 @@ Feature: partner_means_assessment dwp override
     When I click 'Save and continue'
     Then I should be on a page with title "DWP records show that your client does not get a passporting benefit"
 
-    When I choose "No, my client gets a joint passporting benefit with their partner"
+    When I click "Continue"
+    Then I should be on a page showing "Does your client get a passporting benefit?"
+
+    When I choose "Yes, they get a passporting benefit with a partner"
     And I click 'Save and continue'
     Then I should be on a page with title "Check your client's and their partner's details"
 
