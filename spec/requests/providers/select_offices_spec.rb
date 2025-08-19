@@ -19,6 +19,7 @@ RSpec.describe "provider selects office" do
   end
 
   let(:devolved_powers_status) { "Yes - Excluding JR Proceedings" }
+
   let(:schedules) do
     [
       {
@@ -71,6 +72,11 @@ RSpec.describe "provider selects office" do
         userLogin: provider.username,
       },
     }.to_json
+  end
+
+  around do |example|
+    # We rely on webmock and stubs so we do not want to use VCR
+    VCR.turned_off { example.run }
   end
 
   describe "GET providers/select_office" do
@@ -210,6 +216,40 @@ RSpec.describe "provider selects office" do
         it "renders the page with flash message" do
           expect(response).to render_template :show
           expect(flash[:error]).to eq "No CCMS username found for #{provider.email}"
+        end
+      end
+    end
+
+    context "when mock auth enabled" do
+      before do
+        login_as provider
+        allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_return(true)
+      end
+
+      context "and host environment is production" do
+        before do
+          allow(HostEnv).to receive(:environment).and_return(:production)
+        end
+
+        it "calls the real PDA service" do
+          a_double = instance_double(PDA::ProviderDetailsUpdater, call: nil, has_valid_schedules?: nil)
+
+          allow(PDA::ProviderDetailsUpdater).to receive(:new).and_return(a_double)
+          patch_request
+          expect(PDA::ProviderDetailsUpdater).to have_received(:new)
+        end
+      end
+
+      context "and host environment is NOT production" do
+        before do
+          allow(HostEnv).to receive(:environment).and_return(:staging)
+        end
+
+        it "calls the mock PDA service" do
+          a_double = instance_double(PDA::MockProviderDetailsUpdater, call: nil, has_valid_schedules?: nil)
+          allow(PDA::MockProviderDetailsUpdater).to receive(:new).and_return(a_double)
+          patch_request
+          expect(PDA::MockProviderDetailsUpdater).to have_received(:new)
         end
       end
     end

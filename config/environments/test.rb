@@ -87,4 +87,9 @@ Rails.application.configure do
   config.active_job.queue_adapter = :test
 
   config.middleware.insert_before 0, Capybara::Lockstep::Middleware
+
+  # set off by default to allow stubbing and mocks to be used for testing on a case by case basis
+  config.x.omniauth_entraid.mock_auth_enabled = false
+  config.x.omniauth_entraid.mock_username = "test@test.com"
+  config.x.omniauth_entraid.mock_password = "not-a-real-password"
 end

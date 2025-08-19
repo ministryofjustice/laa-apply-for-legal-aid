@@ -8,8 +8,10 @@ RSpec.describe "applicants omniauth call back" do
   let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :awaiting_applicant, applicant:) }
   let(:bank_provider) { applicant.bank_providers.find_by(token:) }
 
-  before do
+  around do |example|
     sign_in_citizen_for_application(legal_aid_application) if applicant
+    OmniAuth.config.test_mode = true
+
     OmniAuth.config.add_mock(
       :true_layer,
       credentials: {
@@ -20,10 +22,11 @@ RSpec.describe "applicants omniauth call back" do
 
     stub_true_layer
     ImportBankDataWorker.clear
-  end
 
-  after do
+    example.run
+
     OmniAuth.config.mock_auth[:true_layer] = nil
+    OmniAuth.config.test_mode = false
   end
 
   describe "GET /applicants/auth/true_layer/callback" do

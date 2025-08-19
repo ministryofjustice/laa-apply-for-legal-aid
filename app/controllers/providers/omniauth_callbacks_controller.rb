@@ -3,6 +3,7 @@ module Providers
     def entra_id
       if auth_data_valid?
         @provider = Provider.from_omniauth(auth_data)
+        flash[:notice] = I18n.t "devise.omniauth_callbacks.signed_in"
         sign_in_and_redirect @provider, event: :authentication
       else
         flash[:notice] = I18n.t "devise.omniauth_callbacks.unauthorised"

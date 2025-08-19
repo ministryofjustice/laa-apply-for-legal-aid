@@ -1,5 +1,5 @@
 Feature: Search applications
-  @javascript @vcr @stub_office_schedules_and_user
+  @javascript @vcr @stub_pda_provider_details
   Scenario: Going to the search page
     Given I am logged in as a provider
     And An application has been created

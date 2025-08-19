@@ -83,18 +83,18 @@ RSpec.describe Applicants::HasNationalInsuranceNumberForm, type: :form do
       let(:params) { { model: applicant, has_national_insurance_number: "true", national_insurance_number: "JS130161E" } }
 
       before do
-        allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth).and_return(in_test_mode)
+        allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_return(in_test_mode)
         call_save
       end
 
-      context "when configured to use mock entra id login" do
-        let(:in_test_mode) { "true" }
+      context "when configured to use provider mock auth login" do
+        let(:in_test_mode) { true }
 
         it { expect(instance).to be_valid, "was invalid with errors: #{instance.errors.messages}" }
       end
 
-      context "when configured to use real entra id login" do
-        let(:in_test_mode) { "false" }
+      context "when configured to use provider real auth login" do
+        let(:in_test_mode) { false }
 
         it { expect(instance).not_to be_valid }
 

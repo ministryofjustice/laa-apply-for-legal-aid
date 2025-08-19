@@ -1,7 +1,7 @@
 @javascript @clamav
 Feature: Bank statement file upload
 
-  @stub_office_schedules_and_user
+  @stub_pda_provider_details
   Scenario: Uploading a file
     Given csrf is enabled
     And I have completed a non-passported employed application with bank statements as far as the open banking consent page

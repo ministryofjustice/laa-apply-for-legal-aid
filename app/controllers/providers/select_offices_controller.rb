@@ -11,18 +11,12 @@ module Providers
       @form = Providers::OfficeForm.new(form_params)
 
       if @form.valid?
-        provider = form_params[:model]
-
-        # NOTE: This updates the firm, and creates/updates the office and associates with the provider if
-        # necessary (marking as the selected office as well)
-        # TODO: This will silently add no office to provider if the office exists but has no schedule
-        pda = PDA::ProviderDetails.new(provider, form_params[:selected_office_code])
-        pda.call
+        provider_details_updater.call
 
         # TODO: remove?! This is a temp call while we debug the contract endpoint retrieval and storage
         ProviderContractDetailsWorker.perform_async(form_params[:selected_office_code])
 
-        if pda.has_valid_schedules?
+        if provider_details_updater.has_valid_schedules?
           redirect_to your_applications_default_tab_path
         else
           redirect_to providers_invalid_schedules_path
@@ -30,7 +24,7 @@ module Providers
       else
         render :show
       end
-    rescue PDA::ProviderDetails::UserNotFound => e
+    rescue PDA::ProviderDetailsUpdater::UserNotFound => e
       flash.now[:error] = e.message
       render :show
     end
@@ -47,6 +41,18 @@ module Providers
 
     def initialize_page_history
       session[:page_history_id] = SecureRandom.uuid
+    end
+
+    def provider_details_updater
+      @provider_details_updater ||= if Rails.configuration.x.omniauth_entraid.mock_auth_enabled && HostEnv.not_production?
+                                      PDA::MockProviderDetailsUpdater.new(provider, form_params[:selected_office_code])
+                                    else
+                                      PDA::ProviderDetailsUpdater.new(provider, form_params[:selected_office_code])
+                                    end
+    end
+
+    def provider
+      @provider ||= form_params[:model]
     end
   end
 end

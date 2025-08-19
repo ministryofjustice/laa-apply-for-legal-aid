@@ -3,8 +3,13 @@ require Rails.root.join("db/seeds/test_provider_populator")
 
 RSpec.describe "The mock entra path works as expected" do
   feature "When I click the sign in link, from the landing page, I see the select office list" do
-    before do
+    around do |example|
+      OmniAuth.config.test_mode = true
       OmniAuth::Strategies::Silas.mock_auth
+
+      example.run
+
+      OmniAuth.config.test_mode = false
     end
 
     scenario "I can see the select office choice list" do

@@ -63,11 +63,11 @@ RSpec.describe Partners::DetailsForm, type: :form do
       let(:valid_nino) { "JA123456D" }
 
       before do
-        allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth).and_return(in_test_mode)
+        allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_return(in_test_mode)
       end
 
       context "with normal validation" do
-        let(:in_test_mode) { "false" }
+        let(:in_test_mode) { false }
 
         it "test nino is invalid" do
           partner_form.national_insurance_number = test_nino
@@ -86,7 +86,7 @@ RSpec.describe Partners::DetailsForm, type: :form do
       end
 
       context "with test level validation" do
-        let(:in_test_mode) { "true" }
+        let(:in_test_mode) { true }
 
         it "test NINO is valid" do
           partner_form.national_insurance_number = test_nino

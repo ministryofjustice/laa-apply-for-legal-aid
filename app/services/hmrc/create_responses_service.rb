@@ -32,11 +32,7 @@ module HMRC
   private
 
     def use_mock?
-      Rails.configuration.x.hmrc_use_dev_mock && not_production_environment?
-    end
-
-    def not_production_environment?
-      !HostEnv.production?
+      Rails.configuration.x.hmrc_use_dev_mock && HostEnv.not_production?
     end
 
     def check_partner?

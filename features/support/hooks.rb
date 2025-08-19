@@ -30,12 +30,58 @@ Around("@disable-rack-attack") do |_scenario, block|
 end
 
 Before("@stub_pda_provider_details") do
-  allow(PDA::ProviderDetails).to receive(:call).and_return(true) # this stubs out calls to the pda schedules endpoint
+  double = instance_double(PDA::ProviderDetailsUpdater, call: nil, has_valid_schedules?: true)
+  allow(PDA::ProviderDetailsUpdater).to receive(:new).and_return(double)
 end
 
-Before("@stub_office_schedules_and_user") do
+After("@stub_pda_provider_details") do
+  # unstub
+  allow(PDA::ProviderDetailsUpdater).to receive(:new).and_call_original
+end
+
+Around("@stub_office_schedules_and_user") do |_scenario, block|
   stub_office_schedules_for_0x395u
-  stub_provider_user_for_test_provider
+  stub_provider_user_for("test_provider")
   stub_office_schedules_not_found_for("2N078D")
   stub_office_schedules_not_found_for("A123456")
+
+  VCR.turned_off { block.call }
+ensure
+  # Unstub
+  WebMock.reset!
+end
+
+Before("@mock_auth_enabled") do |_scenario, _block|
+  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_return(true)
+  Rails.application.reload_routes!
+end
+
+After("@mock_auth_enabled") do |_scenario, _block|
+  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_call_original
+  Rails.application.reload_routes!
+end
+
+Around("@vcr_turned_off") do |_scenario, block|
+  VCR.turned_off { block.call }
+end
+
+Before("@mock_auth_enabled_on_production") do |_scenario, _block|
+  # turn on entra id auth mocking.
+  OmniAuth.config.test_mode = true
+  OmniAuth::Strategies::Silas.mock_auth
+
+  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_return(true)
+  allow(HostEnv).to receive(:environment).and_return(:production)
+  Rails.application.reload_routes!
+end
+
+After("@mock_auth_enabled_on_production") do |_scenario, _block|
+  # unmock entraid auth
+  OmniAuth.config.mock_auth[:entra_id] = nil
+  OmniAuth.config.test_mode = true
+
+  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_call_original
+  allow(HostEnv).to receive(:environment).and_call_original
+
+  Rails.application.reload_routes!
 end
