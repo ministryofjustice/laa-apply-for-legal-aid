@@ -117,7 +117,6 @@ omniauth_entraid:
   mock_auth_enabled: true
   redirect_uri: https://main-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk/auth/entra_id/callback # overridden for branches (see deploy script)
 
-
 pda:
   url: "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk"
 
