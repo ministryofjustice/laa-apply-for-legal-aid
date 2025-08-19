@@ -1,0 +1,6 @@
+<%= page_template(page_title: t(".unsuccessful.tab_title"), template: :basic, column_width: "full") do %>
+  <%= interruption_card(heading: t(".unsuccessful.title_html"),
+                        actions: -> { render "actions" }) do
+        t(".unsuccessful.body")
+      end %>
+<% end %>
