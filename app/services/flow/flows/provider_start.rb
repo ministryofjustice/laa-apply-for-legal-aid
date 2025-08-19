@@ -39,6 +39,7 @@ module Flow
         check_provider_answers: Steps::ProviderStart::CheckProviderAnswersStep,
         confirm_non_means_tested_applications: Steps::ProviderStart::ConfirmNonMeansTestedApplicationStep,
         no_national_insurance_numbers: Steps::ProviderStart::NoNationalInsuranceNumbersStep,
+        dwp_results: Steps::ProviderDWP::DWPResultsStep,
         check_benefits: Steps::ProviderStart::CheckBenefitsStep,
         substantive_applications: Steps::ProviderStart::SubstantiveApplicationsStep,
         delegated_confirmation: Steps::ProviderStart::DelegatedConfirmationStep,
