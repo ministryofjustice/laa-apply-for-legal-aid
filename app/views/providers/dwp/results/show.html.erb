@@ -1,6 +1,7 @@
-<%= page_template(page_title: t(".unsuccessful.tab_title"), template: :basic, column_width: "full") do %>
-  <%= interruption_card(heading: t(".unsuccessful.title_html"),
+
+<%= page_template(page_title: t(".tab_title.#{@benefit_check_status}"), template: :basic, column_width: "full") do %>
+  <%= interruption_card(heading: t(".title.#{@benefit_check_status}_html"),
                         actions: -> { render "actions" }) do
-        t(".unsuccessful.body")
+        I18n.t(".body.#{@benefit_check_status}", default: "")
       end %>
 <% end %>

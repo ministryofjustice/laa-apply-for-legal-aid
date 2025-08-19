@@ -13,5 +13,6 @@ RSpec.describe Flow::Steps::ProviderDWP::DWPResultsStep, type: :request do
     subject(:forward_step) { described_class.forward.call(legal_aid_application) }
 
     it { is_expected.to eq :dwp_fallback }
+    # TODO: Expand options
   end
 end
