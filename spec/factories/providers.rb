@@ -6,6 +6,11 @@ FactoryBot.define do
     email { Faker::Internet.email }
     portal_enabled { true }
 
+    after(:build) do |provider, _evaluator|
+      office = build(:office, firm: provider.firm)
+      provider.selected_office = office
+    end
+
     trait :without_portal_enabled do
       portal_enabled { false }
     end
