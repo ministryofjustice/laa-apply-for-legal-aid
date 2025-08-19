@@ -1821,6 +1821,15 @@ en:
         accessibility_message: Tab out of this box to select returned options
         accessibility_message_safari_browser: "You are in a search field, tab out to see results"
         you_have_selected: You have selected %{count}
+        details:
+          summary_text: Applying for multiple proceedings
+          text: |
+            You will only be shown the proceedings that you can select. Each proceeding can only be added once.
+
+            Special children act proceedings should be added before related ones.
+
+            For public law family, means-tested and non-means-tested proceedings cannot be combined.
+        chosen_proceedings: See your chosen proceedings
     has_other_proceedings:
       show:
         page_title: Do you want to add another proceeding?
