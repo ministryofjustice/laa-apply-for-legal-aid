@@ -11,11 +11,22 @@ RSpec.describe "provider invalid schedules" do
 
     it "returns http success" do
       expect(response).to have_http_status(:ok)
-      expect(unescaped_response_body).to include(I18n.t("providers.invalid_schedules.show.h1-heading"))
+    end
+
+    it "has expected title" do
+      expect(page).to have_css("h1", text: "You cannot use this service")
     end
 
     it "logs the provider out" do
       expect(session["signed_out"]).to be true
+    end
+
+    it "displays link to LAA landing page (a.k.a portal) for CCMS login" do
+      expect(page).to have_link("CCMS", href: Rails.configuration.x.laa_landing_page_target_url)
+    end
+
+    it "displays link to contact online support" do
+      expect(page).to have_link("contact online support", href: Rails.configuration.x.online_support)
     end
   end
 end

@@ -4,6 +4,11 @@
     <p><%= t(".paragraph-2") %></p>
     <p><%= t(".actions_text") %></p>
 
-    <%= govuk_list t(".actions_list_html"), type: :bullet %>
+    <%= govuk_list(
+          t(".actions_list_html",
+            ccms_login: Rails.configuration.x.laa_landing_page_target_url,
+            online_support: Rails.configuration.x.online_support),
+          type: :bullet,
+        ) %>
   <% end %>
 <% end %>
