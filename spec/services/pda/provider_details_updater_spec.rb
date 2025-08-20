@@ -90,8 +90,11 @@ RSpec.describe PDA::ProviderDetailsUpdater do
     end
 
     context "when the office has schedules applicable to civil apply" do
-      it "associates the contracts with the correct office" do
-        expect { call }.to change { office.schedules.count }.from(0).to(1)
+      it "adds [applicable] office schedules" do
+        expect { described_class.call(provider, office_code) }
+          .to change { office.schedules.count }
+            .from(0)
+            .to(1)
       end
 
       it "creates the schedules with the correct category of law" do
@@ -111,16 +114,21 @@ RSpec.describe PDA::ProviderDetailsUpdater do
         expect { call }.to change { provider.reload.contact_id }.from(nil).to(87_654)
       end
 
+      it "updates the provider's selected office" do
+        expect { described_class.call(provider, office_code) }
+          .to change { provider.reload.selected_office }
+            .from(nil)
+            .to(office)
+      end
+
       context "when the office ccms_id changes" do
         let(:ccms_office_id) { 54_321 }
 
         it "updates the office details" do
-          described_class.call(provider, office_code)
-          office.reload
-          expect(office.firm).to eq firm
-          expect(office.code).to eq office_code
-          expect(office.ccms_id).to eq "54321"
-          expect(office.schedules.count).to eq 1
+          expect { described_class.call(provider, office_code) }
+            .to change { office.reload.ccms_id }
+              .from("12345")
+              .to("54321")
         end
       end
 
@@ -129,12 +137,22 @@ RSpec.describe PDA::ProviderDetailsUpdater do
 
         let(:office) { nil }
 
-        it "creates the office" do
-          described_class.call(provider, office_code)
+        it "creates the office and updates details" do
+          expect { described_class.call(provider, office_code) }
+            .to change { Office.where(code: office_code).count }
+              .from(0)
+              .to(1)
+
           office = Office.find_by(code: office_code)
-          expect(office.firm).to eq firm
-          expect(office.ccms_id).to eq "12345"
-          expect(office.schedules.count).to eq 1
+
+          expect(office).to have_attributes(firm_id: firm.id, code: office_code, ccms_id: "12345")
+        end
+
+        it "adds [applicable] office schedules" do
+          expect { described_class.call(provider, office_code) }
+            .to change(Schedule, :count)
+              .from(0)
+              .to(1)
         end
       end
 
@@ -143,26 +161,45 @@ RSpec.describe PDA::ProviderDetailsUpdater do
         let(:office) { nil }
 
         it "creates the firm" do
-          described_class.call(provider, office_code)
+          expect { described_class.call(provider, office_code) }
+            .to change { Firm.where(ccms_id: "56789").count }
+              .from(0)
+              .to(1)
+
           firm = Firm.find_by(ccms_id: "56789")
           expect(firm.name).to eq "updated firm name"
-          expect(firm.offices.count).to eq 1
         end
 
         it "creates the office" do
-          described_class.call(provider, office_code)
-          office = Office.find_by(code: office_code)
-          expect(office.ccms_id).to eq "12345"
-          expect(office.schedules.count).to eq 1
+          expect { described_class.call(provider, office_code) }
+            .to change { Office.where(code: office_code).count }
+              .from(0)
+              .to(1)
+        end
+
+        it "associates the office with the firm" do
+          expect { described_class.call(provider, office_code) }
+            .to change { provider.firm.offices.reload.pluck(:code) }
+              .from([])
+              .to(%w[4A497U])
+        end
+
+        it "associates the office with the provider" do
+          expect { described_class.call(provider, office_code) }
+            .to change { provider.offices.reload.pluck(:code) }
+              .from([])
+              .to(%w[4A497U])
         end
       end
 
       context "when there are existing schedules belonging to the office" do
         before { office.schedules << Schedule.new(area_of_law: "Legal Help", category_of_law: "HOU") }
 
-        it "deletes any existing schedules belonging to the office" do
-          call
-          expect(office.schedules.pluck(:category_of_law)).to contain_exactly("MAT")
+        it "deletes any existing schedules belonging to the office and adds applicable schedules" do
+          expect { call }
+            .to change { office.schedules.reload.pluck(:category_of_law) }
+              .from(%w[HOU])
+              .to(%w[MAT])
         end
       end
     end
