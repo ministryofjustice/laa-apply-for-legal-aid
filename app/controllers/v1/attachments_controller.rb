@@ -12,7 +12,9 @@ module V1
   private
 
     def attachment
-      @attachment ||= Attachment.find_by(id: params[:id])
+      return @attachment if defined?(@attachment)
+
+      @attachment = Attachment.find_by(id: params[:id])
     end
 
     def attachment_params

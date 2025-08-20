@@ -27,7 +27,9 @@ module Providers
       end
 
       def aggregated_cash_income
-        @aggregated_cash_income ||= AggregatedCashIncome.find_by(legal_aid_application_id: legal_aid_application.id, owner: "Partner")
+        return @aggregated_cash_income if defined?(@aggregated_cash_income)
+
+        @aggregated_cash_income = AggregatedCashIncome.find_by(legal_aid_application_id: legal_aid_application.id, owner: "Partner")
       end
 
       def form_params
