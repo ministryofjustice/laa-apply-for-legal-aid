@@ -26,15 +26,6 @@ RSpec.describe "providers legal aid application requests" do
         expect(response).to have_http_status(:ok)
       end
 
-      context "when the provider is not a portal_enabled user" do
-        let(:provider) { create(:provider, :without_portal_enabled) }
-
-        it "redirects to error page" do
-          get_request
-          expect(response).to redirect_to(error_path(:access_denied))
-        end
-      end
-
       it "includes a link to the legal aid application's default start path" do
         get_request
         expect(response.body).to include(providers_legal_aid_application_proceedings_types_path(legal_aid_application))

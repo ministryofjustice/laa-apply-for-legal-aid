@@ -18,7 +18,6 @@ module Providers
     included do
       include Pundit::Authorization
 
-      before_action :authorize_portal_user?
       before_action :authorize_legal_aid_application
       rescue_from Pundit::NotAuthorizedError, with: :provider_not_authorized
 
@@ -46,12 +45,6 @@ module Providers
 
       def current_policy
         Pundit.policy pundit_user, legal_aid_application
-      end
-
-      def authorize_portal_user?
-        return false if current_provider.portal_enabled?
-
-        redirect_to error_path(:access_denied)
       end
 
       def authorize_legal_aid_application
