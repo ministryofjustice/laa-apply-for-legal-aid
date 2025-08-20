@@ -66,8 +66,16 @@
       <span class="govuk-body"><%= t ".no_results" %></span>
     </div>
   </div>
-  <div class="govuk-grid-row govuk-!-margin-top-5">
+  <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      <%= govuk_details(summary_text: t(".details.summary_text"), text: simple_format(t(".details.text"))) %>
+
+      <% if @legal_aid_application.proceedings.any? %>
+        <p class="govuk-body">
+          <%= govuk_link_to(t(".chosen_proceedings"), providers_legal_aid_application_has_other_proceedings_path) %>
+        </p>
+      <% end %>
+
       <%= next_action_buttons(form:, show_draft: true) %>
     </div>
   </div>
