@@ -87,7 +87,7 @@ module Reports
     end
 
     def find_latest_application(id:)
-      CFE::BaseResult.where(legal_aid_application_id: id).order("created_at DESC").first
+      CFE::BaseResult.where(legal_aid_application_id: id).order(created_at: :desc).first
     end
 
     def filter_by_assessment_result(ids)
