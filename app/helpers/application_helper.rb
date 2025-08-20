@@ -25,10 +25,11 @@ module ApplicationHelper
     return journey_type if respond_to?(:journey_type)
 
     journeys = %i[admin providers citizens]
-    parent = controller.class.module_parent.to_s.downcase.to_sym
-    return :unknown unless journeys.include?(parent)
+    namespace = controller_path.split("/").first&.to_sym
 
-    parent
+    return :unknown unless journeys.include?(namespace)
+
+    namespace
   end
 
   def user_header_navigation
