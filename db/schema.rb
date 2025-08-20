@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_12_154747) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_20_112750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -936,7 +936,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_154747) do
     t.uuid "selected_office_id"
     t.string "name"
     t.string "email"
-    t.boolean "portal_enabled", default: true
     t.integer "contact_id"
     t.boolean "cookies_enabled"
     t.datetime "cookies_saved_at"
