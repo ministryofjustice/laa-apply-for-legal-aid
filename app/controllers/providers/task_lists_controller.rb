@@ -18,8 +18,9 @@ module Providers
   private
 
     def legal_aid_application
-      @legal_aid_application ||=
-        LegalAidApplication.find_by(id: task_list_params[:legal_aid_application_id])
+      return @legal_aid_application if defined?(@legal_aid_application)
+
+      @legal_aid_application = LegalAidApplication.find_by(id: task_list_params[:legal_aid_application_id])
     end
 
     def task_list_params

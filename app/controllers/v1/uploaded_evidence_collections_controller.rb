@@ -29,7 +29,9 @@ module V1
     end
 
     def legal_aid_application
-      @legal_aid_application ||= LegalAidApplication.find_by(id: form_params[:legal_aid_application_id])
+      return @legal_aid_application if defined?(@legal_aid_application)
+
+      @legal_aid_application = LegalAidApplication.find_by(id: form_params[:legal_aid_application_id])
     end
 
     def form_params

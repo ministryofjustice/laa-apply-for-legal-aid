@@ -25,7 +25,9 @@ module AdminUsers
   private
 
     def admin_user
-      @admin_user ||= AdminUser.find_by(email:)
+      return @admin_user if defined?(@admin_user)
+
+      @admin_user = AdminUser.find_by(email:)
     end
 
     def access_token

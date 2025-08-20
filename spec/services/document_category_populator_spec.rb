@@ -11,7 +11,7 @@ RSpec.describe DocumentCategoryPopulator do
 
     it "creates instances with correct data from the seed file" do
       described_class.call
-      expect(DocumentCategory.order("created_at ASC").first.name).to eq(CSV.read(seed_file, headers: true)[0][0])
+      expect(DocumentCategory.order(:created_at).first.name).to eq(CSV.read(seed_file, headers: true)[0][0])
     end
 
     context "when a document_category exists" do
