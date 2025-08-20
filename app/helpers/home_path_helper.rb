@@ -17,6 +17,6 @@ private
   end
 
   def before_applications_page?
-    [providers_confirm_office_path, providers_select_office_path].any? { |page| request.path.include?(URI.parse(page).path) }
+    [providers_confirm_office_path, providers_select_office_path, providers_provider_path].any? { |page| request.path.include?(URI.parse(page).path) }
   end
 end
