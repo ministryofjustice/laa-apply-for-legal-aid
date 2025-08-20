@@ -1,4 +1,6 @@
 class Provider < ApplicationRecord
+  self.ignored_columns += %w[portal_enabled]
+
   encrypts :auth_subject_uid, deterministic: true
 
   devise :trackable

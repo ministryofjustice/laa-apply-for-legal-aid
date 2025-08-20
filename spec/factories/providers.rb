@@ -4,11 +4,6 @@ FactoryBot.define do
     name { Faker::Name.name }
     username { "#{Faker::Internet.username}_#{Random.rand(1...999).to_s.rjust(3, '0')}" }
     email { Faker::Internet.email }
-    portal_enabled { true }
-
-    trait :without_portal_enabled do
-      portal_enabled { false }
-    end
 
     trait :with_provider_details_api_username do
       username { "NEETADESOR" }
