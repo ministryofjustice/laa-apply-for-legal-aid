@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "provider selects office" do
-  let(:provider) { create(:provider, office_codes: "0X395U:2N078D:A123456") }
+  let(:provider) { create(:provider, office_codes: "0X395U:2N078D:A123456", with_office_selected: false) }
 
   let(:body) do
     {
@@ -174,7 +174,7 @@ RSpec.describe "provider selects office" do
           patch_request
         end
 
-        it "does not update the select office" do
+        it "does not update the selected office" do
           expect(provider.reload.selected_office_id).to be_blank
         end
 
