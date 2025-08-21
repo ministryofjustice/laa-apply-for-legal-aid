@@ -32,6 +32,10 @@ Given(/^I visit the voided applications page$/) do
   visit voided_providers_legal_aid_applications_path
 end
 
+Given(/^I visit the My profile page$/) do
+  visit providers_provider_path
+end
+
 Given("I have previously created multiple applications") do
   provider = create(:provider)
   create_list(:legal_aid_application, 3, :with_non_passported_state_machine, provider:)

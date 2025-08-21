@@ -11,7 +11,7 @@ module Providers
     #   before_action :appoint_provider!
     #
     def appoint_provider!
-      return if current_provider.selected_office.present? || request.fullpath == providers_select_office_path
+      return if current_provider.selected_office.present? || allowed_unappointed_path?
 
       store_location_for(:provider, request.fullpath)
       redirect_to providers_select_office_path
@@ -22,8 +22,8 @@ module Providers
     #
     # Example:
     #
-    #   store_location_for(:user, dashboard_path)
-    #   redirect_to user_facebook_omniauth_authorize_path
+    #   store_location_for(:provider, home_path)
+    #   redirect_to providers_select_office_path
     #
     def store_location_for(resource_or_scope, location)
       session_key = stored_location_key_for(resource_or_scope)
@@ -46,6 +46,14 @@ module Providers
     end
 
   private
+
+    def allowed_unappointed_path?
+      request.fullpath.in? [
+        providers_select_office_path,
+        providers_invalid_schedules_path,
+        providers_provider_path,
+      ]
+    end
 
     def parse_uri(location)
       location && URI.parse(location)
