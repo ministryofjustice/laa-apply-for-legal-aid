@@ -4,8 +4,8 @@ Given(/^I am logged in as a provider$/) do
   login_as @registered_provider
 end
 
-Given("I am logged in as a provider with username {string}") do |username|
-  @registered_provider = create_provider_with_firm_and_office(username)
+Given("I am logged in as a provider with silas_uuid {string}") do |silas_uuid|
+  @registered_provider = create_provider_with_firm_and_office(silas_uuid)
 
   login_as @registered_provider
 end
@@ -17,14 +17,14 @@ end
 
 # NOTE: this fakes the result of authentication office_codes and office selection
 # to avoid the need to fully stub AuthN and PDA responses.
-def create_provider_with_firm_and_office(username = nil)
-  username ||= "test_provider"
+def create_provider_with_firm_and_office(silas_uuid = nil)
+  silas_uuid ||= "c680f03d-48ed-4079-b3c9-ca0c97d9279d"
 
   firm = create(:firm, ccms_id: 77_777, name: "Test firm")
   office = create(:office, ccms_id: 66_666, code: "0X395U")
 
   create(:provider,
-         username:,
+         silas_uuid:,
          firm:,
          office_codes: "0X395U:2N078D:A123456",
          offices: [office],

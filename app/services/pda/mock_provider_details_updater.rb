@@ -17,7 +17,7 @@ module PDA
 
     def load_stubs
       stub_office_schedules_for_0x395u
-      stub_provider_user_for("MARTIN.RONAN@DAVIDGRAY.CO.UK")
+      stub_provider_user_for("51cdbbb4-75d2-48d0-aaac-fa67f013c50a")
       stub_office_schedules_not_found_for("2N078D")
       stub_office_schedules_not_found_for("A123456")
     end

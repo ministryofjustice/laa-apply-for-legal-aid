@@ -48,7 +48,7 @@ RSpec.describe Provider do
       )
     end
 
-    let(:raw_info) { { USER_NAME: "LEGACY@FIRM.COM", LAA_ACCOUNTS: "AAAAB" } }
+    let(:raw_info) { { USER_NAME: "c680f03d-48ed-4079-b3c9-ca0c97d9279d", LAA_ACCOUNTS: "AAAAB" } }
     let(:auth_subject_uid) { SecureRandom.uuid }
 
     context "when passed a new user" do
