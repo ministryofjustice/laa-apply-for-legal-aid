@@ -361,6 +361,7 @@ workflows:
           <<: *generic-slack-fail-post-step
 
   merge_pr:
+    max_auto_reruns: 1
     jobs:
       - lint_checks:
           filters:
