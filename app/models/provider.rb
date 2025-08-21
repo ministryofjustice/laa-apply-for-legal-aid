@@ -1,5 +1,6 @@
 class Provider < ApplicationRecord
   encrypts :auth_subject_uid, deterministic: true
+  encrypts :silas_uuid, deterministic: true
 
   devise :trackable
 
@@ -25,7 +26,7 @@ class Provider < ApplicationRecord
 
       record.update!(
         name: [auth.info.first_name, auth.info.last_name].join(" "),
-        username: auth.extra.raw_info.USER_NAME,
+        silas_uuid: auth.extra.raw_info.USER_NAME,
         email: auth.info.email,
         office_codes: [office_codes].join(":"),
       )
