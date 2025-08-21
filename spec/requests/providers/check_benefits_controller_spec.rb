@@ -72,9 +72,9 @@ RSpec.describe Providers::CheckBenefitsController do
     context "when the benefit check service is down" do
       before { allow(BenefitCheckService).to receive(:call).and_return(false) }
 
-      it "redirects to the Problem page" do
+      it "redirects to the DWP results page" do
         get_request
-        expect(response).to redirect_to(error_path(:benefit_checker_down))
+        expect(response).to redirect_to(providers_legal_aid_application_dwp_result_path)
       end
     end
 
