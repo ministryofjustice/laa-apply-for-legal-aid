@@ -20,7 +20,7 @@ RSpec.describe HomePathHelper do
           allow(request).to receive(:path).and_return(providers_provider_path)
         end
 
-        it { is_expected.to eq(root_path) }
+        it { is_expected.to eq(in_progress_providers_legal_aid_applications_path) }
       end
 
       context "and user is on the providers confirm office profile page" do

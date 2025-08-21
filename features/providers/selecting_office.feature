@@ -30,6 +30,9 @@ Feature: Selecting office
     When I visit the My profile page
     Then I should be on a page showing 'Your profile'
 
+    When I click link "Apply for civil legal aid"
+    Then I should be on a page showing 'Select the account number of the office handling this application'
+
   @javascript @stub_office_schedules_and_user
   Scenario: I am unable to bypass selecting an office
     Given I am logged in as a provider but have never selected an office
