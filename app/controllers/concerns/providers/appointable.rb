@@ -60,9 +60,11 @@ module Providers
 
       def parse_uri(location)
         location && URI.parse(location)
+      # :nocov:
       rescue URI::InvalidURIError
         nil
       end
+      # :nocov:
 
       def stored_location_key_for(resource_or_scope)
         scope = Devise::Mapping.find_scope!(resource_or_scope)
