@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_20_112750) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_21_145938) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -921,7 +921,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_112750) do
   end
 
   create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "username", null: false
+    t.string "username"
     t.string "type"
     t.text "roles"
     t.integer "sign_in_count", default: 0, null: false
@@ -941,6 +941,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_20_112750) do
     t.datetime "cookies_saved_at"
     t.string "auth_provider", default: "", null: false
     t.string "auth_subject_uid"
+    t.string "silas_id"
     t.index ["auth_subject_uid", "auth_provider"], name: "index_providers_on_auth_subject_uid_and_auth_provider", unique: true
     t.index ["firm_id"], name: "index_providers_on_firm_id"
     t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"

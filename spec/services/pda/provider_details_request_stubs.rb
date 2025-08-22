@@ -674,8 +674,8 @@ def office_schedules_json
   }.to_json
 end
 
-def stub_provider_user_for(username)
-  stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-users/#{username}})
+def stub_provider_user_for(uuid)
+  stub_request(:get, %r{#{Rails.configuration.x.pda.url}/ccms-provider-users/#{uuid}})
     .to_return(
       status: 200,
       body: provider_user_json,
@@ -685,26 +685,9 @@ end
 
 def provider_user_json
   {
-    firm: {
-      firmNumber: "1639",
-      firmId: 1639,
-      ccmsFirmId: 19_148,
-      parentFirmId: 0,
-      firmName: "DAVID GRAY LLP",
-      firmType: "Legal Services Provider",
-      constitutionalStatus: "LLP",
-      solicitorAdvocateYN: nil,
-      advocateLevel: nil,
-      barCouncilRoll: nil,
-      companyHouseNumber: nil,
-    },
-    user: {
-      userId: 63_025,
-      ccmsContactId: 494_000,
-      userLogin: "MARTIN.RONAN@DAVIDGRAY.CO.UK",
-      name: "Ronan, Martin",
-      emailAddress: "martin.ronan@davidgray.co.uk",
-    },
+    userUuid: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a",
+    userLogin: "MARTIN.RONAN@DAVIDGRAY.CO.UK",
+    ccmsContactId: 494_000,
   }.to_json
 end
 

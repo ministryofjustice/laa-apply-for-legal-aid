@@ -66,11 +66,9 @@ RSpec.describe "provider selects office" do
 
   let(:user) do
     {
-      user: {
-        userId: 98_765,
-        ccmsContactId: 87_654,
-        userLogin: provider.username,
-      },
+      userUuid: "c680f03d-48ed-4079-b3c9-ca0c97d9279d",
+      userLogin: provider.username,
+      ccmsContactId: 87_654,
     }.to_json
   end
 
@@ -137,7 +135,7 @@ RSpec.describe "provider selects office" do
           stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules")
             .to_return(body:, status: 200)
 
-          stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}")
+          stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}")
             .to_return(body: user, status: 200)
 
           allow(ProviderContractDetailsWorker)
@@ -204,7 +202,7 @@ RSpec.describe "provider selects office" do
           stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules")
             .to_return(body:, status: 200)
 
-          stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}")
+          stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}")
             .to_return(body: nil, status: 204)
 
           allow(ProviderContractDetailsWorker)

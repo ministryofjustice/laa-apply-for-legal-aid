@@ -8,7 +8,7 @@ RSpec.describe PDA::ProviderDetailsUpdater do
       firm.offices << office if office
       stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{office_code}/schedules")
         .to_return(body:, status:)
-      stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}")
+      stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}")
         .to_return(body: user, status:)
     end
 
@@ -81,11 +81,9 @@ RSpec.describe PDA::ProviderDetailsUpdater do
 
     let(:user) do
       {
-        user: {
-          userId: 98_765,
-          ccmsContactId: 87_654,
-          userLogin: provider.username,
-        },
+        userUuid: "c680f03d-48ed-4079-b3c9-ca0c97d9279d",
+        userLogin: provider.username,
+        ccmsContactId: 87_654,
       }.to_json
     end
 
@@ -314,18 +312,18 @@ RSpec.describe PDA::ProviderDetailsUpdater do
     end
 
     context "when PDA returns no details for the provider user" do
-      before { stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}").to_return(body: "", status: 204) }
+      before { stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}").to_return(body: "", status: 204) }
 
       it "raises a UserNotFound error" do
         expect(Rails.logger).to receive(:info).with("#{described_class} - No provider details found for #{provider.email}")
         expect { call }.to raise_error(PDA::ProviderDetailsUpdater::UserNotFound, "No CCMS username found for #{provider.email}")
       end
 
-      context "when there is an error calling the provider-users endpoint" do
-        before { stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}").to_return(body: "An error has occurred", status: 500) }
+      context "when there is an error calling the ccms-provider-users endpoint" do
+        before { stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}").to_return(body: "An error has occurred", status: 500) }
 
         it "raises ApiError" do
-          expect { call }.to raise_error(PDA::ProviderDetailsUpdater::ApiError, "API Call Failed: provider-users (500) An error has occurred")
+          expect { call }.to raise_error(PDA::ProviderDetailsUpdater::ApiError, "API Call Failed: ccms-provider-users (500) An error has occurred")
         end
       end
     end

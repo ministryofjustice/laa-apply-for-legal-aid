@@ -74,7 +74,16 @@ module PDA
       @provider.offices << office unless @provider.offices.include?(office)
       @provider.selected_office_id = office.id
       @provider.contact_id = contact_id
+      @provider.username = username
       @provider.save!
+    end
+
+    def contact_id
+      ccms_provider_user["ccmsContactId"]
+    end
+
+    def username
+      ccms_provider_user["userLogin"]
     end
 
     def create_schedules
@@ -99,16 +108,16 @@ module PDA
       @office_schedules_result ||= JSON.parse(office_schedules_response.body)
     end
 
-    def contact_id
+    def ccms_provider_user
       if user_detail_response.success?
         if user_detail_response.status == 200
-          JSON.parse(user_detail_response.body).dig("user", "ccmsContactId")
+          JSON.parse(user_detail_response.body)
         else
           Rails.logger.info("#{self.class} - No provider details found for #{@provider.email}")
           raise UserNotFound, "No CCMS username found for #{@provider.email}"
         end
       else
-        raise ApiError, "API Call Failed: provider-users (#{user_detail_response.status}) #{user_detail_response.body}"
+        raise ApiError, "API Call Failed: ccms-provider-users (#{user_detail_response.status}) #{user_detail_response.body}"
       end
     end
 
@@ -117,11 +126,7 @@ module PDA
     end
 
     def user_detail_response
-      @user_detail_response ||= conn.get("provider-users/#{encoded_username}")
-    end
-
-    def encoded_username
-      @encoded_username ||= URI.encode_www_form_component(@provider.username).gsub("+", "%20")
+      @user_detail_response ||= conn.get("ccms-provider-users/#{@provider.silas_id}")
     end
 
     def conn

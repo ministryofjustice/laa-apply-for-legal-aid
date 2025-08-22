@@ -17,7 +17,7 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
 
     context "when called with an office for the first time" do
       context "with expected stubbed user and offices response" do
-        let(:provider) { create(:provider, username: "MARTIN.RONAN@DAVIDGRAY.CO.UK", firm: nil) }
+        let(:provider) { create(:provider, firm: nil, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a") }
 
         it "adds the provider to the expected firm" do
           expect { call }
@@ -66,7 +66,7 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
 
     context "when called with an office for the second time, or more" do
       let(:provider) do
-        create(:provider, username: "MARTIN.RONAN@DAVIDGRAY.CO.UK", contact_id: 654_321, firm:).tap do |provider|
+        create(:provider, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a", contact_id: 654_321, firm:).tap do |provider|
           provider.offices << office
         end
       end

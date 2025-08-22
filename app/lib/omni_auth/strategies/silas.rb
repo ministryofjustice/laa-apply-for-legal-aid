@@ -54,7 +54,7 @@ module OmniAuth
             extra: {
               raw_info: {
                 oid: "mock-oid-entra",
-                "USER_NAME" => "MARTIN.RONAN@DAVIDGRAY.CO.UK",
+                "USER_NAME" => "51cdbbb4-75d2-48d0-aaac-fa67f013c50a",
                 "LAA_ACCOUNTS" => %w[0X395U 2N078D A123456],
               },
             },

@@ -1,5 +1,8 @@
 class Provider < ApplicationRecord
+  class RawInfoNotFound < StandardError; end
+
   encrypts :auth_subject_uid, deterministic: true
+  encrypts :silas_id, deterministic: true
 
   devise :trackable
 
@@ -20,18 +23,20 @@ class Provider < ApplicationRecord
   # NOTE: SILAS is currently returning a single office code as a string and multiple as an array of strings. This handles
   # both scenarios.
   def self.from_omniauth(auth)
+    raise RawInfoNotFound, "Claim enrichment missing from OAuth payload" if auth.extra.raw_info.empty?
+
     find_or_initialize_by(auth_provider: auth.provider, auth_subject_uid: auth.uid).tap do |record|
       office_codes = auth.extra.raw_info.LAA_ACCOUNTS
 
       record.update!(
         name: [auth.info.first_name, auth.info.last_name].join(" "),
-        username: auth.extra.raw_info.USER_NAME,
+        silas_id: auth.extra.raw_info.USER_NAME,
         email: auth.info.email,
         office_codes: [office_codes].join(":"),
       )
     end
   rescue StandardError => e
-    Rails.logger.info("#{__method__}: omniauth enountered error #{e}")
+    Rails.logger.info("#{__method__}: omniauth enountered error \"#{e}\"")
     nil
   end
 
