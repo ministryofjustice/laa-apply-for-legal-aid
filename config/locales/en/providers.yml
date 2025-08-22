@@ -192,6 +192,12 @@ en:
             tab_title: There was a problem connecting to DWP
             title_html: There was a problem connecting to <abbr title='Department for Work and Pensions'>DWP</abbr>
             body: Your client’s benefit status cannot be checked at this time. You will need to tell us about any passporting benefits.
+      overrides:
+        show:
+          tab_title: Does your client get a passporting benefit?
+          title: Does your client get a passporting benefit?
+          hmrc_text: If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.
+          option_partner: Yes, they get a passporting benefit with a partner
     cookies:
       show:
         page_title: Cookies on Apply for civil legal aid
