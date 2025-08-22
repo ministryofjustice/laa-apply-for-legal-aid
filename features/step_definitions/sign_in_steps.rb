@@ -10,6 +10,13 @@ Given("I am logged in as a provider with silas_id {string}") do |silas_id|
   login_as @registered_provider
 end
 
+Given("I am logged in as a provider but have never selected an office") do
+  @registered_provider = create_provider_with_firm_and_office
+  @registered_provider.update!(offices: [], selected_office: nil)
+
+  login_as @registered_provider
+end
+
 When("I fill in the mock user email and password") do
   fill_in "Email", with: Rails.configuration.x.omniauth_entraid.mock_username
   fill_in "Password", with: Rails.configuration.x.omniauth_entraid.mock_password

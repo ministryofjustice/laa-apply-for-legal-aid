@@ -5,6 +5,18 @@ FactoryBot.define do
     username { "#{Faker::Internet.username}_#{Random.rand(1...999).to_s.rjust(3, '0')}" }
     email { Faker::Internet.email }
 
+    transient do
+      with_office_selected { true }
+    end
+
+    after(:build) do |provider, evaluator|
+      if evaluator.with_office_selected
+        office = build(:office, firm: provider.firm, code: "0X00000")
+        provider.offices << office
+        provider.selected_office = office
+      end
+    end
+
     trait :with_provider_details_api_username do
       username { "NEETADESOR" }
     end

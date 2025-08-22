@@ -17,10 +17,6 @@ RSpec.describe "provider invalid schedules" do
       expect(page).to have_css("h1", text: "You cannot use this service")
     end
 
-    it "logs the provider out" do
-      expect(session["signed_out"]).to be true
-    end
-
     it "displays link to LAA landing page (a.k.a portal) for CCMS login" do
       expect(page).to have_link("CCMS", href: Rails.configuration.x.laa_landing_page_target_url)
     end

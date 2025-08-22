@@ -17,7 +17,7 @@ module Providers
         ProviderContractDetailsWorker.perform_async(form_params[:selected_office_code])
 
         if provider_details_updater.has_valid_schedules?
-          redirect_to your_applications_default_tab_path
+          redirect_to stored_location_for(:provider) || your_applications_default_tab_path
         else
           redirect_to providers_invalid_schedules_path
         end

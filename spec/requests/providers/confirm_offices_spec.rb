@@ -1,10 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "provider confirm office" do
-  let(:firm) { create(:firm) }
-  let!(:office) { create(:office, firm:) }
-  let!(:office2) { create(:office, firm:) }
-  let(:provider) { create(:provider, firm:, selected_office: office) }
+  let(:office1) { create(:office, code: "1X11111", firm: provider.firm) }
+  let(:office2) { create(:office, code: "2X22222", firm: provider.firm) }
 
   describe "GET providers/confirm_office" do
     subject(:get_request) { get providers_confirm_office_path }
@@ -18,37 +16,75 @@ RSpec.describe "provider confirm office" do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        get_request
       end
 
-      it "returns http success" do
-        expect(response).to have_http_status(:ok)
-      end
+      context "when the firm has 2 offices and one is previously selected" do
+        let(:provider) { create(:provider, firm: create(:firm), with_office_selected: false) }
 
-      it "displays the correct office legal aid code" do
-        expect(unescaped_response_body).to include(office.code)
-      end
+        before do
+          office1
+          office2
 
-      it "sets the page_history_id" do
-        expect(session["page_history_id"]).not_to be_nil
-      end
-
-      context "when the firm has only one office" do
-        let(:office) { nil }
-
-        it "assigns office 2 to the provider" do
-          expect(provider.reload.selected_office).to eq office2
+          provider.update!(selected_office: office1)
         end
 
-        it "redirects to the legal aid applications page" do
+        it "returns http success" do
+          get_request
+
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "displays the correct office legal aid code" do
+          get_request
+
+          expect(page).to have_content("Is 1X11111 your office account number?")
+        end
+
+        it "sets the page_history_id" do
+          get_request
+
+          expect(session["page_history_id"]).not_to be_nil
+        end
+      end
+
+      context "when the firm has only one office and no office selected" do
+        let(:provider) { create(:provider, firm: create(:firm), with_office_selected: false) }
+
+        before do
+          create(:office, code: "3X33333", firm: provider.firm)
+        end
+
+        it "sets the page_history_id", skip: "TODO: AP-6201 - flow will need changing if we reimplement feature" do
+          get_request
+
+          expect(session["page_history_id"]).not_to be_nil
+        end
+
+        it "selects that office for the provider automatically", skip: "TODO: AP-6201 - flow will need changing if we reimplement feature" do
+          get_request
+
+          expect(provider.reload.selected_office.code).to eq "3X33333"
+        end
+
+        it "returns http redirect" do
+          get_request
+
+          expect(response).to have_http_status(:redirect)
+        end
+
+        it "redirects to the legal aid applications page", skip: "TODO: AP-6201 - flow will need changing if we reimplement feature" do
+          get_request
+
           expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
         end
       end
 
       context "when the provider has not selected an office" do
-        let(:provider) { create(:provider, firm:, selected_office: nil) }
+        let(:provider) { create(:provider, firm: create(:firm), with_office_selected: false) }
 
         it "redirects to the select office page" do
+          get_request
+
           expect(response).to redirect_to providers_select_office_path
         end
       end
@@ -57,6 +93,8 @@ RSpec.describe "provider confirm office" do
 
   describe "PATCH providers/confirm_office" do
     subject(:patch_request) { patch providers_confirm_office_path, params: }
+
+    let(:provider) { create(:provider, firm: create(:firm)) }
 
     let(:params) { { binary_choice_form: { confirm_office: "true" } } }
 

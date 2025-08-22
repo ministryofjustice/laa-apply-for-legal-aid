@@ -17,7 +17,7 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
 
     context "when called with an office for the first time" do
       context "with expected stubbed user and offices response" do
-        let(:provider) { create(:provider, firm: nil, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a") }
+        let(:provider) { create(:provider, firm: nil, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a", with_office_selected: false) }
 
         it "adds the provider to the expected firm" do
           expect { call }
@@ -66,8 +66,9 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
 
     context "when called with an office for the second time, or more" do
       let(:provider) do
-        create(:provider, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a", contact_id: 654_321, firm:).tap do |provider|
+        create(:provider, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a", contact_id: 654_321, firm:, with_office_selected: false).tap do |provider|
           provider.offices << office
+          provider.save!
         end
       end
 
@@ -93,6 +94,26 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
           .to change { provider.reload.contact_id }
             .from(654_321)
             .to(494_000)
+      end
+
+      context "when office was selected previously" do
+        before { provider.update!(selected_office: office) }
+
+        it "updates the selected_office_id, if it was not before" do
+          expect { call }
+            .not_to change { provider.reload.selected_office_id }
+        end
+      end
+
+      context "when office was not selected previously" do
+        before { provider.update!(selected_office: nil) }
+
+        it "updates the selected_office_id, if it was not before" do
+          expect { call }
+            .to change { provider.reload.selected_office_id }
+              .from(nil)
+              .to(office.id)
+        end
       end
     end
   end

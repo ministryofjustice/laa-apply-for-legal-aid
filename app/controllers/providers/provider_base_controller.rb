@@ -3,6 +3,7 @@ module Providers
     before_action :authenticate_provider!
     before_action :set_cache_buster
     before_action :update_locale
+    include Appointable
     include ApplicationDependable
     include Draftable
     include Authorizable
