@@ -33,6 +33,7 @@ class Provider < ApplicationRecord
         silas_id: auth.extra.raw_info.USER_NAME,
         email: auth.info.email,
         office_codes: [office_codes].join(":"),
+        selected_office: nil,
       )
     end
   rescue StandardError => e
