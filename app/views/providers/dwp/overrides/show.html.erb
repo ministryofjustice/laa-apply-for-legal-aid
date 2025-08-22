@@ -1,0 +1,36 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_dwp_override_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+  <%= page_template(
+        page_title: t(".tab_title"),
+        template: :basic,
+        column_width: :full,
+        form:,
+      ) do %>
+
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+        <%= form.govuk_radio_buttons_fieldset(:confirm_dwp_result,
+                                              legend: { size: "l", tag: "h1", text: t(".title") },
+                                              classes: "govuk-!-margin-bottom-6") do %>
+
+          <% if display_hmrc_text? %>
+            <p class="govuk-body"><%= t(".hmrc_text") %></p>
+          <% end %>
+
+          <%= form.govuk_radio_button :confirm_dwp_result, "benefit_received", link_errors: true, label: { text: t("generic.yes") } %>
+          <% if @legal_aid_application.applicant.has_partner? %>
+            <%= form.govuk_radio_button :confirm_dwp_result, "joint_benefit_with_partner", label: { text: t(".option_partner") } %>
+          <% end %>
+          <%= form.govuk_radio_button :confirm_dwp_result, "no_benefit_received", label: { text: t("generic.no") } %>
+      <% end %>
+      </div>
+    </div>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
