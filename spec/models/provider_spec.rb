@@ -39,7 +39,7 @@ RSpec.describe Provider do
           provider: "govuk",
           uid: auth_subject_uid,
           info: {
-            first_name: "first", last_name: "last", email: "provider@test.com", description: "desc", roles: "a,b"
+            first_name: "first", last_name: "last", email: "provider@example.com", description: "desc", roles: "a,b"
           },
           extra: {
             raw_info:,
@@ -65,7 +65,7 @@ RSpec.describe Provider do
           name: "first last",
           silas_id:,
           auth_subject_uid:,
-          email: "provider@test.com",
+          email: "provider@example.com",
           office_codes: "AAAAB",
         )
       end
@@ -74,7 +74,7 @@ RSpec.describe Provider do
     context "when passed an existing user with single office code as a string" do
       let(:provider) do
         described_class.create(
-          email: "provider@test.com",
+          email: "provider@example.com",
           username: "CCMS_USERNAME@FIRM.COM",
           name: "Marty Ronan",
           auth_provider: "govuk",
@@ -94,7 +94,7 @@ RSpec.describe Provider do
 
       let(:provider) do
         described_class.create(
-          email: "provider@test.com",
+          email: "provider@example.com",
           username: "CCMS_USERNAME@FIRM.COM",
           name: "Marty Ronan",
           auth_provider: "govuk",
