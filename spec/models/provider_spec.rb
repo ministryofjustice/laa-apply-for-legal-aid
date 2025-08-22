@@ -48,9 +48,9 @@ RSpec.describe Provider do
       )
     end
 
-    let(:raw_info) { { USER_NAME: silas_uuid, LAA_ACCOUNTS: "AAAAB" } }
+    let(:raw_info) { { USER_NAME: silas_id, LAA_ACCOUNTS: "AAAAB" } }
     let(:auth_subject_uid) { SecureRandom.uuid }
-    let(:silas_uuid) { "c680f03d-48ed-4079-b3c9-ca0c97d9279d" }
+    let(:silas_id) { "c680f03d-48ed-4079-b3c9-ca0c97d9279d" }
 
     context "when passed a new user" do
       it "creates a new record" do
@@ -63,7 +63,7 @@ RSpec.describe Provider do
         expect(provider).to have_attributes(
           auth_provider: "govuk",
           name: "first last",
-          silas_uuid:,
+          silas_id:,
           auth_subject_uid:,
           email: "provider@test.com",
           office_codes: "AAAAB",
@@ -79,7 +79,7 @@ RSpec.describe Provider do
           name: "Marty Ronan",
           auth_provider: "govuk",
           auth_subject_uid:,
-          silas_uuid:,
+          silas_id:,
           office_codes: "AAAAB:BBBBA",
         )
       end
@@ -98,7 +98,7 @@ RSpec.describe Provider do
           username: "CCMS_USERNAME@FIRM.COM",
           name: "Marty Ronan",
           auth_provider: "govuk",
-          silas_uuid:,
+          silas_id:,
           auth_subject_uid:,
           office_codes: "00001:00002",
         )
@@ -114,8 +114,8 @@ RSpec.describe Provider do
 
       it "updates the existing silas uuid" do
         expect { described_class.from_omniauth(auth) }
-          .to change { provider.reload.silas_uuid }
-            .from(silas_uuid)
+          .to change { provider.reload.silas_id }
+            .from(silas_id)
             .to("my-update-silas-id")
       end
     end

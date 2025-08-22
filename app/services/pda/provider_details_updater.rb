@@ -126,7 +126,7 @@ module PDA
     end
 
     def user_detail_response
-      @user_detail_response ||= conn.get("ccms-provider-users/#{@provider.silas_uuid}")
+      @user_detail_response ||= conn.get("ccms-provider-users/#{@provider.silas_id}")
     end
 
     def conn

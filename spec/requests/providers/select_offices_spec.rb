@@ -135,7 +135,7 @@ RSpec.describe "provider selects office" do
           stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules")
             .to_return(body:, status: 200)
 
-          stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_uuid}")
+          stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}")
             .to_return(body: user, status: 200)
 
           allow(ProviderContractDetailsWorker)
@@ -202,7 +202,7 @@ RSpec.describe "provider selects office" do
           stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules")
             .to_return(body:, status: 200)
 
-          stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_uuid}")
+          stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}")
             .to_return(body: nil, status: 204)
 
           allow(ProviderContractDetailsWorker)

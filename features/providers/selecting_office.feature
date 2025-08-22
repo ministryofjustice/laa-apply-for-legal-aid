@@ -2,7 +2,7 @@ Feature: Selecting office
 
   @javascript @stub_office_schedules_and_user
   Scenario: I am able to select an office
-    Given I am logged in as a provider with silas_uuid "51cdbbb4-75d2-48d0-aaac-fa67f013c50a"
+    Given I am logged in as a provider with silas_id "51cdbbb4-75d2-48d0-aaac-fa67f013c50a"
     When I visit the select office page
     And I choose '0X395U'
     And I click 'Save and continue'
@@ -18,7 +18,7 @@ Feature: Selecting office
 
   @javascript @mock_auth_enabled @vcr_turned_off
   Scenario: I am able to select an office when mock auth is enabled
-    Given I am logged in as a provider with silas_uuid "51cdbbb4-75d2-48d0-aaac-fa67f013c50a"
+    Given I am logged in as a provider with silas_id "51cdbbb4-75d2-48d0-aaac-fa67f013c50a"
     When I visit the select office page
     And I choose '0X395U'
     And I click 'Save and continue'

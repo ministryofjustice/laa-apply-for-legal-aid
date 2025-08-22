@@ -8,7 +8,7 @@ RSpec.describe PDA::ProviderDetailsUpdater do
       firm.offices << office if office
       stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{office_code}/schedules")
         .to_return(body:, status:)
-      stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_uuid}")
+      stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}")
         .to_return(body: user, status:)
     end
 
@@ -312,7 +312,7 @@ RSpec.describe PDA::ProviderDetailsUpdater do
     end
 
     context "when PDA returns no details for the provider user" do
-      before { stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_uuid}").to_return(body: "", status: 204) }
+      before { stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}").to_return(body: "", status: 204) }
 
       it "raises a UserNotFound error" do
         expect(Rails.logger).to receive(:info).with("#{described_class} - No provider details found for #{provider.email}")
@@ -320,7 +320,7 @@ RSpec.describe PDA::ProviderDetailsUpdater do
       end
 
       context "when there is an error calling the ccms-provider-users endpoint" do
-        before { stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_uuid}").to_return(body: "An error has occurred", status: 500) }
+        before { stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}").to_return(body: "An error has occurred", status: 500) }
 
         it "raises ApiError" do
           expect { call }.to raise_error(PDA::ProviderDetailsUpdater::ApiError, "API Call Failed: ccms-provider-users (500) An error has occurred")

@@ -2,7 +2,7 @@ class Provider < ApplicationRecord
   class RawInfoNotFound < StandardError; end
 
   encrypts :auth_subject_uid, deterministic: true
-  encrypts :silas_uuid, deterministic: true
+  encrypts :silas_id, deterministic: true
 
   devise :trackable
 
@@ -30,7 +30,7 @@ class Provider < ApplicationRecord
 
       record.update!(
         name: [auth.info.first_name, auth.info.last_name].join(" "),
-        silas_uuid: auth.extra.raw_info.USER_NAME,
+        silas_id: auth.extra.raw_info.USER_NAME,
         email: auth.info.email,
         office_codes: [office_codes].join(":"),
       )
