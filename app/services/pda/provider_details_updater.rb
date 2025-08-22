@@ -79,11 +79,11 @@ module PDA
     end
 
     def contact_id
-      provider_user_call["ccmsContactId"]
+      ccms_provider_user["ccmsContactId"]
     end
 
     def username
-      provider_user_call["userLogin"]
+      ccms_provider_user["userLogin"]
     end
 
     def create_schedules
@@ -108,7 +108,7 @@ module PDA
       @office_schedules_result ||= JSON.parse(office_schedules_response.body)
     end
 
-    def provider_user_call
+    def ccms_provider_user
       if user_detail_response.success?
         if user_detail_response.status == 200
           JSON.parse(user_detail_response.body)
