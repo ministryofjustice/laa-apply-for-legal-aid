@@ -39,7 +39,7 @@ RSpec.describe Provider do
           provider: "govuk",
           uid: auth_subject_uid,
           info: {
-            first_name: "first", last_name: "last", email: "test@test.com", description: "desc", roles: "a,b"
+            first_name: "first", last_name: "last", email: "provider@test.com", description: "desc", roles: "a,b"
           },
           extra: {
             raw_info:,
@@ -48,50 +48,86 @@ RSpec.describe Provider do
       )
     end
 
-    let(:raw_info) { { USER_NAME: "c680f03d-48ed-4079-b3c9-ca0c97d9279d", LAA_ACCOUNTS: "AAAAB" } }
+    let(:raw_info) { { USER_NAME: silas_uuid, LAA_ACCOUNTS: "AAAAB" } }
     let(:auth_subject_uid) { SecureRandom.uuid }
+    let(:silas_uuid) { "c680f03d-48ed-4079-b3c9-ca0c97d9279d" }
 
     context "when passed a new user" do
       it "creates a new record" do
         expect { described_class.from_omniauth(auth) }.to change(described_class, :count).by(1)
       end
+
+      it "creates the record with expected attributes" do
+        provider = described_class.from_omniauth(auth)
+
+        expect(provider).to have_attributes(
+          auth_provider: "govuk",
+          name: "first last",
+          silas_uuid:,
+          auth_subject_uid:,
+          email: "provider@test.com",
+          office_codes: "AAAAB",
+        )
+      end
     end
 
     context "when passed an existing user with single office code as a string" do
       let(:provider) do
-        described_class.create(email: "test@test.com",
-                               username: "LEGACY@FIRM.COM",
-                               name: "Marty Ronan",
-                               auth_provider: "govuk",
-                               auth_subject_uid:)
-        # office codes deliberately left blank
+        described_class.create(
+          email: "provider@test.com",
+          username: "CCMS_USERNAME@FIRM.COM",
+          name: "Marty Ronan",
+          auth_provider: "govuk",
+          auth_subject_uid:,
+          silas_uuid:,
+          office_codes: "AAAAB:BBBBA",
+        )
       end
 
       it "updates the existing record office_codes" do
-        expect { described_class.from_omniauth(auth) }.to change { provider.reload.office_codes }.from(nil).to("AAAAB")
+        expect { described_class.from_omniauth(auth) }.to change { provider.reload.office_codes }.from("AAAAB:BBBBA").to("AAAAB")
       end
     end
 
     context "when passed an existing user with multiple office codes as array" do
-      let(:raw_info) { { USER_NAME: "LEGACY@FIRM.COM", LAA_ACCOUNTS: %w[AAAAA BBBBB] } }
+      let(:raw_info) { { USER_NAME: "my-update-silas-id", LAA_ACCOUNTS: %w[AAAAA BBBBB] } }
 
       let(:provider) do
-        described_class.create(email: "test@test.com",
-                               username: "LEGACY@FIRM.COM",
-                               name: "Marty Ronan",
-                               auth_provider: "govuk",
-                               auth_subject_uid:)
-        # office codes deliberately left blank
+        described_class.create(
+          email: "provider@test.com",
+          username: "CCMS_USERNAME@FIRM.COM",
+          name: "Marty Ronan",
+          auth_provider: "govuk",
+          silas_uuid:,
+          auth_subject_uid:,
+          office_codes: "00001:00002",
+        )
       end
 
       it "updates the existing record office_codes" do
-        expect { described_class.from_omniauth(auth) }.to change { provider.reload.office_codes }.from(nil).to("AAAAA:BBBBB")
+        expect { described_class.from_omniauth(auth) }.to change { provider.reload.office_codes }.from("00001:00002").to("AAAAA:BBBBB")
+      end
+
+      it "updates the existing name" do
+        expect { described_class.from_omniauth(auth) }.to change { provider.reload.name }.from("Marty Ronan").to("first last")
+      end
+
+      it "updates the existing silas uuid" do
+        expect { described_class.from_omniauth(auth) }
+          .to change { provider.reload.silas_uuid }
+            .from(silas_uuid)
+            .to("my-update-silas-id")
       end
     end
 
     context "when data is missing from the auth payload" do
-      let(:raw_info) { {} }
-      # simulates a breakdown in entra claim enrichment
+      let(:raw_info) { {} } # simulates a breakdown in entra claim enrichment
+
+      it "logs a claim enrichment missing error" do
+        allow(Rails.logger).to receive(:info)
+        described_class.from_omniauth(auth)
+        expect(Rails.logger).to have_received(:info).with("from_omniauth: omniauth enountered error \"Claim enrichment missing from OAuth payload\"")
+      end
 
       it { expect(described_class.from_omniauth(auth)).to be_nil }
     end
