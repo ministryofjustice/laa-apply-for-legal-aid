@@ -7,9 +7,25 @@ RSpec.describe HomePathHelper do
     subject { home_path }
 
     context "when on provider journey" do
-      context "and user has not reached the application page yet" do
+      context "and user is on providers select office page" do
         before do
           allow(request).to receive(:path).and_return(providers_select_office_path)
+        end
+
+        it { is_expected.to eq(root_path) }
+      end
+
+      context "and user is on providers profile page" do
+        before do
+          allow(request).to receive(:path).and_return(providers_provider_path)
+        end
+
+        it { is_expected.to eq(in_progress_providers_legal_aid_applications_path) }
+      end
+
+      context "and user is on the providers confirm office profile page" do
+        before do
+          allow(request).to receive(:path).and_return(providers_confirm_office_path)
         end
 
         it { is_expected.to eq(root_path) }

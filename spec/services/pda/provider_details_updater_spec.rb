@@ -12,7 +12,7 @@ RSpec.describe PDA::ProviderDetailsUpdater do
         .to_return(body: user, status:)
     end
 
-    let(:provider) { create(:provider) }
+    let(:provider) { create(:provider, with_office_selected: false) }
     let(:firm) { create(:firm, name: "original firm name", ccms_id: "56789") }
     let(:office) { create(:office, code: office_code, ccms_id: "12345") }
     let(:office_code) { "4A497U" }
