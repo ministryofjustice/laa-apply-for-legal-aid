@@ -50,5 +50,5 @@ en:
   problem:
     index:
       title: Sorry, there is a problem with the service
-      ccms_or_try_later_html: <a href="https://portal.legalservices.gov.uk/">Use CCMS to complete your application</a> or try again later.
+      ccms_or_try_later_html: <a href=%{url}>Use CCMS to complete your application</a> or try again later.
       answers_saved: We've saved your answers.

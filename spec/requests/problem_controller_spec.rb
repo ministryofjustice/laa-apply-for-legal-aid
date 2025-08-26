@@ -10,7 +10,7 @@ RSpec.describe ProblemController do
 
     it "displays the correct content" do
       expect(unescaped_response_body).to match(I18n.t("problem.index.title"))
-      expect(unescaped_response_body).to match(I18n.t("problem.index.ccms_or_try_later_html"))
+      expect(unescaped_response_body).to match(I18n.t("problem.index.ccms_or_try_later_html", url: Rails.configuration.x.laa_landing_page_target_url))
       expect(unescaped_response_body).to match(I18n.t("problem.index.answers_saved"))
     end
   end

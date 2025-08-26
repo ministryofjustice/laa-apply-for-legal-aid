@@ -14,7 +14,7 @@
 
     <%= govuk_list Setting.linked_applications? ? t(".dont_use_service.linked_applications_list") : t(".dont_use_service.list"), type: :bullet %>
 
-    <p class="govuk-body"><%= t(".use_ccms_para_html") %></p>
+    <p class="govuk-body"><%= t(".use_ccms_para_html", url: Rails.configuration.x.laa_landing_page_target_url) %></p>
     <p class="govuk-body"><%= t(".progress_saved") %></p>
 
     <%= govuk_start_button(text: provider_signed_in? ? t("generic.start") : t("generic.sign_in"), href: providers_select_office_path, html_attributes: { id: "start" }) %>

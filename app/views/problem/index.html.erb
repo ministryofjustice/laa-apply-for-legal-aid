@@ -1,5 +1,5 @@
 <%= page_template page_title: t(".title"), back_link: :none do %>
-  <p><%= t(".ccms_or_try_later_html") %></p>
+  <p><%= t(".ccms_or_try_later_html", url: Rails.configuration.x.laa_landing_page_target_url) %></p>
   <p><%= t(".answers_saved") %></p>
 
   <p class="govuk-body">
