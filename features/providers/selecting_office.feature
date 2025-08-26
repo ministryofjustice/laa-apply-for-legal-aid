@@ -40,6 +40,36 @@ Feature: Selecting office
     Then I should be on a page showing 'Select the account number of the office handling this application'
 
   @javascript @mock_auth_enabled @vcr_turned_off
+  Scenario: I am forced to select an office again after sign out and sign in
+    Given I visit the root page
+    And I should see "Providers can use this service to apply for civil legal aid for their clients"
+
+    When I click link "Sign in"
+    Then I should be on a page with title "Sign in"
+
+    When I fill in the mock user email and password
+    And I click 'Sign in'
+    Then I should be on a page showing 'Select the account number of the office handling this application'
+
+    When I choose "0X395U"
+    And I click "Save and continue"
+    Then I should be on a page with title "Your applications"
+
+    When I click link "Sign out"
+    Then I should see "Help us improve the Apply for civil legal aid service"
+    And I should see "You have been signed out"
+
+    When I click link "Sign In"
+    Then I should be on a page with title "Sign in"
+
+    When I fill in the mock user email and password
+    And I click 'Sign in'
+    Then I should be on a page showing 'Select the account number of the office handling this application'
+
+    When I visit the in progress applications page
+    Then I should be on a page showing 'Select the account number of the office handling this application'
+
+  @javascript @mock_auth_enabled @vcr_turned_off
   Scenario: I am able to select an office when mock auth is enabled
     Given I am logged in as a provider with silas_id "51cdbbb4-75d2-48d0-aaac-fa67f013c50a"
     When I visit the select office page
