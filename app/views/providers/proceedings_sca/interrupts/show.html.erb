@@ -6,6 +6,6 @@
       <% end %>
 
       <p><%= t(".#{@type}.options") %></p>
-      <%= govuk_list(t(".#{@type}.option_bullets_html"), type: :bullet) %>
+      <%= govuk_list(t(".#{@type}.option_bullets_html", url: Rails.configuration.x.laa_landing_page_target_url), type: :bullet) %>
   <% end %>
 <% end %>

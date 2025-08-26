@@ -39,4 +39,3 @@ Naming/PredicateMethod:
   Exclude:
     - app/forms/providers/regular_transaction_form.rb
     - app/forms/base_bank_statement_form.rb
-    - lib/tasks/portal/name_validator.rb
