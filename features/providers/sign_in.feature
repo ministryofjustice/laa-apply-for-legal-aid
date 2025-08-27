@@ -5,7 +5,7 @@ Feature: Sign in
     When I visit the root page
     Then I should see "Providers can use this service to apply for civil legal aid for their clients"
 
-    When I click link "Sign in"
+    When I click govuk-button "Sign in"
     Then I should be on a page with title "Sign in"
 
     When I fill 'email' with 'test@test.com'
@@ -32,6 +32,6 @@ Feature: Sign in
     When I visit the root page
     Then I should see "Providers can use this service to apply for civil legal aid for their clients"
 
-    When I click link "Sign in"
+    When I click govuk-button "Sign in"
     Then I should be on a page with title "Select the account number of the office handling this application"
     And I should see "Signed in successfully"

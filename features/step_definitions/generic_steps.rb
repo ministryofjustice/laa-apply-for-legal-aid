@@ -20,6 +20,10 @@ Then("I should see a mailto link text {string} for email {string}") do |locator,
   expect(page).to have_link(locator, href: "mailto:#{email}")
 end
 
+When("I click govuk-button {string}") do |text|
+  click_on(class: "govuk-button", text:)
+end
+
 Then("I should see govuk error summary {string}") do |error_text|
   summary = page.find("div.govuk-error-summary > div[role='alert']")
   expect(summary).to have_css(
