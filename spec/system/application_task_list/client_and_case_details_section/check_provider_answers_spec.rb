@@ -3,8 +3,6 @@ RSpec.describe "Client and case details section - Check your answers", :vcr do
   feature "View check your answers" do
     before do
       login_as_a_provider
-
-      Setting.setting.update!(linked_applications: true)
     end
 
     scenario "I can complete the task list's Check your answers item" do
