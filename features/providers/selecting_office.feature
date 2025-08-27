@@ -44,7 +44,7 @@ Feature: Selecting office
     Given I visit the root page
     And I should see "Providers can use this service to apply for civil legal aid for their clients"
 
-    When I click link "Sign in"
+    When I click govuk-button "Sign in"
     Then I should be on a page with title "Sign in"
 
     When I fill in the mock user email and password
@@ -59,7 +59,7 @@ Feature: Selecting office
     Then I should see "Help us improve the Apply for civil legal aid service"
     And I should see "You have been signed out"
 
-    When I click link "Sign In"
+    When I click link "Sign in"
     Then I should be on a page with title "Sign in"
 
     When I fill in the mock user email and password

@@ -28,7 +28,7 @@ Feature: Citizen journey
   Scenario: View privacy policy
     Given An application has been created
     Then I visit the start of the financial assessment
-    Then I should not see 'Sign In'
+    Then I should not see 'Sign in'
     Then I click link "Privacy policy"
     Then I should be on a page showing "Types of personal data we process"
     Then I should be on a page showing "Complaints"

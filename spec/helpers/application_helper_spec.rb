@@ -47,7 +47,7 @@ RSpec.describe ApplicationHelper do
 
         it "returns a login link" do
           expect(user_header_navigation).to have_css("li", count: 1)
-            .and have_css("li", text: "Sign In")
+            .and have_css("li", text: "Sign in")
         end
       end
     end
