@@ -6,8 +6,8 @@
 
     <%= govuk_list(
           t(".actions_list_html",
-            ccms_login: Rails.configuration.x.laa_landing_page_target_url,
-            online_support: Rails.configuration.x.online_support),
+            ccms_url: Rails.configuration.x.laa_landing_page_target_url,
+            support_url: Rails.configuration.x.online_support),
           type: :bullet,
         ) %>
   <% end %>
