@@ -6,7 +6,6 @@ module Settings
                   :manually_review_all_cases,
                   :allow_welsh_translation,
                   :enable_ccms_submission,
-                  :linked_applications,
                   :collect_hmrc_data,
                   :collect_dwp_data
 
@@ -14,7 +13,6 @@ module Settings
               :manually_review_all_cases,
               :allow_welsh_translation,
               :enable_ccms_submission,
-              :linked_applications,
               :collect_hmrc_data,
               :collect_dwp_data,
               presence: true

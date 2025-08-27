@@ -79,7 +79,6 @@ en:
           allow_welsh_translation: Allow Welsh translation
           enable_ccms_submission: Allow CCMS submissions
           enable_evidence_upload: Enable the new evidence upload feature
-          linked_applications: Enable linking and copying cases
           collect_hmrc_data: Collect HMRC data
           collect_dwp_data: Collect DWP data
         hints:
@@ -90,7 +89,6 @@ en:
           allow_welsh_translation: Select Yes to translate the service into Welsh
           enable_ccms_submission: Yes by default, only set to No if CCMS is being taken offline
           enable_evidence_upload: Select Yes to enable the new evidence upload feature for solicitors
-          linked_applications: Select Yes to enable the linking and copying cases feature for solicitors
           collect_hmrc_data: Select Yes to enable calls to HMRC for employment data
           collect_dwp_data: Select Yes to enable calls to Benefit Checker for passporting benefits data
 

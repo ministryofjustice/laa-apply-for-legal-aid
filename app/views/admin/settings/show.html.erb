@@ -47,16 +47,6 @@
         ) %>
 
     <%= form.govuk_collection_radio_buttons(
-          :linked_applications,
-          yes_no_options,
-          :value,
-          :label,
-          inline: true,
-          hint: { text: t(".hints.linked_applications") },
-          legend: { text: t(".labels.linked_applications") },
-        ) %>
-
-    <%= form.govuk_collection_radio_buttons(
           :collect_hmrc_data,
           yes_no_options,
           :value,
