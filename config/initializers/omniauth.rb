@@ -33,6 +33,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     {
       name: :entra_id,
       scope: %i[openid email],
+      prompt: :select_account,
       response_type: :code,
       send_nonce: true,
       client_options: {
