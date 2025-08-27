@@ -976,12 +976,12 @@ en:
       show:
         h1-heading: You cannot use this service
         paragraph-1: The office you selected does not have a family contract with the Legal Aid Agency (LAA).
-        paragraph-2: A family contract allows you to use Apply for civil legal aid for special children act, domestic abuse (except domestic abuse protection orders), section 8 and public law family cases.
+        paragraph-2: A family contract allows you to use Apply for civil legal aid for special children act, domestic abuse (except domestic abuse protection orders), section 8, and public law family cases.
         actions_text: 'You can do one of the following:'
         button_text: Choose a different office
         actions_list_html:
             - go back and choose a different office
-            - apply in <a class="govuk-link govuk-link--inverse" href="%{ccms_login}"><abbr title='Client and Cost Management System'>CCMS</abbr></a> for all other proceedings
+            - apply in <a class="govuk-link govuk-link--inverse" href="%{ccms_login}">CCMS (Client and Cost Management System)</a> for all other proceedings
             - <a class="govuk-link govuk-link--inverse" href="%{online_support}">contact online support</a> if you think this is wrong, and you should have access
     legal_aid_applications:
       index:
