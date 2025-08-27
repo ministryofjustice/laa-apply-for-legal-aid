@@ -21,6 +21,10 @@ Feature: Emergency cost override
     And I click find address
     And I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     When I click 'Use this address'
+    Then I should be on a page showing "Do you want to link this application with another one?"
+
+    When I choose "No"
+    And I click "Save and continue"
     And I should be on a page showing "What does your client want legal aid for?"
     When I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
