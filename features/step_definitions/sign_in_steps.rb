@@ -24,16 +24,29 @@ end
 
 # NOTE: this fakes the result of authentication office_codes and office selection
 # to avoid the need to fully stub AuthN and PDA responses.
+# It performs a custom find or create by to avoid clashing with stubbed user martin ronan.
+#
 def create_provider_with_firm_and_office(silas_id = nil)
   silas_id ||= "c680f03d-48ed-4079-b3c9-ca0c97d9279d"
 
   firm = create(:firm, ccms_id: 77_777, name: "Test firm")
   office = create(:office, ccms_id: 66_666, code: "0X395U")
 
-  create(:provider,
-         silas_id:,
-         firm:,
-         office_codes: "0X395U:2N078D:A123456",
-         offices: [office],
-         selected_office: office)
+  attributes = {
+    silas_id:,
+    firm:,
+    office_codes: "0X395U:2N078D:A123456",
+    offices: [office],
+    selected_office: office,
+  }
+
+  provider = Provider.find_by(silas_id:)
+
+  if provider
+    provider.update!(attributes)
+  else
+    provider = create(:provider, attributes)
+  end
+
+  provider
 end

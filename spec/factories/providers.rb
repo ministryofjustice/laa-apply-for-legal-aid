@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :provider do
+    silas_id { SecureRandom.uuid }
     firm
     name { Faker::Name.name }
     username { "#{Faker::Internet.username}_#{Random.rand(1...999).to_s.rjust(3, '0')}" }
