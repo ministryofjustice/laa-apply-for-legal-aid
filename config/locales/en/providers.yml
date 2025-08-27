@@ -905,7 +905,7 @@ en:
         audit: You may need to show these if you’re audited by the LAA in the future.
         what_next: What happens next
         application_to_be_checked: We'll check your application to see if your client is entitled to legal aid.
-        decision_in_ccms_html: We'll let you know our decision in <abbr title='Client and Cost Management System'>CCMS</abbr>.
+        decision_in_ccms_html: We'll let you know our decision in CCMS (Client and Cost Management System).
         feedback_prefix: "Give feedback"
         feedback_suffix: " to help us improve this service."
         view_completed_application: View completed application
@@ -981,8 +981,8 @@ en:
         button_text: Choose a different office
         actions_list_html:
             - go back and choose a different office
-            - apply in <a class="govuk-link govuk-link--inverse" href="%{ccms_login}">CCMS (Client and Cost Management System)</a> for all other proceedings
-            - <a class="govuk-link govuk-link--inverse" href="%{online_support}">contact online support</a> if you think this is wrong, and you should have access
+            - apply in <a class="govuk-link govuk-link--inverse" href="%{ccms_url}">CCMS (Client and Cost Management System)</a> for all other proceedings
+            - <a class="govuk-link govuk-link--inverse" href="%{support_url}">contact online support</a> if you think this is wrong, and you should have access
     legal_aid_applications:
       index:
         heading_1: Your applications
@@ -1894,8 +1894,7 @@ en:
             - you want to amend a submitted application
         use_ccms_para_html: |
           If any of these apply, or you want to apply for other proceedings, use
-          <a href=%{url}><abbr title='Client and
-          Cost Management System'>CCMS</abbr> (Client and Cost Management System)</a>
+          <a href=%{url}>CCMS (Client and Cost Management System)</a>
           instead.
         progress_saved: Your progress is saved so that you can come back to it later.
     start_chances_of_successes:
