@@ -5,11 +5,7 @@ module Flow
         path: ->(application) { Steps.urls.providers_legal_aid_application_home_address_status_path(application) },
         forward: lambda do |application|
           if application.applicant.no_fixed_residence?
-            if Setting.linked_applications?
-              :link_application_make_links
-            else
-              application.proceedings.any? ? :has_other_proceedings : :proceedings_types
-            end
+            :link_application_make_links
           else
             :home_address_lookups
           end
