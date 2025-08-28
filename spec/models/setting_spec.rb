@@ -13,7 +13,6 @@ RSpec.describe Setting do
         expect(rec.enable_ccms_submission?).to be true
         expect(rec.bank_transaction_filename).to eq "db/sample_data/bank_transactions.csv"
         expect(rec.alert_via_sentry?).to be true
-        expect(rec.linked_applications?).to be false
         expect(rec.collect_hmrc_data?).to be false
         expect(rec.collect_dwp_data?).to be true
       end
@@ -28,7 +27,6 @@ RSpec.describe Setting do
           enable_ccms_submission: false,
           bank_transaction_filename: "my_special_file.csv",
           alert_via_sentry: false,
-          linked_applications: true,
           collect_hmrc_data: true,
           collect_dwp_data: true,
         )
@@ -42,7 +40,6 @@ RSpec.describe Setting do
         expect(rec.enable_ccms_submission?).to be false
         expect(rec.bank_transaction_filename).to eq "my_special_file.csv"
         expect(rec.alert_via_sentry?).to be false
-        expect(rec.linked_applications?).to be true
         expect(rec.collect_hmrc_data?).to be true
         expect(rec.collect_dwp_data?).to be true
       end
@@ -59,7 +56,6 @@ RSpec.describe Setting do
       expect(described_class.enable_ccms_submission?).to be true
       expect(described_class.bank_transaction_filename).to eq "db/sample_data/bank_transactions.csv"
       expect(described_class.alert_via_sentry?).to be true
-      expect(described_class.linked_applications?).to be false
       expect(described_class.collect_hmrc_data?).to be false
       expect(described_class.collect_dwp_data?).to be true
     end

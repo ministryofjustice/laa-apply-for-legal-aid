@@ -3,8 +3,6 @@ RSpec.describe "Client and case details section - Client details", :vcr do
   feature "View and amend client details" do
     before do
       login_as_a_provider
-
-      Setting.setting.update!(linked_applications: true)
     end
 
     # TODO: we navigate to the task list directly at time of writing but eventually we should be

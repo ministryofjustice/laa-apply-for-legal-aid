@@ -12,7 +12,7 @@
 
     <p class="govuk-body"><%= t(".dont_use_service.list_title") %></p>
 
-    <%= govuk_list Setting.linked_applications? ? t(".dont_use_service.linked_applications_list") : t(".dont_use_service.list"), type: :bullet %>
+    <%= govuk_list t(".dont_use_service.list"), type: :bullet %>
 
     <p class="govuk-body"><%= t(".use_ccms_para_html", url: Rails.configuration.x.laa_landing_page_target_url) %></p>
     <p class="govuk-body"><%= t(".progress_saved") %></p>

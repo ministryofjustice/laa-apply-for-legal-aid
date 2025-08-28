@@ -4,7 +4,6 @@ Feature: Checking answers for linked and copied cases
 Background: I have started linking and copying a submitted application
   Given I am logged in as a provider
   And I have created and submitted an application with the application reference 'L-123-456'
-  And the feature flag for linked_applications is enabled
 
   When I complete the non-passported journey as far as check your answers
   And I have linked and copied the 'L-123-456' application with a 'Family' link

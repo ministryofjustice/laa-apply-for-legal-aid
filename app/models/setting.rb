@@ -23,10 +23,6 @@ class Setting < ApplicationRecord
     setting.alert_via_sentry
   end
 
-  def self.linked_applications?
-    setting.linked_applications
-  end
-
   def self.collect_hmrc_data?
     setting.collect_hmrc_data
   end

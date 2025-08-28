@@ -1,4 +1,9 @@
 Feature: Applicant details
+
+Background: I have started an application and not linked or copied it
+  Given I am logged in as a provider
+  And I have created and submitted an application with the application reference 'L-123-456'
+
   @javascript @vcr @billy @stub_pda_provider_details
   Scenario: Completes the application using address lookup with multiple proceedings
     Given I start the journey as far as the applicant page
@@ -22,6 +27,9 @@ Feature: Applicant details
     Then I click find address
     Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Use this address'
+    Then I should be on a page showing "Do you want to link this application with another one?"
+    When I choose "No"
+    And I click "Save and continue"
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -161,6 +169,22 @@ Feature: Applicant details
     Then I click find address
     Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Use this address'
+    Then I should be on a page showing "Do you want to link this application with another one?"
+
+    When I choose "Yes, I want to make a family link"
+    And I click "Save and continue"
+    Then I should be on a page showing "What is the LAA reference of the application you want to link to?"
+    
+    Then I enter linked_application 'L123456'
+    And I click "Search"
+    Then I should be on a page showing "Search result"
+
+    When I choose "Yes"
+    And I click "Save and continue"
+    Then I should be on a page showing "Linked application"
+
+    When I choose "No, I need to make changes"
+    And I click "Save and continue"
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -230,6 +254,22 @@ Feature: Applicant details
     And I enter a building number name '100'
     Then I click find address
     Then I click 'Use this address'
+    Then I should be on a page showing "Do you want to link this application with another one?"
+
+    When I choose "Yes, I want to make a family link"
+    And I click "Save and continue"
+    Then I should be on a page showing "What is the LAA reference of the application you want to link to?"
+    
+    Then I enter linked_application 'L123456'
+    And I click "Search"
+    Then I should be on a page showing "Search result"
+
+    When I choose "Yes"
+    And I click "Save and continue"
+    Then I should be on a page showing "Linked application"
+
+    When I choose "No, I need to make changes"
+    And I click "Save and continue"
     And I should be on a page showing "What does your client want legal aid for?"
 
   @javascript @vcr @billy @stub_pda_provider_details
@@ -257,6 +297,22 @@ Feature: Applicant details
     Then I enter city 'Fake City'
     Then I enter postcode 'XX1 1XX'
     Then I click 'Save and continue'
+    Then I should be on a page showing "Do you want to link this application with another one?"
+
+    When I choose "Yes, I want to make a family link"
+    And I click "Save and continue"
+    Then I should be on a page showing "What is the LAA reference of the application you want to link to?"
+    
+    Then I enter linked_application 'L123456'
+    And I click "Search"
+    Then I should be on a page showing "Search result"
+
+    When I choose "Yes"
+    And I click "Save and continue"
+    Then I should be on a page showing "Linked application"
+
+    When I choose "No, I need to make changes"
+    And I click "Save and continue"
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -342,6 +398,9 @@ Feature: Applicant details
     Then I click find address
     Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Use this address'
+    Then I should be on a page showing "Do you want to link this application with another one?"
+    When I choose "No"
+    And I click "Save and continue"
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -404,6 +463,22 @@ Feature: Applicant details
     Then I click find address
     Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Use this address'
+    Then I should be on a page showing "Do you want to link this application with another one?"
+
+    When I choose "Yes, I want to make a family link"
+    And I click "Save and continue"
+    Then I should be on a page showing "What is the LAA reference of the application you want to link to?"
+    
+    Then I enter linked_application 'L123456'
+    And I click "Search"
+    Then I should be on a page showing "Search result"
+
+    When I choose "Yes"
+    And I click "Save and continue"
+    Then I should be on a page showing "Linked application"
+
+    When I choose "No, I need to make changes"
+    And I click "Save and continue"
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -475,6 +550,22 @@ Feature: Applicant details
     Then I click find address
     Then I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     Then I click 'Use this address'
+    Then I should be on a page showing "Do you want to link this application with another one?"
+
+    When I choose "Yes, I want to make a family link"
+    And I click "Save and continue"
+    Then I should be on a page showing "What is the LAA reference of the application you want to link to?"
+    
+    Then I enter linked_application 'L123456'
+    And I click "Search"
+    Then I should be on a page showing "Search result"
+
+    When I choose "Yes"
+    And I click "Save and continue"
+    Then I should be on a page showing "Linked application"
+
+    When I choose "No, I need to make changes"
+    And I click "Save and continue"
     And I should be on a page showing "What does your client want legal aid for?"
     Then I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results

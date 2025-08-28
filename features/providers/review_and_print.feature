@@ -3,7 +3,6 @@ Feature: Review and print your application
 
   Scenario: For a non-passported bank statement upload journey
     Given I have completed a bank statement upload application with merits
-    And the feature flag for linked_applications is enabled
     When I view the review and print your application page
 
     Then the following sections should exist:
@@ -83,7 +82,6 @@ Feature: Review and print your application
 
   Scenario: For a non-passported truelayer bank transactions journey
     Given I have completed truelayer application with merits
-    And the feature flag for linked_applications is enabled
     When I view the review and print your application page
 
     Then the following sections should exist:
@@ -176,7 +174,6 @@ Feature: Review and print your application
 
   Scenario: For a passported journey
     Given I have completed a passported application with merits
-    And the feature flag for linked_applications is enabled
     When I view the review and print your application page
 
     Then the following sections should exist:

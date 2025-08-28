@@ -22,7 +22,10 @@ Feature: Using the back button on proceedings should not lock a user out
     And I click find address
     And I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     When I click 'Use this address'
+    Then I should be on a page showing "Do you want to link this application with another one?"
 
+    When I choose "No"
+    And I click "Save and continue"
     Then I should be on a page showing "What does your client want legal aid for?"
     When I search for proceeding 'Non-molestation order'
     Then proceeding suggestions has results
@@ -32,7 +35,8 @@ Feature: Using the back button on proceedings should not lock a user out
 
     When I click link "Back"
     And I click link "Back"
+    And I click link "Back"
     Then I should be on a page showing "Select your client's home address"
 
     When I click "Use this address"
-    Then I should be on a page showing 'Do you want to add another proceeding?'
+    Then I should be on a page showing 'Do you want to link this application with another one?'

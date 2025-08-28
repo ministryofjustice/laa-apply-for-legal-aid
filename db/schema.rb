@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_21_145938) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_27_103452) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -1041,7 +1041,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_21_145938) do
     t.boolean "alert_via_sentry", default: true, null: false
     t.datetime "digest_extracted_at", precision: nil, default: "1970-01-01 00:00:01"
     t.datetime "cfe_compare_run_at"
-    t.boolean "linked_applications", default: false, null: false
     t.boolean "collect_hmrc_data", default: false, null: false
     t.boolean "collect_dwp_data", default: true, null: false
   end
