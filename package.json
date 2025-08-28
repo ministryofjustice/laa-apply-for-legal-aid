@@ -16,7 +16,7 @@
     "core-js": "^3.45.1",
     "dropzone": "^6.0.0-beta.2",
     "esbuild": "^0.25.9",
-    "govuk-frontend": "^5.11.1",
+    "govuk-frontend": "^5.11.2",
     "jquery": "^3.7.1",
     "js-search": "^2.0.1",
     "moment": "^2.30.1",
