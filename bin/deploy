@@ -21,7 +21,8 @@ deploy_branch() {
                 --namespace=${K8S_NAMESPACE} \
                 --values ./helm_deploy/apply-for-legal-aid/values-uat.yaml \
                 --set postgresql.image.repository=bitnamilegacy/postgresql \
-                --set postgresql.global.security.allowInsecureImages=true \
+                --set redis.image.repository=bitnamilegacy/redis \
+                --set global.security.allowInsecureImages=true \
                 --set deploy.host="$RELEASE_HOST" \
                 --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                 --set image.tag="${CIRCLE_SHA1}" \
