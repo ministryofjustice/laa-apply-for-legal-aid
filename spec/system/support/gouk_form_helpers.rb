@@ -8,6 +8,6 @@ module GovukFormHelpers
   end
 
   def govuk_choose(locator, **)
-    choose(locator, **, visible: :hidden)
+    choose(locator, **, visible: :all)
   end
 end

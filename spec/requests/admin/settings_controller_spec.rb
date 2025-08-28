@@ -43,6 +43,7 @@ RSpec.describe Admin::SettingsController do
           linked_applications: "true",
           collect_hmrc_data: "true",
           home_address: "true",
+          collect_dwp_data: "true",
         },
       }
     end
@@ -52,15 +53,16 @@ RSpec.describe Admin::SettingsController do
       Setting.delete_all
     end
 
-    it "change settings values" do
+    it "changes settings values" do
       patch_request
       expect(setting.mock_true_layer_data?).to be(true)
       expect(setting.allow_welsh_translation?).to be(true)
       expect(setting.linked_applications?).to be(true)
       expect(setting.collect_hmrc_data?).to be(true)
+      expect(setting.collect_dwp_data?).to be(true)
     end
 
-    it "create settings if they do not exist" do
+    it "creates settings if they do not exist" do
       expect { patch_request }.to change(Setting, :count).from(0).to(1)
     end
 

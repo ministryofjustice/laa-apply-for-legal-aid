@@ -8,6 +8,8 @@ module Providers
       @applicant = legal_aid_application.applicant
       return skip_benefit_check_and_go_forward! if known_issue_prevents_benefit_check?
 
+      return redirect_to providers_legal_aid_application_dwp_result_path unless Setting.collect_dwp_data?
+
       check_benefits && return if legal_aid_application.benefit_check_result_needs_updating?
 
       go_forward(true) if legal_aid_application.non_passported?
@@ -20,7 +22,7 @@ module Providers
   private
 
     def check_benefits
-      redirect_to error_path(:benefit_checker_down) unless legal_aid_application.add_benefit_check_result
+      redirect_to providers_legal_aid_application_dwp_result_path unless legal_aid_application.add_benefit_check_result
     end
 
     def known_issue_prevents_benefit_check?
