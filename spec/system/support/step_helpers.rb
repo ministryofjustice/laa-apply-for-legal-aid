@@ -38,7 +38,7 @@ module StepHelpers
   end
 
   def create_an_application_and_complete_client_details(with_partner)
-    applicant = with_partner ? :with_applicant : :with_applicant_and_partner
+    applicant = with_partner ? :with_applicant_and_partner : :with_applicant
     @legal_aid_application = create(
       :application,
       :with_proceedings,

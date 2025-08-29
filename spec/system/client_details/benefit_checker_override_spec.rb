@@ -38,16 +38,20 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
       expect(page).to have_css("h1", text: "What you need to do")
     end
 
-    scenario "when the client receives a joint passporting benefit with their partner" do
-      click_on "Save and continue"
-      expect(page).to have_css("h1", text: "There was a problem connecting to DWP")
+    context "when the client has a partner" do
+      let(:with_partner) { true }
 
-      click_on "Continue"
-      expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
+      scenario "when the client receives a joint passporting benefit with their partner" do
+        click_on "Save and continue"
+        expect(page).to have_css("h1", text: "There was a problem connecting to DWP")
 
-      govuk_choose("Yes, they get a passporting benefit with a partner")
-      click_on "Save and continue"
-      expect(page).to have_css("h1", text: "Which joint passporting benefit does your client and their partner get?")
+        click_on "Continue"
+        expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
+
+        govuk_choose("Yes, they get a passporting benefit with a partner")
+        click_on "Save and continue"
+        expect(page).to have_css("h1", text: "Which joint passporting benefit does your client and their partner get?")
+      end
     end
   end
 
