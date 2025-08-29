@@ -1,6 +1,6 @@
 module Providers
   module DWP
-    class OverridesController < ProviderBaseController
+    class FallbackController < ProviderBaseController
       include ApplicantDetailsCheckable
 
       prefix_step_with :dwp

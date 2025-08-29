@@ -1,13 +1,13 @@
 require "rails_helper"
 
-RSpec.describe Providers::DWP::OverridesController do
+RSpec.describe Providers::DWP::FallbackController do
   let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address) }
   let(:enable_hmrc_collection) { true }
 
   before { allow(Setting).to receive(:collect_hmrc_data?).and_return(enable_hmrc_collection) }
 
   describe "GET /providers/applications/:legal_aid_application_id/dwp/advise-of-passport-benefit" do
-    subject(:get_request) { get providers_legal_aid_application_dwp_override_path(application) }
+    subject(:get_request) { get providers_legal_aid_application_dwp_fallback_path(application) }
 
     context "when the provider is not authenticated" do
       before { get_request }
@@ -58,7 +58,7 @@ RSpec.describe Providers::DWP::OverridesController do
 
   describe "PATCH /providers/applications/:legal_aid_application_id/dwp/advise-of-passport-benefit" do
     context "when submitting with the Continue button" do
-      subject(:patch_request) { patch providers_legal_aid_application_dwp_override_path(application), params: }
+      subject(:patch_request) { patch providers_legal_aid_application_dwp_fallback_path(application), params: }
 
       let(:params) do
         {
@@ -225,7 +225,7 @@ RSpec.describe Providers::DWP::OverridesController do
     end
 
     context "when submitting with the Save As Draft button" do
-      subject(:patch_request) { patch providers_legal_aid_application_dwp_override_path(application), params: }
+      subject(:patch_request) { patch providers_legal_aid_application_dwp_fallback_path(application), params: }
 
       let(:params) do
         {
