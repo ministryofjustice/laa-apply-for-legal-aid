@@ -41,6 +41,7 @@ module Flow
         no_national_insurance_numbers: Steps::ProviderStart::NoNationalInsuranceNumbersStep,
         dwp_results: Steps::ProviderDWP::DWPResultsStep,
         dwp_fallback: Steps::ProviderDWP::DWPFallbackStep,
+        dwp_partner_overrides: Steps::ProviderDWP::DWPPartnerOverridesStep,
         check_benefits: Steps::ProviderStart::CheckBenefitsStep,
         substantive_applications: Steps::ProviderStart::SubstantiveApplicationsStep,
         delegated_confirmation: Steps::ProviderStart::DelegatedConfirmationStep,
