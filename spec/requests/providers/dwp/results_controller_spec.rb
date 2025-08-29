@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe Providers::DWP::ResultsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address) }
 
-  describe "GET /providers/applications/:legal_aid_application_id/dwp/advise-of-passport-benefit" do
-    subject(:get_request) { get providers_legal_aid_application_dwp_override_path(legal_aid_application) }
+  describe "GET /providers/applications/:legal_aid_application_id/dwp/dwp-result" do
+    subject(:get_request) { get providers_legal_aid_application_dwp_result_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
       before { get_request }
@@ -24,8 +24,8 @@ RSpec.describe Providers::DWP::ResultsController do
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/dwp/advise-of-passport-benefit" do
-    subject(:patch_request) { patch providers_legal_aid_application_dwp_override_path(legal_aid_application), params: }
+  describe "PATCH /providers/applications/:legal_aid_application_id/dwp/dwp-result" do
+    subject(:patch_request) { patch providers_legal_aid_application_dwp_result_path(legal_aid_application), params: }
 
     let(:params) do
       {
