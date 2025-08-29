@@ -174,7 +174,7 @@ Background: I have started an application and not linked or copied it
     When I choose "Yes, I want to make a family link"
     And I click "Save and continue"
     Then I should be on a page showing "What is the LAA reference of the application you want to link to?"
-    
+
     Then I enter linked_application 'L123456'
     And I click "Search"
     Then I should be on a page showing "Search result"
@@ -211,10 +211,7 @@ Background: I have started an application and not linked or copied it
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
-    Then I click 'Continue'
-    Then I should be on a page showing "Does your client get a passporting benefit?"
-    Then I choose 'No'
-    Then I click 'Save and continue'
+    Then I click 'Yes, continue'
     Then I should be on a page showing "What you need to do"
     When I click 'Continue'
     Then I should be on a page showing "What is your client's employment status?"
@@ -261,7 +258,7 @@ Background: I have started an application and not linked or copied it
     When I choose "Yes, I want to make a family link"
     And I click "Save and continue"
     Then I should be on a page showing "What is the LAA reference of the application you want to link to?"
-    
+
     Then I enter linked_application 'L123456'
     And I click "Search"
     Then I should be on a page showing "Search result"
@@ -304,7 +301,7 @@ Background: I have started an application and not linked or copied it
     When I choose "Yes, I want to make a family link"
     And I click "Save and continue"
     Then I should be on a page showing "What is the LAA reference of the application you want to link to?"
-    
+
     Then I enter linked_application 'L123456'
     And I click "Search"
     Then I should be on a page showing "Search result"
@@ -357,10 +354,7 @@ Background: I have started an application and not linked or copied it
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
-    Then I click 'Continue'
-    Then I should be on a page showing "Does your client get a passporting benefit?"
-    Then I choose 'No'
-    Then I click 'Save and continue'
+    Then I click 'Yes, continue'
     Then I should be on a page showing "What you need to do"
     When I click 'Continue'
     And I should be on a page showing "What is your client's employment status?"
@@ -472,7 +466,7 @@ Background: I have started an application and not linked or copied it
     When I choose "Yes, I want to make a family link"
     And I click "Save and continue"
     Then I should be on a page showing "What is the LAA reference of the application you want to link to?"
-    
+
     Then I enter linked_application 'L123456'
     And I click "Search"
     Then I should be on a page showing "Search result"
@@ -515,10 +509,7 @@ Background: I have started an application and not linked or copied it
   Scenario: I want to change client details after a failed benefit check
     Given I start the application with a negative benefit check result
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
-    Then I click 'Continue'
-    Then I should be on a page showing "Does your client get a passporting benefit?"
-    Then I choose 'Yes'
-    Then I click "Save and continue"
+    Then I click link 'This is not correct'
     Then I should be on a page showing "Check your client's details"
     Then I click the first link 'Client name'
     Then I should be on a page showing "Enter your client's details"
@@ -561,7 +552,7 @@ Background: I have started an application and not linked or copied it
     When I choose "Yes, I want to make a family link"
     And I click "Save and continue"
     Then I should be on a page showing "What is the LAA reference of the application you want to link to?"
-    
+
     Then I enter linked_application 'L123456'
     And I click "Search"
     Then I should be on a page showing "Search result"
