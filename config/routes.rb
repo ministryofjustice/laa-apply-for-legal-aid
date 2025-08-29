@@ -234,7 +234,7 @@ Rails.application.routes.draw do
       resource :previous_references, only: %i[show update]
       resource :check_benefit, only: %i[show update]
       resource :dwp_result, only: %i[show update], controller: "dwp/results", path: "dwp-result"
-      resource :dwp_override, only: %i[show update], controller: "dwp/overrides", path: "advise-of-passport-benefit"
+      resource :dwp_fallback, only: %i[show update], controller: "dwp/fallback", path: "advise-of-passport-benefit"
       resource :has_national_insurance_number, only: %i[show update]
       resources :applicant_employed, only: %i[index create]
       resource :about_financial_means, only: %i[show update]

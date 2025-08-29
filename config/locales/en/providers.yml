@@ -192,7 +192,7 @@ en:
             tab_title: There was a problem connecting to DWP
             title_html: There was a problem connecting to <abbr title='Department for Work and Pensions'>DWP</abbr>
             body: Your client’s benefit status cannot be checked at this time. You will need to tell us about any passporting benefits.
-      overrides:
+      fallback:
         show:
           tab_title: Does your client get a passporting benefit?
           title: Does your client get a passporting benefit?
