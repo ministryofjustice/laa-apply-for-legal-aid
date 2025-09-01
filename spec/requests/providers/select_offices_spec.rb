@@ -33,7 +33,7 @@ RSpec.describe "provider selects office" do
         scheduleAuthorizationStatus: "APPROVED",
         scheduleStatus: "Open",
         scheduleStartDate: "2024-09-01",
-        scheduleEndDate: "2025-08-31",
+        scheduleEndDate: "2099-12-31",
         scheduleLines: [
           {
             areaOfLaw: "LEGAL HELP",
