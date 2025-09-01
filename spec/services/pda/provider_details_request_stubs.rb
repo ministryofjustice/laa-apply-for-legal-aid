@@ -151,7 +151,7 @@ def office_schedules_json
         contractStatus: "Open",
         contractAuthorizationStatus: "APPROVED",
         contractStartDate: "2024-09-01",
-        contractEndDate: "2026-06-30",
+        contractEndDate: "2099-12-31",
         areaOfLaw: "LEGAL HELP",
         scheduleType: "Standard",
         scheduleNumber: "0X395U/2024/01",
@@ -160,7 +160,7 @@ def office_schedules_json
         scheduleAuthorizationStatus: "APPROVED",
         scheduleStatus: "Open",
         scheduleStartDate: "2024-09-01",
-        scheduleEndDate: "2025-08-31",
+        scheduleEndDate: "2099-12-31",
         scheduleLines: [
           {
             areaOfLaw: "LEGAL HELP",
@@ -587,7 +587,7 @@ def office_schedules_json
         contractStatus: "Open",
         contractAuthorizationStatus: "APPROVED",
         contractStartDate: "2022-10-01",
-        contractEndDate: "2025-09-30",
+        contractEndDate: "2099-12-31",
         areaOfLaw: "CRIME LOWER",
         scheduleType: "Standard",
         scheduleNumber: "CRM/0X395U/23",
@@ -596,7 +596,7 @@ def office_schedules_json
         scheduleAuthorizationStatus: "APPROVED",
         scheduleStatus: "Open",
         scheduleStartDate: "2023-10-01",
-        scheduleEndDate: "2025-09-30",
+        scheduleEndDate: "2099-12-31",
         scheduleLines: [
           {
             areaOfLaw: "CRIME LOWER",
