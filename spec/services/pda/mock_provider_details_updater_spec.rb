@@ -52,7 +52,7 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
             status: "Open",
             cancelled: false,
             start_date: "2024-09-01".to_date,
-            end_date: "2025-08-31".to_date,
+            end_date: "2099-12-31".to_date,
             license_indicator: 1,
             devolved_power_status: "Yes - Excluding JR Proceedings",
           )
