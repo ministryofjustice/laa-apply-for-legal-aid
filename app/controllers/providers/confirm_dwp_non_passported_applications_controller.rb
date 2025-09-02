@@ -2,8 +2,6 @@ module Providers
   class ConfirmDWPNonPassportedApplicationsController < ProviderBaseController
     include ApplicantDetailsCheckable
 
-    helper_method :display_hmrc_text?
-
     def show
       delete_check_benefits_from_history
       @form = Providers::ConfirmDWPNonPassportedApplicationsForm.new(model: partner)
@@ -70,15 +68,5 @@ module Providers
     def correct_dwp_result?
       @form.correct_dwp_result?
     end
-
-    def hmrc_call_enabled?
-      Setting.collect_hmrc_data?
-    end
-
-    def make_hmrc_call?
-      hmrc_call_enabled?
-    end
-
-    alias_method :display_hmrc_text?, :make_hmrc_call?
   end
 end

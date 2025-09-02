@@ -5,8 +5,6 @@ module Providers
 
       include ApplicantDetailsCheckable
 
-      helper_method :display_hmrc_text?
-
       def show
         @form = Providers::DWP::OverridesForm.new(model: partner)
       end
@@ -51,15 +49,6 @@ module Providers
       def update_application_state
         legal_aid_application.override_dwp_result! unless legal_aid_application.overriding_dwp_result?
       end
-
-      def hmrc_call_enabled?
-        Setting.collect_hmrc_data?
-      end
-
-      def make_hmrc_call?
-        hmrc_call_enabled?
-      end
-      alias_method :display_hmrc_text?, :make_hmrc_call?
     end
   end
 end
