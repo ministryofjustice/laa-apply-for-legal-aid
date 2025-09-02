@@ -9,6 +9,8 @@ module Providers
     include Authorizable
     include Reviewable::Controller
 
+    helper_method :display_hmrc_text?
+
   private
 
     def display_employment_income?
@@ -23,5 +25,10 @@ module Providers
 
       I18n.t("providers.submitted_applications.show.link_banner_one")
     end
+
+    def make_hmrc_call?
+      Setting.collect_hmrc_data?
+    end
+    alias_method :display_hmrc_text?, :make_hmrc_call?
   end
 end

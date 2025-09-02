@@ -5,8 +5,6 @@ module Providers
 
       prefix_step_with :dwp
 
-      helper_method :display_hmrc_text?
-
       def show
         @form = Providers::DWP::OverridesForm.new(model: partner)
       end
@@ -68,15 +66,6 @@ module Providers
       def correct_dwp_result?
         @form.correct_dwp_result?
       end
-
-      def hmrc_call_enabled?
-        Setting.collect_hmrc_data?
-      end
-
-      def make_hmrc_call?
-        hmrc_call_enabled?
-      end
-      alias_method :display_hmrc_text?, :make_hmrc_call?
     end
   end
 end
