@@ -200,7 +200,7 @@ en:
             positive_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client receives a passporting benefit
             negative_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client does not get a passporting benefit
           body:
-            unsuccessful: Your client’s benefit status cannot be checked at this time. You will need to tell us about any passporting benefits.
+            unsuccessful: Your client's benefit status cannot be checked at this time. You will need to tell us about any passporting benefits.
       fallback:
         show:
           tab_title: Does your client get a passporting benefit?

@@ -64,6 +64,7 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
       scenario "I am routed from Check your answers to an interrupt page and then to the benefit confirmation page" do
         click_on "Save and continue"
         expect(page).to have_css("h1", text: "There was a problem connecting to DWP")
+        expect(page).to have_css("p.govuk-body", text: "Your client's benefit status cannot be checked at this time. You will need to tell us about any passporting benefits.")
 
         click_on "Continue"
         expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
