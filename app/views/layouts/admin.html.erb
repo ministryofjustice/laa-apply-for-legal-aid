@@ -1,16 +1,4 @@
 <div class="admin-page">
-  <nav class="app-navigation govuk-!-margin-bottom-8" aria-label="Top level admin navigation">
-    <ul class="app-navigation__list govuk-width-container">
-      <%= admin_nav_to t(".applications"), admin_root_path %>
-      <%= admin_nav_to t(".edit_settings"), admin_settings_path %>
-      <%= admin_nav_to t(".ccms_queue"), admin_ccms_queues_path %>
-      <%= admin_nav_to t(".submitted_applications_report"), admin_submitted_applications_report_path %>
-      <%= admin_nav_to t(".feedback"), admin_feedback_path %>
-      <%= admin_nav_to t(".reports"), admin_reports_path %>
-      <%= admin_nav_to t(".user_admin"), admin_user_dashboard_path %>
-    </ul>
-  </nav>
-
   <%= yield %>
 </div>
 

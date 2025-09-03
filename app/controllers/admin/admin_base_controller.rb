@@ -1,6 +1,6 @@
 module Admin
   class AdminBaseController < ApplicationController
-    before_action :check_vpn_ipaddr, :authenticate_admin_user!, :set_cache_buster
+    before_action :check_vpn_ipaddr, :authenticate_admin_user!, :set_cache_buster, :set_scope
     layout "admin".freeze
 
   protected
@@ -19,6 +19,10 @@ module Admin
     end
 
   private
+
+    def set_scope
+      @scope = :admin
+    end
 
     def set_cache_buster
       response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
