@@ -6,6 +6,7 @@ module Providers
       include ApplicantDetailsCheckable
       include BenefitCheckSkippable
 
+      # OPTIMIZE: This will call check_benefits twice (on show and update). Is this neccessary? I cannot see why! JS
       before_action :check_benefits, :benefit_check_status
 
       def show
