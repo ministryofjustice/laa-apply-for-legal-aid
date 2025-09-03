@@ -10,4 +10,16 @@ module GovukFormHelpers
   def govuk_choose(locator, **)
     choose(locator, **, visible: :all)
   end
+
+  def expect_govuk_error_summary(text: nil)
+    summary = page.find("div.govuk-error-summary > div[role='alert']")
+
+    expect(summary).to have_css(
+      "h2",
+      class: "govuk-error-summary__title",
+      text: "There is a problem",
+    )
+
+    expect(summary).to have_link(text)
+  end
 end

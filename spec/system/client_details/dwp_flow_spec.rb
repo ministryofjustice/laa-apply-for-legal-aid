@@ -73,6 +73,7 @@ RSpec.describe "Client and case details section - DWP result flows", :vcr do
 
   context "when the applicant has a partner and does not receive a passported benefit" do
     let(:with_partner?) { true }
+
     let(:benefit_check_response) do
       {
         benefit_checker_status: "No",
@@ -94,6 +95,9 @@ RSpec.describe "Client and case details section - DWP result flows", :vcr do
 
       click_on "This is not correct"
       expect(page).to have_css("h1", text: "Does your client get the passporting benefit on their own or with a partner")
+
+      click_on "Save and continue"
+      expect_govuk_error_summary(text: "Select if the client gets the passporting benefit on their own or with a partner")
 
       govuk_choose("On their own")
       click_on "Save and continue"
