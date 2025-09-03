@@ -31,6 +31,9 @@ cy:
         phase: ateB
         phase_banner_html: This is a new service – your %{link} will help us to improve it.
         title: dia lagel rof ylppA
+        development: Development
+        staging: Staging
+        uat: UAT
     header:
       legal_aid_agency: Legal Aid Agency
     logout:

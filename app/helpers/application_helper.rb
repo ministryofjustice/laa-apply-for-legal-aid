@@ -87,4 +87,12 @@ module ApplicationHelper
   def application_ref_non_breaking(application_ref)
     application_ref.tr("-", "\u2011")
   end
+
+  def phase_banner_tag
+    return { text: t("layouts.application.header.staging"), colour: "orange" } if HostEnv.staging?
+    return { text: t("layouts.application.header.uat"), colour: "purple" } if HostEnv.uat?
+    return { text: t("layouts.application.header.development"), colour: "green" } if HostEnv.development?
+
+    { text: t("layouts.application.header.phase") }
+  end
 end

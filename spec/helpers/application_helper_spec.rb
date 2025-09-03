@@ -71,4 +71,40 @@ RSpec.describe ApplicationHelper do
       end
     end
   end
+
+  describe "#phase_banner_tag" do
+    subject(:banner) { phase_banner_tag }
+
+    context "when on the develoment environment" do
+      before do
+        allow(HostEnv).to receive(:environment).and_return(:development)
+      end
+
+      it { is_expected.to eq({ text: "Development", colour: "green" }) }
+    end
+
+    context "when on the staging environment" do
+      before do
+        allow(HostEnv).to receive(:environment).and_return(:staging)
+      end
+
+      it { is_expected.to eq({ text: "Staging", colour: "orange" }) }
+    end
+
+    context "when on the UAT environment" do
+      before do
+        allow(HostEnv).to receive(:environment).and_return(:uat)
+      end
+
+      it { is_expected.to eq({ text: "UAT", colour: "purple" }) }
+    end
+
+    context "when on the production environment" do
+      before do
+        allow(HostEnv).to receive(:environment).and_return(:production)
+      end
+
+      it { is_expected.to eq({ text: "Beta" }) }
+    end
+  end
 end

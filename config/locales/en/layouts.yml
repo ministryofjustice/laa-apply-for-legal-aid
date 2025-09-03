@@ -32,6 +32,9 @@ en:
         title: Apply for civil legal aid
         notice: Notice
         my_profile: My profile
+        development: Development
+        staging: Staging
+        uat: UAT
     header:
       legal_aid_agency: Legal Aid Agency
     logout:
