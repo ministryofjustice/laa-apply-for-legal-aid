@@ -29,7 +29,7 @@ module Providers
         return false if draft?
 
         if confirm_dwp_result.nil? || RESPONSE_ATTRIBUTES.exclude?(confirm_dwp_result)
-          errors.add(:confirm_dwp_result, I18n.t("providers.confirm_dwp_non_passported_applications.show.error"))
+          errors.add(:confirm_dwp_result, I18n.t("providers.dwp.partner_overrides.show.error"))
         end
       end
     end
