@@ -17,11 +17,12 @@ module Providers
       end
 
       def update
-        # if the page returns here, the user has clicked Yes, continue
-        # This means that DWP was correct and benefits not received
-        # Update applicant with
-        # Update application status
-        # details_checked! unless details_checked?
+        # If this action is invoked then the "Yes, continue" has been pressed (i.e. they have accepted the DWP result)
+        # In this case we can simply go forward but should mark the applicants details as having been checked in case
+        # they have have gotten to this page via a Back clik or backpage following a "This is not correct"
+        #
+        # ps: if they have clicked "This is not correct" see the check client details controller
+        details_checked! unless details_checked?
         go_forward
       end
 

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::CheckClientDetailsController do
-  let(:application) { create(:legal_aid_application, :with_proceedings, :with_applicant_and_address) }
+  let(:application) { create(:legal_aid_application, :with_proceedings, :with_applicant_and_address, :at_checking_applicant_details) }
   let(:application_id) { application.id }
 
   describe "GET /providers/applications/:legal_aid_application_id/check_client_details" do
@@ -16,26 +16,37 @@ RSpec.describe Providers::CheckClientDetailsController do
     context "when the provider is authenticated" do
       before do
         login_as application.provider
-        get_request
       end
 
       it "returns success" do
+        get_request
+
         expect(response).to be_successful
       end
 
       it "displays the applicant's full name" do
+        get_request
+
         full_name = "#{application.applicant.first_name} #{application.applicant.last_name}"
-        expect(unescaped_response_body).to include(full_name)
+        expect(page).to have_content(full_name)
       end
 
       it "displays the applicant date of birth in the required format" do
+        get_request
+
         dob_formatted = application.applicant.date_of_birth.strftime("%e %B %Y")
-        expect(unescaped_response_body).to include(dob_formatted)
+        expect(page).to have_content(dob_formatted)
       end
 
       it "displays the applicant national insurance number" do
+        get_request
+
         ni_number = application.applicant.national_insurance_number
-        expect(unescaped_response_body).to include(ni_number)
+        expect(page).to have_content(ni_number)
+      end
+
+      it "sets state machine to overriding_dwp_result" do
+        expect { get_request }.to change { application.reload.state }.from("checking_applicant_details").to("overriding_dwp_result")
       end
     end
 
