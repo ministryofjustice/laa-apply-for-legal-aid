@@ -119,16 +119,11 @@ Feature: passported_journey completes application
   Scenario: When Provider accepts non-passported DWP result, continues, then goes back to change
     Given I complete the non-passported journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing 'DWP records show that your client does not get a passporting benefit'
-    When I click "Continue"
-    Then I should be on a page showing "Does your client get a passporting benefit?"
-    When I choose 'No'
-    And I click 'Save and continue'
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
+    When I click "Yes, continue"
     Then I should be on a page showing "What you need to do"
     And I click link 'Back'
-    And I should be on a page showing 'Does your client get a passporting benefit?'
-    Then I choose 'Yes'
-    And I click 'Save and continue'
+    Then I click link 'This is not correct'
     And I should be on a page showing "Check your client's details"
     And I click 'Save and continue'
     And I should be on a page showing 'Which passporting benefit does your client get?'
@@ -146,11 +141,8 @@ Feature: passported_journey completes application
   Scenario: A negative benefit check allows the solicitor to override the result
     Given I complete the non-passported journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing 'DWP records show that your client does not get a passporting benefit'
-    When I click "Continue"
-    Then I should be on a page showing "Does your client get a passporting benefit?"
-    When I choose 'Yes'
-    And I click 'Save and continue'
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
+    When I click link 'This is not correct'
     Then I should be on a page showing "Check your client's details"
     Then I click the first link "Client name"
     Then I should be on a page showing "Enter your client's details"

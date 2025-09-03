@@ -4,11 +4,8 @@ Feature: Pathways from check your answers
   Scenario: I do not use delegated functions
     Given I complete the journey as far as check your answers
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
-    When I click "Continue"
-    Then I should be on a page showing "Does your client get a passporting benefit?"
-    When I choose 'No'
-    Then I click 'Save and continue'
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
+    When I click "Yes, continue"
     Then I should be on a page showing 'What you need to do'
     When I click 'Continue'
     Then I should be on a page showing "What is your client's employment status?"
@@ -30,11 +27,8 @@ Feature: Pathways from check your answers
     And a "bank holiday" exists in the database
     And I used delegated functions
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
-    When I click "Continue"
-    Then I should be on a page showing "Does your client get a passporting benefit?"
-    When I choose 'No'
-    Then I click 'Save and continue'
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
+    When I click "Yes, continue"
     Then I should be on a page showing 'What you need to do'
     When I click 'Continue'
     Then I should be on a page showing "What is your client's employment status?"
@@ -53,11 +47,8 @@ Feature: Pathways from check your answers
     And a "bank holiday" exists in the database
     And I used delegated functions
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
-    When I click "Continue"
-    Then I should be on a page showing "Does your client get a passporting benefit?"
-    When I choose 'No'
-    Then I click 'Save and continue'
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
+    When I click "Yes, continue"
     Then I should be on a page showing 'What you need to do'
     When I click 'Continue'
     Then I should be on a page showing "What is your client's employment status?"
@@ -151,6 +142,6 @@ Feature: Pathways from check your answers
   Scenario: I click the back button on the DWP override page
     Given I complete the non-passported journey as far as check your answers
     When I click 'Save and continue'
-    Then I should be on a page showing 'DWP records show that your client does not get a passporting benefit'
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
     When I click link 'Back'
     Then I should be on a page showing 'Check your answers'
