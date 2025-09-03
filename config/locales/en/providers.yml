@@ -194,11 +194,11 @@ en:
           tab_title:
             unsuccessful: There was a problem connecting to DWP
             positive: DWP records show that your client receives a passporting benefit
-            negative: DWP records show that your client does not get a passporting benefit
+            negative: DWP records show that your client does not get a passporting benefit. Is this correct?
           title:
             unsuccessful_html: There was a problem connecting to <abbr title='Department for Work and Pensions'>DWP</abbr>
             positive_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client receives a passporting benefit
-            negative_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client does not get a passporting benefit
+            negative_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client does not get a passporting benefit. Is this correct?
           body:
             unsuccessful: Your client's benefit status cannot be checked at this time. You will need to tell us about any passporting benefits.
       fallback:

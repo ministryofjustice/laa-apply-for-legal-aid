@@ -39,7 +39,11 @@ RSpec.describe "Client and case details section - DWP result flows", :vcr do
     end
 
     scenario "when the provider agrees, they are routed through an interrupt page to the means path" do
-      expect(page).to have_css("h1", text: "DWP records show that your client does not get a passporting benefit")
+      expect(page)
+        .to have_title("DWP records show that your client does not get a passporting benefit. Is this correct?")
+        .and have_css("h1", text: "DWP records show that your client does not get a passporting benefit. Is this correct?")
+        .and have_button(text: "Yes, continue")
+        .and have_link(text: "This is not correct", href: providers_legal_aid_application_check_client_details_path(@legal_aid_application))
 
       click_on "Yes, continue"
       # start of the income means flow
@@ -48,8 +52,7 @@ RSpec.describe "Client and case details section - DWP result flows", :vcr do
     end
 
     scenario "when the provider disagrees, they are routed through an interrupt page to the capital introductions via the dwp override path" do
-      expect(page).to have_css("h1", text: "DWP records show that your client does not get a passporting benefit")
-      expect(page).to have_link(text: "This is not correct", href: providers_legal_aid_application_check_client_details_path(@legal_aid_application))
+      expect(page).to have_css("h1", text: "DWP records show that your client does not get a passporting benefit. Is this correct?")
 
       click_on "This is not correct"
       expect(page).to have_css("h1", text: "Check your client's details")
@@ -78,7 +81,7 @@ RSpec.describe "Client and case details section - DWP result flows", :vcr do
     end
 
     scenario "when the provider agrees, they are routed through an interrupt page to the means path" do
-      expect(page).to have_css("h1", text: "DWP records show that your client does not get a passporting benefit")
+      expect(page).to have_css("h1", text: "DWP records show that your client does not get a passporting benefit. Is this correct?")
 
       click_on "Yes, continue"
       # start of the income means flow
@@ -87,7 +90,7 @@ RSpec.describe "Client and case details section - DWP result flows", :vcr do
     end
 
     scenario "when the provider disagrees, and the client receives the benefit, they are routed through an interrupt page to the capital introductions via the dwp override path" do
-      expect(page).to have_css("h1", text: "DWP records show that your client does not get a passporting benefit")
+      expect(page).to have_css("h1", text: "DWP records show that your client does not get a passporting benefit. Is this correct?")
 
       click_on "This is not correct"
       expect(page).to have_css("h1", text: "Does your client get the passporting benefit on their own or with a partner")
@@ -110,7 +113,7 @@ RSpec.describe "Client and case details section - DWP result flows", :vcr do
     end
 
     scenario "when the provider disagrees, and the client receives a joint benefit, they are routed through an interrupt page to the capital introductions via the dwp override path" do
-      expect(page).to have_css("h1", text: "DWP records show that your client does not get a passporting benefit")
+      expect(page).to have_css("h1", text: "DWP records show that your client does not get a passporting benefit. Is this correct?")
 
       click_on "This is not correct"
       expect(page).to have_css("h1", text: "Does your client get the passporting benefit on their own or with a partner")
