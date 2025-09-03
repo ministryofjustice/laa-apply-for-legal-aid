@@ -321,7 +321,6 @@ generic-slack-fail-post-step: &generic-slack-fail-post-step
 
 workflows:
   open_pr:
-    max_auto_reruns: 1
     jobs:
       - lint_checks:
           filters:
