@@ -210,7 +210,7 @@ Background: I have started an application and not linked or copied it
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
     Then I click 'Yes, continue'
     Then I should be on a page showing "What you need to do"
     When I click 'Continue'
@@ -353,7 +353,7 @@ Background: I have started an application and not linked or copied it
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
     Then I click 'Yes, continue'
     Then I should be on a page showing "What you need to do"
     When I click 'Continue'
@@ -503,12 +503,12 @@ Background: I have started an application and not linked or copied it
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
     Then I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
 
   @javascript @vcr
   Scenario: I want to change client details after a failed benefit check
     Given I start the application with a negative benefit check result
-    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
     Then I click link 'This is not correct'
     Then I should be on a page showing "Check your client's details"
     Then I click the first link 'Client name'

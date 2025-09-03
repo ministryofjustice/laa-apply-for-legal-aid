@@ -4,13 +4,12 @@ Feature: partner_means_assessment dwp override
     Given I complete the journey as far as check client details with a partner
 
     When I click 'Save and continue'
-    Then I should be on a page with title "DWP records show that your client does not get a passporting benefit"
+    Then I should be on a page with title "DWP records show that your client does not get a passporting benefit. Is this correct?"
 
-    When I click "Continue"
-    Then I should be on a page showing "Does your client get a passporting benefit?"
-
-    When I choose "Yes, they get a passporting benefit with a partner"
-    And I click 'Save and continue'
+    When I click link "This is not correct"
+    Then I should be on a page showing "Does your client get the passporting benefit on their own or with a partner?"
+    When I choose "With a partner"
+    And I click "Save and continue"
     Then I should be on a page with title "Check your client's and their partner's details"
 
     When I click link "Change Partner name"
