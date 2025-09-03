@@ -24,7 +24,7 @@ RSpec.describe "Client and case details section - DWP result flows", :vcr do
     scenario "the provider is routed through an interrupt page to the capital introductions" do
       expect(page).to have_css("h1", text: "DWP records show that your client receives a passporting benefit")
 
-      click_on "Continue"
+      click_on "Save and continue"
       expect(page.current_url).to eql providers_legal_aid_application_capital_introduction_url(@legal_aid_application)
       expect(page).to have_css("h1", text: "What you need to do")
     end

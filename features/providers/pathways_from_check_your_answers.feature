@@ -18,7 +18,7 @@ Feature: Pathways from check your answers
     Given I complete the passported journey as far as check your answers for client details
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
-    Then I click 'Continue'
+    Then I click 'Save and continue'
     Then I should be on the 'capital_introduction' page showing "What you need to do"
 
   @javascript @vcr

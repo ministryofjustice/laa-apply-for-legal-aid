@@ -17,7 +17,7 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
       click_on "Save and continue"
       expect(page).to have_css("h1", text: "There was a problem connecting to DWP")
 
-      click_on "Continue"
+      click_on "Save and continue"
       expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
 
       govuk_choose("Yes")
@@ -29,7 +29,7 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
       click_on "Save and continue"
       expect(page).to have_css("h1", text: "There was a problem connecting to DWP")
 
-      click_on "Continue"
+      click_on "Save and continue"
       expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
 
       govuk_choose("No")
@@ -45,7 +45,7 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
         click_on "Save and continue"
         expect(page).to have_css("h1", text: "There was a problem connecting to DWP")
 
-        click_on "Continue"
+        click_on "Save and continue"
         expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
 
         govuk_choose("Yes, they get a passporting benefit with a partner")
@@ -66,7 +66,7 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
         expect(page).to have_css("h1", text: "There was a problem connecting to DWP")
         expect(page).to have_css("p.govuk-body", text: "Your client's benefit status cannot be checked at this time. You will need to tell us about any passporting benefits.")
 
-        click_on "Continue"
+        click_on "Save and continue"
         expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
 
         click_on "Save and continue"
@@ -93,7 +93,7 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
         click_on "Save and continue"
         expect(page).to have_css("h1", text: "DWP records show that your client receives a passporting benefit")
 
-        click_on "Continue"
+        click_on "Save and continue"
         expect(page).to have_css("h1", text: "What you need to do") # on capital_introductions page
       end
     end
