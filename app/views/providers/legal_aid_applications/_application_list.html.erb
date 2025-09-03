@@ -4,35 +4,12 @@
 
         table.with_head do |head|
           head.with_row do |row|
-            row.with_cell(html_attributes: { "aria-sort": "none" }) do
-              tag.span(class: "aria-sort-description") do
-                concat t(".applicant_name")
-                concat tag.span(class: "sort-direction-indicator")
-              end
-            end
-            row.with_cell(html_attributes: { "aria-sort": "descending" }) do
-              tag.span(class: "aria-sort-description") do
-                concat t(".created_at")
-                concat tag.span(class: "sort-direction-indicator")
-              end
-            end
-            row.with_cell do
-              tag.span(class: "aria-sort-description") do
-                concat t(".application_ref_html")
-                concat tag.span(class: "sort-direction-indicator")
-              end
-            end
-            row.with_cell(html_attributes: { "aria-sort": "none" }) do
-              tag.span(class: "aria-sort-description") do
-                concat t(".certificate_type")
-                concat tag.span(class: "sort-direction-indicator")
-              end
-            end
+            row.with_cell(html_attributes: { "aria-sort": "none" }, text: t(".applicant_name"))
+            row.with_cell(html_attributes: { "aria-sort": "descending" }, text: t(".created_at"))
+            row.with_cell(text: t(".application_ref_html"))
+            row.with_cell(html_attributes: { "aria-sort": "none" }, text: t(".certificate_type"))
             if @scope.in? %i[in_progress voided]
-              row.with_cell do
-                concat t(".action")
-                concat tag.span(class: "sort-direction-indicator")
-              end
+              row.with_cell(text: t(".action"))
             end
           end
         end
@@ -47,7 +24,7 @@
               row.with_cell do
                 if application.special_children_act_proceedings? && application.used_delegated_functions?
                   concat t(".substantive")
-                  concat tag.span(class: "govuk-body-s govuk-!-display-block") {
+                  concat tag.span(class: "govuk-body-s govuk-!-margin-bottom-0 govuk-!-display-block") {
                     t(".backdated_to", date: l(application.used_delegated_functions_on, format: :short_date))
                   }
                 elsif application.used_delegated_functions?
