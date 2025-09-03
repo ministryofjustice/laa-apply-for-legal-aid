@@ -3,7 +3,6 @@ module Admin
     class SubmissionsController < AdminBaseController
       before_action :authenticate_admin_user!
       before_action :load_history, only: %i[download_xml_response download_xml_request]
-      layout "admin".freeze
 
       def show
         legal_aid_application

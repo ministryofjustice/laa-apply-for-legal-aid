@@ -1,7 +1,6 @@
 module Admin
   class AdminBaseController < ApplicationController
     before_action :check_vpn_ipaddr, :authenticate_admin_user!, :set_cache_buster, :set_scope
-    layout "admin".freeze
 
   protected
 
