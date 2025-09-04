@@ -462,6 +462,8 @@ en:
           latest-incident-heading: Latest incident details
           date_of_latest_incident: Date of incident
           notification_of_latest_incident: Date your client contacted you about the latest incident
+          when-contact-was-made-heading: When contact was made
+          first-contact-date: Date your client contacted you
         matter_opposition:
           matter_opposed_reason: Reasons why the matter is opposed
           matter_opposed_reason_heading: Why the matter is opposed
@@ -682,6 +684,7 @@ en:
         date_of_birth_label: Date of birth
         occurred_on_label: When did the incident occur?
         told_on_label: When did your client contact you about the latest domestic abuse incident?
+        first_contact_date_label: When did your client first contact you about this matter?
         date_hint: "For example %{options}."
         used_delegated_functions_on_label: Date you used delegated functions
         used_delegated_functions_on_hint: "For example, %{options}."

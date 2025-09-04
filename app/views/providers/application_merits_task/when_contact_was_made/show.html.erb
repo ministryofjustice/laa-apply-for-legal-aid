@@ -1,0 +1,22 @@
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_when_contact_was_made_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
+    <%= page_template(page_title: t(".h1-heading"),
+                      template: :basic,
+                      back_link: {},
+                      form:) do %>
+
+    <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: page_title } do %>
+      <%= form.govuk_date_field :first_contact_date,
+                                legend: { text: t("shared.forms.date_input_fields.first_contact_date_label"), hidden: true },
+                                hint: { text: t("shared.forms.date_input_fields.date_hint", options: number_of_days_ago(0)) } %>
+    <% end %>
+
+    <div class="govuk-!-padding-bottom-4"></div>
+
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
+<% end %>
