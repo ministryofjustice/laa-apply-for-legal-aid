@@ -8,6 +8,7 @@ Feature: Public law family merits appeal question flow
 
     Then I should see "About the application"
     And I should see 'Opponents Not started'
+    And I should see 'When contact was made Not started'
     And I should see 'Statement of case Not started'
     And I should see 'Children involved in this application Not started'
 
@@ -33,6 +34,17 @@ Feature: Public law family merits appeal question flow
 
     When I choose "No"
     And I click 'Save and continue'
+
+    ############################
+    # when contact was made
+    ############################
+
+    Then I should be on a page with title "When did your client first contact you about this matter?"
+    Then I fill "application_merits_task_incident_first_contact_date_3i" with "5"
+    Then I fill "application_merits_task_incident_first_contact_date_2i" with "5"
+    Then I fill "application_merits_task_incident_first_contact_date_1i" with "25"
+
+    When I click 'Save and continue'
 
     ############################
     # statement of case
