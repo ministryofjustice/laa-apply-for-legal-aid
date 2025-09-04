@@ -1,14 +1,6 @@
 ---
 cy:
   layouts:
-    admin:
-      applications: snoitacilppA
-      edit_settings: sgnitteS
-      ccms_queue: SMCC
-      submitted_applications_report: snoitacilppA dettimbuS
-      feedback: kcabdeeF
-      reports: stropeR
-      user_admin: nimda resU
     application:
       footer:
         accessibility_statement: tnemetats ytilibisseccA
@@ -34,6 +26,16 @@ cy:
         development: Development
         staging: Staging
         uat: UAT
+      service_navigation:
+        applications: snoitacilppA
+        edit_settings: sgnitteS
+        ccms_queue: SMCC
+        search: hcraeS
+        submitted_applications_report: snoitacilppA dettimbuS
+        feedback: kcabdeeF
+        reports: stropeR
+        user_admin: nimda resU
+        your_applications: snoitacilppa ruoY
     header:
       legal_aid_agency: Legal Aid Agency
     logout:

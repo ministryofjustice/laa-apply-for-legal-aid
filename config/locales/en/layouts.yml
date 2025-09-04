@@ -1,14 +1,6 @@
 ---
 en:
   layouts:
-    admin:
-      applications: Apps
-      edit_settings: Settings
-      ccms_queue: CCMS
-      submitted_applications_report: Submitted
-      feedback: Feedback
-      reports: Reports
-      user_admin: User admin
     application:
       footer:
         accessibility_statement: Accessibility statement
@@ -35,6 +27,16 @@ en:
         development: Development
         staging: Staging
         uat: UAT
+      service_navigation:
+        applications: Apps
+        edit_settings: Settings
+        ccms_queue: CCMS
+        feedback: Feedback
+        reports: Reports
+        search: Search
+        submitted_applications_report: Submitted
+        user_admin: User admin
+        your_applications: Your applications
     header:
       legal_aid_agency: Legal Aid Agency
     logout:

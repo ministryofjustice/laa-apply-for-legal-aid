@@ -1,111 +1,140 @@
-<%= back_link %>
-<div class='govuk-body'>
-  <h1 class="govuk-heading-l">Legal Aid Application</h1>
-  <dl class="govuk-body kvp">
-    <dt>Reference</dt>
-    <dd><%= @legal_aid_application.application_ref %></dd>
-    <dt>State</dt>
-    <dd><%= @legal_aid_application.state %></dd>
-  </dl>
-  <h2 class="govuk-heading-m">Reports</h2>
-  <dl class="govuk-body kvp">
-    <% if @legal_aid_application&.means_report&.document.present? %>
-      <dt>Means report</dt>
-      <dd><%= govuk_link_to("Download means report", download_means_report_admin_legal_aid_applications_submission_path(@legal_aid_application)) %></dd>
-    <% end %>
-    <% if @legal_aid_application&.merits_report&.document.present? %>
-      <dt>Merits report</dt>
-      <dd><%= govuk_link_to("Download merits report", download_merits_report_admin_legal_aid_applications_submission_path(@legal_aid_application)) %>
-    <% end %>
-    <% if @legal_aid_application&.hmrc_responses.any? %>
-      <% @legal_aid_application.hmrc_responses.each do |hmrc_response| %>
-        <%= govuk_details(summary_text: "HMRC response - use case #{hmrc_response.use_case} for the #{hmrc_response.owner_type.downcase}") do %>
-            <% if hmrc_response.response.present? %>
-                <% if hmrc_response&.response['data'].present? %>
-                <% hmrc_response.response["data"].each do |hrr_hash| %>
-                  <% next if hrr_hash.keys.eql?(["individuals/matching/individual"]) %>
-                  <%= format_hash(hrr_hash) %>
+<%= page_template(column_width: :full) do %>
+      <h1 class="govuk-heading-xl">Legal Aid Application</h1>
+      <%= govuk_summary_list(classes: "govuk-summary-list--no-border") do |summary_list|
+            summary_list.with_row do |row|
+              row.with_key { "Reference" }
+              row.with_value { @legal_aid_application.application_ref }
+            end
+            summary_list.with_row do |row|
+              row.with_key { "State" }
+              row.with_value { @legal_aid_application.state }
+            end
+          end %>
+
+      <h2 class="govuk-heading-l">Reports</h2>
+      <dl class="govuk-body kvp">
+        <% if @legal_aid_application&.means_report&.document.present? %>
+          <dt>Means report</dt>
+          <dd><%= govuk_link_to("Download means report", download_means_report_admin_legal_aid_applications_submission_path(@legal_aid_application)) %></dd>
+        <% end %>
+        <% if @legal_aid_application&.merits_report&.document.present? %>
+          <dt>Merits report</dt>
+          <dd><%= govuk_link_to("Download merits report", download_merits_report_admin_legal_aid_applications_submission_path(@legal_aid_application)) %>
+        <% end %>
+        <% if @legal_aid_application&.hmrc_responses.any? %>
+          <% @legal_aid_application.hmrc_responses.each do |hmrc_response| %>
+            <%= govuk_details(summary_text: "HMRC response - use case #{hmrc_response.use_case} for the #{hmrc_response.owner_type.downcase}") do %>
+                <% if hmrc_response.response.present? %>
+                    <% if hmrc_response&.response['data'].present? %>
+                    <% hmrc_response.response["data"].each do |hrr_hash| %>
+                      <% next if hrr_hash.keys.eql?(["individuals/matching/individual"]) %>
+                      <%= format_hash(hrr_hash) %>
+                    <% end %>
+                  <% else %>
+                    <%= format_hash(hmrc_response.response) %>
+                  <% end %>
+                <% else %>
+                  Submission created, awaiting first check
                 <% end %>
-              <% else %>
-                <%= format_hash(hmrc_response.response) %>
-              <% end %>
-            <% else %>
-              Submission created, awaiting first check
             <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-  </dl>
-  <% if @legal_aid_application.cfe_submissions.present? %>
-    <% @legal_aid_application.cfe_submissions.each do |cfe_submission| %>
-      <h2 class="govuk-heading-m">CFE Submission (<%= cfe_submission.id %>)</h2>
-      <dl class="govuk-body kvp">
-        <dt>State</dt>
-        <dd><%= cfe_submission.aasm_state %></dd>
-        <dt>assessment_id</dt>
-        <dd><%= cfe_submission.assessment_id %></dd>
-        <dt>error message</dt>
-        <dd><%= cfe_submission.error_message ||= "N/A" %></dd>
-      </dl>
-      <details>
-        <section>
-          <% if cfe_submission.result&.result %>
-            <%= format_hash(JSON.parse(cfe_submission.result.result)) %>
-          <% else %>
-            <p class="govuk-body">No result available</p>
           <% end %>
-        </section>
-        <%= govuk_details(summary_text: "CFE result") do %>
         <% end %>
-      </details>
-    <% end %>
-  <% end %>
-</div>
-<div class="govuk-body">
-  <% if @legal_aid_application.ccms_submission.present? %>
-    <h2 class="govuk-heading-m">CCMS Submission (<%= @legal_aid_application.ccms_submission.id %>)</h2>
-    <section>
-      <dl class="govuk-body kvp">
-        <dt>State</dt>
-        <dd><%= @legal_aid_application.ccms_submission.aasm_state %></dd>
-        <dt>Case CCMS reference</dt>
-        <dd><%= @legal_aid_application.ccms_submission.case_ccms_reference %></dd>
-        <dt>Applicant CCMS reference</dt>
-        <dd><%= @legal_aid_application.ccms_submission.applicant_ccms_reference %></dd>
-        <dt>Applicant poll count</dt>
-        <dd><%= @legal_aid_application.ccms_submission.applicant_poll_count ||= "N/A" %></dd>
-        <dt>Case poll count</dt>
-        <dd><%= @legal_aid_application.ccms_submission.case_poll_count ||= "N/A" %></dd>
       </dl>
-    </section>
-    <% if @legal_aid_application.ccms_submission.submission_history.present? %>
-      <h2 class="govuk-heading-m">CCMS Submission histories</h2>
-        <dl class="govuk-body kvp">
-          <% @legal_aid_application.ccms_submission.submission_history.order(:created_at).each do |submission_history| %>
-            <dt>Created <%= submission_history.created_at.strftime("%d %B %Y at %H:%M:%S") %></dt>
-            <dd><%= submission_history.id %></dd>
-            <dt>From state</dt>
-            <dd><%= submission_history.from_state %></dd>
-            <dt>To state</dt>
-            <dd><%= submission_history.to_state %></dd>
-            <dt>Success</dt>
-            <dd><%= submission_history.success %></dd>
-            <% if submission_history.details.present? %>
-              <dt>Details</dt>
-              <dd><%= submission_history.details %></dd>
+
+      <% if @legal_aid_application.cfe_submissions.present? %>
+        <% @legal_aid_application.cfe_submissions.each do |cfe_submission| %>
+          <%= govuk_summary_card(title: "CFE Submission (#{cfe_submission.id})") do |card|
+                card.with_summary_list do |summary_list|
+                  summary_list.with_row do |row|
+                    row.with_key { "State" }
+                    row.with_value { cfe_submission.aasm_state }
+                  end
+                  summary_list.with_row do |row|
+                    row.with_key { "assessment_id" }
+                    row.with_value { cfe_submission.assessment_id }
+                  end
+                  summary_list.with_row do |row|
+                    row.with_key { "error message" }
+                    row.with_value { cfe_submission.error_message ||= "N/A" }
+                  end
+                end
+              end %>
+          <%= govuk_details(summary_text: "CFE result") do %>
+            <% if cfe_submission.result&.result %>
+              <%= format_hash(JSON.parse(cfe_submission.result.result)) %>
+            <% else %>
+              <p class="govuk-body">No result available</p>
             <% end %>
-            <dt class="govuk-!-margin-bottom-5"></dt>
-            <dd>
-              <% if submission_history.request.present? %>
-                <%= govuk_link_to "Download XML Request", download_xml_request_admin_legal_aid_applications_submission_path(submission_history) %>
-              <% end %>
-              <br>
-              <% if submission_history.response.present? %>
-                <%= govuk_link_to "Download XML Response", download_xml_response_admin_legal_aid_applications_submission_path(submission_history) %>
-              <% end %>
-            </dd>
+          <% end %>
         <% end %>
-        </dl>
       <% end %>
-    <% end %>
-</div>
+
+      <% if @legal_aid_application.ccms_submission.present? %>
+        <%= govuk_summary_card(title: "CFE Submission (#{@legal_aid_application.ccms_submission.id})") do |card|
+              card.with_summary_list do |summary_list|
+                summary_list.with_row do |row|
+                  row.with_key { "State" }
+                  row.with_value { @legal_aid_application.ccms_submission.aasm_state }
+                end
+                summary_list.with_row do |row|
+                  row.with_key { "Case CCMS reference" }
+                  row.with_value { @legal_aid_application.ccms_submission.case_ccms_reference }
+                end
+                summary_list.with_row do |row|
+                  row.with_key { "Applicant CCMS reference" }
+                  row.with_value { @legal_aid_application.ccms_submission.applicant_ccms_reference }
+                end
+                summary_list.with_row do |row|
+                  row.with_key { "Applicant poll count" }
+                  row.with_value { @legal_aid_application.ccms_submission.applicant_poll_count.to_s ||= "N/A" }
+                end
+                summary_list.with_row do |row|
+                  row.with_key { "Case poll count" }
+                  row.with_value { @legal_aid_application.ccms_submission.case_poll_count.to_s ||= "N/A" }
+                end
+              end
+            end %>
+
+        <% if @legal_aid_application.ccms_submission.submission_history.present? %>
+          <h2 class="govuk-heading-l">CCMS Submission histories</h2>
+          <% @legal_aid_application.ccms_submission.submission_history.order(:created_at).each do |submission_history| %>
+            <%= govuk_summary_card(title: "CFE Submission (#{@legal_aid_application.ccms_submission.id})") do |card|
+                  if submission_history.request.present?
+                    card.with_action { govuk_link_to("Download XML Request", download_xml_request_admin_legal_aid_applications_submission_path(submission_history)) }
+                  end
+                  if submission_history.response.present?
+                    card.with_action { govuk_link_to("Download XML Response", download_xml_response_admin_legal_aid_applications_submission_path(submission_history)) }
+                  end
+                  card.with_summary_list(actions: false) do |summary_list|
+                    summary_list.with_row do |row|
+                      row.with_key { "State" }
+                      row.with_value { @legal_aid_application.ccms_submission.aasm_state }
+                    end
+                    summary_list.with_row do |row|
+                      row.with_key { "Created #{submission_history.created_at.strftime('%d %B %Y at %H:%M:%S')}" }
+                      row.with_value { submission_history.id }
+                    end
+                    summary_list.with_row do |row|
+                      row.with_key { "From state" }
+                      row.with_value { submission_history.from_state }
+                    end
+                    summary_list.with_row do |row|
+                      row.with_key { "To state" }
+                      row.with_value { submission_history.to_state }
+                    end
+                    summary_list.with_row do |row|
+                      row.with_key { "Success" }
+                      row.with_value { submission_history.success.to_s }
+                    end
+                    if submission_history.details.present?
+                      summary_list.with_row do |row|
+                        row.with_key { "Details" }
+                        row.with_value { submission_history.details }
+                      end
+                    end
+                  end
+                end %>
+            <% end %>
+          <% end %>
+      <% end %>
+<% end %>
