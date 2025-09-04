@@ -41,6 +41,7 @@ Rails.application.configure do
   # Set localhost to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = {
     host: ENV.fetch("MAILER_DEFAULT_URL", "localhost"),
+    protocol: "https",
     port: ENV.fetch("PORT", 3002),
   }
 
@@ -90,7 +91,10 @@ Rails.application.configure do
   config.x.logs_faraday_response = true
 
   config.x.application.host = ENV.fetch("HOST") { "localhost:#{ENV.fetch('PORT', 3002)}" }
-  Rails.application.routes.default_url_options[:host] = config.x.application.host
+  Rails.application.routes.default_url_options = {
+    host: config.x.application.host,
+    protocol: "https",
+  }
 
   config.active_storage.service = :local
   config.x.application.host_url = "http://#{config.x.application.host}"
