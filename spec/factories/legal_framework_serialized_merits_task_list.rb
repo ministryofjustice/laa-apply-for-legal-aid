@@ -505,6 +505,7 @@ FactoryBot.define do
           request_id: SecureRandom.uuid,
           application: {
             tasks: {
+              when_contact_was_made: [],
               opponent_name: [],
               statement_of_case: [],
               children_application: [],
@@ -530,6 +531,7 @@ FactoryBot.define do
           request_id: SecureRandom.uuid,
           application: {
             tasks: {
+              when_contact_was_made: [],
               opponent_name: [],
               statement_of_case: [],
               children_application: [],
@@ -555,6 +557,7 @@ FactoryBot.define do
           request_id: SecureRandom.uuid,
           application: {
             tasks: {
+              when_contact_was_made: [],
               opponent_name: [],
               statement_of_case: [],
               children_application: [],
@@ -580,6 +583,7 @@ FactoryBot.define do
           request_id: SecureRandom.uuid,
           application: {
             tasks: {
+              when_contact_was_made: [],
               opponent_name: [],
               statement_of_case: [],
               children_application: [],
