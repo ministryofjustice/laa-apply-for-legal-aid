@@ -208,6 +208,10 @@ en:
               date_is_in_the_future: Date the incident occurred must be in the past
               blank: Enter the date the incident occurred
               invalid_timeline: Date the incident occurred must be before the date your client told you about it
+            first_contact_date:
+              date_not_valid: Enter a valid date for when your client first contacted you about this matter
+              date_is_in_the_future: Date your client first contacted you must be in the past
+              blank: Enter the date your client first contacted you about this matter
             details:
               blank: Enter details of the incident
         application_merits_task/involved_child:
