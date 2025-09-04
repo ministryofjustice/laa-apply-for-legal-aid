@@ -18,10 +18,6 @@
                                               legend: { size: "l", tag: "h1", text: t(".title") },
                                               classes: "govuk-!-margin-bottom-6") do %>
 
-          <% if display_hmrc_text? %>
-            <p class="govuk-body"><%= t(".hmrc_text") %></p>
-          <% end %>
-
           <%= form.govuk_radio_button :confirm_dwp_result, "benefit_received", label: { text: t(".option_no") } %>
           <%= form.govuk_radio_button :confirm_dwp_result, "joint_benefit_with_partner", label: { text: t(".option_partner") } %>
         <% end %>
