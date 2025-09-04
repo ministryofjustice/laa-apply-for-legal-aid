@@ -6,13 +6,13 @@ module Providers
       prefix_step_with :dwp
 
       def show
-        @form = Providers::DWP::OverridesForm.new(model: partner)
+        @form = Providers::DWP::FallbackForm.new(model: partner)
       end
 
       def update
         return continue_or_draft if draft_selected?
 
-        @form = Providers::DWP::OverridesForm.new(form_params)
+        @form = Providers::DWP::FallbackForm.new(form_params)
 
         if @form.valid?
           remove_dwp_override if correct_dwp_result?

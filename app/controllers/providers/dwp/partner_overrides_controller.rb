@@ -6,13 +6,13 @@ module Providers
       include ApplicantDetailsCheckable
 
       def show
-        @form = Providers::DWP::OverridesForm.new(model: partner)
+        @form = Providers::DWP::PartnerOverridesForm.new(model: partner)
       end
 
       def update
         return continue_or_draft if draft_selected?
 
-        @form = Providers::DWP::OverridesForm.new(form_params)
+        @form = Providers::DWP::PartnerOverridesForm.new(form_params)
 
         if @form.valid?
           update_joint_benefit_response
