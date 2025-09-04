@@ -70,8 +70,7 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
         expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
 
         click_on "Save and continue"
-        expect(page).to have_css("h2", text: "There is a problem")
-        expect(page).to have_css("a", text: "Select yes if the DWP records are correct")
+        expect_govuk_error_summary(text: "Select yes if the DWP records are correct")
 
         govuk_choose("Yes")
         click_on "Save and continue"
