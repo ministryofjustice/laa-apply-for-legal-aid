@@ -4,11 +4,13 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
   before do
     login_as_a_provider
     allow(Setting).to receive_messages(collect_dwp_data?: collect_dwp_data)
+    allow(Setting).to receive_messages(collect_hmrc_data?: collect_hmrc_data)
     create_an_application_and_complete_client_details(with_partner)
     visit providers_legal_aid_application_check_provider_answers_path(@legal_aid_application)
   end
 
   let(:with_partner) { false }
+  let(:collect_hmrc_data) { true }
 
   context "when the collect_dwp_data setting is off" do
     let(:collect_dwp_data) { false }
@@ -18,7 +20,9 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
       expect(page).to have_css("h1", text: "There was a problem connecting to DWP")
 
       click_on "Save and continue"
-      expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
+      expect(page)
+        .to have_css("h1", text: "Does your client get a passporting benefit?")
+        .and have_content("If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.")
 
       govuk_choose("Yes")
       click_on "Save and continue"
@@ -30,7 +34,9 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
       expect(page).to have_css("h1", text: "There was a problem connecting to DWP")
 
       click_on "Save and continue"
-      expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
+      expect(page)
+        .to have_css("h1", text: "Does your client get a passporting benefit?")
+        .and have_content("If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.")
 
       click_on "Save and continue"
       expect_govuk_error_summary(text: "Select yes if your client gets a passporting benefit")
@@ -135,6 +141,23 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
         click_on "Save and continue"
         expect(page).to have_css("h1", text: "What you need to do") # on capital_introductions page
       end
+    end
+  end
+
+  context "when the collect_hmrc_data is off" do
+    let(:collect_dwp_data) { true }
+    let(:collect_hmrc_data) { false }
+
+    before { allow(BenefitCheckService).to receive(:call).and_return(false) }
+
+    scenario "the page does NOT display the HMRC warning" do
+      click_on "Save and continue"
+      expect(page).to have_css("h1", text: "There was a problem connecting to DWP")
+
+      click_on "Save and continue"
+      expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
+
+      expect(page).to have_no_content("HMRC")
     end
   end
 end

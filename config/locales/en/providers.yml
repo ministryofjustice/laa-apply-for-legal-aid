@@ -258,6 +258,8 @@ en:
           care_of_organisation_name: Organisation name
           yes_organisation: Yes, an organisation
           no_hint: Correspondence will be addressed to the client
+
+    # TODO: check if these can be removed
     confirm_dwp_non_passported_applications:
       show:
         tab_title: DWP records show that your client does not get a passporting benefit
