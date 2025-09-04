@@ -97,7 +97,7 @@ RSpec.describe "Client and case details section - DWP result flows", :vcr do
       expect(page).to have_css("h1", text: "Does your client get the passporting benefit on their own or with a partner")
 
       click_on "Save and continue"
-      expect_govuk_error_summary(text: "Select if the client gets the passporting benefit on their own or with a partner")
+      expect_govuk_error_summary(text: "Select if your client gets the passporting benefit on their own or with a partner")
 
       govuk_choose("On their own")
       click_on "Save and continue"

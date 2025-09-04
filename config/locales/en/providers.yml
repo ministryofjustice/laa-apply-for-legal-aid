@@ -207,14 +207,16 @@ en:
           title: Does your client get a passporting benefit?
           hmrc_text: If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.
           option_partner: Yes, they get a passporting benefit with a partner
-          error: Select yes if the DWP records are correct
+          error:
+            with_partner: Select if your client gets a passporting benefit
+            without_partner: Select yes if your client gets a passporting benefit
       partner_overrides:
         show:
           title: Does your client get the passporting benefit on their own or with a partner?
           option_no: On their own
           option_partner: With a partner
           hmrc_text: If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.
-          error: Select if the client gets the passporting benefit on their own or with a partner
+          error: Select if your client gets the passporting benefit on their own or with a partner
     cookies:
       show:
         page_title: Cookies on Apply for civil legal aid

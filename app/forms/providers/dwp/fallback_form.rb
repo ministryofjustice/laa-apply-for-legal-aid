@@ -6,7 +6,11 @@ module Providers
     private
 
       def error_scope
-        "providers.dwp.fallback.show.error"
+        if model.is_a?(Partner) && model.persisted?
+          "providers.dwp.fallback.show.error.with_partner"
+        else
+          "providers.dwp.fallback.show.error.without_partner"
+        end
       end
     end
   end

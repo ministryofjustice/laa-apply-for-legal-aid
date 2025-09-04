@@ -32,9 +32,12 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
       click_on "Save and continue"
       expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
 
+      click_on "Save and continue"
+      expect_govuk_error_summary(text: "Select yes if your client gets a passporting benefit")
+
       govuk_choose("No")
       click_on "Save and continue"
-      expect(page.current_url).to eql providers_legal_aid_application_about_financial_means_url(@legal_aid_application)
+      expect(page.current_url).to include providers_legal_aid_application_about_financial_means_path(@legal_aid_application)
       expect(page).to have_css("h1", text: "What you need to do")
     end
 
@@ -46,7 +49,14 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
         expect(page).to have_css("h1", text: "There was a problem connecting to DWP")
 
         click_on "Save and continue"
-        expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
+        expect(page)
+            .to have_css("h1", text: "Does your client get a passporting benefit?")
+            .and have_css(".govuk-label", text: "Yes")
+            .and have_css(".govuk-label", text: "Yes, they get a passporting benefit with a partner")
+            .and have_css(".govuk-label", text: "No")
+
+        click_on "Save and continue"
+        expect_govuk_error_summary(text: "Select if your client gets a passporting benefit")
 
         govuk_choose("Yes, they get a passporting benefit with a partner")
         click_on "Save and continue"
@@ -61,20 +71,50 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
     context "and the call to benefit checker does not return a 200" do
       before { allow(BenefitCheckService).to receive(:call).and_return(false) }
 
-      scenario "I am routed from Check your answers to an interrupt page and then to the benefit confirmation page" do
-        click_on "Save and continue"
-        expect(page).to have_css("h1", text: "There was a problem connecting to DWP")
-        expect(page).to have_css("p.govuk-body", text: "Your client's benefit status cannot be checked at this time. You will need to tell us about any passporting benefits.")
+      context "without a partner" do
+        scenario "I am routed from Check your answers to an interrupt page and then to the benefit confirmation page" do
+          click_on "Save and continue"
+          expect(page).to have_css("h1", text: "There was a problem connecting to DWP")
+          expect(page).to have_css("p.govuk-body", text: "Your client's benefit status cannot be checked at this time. You will need to tell us about any passporting benefits.")
 
-        click_on "Save and continue"
-        expect(page).to have_css("h1", text: "Does your client get a passporting benefit?")
+          click_on "Save and continue"
+          expect(page)
+            .to have_css("h1", text: "Does your client get a passporting benefit?")
+            .and have_css(".govuk-label", text: "Yes")
+            .and have_css(".govuk-label", text: "No")
 
-        click_on "Save and continue"
-        expect_govuk_error_summary(text: "Select yes if the DWP records are correct")
+          click_on "Save and continue"
+          expect_govuk_error_summary(text: "Select yes if your client gets a passporting benefit")
 
-        govuk_choose("Yes")
-        click_on "Save and continue"
-        expect(page).to have_css("h1", text: "Which passporting benefit does your client get?")
+          govuk_choose("Yes")
+          click_on "Save and continue"
+          expect(page).to have_css("h1", text: "Which passporting benefit does your client get?")
+        end
+      end
+
+      context "with a partner" do
+        let(:with_partner) { true  }
+
+        scenario "I am routed from Check your answers to an interrupt page and then to the benefit confirmation page" do
+          click_on "Save and continue"
+          expect(page)
+            .to have_css("h1", text: "There was a problem connecting to DWP")
+            .and have_css("p.govuk-body", text: "Your client's benefit status cannot be checked at this time. You will need to tell us about any passporting benefits.")
+
+          click_on "Save and continue"
+          expect(page)
+            .to have_css("h1", text: "Does your client get a passporting benefit?")
+            .and have_css(".govuk-label", text: "Yes")
+            .and have_css(".govuk-label", text: "Yes, they get a passporting benefit with a partner")
+            .and have_css(".govuk-label", text: "No")
+
+          click_on "Save and continue"
+          expect_govuk_error_summary(text: "Select if your client gets a passporting benefit")
+
+          govuk_choose("Yes, they get a passporting benefit with a partner")
+          click_on "Save and continue"
+          expect(page).to have_css("h1", text: "Which joint passporting benefit does your client and their partner get?")
+        end
       end
     end
 

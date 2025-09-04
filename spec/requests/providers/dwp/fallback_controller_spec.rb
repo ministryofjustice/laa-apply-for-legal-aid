@@ -219,7 +219,7 @@ RSpec.describe Providers::DWP::FallbackController do
       context "and the solicitor does not select a radio button" do
         it "displays an error" do
           patch_request
-          expect(response.body).to include(I18n.t("providers.confirm_dwp_non_passported_applications.show.error"))
+          expect(response.body).to include("Select yes if your client gets a passporting benefit")
         end
       end
     end

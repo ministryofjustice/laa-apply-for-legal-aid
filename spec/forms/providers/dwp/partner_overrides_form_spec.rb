@@ -14,7 +14,7 @@ RSpec.describe Providers::DWP::PartnerOverridesForm, type: :form do
 
       it "adds expected error message" do
         form.validate
-        expect(form.errors[:confirm_dwp_result]).to include("Select if the client gets the passporting benefit on their own or with a partner")
+        expect(form.errors[:confirm_dwp_result]).to include("Select if your client gets the passporting benefit on their own or with a partner")
       end
     end
   end
