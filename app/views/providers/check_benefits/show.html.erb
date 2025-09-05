@@ -1,5 +1,0 @@
-<% result_namespace = @legal_aid_application.applicant_receives_benefit? ? ".positive_result" : ".negative_result" %>
-
-<%= page_template(page_title: t("#{result_namespace}.tab_title"), template: :basic, column_width: "full") do %>
-  <%= interruption_card(heading: t("#{result_namespace}.title"), actions: -> { render "actions" }) %>
-<% end %>

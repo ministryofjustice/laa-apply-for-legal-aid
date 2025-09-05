@@ -42,7 +42,6 @@ module Flow
         dwp_results: Steps::ProviderDWP::DWPResultsStep,
         dwp_fallback: Steps::ProviderDWP::DWPFallbackStep,
         dwp_partner_overrides: Steps::ProviderDWP::DWPPartnerOverridesStep,
-        check_benefits: Steps::ProviderStart::CheckBenefitsStep,
         substantive_applications: Steps::ProviderStart::SubstantiveApplicationsStep,
         delegated_confirmation: Steps::ProviderStart::DelegatedConfirmationStep,
         open_banking_consents: Steps::ProviderStart::OpenBankingConsentsStep,
