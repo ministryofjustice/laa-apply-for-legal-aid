@@ -31,7 +31,7 @@ RSpec.describe Providers::DWP::FallbackController do
 
       it "displays the HMRC inset text" do
         get_request
-        expect(unescaped_response_body).to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.hmrc_text"))
+        expect(unescaped_response_body).to include("If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.")
       end
     end
 
