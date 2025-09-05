@@ -1,20 +1,19 @@
 module Providers
   module DWP
-    class OverridesController < ProviderBaseController
+    class FallbackController < ProviderBaseController
       include ApplicantDetailsCheckable
 
       prefix_step_with :dwp
 
-      helper_method :display_hmrc_text?
-
       def show
-        @form = Providers::DWP::OverridesForm.new(model: partner)
+        # QUESTION: Do we need to delete back hisotry here as the old ConfirmDWPNonPassportedApplicationsController did?
+        @form = Providers::DWP::FallbackForm.new(model: partner)
       end
 
       def update
         return continue_or_draft if draft_selected?
 
-        @form = Providers::DWP::OverridesForm.new(form_params)
+        @form = Providers::DWP::FallbackForm.new(form_params)
 
         if @form.valid?
           remove_dwp_override if correct_dwp_result?
@@ -47,9 +46,9 @@ module Providers
 
       def form_params
         merge_with_model(partner) do
-          return {} unless params[:partner]
+          return { model: partner } unless params[:partner]
 
-          params.expect(partner: [:confirm_dwp_result])
+          params.permit(partner: [:confirm_dwp_result], model: partner).require(:partner)
         end
       end
 
@@ -68,15 +67,6 @@ module Providers
       def correct_dwp_result?
         @form.correct_dwp_result?
       end
-
-      def hmrc_call_enabled?
-        Setting.collect_hmrc_data?
-      end
-
-      def make_hmrc_call?
-        hmrc_call_enabled?
-      end
-      alias_method :display_hmrc_text?, :make_hmrc_call?
     end
   end
 end

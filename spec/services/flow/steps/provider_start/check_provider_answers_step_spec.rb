@@ -27,7 +27,7 @@ RSpec.describe Flow::Steps::ProviderStart::CheckProviderAnswersStep, type: :requ
     end
 
     context "when applicant has national insurance number" do
-      it { is_expected.to eq :check_benefits }
+      it { is_expected.to eq :dwp_results }
     end
 
     context "when applicant does not have national insurance number" do

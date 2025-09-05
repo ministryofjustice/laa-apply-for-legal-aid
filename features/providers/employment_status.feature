@@ -6,9 +6,9 @@ Feature: Employment status
     Then I should be on a page showing 'Check your answers'
 
     When I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
-    Then I choose 'Yes'
-    Then I click 'Save and continue'
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
+
+    When I click "Yes, continue"
     Then I should be on a page showing "What you need to do"
 
     When I click 'Continue'
