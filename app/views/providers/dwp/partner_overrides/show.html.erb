@@ -1,3 +1,4 @@
+
 <%= form_with(
       model: @form,
       url: providers_legal_aid_application_dwp_partner_override_path,
@@ -15,7 +16,7 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <%= form.govuk_radio_buttons_fieldset(:confirm_dwp_result,
-                                              legend: { size: "l", tag: "h1", text: t(".title") },
+                                              legend: { size: "xl", tag: "h1", text: t(".title") },
                                               classes: "govuk-!-margin-bottom-6") do %>
 
           <%= form.govuk_radio_button :confirm_dwp_result, "benefit_received", label: { text: t(".option_no") } %>
