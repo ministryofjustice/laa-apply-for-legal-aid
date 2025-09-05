@@ -171,20 +171,6 @@ en:
           - vehicles
           - savings and investments
           - other assets
-    check_benefits:
-      show:
-        details_used: "We used the following details to check your client's benefits status with the DWP:"
-        what_happens_next: What happens next
-        because_not_receiving_benefits: This is because they do not receive benefits that qualify for legal aid.
-        you_need_to: "You'll need to:"
-        negative_result:
-          tab_title: Your client must complete a financial assessment
-          title: "We need to check your client's financial eligibility"
-        positive_result:
-          tab_title: Your client receives benefits that qualify for legal aid
-          title: "DWP records show that your client receives a passporting benefit"
-          must_answer_financial_questions: "answer questions about your client's property, savings and other assets"
-          provide_details: provide details of the case
     dwp:
       results:
         negative_actions:
@@ -258,18 +244,6 @@ en:
           care_of_organisation_name: Organisation name
           yes_organisation: Yes, an organisation
           no_hint: Correspondence will be addressed to the client
-
-    # TODO: check if these can be removed
-    confirm_dwp_non_passported_applications:
-      show:
-        tab_title: DWP records show that your client does not get a passporting benefit
-        title_html: <abbr title='Department for Work and Pensions'>DWP</abbr> records show that your client does not get a passporting benefit
-        is_this_correct: Are the DWP records correct?
-        option_no: No, my client gets a passporting benefit
-        option_partner: No, my client gets a joint passporting benefit with their partner
-        hmrc_text: If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.
-        error: Select yes if the DWP records are correct
-
     confirm_multiple_delegated_functions_dates:
       show:
         heading: Confirm when you used delegated functions

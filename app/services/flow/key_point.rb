@@ -11,7 +11,6 @@ module Flow
         start_after_applicant_completes_means: :client_completed_means,
         start_income_update: :capital_introductions,
         start_vehicle_journey: :vehicles,
-        start_dwp_override: :confirm_dwp_non_passported_applications,
         check_benefits: :dwp_results,
       },
     }.freeze

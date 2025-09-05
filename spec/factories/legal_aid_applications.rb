@@ -915,7 +915,7 @@ FactoryBot.define do
         application.state_machine_proxy.update!(aasm_state: :applicant_details_checked)
       end
 
-      provider_step { :check_benefits }
+      provider_step { :dwp_results }
     end
 
     trait :at_client_completed_means do

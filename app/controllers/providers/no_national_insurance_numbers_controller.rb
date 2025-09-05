@@ -7,7 +7,7 @@ module Providers
       @applicant = legal_aid_application.applicant
 
       if @applicant.national_insurance_number?
-        redirect_to providers_legal_aid_application_check_benefit_path(legal_aid_application)
+        redirect_to providers_legal_aid_application_dwp_result_path(legal_aid_application)
       else
         details_checked! unless details_checked?
         mark_as_benefit_check_skipped!("no_national_insurance_number")
