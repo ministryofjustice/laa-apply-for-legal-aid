@@ -1,9 +1,9 @@
 module Providers
   module DWP
     class FallbackController < ProviderBaseController
-      include ApplicantDetailsCheckable
-
       prefix_step_with :dwp
+
+      include ApplicantDetailsCheckable
 
       def show
         # QUESTION: Do we need to delete back hisotry here as the old ConfirmDWPNonPassportedApplicationsController did?
@@ -28,12 +28,12 @@ module Providers
 
     private
 
-      def remove_dwp_override
-        legal_aid_application.dwp_override&.destroy!
-      end
-
       def partner
         @partner = legal_aid_application.partner
+      end
+
+      def remove_dwp_override
+        legal_aid_application.dwp_override&.destroy!
       end
 
       def update_joint_benefit_response
@@ -42,14 +42,6 @@ module Providers
 
         partner.shared_benefit_with_applicant = @form.receives_joint_benefit?
         partner.save!
-      end
-
-      def form_params
-        merge_with_model(partner) do
-          return { model: partner } unless params[:partner]
-
-          params.permit(partner: [:confirm_dwp_result], model: partner).require(:partner)
-        end
       end
 
       def update_application_state
@@ -66,6 +58,14 @@ module Providers
 
       def correct_dwp_result?
         @form.correct_dwp_result?
+      end
+
+      def form_params
+        merge_with_model(partner) do
+          return { model: partner } unless params[:partner]
+
+          params.permit(partner: [:confirm_dwp_result], model: partner).require(:partner)
+        end
       end
     end
   end
