@@ -39,8 +39,9 @@
     <%= next_action_buttons_with_form(
           url: continue_providers_legal_aid_application_review_and_print_application_path(@legal_aid_application),
           method: :patch,
-          show_draft: true,
           continue_button_text: t("generic.submit_and_continue"),
+          additional_link_text: t(".back_to_your_applications"),
+          additional_link_url: home_path,
         ) %>
   </div>
 
