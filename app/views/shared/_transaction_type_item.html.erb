@@ -15,7 +15,7 @@
 
     <%= t("transaction_types.names.providers.#{name}") %>
     <% if error_message %>
-      <p id='<%= "error-#{name}" %>' class="govuk-error-message govuk-!-padding-top-2"><%= error_message %></p>
+      <p id="<%= "error-#{name}" %>" class="govuk-error-message govuk-!-padding-top-2"><%= error_message %></p>
     <% end %>
   </h2>
   <div class="sort-transactions__items" id="list-item-<%= name %>">

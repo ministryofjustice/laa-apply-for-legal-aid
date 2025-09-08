@@ -5,10 +5,10 @@
 
     <% if form.object.lookup_postcode.present? %>
       <%= form.hidden_field :lookup_postcode %>
-      <div class='govuk-form-group'>
+      <div class="govuk-form-group">
         <%= label_tag t(".label_1"), class: "govuk-label" do %>
           <%= t(".postcode") %>
-          <p class='govuk-body govuk-!-font-weight-bold'>
+          <p class="govuk-body govuk-!-font-weight-bold">
             <%= form.object.lookup_postcode %>
             <%= govuk_link_to(
                   t("generic.change"),

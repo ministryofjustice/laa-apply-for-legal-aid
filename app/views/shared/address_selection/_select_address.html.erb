@@ -16,7 +16,7 @@
                                           :address,
                                           legend: { text: page_title, tag: "h1", size: "xl" } do %>
 
-      <p class='govuk-body'>
+      <p class="govuk-body">
         <% if @form.model.building_number_name.present? %>
           <%= t(".addresses_found_long_html",
                 number: @address_collection.count,
