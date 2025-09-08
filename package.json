@@ -20,6 +20,7 @@
     "jquery": "^3.7.1",
     "js-search": "^2.0.1",
     "moment": "^2.30.1",
+    "sanitize-html": "^2.17.0",
     "sass": "^1.92.1"
   },
   "devDependencies": {
