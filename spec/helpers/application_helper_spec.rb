@@ -72,6 +72,27 @@ RSpec.describe ApplicationHelper do
     end
   end
 
+  describe "#print_button" do
+    let(:print_btn) { print_button(text, primary:) }
+
+    let(:text) { "Print text" }
+    let(:primary) { nil }
+
+    context "when primary is not set" do
+      it "outputs a secondary button" do
+        expect(print_btn).to have_css(:button, class: "govuk-button--secondary")
+      end
+    end
+
+    context "when primary is true" do
+      let(:primary) { true }
+
+      it "outputs a primary button" do
+        expect(print_btn).to have_no_css(:button, class: "govuk-button--secondary")
+      end
+    end
+  end
+
   describe "#phase_banner_tag" do
     subject(:banner) { phase_banner_tag }
 
