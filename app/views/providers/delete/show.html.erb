@@ -25,7 +25,7 @@
 
       <%= govuk_warning_text(text: t(".warning")) %>
 
-      <div class='govuk-button-group'>
+      <div class="govuk-button-group">
         <%= form_for(@legal_aid_application, url: providers_legal_aid_application_delete_path, method: :delete) do |form| %>
           <%= form.govuk_submit(
                 t(".yes_button"),

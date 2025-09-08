@@ -4,7 +4,7 @@
       show_errors_for: @merits_task_list,
     ) do %>
 
-  <div id='task_list' class="<%= "govuk-form-group--error" if @merits_task_list&.errors&.any? && @merits_task_list.errors[:task_list].present? %>">
+  <div id="task_list" class="<%= "govuk-form-group--error" if @merits_task_list&.errors&.any? && @merits_task_list.errors[:task_list].present? %>">
 
     <% if @merits_task_list&.errors&.any? && @merits_task_list.errors[:task_list].present? %>
       <p class="govuk-error-message" id="task-list-error">

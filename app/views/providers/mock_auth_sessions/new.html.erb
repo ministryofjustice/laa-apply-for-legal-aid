@@ -1,4 +1,4 @@
-<h1 class="govuk-heading-m"><%= t(".page_heading") %></h2>
+<h1 class="govuk-heading-xl"><%= t(".page_heading") %></h1>
 
 <%= form_with(model: resource || resource_name.to_s.camelcase.constantize.new, scope: resource_name, url: provider_session_path(resource_name)) do |form| %>
   <%= page_template head_title: t(".page_heading"), form:, template: :basic, back_link: :none do %>

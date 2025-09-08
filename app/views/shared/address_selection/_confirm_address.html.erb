@@ -6,7 +6,7 @@
 
       <h1 class="govuk-heading-xl"><%= t(".heading", location:) %></h1>
 
-      <p class='govuk-body'>
+      <p class="govuk-body">
         <% if @form.model.building_number_name.present? %>
           <%= t(".addresses_found_long_html",
                 number: @address_collection.count,

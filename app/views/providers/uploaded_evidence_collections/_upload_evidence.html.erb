@@ -41,7 +41,7 @@
         </label>
         <div class="govuk-hint"><%= t(".size_hint") %></div>
         <% if @mandatory_evidence_errors %>
-            <p id="dropzone-mandatory-error" class='govuk-error-message dropzone-error govuk-!-margin-bottom-1'>
+            <p id="dropzone-mandatory-error" class="govuk-error-message dropzone-error govuk-!-margin-bottom-1">
               <% @mandatory_evidence_errors.each do |error| %>
                 <span class="govuk-visually-hidden">Error:</span>
                 <%= error.message %><br>
@@ -65,7 +65,7 @@
       <div class="fallback no-script govuk-!-margin-bottom-4">
         <% if @mandatory_evidence_errors %>
           <% @mandatory_evidence_errors.each do |error| %>
-            <p class='govuk-error-message govuk-!-margin-top-1'><%= error.message %></p>
+            <p class="govuk-error-message govuk-!-margin-top-1"><%= error.message %></p>
           <% end %>
         <% end %>
         <%= form.govuk_file_field :original_file, label: { text: t("generic.attach_file"), size: "m" },
