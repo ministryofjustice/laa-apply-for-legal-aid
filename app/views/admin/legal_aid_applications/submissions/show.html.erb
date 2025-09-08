@@ -19,7 +19,7 @@
         <% end %>
         <% if @legal_aid_application&.merits_report&.document.present? %>
           <dt>Merits report</dt>
-          <dd><%= govuk_link_to("Download merits report", download_merits_report_admin_legal_aid_applications_submission_path(@legal_aid_application)) %>
+          <dd><%= govuk_link_to("Download merits report", download_merits_report_admin_legal_aid_applications_submission_path(@legal_aid_application)) %></dd>
         <% end %>
         <% if @legal_aid_application&.hmrc_responses.any? %>
           <% @legal_aid_application.hmrc_responses.each do |hmrc_response| %>
