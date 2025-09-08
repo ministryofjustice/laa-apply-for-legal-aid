@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { hide, show, pluralize } from '../helpers'
+import sanitizeHtml from 'sanitize-html'
 
 const doneTypingInterval = 500 // time in ms, 500ms to make search work fairly quickly but avoid too many DB requests
 const screenReaderMessageDelay = 1000 // wait before updating the screen reader message, to avoid interrupting queue
@@ -29,7 +30,7 @@ function showResults (results, inputText) {
       const label = element.querySelector('.govuk-label')
 
       // Replace text values with "headlines" from result/data payload
-      label.innerHTML = result.description_headline
+      label.innerHTML = sanitizeHtml(result.description_headline)
 
       // move to top of list, but after previously added results
       countriesContainer.insertBefore(element, countriesContainer.children[idx])
@@ -63,7 +64,7 @@ async function doneTyping () {
     ariaText = 'No text entered.'
   }
 
-  setTimeout(() => { document.querySelector('#screen-reader-messages').innerHTML = ariaText }, screenReaderMessageDelay)
+  setTimeout(() => { document.querySelector('#screen-reader-messages').innerHTML = sanitizeHtml(ariaText) }, screenReaderMessageDelay)
 }
 
 function addSearchInputListeners (searchInputBox) {

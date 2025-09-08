@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { hide, show, pluralize } from '../helpers'
+import sanitizeHtml from 'sanitize-html'
 
 const doneTypingInterval = 500 // time in ms, 500ms to make search work fairly quickly but avoid too many DB requests
 const screenReaderMessageDelay = 1000 // wait before updating the screenreader message, to avoid interrupting queue
@@ -76,7 +77,7 @@ async function doneTyping () {
     updateMatchCounters()
     hideProceeedingsItems()
   }
-  setTimeout(() => { document.querySelector('#screen-reader-messages').innerHTML = ariaText }, screenReaderMessageDelay)
+  setTimeout(() => { document.querySelector('#screen-reader-messages').innerHTML = sanitizeHtml(ariaText) }, screenReaderMessageDelay)
 }
 
 // Add event listeners for the user typing in the search box and clearing the search
