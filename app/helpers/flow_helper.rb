@@ -3,12 +3,11 @@ module FlowHelper
     url:,
     method: :post,
     show_continue: true,
-    show_draft: false,
     inverse_continue: false,
     continue_button_text: t("generic.save_and_continue"),
+    show_draft: false,
     draft_button_text: t("generic.save_and_come_back_later"),
-    additional_link_text: nil,
-    additional_link_url: nil,
+    additional_link: nil,
     container_class: nil
   )
     form_with(url:, method:, local: true) do |form|
@@ -19,8 +18,7 @@ module FlowHelper
         form:,
         continue_button_text:,
         draft_button_text:,
-        additional_link_text:,
-        additional_link_url:,
+        additional_link:,
         container_class:,
       )
     end
@@ -30,12 +28,11 @@ module FlowHelper
     form:,
     continue_id: :continue,
     show_continue: true,
-    show_draft: false,
     inverse_continue: false,
     continue_button_text: t("generic.save_and_continue"),
+    show_draft: false,
     draft_button_text: t("generic.save_and_come_back_later"),
-    additional_link_text: nil,
-    additional_link_url: nil,
+    additional_link: nil,
     container_class: nil
   )
     render(
@@ -47,8 +44,7 @@ module FlowHelper
       inverse_continue:,
       continue_button_text:,
       draft_button_text:,
-      additional_link_text:,
-      additional_link_url:,
+      additional_link:,
       container_class: ["govuk-button-group", container_class].compact.join(" "),
     )
   end

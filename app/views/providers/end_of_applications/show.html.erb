@@ -40,7 +40,6 @@
         url: providers_legal_aid_application_end_of_application_path,
         method: :patch,
         continue_button_text: t(".view_completed_application"),
-        additional_link_text: t(".back_to_your_applications"),
-        additional_link_url: home_path,
+        additional_link: { text: t(".back_to_your_applications"), url: home_path },
       ) %>
 <% end %>
