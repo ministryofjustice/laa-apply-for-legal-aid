@@ -1929,7 +1929,7 @@ en:
         link_banner_many: This application has been linked with %{count} other ones since you submitted it.
     review_and_print_applications:
       show:
-        heading: Review and print your application
+        heading: Print and submit your application
         print_heading:  Application for legal aid and client declaration
         print_button: Print application
         print_your_application: Print your application

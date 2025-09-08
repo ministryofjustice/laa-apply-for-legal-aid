@@ -38,7 +38,7 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController do
 
       it "renders the confirm client declaration page" do
         expect(response).to render_template("providers/review_and_print_applications/show")
-        expect(response.body).to include("Review and print your application")
+        expect(response.body).to include("Print and submit your application")
       end
     end
   end
