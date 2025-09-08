@@ -3,8 +3,6 @@ module Providers
     class PartnerOverridesController < ProviderBaseController
       prefix_step_with :dwp
 
-      include ApplicantDetailsCheckable
-
       def show
         @form = Providers::DWP::PartnerOverridesForm.new(model: partner)
       end
@@ -30,14 +28,6 @@ module Providers
         @partner = legal_aid_application.partner
       end
 
-      def form_params
-        merge_with_model(partner) do
-          return {} unless params[:partner]
-
-          params.expect(partner: [:confirm_dwp_result])
-        end
-      end
-
       def update_joint_benefit_response
         applicant.update!(shared_benefit_with_partner: @form.receives_joint_benefit?)
         return if partner.nil?
@@ -48,6 +38,14 @@ module Providers
 
       def update_application_state
         legal_aid_application.override_dwp_result! unless legal_aid_application.overriding_dwp_result?
+      end
+
+      def form_params
+        merge_with_model(partner) do
+          return {} unless params[:partner]
+
+          params.expect(partner: [:confirm_dwp_result])
+        end
       end
     end
   end
