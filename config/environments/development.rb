@@ -97,5 +97,5 @@ Rails.application.configure do
   }
 
   config.active_storage.service = :local
-  config.x.application.host_url = "http://#{config.x.application.host}"
+  config.x.application.host_url = "https://#{config.x.application.host}"
 end
