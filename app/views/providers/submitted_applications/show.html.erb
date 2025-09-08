@@ -8,9 +8,16 @@
                   notification_banner_title:,
                   notification_banner_text:,
                   column_width: "full" do %>
-  <%= print_button t(".print_button") %>
+
+  <%= render "shared/review_application/application_details" %>
+
+  <%= print_button t(".print_button"), primary: true %>
 
   <%= render "shared/review_application/questions_and_answers" %>
 
-  <%= govuk_button_link_to(t(".back_home"), forward_path, secondary: true, class: "no-print") %>
+  <div class="govuk-button-group">
+    <%= print_button t(".print_button"), primary: true %>
+    <%= govuk_link_to(t(".back_home"), forward_path, class: "no-print") %>
+  </div>
+
 <% end %>

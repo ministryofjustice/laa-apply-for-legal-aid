@@ -62,8 +62,8 @@ module ApplicationHelper
     boolean ? t("generic.yes") : t("generic.no")
   end
 
-  def print_button(text)
-    content_tag :button, text, class: "govuk-button govuk-button--secondary no-print print-button", type: "button"
+  def print_button(text, primary: nil)
+    content_tag :button, text, class: "govuk-button #{'govuk-button--secondary' unless primary} no-print print-button", type: "button"
   end
 
   def linked_children_names(proceeding)
