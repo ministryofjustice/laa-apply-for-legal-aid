@@ -358,7 +358,7 @@ class LegalAidApplication < ApplicationRecord
     errors.present?
   end
 
-  def add_benefit_check_result
+  def upsert_benefit_check_result
     return false unless benefit_check_response
 
     self.benefit_check_result ||= build_benefit_check_result
