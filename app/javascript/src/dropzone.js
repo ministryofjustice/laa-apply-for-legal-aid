@@ -1,6 +1,7 @@
 import Dropzone from 'dropzone'
 import imgLoading from '../../assets/images/loading-small.gif'
 import { initFileUploadCategorisation } from './file-upload-categorisation'
+import sanitizeHtml from 'sanitize-html'
 
 const screenReaderMessageDelay = 1000 // wait before updating the screenreader message, to avoid interrupting queue
 
@@ -126,7 +127,14 @@ document.addEventListener('DOMContentLoaded', event => {
       const xmlHttp = new XMLHttpRequest() // eslint-disable-line no-undef
       xmlHttp.open('GET', url, false) // false for synchronous request
       xmlHttp.send(null)
-      fileSection.innerHTML = xmlHttp.responseText
+
+      // XSS mitigation - allow tags from standard set plus those required for the
+      // delete and categorisation functionality.
+      // allow all attributes (unless we want to add a very big list)
+      fileSection.innerHTML = sanitizeHtml(xmlHttp.responseText, {
+        allowedTags: sanitizeHtml.defaults.allowedTags.concat(['form', 'input', 'button', 'select', 'label', 'option']),
+        allowedAttributes: false
+      })
 
       // reinitialise event handlers for categorisation select lists
       initFileUploadCategorisation()
