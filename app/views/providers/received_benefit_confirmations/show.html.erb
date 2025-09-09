@@ -1,13 +1,23 @@
 <% page_title = @legal_aid_application.shared_benefit_with_applicant? ? t(".h1_partner") : t(".h1_no_partner") %>
-<%= page_template page_title:, template: :basic, show_errors_for: @form do %>
-  <%= form_with(model: @form,
-                url: providers_legal_aid_application_received_benefit_confirmation_path(@legal_aid_application),
-                method: :patch, local: true) do |form| %>
+
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_received_benefit_confirmation_path(@legal_aid_application),
+      method: :patch,
+      local: true,
+    ) do |form| %>
+
+    <%= page_template(
+          page_title:,
+          template: :basic,
+          column_width: :full,
+          form:,
+        ) do %>
 
     <%= form.govuk_radio_buttons_fieldset(:passporting_benefit,
                                           legend: { size: "xl", tag: "h1", class: "govuk-!-margin-bottom-6", text: content_for(:page_title) }) do %>
-      <% Providers::ReceivedBenefitConfirmationForm.radio_options.each do |f| %>
-        <%= form.govuk_radio_button :passporting_benefit, f.value, label: { text: f.label }, link_errors: true %>
+      <% Providers::ReceivedBenefitConfirmationForm.radio_options.each_with_index do |f, index| %>
+        <%= form.govuk_radio_button :passporting_benefit, f.value, label: { text: f.label }, link_errors: index.zero? %>
       <% end %>
       <%= form.govuk_radio_divider %>
       <%= form.govuk_radio_button(:passporting_benefit, :none_selected, label: { text: t("generic.none_selected") }) %>
