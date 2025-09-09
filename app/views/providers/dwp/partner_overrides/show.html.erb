@@ -19,7 +19,7 @@
                                               legend: { size: "xl", tag: "h1", text: t(".title") },
                                               classes: "govuk-!-margin-bottom-6") do %>
 
-          <%= form.govuk_radio_button :confirm_dwp_result, "benefit_received", label: { text: t(".option_no") } %>
+          <%= form.govuk_radio_button :confirm_dwp_result, "benefit_received", link_errors: true, label: { text: t(".option_no") } %>
           <%= form.govuk_radio_button :confirm_dwp_result, "joint_benefit_with_partner", label: { text: t(".option_partner") } %>
         <% end %>
       </div>
