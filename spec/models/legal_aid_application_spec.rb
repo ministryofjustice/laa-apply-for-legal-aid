@@ -199,8 +199,8 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "#add_benefit_check_result" do
-    subject(:add_benefit_check_result) { legal_aid_application.add_benefit_check_result }
+  describe "#upsert_benefit_check_result" do
+    subject(:upsert_benefit_check_result) { legal_aid_application.upsert_benefit_check_result }
 
     before do
       allow(BenefitCheckService).to receive(:call).with(legal_aid_application).and_return(benefit_check_response)
@@ -215,7 +215,7 @@ RSpec.describe LegalAidApplication do
       end
 
       it "creates a benefit_check_result with the right values" do
-        expect { add_benefit_check_result }
+        expect { upsert_benefit_check_result }
           .to change { legal_aid_application.reload.benefit_check_result }
             .from(nil)
             .to(instance_of(BenefitCheckResult))
@@ -229,11 +229,11 @@ RSpec.describe LegalAidApplication do
       let(:benefit_check_response) { false }
 
       it "returns false" do
-        expect(add_benefit_check_result).to be false
+        expect(upsert_benefit_check_result).to be false
       end
 
       it "leaves benefit_check_result empty" do
-        expect { add_benefit_check_result }
+        expect { upsert_benefit_check_result }
           .not_to change { legal_aid_application.reload.benefit_check_result }
             .from(nil)
       end
@@ -252,7 +252,7 @@ RSpec.describe LegalAidApplication do
       end
 
       it "updates the benenfit_check_result" do
-        expect { add_benefit_check_result }
+        expect { upsert_benefit_check_result }
           .to change { legal_aid_application.reload.benefit_check_result.attributes.symbolize_keys }
             .from(hash_including(dwp_ref: "old_ref", result: "Old result"))
             .to(hash_including(dwp_ref: "new_ref", result: "New result"))
@@ -271,7 +271,7 @@ RSpec.describe LegalAidApplication do
     before do
       legal_aid_application.save!
       allow(BenefitCheckService).to receive(:call).with(legal_aid_application).and_return(benefit_check_response)
-      legal_aid_application.add_benefit_check_result
+      legal_aid_application.upsert_benefit_check_result
     end
 
     context "when the benefit check service returns a positive outcome" do

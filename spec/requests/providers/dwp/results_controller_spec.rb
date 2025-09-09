@@ -15,11 +15,170 @@ RSpec.describe Providers::DWP::ResultsController do
     context "when the provider is authenticated" do
       before do
         login_as legal_aid_application.provider
-        get_request
       end
 
       it "returns success" do
+        get_request
         expect(response).to be_successful
+      end
+
+      it "marks the applicant_details_checked!" do
+        expect { get_request }.to change { legal_aid_application.reload.state }.from("checking_applicant_details").to("applicant_details_checked")
+      end
+
+      context "when applicant has a partner" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_partner) }
+
+        it "assigns target path to partner override path" do
+          get_request
+          expect(assigns(:override_path)).to eql providers_legal_aid_application_dwp_partner_override_path
+        end
+      end
+
+      context "when applicant does not have a partner" do
+        it "assigns target path to check client details path" do
+          get_request
+          expect(assigns(:override_path)).to eql providers_legal_aid_application_check_client_details_path
+        end
+      end
+
+      context "when no benefit check has been added" do
+        before do
+          legal_aid_application.benefit_check_result.destroy! if legal_aid_application.benefit_check_result
+          allow(BenefitCheckService).to receive(:call).with(legal_aid_application).and_return(benefit_check_response)
+        end
+
+        let(:benefit_check_response) do
+          {
+            benefit_checker_status: "Yes",
+            confirmation_ref: SecureRandom.hex,
+          }
+        end
+
+        it "adds the expected benefit check result" do
+          expect { get_request }
+            .to change { legal_aid_application.reload.benefit_check_result&.attributes&.symbolize_keys }
+              .from(nil)
+              .to(hash_including(result: "Yes", dwp_ref: benefit_check_response[:confirmation_ref]))
+        end
+      end
+
+      context "when benefit check has already been added" do
+        before do
+          create(:benefit_check_result, legal_aid_application:, dwp_ref: "old_ref", result: "No")
+          allow(BenefitCheckService).to receive(:call).with(legal_aid_application).and_return(benefit_check_response)
+        end
+
+        let(:benefit_check_response) do
+          {
+            benefit_checker_status: "Yes",
+            confirmation_ref: "new_ref",
+          }
+        end
+
+        it "updates the existing benefit check result" do
+          expect { get_request }
+            .to change { legal_aid_application.reload.benefit_check_result&.attributes&.symbolize_keys }
+              .from(hash_including(result: "No", dwp_ref: "old_ref"))
+              .to(hash_including(result: "Yes", dwp_ref: "new_ref"))
+        end
+      end
+
+      context "when applicants last name is very short" do
+        before do
+          legal_aid_application.benefit_check_result.destroy! if legal_aid_application.benefit_check_result
+          legal_aid_application.applicant.update!(last_name: "Q")
+          allow(BenefitCheckService).to receive(:call).with(legal_aid_application)
+        end
+
+        it "adds the benefit check as skipped" do
+          expect { get_request }
+            .to change { legal_aid_application.reload.benefit_check_result&.attributes&.symbolize_keys }
+              .from(nil)
+              .to(hash_including(result: "skipped:short_name", dwp_ref: nil))
+        end
+      end
+
+      context "when applicants last name is very short but had previously not been" do
+        before do
+          create(:benefit_check_result, legal_aid_application:, dwp_ref: "old_ref", result: "Yes")
+          legal_aid_application.applicant.update!(last_name: "Q")
+          allow(BenefitCheckService).to receive(:call).with(legal_aid_application)
+        end
+
+        it "updates the existing benefit check to skipped" do
+          expect { get_request }
+            .to change { legal_aid_application.reload.benefit_check_result&.attributes&.symbolize_keys }
+              .from(hash_including(result: "Yes", dwp_ref: "old_ref"))
+              .to(hash_including(result: "skipped:short_name", dwp_ref: nil))
+        end
+      end
+
+      context "when benefit checker data collection is off" do
+        before do
+          allow(Setting).to receive(:collect_dwp_data?).and_return(false)
+        end
+
+        it "does not add a benefit check result" do
+          expect { get_request }
+            .not_to change { legal_aid_application.reload.benefit_check_result }
+              .from(nil)
+        end
+      end
+
+      context "when benefit checker is down" do
+        before do
+          allow(BenefitCheckService).to receive(:call).with(legal_aid_application).and_return(false)
+        end
+
+        it "displays DWP down content" do
+          get_request
+          expect(page)
+            .to have_content("There was a problem connecting to DWP")
+        end
+      end
+
+      context "when benefit checker returns positive result" do
+        before do
+          allow(BenefitCheckService).to receive(:call).with(legal_aid_application).and_return(benefit_check_response)
+        end
+
+        let(:benefit_check_response) do
+          {
+            benefit_checker_status: "Yes",
+            confirmation_ref: "new_ref",
+          }
+        end
+
+        it "displays DWP positive result content" do
+          get_request
+          expect(page)
+            .to have_content("DWP records show that your client receives a passporting benefit")
+            .and have_button("Save and continue")
+        end
+      end
+
+      context "when benefit checker returns negative result" do
+        before do
+          allow(BenefitCheckService).to receive(:call).with(legal_aid_application).and_return(benefit_check_response)
+        end
+
+        let(:benefit_check_response) do
+          {
+            benefit_checker_status: "Undetermined",
+            confirmation_ref: "new_ref",
+          }
+        end
+
+        # Question: what if they have previously provided DWP evidence but have back paged.
+        # see `applicant_receives_benefit?` - edge case issue!?
+        it "displays DWP negative result content" do
+          get_request
+          expect(page)
+            .to have_content("DWP records show that your client does not get a passporting benefit. Is this correct?")
+            .and have_button("Yes, continue")
+            .and have_link("This is not correct")
+        end
       end
     end
   end
