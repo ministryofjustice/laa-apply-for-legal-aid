@@ -34,4 +34,11 @@ class Setting < ApplicationRecord
   def self.setting
     Setting.first || Setting.create!
   end
+
+  def self.out_of_hours?
+    # Provider access to the service only required between 7AM and 7PM on weekdays
+    # Citizen access is required 24/7
+
+    (Time.zone.now.hour < 7 || Time.zone.now.hour >= 19) || Time.zone.now.on_weekend?
+  end
 end
