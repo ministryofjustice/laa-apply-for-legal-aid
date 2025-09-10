@@ -66,6 +66,7 @@ RSpec.describe Providers::DWP::ResultsController do
       context "when benefit check has already been added" do
         before do
           create(:benefit_check_result, legal_aid_application:, dwp_ref: "old_ref", result: "No")
+          legal_aid_application.applicant.touch
           allow(BenefitCheckService).to receive(:call).with(legal_aid_application).and_return(benefit_check_response)
         end
 
@@ -81,6 +82,51 @@ RSpec.describe Providers::DWP::ResultsController do
             .to change { legal_aid_application.reload.benefit_check_result&.attributes&.symbolize_keys }
               .from(hash_including(result: "No", dwp_ref: "old_ref"))
               .to(hash_including(result: "Yes", dwp_ref: "new_ref"))
+        end
+      end
+
+      context "when applicants details have changed since last benefit check" do
+        before do
+          create(:benefit_check_result, legal_aid_application:, dwp_ref: "old_ref", result: "No")
+          legal_aid_application.applicant.touch
+          allow(BenefitCheckService).to receive(:call).with(legal_aid_application).and_return(benefit_check_response)
+        end
+
+        let(:benefit_check_response) do
+          {
+            benefit_checker_status: "Yes",
+            confirmation_ref: "new_ref",
+          }
+        end
+
+        it "queries the benefit check" do
+          get_request
+          expect(BenefitCheckService).to have_received(:call)
+        end
+
+        it "updates the existing benefit check result" do
+          expect { get_request }
+            .to change { legal_aid_application.reload.benefit_check_result&.attributes&.symbolize_keys }
+              .from(hash_including(result: "No", dwp_ref: "old_ref"))
+              .to(hash_including(result: "Yes", dwp_ref: "new_ref"))
+        end
+      end
+
+      context "when applicants details have NOT changed since last benefit check" do
+        before do
+          create(:benefit_check_result, legal_aid_application:, dwp_ref: "old_ref", result: "No")
+          allow(BenefitCheckService).to receive(:call)
+        end
+
+        it "does not query the benefit check" do
+          get_request
+          expect(BenefitCheckService).not_to have_received(:call)
+        end
+
+        it "does not update existing benefit check result" do
+          expect { get_request }
+            .not_to change { legal_aid_application.reload.benefit_check_result&.attributes&.symbolize_keys }
+              .from(hash_including(result: "No", dwp_ref: "old_ref"))
         end
       end
 
