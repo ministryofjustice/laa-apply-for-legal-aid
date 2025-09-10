@@ -6,7 +6,6 @@ module Providers
       include ApplicantDetailsCheckable
 
       def show
-        # QUESTION: Do we need to delete back hisotry here as the old ConfirmDWPNonPassportedApplicationsController did?
         @form = Providers::DWP::FallbackForm.new(model: partner)
       end
 
