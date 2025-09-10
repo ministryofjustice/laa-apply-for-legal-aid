@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   layout "application"
+  before_action :out_of_hours_redirect
 
   include Backable
   include HomePathHelper
@@ -8,6 +9,16 @@ class ApplicationController < ActionController::Base
   helper_method :home_path
 
 private
+
+  def out_of_hours_redirect
+    return if skip_out_of_hours?
+
+    render "pages/service_out_of_hours" if Setting.out_of_hours?
+  end
+
+  def skip_out_of_hours?
+    false
+  end
 
   def default_url_options
     { locale: I18n.locale }
