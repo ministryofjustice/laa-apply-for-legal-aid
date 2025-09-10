@@ -1,0 +1,20 @@
+<div class="print-header-wrapper">
+  <dl class="govuk-list inline-list print-header">
+    <dt>
+      <strong><%= t(".client_name") %>:</strong>
+    </dt>
+    <dd><%= @legal_aid_application.applicant_full_name %></dd>
+
+    <dt>
+      <strong><%= t(".case_reference_html") %>:</strong>
+    </dt>
+    <dd><%= @legal_aid_application.application_ref %></dd>
+
+    <% if @legal_aid_application.case_ccms_reference %>
+      <dt>
+        <strong><%= t(".ccms_reference_html") %>:</strong>
+      </dt>
+      <dd><%= @legal_aid_application.case_ccms_reference %></dd>
+    <% end %>
+  </dl>
+</div>

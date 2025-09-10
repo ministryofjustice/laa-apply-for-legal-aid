@@ -109,7 +109,7 @@ Feature: passported_journey completes application
     And I should be on a page showing "Confirm the following"
     Then I check "I confirm the above is correct and that I'll get a signed declaration from my client"
     Then I click 'Save and continue'
-    Then I should be on a page showing "Review and print your application"
+    Then I should be on a page showing "Print and submit your application"
     Then I click 'Submit and continue'
     Then I should be on a page showing "Application complete"
     Then I click 'View completed application'

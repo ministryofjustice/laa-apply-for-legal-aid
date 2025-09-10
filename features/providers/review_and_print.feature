@@ -276,7 +276,7 @@ Feature: Review and print your application
 
     Then the following sections should exist:
       | tag | section |
-      | h1  | Review and print your application |
+      | h1  | Print and submit your application |
       | h2  | Client |
       | h2  | What you're applying for |
       | h2  | Case details |

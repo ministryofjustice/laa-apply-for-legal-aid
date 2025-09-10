@@ -19,4 +19,9 @@
           class: "govuk-!-display-none-print",
         ) %>
   <% end %>
+  <% if additional_link %>
+    <div class="govuk-body govuk-!-display-none-print">
+      <%= govuk_link_to additional_link[:text], additional_link[:url] %>
+    </div>
+  <% end %>
 </div>

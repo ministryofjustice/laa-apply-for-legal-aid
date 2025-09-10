@@ -896,14 +896,14 @@ en:
       restrictions: Restrictions on your client's assets
       none: None
     review_application:
-      partner_income:
-        income-heading: The partner's income
-        outgoings-heading: The partner's outgoings
-
-      questions_and_answers:
+      application_details:
         client_name: Client
         case_reference_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
         ccms_reference_html: <abbr title='Client and Cost Management System'>CCMS</abbr> reference
+      partner_income:
+        income-heading: The partner's income
+        outgoings-heading: The partner's outgoings
+      questions_and_answers:
         client_details_heading: Client
         partner_details_heading: Partner
         linking_and_copying_heading: Cases linked to this one

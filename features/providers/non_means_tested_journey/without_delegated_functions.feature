@@ -138,7 +138,7 @@ Feature: Non-means-tested applicant journey without use of delegation functions
     And I check "I confirm the above is correct and will get a signed declaration from the person acting for Test User. For example, a litigation friend, a professional children's guardian or a parental order report."
 
     When I click 'Save and continue'
-    Then I should be on a page showing "Review and print your application"
+    Then I should be on a page showing "Print and submit your application"
     And I should not see "Your client's income"
 
     When I click 'Submit and continue'
