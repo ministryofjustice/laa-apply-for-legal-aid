@@ -232,9 +232,9 @@ Rails.application.routes.draw do
       resource :limitations, only: %i[show update]
       resource :applicant_details, only: %i[show update]
       resource :previous_references, only: %i[show update]
-      resource :check_benefit, only: %i[show update]
       resource :dwp_result, only: %i[show update], controller: "dwp/results", path: "dwp-result"
-      resource :dwp_override, only: %i[show update], controller: "dwp/overrides", path: "advise-of-passport-benefit"
+      resource :dwp_fallback, only: %i[show update], controller: "dwp/fallback", path: "advise-of-passport-benefit"
+      resource :dwp_partner_override, only: %i[show update], controller: "dwp/partner_overrides", path: "dwp-override"
       resource :has_national_insurance_number, only: %i[show update]
       resources :applicant_employed, only: %i[index create]
       resource :about_financial_means, only: %i[show update]
@@ -300,7 +300,6 @@ Rails.application.routes.draw do
       resources :delegated_confirmation, only: :index
       resource :merits_report, only: :show
       resource :means_report, only: :show
-      resource :confirm_dwp_non_passported_applications, only: %i[show update]
       resource :confirm_non_means_tested_applications, only: %i[show update]
       resource :check_client_details, only: %i[show update]
       resource :received_benefit_confirmation, only: %i[show update]

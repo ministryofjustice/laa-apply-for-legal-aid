@@ -199,10 +199,71 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "#add_benefit_check_result" do
+  describe "#upsert_benefit_check_result" do
+    subject(:upsert_benefit_check_result) { legal_aid_application.upsert_benefit_check_result }
+
+    before do
+      allow(BenefitCheckService).to receive(:call).with(legal_aid_application).and_return(benefit_check_response)
+    end
+
+    context "when benefit check service is working" do
+      let(:benefit_check_response) do
+        {
+          benefit_checker_status: Faker::Lorem.word,
+          confirmation_ref: SecureRandom.hex,
+        }
+      end
+
+      it "creates a benefit_check_result with the right values" do
+        expect { upsert_benefit_check_result }
+          .to change { legal_aid_application.reload.benefit_check_result }
+            .from(nil)
+            .to(instance_of(BenefitCheckResult))
+
+        expect(legal_aid_application.benefit_check_result.result).to eq(benefit_check_response[:benefit_checker_status])
+        expect(legal_aid_application.benefit_check_result.dwp_ref).to eq(benefit_check_response[:confirmation_ref])
+      end
+    end
+
+    context "when benefit check service is down" do
+      let(:benefit_check_response) { false }
+
+      it "returns false" do
+        expect(upsert_benefit_check_result).to be false
+      end
+
+      it "leaves benefit_check_result empty" do
+        expect { upsert_benefit_check_result }
+          .not_to change { legal_aid_application.reload.benefit_check_result }
+            .from(nil)
+      end
+    end
+
+    context "when called twice" do
+      before do
+        create(:benefit_check_result, legal_aid_application:, dwp_ref: "old_ref", result: "Old result")
+      end
+
+      let(:benefit_check_response) do
+        {
+          benefit_checker_status: "New result",
+          confirmation_ref: "new_ref",
+        }
+      end
+
+      it "updates the benenfit_check_result" do
+        expect { upsert_benefit_check_result }
+          .to change { legal_aid_application.reload.benefit_check_result.attributes.symbolize_keys }
+            .from(hash_including(dwp_ref: "old_ref", result: "Old result"))
+            .to(hash_including(dwp_ref: "new_ref", result: "New result"))
+      end
+    end
+  end
+
+  describe "#benefit_check_status" do
     let(:benefit_check_response) do
       {
-        benefit_checker_status: Faker::Lorem.word,
+        benefit_checker_status:,
         confirmation_ref: SecureRandom.hex,
       }
     end
@@ -210,25 +271,31 @@ RSpec.describe LegalAidApplication do
     before do
       legal_aid_application.save!
       allow(BenefitCheckService).to receive(:call).with(legal_aid_application).and_return(benefit_check_response)
+      legal_aid_application.upsert_benefit_check_result
     end
 
-    it "creates a check_benefit_result with the right values" do
-      legal_aid_application.add_benefit_check_result
-      expect(legal_aid_application.benefit_check_result.result).to eq(benefit_check_response[:benefit_checker_status])
-      expect(legal_aid_application.benefit_check_result.dwp_ref).to eq(benefit_check_response[:confirmation_ref])
+    context "when the benefit check service returns a positive outcome" do
+      let(:benefit_checker_status) { "Yes" }
+
+      it { expect(legal_aid_application.benefit_check_status).to be :positive }
+    end
+
+    context "when the benefit check service returns a negative outcome" do
+      let(:benefit_checker_status) { "No" }
+
+      it { expect(legal_aid_application.benefit_check_status).to be :negative }
+    end
+
+    context "when the benefit check service returns an undetermined outcome" do
+      let(:benefit_checker_status) { "Undetermined" }
+
+      it { expect(legal_aid_application.benefit_check_status).to be :negative }
     end
 
     context "when benefit check service is down" do
       let(:benefit_check_response) { false }
 
-      it "returns false" do
-        expect(legal_aid_application.add_benefit_check_result).to be false
-      end
-
-      it "leaves benefit_check_result empty" do
-        legal_aid_application.add_benefit_check_result
-        expect(legal_aid_application.benefit_check_result).to be_nil
-      end
+      it { expect(legal_aid_application.benefit_check_status).to be :unsuccessful }
     end
   end
 

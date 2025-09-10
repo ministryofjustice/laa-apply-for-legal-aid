@@ -358,15 +358,23 @@ class LegalAidApplication < ApplicationRecord
     errors.present?
   end
 
-  def add_benefit_check_result
-    benefit_check_response = BenefitCheckService.call(self)
+  def upsert_benefit_check_result
     return false unless benefit_check_response
 
     self.benefit_check_result ||= build_benefit_check_result
+
     benefit_check_result.update!(
       result: benefit_check_response[:benefit_checker_status],
       dwp_ref: benefit_check_response[:confirmation_ref],
     )
+  end
+
+  def benefit_check_status
+    if benefit_check_result.nil?
+      :unsuccessful
+    else
+      applicant_receives_benefit? ? :positive : :negative
+    end
   end
 
   # TODO: this logic is placeholder only for now and needs checking
@@ -727,6 +735,10 @@ class LegalAidApplication < ApplicationRecord
   end
 
 private
+
+  def benefit_check_response
+    @benefit_check_response ||= BenefitCheckService.call(self)
+  end
 
   def expired_by_2023_surname_at_birth_issue?
     created_at.year < 2024 &&

@@ -386,7 +386,6 @@ en:
             base:
               none_selected: Select one or more employment types or None of the above if not employed
               none_and_another_option_selected: If you select 'None of the above', you cannot select any of the other options
-            confirm_dwp_result: Select yes if the DWP records are correct
             full_employment_details:
               blank: Enter the partner's employment details
             receives_state_benefits:

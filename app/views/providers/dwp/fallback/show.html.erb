@@ -1,6 +1,6 @@
 <%= form_with(
       model: @form,
-      url: providers_legal_aid_application_confirm_dwp_non_passported_applications_path,
+      url: providers_legal_aid_application_dwp_fallback_path,
       method: :patch,
       local: true,
     ) do |form| %>
@@ -12,24 +12,22 @@
         form:,
       ) do %>
 
-    <%= interruption_card(heading: t(".title_html")) %>
-
-    <div class="govuk-grid-row govuk-!-margin-top-6">
+    <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <%= form.govuk_radio_buttons_fieldset(:confirm_dwp_result,
-                                              legend: { size: "l", tag: "h2", text: t(".is_this_correct") },
+                                              legend: { size: "xl", tag: "h1", text: t(".title") },
                                               classes: "govuk-!-margin-bottom-6") do %>
 
           <% if display_hmrc_text? %>
             <p class="govuk-body"><%= t(".hmrc_text") %></p>
           <% end %>
 
-          <%= form.govuk_radio_button :confirm_dwp_result, "dwp_correct", link_errors: true, label: { text: t("generic.yes") } %>
-          <%= form.govuk_radio_button :confirm_dwp_result, "joint_with_partner_false", label: { text: t(".option_no") } %>
+          <%= form.govuk_radio_button :confirm_dwp_result, "benefit_received", link_errors: true, label: { text: t("generic.yes") } %>
           <% if @legal_aid_application.applicant.has_partner? %>
-            <%= form.govuk_radio_button :confirm_dwp_result, "joint_with_partner_true", label: { text: t(".option_partner") } %>
+            <%= form.govuk_radio_button :confirm_dwp_result, "joint_benefit_with_partner", label: { text: t(".option_partner") } %>
           <% end %>
-        <% end %>
+          <%= form.govuk_radio_button :confirm_dwp_result, "no_benefit_received", label: { text: t("generic.no") } %>
+      <% end %>
       </div>
     </div>
 
