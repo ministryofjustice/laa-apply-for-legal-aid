@@ -30,7 +30,9 @@ module Providers
     private
 
       def check_benefits
-        legal_aid_application.upsert_benefit_check_result unless !Setting.collect_dwp_data? || skip_because_of_short_last_name
+        return unless legal_aid_application.benefit_check_result_needs_updating? && Setting.collect_dwp_data?
+
+        legal_aid_application.upsert_benefit_check_result unless skip_because_of_short_last_name
       end
 
       def skip_because_of_short_last_name
