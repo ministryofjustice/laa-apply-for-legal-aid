@@ -34,6 +34,13 @@ Rails.application.routes.draw do
       via: %i[get puts],
       as: :admin_user_google_oauth2_omniauth_callback,
     )
+
+    match(
+      "auth/entra_id/callback",
+      to: "admin_users/omniauth_callbacks#entra_id",
+      via: %i[get puts],
+      as: :admin_user_entra_omniauth_callback,
+    )
   end
 
   devise_scope :provider do

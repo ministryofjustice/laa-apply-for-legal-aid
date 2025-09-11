@@ -11,6 +11,8 @@ module AdminUsers
       end
     end
 
+    def entra; end
+
     def failure(reason: "Process cancelled")
       set_flash_message(:error, :failure, kind: "Google", reason:)
       redirect_to error_path(:access_denied)
