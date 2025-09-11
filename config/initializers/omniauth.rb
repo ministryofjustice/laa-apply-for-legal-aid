@@ -47,4 +47,21 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       strategy_class: OmniAuth::Strategies::Silas,
     },
   )
+  provider(
+    :openid_connect,
+    {
+      name: :admin_entra_id,
+      scope: %i[openid email],
+      response_type: :code,
+      client_options: {
+        identifier: ENV.fetch("ADMIN_OMNIAUTH_ENTRAID_CLIENT_ID", nil),
+        secret: ENV.fetch("ADMIN_OMNIAUTH_ENTRAID_CLIENT_SECRET", nil),
+        redirect_uri: ENV.fetch("ADMIN_OMNIAUTH_ENTRAID_REDIRECT_URI", nil),
+      },
+      discovery: true,
+      pkce: true,
+      issuer: "https://login.microsoftonline.com/#{ENV.fetch('ADMIN_OMNIAUTH_ENTRAID_TENANT_ID', nil)}/v2.0",
+      extra_authorise_params: { tenant: ENV.fetch("ADMIN_OMNIAUTH_ENTRAID_TENANT_ID", nil) },
+    },
+  )
 end
