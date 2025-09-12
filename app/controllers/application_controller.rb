@@ -17,6 +17,9 @@ private
   end
 
   def skip_out_of_hours?
+    # this is the only page on the citizen path that cannot be namespaced as /citizen
+    return true if request.path.include?("auth/true_layer")
+
     false
   end
 
