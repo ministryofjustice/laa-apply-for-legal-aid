@@ -160,4 +160,8 @@ maintenance_mode:
 collect_hmrc_data:
   enabled: "false"
 
+business_hours:
+  start: 7
+  end: 19
+
 env: production
