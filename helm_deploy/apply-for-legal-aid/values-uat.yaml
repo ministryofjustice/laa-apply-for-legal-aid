@@ -152,7 +152,7 @@ policy_disregards_start_date: "2020-12-20"
 mtr_a_start_date: "2024-11-6"
 
 hmrc_interface:
-  host: 'https://main-laa-hmrc-interface-uat.cloud-platform.service.justice.gov.uk/'
+  host: "http://main-laa-hmrc-interface-service-api.laa-hmrc-interface-uat.svc.cluster.local"
   duration: '93'
   hmrc_use_dev_mock: 'true'
 
