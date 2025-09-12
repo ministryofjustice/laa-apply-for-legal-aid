@@ -9,6 +9,10 @@ module Citizens
 
   private
 
+    def skip_out_of_hours?
+      true
+    end
+
     def authenticate_with_devise
       authenticate_applicant!
     end
