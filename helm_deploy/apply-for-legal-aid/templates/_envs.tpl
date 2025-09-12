@@ -306,6 +306,10 @@ env:
         key: encryptionKeyDerivationSalt
   - name: MAINTENANCE_MODE
     value: {{ .Values.maintenance_mode.enabled | quote  }}
+  - name: BUSINESS_HOURS_END
+    value: {{ .Values.business_hours.end | quote  }}
+  - name: BUSINESS_HOURS_START
+    value: {{ .Values.business_hours.start | quote  }}
   - name: SLACK_ALERT_WEBHOOK
     valueFrom:
       secretKeyRef:

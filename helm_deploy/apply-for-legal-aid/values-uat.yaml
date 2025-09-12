@@ -190,4 +190,8 @@ session:
    reauthenticate_after_minutes: "1440"
    idle_timeout_after_minutes: "60"
 
+business_hours:
+  start: 7
+  end: 19
+
 env: uat

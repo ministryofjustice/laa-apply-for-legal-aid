@@ -173,4 +173,8 @@ session:
    reauthenticate_after_minutes: "720"
    idle_timeout_after_minutes: "60"
 
+business_hours:
+  start: 7
+  end: 19
+
 env: production
