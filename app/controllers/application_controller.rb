@@ -13,7 +13,7 @@ private
   def out_of_hours_redirect
     return if skip_out_of_hours?
 
-    render "pages/service_out_of_hours" if Setting.out_of_hours?
+    render "pages/service_out_of_hours", status: :service_unavailable if Setting.out_of_hours?
   end
 
   def skip_out_of_hours?
