@@ -199,7 +199,7 @@ en:
       partner_overrides:
         show:
           title: Does your client get the passporting benefit on their own or with a partner?
-          option_no: On their own
+          option_own: On their own
           option_partner: With a partner
           hmrc_text: If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.
           error: Select if your client gets the passporting benefit on their own or with a partner
