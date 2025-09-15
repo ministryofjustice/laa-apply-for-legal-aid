@@ -145,7 +145,7 @@ policy_disregards_start_date: "2020-12-26"
 mtr_a_start_date: "2024-11-12"
 
 hmrc_interface:
-  host: 'https://laa-hmrc-interface-staging.cloud-platform.service.justice.gov.uk/'
+  host: "http://laa-hmrc-interface-laa-hmrc-interface-service-api.laa-hmrc-interface-staging.svc.cluster.local"
   duration: '93'
   hmrc_use_dev_mock: 'true'
 
