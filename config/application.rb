@@ -119,6 +119,10 @@ module LaaApplyForLegalAid
     config.x.google_oauth2.client_id      = ENV.fetch("GOOGLE_CLIENT_ID", nil)
     config.x.google_oauth2.client_secret = ENV.fetch("GOOGLE_CLIENT_SECRET", nil)
 
+    config.x.admin_omniauth.mock_auth_enabled = ENV.fetch("ADMIN_OMNIAUTH_ENTRAID_MOCK_AUTH_ENABLED", nil) == "true"
+    config.x.admin_omniauth.mock_username = ENV.fetch("ADMIN_OMNIAUTH_ENTRAID_MOCK_USERNAME", nil)
+    config.x.admin_omniauth.mock_password = ENV.fetch("ADMIN_OMNIAUTH_ENTRAID_MOCK_PASSWORD", nil)
+
     config.x.hmrc_use_dev_mock = ENV["HMRC_USE_DEV_MOCK"] == "true"
     config.x.hmrc_interface.host = ENV.fetch("HMRC_API_HOST", nil)
     config.x.hmrc_interface.client_id = ENV.fetch("HMRC_API_UID", nil)

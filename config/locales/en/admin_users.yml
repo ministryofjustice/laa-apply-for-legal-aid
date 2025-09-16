@@ -1,8 +1,9 @@
 ---
 en:
   admin_users:
-    sessions:
+    mock_auth_sessions:
       new:
-        button: Log in
-        heading: 'Admin: Log In'
-        entra_login: Log in via entra
+        email: Email
+        password: Password
+        page_heading: "Admin: Log In"
+        sign_in: Sign in
