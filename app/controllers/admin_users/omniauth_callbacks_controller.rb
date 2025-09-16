@@ -8,13 +8,10 @@ module AdminUsers
         flash[:notice] = I18n.t "devise.omniauth_callbacks.success"
         sign_in_and_redirect admin, event: :authentication
       else
-        failure(reason: "You do not have an Admin account in this system")
+        flash[:notice] = I18n.t "devise.omniauth_callbacks.unauthorised"
+        Rails.logger.error "Couldn't login admin"
+        redirect_to error_path(:access_denied)
       end
-    end
-
-    def failure(reason: "Process cancelled")
-      set_flash_message(:error, reason:)
-      redirect_to error_path(:access_denied)
     end
 
   protected
