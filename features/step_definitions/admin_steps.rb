@@ -9,7 +9,6 @@ Given(/^I am logged in as an admin$/) do
     origin: admin_settings_url,
   )
   visit admin_root_path
-  click_on "Log in via entra"
 end
 
 Given("an application has been submitted") do
