@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   devise_for :providers, controllers: { sessions: "providers/sessions" }
   devise_for :applicants
-  devise_for :admin_users, controllers: { sessions: "admin_users/sessions" }
+  devise_for :admin_users, skip: [:sessions], controllers: { sessions: "admin_users/sessions" }
 
   devise_scope :applicant do
     match(
@@ -31,9 +31,18 @@ Rails.application.routes.draw do
     match(
       "auth/admin_entra_id/callback",
       to: "admin_users/omniauth_callbacks#entra_id",
-      via: %i[get puts],
+      via: %i[get post],
       as: :admin_user_entra_omniauth_callback,
     )
+    if Rails.configuration.x.admin_omniauth.mock_auth_enabled && HostEnv.not_production?
+      get "/admin_users/sign_in", to: "admin_users/mock_auth_sessions#new", as: :new_admin_user_session
+      post "/admin_users/sign_in", to: "admin_users/mock_auth_sessions#create", as: :admin_user_session
+    else
+      get "/auth/admin_entra_id", to: "admin_users/sessions#new", as: :new_admin_user_session
+      post "/admin_users/sign_in", to: "admin_users/sessions#create", as: :admin_user_session
+    end
+
+    delete "/admin_users/sign_out", to: "admin_users/sessions#destroy", as: :destroy_admin_user_session
   end
 
   devise_scope :provider do
