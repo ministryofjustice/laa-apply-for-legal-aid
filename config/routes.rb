@@ -43,6 +43,15 @@ Rails.application.routes.draw do
     end
 
     delete "/admin_users/sign_out", to: "admin_users/sessions#destroy", as: :destroy_admin_user_session
+    unauthenticated :admin_user do
+      get "/admin", to: redirect { |_params, _req|
+        if Rails.configuration.x.admin_omniauth.mock_auth_enabled && HostEnv.not_production?
+          "/admin_users/sign_in"
+        else
+          "/auth/admin_entra_id"
+        end
+      }
+    end
   end
 
   devise_scope :provider do
