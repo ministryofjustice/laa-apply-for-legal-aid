@@ -13,10 +13,10 @@
 
       <div class="actions govuk-button-group">
         <%= f.govuk_submit t(".button") %>
-        <%= govuk_link_to("login via entra", "/auth/admin_entra_id") %>
+        <%= govuk_link_to(t(".entra_login"), "/auth/admin_entra_id") %>
       </div>
     <% end %>
   <% else %>
-    <%= govuk_link_to("login via entra", "/auth/admin_entra_id") %>
+    <%= govuk_link_to(t(".entra_login"), "/auth/admin_entra_id") %>
   <% end %>
 <% end %>

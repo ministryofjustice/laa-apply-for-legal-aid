@@ -1,18 +1,15 @@
 Given(/^I am logged in as an admin$/) do
-  admin_user = create(:admin_user, username: "apply_maintenance")
+  admin_user = create(:admin_user, username: "apply_maintenance", email: Faker::Internet.email)
 
   OmniAuth.config.test_mode = true
 
   OmniAuth.config.add_mock(
-    :google_oauth2,
+    :admin_entra_id,
     info: { email: admin_user.email },
     origin: admin_settings_url,
   )
-
-  get admin_user_google_oauth2_omniauth_callback_path
-  follow_redirect!
-  visit admin_legal_aid_applications_path
-  click_on "Log in via google"
+  visit admin_root_path
+  click_on "Log in via entra"
 end
 
 Given("an application has been submitted") do
