@@ -1,6 +1,6 @@
-<%= page_template(page_title: t(".unsuccessful.tab_title"), template: :basic, column_width: "full") do %>
-  <%= interruption_card(heading: t(".unsuccessful.title_html"),
-                        actions: -> { render "actions" }) do
-        t(".unsuccessful.body")
-      end %>
+<%= page_template(page_title: t(".tab_title.#{@benefit_check_status}"), template: :basic, column_width: "full") do %>
+  <%= interruption_card(heading: t(".title.#{@benefit_check_status}_html"),
+                        actions: -> { render "#{@benefit_check_status.eql?(:negative) ? 'negative' : 'standard'}_actions" }) do %>
+        <p class="govuk-body"><%= t(".body.#{@benefit_check_status}", default: "") %></p>
+      <% end %>
 <% end %>

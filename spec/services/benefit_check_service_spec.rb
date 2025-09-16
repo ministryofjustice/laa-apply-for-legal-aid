@@ -14,7 +14,7 @@ RSpec.describe BenefitCheckService do
   let(:application) { create(:application, applicant:) }
   let(:faraday) { instance_double(Faraday::SoapCall) }
 
-  describe "#check_benefits", :vcr do
+  describe "#call", :vcr do
     let(:payload) do
       <<~PAYLOAD.squish
         <?xml version="1.0" encoding="UTF-8"?>#{' '}
@@ -31,6 +31,7 @@ RSpec.describe BenefitCheckService do
         </wsdl:check> </env:Body> </env:Envelope>
       PAYLOAD
     end
+
     let(:response) do
       <<~XML.squish
         <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"

@@ -1,21 +1,27 @@
 <% page_title = @legal_aid_application.shared_benefit_with_applicant? ? t(".h1_partner", passporting_benefit: @passporting_benefit) : t(".h1_no_partner", passporting_benefit: @passporting_benefit) %>
-<%= page_template page_title:, template: :basic, show_errors_for: @form do %>
-    <%= form_with(
-          model: @form,
-          url: providers_legal_aid_application_has_evidence_of_benefit_path,
-          method: :patch,
-          local: true,
-        ) do |form| %>
 
-    <%= form.govuk_collection_radio_buttons :has_evidence_of_benefit, # attribute name
-                                            yes_no_options(yes: t(".radio_hint_yes")), # collection
-                                            :value, # value method
-                                            :label, # text method
-                                            :radio_hint, # hint method,
-                                            bold_labels: false,
-                                            legend: { text: content_for(:page_title), tag: "h1", size: "xl" },
-                                            hint: { text: t(".evidence_hint") } %>
+<%= form_with(
+      model: @form,
+      url: providers_legal_aid_application_has_evidence_of_benefit_path,
+      method: :patch,
+      local: true,
+    ) do |form| %>
 
-    <%= next_action_buttons(show_draft: true, form:) %>
+    <%= page_template(
+          page_title:,
+          template: :basic,
+          form:,
+        ) do %>
+
+      <%= form.govuk_collection_radio_buttons :has_evidence_of_benefit,
+                                              yes_no_options(yes: t(".radio_hint_yes")),
+                                              :value,
+                                              :label,
+                                              :radio_hint,
+                                              bold_labels: false,
+                                              legend: { text: content_for(:page_title), tag: "h1", size: "xl" },
+                                              hint: { text: t(".evidence_hint") } %>
+
+      <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
 <% end %>

@@ -1,14 +1,13 @@
 require "rails_helper"
 
-RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
+RSpec.describe Providers::DWP::FallbackController do
   let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address) }
-  let(:application_id) { application.id }
   let(:enable_hmrc_collection) { true }
 
   before { allow(Setting).to receive(:collect_hmrc_data?).and_return(enable_hmrc_collection) }
 
-  describe "GET /providers/applications/:legal_aid_application_id/confirm_dwp_non_passported_applications" do
-    subject(:get_request) { get "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications" }
+  describe "GET /providers/applications/:legal_aid_application_id/dwp/advise-of-passport-benefit" do
+    subject(:get_request) { get providers_legal_aid_application_dwp_fallback_path(application) }
 
     context "when the provider is not authenticated" do
       before { get_request }
@@ -27,28 +26,12 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
       end
     end
 
-    describe "back link" do
-      let(:page1) { providers_legal_aid_application_check_provider_answers_path(application) }
-      let(:page2) { providers_legal_aid_application_check_benefit_path(application) }
-
-      before do
-        login_as application.provider
-        get page1
-        get page2
-        get_request
-      end
-
-      it "points to check your answers page" do
-        expect(response.body).to have_back_link("#{page1}&back=true")
-      end
-    end
-
     describe "HMRC inset text" do
       before { login_as application.provider }
 
       it "displays the HMRC inset text" do
         get_request
-        expect(unescaped_response_body).to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.hmrc_text"))
+        expect(unescaped_response_body).to include("If your client does not receive a passporting benefit, we'll check their details with HM Revenue and Customs (HMRC). You can review these details later.")
       end
     end
 
@@ -61,21 +44,21 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
 
       it "displays the joint passporting benefit option" do
         get_request
-        expect(unescaped_response_body).to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.option_partner"))
+        expect(unescaped_response_body).to include("Yes, they get a passporting benefit with a partner")
       end
     end
 
     context "when the application does not have a partner" do
       it "does not display the joint passporting benefit option" do
         get_request
-        expect(unescaped_response_body).not_to include(I18n.t(".providers.confirm_dwp_non_passported_applications.show.option_partner"))
+        expect(unescaped_response_body).not_to include("Yes, they get a passporting benefit with a partner")
       end
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/confirm_dwp_non_passported_applications" do
+  describe "PATCH /providers/applications/:legal_aid_application_id/dwp/advise-of-passport-benefit" do
     context "when submitting with the Continue button" do
-      subject(:patch_request) { patch "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications", params: }
+      subject(:patch_request) { patch providers_legal_aid_application_dwp_fallback_path(application), params: }
 
       let(:params) do
         {
@@ -93,14 +76,21 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           {
             continue_button: "Continue",
             partner: {
-              confirm_dwp_result: "dwp_correct",
+              confirm_dwp_result: "no_benefit_received",
             },
           }
         end
 
-        it "transitions the application state to applicant details checked" do
-          patch_request
-          expect(application.reload.state).to eq "applicant_details_checked"
+        context "when the status is already applicant_details_checked" do
+          before { application.applicant_details_checked! }
+
+          it { expect { patch_request }.not_to change { application.reload.state } }
+        end
+
+        context "when the state is not already applicant_details_checked" do
+          it "sets the application state to overriding applicant_details_checked result" do
+            expect { patch_request }.to change { application.reload.state }.to("applicant_details_checked")
+          end
         end
 
         it "redirects to the next page" do
@@ -144,14 +134,21 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           {
             continue_button: "Continue",
             partner: {
-              confirm_dwp_result: "joint_with_partner_false",
+              confirm_dwp_result: "benefit_received",
             },
           }
         end
 
-        it "sets the application state to overriding DWP result" do
-          patch_request
-          expect(application.reload.state).to eq "overriding_dwp_result"
+        context "when the status is already overriding_dwp_result" do
+          before { application.override_dwp_result! }
+
+          it { expect { patch_request }.not_to change { application.reload.state } }
+        end
+
+        context "when the state is not already override_dwp_result" do
+          it "sets the application state to overriding DWP result" do
+            expect { patch_request }.to change { application.reload.state }.to("overriding_dwp_result")
+          end
         end
 
         it "redirects to the next page" do
@@ -183,7 +180,7 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
           {
             continue_button: "Continue",
             partner: {
-              confirm_dwp_result: "joint_with_partner_true",
+              confirm_dwp_result: "joint_benefit_with_partner",
             },
           }
         end
@@ -222,13 +219,13 @@ RSpec.describe Providers::ConfirmDWPNonPassportedApplicationsController do
       context "and the solicitor does not select a radio button" do
         it "displays an error" do
           patch_request
-          expect(response.body).to include(I18n.t("providers.confirm_dwp_non_passported_applications.show.error"))
+          expect(response.body).to include("Select yes if your client gets a passporting benefit")
         end
       end
     end
 
     context "when submitting with the Save As Draft button" do
-      subject(:patch_request) { patch "/providers/applications/#{application_id}/confirm_dwp_non_passported_applications", params: }
+      subject(:patch_request) { patch providers_legal_aid_application_dwp_fallback_path(application), params: }
 
       let(:params) do
         {

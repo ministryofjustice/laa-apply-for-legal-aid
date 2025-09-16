@@ -368,16 +368,16 @@ RSpec.describe Providers::CheckProviderAnswersController do
           )
         end
 
-        it "redirects to check benefits page" do
+        it "redirects to DWP result page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_check_benefit_path(application))
+          expect(response).to redirect_to(providers_legal_aid_application_dwp_result_path(application))
         end
       end
 
       context "when already non passported with negative benefit_check_result" do
-        it "redirects to the check benefits page" do
+        it "redirects to the DWP result page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_check_benefit_path(application))
+          expect(response).to redirect_to(providers_legal_aid_application_dwp_result_path(application))
         end
 
         context "with non-means-tested application and applicant under 18" do
@@ -434,9 +434,9 @@ RSpec.describe Providers::CheckProviderAnswersController do
           )
         end
 
-        it "redirects to the check benefits page" do
+        it "redirects to the DWP result page" do
           request
-          expect(response).to redirect_to(providers_legal_aid_application_check_benefit_path(application))
+          expect(response).to redirect_to(providers_legal_aid_application_dwp_result_path(application))
         end
 
         context "with non-means-tested application and applicant under 18" do

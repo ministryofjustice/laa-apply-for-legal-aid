@@ -2,9 +2,8 @@ Feature: non_passported_journey waiting for applicant
   @javascript
   Scenario: I want the check_provider_answers page to correctly display while waiting for client to provide data
     Given I start the application with a negative benefit check result
-    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit"
-    When I choose 'Yes'
-    And I click 'Save and continue'
+    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
+    When I click "Yes, continue"
     Then I should be on a page showing "What you need to do"
     When I click 'Continue'
     Then I should be on a page showing "What is your client's employment status?"

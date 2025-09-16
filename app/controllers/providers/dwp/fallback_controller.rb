@@ -1,20 +1,18 @@
 module Providers
   module DWP
-    class OverridesController < ProviderBaseController
-      include ApplicantDetailsCheckable
-
+    class FallbackController < ProviderBaseController
       prefix_step_with :dwp
 
-      helper_method :display_hmrc_text?
+      include ApplicantDetailsCheckable
 
       def show
-        @form = Providers::DWP::OverridesForm.new(model: partner)
+        @form = Providers::DWP::FallbackForm.new(model: partner)
       end
 
       def update
         return continue_or_draft if draft_selected?
 
-        @form = Providers::DWP::OverridesForm.new(form_params)
+        @form = Providers::DWP::FallbackForm.new(form_params)
 
         if @form.valid?
           remove_dwp_override if correct_dwp_result?
@@ -29,12 +27,12 @@ module Providers
 
     private
 
-      def remove_dwp_override
-        legal_aid_application.dwp_override&.destroy!
-      end
-
       def partner
         @partner = legal_aid_application.partner
+      end
+
+      def remove_dwp_override
+        legal_aid_application.dwp_override&.destroy!
       end
 
       def update_joint_benefit_response
@@ -43,14 +41,6 @@ module Providers
 
         partner.shared_benefit_with_applicant = @form.receives_joint_benefit?
         partner.save!
-      end
-
-      def form_params
-        merge_with_model(partner) do
-          return {} unless params[:partner]
-
-          params.expect(partner: [:confirm_dwp_result])
-        end
       end
 
       def update_application_state
@@ -69,14 +59,13 @@ module Providers
         @form.correct_dwp_result?
       end
 
-      def hmrc_call_enabled?
-        Setting.collect_hmrc_data?
-      end
+      def form_params
+        merge_with_model(partner) do
+          return { model: partner } unless params[:partner]
 
-      def make_hmrc_call?
-        hmrc_call_enabled?
+          params.permit(partner: [:confirm_dwp_result], model: partner).require(:partner)
+        end
       end
-      alias_method :display_hmrc_text?, :make_hmrc_call?
     end
   end
 end

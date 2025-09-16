@@ -25,13 +25,16 @@ Feature: Main dwelling place changes for MTR-Accelerated measures
     And I should see "How much is the home they usually live in worth?"
 
   @javascript
-  Scenario: When the MTR-A feature flag is on and the client a partner I should see the legacy pages
+  Scenario: When the MTR-A feature flag is on and the client has a partner I should see the legacy pages
     Given I complete the journey as far as check client details with a partner
 
     When I click "Save and continue"
-    Then I should be on a page with title "DWP records show that your client does not get a passporting benefit"
+    Then I should be on a page with title "DWP records show that your client does not get a passporting benefit. Is this correct?"
 
-    When I choose "No, my client gets a joint passporting benefit with their partner"
+    When I click link "This is not correct"
+    Then I should be on a page showing "Does your client get the passporting benefit on their own or with a partner?"
+    When I choose "With a partner"
+
     And I click "Save and continue"
     Then I should be on a page with title "Check your client's and their partner's details"
 

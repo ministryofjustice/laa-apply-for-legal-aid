@@ -3,7 +3,7 @@ module Providers
     class OverridesForm < BaseForm
       form_for Partner
 
-      RESPONSE_ATTRIBUTES = %w[
+      VALID_VALUES = %w[
         benefit_received
         joint_benefit_with_partner
         no_benefit_received
@@ -28,10 +28,18 @@ module Providers
       def response_present?
         return false if draft?
 
-        if confirm_dwp_result.nil? || RESPONSE_ATTRIBUTES.exclude?(confirm_dwp_result)
-          errors.add(:confirm_dwp_result, I18n.t("providers.confirm_dwp_non_passported_applications.show.error"))
+        if confirm_dwp_result.nil? || VALID_VALUES.exclude?(confirm_dwp_result)
+          errors.add(:confirm_dwp_result, I18n.t(error_scope))
         end
       end
+
+    private
+
+      # :nocov:
+      def error_scope
+        raise "Implement in subclass"
+      end
+      # :nocov:
     end
   end
 end
