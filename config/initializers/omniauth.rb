@@ -52,6 +52,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     {
       name: :admin_entra_id,
       scope: %i[openid email],
+      prompt: :select_account,
       response_type: :code,
       client_options: {
         identifier: ENV.fetch("ADMIN_OMNIAUTH_ENTRAID_CLIENT_ID", nil),
