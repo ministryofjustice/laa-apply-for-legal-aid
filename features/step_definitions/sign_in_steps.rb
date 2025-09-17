@@ -27,6 +27,10 @@ When("I fill in the mock admin email and password") do
   fill_in "Password", with: Rails.configuration.x.admin_omniauth.mock_password
 end
 
+Given("there is an admin user") do
+  create(:admin_user, email: Rails.configuration.x.admin_omniauth.mock_username, username: "Test user")
+end
+
 # NOTE: this fakes the result of authentication office_codes and office selection
 # to avoid the need to fully stub AuthN and PDA responses.
 # It performs a custom find or create by to avoid clashing with stubbed user martin ronan.

@@ -2,6 +2,7 @@ Feature: Admin sign in
 
   @javascript @mock_admin_auth_enabled @vcr_turned_off
   Scenario: I am able to sign in when mock auth is enabled
+    Given there is an admin user
     When I visit the admin page
     Then I should see "Admin: Log In"
 
