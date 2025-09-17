@@ -61,6 +61,16 @@ After("@mock_auth_enabled") do |_scenario, _block|
   Rails.application.reload_routes!
 end
 
+Before("@mock_admin_auth_enabled") do |_scenario, _block|
+  allow(Rails.configuration.x.admin_omniauth).to receive(:mock_auth_enabled).and_return(true)
+  Rails.application.reload_routes!
+end
+
+After("@mock_admin_auth_enabled") do |_scenario, _block|
+  allow(Rails.configuration.x.admin_omniauth).to receive(:mock_auth_enabled).and_call_original
+  Rails.application.reload_routes!
+end
+
 Around("@vcr_turned_off") do |_scenario, block|
   VCR.turned_off { block.call }
 end

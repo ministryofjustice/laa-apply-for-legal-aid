@@ -29,8 +29,8 @@ Given("multiple applications have been submitted") do
   )
 end
 
-Given(/^I visit the admin applications page$/) do
-  visit admin_legal_aid_applications_path
+Given(/^I visit the admin page$/) do
+  visit admin_path
 end
 
 Then(/^I should (see|not see) the (\S*) application$/) do |visibility, number|

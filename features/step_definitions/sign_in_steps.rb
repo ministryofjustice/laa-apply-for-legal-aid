@@ -22,6 +22,11 @@ When("I fill in the mock user email and password") do
   fill_in "Password", with: Rails.configuration.x.omniauth_entraid.mock_password
 end
 
+When("I fill in the mock admin email and password") do
+  fill_in "Email", with: Rails.configuration.x.admin_omniauth.mock_username
+  fill_in "Password", with: Rails.configuration.x.admin_omniauth.mock_password
+end
+
 # NOTE: this fakes the result of authentication office_codes and office selection
 # to avoid the need to fully stub AuthN and PDA responses.
 # It performs a custom find or create by to avoid clashing with stubbed user martin ronan.
