@@ -50,7 +50,7 @@ RSpec.describe Provider do
 
     let(:raw_info) { { USER_NAME: silas_id, LAA_ACCOUNTS: "AAAAB" } }
     let(:auth_subject_uid) { SecureRandom.uuid }
-    let(:silas_id) { "c680f03d-48ed-4079-b3c9-ca0c97d9279d" }
+    let(:silas_id) { "51cdbbb4-75d2-48d0-aaac-fa67f013c50a" }
 
     context "when passed a new user" do
       it "creates a new record" do

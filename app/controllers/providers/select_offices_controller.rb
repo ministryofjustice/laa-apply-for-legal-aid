@@ -24,9 +24,6 @@ module Providers
       else
         render :show
       end
-    rescue PDA::ProviderDetailsUpdater::UserNotFound => e
-      flash.now[:error] = e.message
-      render :show
     end
 
   private

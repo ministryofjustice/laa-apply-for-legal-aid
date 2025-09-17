@@ -119,6 +119,10 @@ admin_omniauth_entraid:
 pda:
   url: "https://laa-provider-details-api-prod.apps.live.cloud-platform.service.justice.gov.uk"
 
+ccms_user_api:
+  url: "http://user-api-service.laa-ccms-user-management-api-prod.svc.cluster.local:8080/api/v1" # TBC
+  # url: "https://laa-ccms-user-management-api-production.apps.live.cloud-platform.service.justice.gov.uk/api/v1" # TBC
+
 trueLayer:
   enableMock: "false"
 

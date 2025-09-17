@@ -64,14 +64,6 @@ RSpec.describe "provider selects office" do
     ]
   end
 
-  let(:user) do
-    {
-      userUuid: "c680f03d-48ed-4079-b3c9-ca0c97d9279d",
-      userLogin: provider.username,
-      ccmsContactId: 87_654,
-    }.to_json
-  end
-
   around do |example|
     # We rely on webmock and stubs so we do not want to use VCR
     VCR.turned_off { example.run }
@@ -135,8 +127,7 @@ RSpec.describe "provider selects office" do
           stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules")
             .to_return(body:, status: 200)
 
-          stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}")
-            .to_return(body: user, status: 200)
+          stub_provider_user_for(provider.silas_id)
 
           allow(ProviderContractDetailsWorker)
             .to receive(:perform_async).and_return(true)
@@ -194,26 +185,6 @@ RSpec.describe "provider selects office" do
 
         it "the response includes the error message" do
           expect(response.body).to include("Select an account number")
-        end
-      end
-
-      context "when the user cannot be found" do
-        before do
-          stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules")
-            .to_return(body:, status: 200)
-
-          stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}")
-            .to_return(body: nil, status: 204)
-
-          allow(ProviderContractDetailsWorker)
-            .to receive(:perform_async).and_return(true)
-
-          patch_request
-        end
-
-        it "renders the page with flash message" do
-          expect(response).to render_template :show
-          expect(flash[:error]).to eq "No CCMS username found for #{provider.email}"
         end
       end
     end

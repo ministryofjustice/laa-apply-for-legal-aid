@@ -1,7 +1,6 @@
 module PDA
   class ProviderDetailsUpdater
     ApiError = Class.new(StandardError)
-    UserNotFound = Class.new(StandardError)
 
     # Only save schedule details that are relevant to civil apply
     APPLICABLE_CATEGORIES_OF_LAW = %w[MAT].freeze
@@ -74,16 +73,8 @@ module PDA
       @provider.offices << office unless @provider.offices.include?(office)
       @provider.selected_office_id = office.id
       @provider.ccms_contact_id = ccms_contact_id
-      @provider.username = username
+      @provider.username = ccms_username
       @provider.save!
-    end
-
-    def ccms_contact_id
-      ccms_provider_user["ccmsContactId"]
-    end
-
-    def username
-      ccms_provider_user["userLogin"]
     end
 
     def create_schedules
@@ -108,32 +99,33 @@ module PDA
       @office_schedules_result ||= JSON.parse(office_schedules_response.body)
     end
 
-    def ccms_provider_user
-      if user_detail_response.success?
-        if user_detail_response.status == 200
-          JSON.parse(user_detail_response.body)
-        else
-          Rails.logger.info("#{self.class} - No provider details found for #{@provider.email}")
-          raise UserNotFound, "No CCMS username found for #{@provider.email}"
-        end
-      else
-        raise ApiError, "API Call Failed: ccms-provider-users (#{user_detail_response.status}) #{user_detail_response.body}"
-      end
-    end
-
     def office_schedules_response
-      @office_schedules_response ||= conn.get("provider-offices/#{@office_code}/schedules")
+      @office_schedules_response ||= pda_conn.get("provider-offices/#{@office_code}/schedules")
     end
 
-    def user_detail_response
-      @user_detail_response ||= conn.get("ccms-provider-users/#{@provider.silas_id}")
+    def ccms_contact_id
+      ccms_user_details["userPartyId"]
     end
 
-    def conn
-      @conn ||= Faraday.new(url: Rails.configuration.x.pda.url, headers:)
+    def ccms_username
+      ccms_user_details["userName"]
     end
 
-    def headers
+    def ccms_user_details
+      ccms_user["ccmsUserDetails"]
+    end
+
+    def ccms_user
+      @ccms_user = CCMSUser::UserDetails::Silas.call(@provider.silas_id)
+    rescue CCMSUser::UserDetails::Silas::UserNotFound
+      @ccms_user = { ccmsUserDetails: { userName: "Not found", userPartyId: "Not found" } }.with_indifferent_access
+    end
+
+    def pda_conn
+      @pda_conn ||= Faraday.new(url: Rails.configuration.x.pda.url, headers: pda_headers)
+    end
+
+    def pda_headers
       {
         "accept" => "application/json",
         "X-Authorization" => Rails.configuration.x.pda.auth_key,

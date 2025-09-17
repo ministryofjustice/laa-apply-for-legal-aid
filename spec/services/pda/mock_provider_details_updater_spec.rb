@@ -57,10 +57,6 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
             devolved_power_status: "Yes - Excluding JR Proceedings",
           )
         end
-
-        it "adds the CCMS ccms_contact_id to the provider" do
-          expect { call }.to change { provider.reload.ccms_contact_id }.from(nil).to(494_000)
-        end
       end
     end
 
@@ -87,13 +83,6 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
           .to change { office.reload.ccms_id }
             .from("12345")
             .to("137570")
-      end
-
-      it "updates the providers contact id" do
-        expect { call }
-          .to change { provider.reload.ccms_contact_id }
-            .from(654_321)
-            .to(494_000)
       end
 
       context "when office was selected previously" do

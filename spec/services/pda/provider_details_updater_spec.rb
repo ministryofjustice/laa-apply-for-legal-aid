@@ -1,4 +1,5 @@
 require "rails_helper"
+require Rails.root.join("spec/services/pda/provider_details_request_stubs")
 
 RSpec.describe PDA::ProviderDetailsUpdater do
   describe ".call" do
@@ -8,8 +9,8 @@ RSpec.describe PDA::ProviderDetailsUpdater do
       firm.offices << office if office
       stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{office_code}/schedules")
         .to_return(body:, status:)
-      stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}")
-        .to_return(body: user, status:)
+
+      stub_provider_user_for(provider.silas_id)
     end
 
     let(:provider) { create(:provider, with_office_selected: false) }
@@ -79,14 +80,6 @@ RSpec.describe PDA::ProviderDetailsUpdater do
       }.to_json
     end
 
-    let(:user) do
-      {
-        userUuid: "c680f03d-48ed-4079-b3c9-ca0c97d9279d",
-        userLogin: provider.username,
-        ccmsContactId: 87_654,
-      }.to_json
-    end
-
     context "when the office has schedules applicable to civil apply" do
       it "adds [applicable] office schedules" do
         expect { described_class.call(provider, office_code) }
@@ -109,7 +102,7 @@ RSpec.describe PDA::ProviderDetailsUpdater do
       end
 
       it "updates the provider ccms_contact_id" do
-        expect { call }.to change { provider.reload.ccms_contact_id }.from(nil).to(87_654)
+        expect { call }.to change { provider.reload.ccms_contact_id }.from(nil).to(66_731_970)
       end
 
       it "updates the provider's selected office" do
@@ -307,23 +300,6 @@ RSpec.describe PDA::ProviderDetailsUpdater do
 
         it "deletes any existing schedules belonging to the office" do
           expect { call }.to change(office.schedules, :count).to(0)
-        end
-      end
-    end
-
-    context "when PDA returns no details for the provider user" do
-      before { stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}").to_return(body: "", status: 204) }
-
-      it "raises a UserNotFound error" do
-        expect(Rails.logger).to receive(:info).with("#{described_class} - No provider details found for #{provider.email}")
-        expect { call }.to raise_error(PDA::ProviderDetailsUpdater::UserNotFound, "No CCMS username found for #{provider.email}")
-      end
-
-      context "when there is an error calling the ccms-provider-users endpoint" do
-        before { stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}").to_return(body: "An error has occurred", status: 500) }
-
-        it "raises ApiError" do
-          expect { call }.to raise_error(PDA::ProviderDetailsUpdater::ApiError, "API Call Failed: ccms-provider-users (500) An error has occurred")
         end
       end
     end

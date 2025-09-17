@@ -1860,6 +1860,8 @@ en:
         page_title: Your profile
         role: Permission
         username: Username
+        ccms_username: CCMS Username
+        ccms_contact_id: CCMS Contact ID
     received_benefit_confirmations:
       show:
         h1_no_partner: Which passporting benefit does your client get?
