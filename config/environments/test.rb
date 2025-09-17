@@ -89,4 +89,8 @@ Rails.application.configure do
   config.x.omniauth_entraid.mock_auth_enabled = false
   config.x.omniauth_entraid.mock_username = "test@test.com"
   config.x.omniauth_entraid.mock_password = "not-a-real-password"
+
+  config.x.admin_omniauth.mock_auth_enabled = false
+  config.x.admin_omniauth.mock_username = "test@test.com"
+  config.x.admin_omniauth.mock_password = "not-a-real-password"
 end
