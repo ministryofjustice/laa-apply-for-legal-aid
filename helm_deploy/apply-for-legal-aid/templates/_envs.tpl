@@ -146,6 +146,20 @@ env:
         key: omniauthAzureTenantID
   - name: OMNIAUTH_ENTRAID_REDIRECT_URI
     value: {{ .Values.omniauth_entraid.redirect_uri | quote }}
+  - name: ADMIN_OMNIAUTH_ENTRAID_MOCK_AUTH_ENABLED
+    value: {{ .Values.admin_omniauth_entraid.mock_auth_enabled | quote }}
+  {{ if .Values.admin_omniauth_entraid.mock_auth_enabled }}
+  - name: ADMIN_OMNIAUTH_ENTRAID_MOCK_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: adminAzureMockUsername
+  - name: ADMIN_OMNIAUTH_ENTRAID_MOCK_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: adminAzureMockPassword
+  {{ end }}
   - name: ADMIN_OMNIAUTH_ENTRAID_CLIENT_ID
     valueFrom:
       secretKeyRef:
