@@ -118,8 +118,7 @@ omniauth_entraid:
   redirect_uri: https://main-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk/auth/entra_id/callback # overridden for branches (see deploy script)
 
 admin_omniauth_entraid:
-  # TODO: To allow for testing. This must be changed to the url for uat main before this pr is merged.
-  redirect_uri: https://ap-5739-create-azure-login-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk/auth/admin_entra_id/callback
+  redirect_uri: https://main-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk/auth/admin_entra_id/callback # overridden for branches (see deploy script)
 
 pda:
   url: "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk"
