@@ -111,6 +111,7 @@ omniauth_entraid:
   redirect_uri: https://staging.apply-for-legal-aid.service.justice.gov.uk/auth/entra_id/callback
 
 admin_omniauth_entraid:
+  mock_auth_enabled: false
   redirect_uri: https://staging.apply-for-legal-aid.service.justice.gov.uk/auth/admin_entra_id/callback
 
 pda:
