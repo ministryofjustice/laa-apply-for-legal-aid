@@ -3,7 +3,4 @@ en:
   admin_users:
     mock_auth_sessions:
       new:
-        email: Email
-        password: Password
-        page_heading: "Admin: Log In"
-        sign_in: Sign in
+        page_heading: "Admin: Sign In"
