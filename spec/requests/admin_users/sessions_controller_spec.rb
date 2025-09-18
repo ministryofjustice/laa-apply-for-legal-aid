@@ -30,7 +30,7 @@ RSpec.describe AdminUsers::SessionsController do
 
       it "shows google login" do
         get_session
-        expect(unescaped_response_body).to include("Log in via google")
+        expect(unescaped_response_body).to include("Log in via entra")
       end
     end
   end

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "admin users omniauth call back" do
-  let!(:admin_user) { create(:admin_user) }
+  let!(:admin_user) { create(:admin_user, email: Faker::Internet.email) }
   let(:email) { admin_user.email }
   let(:target_url) { admin_settings_url }
 
@@ -9,20 +9,20 @@ RSpec.describe "admin users omniauth call back" do
     OmniAuth.config.test_mode = true
 
     OmniAuth.config.add_mock(
-      :google_oauth2,
+      :admin_entra_id,
       info: { email: },
       origin: target_url,
     )
 
     example.run
 
-    OmniAuth.config.mock_auth[:google_oauth2] = nil
+    OmniAuth.config.mock_auth[:admin_entra_id] = nil
     OmniAuth.config.test_mode = false
   end
 
-  describe "GET /auth/google_oauth2/callback" do
+  describe "GET /auth/admin_entra_id/callback" do
     subject(:get_request) do
-      get admin_user_google_oauth2_omniauth_callback_path
+      get admin_user_entra_omniauth_callback_path
     end
 
     it "redirects to admin user root" do
@@ -40,7 +40,7 @@ RSpec.describe "admin users omniauth call back" do
       it "displays failure information" do
         get_request
         follow_redirect!
-        expect(response.body).to include("You do not have an Admin account")
+        expect(response.body).to include("Could not authorise you! Ask an admin for access.")
       end
     end
   end

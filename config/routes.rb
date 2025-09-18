@@ -29,10 +29,10 @@ Rails.application.routes.draw do
 
   devise_scope :admin_user do
     match(
-      "auth/google_oauth2/callback",
-      to: "admin_users/omniauth_callbacks#google_oauth2",
+      "auth/admin_entra_id/callback",
+      to: "admin_users/omniauth_callbacks#entra_id",
       via: %i[get puts],
-      as: :admin_user_google_oauth2_omniauth_callback,
+      as: :admin_user_entra_omniauth_callback,
     )
   end
 

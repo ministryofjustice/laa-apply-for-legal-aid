@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_27_103452) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_11_153550) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -94,6 +94,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_27_103452) do
     t.datetime "locked_at", precision: nil
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.string "auth_provider", default: "", null: false
+    t.string "auth_subject_uid"
   end
 
   create_table "allegations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

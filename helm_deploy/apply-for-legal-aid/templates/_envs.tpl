@@ -146,6 +146,23 @@ env:
         key: omniauthAzureTenantID
   - name: OMNIAUTH_ENTRAID_REDIRECT_URI
     value: {{ .Values.omniauth_entraid.redirect_uri | quote }}
+  - name: ADMIN_OMNIAUTH_ENTRAID_CLIENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: adminAzureClientID
+  - name: ADMIN_OMNIAUTH_ENTRAID_CLIENT_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: adminAzureClientSecret
+  - name: ADMIN_OMNIAUTH_ENTRAID_TENANT_ID
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: adminAzureTenantID
+  - name: ADMIN_OMNIAUTH_ENTRAID_REDIRECT_URI
+    value: {{ .Values.admin_omniauth_entraid.redirect_uri | quote }}
   - name: LAA_LANDING_PAGE_TARGET_URL
     valueFrom:
       secretKeyRef:
