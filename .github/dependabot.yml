@@ -32,6 +32,9 @@ updates:
       day: tuesday
       time: "21:15"
       timezone: Europe/London
+    ignore:
+      - dependency-name: "*frontend*"
+      - dependency-name: "*"
     groups:
       moj-frontend:
         patterns:
