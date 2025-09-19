@@ -1,4 +1,4 @@
-# This controller handles an admin user's return from the Google Oauth2 authentication
+# This controller handles an admin user's return from the Oauth2 authentication
 # Note that you may need to restart the server to apply changes to this file.
 module AdminUsers
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController

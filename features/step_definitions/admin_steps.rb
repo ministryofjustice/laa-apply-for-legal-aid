@@ -9,7 +9,6 @@ Given(/^I am logged in as an admin$/) do
     origin: admin_settings_url,
   )
   visit admin_root_path
-  click_on "Log in via entra"
 end
 
 Given("an application has been submitted") do
@@ -30,8 +29,8 @@ Given("multiple applications have been submitted") do
   )
 end
 
-Given(/^I visit the admin applications page$/) do
-  visit admin_legal_aid_applications_path
+Given(/^I visit the admin page$/) do
+  visit admin_path
 end
 
 Then(/^I should (see|not see) the (\S*) application$/) do |visibility, number|

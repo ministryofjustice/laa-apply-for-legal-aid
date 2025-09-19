@@ -1,0 +1,8 @@
+---
+cy:
+  devise:
+    omniauth_callbacks:
+      failure: Could not authenticate you from %{kind} due to "%{reason}".
+      success: Successfully authenticated from %{kind} account.
+      signed_in: Signed in successfully.
+      unauthorised: Could not authorise you! Ask an admin for access.

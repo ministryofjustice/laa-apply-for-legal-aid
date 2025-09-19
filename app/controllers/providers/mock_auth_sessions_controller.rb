@@ -1,21 +1,21 @@
 module Providers
-  class MockAuthSessionsController < Devise::SessionsController
-    def create
-      if mock_auth_session_params[:email] == Rails.configuration.x.omniauth_entraid.mock_username &&
-          mock_auth_session_params[:password] == Rails.configuration.x.omniauth_entraid.mock_password
-        @provider = Provider.from_omniauth(auth_data)
-        flash[:notice] = I18n.t "devise.sessions.signed_in"
-        sign_in_and_redirect @provider, event: :authentication
-      else
-        flash[:notice] = I18n.t("devise.failure.invalid", authentication_keys: "email")
-        render :new
-      end
+  class MockAuthSessionsController < MockAuthSessionsBaseController
+  protected
+
+    def mock_username
+      Rails.configuration.x.omniauth_entraid.mock_username
     end
 
-  protected
+    def mock_password
+      Rails.configuration.x.omniauth_entraid.mock_password
+    end
 
     def mock_auth_session_params
       params.expect(provider: %i[email password])
+    end
+
+    def user
+      @user = Provider.from_omniauth(auth_data)
     end
 
     # TODO: we could potentially use a hash of auth data then call auth_data[mock_auth_session_params[:email]] to

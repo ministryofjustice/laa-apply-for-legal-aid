@@ -1,0 +1,169 @@
+---
+cy:
+  admin:
+    legal_aid_applications:
+      index:
+        delete_all: Delete all applications
+        cancel_delete: Cancel delete
+        heading_1: "Admin: Legal Aid Applications"
+        no_applications: No applications present
+        confirm_delete: Yes, delete
+        applicant_name: Client's name
+        application_ref: Case reference
+        warning:
+          delete_all: Are you sure you want to delete all applications?
+          delete_consequence: This action can't be undone
+        search:
+          label: "Application search:"
+          hint: You can search by Application Reference, ccms_reference, client's name or application_id
+      legal_aid_applications:
+        warning:
+          delete: Are you sure you want to delete this case?
+        applicant_name: Client's name
+        application_ref: Case reference
+        created_at: Date started
+        delete: Delete
+        latest_applications: Latest Legal Aid Applications
+        status: Status
+        provider_username: Provider's username
+        discarded: Discarded by user on %{date}
+        data_view_html: Submission details <span class='govuk-visually-hidden'>for case reference %{application_ref}</span>
+        action: Action
+        submission_data: Submission data
+      search:
+        error: Please enter a search criteria
+    ccms_queues:
+      index:
+        page_title: Incomplete CCMS Submissions
+        progress_queue:
+          heading: Processing queue
+          empty: The sidekiq queue is empty
+        paused_submission:
+          heading: Paused submissions
+          empty: There are no paused submissions
+        applicant_name: Client's name
+        references: CCMS & case reference
+        case_reference: Case reference
+        created_at: Date started
+        state: State
+        sidekiq:
+          in_retry: on retry queue
+          false: Expired
+          running: Running
+      show:
+        submission: CCMS submission
+        created_at: Created at
+        updated_at: Updated at
+        status: Status
+        applicant_poll_count: Applicant poll count
+        case_poll_count: Case poll count
+        actions: Actions
+        restart: Restart at current step
+        restart_details: This will restart the submission at the current step and attempt to complete it another 10 times
+        reset: Reset submission
+        reset_details: This will reset the submission to `initialized` and restart it.  This will generate a new CCMS reference so you should alert the provider and caseworkers
+        submission_histories: Submission histories
+        from_state: From state
+        to_state: To state
+        request: Request
+        request_is_nil: Request is nil
+        response: Response
+        response_is_nil: Response is nil
+        expand: Expand
+    settings:
+      show:
+        heading_1: Settings
+        labels:
+          mock_true_layer_data: Mock TrueLayer Data
+          manually_review_all_cases: Manually review all non-passported applications
+          allow_welsh_translation: Allow Welsh translation
+          enable_ccms_submission: Allow CCMS submissions
+          enable_evidence_upload: Enable the new evidence upload feature
+          collect_hmrc_data: Collect HMRC data
+          collect_dwp_data: Collect DWP data
+        hints:
+          mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
+          manually_review_all_cases: |
+            All applications with capital contributions AND restrictions on assets will be routed to caseworker for review.
+            Select Yes to additionally route all non-passported applications to caseworker for review.
+          allow_welsh_translation: Select Yes to translate the service into Welsh
+          enable_ccms_submission: Yes by default, only set to No if CCMS is being taken offline
+          enable_evidence_upload: Select Yes to enable the new evidence upload feature for solicitors
+          collect_hmrc_data: Select Yes to enable calls to HMRC for employment data
+          collect_dwp_data: Select Yes to enable calls to Benefit Checker for passporting benefits data
+
+      update:
+        notice: Settings have been updated
+    submitted_applications_reports:
+      show:
+        heading_1: Submitted Applications
+        no_applications: No applications present
+      submitted_applications:
+        applicant_name: Client's name
+        application_ref: Case reference
+        ccms_ref_html: <abbr title='Client and Cost Management System'>CCMS</abbr> reference
+        provider_firm: Provider firm
+        provider_username: Provider username
+        submission_date: Submission date
+        table_caption: Submitted Applications
+    feedback:
+      show:
+        heading_1: Feedback
+        no_feedback: No feedback submitted
+      feedbacks:
+        done_eveything: Was the user able to do what they needed to today?
+        satisfaction: Satisfaction rating
+        suggestion: Improvement suggestion
+        source: Source
+    firms:
+      index:
+        heading_1: List of firms
+        action: Action
+        firm: Firm name
+        num_users: Number of provider users
+        permissions: Permissions
+        view_users: View provider users
+        view_users_html: View users <span class='govuk-visually-hidden'>for %{provider}</span>
+    reports:
+      index:
+        heading_1: "Admin reports and downloads"
+      date_input_fields:
+        records_from:
+          heading: Select records from
+          hint: (Optional) Default, 1 12 2019 - from month service went live
+        records_to:
+          heading: Select records to
+          hint: (Optional) Default, Todays's Date
+      submitted_to_ccms:
+        heading: Cases Successfully Submitted to CCMS Only
+      capital_assessment_result:
+        heading: Capital Assessment Result
+        none: "None"
+        pending: "Pending"
+        eligible: "Eligible"
+        not_eligible: "Not Eligible"
+        contribution_required: "Contribution Required"
+      application_type:
+        heading: Application Type
+        all: "All"
+        passported: "Passported"
+        non_passported: "Non-Passported"
+    roles:
+      index:
+        heading_1: Search for the Provider firm name
+      permissions:
+        show:
+          heading_1: "Select Firm permissions for %{firm_name}"
+        update:
+          notice: Permissions have been updated
+    providers:
+      index:
+        heading_1: Provider users for firm %{firm_name}
+        all_firms_heading_1: All provider users
+        email_address: Email address
+        username: Username
+    user_dashboard:
+      index:
+        heading_1: User administration main menu
+        firm_permissions: Manage permissions for provider firms
+        firms: List Provider firms

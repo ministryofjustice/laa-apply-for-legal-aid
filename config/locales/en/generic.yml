@@ -23,6 +23,7 @@ en:
     cya_inset_text: You cannot change the answers on this page once you save and continue.
     destroy: Destroy
     edit: Edit
+    email: Email
     en: English
     en-GB: English # Needed for testing as en-GB is used by Faker
     enter_text: Enter text
@@ -45,6 +46,7 @@ en:
     or: or
     partner: the partner
     partner_means_caption: Partner's means assessment
+    password: Password
     remove: Remove
     save_and_continue: Save and continue
     save_as_draft: Save as draft
