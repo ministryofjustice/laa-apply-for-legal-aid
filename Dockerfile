@@ -29,7 +29,7 @@ RUN gem update --system \
 && bundle install
 
 COPY package.json yarn.lock ./
-RUN yarn --prod
+RUN NODE_ENV=production yarn install --prod --frozen-lockfile --ignore-scripts
 
 ####################
 # DEPENDENCIES END #

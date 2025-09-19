@@ -26,7 +26,7 @@ references:
   install_js_packages: &install_js_packages
     run:
       name: Install Yarn packages
-      command: yarn --frozen-lockfile
+      command: yarn install --frozen-lockfile --ignore-scripts
 
   update_packages: &update_packages
     run:
