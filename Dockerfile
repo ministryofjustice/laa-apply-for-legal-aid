@@ -42,7 +42,7 @@ EXPOSE 3002
 
 COPY . .
 
-RUN NODE_OPTIONS=--openssl-legacy-provider bundle exec rake assets:precompile SECRET_KEY_BASE=a-real-secret-key-is-not-needed-here
+RUN bundle exec rake assets:precompile SECRET_KEY_BASE=a-real-secret-key-is-not-needed-here
 
 # tidy up installation - these are installed in the apply-base image
 RUN apk del build-dependencies
