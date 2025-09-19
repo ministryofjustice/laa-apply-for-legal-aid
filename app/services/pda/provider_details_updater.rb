@@ -130,17 +130,24 @@ module PDA
     end
 
     def pda_conn
-      @pda_conn ||= Faraday.new(url: Rails.configuration.x.pda.url, headers:)
+      @pda_conn ||= Faraday.new(url: Rails.configuration.x.pda.url, headers: pda_headers)
     end
 
     def ccms_user_api_conn
-      @ccms_user_api_conn ||= Faraday.new(url: Rails.configuration.x.ccms_user_api.url, headers:)
+      @ccms_user_api_conn ||= Faraday.new(url: Rails.configuration.x.ccms_user_api.url, headers: ccms_user_api_headers)
     end
 
-    def headers
+    def pda_headers
       {
         "accept" => "application/json",
         "X-Authorization" => Rails.configuration.x.pda.auth_key,
+      }
+    end
+
+    def ccms_user_api_headers
+      {
+        "accept" => "application/json",
+        "X-Authorization" => Rails.configuration.x.ccms_user_api.auth_key,
       }
     end
   end
