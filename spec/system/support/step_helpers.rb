@@ -34,7 +34,25 @@ module StepHelpers
     click_on "Save and continue"
     expect(page).to have_css("h1", text: "Has your client applied for civil legal aid before?")
 
-    nil if step_name == :previous_references
+    return if step_name == :previous_references
+
+    govuk_choose("No")
+    click_on "Save and continue"
+
+    return if step_name == :correspondence_address
+
+    govuk_choose("My client's UK home address")
+    click_on("Save and continue")
+
+    fill_in("Postcode", with: "SW1H 9EA")
+    click_on "Find address"
+
+    govuk_choose "Transport For London, 98 Petty France, London, SW1H 9EA"
+    click_on "Use this address"
+
+    expect(page).to have_css("h1", text: "Do you want to link this application with another one?")
+
+    nil if step_name == :link_application
   end
 
   def create_an_application_and_complete_client_details(with_partner)
