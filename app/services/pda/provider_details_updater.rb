@@ -126,15 +126,15 @@ module PDA
     end
 
     def user_detail_response
-      @user_detail_response ||= user_api_conn.get("user-details/silas/#{@provider.silas_id}")
+      @user_detail_response ||= ccms_user_api_conn.get("user-details/silas/#{@provider.silas_id}")
     end
 
     def pda_conn
       @pda_conn ||= Faraday.new(url: Rails.configuration.x.pda.url, headers:)
     end
 
-    def user_api_conn
-      @user_api_conn ||= Faraday.new(url: Rails.configuration.x.user_api.url, headers:)
+    def ccms_user_api_conn
+      @ccms_user_api_conn ||= Faraday.new(url: Rails.configuration.x.ccms_user_api.url, headers:)
     end
 
     def headers

@@ -124,7 +124,7 @@ admin_omniauth_entraid:
 pda:
   url: "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk"
 
-user_api:
+ccms_user_api:
   url: "https://laa-ccms-user-management-api-dev.apps.live.cloud-platform.service.justice.gov.uk/api/v1"
 
 trueLayer:
