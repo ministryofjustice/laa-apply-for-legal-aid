@@ -118,6 +118,9 @@ admin_omniauth_entraid:
 pda:
   url: "https://laa-provider-details-api-prod.apps.live.cloud-platform.service.justice.gov.uk"
 
+user_api:
+  url: "https://laa-ccms-user-management-api-production.apps.live.cloud-platform.service.justice.gov.uk/api/v1" # Need prod URL confirmation
+
 trueLayer:
   enableMock: "false"
 

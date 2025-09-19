@@ -79,11 +79,11 @@ module PDA
     end
 
     def contact_id
-      ccms_provider_user["ccmsContactId"]
+      ccms_provider_user.dig("ccmsUserDetails", "userPartyId")
     end
 
     def username
-      ccms_provider_user["userLogin"]
+      ccms_provider_user.dig("ccmsUserDetails", "userName")
     end
 
     def create_schedules
@@ -114,7 +114,7 @@ module PDA
           JSON.parse(user_detail_response.body)
         else
           Rails.logger.info("#{self.class} - No provider details found for #{@provider.email}")
-          raise UserNotFound, "No CCMS username found for #{@provider.email}"
+          raise UserNotFound, "No CCMS username found for #{@provider.email}" # This needs improving to help the user
         end
       else
         raise ApiError, "API Call Failed: ccms-provider-users (#{user_detail_response.status}) #{user_detail_response.body}"
@@ -122,15 +122,19 @@ module PDA
     end
 
     def office_schedules_response
-      @office_schedules_response ||= conn.get("provider-offices/#{@office_code}/schedules")
+      @office_schedules_response ||= pda_conn.get("provider-offices/#{@office_code}/schedules")
     end
 
     def user_detail_response
-      @user_detail_response ||= conn.get("ccms-provider-users/#{@provider.silas_id}")
+      @user_detail_response ||= user_api_conn.get("user-details/silas/#{@provider.silas_id}")
     end
 
-    def conn
-      @conn ||= Faraday.new(url: Rails.configuration.x.pda.url, headers:)
+    def pda_conn
+      @pda_conn ||= Faraday.new(url: Rails.configuration.x.pda.url, headers:)
+    end
+
+    def user_api_conn
+      @user_api_conn ||= Faraday.new(url: Rails.configuration.x.user_api.url, headers:)
     end
 
     def headers
