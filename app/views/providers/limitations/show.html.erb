@@ -60,7 +60,7 @@
     <%= render partial: "providers/limitations/cost_limits",
                locals: { form: } %>
 
-    <%= if @legal_aid_application&.lead_linked_application&.link_type_code == "FC_LEAD"
+    <%= if @legal_aid_application.associated_family_linked_application?
           govuk_warning_text(text: t(".family_warning"))
         end %>
 
