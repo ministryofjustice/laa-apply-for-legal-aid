@@ -143,7 +143,6 @@ World(Warden::Test::Helpers)
 
 After do |scenario|
   # reset oauth mocks
-  OmniAuth.config.mock_auth[:google_oauth2] = nil
   OmniAuth.config.test_mode = false
 
   if scenario.failed?

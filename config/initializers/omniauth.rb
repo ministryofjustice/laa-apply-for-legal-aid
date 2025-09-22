@@ -24,11 +24,6 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     scope: "info accounts balance transactions",
   )
   provider(
-    :google_oauth2,
-    Rails.configuration.x.google_oauth2.client_id,
-    Rails.configuration.x.google_oauth2.client_secret,
-  )
-  provider(
     :openid_connect,
     {
       name: :entra_id,
