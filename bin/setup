@@ -74,7 +74,7 @@ class ApplicationRequirementSetup
 
   def yarn_install
     puts "\n== Installing JavaScript dependencies =="
-    system! 'yarn install'
+    system! 'yarn install --frozen-lockfile --ignore-scripts'
   end
 
   def restart
