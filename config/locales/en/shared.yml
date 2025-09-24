@@ -934,13 +934,6 @@ en:
     means:
       employment_income_table:
         inset_text: We used your client's National Insurance number to get this information from HMRC.
-        date: Date
-        income: Income
-        deductions: Deductions
-        gross: Gross
-        tax: Tax
-        ni: National Insurance
-        table_caption: Your client's employment details
       cash_income:
         info: Cash means physical money like banknotes and coins.
       regular_income:

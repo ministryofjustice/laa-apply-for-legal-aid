@@ -5,3 +5,12 @@ en:
       reject: Reject analytics cookies
       view: View cookies
       hide: Hide this message
+    table_component:
+      employment_income_table:
+        date: Date
+        income: Income
+        deductions: Deductions
+        gross: Gross
+        tax: Tax
+        ni: National Insurance
+        table_caption: Your client's employment details
