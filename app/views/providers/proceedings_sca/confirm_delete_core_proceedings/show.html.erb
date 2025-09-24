@@ -1,16 +1,18 @@
-<h1 class="govuk-heading-xl"><%= t(".page_title", proceeding: @proceeding.meaning) %></h1>
+<%= page_template(page_title: t(".page_title", proceeding: @proceeding.meaning)) do %>
 
-<p><%= t(".paragraph") %></p>
+  <p class="govuk-body"><%= t(".paragraph") %></p>
 
-<ul class="govuk-list govuk-list--bullet">
-  <% @legal_aid_application.related_proceedings.each do |proceeding| %>
-    <li><%= proceeding.meaning %></li>
-  <% end %>
-</ul>
+  <ul class="govuk-list govuk-list--bullet">
+    <% @legal_aid_application.related_proceedings.each do |proceeding| %>
+      <li><%= proceeding.meaning %></li>
+    <% end %>
+  </ul>
 
-<%= govuk_warning_text(text: t(".warning")) %>
+  <%= govuk_warning_text(text: t(".warning")) %>
 
-<div class="govuk-button-group">
-  <%= govuk_button_link_to t(".yes_button"), providers_legal_aid_application_confirm_delete_core_proceeding_path(@legal_aid_application, proceeding_id: @proceeding.id), method: :delete, warning: true %>
-  <%= govuk_button_link_to t(".no_button"), providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application) %>
-</div>
+  <div class="govuk-button-group">
+    <%= govuk_button_link_to t(".yes_button"), providers_legal_aid_application_confirm_delete_core_proceeding_path(@legal_aid_application, proceeding_id: @proceeding.id), method: :delete, warning: true %>
+    <%= govuk_button_link_to t(".no_button"), providers_legal_aid_application_has_other_proceedings_path(@legal_aid_application) %>
+  </div>
+
+<% end %>
