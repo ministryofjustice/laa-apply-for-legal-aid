@@ -6,10 +6,9 @@
   <% end %>
 
   <% if flash[:notice] %>
-    <%= govuk_notification_banner(
-          title_text: t("generic.important"),
-          text: flash[:notice],
-        ) %>
+    <%= govuk_notification_banner(title_text: t("generic.important")) do |nb|
+          nb.with_heading(text: flash[:notice])
+        end %>
   <% end %>
 
   <% if flash[:hash] && flash[:hash].symbolize_keys! %>
