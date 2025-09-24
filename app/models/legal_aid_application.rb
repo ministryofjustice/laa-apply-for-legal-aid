@@ -558,6 +558,10 @@ class LegalAidApplication < ApplicationRecord
     lead_legal_linked_application? ? legal_linked_count + 1 : nil
   end
 
+  def associated_family_linked_application?
+    family_linked_associated_application? && lead_linked_application&.confirm_link == true
+  end
+
   def find_or_create_ccms_submission
     create_ccms_submission! unless ccms_submission
     ccms_submission
@@ -800,10 +804,6 @@ private
 
   def lead_legal_linked_application?
     legal_linked_count.positive?
-  end
-
-  def associated_family_linked_application?
-    family_linked_associated_application? && lead_linked_application&.confirm_link == true
   end
 
   def associated_legal_linked_application?

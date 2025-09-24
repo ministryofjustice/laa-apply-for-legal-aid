@@ -1169,6 +1169,27 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "associated_family_linked_application?" do
+    subject(:legal_linked_applications_count) { legal_aid_application.associated_family_linked_application? }
+
+    let(:linked_application) { create(:legal_aid_application) }
+    let(:confirm_link) { true }
+
+    before do
+      create(:linked_application, lead_application: linked_application, associated_application: legal_aid_application, link_type_code: "FC_LEAD", confirm_link:)
+    end
+
+    context "when the family link has been confirmed" do
+      it { is_expected.to be true }
+    end
+
+    context "when the family link has not been confirmed" do
+      let(:confirm_link) { false }
+
+      it { is_expected.to be false }
+    end
+  end
+
   describe "#bank_transactions" do
     subject(:bank_transactions) { legal_aid_application.bank_transactions }
 
