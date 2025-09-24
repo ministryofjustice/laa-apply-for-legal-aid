@@ -25,25 +25,23 @@ updates:
           - "govuk-components"
           - "view_component"
     open-pull-requests-limit: 10
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: weekly
-      day: tuesday
-      time: "21:15"
-      timezone: Europe/London
-    ignore:
-      - dependency-name: "*frontend*"
-      - dependency-name: "*"
-    groups:
-      moj-frontend:
-        patterns:
-          - "*frontend*"
-      npm:
-        patterns:
-          - "*"
-    open-pull-requests-limit: 10
-    ignore:
-      # REMOVE once a satisfactory solution to https://github.com/jestjs/jest/issues/15674 is found
-      - dependency-name: "jest-environment-jsdom"
-        versions: [ ">=30.0.0" ]
+  # Removed until shai-hulud threat has abated
+  # - package-ecosystem: "npm"
+  #   directory: "/"
+  #   schedule:
+  #     interval: weekly
+  #     day: tuesday
+  #     time: "21:15"
+  #     timezone: Europe/London
+  #   groups:
+  #     moj-frontend:
+  #       patterns:
+  #         - "*frontend*"
+  #     npm:
+  #       patterns:
+  #         - "*"
+  #   open-pull-requests-limit: 10
+  #   ignore:
+  #     # REMOVE once a satisfactory solution to https://github.com/jestjs/jest/issues/15674 is found
+  #     - dependency-name: "jest-environment-jsdom"
+  #       versions: [ ">=30.0.0" ]
