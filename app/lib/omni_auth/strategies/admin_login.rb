@@ -3,8 +3,8 @@ module OmniAuth
     class AdminLogin < OmniAuth::Strategies::OpenIDConnect
       class << self
         def mock_auth
-          OmniAuth.config.mock_auth[:entra_id] = OmniAuth::AuthHash.new({
-            provider: :admin_entra_id,
+          OmniAuth.config.mock_auth[:admin_entra_id] = OmniAuth::AuthHash.new({
+            provider: "entra_id",
             uid: "mock-admin-123",
             info: {
               name: "Mock Admin User",
