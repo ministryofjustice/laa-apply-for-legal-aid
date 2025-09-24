@@ -1,0 +1,7 @@
+en:
+  govuk_component:
+    cookie_banner_component:
+      accept: Accept analytics cookies
+      reject: Reject analytics cookies
+      view: View cookies
+      hide: Hide this message

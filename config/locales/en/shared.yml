@@ -6,14 +6,10 @@ en:
         title: Cookies on Apply for civil legal aid
         we_use_some: We use some essential cookies to make this service work.
         wed_also_like: "We'd also like to use analytics cookies so we can understand how you use the service and make improvements."
-        accept: Accept analytics cookies
-        reject: Reject analytics cookies
-        view: View cookies
         cookie_confirmation_msg_html: |
           You've %{cookie_state} analytics cookies. You can <a class="govuk-link" href="%{cookie_path}">change your cookie settings</a> at any time
         accepted: accepted
         rejected: rejected
-        hide: Hide this message
       revealing_checkbox:
         providers:
           means: &revealing_checkbox_labels
