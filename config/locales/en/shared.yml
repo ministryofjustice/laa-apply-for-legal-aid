@@ -503,8 +503,6 @@ en:
           evidence_upload: Files to support the application
         children_involved:
           involved-children-heading: Children involved in this application
-          child_name: Child %{number} name
-          child_date_of_birth: Child %{number} date of birth
       child_care_assessment:
         assessed: Client's ability to care was assessed by the local authority?
         result: Assessment result

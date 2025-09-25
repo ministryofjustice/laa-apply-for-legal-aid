@@ -19,6 +19,9 @@ en:
         applied_previously:
           has_applied_before: Has your client applied for civil legal aid before?
           previous_application_reference: Previous CCMS reference number
+        children_involved:
+          child_name: Child %{number} name
+          child_date_of_birth: Child %{number} date of birth
         client_details:
           heading: Client details
           previous_application_reference: Previous application reference
