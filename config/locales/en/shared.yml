@@ -439,8 +439,6 @@ en:
           additional_information: Why you think there is merit
         opponents:
           heading: Opponents
-          name: Opponent %{number} name
-          type: Opponent %{number} type
         domestic_abuse_summary:
           heading: Domestic abuse summary
           warning_letter_reasons: Why a warning letter has not been sent
