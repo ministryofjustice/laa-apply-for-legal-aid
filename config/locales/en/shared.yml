@@ -431,7 +431,6 @@ en:
           heading: Why the matter is opposed
         is_matter_opposed:
           heading: If the matter is opposed
-          description: Matter is opposed?
         allegation:
           heading: Allegation
           denies_all: Client wholly or substantially denies any allegations?
