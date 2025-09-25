@@ -69,6 +69,8 @@ en:
           date_of_latest_incident: Date of incident
           notification_of_latest_incident: Date your client contacted you about the latest incident
           first-contact-date: Date your client contacted you
+        matter_opposition:
+          reason: Reasons why the matter is opposed
         opponents:
           name: Opponent %{number} name
           type: Opponent %{number} type
