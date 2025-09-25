@@ -51,3 +51,5 @@ en:
           nino: National Insurance number
           has_partner: Client has a partner?
           has_partner_aria_label: Change whether your client has a partner
+        proceeding_details:
+          proceeding: Proceeding
