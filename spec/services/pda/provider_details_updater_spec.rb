@@ -108,10 +108,6 @@ RSpec.describe PDA::ProviderDetailsUpdater do
             .to("updated firm name")
       end
 
-      it "updates the provider contact_id" do
-        expect { call }.to change { provider.reload.contact_id }.from(nil).to(87_654)
-      end
-
       it "updates the provider's selected office" do
         expect { described_class.call(provider, office_code) }
           .to change { provider.reload.selected_office }
@@ -307,23 +303,6 @@ RSpec.describe PDA::ProviderDetailsUpdater do
 
         it "deletes any existing schedules belonging to the office" do
           expect { call }.to change(office.schedules, :count).to(0)
-        end
-      end
-    end
-
-    context "when PDA returns no details for the provider user" do
-      before { stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}").to_return(body: "", status: 204) }
-
-      it "raises a UserNotFound error" do
-        expect(Rails.logger).to receive(:info).with("#{described_class} - No provider details found for #{provider.email}")
-        expect { call }.to raise_error(PDA::ProviderDetailsUpdater::UserNotFound, "No CCMS username found for #{provider.email}")
-      end
-
-      context "when there is an error calling the ccms-provider-users endpoint" do
-        before { stub_request(:get, "#{Rails.configuration.x.pda.url}/ccms-provider-users/#{provider.silas_id}").to_return(body: "An error has occurred", status: 500) }
-
-        it "raises ApiError" do
-          expect { call }.to raise_error(PDA::ProviderDetailsUpdater::ApiError, "API Call Failed: ccms-provider-users (500) An error has occurred")
         end
       end
     end

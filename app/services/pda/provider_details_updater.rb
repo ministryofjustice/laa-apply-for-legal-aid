@@ -73,17 +73,7 @@ module PDA
       @provider.firm = firm
       @provider.offices << office unless @provider.offices.include?(office)
       @provider.selected_office_id = office.id
-      @provider.contact_id = contact_id
-      @provider.username = username
       @provider.save!
-    end
-
-    def contact_id
-      ccms_provider_user.dig("ccmsUserDetails", "userPartyId")
-    end
-
-    def username
-      ccms_provider_user.dig("ccmsUserDetails", "userName")
     end
 
     def create_schedules
@@ -108,46 +98,18 @@ module PDA
       @office_schedules_result ||= JSON.parse(office_schedules_response.body)
     end
 
-    def ccms_provider_user
-      if user_detail_response.success?
-        if user_detail_response.status == 200
-          JSON.parse(user_detail_response.body)
-        else
-          Rails.logger.info("#{self.class} - No provider details found for #{@provider.email}")
-          raise UserNotFound, "No CCMS username found for #{@provider.email}" # This needs improving to help the user
-        end
-      else
-        raise ApiError, "API Call Failed: ccms-provider-users (#{user_detail_response.status}) #{user_detail_response.body}"
-      end
-    end
-
     def office_schedules_response
       @office_schedules_response ||= pda_conn.get("provider-offices/#{@office_code}/schedules")
-    end
-
-    def user_detail_response
-      @user_detail_response ||= ccms_user_api_conn.get("user-details/silas/#{@provider.silas_id}")
     end
 
     def pda_conn
       @pda_conn ||= Faraday.new(url: Rails.configuration.x.pda.url, headers: pda_headers)
     end
 
-    def ccms_user_api_conn
-      @ccms_user_api_conn ||= Faraday.new(url: Rails.configuration.x.ccms_user_api.url, headers: ccms_user_api_headers)
-    end
-
     def pda_headers
       {
         "accept" => "application/json",
         "X-Authorization" => Rails.configuration.x.pda.auth_key,
-      }
-    end
-
-    def ccms_user_api_headers
-      {
-        "accept" => "application/json",
-        "X-Authorization" => Rails.configuration.x.ccms_user_api.auth_key,
       }
     end
   end
