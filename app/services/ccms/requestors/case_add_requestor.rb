@@ -175,7 +175,7 @@ module CCMS
         xml.__send__(:"casebio:ProviderFirmID", provider.firm.ccms_id)
         xml.__send__(:"casebio:ProviderOfficeID", @legal_aid_application.office.ccms_id)
         xml.__send__(:"casebio:ContactUserID") do
-          xml.__send__(:"common:UserLoginID", provider.contact_id)
+          xml.__send__(:"common:UserLoginID", provider.ccms_contact_id)
         end
       end
 
