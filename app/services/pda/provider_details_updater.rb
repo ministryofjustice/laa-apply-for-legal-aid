@@ -1,7 +1,6 @@
 module PDA
   class ProviderDetailsUpdater
     ApiError = Class.new(StandardError)
-    UserNotFound = Class.new(StandardError)
 
     # Only save schedule details that are relevant to civil apply
     APPLICABLE_CATEGORIES_OF_LAW = %w[MAT].freeze
