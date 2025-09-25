@@ -2052,7 +2052,7 @@ en:
           proceeding_issue_status: &default
             title_html: You cannot choose a special children act proceeding if it has not been issued
             option_bullets_html:
-              - select a different proceeding or matter type
+              - remove the proceeding and select a new one
               - go back and change your answer
               - use legal help
             options: "You can do one of the following:"
@@ -2069,13 +2069,13 @@ en:
             <<: *default
             title_html: For special children act, a supervision order cannot be varied, discharged or extended
             option_bullets_html:
-              - select a different proceeding or matter type
+              - remove the proceeding and select a new one
               - go back and change your answer
           child_subject:
             <<: *default
-            title_html: For special children act, your client must be the child subject of the proceeding
+            title_html: For special children act, your client must be the child subject of this proceeding
             option_bullets_html:
-              - select a different proceeding or matter type
+              - remove the proceeding and select a new one
               - go back and change your answer
           plf_none_selected:
             <<: *default
