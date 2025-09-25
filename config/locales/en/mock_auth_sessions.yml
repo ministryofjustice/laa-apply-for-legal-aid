@@ -3,6 +3,3 @@ en:
     mock_auth_sessions:
       new:
         page_heading: Sign in
-        email: Email
-        password: Password
-        sign_in: Sign in
