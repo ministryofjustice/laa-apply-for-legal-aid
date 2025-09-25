@@ -141,6 +141,8 @@ en:
       county: County (optional)
       postcode: Postcode
       submit_button: Find address
+    all_linked_applications:
+      summary_text: All applications with a %{link_type} link to this one
     application_ref:
       apply_ref: 'Apply service case reference:'
       ccms_ref_html: "<abbr title='Client and Cost Management System'>CCMS</abbr> case reference:"
