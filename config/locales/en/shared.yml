@@ -457,8 +457,6 @@ en:
           undertaking_offered_why: Why undertakings have not been offered
         urgency:
           heading: Nature of urgency and hearing date
-          hearing_date_set: Has a date been set for the hearing?
-          nature_of_urgency: Nature of the urgency
         second_appeal:
           heading: Second appeal details
           second_appeal_question: Second appeal?
