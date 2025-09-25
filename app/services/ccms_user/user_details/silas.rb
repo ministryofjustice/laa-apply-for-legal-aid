@@ -10,8 +10,6 @@ module CCMSUser
         new(silas_id).call
       end
 
-      def_delegators :connection, :get
-
       def initialize(silas_id)
         @silas_id = silas_id
       end
@@ -26,12 +24,13 @@ module CCMSUser
           Rails.logger.info("#{self.class} - No provider details found for #{provider.email}")
           raise UserNotFound, "No CCMS username found for #{provider.email}"
         else
-          raise ApiError, "API Call Failed: (#{response.status}) #{response.body}"
+          raise ApiError, "API Call Failed: status #{response.status}, body #{response.body.presence || 'nil'}"
         end
       end
 
     private
 
+      def_delegators :connection, :get
       attr_reader :silas_id
 
       def request

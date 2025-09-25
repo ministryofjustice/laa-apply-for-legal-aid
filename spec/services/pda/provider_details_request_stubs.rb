@@ -724,3 +724,8 @@ def stub_provider_details_retriever_api_error(provider:)
   stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}/provider-offices")
     .to_return(body: "An error has occurred", status: 500)
 end
+
+def stub_provider_user_failure_for(uuid, status:, body: nil)
+  stub_request(:get, %r{#{Rails.configuration.x.ccms_user_api.url}/user-details/silas/#{uuid}})
+    .to_return(status:, body:)
+end
