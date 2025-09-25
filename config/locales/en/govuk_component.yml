@@ -51,5 +51,10 @@ en:
           nino: National Insurance number
           has_partner: Client has a partner?
           has_partner_aria_label: Change whether your client has a partner
+        delegated_functions:
+          reported_on: Date reported
+          used_on: Date delegated functions were used
+          days_to_report: Days to report
+          not_used: Not used
         proceeding_details:
           proceeding: Proceeding
