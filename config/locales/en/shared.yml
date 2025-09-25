@@ -441,11 +441,6 @@ en:
           heading: Opponents
         domestic_abuse_summary:
           heading: Domestic abuse summary
-          warning_letter_reasons: Why a warning letter has not been sent
-          police_notified_details: Police action taken
-          police_not_notified: Why the police have not been notified
-          bail_conditions_set: Have bail conditions been set?
-          bail_conditions: Bail conditions
         statement_of_case:
           heading: Statement of case
           file_names: File names

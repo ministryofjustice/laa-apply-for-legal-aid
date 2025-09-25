@@ -56,6 +56,12 @@ en:
           used_on: Date delegated functions were used
           days_to_report: Days to report
           not_used: Not used
+        domestic_abuse_summary:
+          warning_letter_reasons: Why a warning letter has not been sent
+          police_notified_details: Police action taken
+          police_not_notified: Why the police have not been notified
+          bail_conditions_set: Have bail conditions been set?
+          bail_conditions: Bail conditions
         latest_incident_details:
           date_of_latest_incident: Date of incident
           notification_of_latest_incident: Date your client contacted you about the latest incident
