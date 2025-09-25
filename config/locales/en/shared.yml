@@ -424,8 +424,6 @@ en:
           question: Section 8 proceedings are in scope of LASPO?
         latest_incident_details:
           latest-incident-heading: Latest incident details
-          date_of_latest_incident: Date of incident
-          notification_of_latest_incident: Date your client contacted you about the latest incident
         matter_opposition:
           matter_opposed_reason: Reasons why the matter is opposed
           matter_opposed_reason_heading: Why the matter is opposed
