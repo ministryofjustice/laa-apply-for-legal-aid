@@ -1545,7 +1545,6 @@ en:
       proceeding_details:
         heading: What you're applying for
         card_title: Proceedings
-        proceeding: Proceeding
       delegated_functions:
         heading: Delegated functions
         reported_on: Date reported
