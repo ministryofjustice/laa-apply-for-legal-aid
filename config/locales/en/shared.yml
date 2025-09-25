@@ -425,8 +425,7 @@ en:
         latest_incident_details:
           latest-incident-heading: Latest incident details
         matter_opposition:
-          matter_opposed_reason: Reasons why the matter is opposed
-          matter_opposed_reason_heading: Why the matter is opposed
+          heading: Why the matter is opposed
         is_matter_opposed:
           heading: If the matter is opposed
           description: Matter is opposed?
