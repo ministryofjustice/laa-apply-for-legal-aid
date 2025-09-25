@@ -66,7 +66,7 @@ RSpec.describe "provider selects office" do
 
   let(:user) do
     {
-      userUuid: "c680f03d-48ed-4079-b3c9-ca0c97d9279d",
+      userUuid: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a",
       userLogin: provider.username,
       ccmsContactId: 87_654,
     }.to_json
