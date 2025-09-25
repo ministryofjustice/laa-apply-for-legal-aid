@@ -459,9 +459,6 @@ en:
           heading: Nature of urgency and hearing date
         second_appeal:
           heading: Second appeal details
-          second_appeal_question: Second appeal?
-          original_judge_level_question: Level of judge in original case
-          court_type_question: Where the %{appeal_num} will be heard
         merits_proceeding_section:
           attempts_to_settle_heading: Attempts to settle
           attempts_to_settle: Details of correspondence or mediation

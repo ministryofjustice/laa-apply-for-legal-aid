@@ -77,6 +77,10 @@ en:
           reasons: Why you think the court would enforce a breach of an order
         proceeding_details:
           proceeding: Proceeding
+        second_appeal:
+          second_appeal_question: Second appeal?
+          original_judge_level_question: Level of judge in original case
+          court_type_question: Where the %{appeal_num} will be heard
         urgency:
           hearing_date_set: Has a date been set for the hearing?
           nature_of_urgency: Nature of the urgency
