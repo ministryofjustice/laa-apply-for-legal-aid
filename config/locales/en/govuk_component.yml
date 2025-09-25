@@ -56,5 +56,9 @@ en:
           used_on: Date delegated functions were used
           days_to_report: Days to report
           not_used: Not used
+        latest_incident_details:
+          date_of_latest_incident: Date of incident
+          notification_of_latest_incident: Date your client contacted you about the latest incident
+          first-contact-date: Date your client contacted you
         proceeding_details:
           proceeding: Proceeding
