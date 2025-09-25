@@ -337,36 +337,6 @@ en:
         bank_statement_question: Uploaded bank statements
       client_details:
         heading: Client details
-        previous_application_reference: Previous application reference
-        has_applied_before: Has applied before?
-        correspondence_address_choice: Where to send client's mail
-        correspondence_choice:
-          home: My client's UK home address
-          residence: Another UK residential address
-          office: A UK office address
-        address: Correspondence address
-        care_of_recipient: Care of recipient
-        has_home_address: Client has a home address?
-        home_address_display:
-          :true: "Yes"
-          :false: No, they have no fixed address
-        home_address: Home address
-        aria_prefix: client's
-        employment_status: Employment status
-        age: "%{years} years old"
-        age_question: Age at computation date
-        means_tested: Was the client means-tested?
-        dob: Date of birth
-        email: Email address
-        first_name: First name
-        last_name: Last name
-        changed_last_name: Has your client ever changed their last name?
-        last_name_at_birth: Last name at birth
-        last_name_at_birth_question: What was your client's last name at birth?
-        same_as_last_name: Same as last name
-        nino: National Insurance number
-        has_partner: Client has a partner?
-        has_partner_aria_label: Change whether your client has a partner
       partner_details:
         section_heading: Partner's details
         aria_prefix: partner's
