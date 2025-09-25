@@ -452,8 +452,6 @@ en:
           statement: Statement
         parties_mental_capacity:
           heading: Mental capacity
-          understands_terms: All parties can understand terms of a court order?
-          reasons: Why you think the court would enforce a breach of an order
         separate_representation:
           heading: Separate representation
           separate_representation: Client wants separate representation?
