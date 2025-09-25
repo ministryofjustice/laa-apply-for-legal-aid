@@ -1542,8 +1542,6 @@ en:
         substantive_cost_limit: Substantive cost limit
       applied_previously:
         heading: Previous Legal Aid
-        has_applied_before: Has your client applied for civil legal aid before?
-        previous_application_reference: Previous CCMS reference number
       proceeding_details:
         heading: What you're applying for
         card_title: Proceedings
