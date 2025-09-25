@@ -283,6 +283,7 @@ Rails.application.routes.draw do
       resource :in_scope_of_laspo, only: %i[show update], controller: "application_merits_task/in_scope_of_laspos"
       resource :nature_of_urgencies, only: %i[show update], controller: "application_merits_task/nature_of_urgencies"
       resource :merits_task_list, only: %i[show update]
+      resource :when_contact_was_made, only: %i[show update], controller: "application_merits_task/when_contact_was_made"
 
       resource :uploaded_evidence_collection, only: %i[show update destroy] do
         get "/list", to: "uploaded_evidence_collections#list"
