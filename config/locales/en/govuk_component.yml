@@ -16,6 +16,9 @@ en:
         table_caption: Your client's employment details
     summary_list_component:
       card_component:
+        applied_previously:
+          has_applied_before: Has your client applied for civil legal aid before?
+          previous_application_reference: Previous CCMS reference number
         client_details:
           heading: Client details
           previous_application_reference: Previous application reference
