@@ -59,5 +59,8 @@ en:
         latest_incident_details:
           date_of_latest_incident: Date of incident
           notification_of_latest_incident: Date your client contacted you about the latest incident
+        opponents:
+          name: Opponent %{number} name
+          type: Opponent %{number} type
         proceeding_details:
           proceeding: Proceeding

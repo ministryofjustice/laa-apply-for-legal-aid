@@ -8,11 +8,11 @@
       card.with_summary_list(actions: false) do |summary_list|
         opponents.order(:created_at).each_with_index do |opponent, i|
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__opponent_name_#{i + 1}" }) do |row|
-            row.with_key(text: t(".name", number: i + 1).to_s, classes: "govuk-!-width-one-third")
+            row.with_key(text: t(".opponents.name", number: i + 1).to_s, classes: "govuk-!-width-one-third")
             row.with_value { opponent.full_name }
           end
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__opponent_type_#{i + 1}" }) do |row|
-            row.with_key(text: t(".type", number: i + 1).to_s)
+            row.with_key(text: t(".opponents.type", number: i + 1).to_s)
             row.with_value { opponent_type_description(opponent) }
           end
         end
