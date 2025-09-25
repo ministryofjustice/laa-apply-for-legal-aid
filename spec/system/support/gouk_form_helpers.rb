@@ -22,4 +22,8 @@ module GovukFormHelpers
 
     expect(summary).to have_link(text)
   end
+
+  def govuk_check(locator, **)
+    check(locator, **, visible: :hidden)
+  end
 end
