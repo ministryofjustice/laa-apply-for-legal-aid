@@ -1547,10 +1547,6 @@ en:
         card_title: Proceedings
       delegated_functions:
         heading: Delegated functions
-        reported_on: Date reported
-        used_on: Date delegated functions were used
-        days_to_report: Days to report
-        not_used: Not used
     means_reports:
       assets_heading: &assets_heading Property, savings and other assets
       benefits_breakdown:
