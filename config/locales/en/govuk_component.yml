@@ -113,6 +113,9 @@ en:
           specific_issue: Specific issue to be determined at court
           vary_order: Details about the changes
           what_is_prohibited: What you're asking to be prohibited
+        offline_savings_accounts:
+          accounts: Has savings accounts they cannot access online?
+          amount: Amount in offline savings accounts
         opponents:
           name: Opponent %{number} name
           type: Opponent %{number} type

@@ -310,8 +310,6 @@ en:
         card_heading: Money in bank accounts
       offline_savings_accounts:
         heading: Your client's offline accounts
-        offline_savings_accounts: Has savings accounts they cannot access online?
-        offline_savings_amount: Amount in offline savings accounts
       partner_bank_accounts:
         card_heading: The partner's accounts
         aria_label: The partner's accounts
