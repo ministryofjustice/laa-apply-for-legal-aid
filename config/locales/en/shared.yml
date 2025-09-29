@@ -468,9 +468,6 @@ en:
           none: Payments paid by %{individual_with_determiner}
       student_finance:
         heading: Student finance
-        question: "%{individual} gets student finance?"
-        how_much: Amount of student finance
-        amount: "%{amount} a year"
       cash_payments:
         income_heading: Payments %{individual_with_determiner} gets in cash
         income_heading_none: Payments received in cash by %{individual_with_determiner}

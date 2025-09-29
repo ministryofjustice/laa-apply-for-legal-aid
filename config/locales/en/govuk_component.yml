@@ -173,6 +173,10 @@ en:
         statement_of_case:
           file_names: File names
           statement: Statement
+        student_finance:
+          question: "%{individual} gets student finance?"
+          how_much: Amount of student finance
+          amount: "%{amount} a year"
         supporting_evidence:
           evidence_types:
             benefit_evidence: Benefit evidence
