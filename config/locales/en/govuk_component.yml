@@ -15,6 +15,9 @@ en:
         ni: National Insurance
         table_caption: Your client's employment details
     summary_list_component:
+      applicant_bank_accounts:
+        account: Account
+        balance: Balance
       card_component:
         allegation:
           denies_all: Client wholly or substantially denies any allegations?

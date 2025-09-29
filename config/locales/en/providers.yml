@@ -386,8 +386,6 @@ en:
       show:
         heading: Your client's bank accounts
         previously_told: Your client shared this information using TrueLayer.
-        account: Account
-        balance: Balance
         offline_savings_accounts: Does your client have any savings accounts they cannot access online?
         offline_savings_amount_label: Enter the total amount in all accounts.
         hints:
