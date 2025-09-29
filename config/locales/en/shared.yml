@@ -308,8 +308,6 @@ en:
         aria_label: Your client's accounts
       total_in_online_bank_accounts:
         card_heading: Money in bank accounts
-        current_accounts: Current accounts
-        savings_accounts: Savings accounts
       offline_savings_accounts:
         heading: Your client's offline accounts
         offline_savings_accounts: Has savings accounts they cannot access online?

@@ -193,6 +193,9 @@ en:
             counsel_opinion: Counsel's opinion
             judgement: Judgement
             plf_court_order: Court order
+        total_in_online_bank_accounts:
+          current_accounts: Current accounts
+          savings_accounts: Savings accounts
         undertaking:
           offered_what: Undertakings offered
           offered_why: Why undertakings have not been offered
