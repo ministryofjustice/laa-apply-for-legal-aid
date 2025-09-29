@@ -452,24 +452,14 @@ en:
           heading: Second appeal details
         merits_proceeding_section:
           attempts_to_settle_heading: Attempts to settle
-          attempts_to_settle: Details of correspondence or mediation
           chances_of_success_heading: Chances of success
-          chances_of_success_details: Why legal aid should be granted
           child_care_assessment_heading: Assessment of your client
           linked_children_heading: Children covered
-          linked_children: Children covered under this proceeding
           opponents_application_heading: Opponent's application
-          opponents_application_question: You have a copy of the opponent's application or court order?
-          opponents_application_reason: Reason for applying for legal aid at this stage
           prohibited_steps_heading: Prohibited steps details
-          prohibited_steps: To prevent removal from the UK?
-          prospects_of_success: Chance of a successful outcome is 45% or better?
           success_prospect: Chance of a successful outcome
           specific_issue_heading: Specific issue
-          specific_issue: Specific issue to be determined at court
           vary_order_heading: Changes since original order was made
-          vary_order: Details about the changes
-          what_is_prohibited: What you're asking to be prohibited
         supporting_evidence:
           evidence_types:
             benefit_evidence: Benefit evidence

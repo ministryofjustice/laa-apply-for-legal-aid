@@ -78,6 +78,17 @@ en:
           first-contact-date: Date your client contacted you
         matter_opposition:
           reason: Reasons why the matter is opposed
+        merits_proceeding_section:
+          attempts_to_settle: Details of correspondence or mediation
+          chances_of_success_details: Why legal aid should be granted
+          linked_children: Children covered under this proceeding
+          opponents_application_question: You have a copy of the opponent's application or court order?
+          opponents_application_reason: Reason for applying for legal aid at this stage
+          prohibited_steps: To prevent removal from the UK?
+          prospects_of_success: Chance of a successful outcome is 45% or better?
+          specific_issue: Specific issue to be determined at court
+          vary_order: Details about the changes
+          what_is_prohibited: What you're asking to be prohibited
         opponents:
           name: Opponent %{number} name
           type: Opponent %{number} type
