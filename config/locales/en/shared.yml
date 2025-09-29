@@ -501,34 +501,8 @@ en:
           proceeding: What does your client want legal aid for?
       proceeding_details:
         description: proceeding details
-        client_involvement_type_details:
-          question: Client role
-        delegated_function_details:
-          question: Delegated functions
-          not_used: Not used
-        level_of_service:
-          emergency:
-            question: Emergency level of service
-          substantive:
-            question: Substantive level of service
-        scope_limits:
-          emergency:
-            question: Emergency scope limitations
-          substantive:
-            question: Substantive scope limitations
-        final_hearing:
-          date:
-            question: Final hearing date
-          details:
-            question: Reasons for not listing final hearing
         cost_limits:
           heading: Cost limits
-          emergency_cost_limit: Emergency cost limit
-          request_higher_emergency: Higher emergency cost limit requested
-          higher_emergency_reasons: Reason for higher emergency cost limit
-          substantive_cost_limit: Substantive cost limit
-          request_higher_substantive: Higher substantive cost limit requested
-          higher_substantive_reasons: Reason for higher emergency cost limit
       delegated_functions:
         section_delegated:
           used_delegated_functions: Have you used delegated functions?
