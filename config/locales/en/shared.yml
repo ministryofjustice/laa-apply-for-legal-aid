@@ -438,8 +438,6 @@ en:
           heading: Domestic abuse summary
         statement_of_case:
           heading: Statement of case
-          file_names: File names
-          statement: Statement
         parties_mental_capacity:
           heading: Mental capacity
         separate_representation:
