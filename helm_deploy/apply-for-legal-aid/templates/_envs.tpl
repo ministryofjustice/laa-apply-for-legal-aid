@@ -201,16 +201,6 @@ env:
         key: trueLayerClientSecret
   - name: TRUE_LAYER_ENABLE_MOCK
     value: {{ .Values.trueLayer.enableMock | quote }}
-  - name: GOOGLE_CLIENT_ID
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: googleClientId
-  - name: GOOGLE_CLIENT_SECRET
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: googleClientSecret
   - name: SIDEKIQ_WEB_UI_PASSWORD
     valueFrom:
       secretKeyRef:
