@@ -106,6 +106,22 @@ en:
         statement_of_case:
           file_names: File names
           statement: Statement
+        supporting_evidence:
+          evidence_types:
+            benefit_evidence: Benefit evidence
+            client_employment_evidence: Client's employment evidence
+            part_employ_evidence: Partner's employment evidence
+            gateway_evidence: Gateway evidence
+            court_application_or_order: Opponents' court application or order
+            court_order: Court order
+            court_application: Court application
+            expert_report: Expert report
+            parental_responsibility: Parental responsibility evidence
+            local_authority_assessment: Assessment
+            grounds_of_appeal: Grounds of appeal
+            counsel_opinion: Counsel's opinion
+            judgement: Judgement
+            plf_court_order: Court order
         undertaking:
           offered_what: Undertakings offered
           offered_why: Why undertakings have not been offered

@@ -461,21 +461,6 @@ en:
           specific_issue_heading: Specific issue
           vary_order_heading: Changes since original order was made
         supporting_evidence:
-          evidence_types:
-            benefit_evidence: Benefit evidence
-            client_employment_evidence: Client's employment evidence
-            part_employ_evidence: Partner's employment evidence
-            gateway_evidence: Gateway evidence
-            court_application_or_order: Opponents' court application or order
-            court_order: Court order
-            court_application: Court application
-            expert_report: Expert report
-            parental_responsibility: Parental responsibility evidence
-            local_authority_assessment: Assessment
-            grounds_of_appeal: Grounds of appeal
-            counsel_opinion: Counsel's opinion
-            judgement: Judgement
-            plf_court_order: Court order
           evidence_upload: Files to support the application
         children_involved:
           involved-children-heading: Children involved in this application
