@@ -494,7 +494,6 @@ en:
         heading: Court order
       proceedings:
         heading: Proceedings
-        proceeding: Proceeding
       proceedings_details:
         section_proceeding:
           client_involvement_type: Client involvement type
