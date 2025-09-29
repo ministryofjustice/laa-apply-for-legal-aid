@@ -433,8 +433,6 @@ en:
           heading: If the matter is opposed
         allegation:
           heading: Allegation
-          denies_all: Client wholly or substantially denies any allegations?
-          additional_information: Why you think there is merit
         opponents:
           heading: Opponents
         domestic_abuse_summary:
