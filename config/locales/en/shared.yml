@@ -274,10 +274,6 @@ en:
       capital_disregards:
         heading: One-off payments your client received
         heading_with_partner: One-off payments your client or their partner received
-        mandatory:
-          heading: Disregarded payments
-        discretionary:
-          heading: Payments to be reviewed
       assets:
         bank_accounts_heading: Bank accounts
         total_in_online_bank_accounts_heading: Total in bank accounts
