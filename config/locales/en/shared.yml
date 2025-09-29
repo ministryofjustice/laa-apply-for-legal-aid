@@ -442,8 +442,6 @@ en:
           heading: Mental capacity
         separate_representation:
           heading: Separate representation
-          separate_representation: Client wants separate representation?
-          confirmed: Confirmed
         undertaking:
           heading: Offer of undertakings
         urgency:

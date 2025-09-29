@@ -103,6 +103,9 @@ en:
           second_appeal_question: Second appeal?
           original_judge_level_question: Level of judge in original case
           court_type_question: Where the %{appeal_num} will be heard
+        separate_representation:
+          separate_representation: Client wants separate representation?
+          confirmed: Confirmed
         statement_of_case:
           file_names: File names
           statement: Statement
