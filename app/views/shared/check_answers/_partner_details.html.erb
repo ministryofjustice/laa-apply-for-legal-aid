@@ -3,9 +3,9 @@
       card.with_summary_list(html_attributes: { id: "partner-details-questions" }, actions: !read_only) do |summary_list|
         if :contrary_interest.in?(attributes)
           summary_list.with_row do |row|
-            row.with_key(text: t(".contrary_interest"), classes: "govuk-!-width-one-third")
+            row.with_key(text: t(".partner_details.contrary_interest"), classes: "govuk-!-width-one-third")
             row.with_value { yes_no(@legal_aid_application.applicant.partner_has_contrary_interest?) }
-            row.with_action(text: t("generic.change"), visually_hidden_text: t(".partner_contrary_interest"),
+            row.with_action(text: t("generic.change"), visually_hidden_text: t(".partner_details.partner_contrary_interest"),
                             href: providers_legal_aid_application_contrary_interest_path(@legal_aid_application))
           end
         end
@@ -13,55 +13,55 @@
         unless @legal_aid_application.applicant.partner_has_contrary_interest?
           if :first_name.in?(attributes)
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_first_name" }) do |row|
-              row.with_key(text: t(".first_name"))
+              row.with_key(text: t(".partner_details.first_name"))
               row.with_value(text: partner.first_name)
               row.with_action(
                 text: t("generic.change"),
                 href: providers_legal_aid_application_partners_details_path(@legal_aid_application, anchor: :first_name),
-                visually_hidden_text: "#{t('.aria_prefix')} #{t('.first_name')}",
+                visually_hidden_text: "#{t('.partner_details.aria_prefix')} #{t('.partner_details.first_name')}",
               )
             end
           end
 
           if :last_name.in?(attributes)
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__partners_last_name" }) do |row|
-              row.with_key(text: t(".last_name"))
+              row.with_key(text: t(".partner_details.last_name"))
               row.with_value(text: partner.last_name)
               row.with_action(
                 text: t("generic.change"),
                 href: providers_legal_aid_application_partners_details_path(@legal_aid_application, anchor: :last_name),
-                visually_hidden_text: "#{t('.aria_prefix')} #{t('.last_name')}",
+                visually_hidden_text: "#{t('.partner_details.aria_prefix')} #{t('.partner_details.last_name')}",
               )
             end
           end
 
           if :date_of_birth.in?(attributes)
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__partners_date_of_birth" }) do |row|
-              row.with_key(text: t(".dob"))
+              row.with_key(text: t(".partner_details.dob"))
               row.with_value(text: partner.date_of_birth)
               row.with_action(
                 text: t("generic.change"),
                 href: providers_legal_aid_application_partners_details_path(@legal_aid_application, anchor: :date_of_birth),
-                visually_hidden_text: "#{t('.aria_prefix')} #{t('.dob')}",
+                visually_hidden_text: "#{t('.partner_details.aria_prefix')} #{t('.partner_details.dob')}",
               )
             end
           end
 
           if :age.in?(attributes)
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__partners_age" }) do |row|
-              row.with_key(text: t(".age_question"))
-              row.with_value(text: t(".age", years: partner.age))
+              row.with_key(text: t(".partner_details.age_question"))
+              row.with_value(text: t(".partner_details.age", years: partner.age))
             end
           end
 
           if :national_insurance_number.in?(attributes)
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_national_insurance_number" }) do |row|
-              row.with_key(text: t(".nino"))
+              row.with_key(text: t(".partner_details.nino"))
               row.with_value(text: nino_with_spaces(partner.national_insurance_number) || t("generic.not_provided"))
               row.with_action(
                 text: t("generic.change"),
                 href: providers_legal_aid_application_partners_details_path(@legal_aid_application),
-                visually_hidden_text: "#{t('.aria_prefix')} {#{t('.nino')}",
+                visually_hidden_text: "#{t('.partner_details.aria_prefix')} {#{t('.partner_details.nino')}",
               )
             end
           end

@@ -339,19 +339,6 @@ en:
         heading: Client details
       partner_details:
         section_heading: Partner's details
-        aria_prefix: partner's
-        address: Correspondence address
-        age: "%{years} years old"
-        age_question: Age at computation date
-        means_tested: Was the client means-tested?
-        dob: Date of birth
-        email: Email address
-        contrary_interest: Partner has a contrary interest?
-        partner_contrary_interest: Partner contrary interest
-        first_name: First name
-        last_name: Last name
-        nino: National Insurance number
-        has_partner: Does your client have a partner?
       dependants:
         dependant_name: "Dependant %{position}"
         client_has_dependants: Client has dependants?

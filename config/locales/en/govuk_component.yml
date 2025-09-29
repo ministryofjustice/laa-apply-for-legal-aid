@@ -119,6 +119,20 @@ en:
         parties_mental_capacity:
           understands_terms: All parties can understand terms of a court order?
           reasons: Why you think the court would enforce a breach of an order
+        partner_details:
+          aria_prefix: partner's
+          address: Correspondence address
+          age: "%{years} years old"
+          age_question: Age at computation date
+          means_tested: Was the client means-tested?
+          dob: Date of birth
+          email: Email address
+          contrary_interest: Partner has a contrary interest?
+          partner_contrary_interest: Partner contrary interest
+          first_name: First name
+          last_name: Last name
+          nino: National Insurance number
+          has_partner: Does your client have a partner?
         plf_court_order:
           description: Has a copy of the court order?
         proceeding_details:
