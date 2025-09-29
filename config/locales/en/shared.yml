@@ -809,12 +809,7 @@ en:
       cash_outgoing:
         info: Cash means physical money like banknotes and coins.
     employment_income_table:
-      benefits_in_kind: Benefits in kind
-      employment_details: Employment details
       heading: Income
-      monthly_income_before_tax: Monthly income before tax
-      national_insurance: National insurance
-      tax: Tax
     scope_limitations:
       limitation_note:
         details: Give details of the %{scope_limitation}

@@ -14,6 +14,10 @@ en:
         tax: Tax
         ni: National Insurance
         table_caption: Your client's employment details
+        benefits_in_kind: Benefits in kind
+        employment_details: Employment details
+        monthly_income_before_tax: Monthly income before tax
+        national_insurance: National insurance
       feedbacks:
         done_everything: Was the user able to do what they needed to today?
         satisfaction: Satisfaction rating
