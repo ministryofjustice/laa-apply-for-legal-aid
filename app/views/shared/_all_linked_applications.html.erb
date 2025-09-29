@@ -1,0 +1,5 @@
+<% if all_linked_applications_details(@legal_aid_application).present? %>
+  <%= govuk_details(summary_text: t(".summary_text", link_type: @legal_aid_application.lead_linked_application&.link_type_description&.downcase)) do %>
+    <%= all_linked_applications_details(@legal_aid_application) %>
+  <% end %>
+<% end %>
