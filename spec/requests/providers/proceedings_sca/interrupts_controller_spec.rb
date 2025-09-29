@@ -46,7 +46,7 @@ RSpec.describe Providers::ProceedingsSCA::InterruptsController do
         it "shows the expected interrupt content" do
           expect(page)
             .to have_content("For special children act, a supervision order cannot be varied, discharged or extended")
-            .and have_content("select a different proceeding or matter type")
+            .and have_content("remove the proceeding and select a new one")
             .and have_content("go back and change your answer")
             .and have_content("Remove the proceeding and select a new one")
         end
@@ -57,8 +57,8 @@ RSpec.describe Providers::ProceedingsSCA::InterruptsController do
 
         it "shows the expected interrupt content" do
           expect(page)
-            .to have_content("For special children act, your client must be the child subject of the proceeding")
-            .and have_content("select a different proceeding or matter type")
+            .to have_content("For special children act, your client must be the child subject of this proceeding")
+            .and have_content("remove the proceeding and select a new one")
             .and have_content("go back and change your answer")
             .and have_content("Remove the proceeding and select a new one")
         end
