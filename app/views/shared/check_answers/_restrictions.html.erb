@@ -5,19 +5,19 @@
         card.with_action do
           govuk_link_to(t("generic.change"),
                         check_answer_url_for(journey_type, :restrictions, @legal_aid_application),
-                        visually_hidden_suffix: t(".#{journey_type}.question"))
+                        visually_hidden_suffix: t(".#{journey_type}.heading#{individual}"))
         end
       end
 
       card.with_summary_list(actions: false) do |summary_list|
         summary_list.with_row(html_attributes: { id: "app-check-your-answers__has_restrictions" }) do |row|
-          row.with_key(text: t(".#{journey_type}.question#{individual}"), classes: "govuk-!-width-one-third")
+          row.with_key(text: t(".restrictions.#{journey_type}.question#{individual}"), classes: "govuk-!-width-one-third")
           row.with_value { yes_no(@legal_aid_application.has_restrictions) }
         end
 
         if @legal_aid_application.has_restrictions
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__restrictions_details" }) do |row|
-            row.with_key(text: t(".details"), classes: "govuk-!-width-one-third")
+            row.with_key(text: t(".restrictions.details"), classes: "govuk-!-width-one-third")
             row.with_value { @legal_aid_application.restrictions_details }
           end
         end

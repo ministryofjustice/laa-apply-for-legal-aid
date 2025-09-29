@@ -166,6 +166,13 @@ en:
               question: Final hearing date
             details:
               question: Reasons for not listing final hearing
+        restrictions:
+          details: Details of restrictions
+          citizens:
+            question: Are there any legal restrictions that prevent you from selling or borrowing against your assets?
+          providers:
+            question: Client is banned from selling or borrowing against assets?
+            question_with_partner: Client or their partner is banned from selling or borrowing against assets?
         second_appeal:
           second_appeal_question: Second appeal?
           original_judge_level_question: Level of judge in original case
