@@ -99,12 +99,6 @@ en:
         heading_1: Submitted Applications
         no_applications: No applications present
       submitted_applications:
-        applicant_name: Client's name
-        application_ref: Case reference
-        ccms_ref_html: <abbr title='Client and Cost Management System'>CCMS</abbr> reference
-        provider_firm: Provider firm
-        provider_username: Provider username
-        submission_date: Submission date
         table_caption: Submitted Applications
     feedback:
       show:
