@@ -14,6 +14,11 @@ en:
         tax: Tax
         ni: National Insurance
         table_caption: Your client's employment details
+      feedbacks:
+        done_everything: Was the user able to do what they needed to today?
+        satisfaction: Satisfaction rating
+        suggestion: Improvement suggestion
+        source: Source
     summary_list_component:
       applicant_bank_accounts:
         account: Account
