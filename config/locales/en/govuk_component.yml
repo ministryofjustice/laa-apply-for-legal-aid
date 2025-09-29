@@ -121,8 +121,6 @@ en:
           reasons: Why you think the court would enforce a breach of an order
         plf_court_order:
           description: Has a copy of the court order?
-        proceeding_details:
-          proceeding: Proceeding
         second_appeal:
           second_appeal_question: Second appeal?
           original_judge_level_question: Level of judge in original case
