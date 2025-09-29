@@ -518,18 +518,7 @@ en:
         providers:
           heading: Vehicles
           card_heading: Vehicles owned
-          own: Client owns a vehicle?
-          own_with_partner: Client or their partner owns a vehicle?
-          owner: Owner of the vehicle
-          estimated_value: Worth of the vehicle
-          payment_remaining: Amount left to pay
-          more_than_three_years_old: Vehicle was bought over 3 years ago?
-          used_regularly: Vehicle is in regular use?
           vehicle_index: Vehicle %{sequence}
-          options:
-            client: My client
-            partner: The partner
-            client_and_partner: My client and their partner
     forms:
       applicant_form:
         page_title: Enter your client's details
