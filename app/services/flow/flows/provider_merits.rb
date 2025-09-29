@@ -7,6 +7,7 @@ module Flow
         has_other_involved_children: Steps::ProviderMerits::HasOtherInvolvedChildrenStep,
         remove_involved_child: Steps::ProviderMerits::RemoveInvolvedChildStep,
         date_client_told_incidents: Steps::ProviderMerits::DateClientToldIncidentsStep,
+        when_contact_was_made: Steps::ProviderMerits::WhenContactWasMadeStep,
         opponent_individuals: Steps::ProviderMerits::OpponentIndividualsStep,
         opponent_existing_organisations: Steps::ProviderMerits::OpponentExistingOrganisationsStep,
         opponent_new_organisations: Steps::ProviderMerits::OpponentNewOrganisationStep,

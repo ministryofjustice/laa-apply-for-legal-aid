@@ -583,6 +583,9 @@ en:
             Select yes if your client is a child subject of the proceeding
       remove_opponent:
         show: *remove_show
+      when_contact_was_made:
+        show:
+          h1-heading: When did your client first contact you about this matter?
       date_client_told_incidents:
         show:
           h1-heading: Latest incident details
@@ -1469,6 +1472,7 @@ en:
         no_more_information_needed: No more information is needed
         # Application level tasks
         latest_incident_details: Latest incident details
+        when_contact_was_made: When contact was made
         opponent_name: Opponents
         opponent_mental_capacity: Mental capacity of all parties
         domestic_abuse_summary: Domestic abuse summary
@@ -1500,6 +1504,7 @@ en:
           complete: Completed
         urls:
           latest_incident_details: date_client_told_incident
+          when_contact_was_made: when_contact_was_made
           opponent_name: opponent_individual
           opponent_type: opponent_type
           has_other_opponent: has_other_opponent
