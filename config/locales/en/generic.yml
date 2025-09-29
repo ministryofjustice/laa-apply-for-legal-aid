@@ -2,6 +2,7 @@
 en:
   generic:
     accept_and_send: Accept and send application
+    action: Action
     address:
       postcode: Postcode
       postcode_label: postcode
@@ -21,15 +22,18 @@ en:
     create_test_applications: Create test applications
     cy: Cymraeg
     cya_inset_text: You cannot change the answers on this page once you save and continue.
+    delete: Delete
     destroy: Destroy
     edit: Edit
     email: Email
+    email_address: Email address
     en: English
     en-GB: English # Needed for testing as en-GB is used by Faker
     enter_text: Enter text
     errors:
       problem_text: There is a problem
       yes_or_no: You must select either Yes or No
+    filename: Filename
     home: Home
     important: Important
     information: Information
@@ -59,6 +63,7 @@ en:
     sign_in: Sign in
     start: Start
     start_now: Start now
+    status: Status
     new_app: Make a new application
     search: Search
     submit: Submit
@@ -71,9 +76,11 @@ en:
     upload: Upload
     upload_file: Upload a file
     uploaded_files_will_be_deleted: Any related files you uploaded will be deleted if you change your answer
+    username: Username
     view: View
     'yes': 'Yes'
     yes_but_none: Yes, but none specified
+    uploaded: Uploaded
     uploading: Uploading...
     ordinal_number:
       1: first

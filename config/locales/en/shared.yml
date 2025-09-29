@@ -967,12 +967,7 @@ en:
     student_finances_table:
       label: Student loan
     uploaded_files:
-      delete: Delete
-      filename: Filename
       size: Size
-      status: Status
-      action: Action
-      uploaded: Uploaded
       title: Files added
       no_files: Files uploaded will appear here.
     state_benefits:
