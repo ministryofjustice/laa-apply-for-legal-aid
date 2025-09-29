@@ -58,15 +58,15 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
           )
         end
 
-        it "adds the CCMS contact_id to the provider" do
-          expect { call }.to change { provider.reload.contact_id }.from(nil).to(494_000)
+        it "adds the CCMS ccms_contact_id to the provider" do
+          expect { call }.to change { provider.reload.ccms_contact_id }.from(nil).to(494_000)
         end
       end
     end
 
     context "when called with an office for the second time, or more" do
       let(:provider) do
-        create(:provider, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a", contact_id: 654_321, firm:, with_office_selected: false).tap do |provider|
+        create(:provider, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a", ccms_contact_id: 654_321, firm:, with_office_selected: false).tap do |provider|
           provider.offices << office
           provider.save!
         end
@@ -91,7 +91,7 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
 
       it "updates the providers contact id" do
         expect { call }
-          .to change { provider.reload.contact_id }
+          .to change { provider.reload.ccms_contact_id }
             .from(654_321)
             .to(494_000)
       end

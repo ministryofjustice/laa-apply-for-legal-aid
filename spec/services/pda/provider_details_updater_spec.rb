@@ -108,8 +108,8 @@ RSpec.describe PDA::ProviderDetailsUpdater do
             .to("updated firm name")
       end
 
-      it "updates the provider contact_id" do
-        expect { call }.to change { provider.reload.contact_id }.from(nil).to(87_654)
+      it "updates the provider ccms_contact_id" do
+        expect { call }.to change { provider.reload.ccms_contact_id }.from(nil).to(87_654)
       end
 
       it "updates the provider's selected office" do
