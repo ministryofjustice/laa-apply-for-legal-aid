@@ -378,17 +378,11 @@ en:
       linking_and_copying:
         section_linking:
           heading: Linking
-          linked: Link to another application?
-          FC_LEAD: Family link made to
-          LEGAL: Legal link made to
-          aria_prefix: which case
         other_links_section:
           FC_LEAD: All applications with a family link to this one
           LEGAL: All applications with a legal link to this one
         section_copying:
           heading: Copying
-          question: Copy from another application?
-          copied: Application copied
       substantive_costs:
         request_higher_limit: Higher cost limit requested
         new_cost_limit: Amount requested

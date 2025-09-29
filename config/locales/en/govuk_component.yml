@@ -91,6 +91,15 @@ en:
           date_of_latest_incident: Date of incident
           notification_of_latest_incident: Date your client contacted you about the latest incident
           first-contact-date: Date your client contacted you
+        linking_and_copying:
+          section_linking:
+            linked: Link to another application?
+            FC_LEAD: Family link made to
+            LEGAL: Legal link made to
+            aria_prefix: which case
+          section_copying:
+            question: Copy from another application?
+            copied: Application copied
         matter_opposition:
           reason: Reasons why the matter is opposed
         merits_proceeding_section:
