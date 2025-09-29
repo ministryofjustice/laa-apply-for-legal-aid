@@ -275,9 +275,6 @@ en:
         h2_client: Client's details
         h2_partner: Partner's details
         partner_text: These details must be correct for our caseworkers to review them. We will not use them to check DWP records.
-        name: Name
-        date_of_birth: Date of birth
-        national_insurance_number: National Insurance number
         client_name: Client name
         client_date_of_birth: Client date of birth
         client_national_insurance_number: Client national Insurance number

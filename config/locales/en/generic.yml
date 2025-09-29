@@ -24,6 +24,7 @@ en:
     cya_inset_text: You cannot change the answers on this page once you save and continue.
     delete: Delete
     destroy: Destroy
+    date_of_birth: Date of birth
     edit: Edit
     email: Email
     email_address: Email address
@@ -40,6 +41,7 @@ en:
     list: List
     'no': 'No'
     menu: Menu
+    name: Name
     national_insurance_number: National Insurance number
     none: None
     none_declared: None declared
