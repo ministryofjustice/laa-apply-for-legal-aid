@@ -70,6 +70,8 @@ en:
           bail_conditions: Bail conditions
         is_matter_opposed:
           description: Matter is opposed?
+        laspo:
+          question: Section 8 proceedings are in scope of LASPO?
         latest_incident_details:
           date_of_latest_incident: Date of incident
           notification_of_latest_incident: Date your client contacted you about the latest incident
