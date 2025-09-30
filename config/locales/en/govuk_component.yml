@@ -77,6 +77,11 @@ en:
         created_at: Date started
         provider_username: Provider's username
         submission_data: Submission data
+      list_selected:
+        col_amount: Amount
+        col_date: Date
+        col_description: Description
+        col_remove: Remove transaction
       submitted_applications:
         applicant_name: Client's name
         application_ref: Case reference
