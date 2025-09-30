@@ -52,6 +52,15 @@ en:
           in_retry: on retry queue
           false: Expired
           running: Running
+      employment_income:
+        monthly_income_before_tax: Monthly income before tax
+        benefits_in_kind: Benefits in kind
+        tax: Tax
+        national_insurance: National Insurance
+        fixed_employment_deduction: Fixed employment expenses deduction
+        total: Total
+        income_type: Types of income
+        amount: Amount
       employment_income_table:
         date: Date
         income: Income

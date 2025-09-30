@@ -122,15 +122,7 @@ en:
         amount: Amount
       employment_income:
         title: "%{individual} employment income"
-        monthly_income_before_tax: Monthly income before tax
-        benefits_in_kind: Benefits in kind
-        tax: Tax
-        national_insurance: National Insurance
-        fixed_employment_deduction: Fixed employment expenses deduction
-        total: Total
         table_caption: Employment income
-        income_type: Types of income
-        amount: Amount
       other_income:
         title: "%{individual} other income"
         income: "%{individual} income"
