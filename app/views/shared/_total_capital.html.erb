@@ -1,46 +1,46 @@
 <% partner = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
-<h2 class="govuk-heading-m"><%= t(".total_assessed_capital") %></h2>
+<h2 class="govuk-heading-m"><%= t(".heading") %></h2>
 
 <%= govuk_table do |table|
       table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".table_caption"))
 
       table.with_head do |head|
         head.with_row do |row|
-          row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, text: t(".type_of_capital"))
-          row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, numeric: true, text: t(".amount"))
+          row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, text: t(".total_capital.type_of_capital"))
+          row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, numeric: true, text: t(".total_capital.amount"))
         end
       end
 
       table.with_body do |body|
         body.with_row do |row|
-          row.with_cell(header: true, text: t(".property"))
+          row.with_cell(header: true, text: t(".total_capital.property"))
           row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_property))
         end
         body.with_row do |row|
-          row.with_cell(header: true, text: t(".vehicles"))
+          row.with_cell(header: true, text: t(".total_capital.vehicles"))
           row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_vehicles))
         end
         body.with_row do |row|
-          row.with_cell(header: true, text: t(".savings_and_investments"))
+          row.with_cell(header: true, text: t(".total_capital.savings_and_investments"))
           row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_savings))
         end
         body.with_row do |row|
-          row.with_cell(header: true, text: t(".other_assets"))
+          row.with_cell(header: true, text: t(".total_capital.other_assets"))
           row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_other_assets))
         end
         body.with_row(html_attributes: { class: "govuk-table__foot" }) do |row|
-          row.with_cell(header: true, text: t(".total_capital"))
+          row.with_cell(header: true, text: t(".total_capital.total_capital"))
           row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_capital_before_pensioner_disregard))
         end
         body.with_row do |row|
-          row.with_cell(header: true, text: t(".pensioner_disregard"))
+          row.with_cell(header: true, text: t(".total_capital.pensioner_disregard"))
           row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.pensioner_capital_disregard))
         end
       end
 
       table.with_foot do |foot|
         foot.with_row do |row|
-          row.with_cell(header: true, text: t(".disposable_capital"))
+          row.with_cell(header: true, text: t(".total_capital.disposable_capital"))
           row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.total_disposable_capital))
         end
       end

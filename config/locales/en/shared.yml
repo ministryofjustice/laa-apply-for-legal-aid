@@ -694,17 +694,8 @@ en:
       heading: Other assets
       table_caption: Other assets
     total_capital:
-      total_assessed_capital: Disposable capital
-      property: Property
-      vehicles: Vehicles
-      savings_and_investments: Savings and investments
-      other_assets: Other assets
-      disposable_capital: Total disposable capital
-      pensioner_disregard: Pensioner disregard
-      total_capital: Total
+      heading: Disposable capital
       table_caption: Disposable capital
-      type_of_capital: Type of capital
-      amount: Amount
     restrictions:
       restrictions: Restrictions on your client's assets
       none: None
