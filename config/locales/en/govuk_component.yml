@@ -244,6 +244,22 @@ en:
         opponents:
           name: Opponent %{number} name
           type: Opponent %{number} type
+        outgoings_and_deductions_details:
+          total_outgoings_and_deductions: Total outgoings and deductions
+          client:
+            housing: "Client housing payments (any declared housing benefits have been deducted from this total)"
+            childcare: Client childcare payments
+            maintenance_out: Client maintenance payments to a former partner
+            legal_aid: Client payments towards legal aid in a criminal case
+            dependants_allowance: Dependants allowance
+            partner_allowance: Partner allowance
+          partner:
+            housing: "Partner housing payments (any declared housing benefits have been deducted from this total)"
+            childcare: Partner childcare payments
+            maintenance_out: Partner maintenance payments to a former partner
+            legal_aid: Partner payments towards legal aid in a criminal case
+          dependants_allowance: Dependants allowance
+          partner_allowance: Partner allowance
         parties_mental_capacity:
           understands_terms: All parties can understand terms of a court order?
           reasons: Why you think the court would enforce a breach of an order
