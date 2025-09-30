@@ -116,6 +116,8 @@ en:
         applied_previously:
           has_applied_before: Has your client applied for civil legal aid before?
           previous_application_reference: Previous CCMS reference number
+        bank_statements:
+          question: Uploaded bank statements
         capital_disregards:
           mandatory:
             heading: Disregarded payments

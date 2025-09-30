@@ -324,7 +324,6 @@ en:
         total: '%{text} total'
       bank_statements:
         section_heading: Bank statements
-        bank_statement_question: Uploaded bank statements
       client_details:
         heading: Client details
       partner_details:
