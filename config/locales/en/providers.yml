@@ -129,15 +129,7 @@ en:
         table_caption: Income
       outgoings:
         title: "%{individual} outgoings"
-        housing_costs: Housing costs
-        childcare_costs: Childcare payments
-        maintenance_out: Maintenance payments to a former partner
-        legal_aid: Payments towards legal aid in a criminal case
-        total_outgoings: Total outgoings
         table_caption: Outgoings
-        type_of_outgoing: Type of outgoings
-        amount: Amount
-
     capital_introductions:
       show:
         h1-heading: What you need to do
