@@ -62,14 +62,8 @@ en:
         back_button: Back to your applications
     bank_transactions:
       list_selected:
-        col_amount: Amount
-        col_date: Date
-        col_description: Description
-        col_remove: Remove transaction
-        remove_link: Remove
         caption: "Transactions added for %{category}"
         removal_confirmation: "You removed transaction %{happened_at} %{description} from the list"
-
     capital_assessment_results:
       additional_property:
         additional_property_value: Additional property value
