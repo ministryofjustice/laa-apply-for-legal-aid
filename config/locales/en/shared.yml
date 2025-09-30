@@ -688,13 +688,8 @@ en:
       hint_text: Vehicle disregards and deductions were calculated using the information you provided.
       table_caption: Vehicles
     savings_and_investments:
-      savings_and_investments: Savings and investments
-      current_accounts: Current accounts
-      savings_accounts: Savings accounts
-      assessed_amount: Total savings and investments
+      heading: Savings and investments
       table_caption: Savings and investments
-      savings_and_investments_type: Type of savings and investments
-      amount: Amount
     other_assets:
       other_assets: Other assets
       assessed_amount: Total assets
