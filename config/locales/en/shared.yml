@@ -691,11 +691,8 @@ en:
       heading: Savings and investments
       table_caption: Savings and investments
     other_assets:
-      other_assets: Other assets
-      assessed_amount: Total assets
+      heading: Other assets
       table_caption: Other assets
-      type_of_asset: Type of asset
-      amount: Amount
     total_capital:
       total_assessed_capital: Disposable capital
       property: Property
