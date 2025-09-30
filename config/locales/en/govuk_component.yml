@@ -92,6 +92,12 @@ en:
         disregards: Disregards and deductions
         assessment_amount: Amount included in calculation
         amount: Amount
+      savings_and_investments:
+        amount: Amount
+        assessed_amount: Total savings and investments
+        current_accounts: Current accounts
+        savings_accounts: Savings accounts
+        type: Type of savings and investments
       submitted_applications:
         applicant_name: Client's name
         application_ref: Case reference
