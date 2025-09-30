@@ -15,6 +15,13 @@ en:
           substantive_due: "Substantive due: %{date}"
         firms:
           view_users_html: View users <span class='govuk-visually-hidden'>for %{provider}</span>
+        legal_aid_applications:
+          applicant_name: Client's name
+          application_ref: Case reference
+          data_view_html: Submission details <span class='govuk-visually-hidden'>for case reference %{application_ref}</span>
+          discarded: Discarded by user on %{date}
+          warning:
+            delete: Are you sure you want to delete this case?
       application_list:
         application_ref_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
         created_at: Start date
@@ -45,6 +52,12 @@ en:
         firm: Firm name
         num_users: Number of provider users
         permissions: Permissions
+      legal_aid_applications:
+        applicant_name: Client's name
+        application_ref: Case reference
+        created_at: Date started
+        provider_username: Provider's username
+        submission_data: Submission data
       submitted_applications:
         applicant_name: Client's name
         application_ref: Case reference

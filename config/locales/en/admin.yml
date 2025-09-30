@@ -17,19 +17,7 @@ en:
           label: 'Application search:'
           hint: You can search by Application Reference, ccms_reference, client's name or application_id
       legal_aid_applications:
-        warning:
-          delete: Are you sure you want to delete this case?
-        applicant_name: Client's name
-        application_ref: Case reference
-        created_at: Date started
-        delete: Delete
         latest_applications: Latest Legal Aid Applications
-        status: Status
-        provider_username: Provider's username
-        discarded: Discarded by user on %{date}
-        data_view_html: Submission details <span class='govuk-visually-hidden'>for case reference %{application_ref}</span>
-        action: Action
-        submission_data: Submission data
       search:
         error: Please enter a search criteria
     ccms_queues:
