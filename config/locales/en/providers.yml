@@ -1002,22 +1002,6 @@ en:
         search_button: Search
       application_list:
         table_description: "Applications table. Sortable by Name, Start date, LAA reference, Certificate type and Status."
-        action: Action
-        applicant_name: Name
-        application_ref_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
-        created_at: Start date
-        certificate_type: Certificate type
-        delete_label: application %{reference} for %{applicant_name}
-        status: Status
-        emergency: Emergency
-        substantive: Substantive
-        substantive_due: "Substantive due: %{date}"
-        backdated_to: "Backdated to: %{date}"
-        col_and_ref: and Ref
-        col_and_state: and Status
-        delete: Delete
-        delete_html: Delete <span class="govuk-visually-hidden">application %{reference} for %{applicant_name}</span>
-        delete_suffix: " application %{reference} for %{applicant}"
         no_applications_html: You have <strong>0</strong> applications.
       destroy: You deleted the application
       voided:

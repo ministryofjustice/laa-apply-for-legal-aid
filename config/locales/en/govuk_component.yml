@@ -7,8 +7,22 @@ en:
       hide: Hide this message
     table_component:
       body_component:
+        application_list:
+          backdated_to: "Backdated to: %{date}"
+          delete_suffix: " application %{reference} for %{applicant}"
+          emergency: Emergency
+          substantive: Substantive
+          substantive_due: "Substantive due: %{date}"
         firms:
           view_users_html: View users <span class='govuk-visually-hidden'>for %{provider}</span>
+      application_list:
+        application_ref_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
+        created_at: Start date
+        certificate_type: Certificate type
+        delete_label: application %{reference} for %{applicant_name}
+        col_and_ref: and Ref
+        col_and_state: and Status
+        delete_html: Delete <span class="govuk-visually-hidden">application %{reference} for %{applicant_name}</span>
       employment_income_table:
         date: Date
         income: Income
