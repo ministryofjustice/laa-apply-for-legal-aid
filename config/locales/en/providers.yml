@@ -1560,10 +1560,6 @@ en:
           heading: Mandatory disregards
       capital_result:
         heading: &capital_result_heading Capital result
-        contribution: Capital contribution
-        lower_limit_label: Capital lower limit
-        upper_limit_label: Capital upper limit
-        total: Total capital assessed
       caseworker_review_section_heading: Caseworker Review
       employment_heading: &employment_heading Employment income
       proceeding_eligibility: Proceeding eligibility
