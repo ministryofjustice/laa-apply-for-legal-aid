@@ -344,6 +344,10 @@ en:
         parties_mental_capacity:
           understands_terms: All parties can understand terms of a court order?
           reasons: Why you think the court would enforce a breach of an order
+        partner_bank_accounts:
+          card_heading: The partner's accounts
+          current_accounts: Current accounts
+          savings_accounts: Savings accounts
         partner_details:
           aria_prefix: partner's
           address: Correspondence address

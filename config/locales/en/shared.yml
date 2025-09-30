@@ -306,9 +306,6 @@ en:
         heading: Your client's offline accounts
       partner_bank_accounts:
         card_heading: The partner's accounts
-        aria_label: The partner's accounts
-        current_accounts: Current accounts
-        savings_accounts: Savings accounts
       joint_bank_accounts:
         card_heading: Joint accounts
         aria_label: Joint accounts
