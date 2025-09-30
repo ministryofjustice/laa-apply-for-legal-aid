@@ -114,6 +114,11 @@ en:
         status: Status
         to_state: To state
         updated_at: Updated at
+      link_application:
+        copies:
+          reference: LAA reference
+          client: Client
+          proceedings: Proceedings
       card_component:
         allegation:
           denies_all: Client wholly or substantially denies any allegations?
