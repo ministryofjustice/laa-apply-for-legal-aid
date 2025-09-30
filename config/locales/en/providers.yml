@@ -1627,12 +1627,6 @@ en:
           pension: Partner pension
       income_result:
         heading: Income result
-        total_disposable_income: Total disposable income assessed
-        total_gross_income: Total gross income assessed
-        gross_income_limit: Gross income limit
-        disposable_income_lower_limit: Disposable income lower limit
-        disposable_income_upper_limit: Disposable income upper limit
-        disposable_income_contribution: Income contribution
       uploaded_bank_statements:
         bank_statement_heading: Bank statements
         bank_statement_question: Uploaded bank statements
