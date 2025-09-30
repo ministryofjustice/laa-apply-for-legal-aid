@@ -28,11 +28,11 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
 
       context "when confirm_dwp_result is not nil" do
         before do
-          application.confirm_dwp_result = "dwp_correct"
+          application.dwp_result_confirmed = true
         end
 
-        it "resets confirm_dwp_result to nil" do
-          expect(application.reload.confirm_dwp_result).to be_nil
+        it "resets dwp_result_confirmed to nil" do
+          expect(application.reload.dwp_result_confirmed).to be_nil
         end
       end
 
@@ -108,11 +108,11 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
         login_as application.provider
       end
 
-      it "updates confirm_dwp_result to dwp_correct" do
+      it "updates dwp_result_confirmed to true" do
         expect { request }
-          .to change { application.reload.confirm_dwp_result }
+          .to change { application.reload.dwp_result_confirmed }
           .from(nil)
-          .to "dwp_correct"
+          .to true
       end
 
       it "creates a skipped benefit check result" do

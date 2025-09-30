@@ -18,19 +18,23 @@ module TaskStatus
     end
 
     def not_started?
-      check_provider_answers_completed? && application.confirm_dwp_result.nil?
+      check_provider_answers_completed? && application.dwp_result_confirmed.nil?
     end
 
     def in_progress?
-      check_provider_answers_completed? && application.confirm_dwp_result == false
+      application.dwp_result_confirmed == false
     end
 
     def completed?
-      application.confirm_dwp_result == true
+      application.dwp_result_confirmed == true || dwp_override_validator.valid?
     end
 
     def check_provider_answers_completed?
       CheckProviderAnswers.new(application).call.completed?
+    end
+
+    def dwp_override_validator
+      @dwp_override_validator ||= Validators::DWPOverride.new(application)
     end
   end
 end
