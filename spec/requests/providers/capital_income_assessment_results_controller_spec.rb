@@ -441,19 +441,19 @@ RSpec.describe Providers::CapitalIncomeAssessmentResultsController do
       let(:cfe_result) { create(:cfe_v6_result, :with_employments) }
       let(:td) { "</th><td class=\"govuk-table__cell govuk-table__cell--numeric\">" }
       let(:footer_td) { "</th><td class=\"govuk-table__footer govuk-table__footer--numeric\">" }
-      let(:monthly_income_before_tax) { I18n.t("providers.capital_income_assessment_results.employment_income.monthly_income_before_tax") }
-      let(:benefits_in_kind) { I18n.t("providers.capital_income_assessment_results.employment_income.benefits_in_kind") }
-      let(:tax) { I18n.t("providers.capital_income_assessment_results.employment_income.tax") }
-      let(:national_insurance) { I18n.t("providers.capital_income_assessment_results.employment_income.national_insurance") }
-      let(:fixed_employment_deduction) { I18n.t("providers.capital_income_assessment_results.employment_income.fixed_employment_deduction") }
-      let(:total_employment) { I18n.t("providers.capital_income_assessment_results.employment_income.total") }
-      let(:total_outgoings) { I18n.t("providers.capital_income_assessment_results.outgoings.total_outgoings") }
-      let(:total_other_income) { I18n.t("providers.capital_income_assessment_results.other_income.total") }
-      let(:total_deductions) { I18n.t("providers.capital_income_assessment_results.deductions.total_deductions") }
-      let(:total_disposable_income) { I18n.t("providers.capital_income_assessment_results.disposable_income.total_income") }
-      let(:total_disposable_outgoings) { I18n.t("providers.capital_income_assessment_results.disposable_income.total_outgoings") }
-      let(:total_disposable_deductions) { I18n.t("providers.capital_income_assessment_results.disposable_income.total_deductions") }
-      let(:total_disposable) { I18n.t("providers.capital_income_assessment_results.disposable_income.total_disposable") }
+      let(:monthly_income_before_tax) { I18n.t("govuk_component.table_component.employment_income.monthly_income_before_tax") }
+      let(:benefits_in_kind) { I18n.t("govuk_component.table_component.employment_income.benefits_in_kind") }
+      let(:tax) { I18n.t("govuk_component.table_component.employment_income.tax") }
+      let(:national_insurance) { I18n.t("govuk_component.table_component.employment_income.national_insurance") }
+      let(:fixed_employment_deduction) { I18n.t("govuk_component.table_component.employment_income.fixed_employment_deduction") }
+      let(:total_employment) { I18n.t("govuk_component.table_component.employment_income.total") }
+      let(:total_outgoings) { I18n.t("govuk_component.table_component.outgoings.total_outgoings") }
+      let(:total_other_income) { I18n.t("govuk_component.table_component.other_income.total") }
+      let(:total_deductions) { I18n.t("govuk_component.table_component.deductions.total_deductions") }
+      let(:total_disposable_income) { I18n.t("govuk_component.table_component.disposable_income.total_income") }
+      let(:total_disposable_outgoings) { I18n.t("govuk_component.table_component.disposable_income.total_outgoings") }
+      let(:total_disposable_deductions) { I18n.t("govuk_component.table_component.disposable_income.total_deductions") }
+      let(:total_disposable) { I18n.t("govuk_component.table_component.disposable_income.total_disposable") }
 
       it "displays the employment income" do
         expect(unescaped_response_body).to include(I18n.t("providers.capital_income_assessment_results.other_income.title", individual: "Client"))
