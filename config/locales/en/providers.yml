@@ -943,17 +943,7 @@ en:
         h2-heading: Uploaded files
         upload_file: Upload files
       uploaded_files:
-        action: Action
         title: Uploaded files
-        filename: Filename
-        size: Size
-        status: Status
-        uploaded: Uploaded
-        delete: Delete
-        delete_html: Delete <span class="govuk-visually-hidden">%{filename}</span>
-        select_a_category: Select a category
-        select_a_category_label: "Select a category for %{filename}"
-        update: Update
     has_other_dependants:
       show:
         error: Select yes if your client has any other dependants

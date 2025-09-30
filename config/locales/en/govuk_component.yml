@@ -22,6 +22,9 @@ en:
           discarded: Discarded by user on %{date}
           warning:
             delete: Are you sure you want to delete this case?
+        uploaded_files:
+          delete_html: Delete <span class="govuk-visually-hidden">%{filename}</span>
+          select_a_category_label: "Select a category for %{filename}"
       head_component:
         transactions:
           col_amount: Amount
@@ -92,6 +95,8 @@ en:
       transactions:
         col_clear_all: Clear all
         col_select_all: Select all
+      uploaded_files:
+        select_a_category: Select a category
     summary_list_component:
       applicant_bank_accounts:
         account: Account
