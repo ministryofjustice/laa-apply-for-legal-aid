@@ -52,6 +52,12 @@ en:
           in_retry: on retry queue
           false: Expired
           running: Running
+      deductions:
+        dependants_allowance: Dependants allowance
+        partner_allowance: Partner allowance
+        total_deductions: Total deductions
+        type_of_deduction: Type of deductions
+        amount: Amount
       employment_income:
         monthly_income_before_tax: Monthly income before tax
         benefits_in_kind: Benefits in kind

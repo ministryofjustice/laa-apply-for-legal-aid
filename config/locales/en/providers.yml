@@ -114,12 +114,7 @@ en:
         amount: Amount
       deductions:
         title: Deductions
-        dependants_allowance: Dependants allowance
-        partner_allowance: Partner allowance
-        total_deductions: Total deductions
         table_caption: Deductions
-        type_of_deduction: Type of deductions
-        amount: Amount
       employment_income:
         title: "%{individual} employment income"
         table_caption: Employment income
