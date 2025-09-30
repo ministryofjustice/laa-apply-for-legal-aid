@@ -8,10 +8,10 @@ RSpec.describe DWPOutcomeHelper do
 
     before { call_method }
 
-    let(:application) { create(:legal_aid_application, confirm_dwp_result: true) }
+    let(:application) { create(:legal_aid_application, dwp_result_confirmed: true) }
 
-    it "resets confirm_dwp_result to nil" do
-      expect(application.confirm_dwp_result).to be_nil
+    it "resets dwp_result_confirmed to nil" do
+      expect(application.dwp_result_confirmed).to be_nil
     end
   end
 
@@ -20,8 +20,8 @@ RSpec.describe DWPOutcomeHelper do
 
     before { call_method }
 
-    it "updates confirm_dwp_result to true" do
-      expect(application.confirm_dwp_result).to be "dwp_correct"
+    it "updates dwp_result_confirmed to true" do
+      expect(application.dwp_result_confirmed).to be true
     end
   end
 end
