@@ -5,23 +5,23 @@
                          html_attributes: { id: "app-check-your-answers__caseworker_review__card" }) do |card|
         card.with_summary_list(actions: false, html_attributes: { id: "app-check-your-answers__caseworker_review__summary" }) do |summary_list|
           summary_list.with_row do |row|
-            row.with_key(text: t(".required"), classes: "govuk-!-width-one-third")
+            row.with_key(text: t(".caseworker_review.required"), classes: "govuk-!-width-one-third")
             row.with_value(text: yes_no(@manual_review_determiner.manual_review_required?))
           end
 
           if @manual_review_determiner.manual_review_required?
             summary_list.with_row do |row|
-              row.with_key(text: t(".reasons"))
+              row.with_key(text: t(".caseworker_review.reasons"))
               row.with_value do
-                safe_join(@manual_review_determiner.review_reasons.map { |reason| t(".reason.#{reason}") }, tag.br * 2)
+                safe_join(@manual_review_determiner.review_reasons.map { |reason| t(".card_component.caseworker_review.reason.#{reason}") }, tag.br * 2)
               end
             end
 
             @manual_review_determiner.review_categories_by_reason&.each do |reason, categories|
               summary_list.with_row do |row|
-                row.with_key(text: t(".category-#{reason}"), classes: "govuk-!-width-one-third")
+                row.with_key(text: t(".caseworker_review.category-#{reason}"), classes: "govuk-!-width-one-third")
                 row.with_value do
-                  safe_join(categories.map { |category| t(".category.#{category}") }, tag.br)
+                  safe_join(categories.map { |category| t(".card_component.caseworker_review.category.#{category}") }, tag.br)
                 end
               end
             end

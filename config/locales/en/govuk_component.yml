@@ -54,6 +54,72 @@ en:
             heading: Disregarded payments
           discretionary:
             heading: Payments to be reviewed
+        caseworker_review:
+          required: Caseworker review required?
+          reasons: Review reasons
+          category-amount_variation: Review categories - Monthly value
+          category-unknown_frequency: Review categories - Frequency
+          category-policy_disregards: Review categories - Discretionary disregards
+          category-multiple_employments: Review categories - Multiple employments
+          category-refunds: Review categories - Tax or NI refunds
+          category:
+            employment: Client's employment
+            client_employment: Client's employment
+            partner_employment: Partner's employment
+            employment_gross_income: Client's employment gross income
+            client_employment_gross_income: Client's employment gross income
+            partner_employment_gross_income: Partner's employment gross income
+            employment_tax: Client's employment income tax
+            client_employment_tax: Client's employment income tax
+            partner_employment_tax: Partner's employment income tax
+            employment_nic: Client's employment National Insurance contributions
+            client_employment_nic: Client's employment National Insurance contributions
+            partner_employment_nic: Partner's employment National Insurance contributions
+            employment_payment: Client's employment payment
+            client_employment_payment: Client's employment payment
+            partner_employment_payment: Partner's employment payment
+            state_benefit_payment: Client's state benefits
+            client_state_benefit_payment: Client's state benefits
+            partner_state_benefit_payment: Partner's state benefits
+            other_income_payment: Client's other income
+            client_other_income_payment: Client's other income
+            partner_other_income_payment: Partner's other income
+            outgoings_housing_cost: Client's housing payments
+            client_outgoings_housing_cost: Client's housing payments
+            partner_outgoings_housing_cost: Partner's housing payments
+            outgoings_maintenance: Client's maintenance payments
+            client_outgoings_maintenance: Client's maintenance payments
+            partner_outgoings_maintenance: Partner's maintenance payments
+            outgoings_legal_aid: Client's legal aid payments
+            client_outgoings_legal_aid: Client's legal aid payments
+            partner_outgoings_legal_aid: Partner's legal aid payments
+            outgoings_childcare: Client's childcare payments
+            client_outgoings_childcare: Client's childcare payments
+            partner_outgoings_childcare: Partner's childcare payments
+            england_infected_blood_support: England Infected Blood Support Scheme
+            vaccine_damage_payments: Vaccine Damage Payments Scheme
+            variant_creutzfeldt_jakob_disease: Variant Creutzfeldt-Jakob disease (vCJD) Trust
+            criminal_injuries_compensation_scheme: Criminal Injuries Compensation Scheme
+            national_emergencies_trust: National Emergencies Trust (NET)
+            we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
+            london_emergencies_trust: The London Emergencies Trust
+          reason:
+            amount_variation: The monthly value for some income or outgoings contains large variations. Refer to 'Variation Category' to see which are impacted and need to be reviewed
+            unknown_frequency: How often some income was received or outgoings were paid could not be calculated. Refer to 'Frequency Category' to see which are impacted and need to be reviewed
+            residual_balance: Check current account's residual balance to ensure capital contribution is correct
+            policy_disregards: Discretionary disregards selected # CFE policy disregard review reason.
+            capital_disregards: Check the mandatory or discretionary capital disregards received by the client and decide if they should be included in the calculation
+            multi_benefit: Multiple benefits in single bank transaction
+            dwp_override: Review evidence disputing the DWP's 'not passported' result
+            restrictions: Review why some capital assets cannot be used towards legal aid
+            client_further_employment_details: Review report and uploaded evidence for the client's further employment information, provided in addition to data returned by HMRC
+            partner_further_employment_details: Review report and uploaded evidence for the partner's further employment information, provided in addition to data returned by HMRC
+            multiple_employments: Request wageslips for the client. HMRC data shows they've had multiple employments
+            refunds: Verify what the correct tax and NI deductions should be. HMRC data shows a refund to the client
+            client_uploaded_bank_statements: Check uploaded bank statements for the client's account details. Open banking was not used
+            partner_uploaded_bank_statements: Check uploaded bank statements for the partner's account details. Open banking was not used
+            ineligible: Applicant is ineligible. Check the overall means result
+            non_passported: Non-Passported application
         children_involved:
           child_name: Child %{number} name
           child_date_of_birth: Child %{number} date of birth
