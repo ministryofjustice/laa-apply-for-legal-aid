@@ -6,6 +6,9 @@ en:
       view: View cookies
       hide: Hide this message
     table_component:
+      body_component:
+        firms:
+          view_users_html: View users <span class='govuk-visually-hidden'>for %{provider}</span>
       employment_income_table:
         date: Date
         income: Income
@@ -23,6 +26,11 @@ en:
         satisfaction: Satisfaction rating
         suggestion: Improvement suggestion
         source: Source
+      firms:
+        action: Action
+        firm: Firm name
+        num_users: Number of provider users
+        permissions: Permissions
       submitted_applications:
         applicant_name: Client's name
         application_ref: Case reference

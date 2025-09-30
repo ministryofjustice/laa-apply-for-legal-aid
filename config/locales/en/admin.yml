@@ -107,12 +107,6 @@ en:
     firms:
       index:
         heading_1: List of firms
-        action: Action
-        firm: Firm name
-        num_users: Number of provider users
-        permissions: Permissions
-        view_users: View provider users
-        view_users_html: View users <span class='govuk-visually-hidden'>for %{provider}</span>
     reports:
       index:
         heading_1: 'Admin reports and downloads'
