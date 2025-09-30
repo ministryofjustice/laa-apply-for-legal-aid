@@ -54,6 +54,9 @@ en:
             heading: Disregarded payments
           discretionary:
             heading: Payments to be reviewed
+          means_report:
+            discretionary_heading: Discretionary disregards
+            mandatory_heading: Mandatory disregards
         capital_result:
           contribution: Capital contribution
           lower_limit_label: Capital lower limit

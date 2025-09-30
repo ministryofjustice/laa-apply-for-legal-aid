@@ -1554,10 +1554,6 @@ en:
       benefit_check_question: In receipt of passporting benefit
       capital_disregards:
         heading: Capital disregards
-        discretionary:
-          heading: Discretionary disregards
-        mandatory:
-          heading: Mandatory disregards
       capital_result:
         heading: &capital_result_heading Capital result
       caseworker_review_section_heading: Caseworker Review
