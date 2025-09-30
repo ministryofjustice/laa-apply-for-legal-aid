@@ -85,6 +85,10 @@ en:
         col_date: Date
         col_description: Description
         col_remove: Remove transaction
+      other_assets:
+        amount: Amount
+        assessed_amount: Total assets
+        type_of_asset: Type of asset
       property_results:
         property_values: Property values
         value: Value
