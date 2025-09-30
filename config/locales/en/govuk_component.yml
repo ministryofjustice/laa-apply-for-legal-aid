@@ -22,6 +22,15 @@ en:
           discarded: Discarded by user on %{date}
           warning:
             delete: Are you sure you want to delete this case?
+      head_component:
+        transactions:
+          col_amount: Amount
+          col_and_category: and category
+          col_and_description: and description
+          col_category: Category
+          col_date: Date
+          col_description: Description
+          sorted: Sorted
       application_list:
         application_ref_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
         created_at: Start date
@@ -75,6 +84,9 @@ en:
         provider_firm: Provider firm
         provider_username: Provider username
         submission_date: Submission date
+      transactions:
+        col_clear_all: Clear all
+        col_select_all: Select all
     summary_list_component:
       applicant_bank_accounts:
         account: Account

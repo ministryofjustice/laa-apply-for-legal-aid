@@ -41,28 +41,28 @@
 
           table.with_head do |head|
             head.with_row do |row|
-              row.with_cell(html_attributes: { class: "select-clear-all", "data-copy-clear": t(".col_clear_all"), "data-copy-select": t(".col_select_all") })
+              row.with_cell(html_attributes: { class: "select-clear-all", "data-copy-clear": t(".transactions.col_clear_all"), "data-copy-select": t(".transactions.col_select_all") })
               row.with_cell(html_attributes: { class: "sort header-sort-desc", "data-sort-type": "date" }) do
                 tag.span(class: "aria-sort-description") do
-                  concat t(".col_date")
+                  concat t(".transactions.col_date")
                   concat tag.span(class: "sort-direction-indicator")
                 end
               end
               row.with_cell(html_attributes: { class: "sort", "data-sort-type": "alphabetic" }) do
                 tag.span(class: "aria-sort-description") do
-                  concat t(".col_description")
+                  concat t(".transactions.col_description")
                   concat tag.span(class: "sort-direction-indicator")
                 end
               end
               row.with_cell(html_attributes: { class: "sort", "data-sort-type": "numeric" }, numeric: true) do
                 tag.span(class: "aria-sort-description") do
-                  concat t(".col_amount")
+                  concat t(".transactions.col_amount")
                   concat tag.span(class: "sort-direction-indicator")
                 end
               end
               row.with_cell(html_attributes: { class: "sort", "data-sort-type": "alphabetic" }) do
                 tag.span(class: "aria-sort-description") do
-                  concat t(".col_category")
+                  concat t(".transactions.col_category")
                   concat tag.span(class: "sort-direction-indicator")
                 end
               end
