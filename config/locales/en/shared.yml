@@ -681,14 +681,8 @@ en:
     property_results:
       property: Property
       hint_text: Property disregards and deductions were calculated using the information you provided.
-      value: Value
-      outstanding_mortgage: Outstanding mortgage
-      disregards: Disregards and deductions
-      assessment_amount: Amount included in calculation
       additional_property: Additional property
       table_caption: Property calculations
-      property_values: Property values
-      amount: Amount
     vehicle_results:
       vehicles: Vehicles
       hint_text: Vehicle disregards and deductions were calculated using the information you provided.
