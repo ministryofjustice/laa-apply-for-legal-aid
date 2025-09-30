@@ -58,6 +58,13 @@ en:
         total_deductions: Total deductions
         type_of_deduction: Type of deductions
         amount: Amount
+      disposable_income:
+        total_income: Total income
+        total_outgoings: Total outgoings (includes tax and National Insurance)
+        total_deductions: Total deductions (includes employment expenses)
+        total_disposable: Total disposable income
+        type_of_disposable_income: Type of disposable income
+        amount: Amount
       employment_income:
         monthly_income_before_tax: Monthly income before tax
         benefits_in_kind: Benefits in kind

@@ -105,13 +105,7 @@ en:
         uploaded: Uploaded bank statements
       disposable_income:
         title: Disposable income
-        total_income: Total income
-        total_outgoings: Total outgoings (includes tax and National Insurance)
-        total_deductions: Total deductions (includes employment expenses)
-        total_disposable: Total disposable income
         table_caption: Disposable income
-        type_of_disposable_income: Type of disposable income
-        amount: Amount
       deductions:
         title: Deductions
         table_caption: Deductions
