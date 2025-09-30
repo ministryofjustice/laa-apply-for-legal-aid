@@ -104,6 +104,13 @@ en:
         col_select_all: Select all
       uploaded_files:
         select_a_category: Select a category
+      vehicle_results:
+        amount: Amount
+        assessment_amount: Amount included in calculation
+        disregards: Disregards and deductions
+        oustanding_payments: Outstanding payments
+        value: Value
+        vehicles_detail: Vehicles detail
     summary_list_component:
       applicant_bank_accounts:
         account: Account
