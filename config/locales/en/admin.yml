@@ -29,35 +29,14 @@ en:
         paused_submission:
           heading: Paused submissions
           empty: There are no paused submissions
-        applicant_name: Client's name
-        references: CCMS & case reference
-        case_reference: Case reference
-        created_at: Date started
-        state: State
-        sidekiq:
-          in_retry: on retry queue
-          false: Expired
-          running: Running
       show:
         submission: CCMS submission
-        created_at: Created at
-        updated_at: Updated at
-        status: Status
-        applicant_poll_count: Applicant poll count
-        case_poll_count: Case poll count
         actions: Actions
         restart: Restart at current step
         restart_details: This will restart the submission at the current step and attempt to complete it another 10 times
         reset: Reset submission
         reset_details: This will reset the submission to `initialized` and restart it.  This will generate a new CCMS reference so you should alert the provider and caseworkers
         submission_histories: Submission histories
-        from_state: From state
-        to_state: To state
-        request: Request
-        request_is_nil: Request is nil
-        response: Response
-        response_is_nil: Response is nil
-        expand: Expand
     settings:
       show:
         heading_1: Settings
