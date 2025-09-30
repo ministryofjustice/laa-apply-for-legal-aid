@@ -98,6 +98,16 @@ en:
         amount: Amount
         assessed_amount: Total assets
         type_of_asset: Type of asset
+      other_income:
+        benefits: Benefits, charitable or government payments
+        friends_or_family: Financial help from friends or family
+        maintenance: Maintenance payments from a former partner
+        property_or_lodger: Income from property or lodger
+        student_finance: Student finance
+        pension: Pension
+        total: Total
+        type_of_income: Type of income
+        amount: Amount
       property_results:
         property_values: Property values
         value: Value
