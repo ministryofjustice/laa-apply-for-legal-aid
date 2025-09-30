@@ -71,37 +71,32 @@ brew bundle
 
 1. Copy the `.env.sample` file and name the new file `.env.development`
 
-To get the app in a usable state you will need to provide an admin password before running set up as seeding the admin user requires this value
-```bash
-ADMIN_PASSWORD=
-```
+1. To install OS dependencies (MacOSX only):
+    ```
+    brew bundle
+    ```
 
-3. To install OS dependencies (MacOSX only):
-```
-brew bundle
-```
+    You may need to switch postgres versions to match version used by app
+    ```
+    brew services list
+    ...
+    brew services stop postgresql@XX
+    brew services start postgresql@14
+    ```
 
-You may need to switch postgres versions to match version used by app
-```
-brew services list
-...
-brew services stop postgresql@XX
-brew services start postgresql@14
-```
+1. From the root of the project execute the following command:
+    ```
+    [bin/spring stop] *
+    bin/setup
+    ```
+    \* possibly needed if spring started and errors encountered when running a command like `rails db:migrate:status`
 
-4. From the root of the project execute the following command:
-```
-[bin/spring stop] *
-bin/setup
-```
-\* possibly needed if spring started and errors encountered when running a command like `rails db:migrate:status`
-
-5. Once setup, you can run the dev binstub to run the server, sidekiq, and watch
+1. Once setup, you can run the dev binstub to run the server, sidekiq, and watch
 for JS and CSS changes.
 
-```
-bin/dev
-```
+    ```
+    bin/dev
+    ```
 
 ### Malware check of uploaded files
 
@@ -302,8 +297,7 @@ This mock data allows for testing with more meaningful bank transactions, includ
 
 The admin portal is at `/admin`. To access it in UAT, there must be an `AdminUser` defined.
 
-If `ENV['ADMIN_PASSWORD']` returns a password, running `rake db:seed` will create an
-admin user with username `apply_maintenance`, and that password, in all UAT deployments.
+Running `rake db:seed` will create an admin user with username `apply_maintenance` in all UAT deployments.
 
 The admin portal is only accessible in Staging and Production using Google login for authorised accounts.
 

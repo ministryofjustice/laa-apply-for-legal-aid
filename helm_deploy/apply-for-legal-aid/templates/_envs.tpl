@@ -41,13 +41,6 @@ env:
         name: apply-for-legal-aid-rds-instance-output
         key: database_name
   {{ end }}
-  {{ if .Values.admin.allowAdminPassword }}
-  - name: ADMIN_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: laa-apply-for-legalaid-secrets
-        key: adminPassword
-  {{ end }}
   - name: GOVUK_NOTIFY_API_KEY
     valueFrom:
       secretKeyRef:
