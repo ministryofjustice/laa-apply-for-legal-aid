@@ -177,6 +177,30 @@ en:
           police_not_notified: Why the police have not been notified
           bail_conditions_set: Have bail conditions been set?
           bail_conditions: Bail conditions
+        income_details:
+          total_income: Total income
+          client:
+            benefits: Client benefits, charitable or government payments
+            employment: Client gross employment income
+            fixed_employment_deduction: Client fixed employment deduction
+            family_help: Client financial help from friends or family
+            income_tax: Client income tax
+            maintenance_in: Client maintenance payments
+            national_insurance: Client national insurance
+            property_or_lodger: Client income from property or lodger
+            student_loan: Client student loan or grant
+            pension: Client pension
+          partner:
+            benefits: Partner benefits, charitable or government payments
+            employment: Partner gross employment income
+            fixed_employment_deduction: Partner fixed employment deduction
+            family_help: Partner financial help from friends or family
+            income_tax: Partner income tax
+            maintenance_in: Partner maintenance payments
+            national_insurance: Partner national insurance
+            property_or_lodger: Partner income from property or lodger
+            student_loan: Partner student loan or grant
+            pension: Partner pension
         income_result:
           total_disposable_income: Total disposable income assessed
           total_gross_income: Total gross income assessed
