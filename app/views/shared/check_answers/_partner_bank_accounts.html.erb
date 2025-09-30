@@ -19,12 +19,12 @@
 
       card.with_summary_list(actions: false) do |summary_list|
         summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_current_accounts" }) do |row|
-          row.with_key(text: t(".current_accounts"), classes: "govuk-!-width-one-third")
+          row.with_key(text: t(".partner_bank_accounts.current_accounts"), classes: "govuk-!-width-one-third")
           row.with_value { @legal_aid_application.savings_amount.partner_offline_current_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.partner_offline_current_accounts) : t("generic.none") }
         end
 
         summary_list.with_row(html_attributes: { id: "app-check-your-answers__partner_savings_accounts" }) do |row|
-          row.with_key(text: t(".savings_accounts"), classes: "govuk-!-width-one-third")
+          row.with_key(text: t(".partner_bank_accounts.savings_accounts"), classes: "govuk-!-width-one-third")
           row.with_value { @legal_aid_application.savings_amount.partner_offline_savings_accounts.present? ? gds_number_to_currency(@legal_aid_application.savings_amount.partner_offline_savings_accounts) : t("generic.none") }
         end
       end
