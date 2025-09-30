@@ -686,13 +686,7 @@ en:
     vehicle_results:
       vehicles: Vehicles
       hint_text: Vehicle disregards and deductions were calculated using the information you provided.
-      value: Value
-      oustanding_payments: Outstanding payments
-      disregards: Disregards and deductions
-      assessment_amount: Amount included in calculation
       table_caption: Vehicles
-      vehicles_detail: Vehicles detail
-      amount: Amount
     savings_and_investments:
       savings_and_investments: Savings and investments
       current_accounts: Current accounts
