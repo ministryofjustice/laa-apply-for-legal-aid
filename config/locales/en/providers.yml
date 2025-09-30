@@ -463,9 +463,6 @@ en:
       copies:
         show:
           heading: Linked application
-          reference: LAA reference
-          client: Client
-          proceedings: Proceedings
           question: Do you want to copy the proceedings and merits from %{lead_application_reference} to this one?
           hint: Do not copy if you want to add to, or change the proceedings.
           "yes": Yes, the information will be the same
