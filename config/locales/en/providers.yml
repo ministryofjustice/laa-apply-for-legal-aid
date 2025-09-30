@@ -1814,15 +1814,6 @@ en:
       show:
         table_description: 'Transactions table "%{from} to %{to}". Sortable by Date, Description, Amount and Category.'
         table_description_html: <span class="govuk-visually-hidden">Transactions table</span> %{from} to %{to} <span class="govuk-visually-hidden">Sortable by Date, Description, Amount and Category</span>
-        col_category: Category
-        col_and_category: and category
-        col_amount: Amount
-        col_clear_all: Clear all
-        col_date: Date
-        col_description: Description
-        col_and_description: and description
-        col_select_all: Select all
-        sorted: Sorted
     use_ccms:
       show:
         warning: "You cannot use this service if your client:"
