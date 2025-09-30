@@ -118,6 +118,13 @@ en:
           previous_application_reference: Previous CCMS reference number
         bank_statements:
           question: Uploaded bank statements
+        benefits_income:
+          applicant:
+            question: Client gets benefits, charitable or government payments?
+          partner:
+            question: Partner gets benefits, charitable or government payments?
+          type: Benefit type
+          amount: Benefit amount
         capital_disregards:
           mandatory:
             heading: Disregarded payments

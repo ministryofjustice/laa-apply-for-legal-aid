@@ -372,15 +372,11 @@ en:
       benefits_income:
         applicant:
           heading: Client benefits, charitable or government payments
-          question: Client gets benefits, charitable or government payments?
           change_aria: whether your client receives benefits
         partner:
           heading: Partner benefits, charitable or government payments
-          question: Partner gets benefits, charitable or government payments?
           change_aria: whether the partner receives benefits
         benefit_heading: "Benefits, charitable or government payment %{index}"
-        type: Benefit type
-        amount: Benefit amount
       merits: &merits
         complete-application-heading: Complete the application
         complete-application-text: By submitting this application you are confirming that, to the best of your knowledge, the details you are providing are correct.
