@@ -49,6 +49,9 @@ en:
         children_involved:
           child_name: Child %{number} name
           child_date_of_birth: Child %{number} date of birth
+        client_bank_accounts:
+          current_accounts: Current accounts
+          savings_accounts: Savings accounts
         client_details:
           heading: Client details
           previous_application_reference: Previous application reference

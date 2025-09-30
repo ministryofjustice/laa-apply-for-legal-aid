@@ -297,8 +297,6 @@ en:
       client_bank_accounts:
         card_heading: Your client's accounts
         aria_label: Your client's accounts
-        current_accounts: Current accounts
-        savings_accounts: Savings accounts
       client_online_bank_accounts:
         card_heading: Client's bank accounts
         aria_label: Your client's accounts
