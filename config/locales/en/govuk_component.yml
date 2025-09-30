@@ -30,6 +30,16 @@ en:
         col_and_ref: and Ref
         col_and_state: and Status
         delete_html: Delete <span class="govuk-visually-hidden">application %{reference} for %{applicant_name}</span>
+      ccms_queues:
+        applicant_name: Client's name
+        references: CCMS & case reference
+        case_reference: Case reference
+        date_started: Date started
+        state: State
+        sidekiq:
+          in_retry: on retry queue
+          false: Expired
+          running: Running
       employment_income_table:
         date: Date
         income: Income
@@ -69,6 +79,19 @@ en:
       applicant_bank_accounts:
         account: Account
         balance: Balance
+      ccms_queues:
+        applicant_poll_count: Applicant poll count
+        case_poll_count: Case poll count
+        created_at: Created at
+        expand: Expand
+        from_state: From state
+        request: Request
+        request_is_nil: Request is nil
+        response: Response
+        response_is_nil: Response is nil
+        status: Status
+        to_state: To state
+        updated_at: Updated at
       card_component:
         allegation:
           denies_all: Client wholly or substantially denies any allegations?
