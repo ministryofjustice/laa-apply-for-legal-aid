@@ -101,10 +101,10 @@ ccms_soa:
   submit_applications: "true"
   clientPasswordType: "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText"
   userRole: EXTERNAL
-  caseServicesWsdl: CaseServicesSTGWsdl.xml
-  clientProxyServiceWsdl: ClientProxyServiceSTGWsdl.xml
-  documentServicesWsdl: DocumentServicesSTGWsdl.xml
-  getReferenceDataWsdl: GetReferenceDataSTGWsdl.xml
+  caseServicesWsdl: CaseServicesUATWsdl.xml
+  clientProxyServiceWsdl: ClientProxyServiceUATWsdl.xml
+  documentServicesWsdl: DocumentServicesUATWsdl.xml
+  getReferenceDataWsdl: GetReferenceDataUATWsdl.xml
 
 omniauth_entraid:
   mock_auth_enabled: false
