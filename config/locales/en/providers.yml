@@ -1653,12 +1653,7 @@ en:
         warning: Check that proceedings are under the right matter type
     providers:
       show:
-        account_number: Account number
-        email: Email address
-        name: Name
         page_title: Your profile
-        role: Permission
-        username: Username
     received_benefit_confirmations:
       show:
         h1_no_partner: Which passporting benefit does your client get?
