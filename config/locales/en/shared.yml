@@ -363,8 +363,6 @@ en:
       employed_income:
         heading: Employment income
         employment_details: Details
-        details_for: "Details for %{individual_with_determiner}"
-        question: "Do you need to tell us anything else about %{individual_with_determiner}'s employment?"
         aria_label: "Change %{individual_with_determiner}'s employment details"
       benefits_income:
         applicant:
