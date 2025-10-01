@@ -15,11 +15,7 @@ en:
       index:
         account_holder_address_heading: Account holder address
         account_holder_name_heading: Account holder name
-        account_number_heading: Account Number
-        balance_heading: Balance
-        sort_code_heading: Sort Code
         table_caption: Your added accounts
-        type_heading: Type
         your_accounts: Your bank accounts
         link_other_account: Add another bank account
     additional_accounts:
