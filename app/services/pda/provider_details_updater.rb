@@ -26,8 +26,8 @@ module PDA
       if office_schedules_response.status == 200
         update_firm
         update_office
-        update_provider
         create_schedules
+        update_provider
         Rails.logger.info("#{self.class} - No applicable schedules found for #{@office_code}") if office.schedules.empty?
       else
         Rails.logger.info("#{self.class} - No schedules found for #{@office_code}")
@@ -72,8 +72,8 @@ module PDA
       @provider.firm = firm
       @provider.offices << office unless @provider.offices.include?(office)
       @provider.selected_office_id = office.id
-      @provider.ccms_contact_id = ccms_contact_id
-      @provider.username = ccms_username
+      @provider.ccms_contact_id ||= ccms_contact_id
+      @provider.username ||= ccms_username
       @provider.save!
     end
 
@@ -117,8 +117,6 @@ module PDA
 
     def ccms_user
       @ccms_user = CCMSUser::UserDetails::Silas.call(@provider.silas_id)
-    rescue CCMSUser::UserDetails::Silas::UserNotFound
-      @ccms_user = { ccmsUserDetails: { userName: "Not found", userPartyId: "Not found" } }.with_indifferent_access
     end
 
     def pda_conn

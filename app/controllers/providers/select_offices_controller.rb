@@ -24,6 +24,11 @@ module Providers
       else
         render :show
       end
+    rescue CCMSUser::UserDetails::Silas::UserNotFound => e
+      Rails.logger.error("#{self.class} - #{e.message}")
+      Sentry.capture_message("#{self.class} - #{e.message}")
+
+      redirect_to providers_user_not_founds_path
     end
 
   private

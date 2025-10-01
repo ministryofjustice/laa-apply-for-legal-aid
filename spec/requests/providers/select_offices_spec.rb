@@ -1,7 +1,8 @@
 require "rails_helper"
+require Rails.root.join("spec/services/pda/provider_details_request_stubs")
 
-RSpec.describe "provider selects office" do
-  let(:provider) { create(:provider, office_codes: "0X395U:2N078D:A123456", with_office_selected: false) }
+RSpec.describe "provider selects office", type: :request do
+  let(:provider) { create(:provider, :without_ccms_user_details, office_codes: "0X395U:2N078D:A123456", with_office_selected: false) }
 
   let(:body) do
     {
@@ -93,10 +94,6 @@ RSpec.describe "provider selects office" do
         expect(unescaped_response_body).to include("2N078D")
         expect(unescaped_response_body).to include("A123456")
       end
-
-      it "does not display offices belonging to the firm but not the provider", skip: "is this a requirement?" do
-        expect(unescaped_response_body).not_to include(third_office.code)
-      end
     end
   end
 
@@ -185,6 +182,144 @@ RSpec.describe "provider selects office" do
 
         it "the response includes the error message" do
           expect(response.body).to include("Select an account number")
+        end
+      end
+
+      context "when CCMS User Management API returns user details" do
+        before do
+          stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules")
+            .to_return(body:, status: 200)
+
+          stub_provider_user_for(provider.silas_id)
+
+          allow(ProviderContractDetailsWorker)
+            .to receive(:perform_async).and_return(true)
+        end
+
+        it "updates the ccms user details" do
+          expect { patch_request }
+            .to change { provider.reload.attributes.symbolize_keys }
+              .from(
+                hash_including(
+                  {
+                    ccms_contact_id: nil,
+                    username: nil,
+                  },
+                ),
+              ).to(
+                hash_including(
+                  {
+                    ccms_contact_id: 66_731_970,
+                    username: "DGRAY-BRUCE-DAVID-GRA-LLP1",
+                  },
+                ),
+              )
+        end
+
+        it "redirects to the in_progress applications list page" do
+          patch_request
+          expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
+        end
+      end
+
+      context "when CCMS user details do not exist on the provider and CCMS User Management API raises NoUserFound" do
+        before do
+          stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules")
+            .to_return(body:, status: 200)
+
+          stub_provider_user_failure_for(provider.silas_id, status: 404)
+
+          allow(ProviderContractDetailsWorker)
+            .to receive(:perform_async).and_return(true)
+        end
+
+        it "calls CCMS User Management API" do
+          allow(CCMSUser::UserDetails::Silas).to receive(:call).and_call_original
+          patch_request
+          expect(CCMSUser::UserDetails::Silas).to have_received(:call)
+        end
+
+        it "redirects to user not found path" do
+          patch_request
+          expect(response).to redirect_to providers_user_not_founds_path
+        end
+
+        it "renders user not found interrupt page" do
+          patch_request
+          follow_redirect!
+
+          expect(page).to have_content("You cannot use this service")
+        end
+
+        it "logs user not found error" do
+          allow(Rails.logger).to receive(:error)
+          patch_request
+          expect(Rails.logger).to have_received(:error).with("Providers::SelectOfficesController - No CCMS username found for #{provider.email}")
+        end
+
+        it "sends user not found error to sentry" do
+          allow(Sentry).to receive(:capture_message)
+          patch_request
+          expect(Sentry).to have_received(:capture_message).with("Providers::SelectOfficesController - No CCMS username found for #{provider.email}")
+        end
+      end
+
+      context "when CCMS user details already exist on the provider (and CCMS User Management API unavailable)" do
+        before do
+          provider.update!(ccms_contact_id: 111_111_111, username: "MY-CCMS-USERNAME")
+
+          stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules").to_return(body:, status: status)
+
+          stub_provider_user_failure_for(provider.silas_id, status: 500)
+
+          allow(ProviderContractDetailsWorker)
+            .to receive(:perform_async).and_return(true)
+        end
+
+        it "does not call CCMS User Management API" do
+          stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules").to_return(body:, status: 200)
+          allow(CCMSUser::UserDetails::Silas).to receive(:call).and_call_original
+          patch_request
+          expect(CCMSUser::UserDetails::Silas).not_to have_received(:call)
+        end
+
+        context "with valid schedules" do
+          before do
+            stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules")
+              .to_return(body:, status: 200)
+          end
+
+          it "redirects to in_progress applications list page" do
+            patch_request
+            expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
+          end
+
+          it "renders in_progress applications list page" do
+            patch_request
+            expect(response).to redirect_to in_progress_providers_legal_aid_applications_path
+            follow_redirect!
+            expect(response.body).to include("Your applications")
+          end
+        end
+
+        context "with invalid schedules" do
+          before do
+            stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules")
+              .to_return(body: nil, status: 204)
+          end
+
+          it "redirects to invalid schedules" do
+            patch_request
+            expect(response).to redirect_to providers_invalid_schedules_path
+          end
+
+          it "renders invalid schedules" do
+            patch_request
+            follow_redirect!
+            expect(page)
+              .to have_css("h1", text: "You cannot use this service")
+              .and have_content("The office you selected does not have")
+          end
         end
       end
     end
