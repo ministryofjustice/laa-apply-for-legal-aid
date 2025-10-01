@@ -332,9 +332,6 @@ en:
         assets: Do they have assets worth more than £8,000?
       emergency_costs:
         heading: Emergency cost limit
-        request_higher_limit: Higher cost limit requested
-        new_cost_limit: Amount requested
-        new_limit_reasons: Reason
       housing_benefit:
         heading: Housing benefit
         card_title: Housing benefit details

@@ -353,6 +353,10 @@ en:
           police_not_notified: Why the police have not been notified
           bail_conditions_set: Have bail conditions been set?
           bail_conditions: Bail conditions
+        emergency_costs:
+          request_higher_limit: Higher cost limit requested
+          new_cost_limit: Amount requested
+          new_limit_reasons: Reason
         employed_income:
           details_for: "Details for %{individual_with_determiner}"
           question: "Do you need to tell us anything else about %{individual_with_determiner}'s employment?"
