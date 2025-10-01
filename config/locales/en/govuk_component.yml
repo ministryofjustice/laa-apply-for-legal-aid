@@ -52,6 +52,12 @@ en:
           in_retry: on retry queue
           false: Expired
           running: Running
+      citizens:
+        accounts:
+          account_number_heading: Account Number
+          balance_heading: Balance
+          sort_code_heading: Sort Code
+          type_heading: Type
       deductions:
         dependants_allowance: Dependants allowance
         partner_allowance: Partner allowance
