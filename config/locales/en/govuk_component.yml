@@ -356,6 +356,8 @@ en:
         employed_income:
           details_for: "Details for %{individual_with_determiner}"
           question: "Do you need to tell us anything else about %{individual_with_determiner}'s employment?"
+        full_employment_details:
+          details: "Anything else about %{individual_with_determiner}'s employment"
         housing_benefit:
           amount: Amount of Housing benefit
           question_client_only: Client gets Housing benefit?

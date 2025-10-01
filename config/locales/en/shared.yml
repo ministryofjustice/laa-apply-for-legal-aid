@@ -422,7 +422,6 @@ en:
         parental_responsibility_agreement: Yes, they have a parental responsibility agreement
       full_employment_details:
         employment: Employment income
-        details: "Anything else about %{individual_with_determiner}'s employment"
       payments_summary:
         credits_section_heading:
           applicant: Payments your client gets
