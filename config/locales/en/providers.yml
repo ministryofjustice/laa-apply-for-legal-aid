@@ -62,14 +62,8 @@ en:
         back_button: Back to your applications
     bank_transactions:
       list_selected:
-        col_amount: Amount
-        col_date: Date
-        col_description: Description
-        col_remove: Remove transaction
-        remove_link: Remove
         caption: "Transactions added for %{category}"
         removal_confirmation: "You removed transaction %{happened_at} %{description} from the list"
-
     capital_assessment_results:
       additional_property:
         additional_property_value: Additional property value
@@ -111,56 +105,20 @@ en:
         uploaded: Uploaded bank statements
       disposable_income:
         title: Disposable income
-        total_income: Total income
-        total_outgoings: Total outgoings (includes tax and National Insurance)
-        total_deductions: Total deductions (includes employment expenses)
-        total_disposable: Total disposable income
         table_caption: Disposable income
-        type_of_disposable_income: Type of disposable income
-        amount: Amount
       deductions:
         title: Deductions
-        dependants_allowance: Dependants allowance
-        partner_allowance: Partner allowance
-        total_deductions: Total deductions
         table_caption: Deductions
-        type_of_deduction: Type of deductions
-        amount: Amount
       employment_income:
         title: "%{individual} employment income"
-        monthly_income_before_tax: Monthly income before tax
-        benefits_in_kind: Benefits in kind
-        tax: Tax
-        national_insurance: National Insurance
-        fixed_employment_deduction: Fixed employment expenses deduction
-        total: Total
         table_caption: Employment income
-        income_type: Types of income
-        amount: Amount
       other_income:
         title: "%{individual} other income"
         income: "%{individual} income"
-        benefits: Benefits, charitable or government payments
-        friends_or_family: Financial help from friends or family
-        maintenance: Maintenance payments from a former partner
-        property_or_lodger: Income from property or lodger
-        student_finance: Student finance
-        pension: Pension
-        total: Total
         table_caption: Income
-        type_of_income: Type of income
-        amount: Amount
       outgoings:
         title: "%{individual} outgoings"
-        housing_costs: Housing costs
-        childcare_costs: Childcare payments
-        maintenance_out: Maintenance payments to a former partner
-        legal_aid: Payments towards legal aid in a criminal case
-        total_outgoings: Total outgoings
         table_caption: Outgoings
-        type_of_outgoing: Type of outgoings
-        amount: Amount
-
     capital_introductions:
       show:
         h1-heading: What you need to do
@@ -275,9 +233,6 @@ en:
         h2_client: Client's details
         h2_partner: Partner's details
         partner_text: These details must be correct for our caseworkers to review them. We will not use them to check DWP records.
-        name: Name
-        date_of_birth: Date of birth
-        national_insurance_number: National Insurance number
         client_name: Client name
         client_date_of_birth: Client date of birth
         client_national_insurance_number: Client national Insurance number
@@ -386,8 +341,6 @@ en:
       show:
         heading: Your client's bank accounts
         previously_told: Your client shared this information using TrueLayer.
-        account: Account
-        balance: Balance
         offline_savings_accounts: Does your client have any savings accounts they cannot access online?
         offline_savings_amount_label: Enter the total amount in all accounts.
         hints:
@@ -474,9 +427,6 @@ en:
       copies:
         show:
           heading: Linked application
-          reference: LAA reference
-          client: Client
-          proceedings: Proceedings
           question: Do you want to copy the proceedings and merits from %{lead_application_reference} to this one?
           hint: Do not copy if you want to add to, or change the proceedings.
           "yes": Yes, the information will be the same
@@ -954,17 +904,7 @@ en:
         h2-heading: Uploaded files
         upload_file: Upload files
       uploaded_files:
-        action: Action
         title: Uploaded files
-        filename: Filename
-        size: Size
-        status: Status
-        uploaded: Uploaded
-        delete: Delete
-        delete_html: Delete <span class="govuk-visually-hidden">%{filename}</span>
-        select_a_category: Select a category
-        select_a_category_label: "Select a category for %{filename}"
-        update: Update
     has_other_dependants:
       show:
         error: Select yes if your client has any other dependants
@@ -1007,22 +947,6 @@ en:
         search_button: Search
       application_list:
         table_description: "Applications table. Sortable by Name, Start date, LAA reference, Certificate type and Status."
-        action: Action
-        applicant_name: Name
-        application_ref_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
-        created_at: Start date
-        certificate_type: Certificate type
-        delete_label: application %{reference} for %{applicant_name}
-        status: Status
-        emergency: Emergency
-        substantive: Substantive
-        substantive_due: "Substantive due: %{date}"
-        backdated_to: "Backdated to: %{date}"
-        col_and_ref: and Ref
-        col_and_state: and Status
-        delete: Delete
-        delete_html: Delete <span class="govuk-visually-hidden">application %{reference} for %{applicant_name}</span>
-        delete_suffix: " application %{reference} for %{applicant}"
         no_applications_html: You have <strong>0</strong> applications.
       destroy: You deleted the application
       voided:
@@ -1542,18 +1466,11 @@ en:
         substantive_cost_limit: Substantive cost limit
       applied_previously:
         heading: Previous Legal Aid
-        has_applied_before: Has your client applied for civil legal aid before?
-        previous_application_reference: Previous CCMS reference number
       proceeding_details:
         heading: What you're applying for
         card_title: Proceedings
-        proceeding: Proceeding
       delegated_functions:
         heading: Delegated functions
-        reported_on: Date reported
-        used_on: Date delegated functions were used
-        days_to_report: Days to report
-        not_used: Not used
     means_reports:
       assets_heading: &assets_heading Property, savings and other assets
       benefits_breakdown:
@@ -1566,16 +1483,8 @@ en:
       benefit_check_question: In receipt of passporting benefit
       capital_disregards:
         heading: Capital disregards
-        discretionary:
-          heading: Discretionary disregards
-        mandatory:
-          heading: Mandatory disregards
       capital_result:
         heading: &capital_result_heading Capital result
-        contribution: Capital contribution
-        lower_limit_label: Capital lower limit
-        upper_limit_label: Capital upper limit
-        total: Total capital assessed
       caseworker_review_section_heading: Caseworker Review
       employment_heading: &employment_heading Employment income
       proceeding_eligibility: Proceeding eligibility
@@ -1584,72 +1493,6 @@ en:
         none: None
       outgoings_cash_payments:
         none: None
-      caseworker_review:
-        required: Caseworker review required?
-        reasons: Review reasons
-        category-amount_variation: Review categories - Monthly value
-        category-unknown_frequency: Review categories - Frequency
-        category-policy_disregards: Review categories - Discretionary disregards
-        category-multiple_employments: Review categories - Multiple employments
-        category-refunds: Review categories - Tax or NI refunds
-        category:
-          employment: Client's employment
-          client_employment: Client's employment
-          partner_employment: Partner's employment
-          employment_gross_income: Client's employment gross income
-          client_employment_gross_income: Client's employment gross income
-          partner_employment_gross_income: Partner's employment gross income
-          employment_tax: Client's employment income tax
-          client_employment_tax: Client's employment income tax
-          partner_employment_tax: Partner's employment income tax
-          employment_nic: Client's employment National Insurance contributions
-          client_employment_nic: Client's employment National Insurance contributions
-          partner_employment_nic: Partner's employment National Insurance contributions
-          employment_payment: Client's employment payment
-          client_employment_payment: Client's employment payment
-          partner_employment_payment: Partner's employment payment
-          state_benefit_payment: Client's state benefits
-          client_state_benefit_payment: Client's state benefits
-          partner_state_benefit_payment: Partner's state benefits
-          other_income_payment: Client's other income
-          client_other_income_payment: Client's other income
-          partner_other_income_payment: Partner's other income
-          outgoings_housing_cost: Client's housing payments
-          client_outgoings_housing_cost: Client's housing payments
-          partner_outgoings_housing_cost: Partner's housing payments
-          outgoings_maintenance: Client's maintenance payments
-          client_outgoings_maintenance: Client's maintenance payments
-          partner_outgoings_maintenance: Partner's maintenance payments
-          outgoings_legal_aid: Client's legal aid payments
-          client_outgoings_legal_aid: Client's legal aid payments
-          partner_outgoings_legal_aid: Partner's legal aid payments
-          outgoings_childcare: Client's childcare payments
-          client_outgoings_childcare: Client's childcare payments
-          partner_outgoings_childcare: Partner's childcare payments
-          england_infected_blood_support: England Infected Blood Support Scheme
-          vaccine_damage_payments: Vaccine Damage Payments Scheme
-          variant_creutzfeldt_jakob_disease: Variant Creutzfeldt-Jakob disease (vCJD) Trust
-          criminal_injuries_compensation_scheme: Criminal Injuries Compensation Scheme
-          national_emergencies_trust: National Emergencies Trust (NET)
-          we_love_manchester_emergency_fund: We Love Manchester Emergency Fund
-          london_emergencies_trust: The London Emergencies Trust
-        reason:
-          amount_variation: The monthly value for some income or outgoings contains large variations. Refer to 'Variation Category' to see which are impacted and need to be reviewed
-          unknown_frequency: How often some income was received or outgoings were paid could not be calculated. Refer to 'Frequency Category' to see which are impacted and need to be reviewed
-          residual_balance: Check current account's residual balance to ensure capital contribution is correct
-          policy_disregards: Discretionary disregards selected # CFE policy disregard review reason.
-          capital_disregards: Check the mandatory or discretionary capital disregards received by the client and decide if they should be included in the calculation
-          multi_benefit: Multiple benefits in single bank transaction
-          dwp_override: Review evidence disputing the DWP's 'not passported' result
-          restrictions: Review why some capital assets cannot be used towards legal aid
-          client_further_employment_details: Review report and uploaded evidence for the client's further employment information, provided in addition to data returned by HMRC
-          partner_further_employment_details: Review report and uploaded evidence for the partner's further employment information, provided in addition to data returned by HMRC
-          multiple_employments: Request wageslips for the client. HMRC data shows they've had multiple employments
-          refunds: Verify what the correct tax and NI deductions should be. HMRC data shows a refund to the client
-          client_uploaded_bank_statements: Check uploaded bank statements for the client's account details. Open banking was not used
-          partner_uploaded_bank_statements: Check uploaded bank statements for the partner's account details. Open banking was not used
-          ineligible: Applicant is ineligible. Check the overall means result
-          non_passported: Non-Passported application
       show:
         heading: Means report
         review_required: Review required
@@ -1671,54 +1514,10 @@ en:
           partner: *partner_employment_details
       outgoings_and_deductions_details:
         heading: Outgoings and deductions
-        total_outgoings_and_deductions: Total outgoings and deductions
-        client:
-          housing: "Client housing payments (any declared housing benefits have been deducted from this total)"
-          childcare: Client childcare payments
-          maintenance_out: Client maintenance payments to a former partner
-          legal_aid: Client payments towards legal aid in a criminal case
-          dependants_allowance: Dependants allowance
-          partner_allowance: Partner allowance
-        partner:
-          housing: "Partner housing payments (any declared housing benefits have been deducted from this total)"
-          childcare: Partner childcare payments
-          maintenance_out: Partner maintenance payments to a former partner
-          legal_aid: Partner payments towards legal aid in a criminal case
-        dependants_allowance: Dependants allowance
-        partner_allowance: Partner allowance
       income_details:
         heading: Income
-        total_income: Total income
-        client:
-          benefits: Client benefits, charitable or government payments
-          employment: Client gross employment income
-          fixed_employment_deduction: Client fixed employment deduction
-          family_help: Client financial help from friends or family
-          income_tax: Client income tax
-          maintenance_in: Client maintenance payments
-          national_insurance: Client national insurance
-          property_or_lodger: Client income from property or lodger
-          student_loan: Client student loan or grant
-          pension: Client pension
-        partner:
-          benefits: Partner benefits, charitable or government payments
-          employment: Partner gross employment income
-          fixed_employment_deduction: Partner fixed employment deduction
-          family_help: Partner financial help from friends or family
-          income_tax: Partner income tax
-          maintenance_in: Partner maintenance payments
-          national_insurance: Partner national insurance
-          property_or_lodger: Partner income from property or lodger
-          student_loan: Partner student loan or grant
-          pension: Partner pension
       income_result:
         heading: Income result
-        total_disposable_income: Total disposable income assessed
-        total_gross_income: Total gross income assessed
-        gross_income_limit: Gross income limit
-        disposable_income_lower_limit: Disposable income lower limit
-        disposable_income_upper_limit: Disposable income upper limit
-        disposable_income_contribution: Income contribution
       uploaded_bank_statements:
         bank_statement_heading: Bank statements
         bank_statement_question: Uploaded bank statements
@@ -1854,12 +1653,7 @@ en:
         warning: Check that proceedings are under the right matter type
     providers:
       show:
-        account_number: Account number
-        email: Email address
-        name: Name
         page_title: Your profile
-        role: Permission
-        username: Username
     received_benefit_confirmations:
       show:
         h1_no_partner: Which passporting benefit does your client get?
@@ -1960,15 +1754,6 @@ en:
       show:
         table_description: 'Transactions table "%{from} to %{to}". Sortable by Date, Description, Amount and Category.'
         table_description_html: <span class="govuk-visually-hidden">Transactions table</span> %{from} to %{to} <span class="govuk-visually-hidden">Sortable by Date, Description, Amount and Category</span>
-        col_category: Category
-        col_and_category: and category
-        col_amount: Amount
-        col_clear_all: Clear all
-        col_date: Date
-        col_description: Description
-        col_and_description: and description
-        col_select_all: Select all
-        sorted: Sorted
     use_ccms:
       show:
         warning: "You cannot use this service if your client:"

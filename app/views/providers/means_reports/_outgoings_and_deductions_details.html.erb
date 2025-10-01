@@ -6,7 +6,7 @@
       card.with_summary_list(actions: false, html_attributes: { id: "app-check-your-answers__outgoings_and_deductions_details__summary" }) do |summary_list|
         outgoings_detail_items.each do |item|
           summary_list.with_row do |row|
-            row.with_key(text: t(".client.#{item.name}"), classes: "govuk-!-width-one-third")
+            row.with_key(text: t(".outgoings_and_deductions_details.client.#{item.name}"), classes: "govuk-!-width-one-third")
             row.with_value { gds_number_to_currency(@cfe_result.__send__(item.value_method)) }
           end
         end
@@ -15,21 +15,21 @@
           next unless @legal_aid_application.applicant.has_partner_with_no_contrary_interest? && partner_exclude_items.exclude?(item.value_method)
 
           summary_list.with_row do |row|
-            row.with_key(text: t(".partner.#{item.name}"), classes: "govuk-!-width-one-third")
+            row.with_key(text: t(".outgoings_and_deductions_details.partner.#{item.name}"), classes: "govuk-!-width-one-third")
             row.with_value { gds_number_to_currency(@cfe_result.__send__(item.value_method, partner: true)) }
           end
         end
 
         deductions_detail_items(@legal_aid_application).each do |item|
           summary_list.with_row do |row|
-            row.with_key(text: t(".client.#{item.name}"), classes: "govuk-!-width-one-third")
+            row.with_key(text: t(".outgoings_and_deductions_details.client.#{item.name}"), classes: "govuk-!-width-one-third")
             row.with_value { gds_number_to_currency(@cfe_result.__send__(item.value_method)) }
           end
 
           next unless @legal_aid_application.applicant.has_partner_with_no_contrary_interest? && partner_exclude_items.exclude?(item.value_method)
 
           summary_list.with_row do |row|
-            row.with_key(text: t(".partner.#{item.name}"), classes: "govuk-!-width-one-third")
+            row.with_key(text: t(".outgoings_and_deductions_details.partner.#{item.name}"), classes: "govuk-!-width-one-third")
             row.with_value { gds_number_to_currency(@cfe_result.__send__(item.value_method, partner: true)) }
           end
         end
@@ -41,7 +41,7 @@
                  end
 
         summary_list.with_row(classes: "bold-border-top") do |row|
-          row.with_key { t(".total_outgoings_and_deductions") }
+          row.with_key(text: t(".outgoings_and_deductions_details.total_outgoings_and_deductions"))
           row.with_value(text: gds_number_to_currency(gds_number_to_currency(result)), html_attributes: { class: "govuk-!-font-weight-bold" })
         end
       end

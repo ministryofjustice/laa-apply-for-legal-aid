@@ -6,29 +6,29 @@
 
       table.with_head do |head|
         head.with_row do |row|
-          row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, text: t(".property_values"))
-          row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, numeric: true, text: t(".amount"))
+          row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, text: t(".property_results.property_values"))
+          row.with_cell(html_attributes: { class: "govuk-visually-hidden" }, numeric: true, text: t(".property_results.amount"))
         end
       end
 
       table.with_body do |body|
         body.with_row do |row|
-          row.with_cell(header: true, text: t(".value"))
+          row.with_cell(header: true, text: t(".property_results.value"))
           row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.main_home_value))
         end
         body.with_row do |row|
-          row.with_cell(header: true, text: t(".outstanding_mortgage"))
+          row.with_cell(header: true, text: t(".property_results.outstanding_mortgage"))
           row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.main_home_outstanding_mortgage))
         end
         body.with_row do |row|
-          row.with_cell(header: true, text: t(".disregards"))
+          row.with_cell(header: true, text: t(".property_results.disregards"))
           row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.main_home_equity_disregard))
         end
       end
 
       table.with_foot do |foot|
         foot.with_row do |row|
-          row.with_cell(header: true, text: t(".assessment_amount"))
+          row.with_cell(header: true, text: t(".property_results.assessment_amount"))
           row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.main_home_assessed_equity))
         end
       end
@@ -42,25 +42,25 @@
 
         table.with_head do |head|
           head.with_row do |row|
-            row.with_cell(html_attributes: { class: "govuk-visually-hiddenx" }, text: t(".property_values"))
-            row.with_cell(html_attributes: { class: "govuk-visually-hiddenx" }, numeric: true, text: t(".amount"))
+            row.with_cell(html_attributes: { class: "govuk-visually-hiddenx" }, text: t(".property_results.property_values"))
+            row.with_cell(html_attributes: { class: "govuk-visually-hiddenx" }, numeric: true, text: t(".property_results.amount"))
           end
         end
 
         table.with_body do |body|
           body.with_row do |row|
-            row.with_cell(header: true, text: t(".value"))
+            row.with_cell(header: true, text: t(".property_results.value"))
             row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.additional_property_value))
           end
           body.with_row do |row|
-            row.with_cell(header: true, text: t(".outstanding_mortgage"))
+            row.with_cell(header: true, text: t(".property_results.outstanding_mortgage"))
             row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.additional_property_mortgage))
           end
         end
 
         table.with_foot do |foot|
           foot.with_row do |row|
-            row.with_cell(header: true, text: t(".assessment_amount"))
+            row.with_cell(header: true, text: t(".property_results.assessment_amount"))
             row.with_cell(numeric: true, text: gds_number_to_currency(@cfe_result.additional_property_assessed_equity))
           end
         end

@@ -8,20 +8,20 @@
           govuk_link_to(
             t("generic.change"),
             check_answer_url_for(journey_type, :applicant_bank_accounts, @legal_aid_application),
-            visually_hidden_suffix: t(".offline_savings_accounts"),
+            visually_hidden_suffix: t(".heading"),
           )
         end
       end
 
       card.with_summary_list do |summary_list|
         summary_list.with_row(html_attributes: { id: "app-check-your-answers__has_offline_savings" }) do |row|
-          row.with_key(text: t(".offline_savings_accounts"), classes: "govuk-!-width-one-third")
+          row.with_key(text: t(".offline_savings_accounts.accounts"), classes: "govuk-!-width-one-third")
           row.with_value { safe_yes_or_no(@legal_aid_application.offline_savings?) }
         end
 
         if @legal_aid_application.offline_savings?
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__offline_savings_amount" }) do |row|
-            row.with_key(text: t(".offline_savings_amount"))
+            row.with_key(text: t(".offline_savings_accounts.amount"))
             row.with_value { gds_number_to_currency(@legal_aid_application.offline_savings_value) }
           end
         end

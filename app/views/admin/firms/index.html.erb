@@ -11,10 +11,10 @@
 
           table.with_head do |head|
             head.with_row do |row|
-              row.with_cell(html_attributes: { class: "govuk-!-width-one-quarter" }, text: t(".firm"))
-              row.with_cell(text: t(".num_users"))
-              row.with_cell(text: t(".permissions"))
-              row.with_cell(text: t(".action"))
+              row.with_cell(html_attributes: { class: "govuk-!-width-one-quarter" }, text: t(".firms.firm"))
+              row.with_cell(text: t(".firms.num_users"))
+              row.with_cell(text: t(".firms.permissions"))
+              row.with_cell(text: t(".firms.action"))
             end
           end
 
@@ -32,7 +32,7 @@
                 end
                 row.with_cell do
                   govuk_link_to(
-                    t(".view_users_html", provider: firm.name),
+                    t(".firms.view_users_html", provider: firm.name),
                     admin_firm_providers_path(firm),
                     id: "firm-#{firm.id}",
                     method: :get,

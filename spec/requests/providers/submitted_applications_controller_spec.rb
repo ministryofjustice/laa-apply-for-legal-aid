@@ -114,7 +114,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
     let(:login) { login_as legal_aid_application.provider }
     let!(:cfe_submission) { create(:cfe_submission, legal_aid_application:) }
     let!(:cfe_result) { create(:cfe_v5_result, :with_employments, submission: cfe_submission) }
-    let(:translation_path) { "shared.employment_income_table" }
+    let(:translation_path) { "govuk_component.table_component.employment_income_table" }
 
     shared_examples "employment data is not present" do
       before { get_request }
@@ -134,7 +134,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
     context "when employment data is present" do
       it "displays the employment income table" do
         get_request
-        expect(unescaped_response_body).to include I18n.t("#{translation_path}.heading")
+        expect(unescaped_response_body).to include I18n.t("shared.employment_income_table.heading")
         expect(unescaped_response_body).to include I18n.t("#{translation_path}.benefits_in_kind")
         expect(unescaped_response_body).to include I18n.t("#{translation_path}.monthly_income_before_tax")
         expect(unescaped_response_body).to include I18n.t("#{translation_path}.national_insurance")

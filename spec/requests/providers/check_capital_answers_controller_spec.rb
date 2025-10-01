@@ -52,11 +52,11 @@ RSpec.describe Providers::CheckCapitalAnswersController do
       expect(response.body).to include(gds_number_to_currency(vehicle.payment_remaining, unit: "£"))
       expect(response.body).to include(yes_no(vehicle.more_than_three_years_old?))
       expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.heading"))
-      expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.own", individual: "your client"))
-      expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.estimated_value"))
-      expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.payment_remaining"))
-      expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.more_than_three_years_old"))
-      expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.used_regularly"))
+      expect(response.body).to include(I18n.t("govuk_component.summary_list_component.card_component.vehicles.providers.own", individual: "your client"))
+      expect(response.body).to include(I18n.t("govuk_component.summary_list_component.card_component.vehicles.providers.estimated_value"))
+      expect(response.body).to include(I18n.t("govuk_component.summary_list_component.card_component.vehicles.providers.payment_remaining"))
+      expect(response.body).to include(I18n.t("govuk_component.summary_list_component.card_component.vehicles.providers.more_than_three_years_old"))
+      expect(response.body).to include(I18n.t("govuk_component.summary_list_component.card_component.vehicles.providers.used_regularly"))
     end
 
     context "when not logged in" do
@@ -70,7 +70,7 @@ RSpec.describe Providers::CheckCapitalAnswersController do
       let(:own_vehicle) { false }
 
       it "displays first vehicle question" do
-        expect(response.body).to include(I18n.t("shared.check_answers.vehicles.providers.own", individual: "your client"))
+        expect(response.body).to include(I18n.t("govuk_component.summary_list_component.card_component.vehicles.providers.own", individual: "your client"))
       end
 
       it "does not display other vehicle questions" do
