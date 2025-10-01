@@ -304,8 +304,6 @@ en:
       joint_bank_accounts:
         card_heading: Joint accounts
         aria_label: Joint accounts
-        current_accounts: Current accounts
-        savings_accounts: Savings accounts
       savings_and_investments:
         card_heading: Your client's savings or investments
         card_heading_with_partner: Your client or their partner's savings or investments
