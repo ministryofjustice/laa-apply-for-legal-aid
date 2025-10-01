@@ -380,9 +380,6 @@ en:
         case-details-heading: Case details
         statement-of-case-heading: Statement of case
         client_denial_of_allegation_heading: Client denial of allegation
-        items:
-          statement_of_case: Statement of case
-          full_name: Name
         evidence_upload_heading: Supporting evidence
         laspo:
           heading: Section 8 and LASPO
@@ -418,7 +415,6 @@ en:
           linked_children_heading: Children covered
           opponents_application_heading: Opponent's application
           prohibited_steps_heading: Prohibited steps details
-          success_prospect: Chance of a successful outcome
           specific_issue_heading: Specific issue
           vary_order_heading: Changes since original order was made
         supporting_evidence:
