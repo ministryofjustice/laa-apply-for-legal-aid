@@ -5,11 +5,13 @@ module Providers
 
       include ApplicantDetailsCheckable
       include BenefitCheckSkippable
+      include DWPOutcomeHelper
 
       before_action :check_benefits, :benefit_check_status, only: :show
 
       def show
         details_checked! unless details_checked?
+        reset_confirm_dwp_status!(legal_aid_application)
 
         # set the path for the "This is not correct" link flow
         @override_path = if legal_aid_application.partner
@@ -24,6 +26,7 @@ module Providers
       #
       # ps: if they have clicked "This is not correct" see the override path set in show action
       def update
+        confirm_dwp_status_correct!(legal_aid_application)
         go_forward
       end
 
