@@ -33,7 +33,7 @@ module UploadedEvidence
     end
 
     def attachment_type_name(type)
-      I18n.t!("shared.check_answers.merits.supporting_evidence.evidence_types.#{type}")
+      I18n.t!("govuk_component.summary_list_component.card_component.supporting_evidence.evidence_types.#{type}")
     rescue I18n::MissingTranslationData
       type.humanize
     end
