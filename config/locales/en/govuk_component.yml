@@ -206,6 +206,11 @@ en:
         applied_previously:
           has_applied_before: Has your client applied for civil legal aid before?
           previous_application_reference: Previous CCMS reference number
+        bank_accounts:
+          bank: Bank
+          account_number: Account number
+          sort_code: Sort code
+          balance: Balance
         bank_statements:
           question: Uploaded bank statements
         benefits_income:
