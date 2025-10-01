@@ -5,6 +5,7 @@ module Providers
 
       include ApplicantDetailsCheckable
       include BenefitCheckSkippable
+      include DWPOutcomeHelper
 
       before_action :check_benefits, :benefit_check_status, only: :show
 
@@ -24,6 +25,7 @@ module Providers
       #
       # ps: if they have clicked "This is not correct" see the override path set in show action
       def update
+        confirm_dwp_status_correct!(legal_aid_application)
         go_forward
       end
 
