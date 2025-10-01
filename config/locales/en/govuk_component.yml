@@ -388,6 +388,9 @@ en:
           disposable_income_contribution: Income contribution
         is_matter_opposed:
           description: Matter is opposed?
+        joint_bank_accounts:
+          current_accounts: Current accounts
+          savings_accounts: Savings accounts
         laspo:
           question: Section 8 proceedings are in scope of LASPO?
         latest_incident_details:
