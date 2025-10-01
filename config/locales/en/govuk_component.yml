@@ -223,6 +223,11 @@ en:
           means_report:
             discretionary_heading: Discretionary disregards
             mandatory_heading: Mandatory disregards
+        capital_disregard_details:
+          payment_type: Payment type
+          payment_reason: What the payment is for
+          amount_and_date_received: Amount and date received
+          bank_account_name: Bank account
         capital_result:
           contribution: Capital contribution
           lower_limit_label: Capital lower limit

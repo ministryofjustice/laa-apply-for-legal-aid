@@ -15,24 +15,24 @@
 
       card.with_summary_list do |summary_list|
         summary_list.with_row(html_attributes: { id: "app-check-your-answers__payment_type" }) do |row|
-          row.with_key(text: t(".questions.payment_type"), classes: "govuk-!-width-one-third")
+          row.with_key(text: t(".capital_disregard_details.payment_type"), classes: "govuk-!-width-one-third")
           row.with_value { capital_disregard_name }
         end
 
         if capital_disregard.payment_reason.present?
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__payment_reason" }) do |row|
-            row.with_key(text: t(".questions.payment_reason"))
+            row.with_key(text: t(".capital_disregard_details.payment_reason"))
             row.with_value { capital_disregard.payment_reason }
           end
         end
 
         summary_list.with_row(html_attributes: { id: "app-check-your-answers__amount_and_date_received" }) do |row|
-          row.with_key(text: t(".questions.amount_and_date_received"))
+          row.with_key(text: t(".capital_disregard_details.amount_and_date_received"))
           row.with_value { amount_and_date_received(capital_disregard) }
         end
 
         summary_list.with_row(html_attributes: { id: "app-check-your-answers__bank_account_name" }) do |row|
-          row.with_key(text: t(".questions.bank_account_name"))
+          row.with_key(text: t(".capital_disregard_details.bank_account_name"))
           row.with_value { capital_disregard.account_name }
         end
       end
