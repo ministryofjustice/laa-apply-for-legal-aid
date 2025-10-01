@@ -26,6 +26,16 @@ RSpec.describe Providers::DWP::ResultsController do
         expect { get_request }.to change { legal_aid_application.reload.state }.from("checking_applicant_details").to("applicant_details_checked")
       end
 
+      context "when dwp_result_confirmed is not nil" do
+        before do
+          legal_aid_application.dwp_result_confirmed = true
+        end
+
+        it "resets dwp_result_confirmed to nil" do
+          expect(legal_aid_application.reload.dwp_result_confirmed).to be_nil
+        end
+      end
+
       context "when applicant has a partner" do
         let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_partner) }
 
@@ -238,9 +248,20 @@ RSpec.describe Providers::DWP::ResultsController do
       }
     end
 
+    before do
+      login_as legal_aid_application.provider
+    end
+
     it "redirects to the next page" do
       patch_request
       expect(response).to have_http_status(:redirect)
+    end
+
+    it "updates confirm_dwp_result to true" do
+      expect { patch_request }
+        .to change { legal_aid_application.reload.dwp_result_confirmed }
+        .from(nil)
+        .to true
     end
   end
 end
