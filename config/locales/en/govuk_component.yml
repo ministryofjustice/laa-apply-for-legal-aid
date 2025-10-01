@@ -343,6 +343,9 @@ en:
           police_not_notified: Why the police have not been notified
           bail_conditions_set: Have bail conditions been set?
           bail_conditions: Bail conditions
+        employed_income:
+          details_for: "Details for %{individual_with_determiner}"
+          question: "Do you need to tell us anything else about %{individual_with_determiner}'s employment?"
         income_details:
           total_income: Total income
           client:
