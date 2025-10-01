@@ -39,6 +39,26 @@ Feature: Selecting office
     When I visit the in progress applications page
     Then I should be on a page showing 'Select the account number of the office handling this application'
 
+ @javascript @stub_office_schedules_but_ccms_user_not_found
+  Scenario: I am presented with a user not found interrupt page when no matching CCMS user can found for my silas credentials
+    Given I am logged in as a provider but have never selected an office
+    When I visit the select office page
+    And I choose '0X395U'
+    And I click 'Save and continue'
+    Then I should be on a page showing 'You cannot use this service'
+    And I should be on a page showing 'Sorry, there was a problem getting your account information'
+    And I should be on a page showing 'Contact our support team if this problem continues.'
+    And I should be on a page showing 'Try again later.'
+
+    When I click link 'Try again now'
+    Then I should be on a page showing 'Select the account number of the office handling this application'
+
+  @javascript @stub_office_schedules_but_ccms_user_not_found
+  Scenario: I am still able to see my profile page even when no matching CCMS user can found for my silas credentials
+    Given I am logged in as a provider but have never selected an office
+    When I visit the My profile pae
+    Then I should be on a page showing 'Your profile'
+
   @javascript @mock_auth_enabled @vcr_turned_off
   Scenario: I am forced to select an office again after sign out and sign in
     Given I visit the root page

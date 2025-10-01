@@ -38,7 +38,7 @@
               <casebio:ProviderFirmID>169</casebio:ProviderFirmID>
               <casebio:ProviderOfficeID>4727432767</casebio:ProviderOfficeID>
               <casebio:ContactUserID>
-                <common:UserLoginID/>
+                <common:UserLoginID>111111111</common:UserLoginID>
               </casebio:ContactUserID>
             </casebio:ProviderDetails>
             <casebio:CategoryOfLaw>

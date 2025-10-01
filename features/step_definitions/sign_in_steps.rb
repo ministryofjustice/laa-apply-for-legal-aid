@@ -12,7 +12,7 @@ end
 
 Given("I am logged in as a provider but have never selected an office") do
   @registered_provider = create_provider_with_firm_and_office
-  @registered_provider.update!(offices: [], selected_office: nil)
+  @registered_provider.update!(offices: [], selected_office: nil, ccms_contact_id: nil, username: nil)
 
   login_as @registered_provider
 end

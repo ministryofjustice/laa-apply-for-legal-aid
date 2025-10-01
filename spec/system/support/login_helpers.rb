@@ -5,6 +5,7 @@ module LoginHelpers
     @registered_provider.office_codes = "0X395U:2N078D:A123456"
 
     stub_office_schedules_for_0x395u
+    stub_provider_user_for(@registered_provider.silas_id)
 
     allow(ProviderContractDetailsWorker)
       .to receive(:perform_async).and_return(true)
