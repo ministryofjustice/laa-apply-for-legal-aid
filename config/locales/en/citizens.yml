@@ -44,10 +44,6 @@ en:
       bank_accounts:
         heading: Your bank accounts
         account: Account %{index}
-        bank: Bank
-        account_number: Account number
-        sort_code: Sort code
-        balance: Balance
         link_other_account: Add another bank account
     contact_providers:
       show:
