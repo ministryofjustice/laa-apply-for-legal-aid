@@ -48,6 +48,13 @@ RSpec.describe Providers::CheckClientDetailsController do
       it "sets state machine to overriding_dwp_result" do
         expect { get_request }.to change { application.reload.state }.from("checking_applicant_details").to("overriding_dwp_result")
       end
+
+      it "updates confirm_dwp_result to true" do
+        expect { get_request }
+          .to change { application.reload.dwp_result_confirmed }
+          .from(nil)
+          .to false
+      end
     end
 
     context "when the client has a partner, and the provider previously selected joint benefit with partner" do
