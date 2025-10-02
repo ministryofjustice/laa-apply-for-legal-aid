@@ -9,7 +9,7 @@ RSpec.describe Task::DWPOutcome do
     include Rails.application.routes.url_helpers
 
     it "returns the route to first step of the task list item" do
-      expect(instance.path).to eql providers_legal_aid_application_confirm_dwp_non_passported_applications_path(application)
+      expect(instance.path).to eql providers_legal_aid_application_check_client_details_path(application)
     end
   end
 end
