@@ -238,9 +238,20 @@ RSpec.describe Providers::DWP::ResultsController do
       }
     end
 
+    before do
+      login_as legal_aid_application.provider
+    end
+
     it "redirects to the next page" do
       patch_request
       expect(response).to have_http_status(:redirect)
+    end
+
+    it "updates confirm_dwp_result to true" do
+      expect { patch_request }
+        .to change { legal_aid_application.reload.dwp_result_confirmed }
+        .from(nil)
+        .to true
     end
   end
 end
