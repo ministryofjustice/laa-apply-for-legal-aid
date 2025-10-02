@@ -234,9 +234,9 @@ RSpec.describe "provider selects office" do
         end
 
         it "calls CCMS User Management API" do
-          allow(CCMSUser::UserDetails::Silas).to receive(:call).and_call_original
+          allow(CCMSUser::UserDetails).to receive(:call).and_call_original
           patch_request
-          expect(CCMSUser::UserDetails::Silas).to have_received(:call)
+          expect(CCMSUser::UserDetails).to have_received(:call)
         end
 
         it "redirects to user not found path" do
@@ -278,9 +278,9 @@ RSpec.describe "provider selects office" do
 
         it "does not call CCMS User Management API" do
           stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules").to_return(body:, status: 200)
-          allow(CCMSUser::UserDetails::Silas).to receive(:call).and_call_original
+          allow(CCMSUser::UserDetails).to receive(:call).and_call_original
           patch_request
-          expect(CCMSUser::UserDetails::Silas).not_to have_received(:call)
+          expect(CCMSUser::UserDetails).not_to have_received(:call)
         end
 
         context "with valid schedules" do

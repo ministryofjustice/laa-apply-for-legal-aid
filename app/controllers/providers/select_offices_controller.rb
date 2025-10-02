@@ -24,7 +24,7 @@ module Providers
       else
         render :show
       end
-    rescue CCMSUser::UserDetails::Silas::UserNotFound => e
+    rescue CCMSUser::UserDetails::UserNotFound => e
       Rails.logger.error("#{self.class} - #{e.message}")
       Sentry.capture_message("#{self.class} - #{e.message}")
 

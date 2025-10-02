@@ -1,7 +1,7 @@
 require "rails_helper"
 require Rails.root.join("spec/services/pda/provider_details_request_stubs")
 
-RSpec.describe CCMSUser::UserDetails::Silas do
+RSpec.describe CCMSUser::UserDetails do
   let(:provider) { create(:provider) }
   let(:uri) { "#{Rails.configuration.x.ccms_user_api.url}/user-details/silas/#{provider.silas_id}" }
 
