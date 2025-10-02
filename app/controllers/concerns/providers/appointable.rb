@@ -14,10 +14,19 @@ module Providers
       #   before_action :appoint_provider!
       #
       def appoint_provider!
-        return if current_provider.selected_office.present? || allowed_unappointed_path?
+        return if (appointed? && has_ccms_user_details?) || allowed_unappointed_path?
 
         store_location_for(:provider, request.fullpath)
         redirect_to providers_select_office_path
+      end
+
+      def appointed?
+        current_provider.selected_office.present?
+      end
+
+      def has_ccms_user_details?
+        current_provider.ccms_contact_id.present? &&
+          current_provider.username.present?
       end
 
       # Stores the provided location to redirect the user after selecting an office.
@@ -55,6 +64,7 @@ module Providers
           providers_select_office_path,
           providers_invalid_schedules_path,
           providers_provider_path,
+          providers_user_not_founds_path,
         ]
       end
 

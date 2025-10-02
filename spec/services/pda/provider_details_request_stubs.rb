@@ -675,20 +675,41 @@ def office_schedules_json
 end
 
 def stub_provider_user_for(uuid)
-  stub_request(:get, %r{#{Rails.configuration.x.pda.url}/ccms-provider-users/#{uuid}})
+  stub_request(:get, %r{#{Rails.configuration.x.ccms_user_api.url}/user-details/silas/#{uuid}})
     .to_return(
       status: 200,
       body: provider_user_json,
-      headers: { "Content-Type" => "application/json; charset=utf-8" },
+      headers: {},
     )
 end
 
 def provider_user_json
   {
-    userUuid: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a",
-    userLogin: "MARTIN.RONAN@DAVIDGRAY.CO.UK",
-    ccmsContactId: 494_000,
-  }.to_json
+    ccmsUserDetails: {
+      uuid: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a",
+      userId: 118_147,
+      userLoginId: "DGRAY-BRUCE-DAVID-GRA-LLP1",
+      userPartyId: 66_731_970,
+      userName: "DGRAY-BRUCE-DAVID-GRA-LLP1",
+      providerFirmId: 19_148,
+      providerName: "DAVID GRAY LLP",
+      notificationLov: "Y",
+      userType: "EXTERNAL",
+      connectionResponsibilityKey: "XXCCMS_CASE_MANAGEMENT",
+    },
+    responsibilities: [
+      {
+        userId: 118_147,
+        userName: "DGRAY-BRUCE-DAVID-GRA-LLP1",
+        responsibilityId: 50_772,
+        responsibilityKey: "XXCCMS_CASE_MANAGEMENT",
+        responsibilityName: "CCMS Case management",
+        respStartDate: "2025-09-19",
+        respEndDate: nil,
+      },
+    ],
+  }
+  .to_json
 end
 
 #################
@@ -702,4 +723,9 @@ end
 def stub_provider_details_retriever_api_error(provider:)
   stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-users/#{provider.username}/provider-offices")
     .to_return(body: "An error has occurred", status: 500)
+end
+
+def stub_provider_user_failure_for(uuid, status:, body: nil)
+  stub_request(:get, %r{#{Rails.configuration.x.ccms_user_api.url}/user-details/silas/#{uuid}})
+    .to_return(status:, body:)
 end

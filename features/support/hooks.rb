@@ -51,6 +51,18 @@ ensure
   WebMock.reset!
 end
 
+Around("@stub_office_schedules_but_ccms_user_not_found") do |_scenario, block|
+  stub_office_schedules_for_0x395u
+  stub_office_schedules_not_found_for("2N078D")
+  stub_office_schedules_not_found_for("A123456")
+  stub_provider_user_failure_for("51cdbbb4-75d2-48d0-aaac-fa67f013c50a", status: 404, body: nil)
+
+  VCR.turned_off { block.call }
+ensure
+  # Unstub
+  WebMock.reset!
+end
+
 Before("@mock_auth_enabled") do |_scenario, _block|
   allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_return(true)
   Rails.application.reload_routes!

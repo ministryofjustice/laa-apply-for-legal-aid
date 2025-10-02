@@ -94,6 +94,9 @@ module LaaApplyForLegalAid
     config.x.pda.url = ENV.fetch("PDA_URL", nil)
     config.x.pda.auth_key = ENV.fetch("PDA_AUTH_KEY", nil)
 
+    config.x.ccms_user_api.url = ENV.fetch("CCMS_USER_API_URL", nil)
+    config.x.ccms_user_api.auth_key = ENV.fetch("CCMS_USER_API_AUTH_KEY", nil)
+
     config.x.legal_framework_api_host = ENV.fetch("LEGAL_FRAMEWORK_API_HOST", nil)
     config.x.legal_framework_api_host_for_js = ENV.fetch("LEGAL_FRAMEWORK_API_HOST_JS", config.x.legal_framework_api_host)
 

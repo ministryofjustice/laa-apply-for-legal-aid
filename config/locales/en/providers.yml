@@ -993,6 +993,12 @@ en:
             - go back and choose a different office
             - apply in <a class="govuk-link govuk-link--inverse" href="%{ccms_url}">CCMS (Client and Cost Management System)</a> for all other proceedings
             - <a class="govuk-link govuk-link--inverse" href="%{support_url}">contact online support</a> if you think this is wrong, and you should have access
+    user_not_founds:
+      show:
+        h1-heading:  Sorry, there was a problem getting your account information
+        paragraph-1: Try again later. 
+        contact_us_html: <a class="govuk-link govuk-link--inverse" href="%{support_url}">Contact our support team</a> if this problem continues.
+        button_text: Try again now
     legal_aid_applications:
       index:
         heading_1: Your applications
@@ -1860,6 +1866,8 @@ en:
         page_title: Your profile
         role: Permission
         username: Username
+        ccms_username: CCMS Username
+        ccms_contact_id: CCMS Contact ID
     received_benefit_confirmations:
       show:
         h1_no_partner: Which passporting benefit does your client get?

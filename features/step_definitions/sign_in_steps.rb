@@ -12,7 +12,7 @@ end
 
 Given("I am logged in as a provider but have never selected an office") do
   @registered_provider = create_provider_with_firm_and_office
-  @registered_provider.update!(offices: [], selected_office: nil)
+  @registered_provider.update!(offices: [], selected_office: nil, ccms_contact_id: nil, username: nil)
 
   login_as @registered_provider
 end
@@ -36,7 +36,7 @@ end
 # It performs a custom find or create by to avoid clashing with stubbed user martin ronan.
 #
 def create_provider_with_firm_and_office(silas_id = nil)
-  silas_id ||= "c680f03d-48ed-4079-b3c9-ca0c97d9279d"
+  silas_id ||= "51cdbbb4-75d2-48d0-aaac-fa67f013c50a"
 
   firm = create(:firm, ccms_id: 77_777, name: "Test firm")
   office = create(:office, ccms_id: 66_666, code: "0X395U")

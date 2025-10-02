@@ -175,6 +175,7 @@ Rails.application.routes.draw do
     resource :declaration, only: %i[show]
     resource :invalid_login, only: :show
     resource :invalid_schedules, only: :show
+    resource :user_not_founds, only: :show
     resources :cookies, only: %i[show update]
 
     resources :legal_aid_applications, path: "applications", only: %i[create] do

@@ -4,6 +4,7 @@ FactoryBot.define do
     firm
     name { Faker::Name.name }
     username { "#{Faker::Internet.username}_#{Random.rand(1...999).to_s.rjust(3, '0')}" }
+    ccms_contact_id { 111_111_111 }
     email { Faker::Internet.email }
 
     transient do
@@ -16,6 +17,11 @@ FactoryBot.define do
         provider.offices << office
         provider.selected_office = office
       end
+    end
+
+    trait :without_ccms_user_details do
+      ccms_contact_id { nil }
+      username { nil }
     end
 
     trait :with_provider_details_api_username do
