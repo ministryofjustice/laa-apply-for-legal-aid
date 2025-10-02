@@ -1,6 +1,6 @@
 <%= page_template(page_title: t(".h1-heading"), head_title: t(".h1-heading"), template: :basic, column_width: "full") do %>
   <%= interruption_card(heading: t(".h1-heading"), actions: -> { render "actions" }) do %>
     <p><%= t(".paragraph-1") %></p>
-    <p><%= t(".paragraph-2") %></p>
+    <p><%= t(".contact_us_html", support_url: contact_path) %></p>
   <% end %>
 <% end %>

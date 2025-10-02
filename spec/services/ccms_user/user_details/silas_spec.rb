@@ -41,7 +41,6 @@ RSpec.describe CCMSUser::UserDetails::Silas do
       end
 
       it "raises error" do
-        # ApiError, "API Call Failed: (#{response.status}) #{response.body}"
         expect { call }.to raise_error(described_class::ApiError, "API Call Failed: status 403, body <body>403 Forbidden</body>")
       end
     end
@@ -52,7 +51,6 @@ RSpec.describe CCMSUser::UserDetails::Silas do
       end
 
       it "raises error" do
-        # ApiError, "API Call Failed: (#{response.status}) #{response.body}"
         expect { call }.to raise_error(described_class::ApiError, "API Call Failed: status 500, body nil")
       end
     end

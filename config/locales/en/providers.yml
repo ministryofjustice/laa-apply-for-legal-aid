@@ -997,7 +997,7 @@ en:
       show:
         h1-heading:  Sorry, there was a problem getting your account information
         paragraph-1: Try again later. 
-        paragraph-2: Contact our support team if this problem continues.
+        contact_us_html: <a class="govuk-link govuk-link--inverse" href="%{support_url}">Contact our support team</a> if this problem continues.
         button_text: Try again now
     legal_aid_applications:
       index:

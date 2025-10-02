@@ -17,7 +17,7 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
 
     context "when called with an office for the first time" do
       context "with expected stubbed user and offices response" do
-        let(:provider) { create(:provider, firm: nil, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a", with_office_selected: false) }
+        let(:provider) { create(:provider, :without_ccms_user_details, firm: nil, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a", with_office_selected: false) }
 
         it "adds the provider to the expected firm" do
           expect { call }
@@ -57,12 +57,16 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
             devolved_power_status: "Yes - Excluding JR Proceedings",
           )
         end
+
+        it "updates the provider ccms_contact_id" do
+          expect { call }.to change { provider.reload.ccms_contact_id }.from(nil).to(66_731_970)
+        end
       end
     end
 
     context "when called with an office for the second time, or more" do
       let(:provider) do
-        create(:provider, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a", ccms_contact_id: 654_321, firm:, with_office_selected: false).tap do |provider|
+        create(:provider, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a", ccms_contact_id: 654_321, username: "MY-CCMS-USERNAME", firm:, with_office_selected: false).tap do |provider|
           provider.offices << office
           provider.save!
         end
@@ -83,6 +87,18 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
           .to change { office.reload.ccms_id }
             .from("12345")
             .to("137570")
+      end
+
+      it "does not update the provider's CCMS contact id" do
+        expect { call }
+          .not_to change { provider.reload.ccms_contact_id }
+            .from(654_321)
+      end
+
+      it "does not update the provider's username" do
+        expect { call }
+          .not_to change { provider.reload.username }
+            .from("MY-CCMS-USERNAME")
       end
 
       context "when office was selected previously" do

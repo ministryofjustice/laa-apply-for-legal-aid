@@ -124,11 +124,10 @@ admin_omniauth_entraid:
 pda:
   url: "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk"
 
-# We point our UAT to their Dev as it more closely mathes logically and there are currently only Dev and UAT is
-# namespaces/hosts available, and CUMA UAT  is used by staging.
+# We point our UAT to their Dev as it more closely matches logically, and there are currently only Dev and UAT
+# namespaces/hosts available, and CUMA UAT is used by staging.
 ccms_user_api:
   url: "http://user-api-service.laa-ccms-user-management-api-dev.svc.cluster.local:8080/api/v1"
-  # url: "https://laa-ccms-user-management-api-dev.apps.live.cloud-platform.service.justice.gov.uk/api/v1"
 
 trueLayer:
   enableMock: "true"

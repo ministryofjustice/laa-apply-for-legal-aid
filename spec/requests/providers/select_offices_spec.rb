@@ -1,7 +1,7 @@
 require "rails_helper"
 require Rails.root.join("spec/services/pda/provider_details_request_stubs")
 
-RSpec.describe "provider selects office", type: :request do
+RSpec.describe "provider selects office" do
   let(:provider) { create(:provider, :without_ccms_user_details, office_codes: "0X395U:2N078D:A123456", with_office_selected: false) }
 
   let(:body) do
@@ -248,7 +248,7 @@ RSpec.describe "provider selects office", type: :request do
           patch_request
           follow_redirect!
 
-          expect(page).to have_content("You cannot use this service")
+          expect(page).to have_css("h1", text: "Sorry, there was a problem getting your account information")
         end
 
         it "logs user not found error" do
