@@ -11,11 +11,11 @@ module TaskStatus
       end
 
       def received_benefit_confirmation_form
-        @received_benefit_confirmation_form ||= ::Providers::ReceivedBenefitConfirmationForm.new
+        @received_benefit_confirmation_form ||= ::Providers::ReceivedBenefitConfirmationForm.new(model: dwp_override)
       end
 
       def has_evidence_of_benefit_form
-        @has_evidence_of_benefit_form ||= ::LegalAidApplications::HasEvidenceOfBenefitForm.new(model: legal_aid_application)
+        @has_evidence_of_benefit_form ||= ::LegalAidApplications::HasEvidenceOfBenefitForm.new(model: dwp_override)
       end
     end
   end
