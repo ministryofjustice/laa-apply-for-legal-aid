@@ -318,5 +318,5 @@ env:
   - name: REAUTHENTICATE_AFTER_MINUTES
     value: {{ .Values.session.reauthenticate_after_minutes | quote }}
   - name: IDLE_TIMEOUT_AFTER_MINUTES
-    value: {{ .Values.sesssion.idle_timeout_after_minutes | quote }}
+    value: {{ .Values.session.idle_timeout_after_minutes | quote }}
 {{- end }}

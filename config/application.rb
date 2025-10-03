@@ -154,6 +154,8 @@ module LaaApplyForLegalAid
     # Time after which a user will be required to sign in again, regardless of their activity (session lifespan).
     config.x.session.reauthenticate_in = ENV.fetch("REAUTHENTICATE_AFTER_MINUTES", 720).to_i.minutes
 
+    config.x.session.timeout_in = ENV.fetch("IDLE_TIMEOUT_AFTER_MINUTES", 60).to_i.minutes
+
     # automatically include locale in the query string when generating urls with url_helpers
     Rails.application.routes.default_url_options[:locale] = I18n.locale
     config.i18n.default_locale = :en
