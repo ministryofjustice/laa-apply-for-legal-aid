@@ -4,7 +4,7 @@ class Provider < ApplicationRecord
   encrypts :auth_subject_uid, deterministic: true
   encrypts :silas_id, deterministic: true
 
-  devise :trackable
+  devise :trackable, :reauthable, :timeoutable
 
   serialize :roles, coder: YAML
   serialize :offices, coder: YAML

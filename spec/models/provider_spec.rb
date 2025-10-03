@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Provider do
+  it_behaves_like "a reauthable model"
+
   describe "#user_permissions" do
     context "with no permissions for provider and their firm" do
       let(:firm) { create(:firm, :with_no_permissions) }
