@@ -172,5 +172,6 @@ collect_hmrc_data:
 # Force reauthentication 24 hours (UAT only) from last sign in, in-inline with SiLAS
 session:
    reauthenticate_after_minutes: "5"
+   idle_timeout_after_minutes: "60"
 
 env: uat
