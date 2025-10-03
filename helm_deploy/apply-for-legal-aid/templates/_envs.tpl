@@ -315,4 +315,8 @@ env:
     value: {{ .Values.collect_hmrc_data.enabled | quote  }}
   - name: CLAMD_CONF_FILENAME
     value: {{ .Values.clamav.configFile }}
+  - name: REAUTHENTICATE_AFTER_MINUTES
+    value: {{ .Values.session.reauthenticate_after_minutes | quote }}
+  - name: IDLE_TIMEOUT_AFTER_MINUTES
+    value: {{ .Values.sesssion.idle_timeout_after_minutes | quote }}
 {{- end }}
