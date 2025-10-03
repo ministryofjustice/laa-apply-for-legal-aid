@@ -122,7 +122,8 @@ admin_omniauth_entraid:
   redirect_uri: https://main-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk/auth/admin_entra_id/callback # overridden for branches (see deploy script)
 
 pda:
-  url: "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk"
+  # url: "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk"
+  url: "https://laa-provider-details-api-dev.apps.live.cloud-platform.service.justice.gov.uk"
 
 # We point our UAT to their Dev as it more closely mathes logically and there are currently only Dev and UAT is
 # namespaces/hosts available, and CUMA UAT  is used by staging.

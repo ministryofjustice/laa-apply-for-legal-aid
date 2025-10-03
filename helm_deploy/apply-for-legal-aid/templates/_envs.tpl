@@ -181,7 +181,7 @@ env:
     valueFrom:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
-        key: pdaAuthKey
+        key: pdaAuthKeyDevTemp
   - name: CCMS_USER_API_URL
     value: {{ .Values.ccms_user_api.url | quote }}
   - name: CCMS_USER_API_AUTH_KEY

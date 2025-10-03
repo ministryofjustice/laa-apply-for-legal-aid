@@ -114,6 +114,7 @@ admin_omniauth_entraid:
   mock_auth_enabled: false
   redirect_uri: https://staging.apply-for-legal-aid.service.justice.gov.uk/auth/admin_entra_id/callback
 
+# We point staging to UAT to align with CUMA test/UAT and CCMS SOA/EBS UAT, and because there is no CUMA Preprod/staging env to use
 pda:
   url: "https://laa-provider-details-api-preprod.apps.live.cloud-platform.service.justice.gov.uk"
 
