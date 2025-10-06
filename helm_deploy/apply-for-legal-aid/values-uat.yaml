@@ -174,4 +174,9 @@ maintenance_mode:
 collect_hmrc_data:
   enabled: "false"
 
+# Force reauthentication 24 hours (UAT only) from last sign in, inline with SiLAS/EntraID
+session:
+   reauthenticate_after_minutes: "1440"
+   idle_timeout_after_minutes: "60"
+
 env: uat

@@ -168,4 +168,9 @@ maintenance_mode:
 collect_hmrc_data:
   enabled: "false"
 
+# Force reauthentication 12 hours from last sign in, inline with SiLAS/EntraID
+session:
+   reauthenticate_after_minutes: "720"
+   idle_timeout_after_minutes: "60"
+
 env: production
