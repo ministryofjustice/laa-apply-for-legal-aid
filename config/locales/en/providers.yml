@@ -1520,10 +1520,6 @@ en:
         heading: Income result
       uploaded_bank_statements:
         bank_statement_heading: Bank statements
-        bank_statement_question: Uploaded bank statements
-        bank_statement_question_with_partner: Client’s uploaded bank statements
-        partner_bank_statement_question: Partner's uploaded bank statements
-
     no_national_insurance_numbers:
       show:
         title: You will have to do a full means test as part of this application

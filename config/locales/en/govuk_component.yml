@@ -548,6 +548,10 @@ en:
         undertaking:
           offered_what: Undertakings offered
           offered_why: Why undertakings have not been offered
+        uploaded_bank_statements:
+          question: Uploaded bank statements
+          question_with_partner: Client's uploaded bank statements
+          partner_question: Partner's uploaded bank statements
         urgency:
           hearing_date_set: Has a date been set for the hearing?
           nature_of_urgency: Nature of the urgency
