@@ -49,7 +49,7 @@ RSpec.describe Providers::CheckClientDetailsController do
         expect { get_request }.to change { application.reload.state }.from("checking_applicant_details").to("overriding_dwp_result")
       end
 
-      it "updates confirm_dwp_result to true" do
+      it "updates confirm_dwp_result to false" do
         expect { get_request }
           .to change { application.reload.dwp_result_confirmed }
           .from(nil)
