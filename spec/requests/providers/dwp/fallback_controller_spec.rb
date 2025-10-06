@@ -27,12 +27,12 @@ RSpec.describe Providers::DWP::FallbackController do
 
       context "when confirm_dwp_result is not nil" do
         before do
-          application.confirm_dwp_result = "dwp_correct"
+          application.dwp_result_confirmed = true
         end
 
-        it "resets confirm_dwp_result to nil" do
+        it "resets dwp_result_confirmed to nil" do
           get_request
-          expect(application.reload.confirm_dwp_result).to be_nil
+          expect(application.reload.dwp_result_confirmed).to be_nil
         end
       end
     end
@@ -104,9 +104,9 @@ RSpec.describe Providers::DWP::FallbackController do
           end
         end
 
-        it "sets the legal_aid_application confirm_dwp_result field to be dwp_correct" do
+        it "sets the legal_aid_application dwp_result_confirmed field to be dwp_correct" do
           patch_request
-          expect(application.reload.confirm_dwp_result).to eq "dwp_correct"
+          expect(application.reload.dwp_result_confirmed).to be true
         end
 
         it "redirects to the next page" do
@@ -167,9 +167,9 @@ RSpec.describe Providers::DWP::FallbackController do
           end
         end
 
-        it "sets the legal_aid_application confirm_dwp_result field to be joint_with_partner_false" do
+        it "sets the legal_aid_application dwp_result_confirmed field to be true" do
           patch_request
-          expect(application.reload.confirm_dwp_result).to eq "joint_with_partner_false"
+          expect(application.reload.dwp_result_confirmed).to be true
         end
 
         it "redirects to the next page" do
@@ -223,7 +223,7 @@ RSpec.describe Providers::DWP::FallbackController do
 
         it "sets the legal_aid_application confirm_dwp_result field to be joint_with_partner_true" do
           patch_request
-          expect(application.reload.confirm_dwp_result).to eq "joint_with_partner_true"
+          expect(application.reload.dwp_result_confirmed).to be true
         end
 
         it "redirects to the next page" do
