@@ -65,8 +65,9 @@ RSpec.describe TaskStatus::MakeLink do
 
     context "with completed link section" do
       let(:applicant) { complete_applicant }
-
       let(:lead_linked_application) { complete_lead_linked_application }
+
+      before { application.update!(linked_application_completed: true) }
 
       it { is_expected.to be_completed }
     end
