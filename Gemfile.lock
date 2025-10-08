@@ -97,7 +97,7 @@ GEM
     attr_required (1.0.2)
     awesome_print (1.9.2)
     aws-eventstream (1.4.0)
-    aws-partitions (1.1168.0)
+    aws-partitions (1.1169.0)
     aws-sdk-core (3.233.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
@@ -138,7 +138,7 @@ GEM
       erubi (~> 1.4)
       parser (>= 2.4)
       smart_properties
-    bigdecimal (3.2.3)
+    bigdecimal (3.3.0)
     bindata (2.5.1)
     binding_of_caller (1.0.1)
       debug_inspector (>= 1.2.0)
@@ -249,7 +249,7 @@ GEM
       http_parser.rb (~> 0)
     email_validator (2.2.4)
       activemodel
-    erb (5.0.2)
+    erb (5.0.3)
     erb_lint (0.9.0)
       activesupport
       better_html (>= 2.0.1)
@@ -271,7 +271,7 @@ GEM
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
-    faraday-follow_redirects (0.3.0)
+    faraday-follow_redirects (0.4.0)
       faraday (>= 1, < 3)
     faraday-net_http (3.4.1)
       net-http (>= 0.5.0)
@@ -356,7 +356,7 @@ GEM
     jmespath (1.6.2)
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
-    json (2.15.0)
+    json (2.13.2)
     json-jwt (1.17.0)
       activesupport (>= 4.2)
       aes_key_wrap
@@ -403,7 +403,7 @@ GEM
     nesty (1.0.2)
     net-http (0.6.0)
       uri
-    net-imap (0.5.10)
+    net-imap (0.5.12)
       date
       net-protocol
     net-pop (0.1.2)
@@ -439,8 +439,9 @@ GEM
       rack (>= 1.2, < 4)
       snaky_hash (~> 2.0, >= 2.0.3)
       version_gem (~> 1.1, >= 1.1.9)
-    omniauth (2.1.3)
+    omniauth (2.1.4)
       hashie (>= 3.4.6)
+      logger
       rack (>= 2.2.3)
       rack-protection
     omniauth-oauth2 (1.8.0)
@@ -483,10 +484,10 @@ GEM
     pg (1.6.2-x86_64-darwin)
     pg (1.6.2-x86_64-linux)
     pg_dump_anonymize (0.1.2)
-    pp (0.6.2)
+    pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
-    prism (1.5.1)
+    prism (1.4.0)
     prometheus_exporter (2.3.0)
       webrick
     propshaft (1.3.1)
@@ -522,7 +523,7 @@ GEM
     pundit (2.5.2)
       activesupport (>= 3.0.0)
     racc (1.8.1)
-    rack (3.2.1)
+    rack (3.2.2)
     rack-attack (6.7.0)
       rack (>= 1.0, < 4)
     rack-oauth2 (2.2.1)
@@ -588,9 +589,10 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.11.1)
       ffi (~> 1.0)
-    rdoc (6.14.2)
+    rdoc (6.15.0)
       erb
       psych (>= 4.0.0)
+      tsort
     redis (5.4.1)
       redis-client (>= 0.22.0)
     redis-client (0.26.1)
@@ -674,9 +676,11 @@ GEM
     ruby2_keywords (0.0.5)
     rubyzip (3.1.1)
     securerandom (0.4.1)
-    selenium-webdriver (4.35.0)
+    selenium-webdriver (4.36.0)
       base64 (~> 0.2)
+      json (<= 2.13.2)
       logger (~> 1.4)
+      prism (~> 1.0, < 1.5)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
@@ -692,7 +696,7 @@ GEM
     shellany (0.0.1)
     shoulda-matchers (6.5.0)
       activesupport (>= 5.2.0)
-    sidekiq (8.0.7)
+    sidekiq (8.0.8)
       connection_pool (>= 2.5.0)
       json (>= 2.9.0)
       logger (>= 1.6.2)
@@ -746,7 +750,7 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.1.0)
-    uri (1.0.3)
+    uri (1.0.4)
     useragent (0.16.11)
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
@@ -870,7 +874,7 @@ DEPENDENCIES
   sentry-ruby
   sentry-sidekiq
   shoulda-matchers (~> 6.5)
-  sidekiq (~> 8.0.7)
+  sidekiq (~> 8.0.8)
   sidekiq-status (~> 4.0.0)
   simple_command
   simplecov
