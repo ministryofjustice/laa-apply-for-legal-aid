@@ -23,6 +23,10 @@ RSpec.describe Providers::LinkApplication::MakeLinkForm, type: :form do
         expect(legal_aid_application.lead_linked_application).to have_attributes(link_type_code: "FC_LEAD",
                                                                                  confirm_link: nil)
       end
+
+      it "sets linked_application_completed to false" do
+        expect { call_save }.to change { legal_aid_application.reload.linked_application_completed }.from(nil).to(false)
+      end
     end
 
     context "with legal link type chosen" do
@@ -39,6 +43,10 @@ RSpec.describe Providers::LinkApplication::MakeLinkForm, type: :form do
         expect(legal_aid_application.copy_case).to be_nil
         expect(legal_aid_application.copy_case_id).to be_nil
       end
+
+      it "sets linked_application_completed to false" do
+        expect(legal_aid_application.reload.linked_application_completed).to be false
+      end
     end
 
     context "with link type no chosen" do
@@ -48,6 +56,10 @@ RSpec.describe Providers::LinkApplication::MakeLinkForm, type: :form do
         call_save
         expect(legal_aid_application.lead_linked_application).to have_attributes(link_type_code: "false",
                                                                                  confirm_link: false)
+      end
+
+      it "sets linked_application_completed to true" do
+        expect { call_save }.to change { legal_aid_application.reload.linked_application_completed }.from(nil).to(true)
       end
     end
 
