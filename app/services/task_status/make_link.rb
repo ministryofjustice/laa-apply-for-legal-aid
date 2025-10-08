@@ -14,27 +14,19 @@ module TaskStatus
   private
 
     def not_started?
-      application.lead_linked_application.blank?
+      application.linked_application_completed.nil?
     end
 
     def cannot_start?
-      !applicants_validator.valid?
+      !Applicants.new(application).call.completed?
     end
 
     def in_progress?
-      application.lead_linked_application.present? && !completed?
+      application.lead_linked_application.present?
     end
 
     def completed?
-      make_link_validator.valid?
-    end
-
-    def make_link_validator
-      @make_link_validator ||= Validators::MakeLink.new(application)
-    end
-
-    def applicants_validator
-      @applicants_validator ||= Validators::Applicants.new(application)
+      application.linked_application_completed
     end
   end
 end
