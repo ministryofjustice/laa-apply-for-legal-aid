@@ -9,7 +9,12 @@ module Providers
 
       def save
         super
-        model.update!(confirm_link: nil) if confirm_link == "No"
+        if confirm_link == "No"
+          model.update!(confirm_link: nil)
+          model.associated_application.update!(linked_application_completed: true)
+        elsif confirm_link == "true" && model.link_type_code.eql?("LEGAL")
+          model.associated_application.update!(linked_application_completed: true)
+        end
       end
       alias_method :save!, :save
     end
