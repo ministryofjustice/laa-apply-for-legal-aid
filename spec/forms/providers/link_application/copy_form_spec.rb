@@ -4,7 +4,7 @@ RSpec.describe Providers::LinkApplication::CopyForm, type: :form do
   subject(:described_form) { described_class.new(params.merge(model: application)) }
 
   let(:lead_application) { create(:legal_aid_application) }
-  let(:application) { create(:legal_aid_application, :with_applicant_and_address) }
+  let(:application) { create(:legal_aid_application, :with_applicant_and_address, linked_application_completed: false) }
 
   before { create(:linked_application, lead_application:, target_application: lead_application, associated_application: application) }
 
@@ -29,6 +29,10 @@ RSpec.describe Providers::LinkApplication::CopyForm, type: :form do
         expect(application.copy_case_id).to eq lead_application.id
       end
 
+      it "sets linked_application_completed to true" do
+        expect { described_form.save! }.to change { application.reload.linked_application_completed }.from(false).to(true)
+      end
+
       context "and proceedings exist for the application" do
         before { create(:proceeding, :se013, legal_aid_application: application) }
 
@@ -49,6 +53,10 @@ RSpec.describe Providers::LinkApplication::CopyForm, type: :form do
         described_form.save!
         expect(application.copy_case).to be false
         expect(application.copy_case_id).to be_nil
+      end
+
+      it "sets linked_application_completed to true" do
+        expect { described_form.save! }.to change { application.reload.linked_application_completed }.from(false).to(true)
       end
 
       context "and a previous yes response has been recorded" do
