@@ -1,0 +1,95 @@
+name: Scan code, dependencies and container using snyk
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '15 6 * * *'
+
+jobs:
+  snyk:
+    name: Scan code, dependencies and container using snyk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #--v4.2.2
+
+    - name: Build docker image
+      run: |
+        docker build \
+          --tag laa-apply-for-legalaid:scan \
+          --file Dockerfile .
+
+    - name: Static code analysis using Snyk
+      continue-on-error: true
+      uses: snyk/actions/ruby@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        command: code test
+        args: --sarif-file-output=snyk-code.sarif --severity-threshold=high --policy-path=.snyk
+
+    - name: Test open source dependencies using Snyk
+      continue-on-error: true
+      uses: snyk/actions/ruby@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        command: test
+        args: --sarif-file-output=snyk-open.sarif --all-projects --severity-threshold=high --policy-path=.snyk
+
+    - name: Monitor open source dependencies using Snyk
+      continue-on-error: true
+      uses: snyk/actions/ruby@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        command: monitor
+        args: --all-projects --severity-threshold=high
+
+    - name: Scan container image for vulnerabilites using Snyk
+      continue-on-error: true
+      uses: snyk/actions/docker@9adf32b1121593767fc3c057af55b55db032dc04 # v1.0.0 (on 3/10/2025)
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        command: container test
+        args: --file=Dockerfile --sarif-file-output=snyk-container.sarif --severity-threshold=high --policy-path=.snyk
+        image: laa-apply-for-legalaid:scan
+
+    - name: Monitor container image using Snyk
+      uses: snyk/actions/docker@9adf32b1121593767fc3c057af55b55db032dc04 # v1.0.0 (on 3/10/2025)
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        command: container monitor
+        args: --file=Dockerfile
+        image: laa-apply-for-legalaid:scan
+
+    - name: Replace security-severity "null" for license-related findings
+      run: |
+        sed -i 's/"security-severity": "null"/"security-severity": "0"/g' snyk-container.sarif
+        sed -i 's/"security-severity": "null"/"security-severity": "0"/g' snyk-code.sarif
+        sed -i 's/"security-severity": "null"/"security-severity": "0"/g' snyk-open.sarif
+
+    - name: Replace security-severity "undefined" for license-related findings
+      run: |
+        sed -i 's/"security-severity": "undefined"/"security-severity": "0"/g' snyk-container.sarif
+        sed -i 's/"security-severity": "undefined"/"security-severity": "0"/g' snyk-code.sarif
+        sed -i 's/"security-severity": "undefined"/"security-severity": "0"/g' snyk-open.sarif
+
+    - name: Upload static code analysis result to GitHub Code Scanning
+      uses: github/codeql-action/upload-sarif@e296a935590eb16afc0c0108289f68c87e2a89a5 #--v4.30.7 @7/10/2025
+      with:
+        sarif_file: snyk-code.sarif
+        category: snyk-code
+
+    - name: Upload open source dependencies test result to GitHub Code Scanning
+      uses: github/codeql-action/upload-sarif@e296a935590eb16afc0c0108289f68c87e2a89a5 #--v4.30.7 @7/10/2025
+      with:
+        sarif_file: snyk-open.sarif
+        category: snyk-open
+
+    - name: Upload container test result to GitHub Code Scanning
+      uses: github/codeql-action/upload-sarif@e296a935590eb16afc0c0108289f68c87e2a89a5 #--v4.30.7 @7/10/2025
+      with:
+        sarif_file: snyk-container.sarif
+        category: snyk-container
