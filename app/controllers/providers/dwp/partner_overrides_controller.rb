@@ -3,7 +3,10 @@ module Providers
     class PartnerOverridesController < ProviderBaseController
       prefix_step_with :dwp
 
+      include DWPOutcomeHelper
+
       def show
+        checking_dwp_status!(legal_aid_application)
         @form = Providers::DWP::PartnerOverridesForm.new(model: partner)
       end
 

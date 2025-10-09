@@ -3,7 +3,7 @@ module TaskStatus
     class Base
       attr_reader :application
 
-      delegate :applicant, to: :application
+      delegate :applicant, :dwp_override, to: :application
       delegate :address, to: :applicant
 
       def initialize(application)

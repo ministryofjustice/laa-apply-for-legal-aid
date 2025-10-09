@@ -4,12 +4,15 @@ module Providers
       prefix_step_with :dwp
 
       include ApplicantDetailsCheckable
+      include DWPOutcomeHelper
 
       def show
         @form = Providers::DWP::FallbackForm.new(model: partner)
+        reset_confirm_dwp_status!(legal_aid_application)
       end
 
       def update
+        confirm_dwp_status_correct!(legal_aid_application)
         return continue_or_draft if draft_selected?
 
         @form = Providers::DWP::FallbackForm.new(form_params)
