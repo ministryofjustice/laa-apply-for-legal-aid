@@ -1,7 +1,7 @@
 # Puffing-billy stub creating and request cache
 
 Some feature tests exercise application logic that includes asynchronous javascript
-calls to external services (APIs). In particular, searching for proceedings and organisations is achieved this through ajax calls to the legal-framework-api. VCR does not intercept browser calls therefore puffing-billy is used. This provides a "rewriting web proxy" to intercept and stub the calls.
+calls to external services (APIs). In particular, searching for proceedings and organisations is achieved through ajax calls to the legal-framework-api. VCR does not intercept browser calls therefore puffing-billy is used. This provides a "rewriting web proxy" to intercept and stub the calls.
 
 VCR and puffing-billy can be used together to achieve stubbing of any calls to external services from the backend and frontend respectively.
 
@@ -47,6 +47,11 @@ If you want to record a request and response, either to use in a feature test or
 2. amend the puffing-billy config in `features/support/puffing_billy.rb`
     - set `non_whitelisted_requests_disabled = false`
     - ensure `cache = true` and `persist_cache = true`
+    - set `record_requests` = true
+    - set `certs_path = "features/puffing-billy/request_certs"` *
+
+> [!WARNING]
+> Do NOT commit `features/puffing-billy/request_certs` dir or its content to repo. It may contain private RSA keys.
 
 3. run the feature (with debug to view request being made of billy's proxy)
 
@@ -57,14 +62,16 @@ If you want to record a request and response, either to use in a feature test or
 4. The requests should appear in the configured folder
    `features/puffing-billy/request_cache`
 
-
-*Warning: you may also need to configure Billy to record certificates temporarily. You SHOULD NOT commit these to the repo.*
-
+Example
 ```ruby
 # features/support/puffing_billy.rb
 Billy.configure do |c|
   ...
-  c.certs_path = 'features/puffing-billy/request_certs'
+  c.cache = true
+  c.persist_cache = true
+  c.non_whitelisted_requests_disabled = false
+  c.certs_path = "features/puffing-billy/request_certs"
+  c.record_requests = true
   ...
 end
 ```

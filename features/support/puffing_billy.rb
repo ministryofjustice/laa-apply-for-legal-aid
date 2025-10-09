@@ -15,10 +15,10 @@ Billy.configure do |c|
   # c.ignore_cache_port = true
   # c.non_successful_cache_disabled = false
   # c.non_successful_error_level = :warn
-  c.non_whitelisted_requests_disabled = true # turn off all unrecorded/uncached requests
+  c.non_whitelisted_requests_disabled = true # turn off all unrecorded/uncached requests, default is false
   # c.cache_whitelist = ["https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk"]
   c.cache_path = "features/puffing-billy/request_cache"
-  # c.certs_path = 'features/puffing-billy/request_certs' # defaults to local user tmp dir, which is safe!?
+  # c.certs_path = "features/puffing-billy/request_certs" # defaults to local /var/folders/.. dir, which is safe, but does not seem to work!?
   # c.proxy_host = 'example.com' # defaults to localhost
   # c.proxy_port = 12345 # defaults to random
   # c.proxied_request_host = nil
