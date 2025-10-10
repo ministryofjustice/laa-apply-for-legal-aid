@@ -73,6 +73,8 @@ Rails.application.configure do
     config.log_level = :fatal
   end
 
+  config.x.legal_framework_api_host = ENV.fetch("LEGAL_FRAMEWORK_API_HOST", "https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk")
+
   # Test url for provider details api
   config.x.pda.url = "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk"
 
