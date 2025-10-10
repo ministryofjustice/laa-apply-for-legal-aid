@@ -52,6 +52,11 @@ deploy:
 
 postgresql:
   enabled: true
+  image:
+    repository: bitnamilegacy/postgresql
+  global:
+    security:
+      allowInsecureImages: true
   resources:
     limits:
      cpu: 250m
@@ -81,6 +86,12 @@ postgresql:
 redis:
   enabled: true
   architecture: standalone
+  image:
+    repository: bitnamisecure/redis
+    tag: latest
+  global:
+    security:
+      allowInsecureImages: true
   master:
     resources:
       limits:
