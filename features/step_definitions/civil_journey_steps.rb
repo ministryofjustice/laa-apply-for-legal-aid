@@ -1183,6 +1183,12 @@ And("I search for proceeding {string}") do |search_terms|
   wait_for_ajax
 end
 
+And("I search for country {string}") do |search_terms|
+  stub_countries_search_for(search_terms)
+
+  fill_in("Country", with: search_terms)
+  wait_for_ajax
+end
 And(/^I should (see|not see) ['|"](.*?)['|"]$/) do |visibility, text|
   if visibility == "see"
     expect(page).to have_content(/#{text}/)

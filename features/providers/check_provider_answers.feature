@@ -157,7 +157,7 @@ Feature: Checking client details answers backwards and forwards
       | Correspondence address | Fake Company\nFake Road\nFake City\nXX1 1XX |
       | Home address | Transport For London\n98 Petty France\nLondon\nSW1H 9EA |
 
-  @javascript @vcr
+  @javascript @vcr @billy
   Scenario: I am able to return and amend the client's overseas home address
     Given  I complete the passported journey as far as check your answers with an overseas address
     And the "Client details" check your answers section should contain:
@@ -167,7 +167,7 @@ Feature: Checking client details answers backwards and forwards
     When I click Check Your Answers Change link for "home address"
     Then I should be on a page with title "Find your client's home address"
     And I click link "Enter a non-UK address"
-    And I enter a country "France"
+    And I search for country "France"
     And I choose "France"
     Then I complete overseas home address 'address line one' with 'Grande Rue 2'
     Then I complete overseas home address 'address line two' with 'Marseille F-54321'
@@ -437,7 +437,7 @@ Feature: Checking client details answers backwards and forwards
       | Date of birth | 11 February 1981 |
       | National Insurance number | BC 29 34 83 A |
 
-  @javascript @vcr
+  @javascript @vcr @billy
   Scenario: I want to change the proceeding type from the check your answers page
     Given I complete the journey as far as check your answers
     And I click Check Your Answers summary card Change link for 'Proceedings'

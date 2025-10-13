@@ -28,6 +28,21 @@ module PuffingBillyHelper
       )
   end
 
+  def stub_countries_search_for(term)
+    body = countries_search_term_stubs[term]
+
+    proxy
+      .stub(%r{https://legal-framework-api-staging\.cloud-platform\.service\.justice\.gov\.uk.*/countries/search}, method: "post")
+      .and_return(
+        headers: {
+          "Access-Control-Allow-Origin" => "*",
+          "Content-Type" => "application/json; charset=utf-8",
+        },
+        code: 200,
+        body: body.to_json,
+      )
+  end
+
   def before_puffing_billy_stubs
     proxy
       .stub(/\.google\.com/, method: "all")
@@ -49,6 +64,16 @@ module PuffingBillyHelper
 
     proxy
       .stub(%r{https://legal-framework-api-staging\.cloud-platform\.service\.justice\.gov\.uk.*/proceeding_types/searches}, method: "options")
+      .and_return(
+        headers: {
+          "Access-Control-Allow-Origin" => "*",
+          "Access-Control-Allow-Headers" => "Content-Type",
+        },
+        code: 200,
+      )
+
+    proxy
+      .stub(%r{https://legal-framework-api-staging\.cloud-platform\.service\.justice\.gov\.uk.*/countries/search}, method: "options")
       .and_return(
         headers: {
           "Access-Control-Allow-Origin" => "*",
@@ -346,6 +371,24 @@ private
               description: "to be represented on an application for a child arrangements order - where the child(ren) will live",
               ccms_category_law: "Family",
               ccms_matter: "section 8 children (S8)",
+            },
+          ],
+        },
+      },
+    )
+  end
+
+  def countries_search_term_stubs
+    Hash.new({ success: false, data: [] }.freeze).merge(
+      {
+        "France" =>
+        {
+          success: true,
+          data: [
+            {
+              description: "France",
+              code: "FRA",
+              description_headline: "<mark>France</mark>",
             },
           ],
         },
