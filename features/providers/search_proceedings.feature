@@ -1,6 +1,7 @@
+
 Feature: Search proceedings
 
-@javascript @vcr @stub_pda_provider_details
+  @javascript @stub_pda_provider_details @vcr @billy
   Scenario: No results returned is seen on screen when invalid proceeding search entered
     Given I am logged in as a provider
     Given I visit the application service
@@ -35,10 +36,10 @@ Feature: Search proceedings
     When I choose "No"
     And I click "Save and continue"
     And I should be on a page showing "What does your client want legal aid for?"
-    When I search for proceeding type "cakes"
+    When I search for proceeding 'cakes'
     Then the proceeding type result list on page returns a "No results found." message
 
-  @javascript @vcr @stub_pda_provider_details
+  @javascript @stub_pda_provider_details @vcr @billy
   Scenario: I am able to clear proceeding on the proceeding page
     Given I am logged in as a provider
     Given I visit the application service
