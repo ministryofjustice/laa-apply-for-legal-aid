@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::ReceivedBenefitConfirmationsController do
-  let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address) }
+  let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address, dwp_result_confirmed: false) }
   let(:application_id) { application.id }
 
   describe "GET /providers/applications/:legal_aid_application_id/received_benefit_confirmation" do
@@ -67,6 +67,11 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
         it "adds a dwp override record" do
           expect { patch_request }.to change(DWPOverride, :count).by(1)
         end
+
+        it "does not update the confirm_dwp_result" do
+          expect { patch_request }
+            .not_to change { application.reload.dwp_result_confirmed }
+        end
       end
 
       context "when the same request is sent twice" do
@@ -111,6 +116,13 @@ RSpec.describe Providers::ReceivedBenefitConfirmationsController do
       it "transitions the application state to applicant details checked" do
         patch_request
         expect(application.reload.state).to eq "applicant_details_checked"
+      end
+
+      it "updates confirm_dwp_result to true" do
+        expect { patch_request }
+          .to change { application.reload.dwp_result_confirmed }
+          .from(false)
+          .to true
       end
     end
   end
