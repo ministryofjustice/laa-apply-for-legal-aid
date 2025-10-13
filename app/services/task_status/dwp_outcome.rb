@@ -22,11 +22,19 @@ module TaskStatus
     end
 
     def in_progress?
-      application.dwp_result_confirmed == false
+      application.dwp_result_confirmed == false && !dwp_override_validator.valid?
     end
 
     def completed?
-      application.dwp_result_confirmed == true || dwp_override_validator.valid?
+      provider_confirmed_dwp_result? || provider_overrode_dwp_result?
+    end
+
+    def provider_confirmed_dwp_result?
+      application.dwp_result_confirmed == true && application.dwp_override.nil?
+    end
+
+    def provider_overrode_dwp_result?
+      application.dwp_result_confirmed == false && dwp_override_validator.valid?
     end
 
     def check_provider_answers_completed?
