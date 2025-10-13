@@ -7,7 +7,7 @@ require "billy/capybara/cucumber"
 #
 Billy.configure do |c|
   c.cache = true
-  # c.cache_request_headers = false
+  c.cache_request_headers = false
   # c.ignore_params = [],
   # c.path_blacklist = []
   # c.merge_cached_responses_whitelist = []
@@ -48,9 +48,9 @@ After("@billy") do
       :status,
       :handler,
       :method,
-      { url: { width: 100 } },
+      { url: { width: 500 } },
       :headers,
-      :body,
+      { body: { width: 200 } },
     ])
 
     Billy.configure.record_requests = false

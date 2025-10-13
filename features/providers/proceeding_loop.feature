@@ -1,5 +1,4 @@
-@javascript @vcr
-
+@javascript @vcr @billy
 Feature: Loop through proceeding questions
 
   Background:

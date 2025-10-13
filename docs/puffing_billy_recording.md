@@ -47,11 +47,12 @@ If you want to record a request and response, either to use in a feature test or
 2. amend the puffing-billy config in `features/support/puffing_billy.rb`
     - set `non_whitelisted_requests_disabled = false`
     - ensure `cache = true` and `persist_cache = true`
-    - set `record_requests` = true
-    - set `certs_path = "features/puffing-billy/request_certs"` *
+    - set `record_requests` = true (optional as the DEBUG|DEBUG_BILLY commandline setting will set to true anyway)
+    - set `certs_path = "features/puffing-billy/request_certs"` *1
 
+*1
 > [!WARNING]
-> Do NOT commit `features/puffing-billy/request_certs` dir or its content to repo. It may contain private RSA keys.
+> Do NOT commit `features/puffing-billy/request_certs` dir or its content to repo. It may contain private RSA keys. They have been git ignored but you should check you commits before pushing nonetheless. In addition, check the contents of any new or amended request_cache directory files for secrets before committing them.
 
 3. run the feature (with debug to view request being made of billy's proxy)
 
@@ -61,6 +62,8 @@ If you want to record a request and response, either to use in a feature test or
 
 4. The requests should appear in the configured folder
    `features/puffing-billy/request_cache`
+
+5. Check the new or amended request_cache files for secret leaks.
 
 Example
 ```ruby

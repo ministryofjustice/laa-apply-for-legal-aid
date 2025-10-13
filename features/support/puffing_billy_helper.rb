@@ -17,10 +17,11 @@ module PuffingBillyHelper
     body = proceeding_search_term_stubs[term]
 
     proxy
-      .stub("https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk:443/proceeding_types/searches", method: "post")
+      .stub(%r{https://legal-framework-api-staging\.cloud-platform\.service\.justice\.gov\.uk.*/proceeding_types/searches}, method: "post")
       .and_return(
         headers: {
           "Access-Control-Allow-Origin" => "*",
+          "Content-Type" => "application/json; charset=utf-8",
         },
         code: 200,
         body: body.to_json,
@@ -29,11 +30,11 @@ module PuffingBillyHelper
 
   def before_puffing_billy_stubs
     proxy
-      .stub(/https:\/\/accounts\.google\.com/, method: "all")
+      .stub(/\.google\.com/, method: "all")
       .and_return(code: 200, body: "")
 
     proxy
-      .stub(/content-autofill\.googleapis\.com/)
+      .stub(/\.googleapis\.com/, method: "all")
       .and_return(code: 200, body: "")
 
     proxy
@@ -157,6 +158,105 @@ private
   def proceeding_search_term_stubs
     Hash.new({ success: false, data: [] }.freeze).merge(
       {
+        "cakes" =>
+        {
+          success: false,
+          data: [],
+        },
+        "dom" =>
+        {
+          success: true,
+          data: [
+            {
+              meaning: "Harassment - injunction",
+              ccms_code: "DA003",
+              description: "to be represented in an action for an injunction under section 3 Protection from Harassment Act 1997.",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "domestic abuse (DA)",
+            },
+            {
+              meaning: "Inherent jurisdiction - high court injunction",
+              ccms_code: "DA001",
+              description: "to be represented on an application for an injunction, order or declaration under the inherent jurisdiction of the court.",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "domestic abuse (DA)",
+            },
+            {
+              meaning: "Part IV - extend, vary or discharge",
+              ccms_code: "DA006",
+              description: "to be represented on an application to extend, vary or discharge an order under Part IV Family Law Act 1996",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "domestic abuse (DA)",
+            },
+            {
+              meaning: "Female genital mutilation (FGM) protection order",
+              ccms_code: "DA020",
+              description: "To be represented on an application for a Female Genital Mutilation Protection Order under the Female Genital Mutilation Act.",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "domestic abuse (DA)",
+            },
+            {
+              meaning: "Occupation order",
+              ccms_code: "DA005",
+              description: "to be represented on an application for an occupation order.",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "domestic abuse (DA)",
+            },
+            {
+              meaning: "Non-molestation order",
+              ccms_code: "DA004",
+              description: "to be represented on an application for a non-molestation order.",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "domestic abuse (DA)",
+            },
+            {
+              meaning: "Forced marriage protection order",
+              ccms_code: "DA007",
+              description: "to be represented on an application for a forced marriage protection order",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "domestic abuse (DA)",
+            },
+            {
+              meaning: "Protection from harassment act 1997 under section 5 - vary or discharge",
+              ccms_code: "DA002",
+              description: "to be represented on an application to vary or discharge an order under section 5 Protection from Harassment Act 1997 where the parties are associated persons (as defined by Part IV Family Law Act 1996).",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "domestic abuse (DA)",
+            },
+          ],
+        },
         "Non-molestation order" =>
         {
           success: true,
