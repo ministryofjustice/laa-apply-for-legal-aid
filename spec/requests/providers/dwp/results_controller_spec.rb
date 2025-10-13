@@ -1,7 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Providers::DWP::ResultsController do
-  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address, dwp_override:, dwp_result_confirmed:) }
+  let(:dwp_result_confirmed) { nil }
+  let(:dwp_override) { nil }
 
   describe "GET /providers/applications/:legal_aid_application_id/dwp/dwp-result" do
     subject(:get_request) { get providers_legal_aid_application_dwp_result_path(legal_aid_application) }
@@ -27,12 +29,22 @@ RSpec.describe Providers::DWP::ResultsController do
       end
 
       context "when dwp_result_confirmed is not nil" do
-        before do
-          legal_aid_application.dwp_result_confirmed = true
-        end
+        let(:dwp_result_confirmed) { false }
 
         it "resets dwp_result_confirmed to nil" do
-          expect(legal_aid_application.reload.dwp_result_confirmed).to be_nil
+          expect { get_request }
+            .to change { legal_aid_application.reload.dwp_result_confirmed }
+            .from(false)
+            .to nil
+        end
+      end
+
+      context "when there is an existing dwp_overide" do
+        let(:dwp_override) { create(:dwp_override, :with_evidence) }
+
+        it "removes any existing dwp_override" do
+          get_request
+          expect(legal_aid_application.reload.dwp_override).to be_nil
         end
       end
 
