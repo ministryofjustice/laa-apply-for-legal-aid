@@ -12,7 +12,6 @@ module Providers
       def show
         details_checked! unless details_checked?
         reset_confirm_dwp_status!(legal_aid_application)
-        legal_aid_application.dwp_override&.destroy!
 
         # set the path for the "This is not correct" link flow
         @override_path = if legal_aid_application.partner
