@@ -72,7 +72,7 @@ Feature: Pathways from check your answers
     Then I click 'Save and continue'
     Then I should be on the 'capital_introduction' page showing "What you need to do"
 
-  @javascript @vcr
+  @javascript @vcr @billy
   Scenario: I go back and change the proceedings on an application with multiple proceedings
     Given I complete the journey as far as check client details with multiple proceedings selected
     When I click Check Your Answers summary card Change link for 'Proceedings'
@@ -101,12 +101,12 @@ Feature: Pathways from check your answers
     Then I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on the 'proceedings_types' page showing 'What does your client want legal aid for?'
-    Then I search for proceeding 'Child arrangements order'
+    Then I search for proceeding 'Child arrangements order CAO Section 8'
     Then proceeding suggestions has results
-    Then I choose a 'Child arrangements order (CAO) - contact' radio button
+    Then I choose a 'Child arrangements order (CAO) - contact - appeal' radio button
     And I click 'Save and continue'
     Then I should be on the 'has_other_proceedings' page showing 'Do you want to add another proceeding?'
-    And I should be on a page showing 'Child arrangements order (CAO) - contact'
+    And I should be on a page showing 'Child arrangements order (CAO) - contact - appeal'
     Then I choose 'No'
     And I click 'Save and continue'
     Then I should see 'Proceeding 1 of 2\nNon-molestation order\nWhat is your client's role in this proceeding?'
@@ -119,13 +119,13 @@ Feature: Pathways from check your answers
     And I should see 'Do you want to use the default level of service and scope for the substantive application?'
     When I choose 'Yes'
     And I click 'Save and continue'
-    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(CAO\) - contact\nWhat is your client's role in this proceeding?'
+    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(CAO\) - contact - appeal\nWhat is your client's role in this proceeding?'
     When I choose 'Applicant, claimant or petitioner'
     And I click 'Save and continue'
-    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(CAO\) - contact\nHave you used delegated functions for this proceeding?'
+    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(CAO\) - contact - appeal\nHave you used delegated functions for this proceeding?'
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(CAO\) - contact'
+    Then I should see 'Proceeding 2 of 2\nChild arrangements order \(CAO\) - contact - appeal'
     And I should see 'Do you want to use the default level of service and scope for the substantive application?'
     When I choose 'Yes'
     And I click 'Save and continue'
@@ -136,7 +136,7 @@ Feature: Pathways from check your answers
     And I click 'Save and continue'
     Then I should be on the 'check_provider_answers' page showing 'Check your answers'
     And I should be on a page showing 'Non-molestation order'
-    And I should be on a page showing 'Child arrangements order (CAO) - contact'
+    And I should be on a page showing 'Child arrangements order (CAO) - contact - appeal'
 
   @javascript @vcr
   Scenario: I click the back button on the DWP override page
