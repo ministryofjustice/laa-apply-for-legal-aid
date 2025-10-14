@@ -1,4 +1,4 @@
-@javascript @vcr @billy
+@javascript @stub_pda_provider_details @vcr @billy
 Feature: Loop through proceeding questions
 
   Background:
@@ -36,9 +36,8 @@ Feature: Loop through proceeding questions
     And I click "Save and continue"
     And I should be on a page showing "What does your client want legal aid for?"
 
-  @stub_pda_provider_details
   Scenario: When provider does not accept default levels of service
-    Given I search for proceeding type "Child arrangements order CAO Section 8"
+    Given I search for proceeding "Child arrangements order CAO Section 8"
     And I choose a "Child arrangements order (CAO) - residence - appeal - vary" radio button
 
     When I click 'Save and continue'
@@ -48,7 +47,7 @@ Feature: Loop through proceeding questions
 
     When I choose "Yes"
     And I click 'Save and continue'
-    And I search for proceeding type "SE095"
+    And I search for proceeding "SE095"
     And I choose "Enforcement order 11J"
 
     When I click 'Save and continue'
@@ -177,9 +176,8 @@ Feature: Loop through proceeding questions
     When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a partner?"
 
-  @stub_pda_provider_details
   Scenario: When provider accepts default levels of service
-    Given I search for proceeding type "Child arrangements order CAO Section 8"
+    Given I search for proceeding "Child arrangements order CAO Section 8"
     And I choose a "Child arrangements order (CAO) - residence - appeal - vary" radio button
 
     When I click 'Save and continue'
@@ -189,7 +187,7 @@ Feature: Loop through proceeding questions
 
     When I choose "Yes"
     And I click 'Save and continue'
-    And I search for proceeding type "SE095"
+    And I search for proceeding "SE095"
     And I choose "Enforcement order 11J"
 
     When I click 'Save and continue'
@@ -270,9 +268,8 @@ Feature: Loop through proceeding questions
     When I click 'Save and continue'
     Then I should be on a page with title "Does your client have a partner?"
 
-  @stub_pda_provider_details
   Scenario: No preselected emergency or substantive levels of service
-    Given I search for proceeding type "Enforcement order 11J"
+    Given I search for proceeding "Enforcement order 11J"
     And I choose "Enforcement order 11J"
 
     When I click 'Save and continue'
