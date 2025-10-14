@@ -13,6 +13,15 @@ RSpec.describe DWPOutcomeHelper do
     it "resets dwp_result_confirmed to nil" do
       expect(application.dwp_result_confirmed).to be_nil
     end
+
+    context "when there is an existing dwp override" do
+      let(:application) { create(:legal_aid_application, dwp_result_confirmed: true, dwp_override:) }
+      let(:dwp_override) { create(:dwp_override) }
+
+      it "destroys any existing dwp_override" do
+        expect(application.reload.dwp_override).to be_nil
+      end
+    end
   end
 
   describe "#checking_dwp_status" do

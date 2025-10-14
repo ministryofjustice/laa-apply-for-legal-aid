@@ -1,5 +1,6 @@
 module DWPOutcomeHelper
   def reset_confirm_dwp_status!(application)
+    application.dwp_override&.destroy!
     dwp_result_confirmation!(application, nil)
   end
 
