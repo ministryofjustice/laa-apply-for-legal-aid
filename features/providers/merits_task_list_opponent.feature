@@ -20,7 +20,7 @@ Feature: Merits task list opponent
     And I click 'Save and continue'
     Then I should be on a page showing "Latest incident details"
 
-  @javascript @vcr
+  @javascript @vcr @billy
   Scenario: I add an opponent existing organisation
     When I choose a 'An organisation' radio button
     Then I click 'Save and continue'

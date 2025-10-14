@@ -1,6 +1,6 @@
 Feature: Under 18 applicant journey
 
-  @javascript @vcr @stub_pda_provider_details
+  @javascript @stub_pda_provider_details @vcr @billy
   Scenario: Completes a minimal application for applicant that is under 18
     Given I am logged in as a provider
 

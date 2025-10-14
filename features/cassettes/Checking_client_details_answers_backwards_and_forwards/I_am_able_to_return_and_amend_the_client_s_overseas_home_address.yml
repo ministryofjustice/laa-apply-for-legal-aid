@@ -10,14 +10,14 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.12.2
+      - Faraday v2.14.0
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 16:16:29 GMT
+      - Mon, 13 Oct 2025 21:32:34 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -41,9 +41,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 2f64c5abc3c9f4ef3f52ab77c4200ed8
+      - d796ecdb21878d02387a96df8181cf74
       x-runtime:
-      - '0.008473'
+      - '0.061458'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -107,7 +107,7 @@ http_interactions:
         Bolivarian Republic of"},{"code":"VNM","description":"Viet Nam"},{"code":"VGB","description":"Virgin
         Islands, British"},{"code":"VIR","description":"Virgin Islands, U.S."},{"code":"WLF","description":"Wallis
         and Futuna"},{"code":"ESH","description":"Western Sahara"},{"code":"YEM","description":"Yemen"},{"code":"ZMB","description":"Zambia"},{"code":"ZWE","description":"Zimbabwe"}]'
-  recorded_at: Fri, 31 Jan 2025 16:16:29 GMT
+  recorded_at: Mon, 13 Oct 2025 21:32:34 GMT
 - request:
     method: get
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/countries/all
@@ -118,14 +118,14 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.12.2
+      - Faraday v2.14.0
   response:
     status:
       code: 200
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 16:16:31 GMT
+      - Mon, 13 Oct 2025 21:32:36 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -149,9 +149,9 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 369a46615ccbcff42d621b2c7028c93a
+      - f1025b14d7812e2f2792502266c5c223
       x-runtime:
-      - '0.006691'
+      - '0.007792'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
@@ -215,5 +215,5 @@ http_interactions:
         Bolivarian Republic of"},{"code":"VNM","description":"Viet Nam"},{"code":"VGB","description":"Virgin
         Islands, British"},{"code":"VIR","description":"Virgin Islands, U.S."},{"code":"WLF","description":"Wallis
         and Futuna"},{"code":"ESH","description":"Western Sahara"},{"code":"YEM","description":"Yemen"},{"code":"ZMB","description":"Zambia"},{"code":"ZWE","description":"Zimbabwe"}]'
-  recorded_at: Fri, 31 Jan 2025 16:16:31 GMT
+  recorded_at: Mon, 13 Oct 2025 21:32:36 GMT
 recorded_with: VCR 6.3.1

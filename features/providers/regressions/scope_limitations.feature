@@ -1,5 +1,6 @@
 Feature: Scope limitations not being set
-  @javascript @vcr @stub_pda_provider_details
+
+  @javascript @stub_pda_provider_details @vcr @billy
   Scenario: When a provider creates an application with multiple proceedings and uses the back button, scope limitations should not be removed
     Given I start the journey as far as the applicant page
     When I enter name 'Test', 'User'

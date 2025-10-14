@@ -1160,10 +1160,6 @@ Then("I click on the View statements and add transactions link for {string}") do
   end
 end
 
-When("I search for proceeding type {string}") do |search_terms|
-  fill_in("proceeding-search-input", with: search_terms)
-end
-
 Then("the proceeding type result list on page returns a {string} message") do |string|
   expect(page).to have_css(".no-proceeding-items", text: string, visible: :visible)
 end
@@ -1179,6 +1175,12 @@ And("I search for proceeding {string}") do |search_terms|
   wait_for_ajax
 end
 
+And("I search for country {string}") do |search_terms|
+  stub_countries_search_for(search_terms)
+
+  fill_in("Country", with: search_terms)
+  wait_for_ajax
+end
 And(/^I should (see|not see) ['|"](.*?)['|"]$/) do |visibility, text|
   if visibility == "see"
     expect(page).to have_content(/#{text}/)
