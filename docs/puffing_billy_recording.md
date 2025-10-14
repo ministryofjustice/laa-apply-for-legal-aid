@@ -13,6 +13,10 @@ This service is explicitly called from javascript to search for proceedings and 
 ## Stubbing
 While it is possible to record and playback requests, using puffing-billy, in a manner similar to vcr, stubbing a request is the preferred option. To add a stub you should add or extend helper methods in the `features/support/puffing_billy_helper.rb` and then call that in a cucumber step definition that will make the call you wish to stub.
 
+> [!NOTE]
+> We force binary encoding - `.force_encoding("BINARY")` - to ensure response JSON containing problematic characters suchs a braces - `(`, `)` - do not cause issues, as they have done in the past. This emulates what puffing-billy does when recording requests.
+
+
 ```ruby
 # features/support/puffing_billy_helper.rb
 def stub_my_call
@@ -23,7 +27,7 @@ def stub_my_call
         "Access-Control-Allow-Origin" => "*",
       },
       code: 200,
-      body: { key: "value", another_key: "another_value" }.to_json,
+      body: { key: "value", another_key: "another_value" }.to_json.force_encoding("BINARY"),
     )
 end
 ```
