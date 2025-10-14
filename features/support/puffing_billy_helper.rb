@@ -9,7 +9,7 @@ module PuffingBillyHelper
           "Access-Control-Allow-Origin" => "*",
         },
         code: 200,
-        body: body.to_json,
+        body: body.to_json.force_encoding("BINARY"),
       )
   end
 
@@ -24,7 +24,7 @@ module PuffingBillyHelper
           "Content-Type" => "application/json; charset=utf-8",
         },
         code: 200,
-        body: body.to_json,
+        body: body.to_json.force_encoding("BINARY"),
       )
   end
 
@@ -39,7 +39,7 @@ module PuffingBillyHelper
           "Content-Type" => "application/json; charset=utf-8",
         },
         code: 200,
-        body: body.to_json,
+        body: body.to_json.force_encoding("BINARY"),
       )
   end
 
@@ -370,6 +370,101 @@ private
               ccms_code: "SE014",
               description: "to be represented on an application for a child arrangements order - where the child(ren) will live",
               ccms_category_law: "Family",
+              ccms_matter: "section 8 children (S8)",
+            },
+          ],
+        },
+        "SE003" =>
+        {
+          success: true,
+          data: [
+            {
+              meaning: "Prohibited steps order - appeal",
+              ccms_code: "SE003A",
+              description: "to be represented on an application for a prohibited steps order.  Appeals only.",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "section 8 children (S8)",
+            },
+            {
+              meaning: "Prohibited steps order",
+              ccms_code: "SE003",
+              description: "to be represented on an application for a prohibited steps order.",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "section 8 children (S8)",
+            },
+            {
+              meaning: "Prohibited steps order - enforcement",
+              ccms_code: "SE003E",
+              description: "to be represented on an application for a prohibited steps order.  Enforcement only.",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "section 8 children (S8)",
+            },
+          ],
+        },
+        "SE014" =>
+        {
+          success: true,
+          data: [
+            {
+              meaning: "Child arrangements order (CAO) - residence",
+              ccms_code: "SE014",
+              description: "to be represented on an application for a child arrangements order –where the child(ren) will live",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "section 8 children (S8)",
+            },
+            {
+              meaning: "Child arrangements order (CAO) - residence - enforcement",
+              ccms_code: "SE014E",
+              description: "to be represented on an application for a child arrangements order –where the child(ren) will live. Enforcement only.",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "section 8 children (S8)",
+            },
+            {
+              meaning: "Child arrangements order (CAO) - residence - appeal",
+              ccms_code: "SE014A",
+              description: "to be represented on an application for a child arrangements order –where the child(ren) will live. Appeals only.",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "section 8 children (S8)",
+            },
+          ],
+        },
+        "SE004A" =>
+        {
+          success: true,
+          data: [
+            {
+              meaning: "Specific issue order - appeal",
+              ccms_code: "SE004A",
+              description: "to be represented on an application for a specific issue order.  Appeals only.",
+              sca_core: false,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
               ccms_matter: "section 8 children (S8)",
             },
           ],
