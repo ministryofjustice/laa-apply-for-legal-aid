@@ -707,6 +707,40 @@ private
             },
           ],
         },
+        "Child assessment order SCA" =>
+        {
+          success: true,
+          data: [
+            {
+              meaning: "Child assessment order",
+              ccms_code: "PB003",
+              description: "to be represented on an application for a child assessment order.",
+              sca_core: true,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "special children act (SCA)",
+            },
+          ],
+        },
+        "secure accommodation order SCA" =>
+        {
+          success: true,
+          data: [
+            {
+              meaning: "Secure accommodation order",
+              ccms_code: "PB006",
+              description: "to be represented on an application for a secure accommodation order.",
+              sca_core: true,
+              sca_related: false,
+              non_means_tested_plf: false,
+              ccms_category_law: "Family",
+              ccms_category_law_code: "MAT",
+              ccms_matter: "special children act (SCA)",
+            },
+          ],
+        },
       },
     )
   end
