@@ -1160,14 +1160,6 @@ Then("I click on the View statements and add transactions link for {string}") do
   end
 end
 
-When("I search for proceeding type {string}") do |search_terms|
-  # NOTE: have tried stubbing here but the stub does not appear to catch the request via puffing-billy
-  # so resorting to using puffing-billy's request_cache.
-  #
-  fill_in("proceeding-search-input", with: search_terms)
-  wait_for_ajax
-end
-
 Then("the proceeding type result list on page returns a {string} message") do |string|
   expect(page).to have_css(".no-proceeding-items", text: string, visible: :visible)
 end
