@@ -27,7 +27,7 @@ Background: I have started linking and copying a submitted application
     | Application copied | Catelyn Stark, L-123-456, Inherent jurisdiction high court injunction |
   And I should not see "Non-molestation order"
 
-@javascript @vcr
+@javascript @vcr @billy
 Scenario: If I change the linked from Family to No
   When I click Check Providers Answers Change link for "linking question"
   Then I should be on a page with title "Do you want to link this application with another one?"
@@ -74,7 +74,7 @@ Scenario: If I change the linked from Family to No
   Then I should be on a page showing 'Check your answers'
   And I should see "Non-molestation order"
 
-@javascript @vcr
+@javascript @vcr @billy
 Scenario: If I change the copied from Yes to No
   When I click Check Your Answers summary card Change link for "copying"
   Then I should be on a page with title "Do you want to copy the proceedings and merits from L-123-456 to this one?"
