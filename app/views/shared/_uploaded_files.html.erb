@@ -16,9 +16,9 @@
 
           table.with_head do |head|
             head.with_row do |row|
-              row.with_cell(text: t(".filename"))
-              row.with_cell(text: t(".status"))
-              row.with_cell(text: t(".action"))
+              row.with_cell(text: t("shared.uploaded_files.filename"))
+              row.with_cell(text: t("shared.uploaded_files.status"))
+              row.with_cell(text: t("shared.uploaded_files.action"))
             end
           end
 
@@ -26,10 +26,10 @@
             attachments.order(:created_at).each do |attachment|
               body.with_row do |row|
                 row.with_cell(text: attachment.document.filename)
-                row.with_cell(text: govuk_tag(text: t(".uploaded")))
+                row.with_cell(text: govuk_tag(text: t("shared.uploaded_files.uploaded")))
                 row.with_cell do
                   govuk_button_to(
-                    t(".delete"),
+                    t("shared.uploaded_files.delete"),
                     url,
                     method: :delete,
                     class: "button-as-link",

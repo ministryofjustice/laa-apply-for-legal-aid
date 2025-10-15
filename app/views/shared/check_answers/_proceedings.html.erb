@@ -10,7 +10,7 @@
       card.with_summary_list(actions: false) do |summary_list|
         @source_application.proceedings_by_name.each_with_index do |proceeding, i|
           summary_list.with_row(classes: "app-check-your-answers__#{proceeding.name}_proceeding") do |row|
-            row.with_key(text: "#{t('.proceeding')} #{i + 1}", classes: "govuk-!-width-one-third")
+            row.with_key(text: "#{t('shared.check_answers.proceedings.proceeding')} #{i + 1}", classes: "govuk-!-width-one-third")
             row.with_value do %>
                 <%= proceeding.meaning %> <br>
                 <%= "#{proceeding.matter_type.humanize}, #{proceeding.category_of_law.downcase}" %>

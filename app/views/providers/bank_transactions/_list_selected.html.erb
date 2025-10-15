@@ -3,10 +3,10 @@
 
       table.with_head do |head|
         head.with_row do |row|
-          row.with_cell(text: t(".col_date"))
-          row.with_cell(text: t(".col_description"))
-          row.with_cell(text: t(".col_amount"))
-          row.with_cell(text: t(".col_remove"))
+          row.with_cell(text: t("providers.bank_transactions.list_selected.col_date"))
+          row.with_cell(text: t("providers.bank_transactions.list_selected.col_description"))
+          row.with_cell(text: t("providers.bank_transactions.list_selected.col_amount"))
+          row.with_cell(text: t("providers.bank_transactions.list_selected.col_remove"))
         end
       end
 
@@ -18,7 +18,7 @@
             row.with_cell(text: value_with_currency_unit(bank_transaction.amount, bank_transaction.currency))
             row.with_cell do
               govuk_button_to(
-                t(".remove_link"),
+                t("providers.bank_transactions.list_selected.remove_link"),
                 remove_transaction_type_providers_legal_aid_application_bank_transaction_path(@legal_aid_application, bank_transaction),
                 method: :patch,
                 class: "button-as-link",

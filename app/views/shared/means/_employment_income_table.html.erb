@@ -9,9 +9,9 @@
 
       table.with_head do |head|
         head.with_row do |row|
-          row.with_cell(text: t(".date"))
-          row.with_cell(text: t(".income"), colspan: 2)
-          row.with_cell(text: t(".deductions"), colspan: 2)
+          row.with_cell(text: t("shared.means.employment_income_table.date"))
+          row.with_cell(text: t("shared.means.employment_income_table.income"), colspan: 2)
+          row.with_cell(text: t("shared.means.employment_income_table.deductions"), colspan: 2)
         end
       end
 
@@ -20,14 +20,14 @@
           table.with_body do |body|
             body.with_row do |row|
               row.with_cell(text: l(payment.date, format: :short_date), rowspan: 2)
-              row.with_cell(text: t(".gross"), classes: "govuk-!-font-weight-bold", rowspan: 2)
+              row.with_cell(text: t("shared.means.employment_income_table.gross"), classes: "govuk-!-font-weight-bold", rowspan: 2)
               row.with_cell(text: gds_number_to_currency(payment.gross), numeric: true, rowspan: 2)
-              row.with_cell(text: t(".tax"), classes: "govuk-!-font-weight-bold no-border-bottom")
+              row.with_cell(text: t("shared.means.employment_income_table.tax"), classes: "govuk-!-font-weight-bold no-border-bottom")
               row.with_cell(text: gds_number_to_currency(payment.tax), numeric: true, classes: "no-border-bottom")
             end
 
             body.with_row do |row|
-              row.with_cell(text: t(".ni"), classes: "govuk-!-font-weight-bold")
+              row.with_cell(text: t("shared.means.employment_income_table.ni"), classes: "govuk-!-font-weight-bold")
               row.with_cell(text: gds_number_to_currency(payment.national_insurance), numeric: true)
             end
           end
