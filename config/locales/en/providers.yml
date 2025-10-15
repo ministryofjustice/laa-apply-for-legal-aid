@@ -54,12 +54,12 @@ en:
       show:
         h1_heading: "We've shared your application with your client"
         laa_reference: LAA case reference
-        sent_email_text: "We've sent an email to %{email}"
+        sent_email_text_html: "We've sent an email to <strong>%{email}</strong>"
         change_email_button: Change email and resend link
         happen_next_heading: What happens next
-        happen_next_text: You can continue your application once your client has shared their financial information.
-        let_you_know_text: We'll let you know once they've done this.
-        back_button: Back to your applications
+        happen_next_text: You can continue your application when your client has shared their bank statements for the last 3 months.
+        let_you_know_text: We'll email you when they've done this.
+        back_link: Back to your applications
     bank_transactions:
       list_selected:
         col_amount: Amount

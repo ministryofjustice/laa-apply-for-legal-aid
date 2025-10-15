@@ -4,7 +4,7 @@
     <%= t(".laa_reference") %>: <%= @legal_aid_application.application_ref %>
   </p>
   <div class="govuk-!-padding-2"></div>
-  <p class="govuk-body"><%= t ".sent_email_text", email: @legal_aid_application.applicant.email %></p>
+  <p class="govuk-body"><%= t ".sent_email_text_html", email: @legal_aid_application.applicant.email %></p>
 
   <%= govuk_button_link_to t(".change_email_button"),
                            providers_legal_aid_application_email_address_path,
@@ -12,17 +12,11 @@
                            secondary: true,
                            id: "change-email" %>
 
-  <h2 class="govuk-heading-m govuk-!-margin-top-4"><%= t ".happen_next_heading" %></h2>
-  <p class="govuk-body">
-   <%= t ".happen_next_text" %>
-  </p>
-  <p class="govuk-body">
-    <%= t ".let_you_know_text" %>
-  </p>
-  <%= govuk_button_link_to(
-        t(".back_button"),
-        home_path,
-        id: "continue",
-        role: "button",
-      ) %>
+  <h2 class="govuk-heading-m"><%= t ".happen_next_heading" %></h2>
+
+  <p class="govuk-body"><%= t ".happen_next_text" %></p>
+
+  <p class="govuk-body"><%= t ".let_you_know_text" %></p>
+
+  <p class="govuk-body"><%= govuk_link_to(t(".back_link"), home_path) %></p>
 <% end %>
