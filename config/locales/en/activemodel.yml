@@ -401,7 +401,7 @@ en:
         dependant:
           attributes:
             name:
-              blank: Enter a name
+              blank: Enter a full name
             date_of_birth:
               blank: Enter a valid date of birth
               date_is_in_the_future: Date of birth must be in the past
