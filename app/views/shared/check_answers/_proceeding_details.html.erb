@@ -11,18 +11,18 @@
 
         card.with_summary_list(actions: false, html_attributes: { id: "#{proceeding.ccms_code.downcase}-questions" }) do |summary_list|
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_client_involvement_type" }) do |row|
-            row.with_key(text: t(".client_involvement_type_details.question"), classes: "govuk-!-width-one-third")
+            row.with_key(text: t("shared.check_answers.proceeding_details.client_involvement_type_details.question"), classes: "govuk-!-width-one-third")
             row.with_value { proceeding.client_involvement_type_description }
           end
 
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_used_delegated_functions_on" }) do |row|
-            row.with_key(text: t(".delegated_function_details.question"))
-            row.with_value { proceeding.used_delegated_functions_on&.strftime("%-d %B %Y") || t(".delegated_function_details.not_used") }
+            row.with_key(text: t("shared.check_answers.proceeding_details.delegated_function_details.question"))
+            row.with_value { proceeding.used_delegated_functions_on&.strftime("%-d %B %Y") || t("shared.check_answers.proceeding_details.delegated_function_details.not_used") }
           end
 
           if proceeding.used_delegated_functions? && !proceeding.special_children_act?
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_emergency_level_of_service_#{proceeding.id}" }) do |row|
-              row.with_key(text: t(".level_of_service.emergency.question"))
+              row.with_key(text: t("shared.check_answers.proceeding_details.level_of_service.emergency.question"))
               row.with_value { proceeding.send(:emergency_level_of_service_name) }
             end
 
@@ -30,19 +30,19 @@
             if final_hearings_emergency.any?
               final_hearing_emergency = final_hearings_emergency.first
               summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_final_hearing" }) do |row|
-                row.with_key(text: final_hearing_emergency.listed? ? t(".final_hearing.date.question") : t(".final_hearing.details.question"))
+                row.with_key(text: final_hearing_emergency.listed? ? t("shared.check_answers.proceeding_details.final_hearing.date.question") : t("shared.check_answers.proceeding_details.final_hearing.details.question"))
                 row.with_value(text: final_hearing_emergency.listed? ? final_hearing_emergency.date&.strftime("%-d %B %Y") : final_hearing_emergency.details)
               end
             end
 
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.ccms_code.downcase}_emergency_scope_limitations" }) do |row|
-              row.with_key(text: t(".scope_limits.emergency.question"))
+              row.with_key(text: t("shared.check_answers.proceeding_details.scope_limits.emergency.question"))
               row.with_value { scope_limits(proceeding, "emergency") }
             end
           end
 
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_substantive_level_of_service_#{proceeding.id}" }) do |row|
-            row.with_key(text: t(".level_of_service.substantive.question"))
+            row.with_key(text: t("shared.check_answers.proceeding_details.level_of_service.substantive.question"))
             row.with_value { proceeding.send(:substantive_level_of_service_name) }
           end
 
@@ -50,13 +50,13 @@
           if final_hearings_substantive.any?
             final_hearing_substantive = final_hearings_substantive.first
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.name}_final_hearing" }) do |row|
-              row.with_key(text: final_hearing_substantive.listed? ? t(".final_hearing.date.question") : t(".final_hearing.details.question"))
+              row.with_key(text: final_hearing_substantive.listed? ? t("shared.check_answers.proceeding_details.final_hearing.date.question") : t("shared.check_answers.proceeding_details.final_hearing.details.question"))
               row.with_value(text: final_hearing_substantive.listed? ? final_hearing_substantive.date&.strftime("%-d %B %Y") : final_hearing_substantive.details)
             end
           end
 
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.ccms_code.downcase}_substantive_scope_limitations" }) do |row|
-            row.with_key(text: t(".scope_limits.substantive.question"))
+            row.with_key(text: t("shared.check_answers.proceeding_details.scope_limits.substantive.question"))
             row.with_value { scope_limits(proceeding, "substantive") }
           end
         end
@@ -69,47 +69,47 @@
           unless @show_linked_proceedings || @read_only
             govuk_link_to(t("generic.change"),
                           providers_legal_aid_application_limitations_path(@legal_aid_application),
-                          visually_hidden_suffix: t(".cost_limits.heading"))
+                          visually_hidden_suffix: t("shared.check_answers.proceeding_details.cost_limits.heading"))
           end
         end
 
         card.with_summary_list(actions: false) do |summary_list|
           unless @legal_aid_application.emergency_cost_override
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_cost_override" }) do |row|
-              row.with_key(text: t(".cost_limits.emergency_cost_limit"), classes: "govuk-!-width-one-third")
+              row.with_key(text: t("shared.check_answers.proceeding_details.cost_limits.emergency_cost_limit"), classes: "govuk-!-width-one-third")
               row.with_value { gds_number_to_currency(@legal_aid_application.default_delegated_functions_cost_limitation) }
             end
           end
 
           unless @legal_aid_application.default_delegated_functions_cost_limitation.zero? || @legal_aid_application.default_delegated_functions_cost_limitation.nil?
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_cost_override" }) do |row|
-              row.with_key(text: t(".cost_limits.request_higher_emergency"), classes: "govuk-!-width-one-third")
+              row.with_key(text: t("shared.check_answers.proceeding_details.cost_limits.request_higher_emergency"), classes: "govuk-!-width-one-third")
               row.with_value { @legal_aid_application.emergency_cost_override? ? gds_number_to_currency(@legal_aid_application.emergency_cost_requested, precision: 2) : yes_no(@legal_aid_application.emergency_cost_override?) }
             end
           end
 
           if @legal_aid_application.emergency_cost_override
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_cost_reasons" }) do |row|
-              row.with_key(text: t(".cost_limits.higher_emergency_reasons"), classes: "govuk-!-width-one-third")
+              row.with_key(text: t("shared.check_answers.proceeding_details.cost_limits.higher_emergency_reasons"), classes: "govuk-!-width-one-third")
               row.with_value { @legal_aid_application.emergency_cost_reasons }
             end
           end
 
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_cost_override" }) do |row|
-            row.with_key(text: t(".cost_limits.substantive_cost_limit"), classes: "govuk-!-width-one-third")
+            row.with_key(text: t("shared.check_answers.proceeding_details.cost_limits.substantive_cost_limit"), classes: "govuk-!-width-one-third")
             row.with_value { gds_number_to_currency(@legal_aid_application.default_substantive_cost_limitation) }
           end
 
           unless @legal_aid_application.default_substantive_cost_limitation.zero? || @legal_aid_application.substantive_cost_override.nil?
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__cost_requested" }) do |row|
-              row.with_key(text: t(".cost_limits.request_higher_substantive"))
+              row.with_key(text: t("shared.check_answers.proceeding_details.cost_limits.request_higher_substantive"))
               row.with_value { @legal_aid_application.substantive_cost_override? ? gds_number_to_currency(@legal_aid_application.substantive_cost_requested, precision: 2) : yes_no(@legal_aid_application.substantive_cost_override?) }
             end
           end
 
           if @legal_aid_application.substantive_cost_override
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__emergency_cost_reasons" }) do |row|
-              row.with_key(text: t(".cost_limits.higher_substantive_reasons"))
+              row.with_key(text: t("shared.check_answers.proceeding_details.cost_limits.higher_substantive_reasons"))
               row.with_value { @legal_aid_application.substantive_cost_reasons }
             end
           end

@@ -4,20 +4,20 @@
     <p class="govuk-body"><%= t(".we_use_some") %></p>
     <p class="govuk-body"><%= t(".wed_also_like") %></p>
 
-    <% m.with_action { govuk_button_link_to(t(".accept"), "#", "data-value": "accept") } %>
-    <% m.with_action { govuk_button_link_to(t(".reject"), "#", "data-value": "reject") } %>
-    <% m.with_action { govuk_link_to(t(".view"), providers_cooky_path(current_provider)) } %>
+    <% m.with_action { govuk_button_link_to(t("shared.partials.cookie_banner.accept"), "#", "data-value": "accept") } %>
+    <% m.with_action { govuk_button_link_to(t("shared.partials.cookie_banner.reject"), "#", "data-value": "reject") } %>
+    <% m.with_action { govuk_link_to(t("shared.partials.cookie_banner.view"), providers_cooky_path(current_provider)) } %>
   <% end %>
 
   <% cb.with_message(role: "alert", html_attributes: { id: "accept-content", hidden: true }) do |m| %>
     <p class="govuk-body"><%= t(".cookie_confirmation_msg_html", cookie_state: t(".accepted"), cookie_path: providers_cooky_path(current_provider)) %></p>
 
-    <% m.with_action { govuk_button_link_to(t(".hide"), "#", "data-value": "hide") } %>
+    <% m.with_action { govuk_button_link_to(t("shared.partials.cookie_banner.hide"), "#", "data-value": "hide") } %>
   <% end %>
 
   <% cb.with_message(role: "alert", html_attributes: { id: "reject-content", hidden: true }) do |m| %>
     <p class="govuk-body"><%= t(".cookie_confirmation_msg_html", cookie_state: t(".rejected"), cookie_path: providers_cooky_path(current_provider)) %></p>
 
-    <% m.with_action { govuk_button_link_to(t(".hide"), "#", "data-value": "hide") } %>
+    <% m.with_action { govuk_button_link_to(t("shared.partials.cookie_banner.hide"), "#", "data-value": "hide") } %>
   <% end %>
 <% end %>
