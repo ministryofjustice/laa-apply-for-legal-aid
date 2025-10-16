@@ -160,6 +160,7 @@ function showResults (results, inputText) {
       // the below alerts screen reader users that results appeared on the page
       const pluralizedMatches = pluralize(codes.length, 'match', 'matches')
       ariaText = `${codes.length} ${pluralizedMatches} found for ${inputText}, use tab to move to options`
+      show(document.querySelector('#proceeding-list'))
       hide(document.querySelector('.no-proceeding-items'))
     } else {
       showNoResults(inputText)
@@ -170,6 +171,7 @@ function showResults (results, inputText) {
 }
 
 function showNoResults (inputText) {
+  hide(document.querySelector('#proceeding-list'))
   show(document.querySelector('.no-proceeding-items'))
   ariaText = `No results found matching ${inputText}`
 }
@@ -181,6 +183,7 @@ function hideProceeedingsItems () {
     .forEach(item => hide(item))
 
   hide(document.querySelector('.no-proceeding-items'))
+  show(document.querySelector('#proceeding-list'))
 }
 
 function disableBackButton () {
@@ -196,6 +199,7 @@ if (window.location.href.includes('proceedings_types')) {
 
 // If the proceedings type search box appears on the page, call the searchOnUserInput function
 document.addEventListener('DOMContentLoaded', event => {
+  hide(document.querySelector('#proceeding-list'))
   const searchInputBox = document.querySelector('#proceeding-search-input')
   if (searchInputBox) searchOnUserInput(searchInputBox)
 })
