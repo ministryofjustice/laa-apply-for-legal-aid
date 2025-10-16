@@ -643,8 +643,9 @@ en:
           page_title: You have added %{count}
           existing: You have added %{count}
           table_caption: Opponents added
-          remove: Remove
           add_another: Do you need to add another opponent?
+          name: Name
+          type: Type
       opponents_mental_capacities:
         show:
           h1-heading: Do all parties have the mental capacity to understand the terms of a court order?

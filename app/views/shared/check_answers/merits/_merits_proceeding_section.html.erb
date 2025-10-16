@@ -2,22 +2,22 @@
   <%= govuk_summary_card(title: t(".chances_of_success_heading"), html_attributes: { id: "app-check-your-answers__#{proceeding.id}_chances_of_success" }, heading_level: 3) do |card|
         card.with_summary_list(actions: !read_only) do |summary_list|
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_success_likely" }) do |row|
-            row.with_key(text: t(".prospects_of_success"), classes: "govuk-!-width-one-third")
+            row.with_key(text: t("shared.check_answers.merits.merits_proceeding_section.prospects_of_success"), classes: "govuk-!-width-one-third")
             row.with_value(text: yes_no(proceeding.chances_of_success.success_likely))
             row.with_action(
               text: t("generic.change"),
               href: providers_merits_task_list_chances_of_success_path(proceeding),
-              visually_hidden_text: t(".prospects_of_success"),
+              visually_hidden_text: t("shared.check_answers.merits.merits_proceeding_section.prospects_of_success"),
             )
           end
           if proceeding.chances_of_success.success_prospect_details
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_success_prospect" }) do |row|
-              row.with_key(text: t(".chances_of_success_details"))
+              row.with_key(text: t("shared.check_answers.merits.merits_proceeding_section.chances_of_success_details"))
               row.with_value(text: proceeding.chances_of_success.success_prospect_details)
               row.with_action(
                 text: t("generic.change"),
                 href: providers_merits_task_list_chances_of_success_path(proceeding),
-                visually_hidden_text: t(".chances_of_success_details"),
+                visually_hidden_text: t("shared.check_answers.merits.merits_proceeding_section.chances_of_success_details"),
               )
             end
           end
@@ -36,7 +36,7 @@
            end
            card.with_summary_list(actions: false) do |summary_list|
              summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_attempts_to_settle_made" }) do |row|
-               row.with_key(text: t(".attempts_to_settle"), classes: "govuk-!-width-one-third")
+               row.with_key(text: t("shared.check_answers.merits.merits_proceeding_section.attempts_to_settle"), classes: "govuk-!-width-one-third")
                row.with_value(text: proceeding.attempts_to_settle.attempts_made)
              end
            end
@@ -53,7 +53,7 @@
            end
            card.with_summary_list(actions: false) do |summary_list|
              summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_linked_children_details" }) do |row|
-               row.with_key(text: t(".linked_children"), classes: "govuk-!-width-one-third")
+               row.with_key(text: t("shared.check_answers.merits.merits_proceeding_section.linked_children"), classes: "govuk-!-width-one-third")
                row.with_value(text: linked_children_names(proceeding))
              end
            end
@@ -70,7 +70,7 @@
            end
            card.with_summary_list(actions: false) do |summary_list|
              summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_specific_issue_details" }) do |row|
-               row.with_key(text: t(".specific_issue"), classes: "govuk-!-width-one-third")
+               row.with_key(text: t("shared.check_answers.merits.merits_proceeding_section.specific_issue"), classes: "govuk-!-width-one-third")
                row.with_value(text: proceeding.specific_issue.details)
              end
            end
@@ -87,12 +87,12 @@
           end
           card.with_summary_list(actions: false) do |summary_list|
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_prohibited_steps" }) do |row|
-              row.with_key(text: t(".prohibited_steps"), classes: "govuk-!-width-one-third")
+              row.with_key(text: t("shared.check_answers.merits.merits_proceeding_section.prohibited_steps"), classes: "govuk-!-width-one-third")
               row.with_value(text: yes_no(proceeding.prohibited_steps.uk_removal))
             end
             unless proceeding.prohibited_steps.uk_removal
               summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_prohibited_steps_details" }) do |row|
-                row.with_key(text: t(".what_is_prohibited"))
+                row.with_key(text: t("shared.check_answers.merits.merits_proceeding_section.what_is_prohibited"))
                 row.with_value(text: proceeding.prohibited_steps.details)
               end
             end
@@ -125,7 +125,7 @@
           end
           card.with_summary_list(actions: false) do |summary_list|
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_vary_order_details" }) do |row|
-              row.with_key(text: t(".vary_order"), classes: "govuk-!-width-one-third")
+              row.with_key(text: t("shared.check_answers.merits.merits_proceeding_section.vary_order"), classes: "govuk-!-width-one-third")
               row.with_value(text: proceeding.vary_order.details)
             end
           end
@@ -142,12 +142,12 @@
           end
           card.with_summary_list(actions: false) do |summary_list|
             summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_opponents_application" }) do |row|
-              row.with_key(text: t(".opponents_application_question"), classes: "govuk-!-width-one-third")
+              row.with_key(text: t("shared.check_answers.merits.merits_proceeding_section.opponents_application_question"), classes: "govuk-!-width-one-third")
               row.with_value(text: yes_no(proceeding.opponents_application.has_opponents_application))
             end
             if proceeding.opponents_application.reason_for_applying
               summary_list.with_row(html_attributes: { id: "app-check-your-answers__#{proceeding.id}_opponents_application_reason" }) do |row|
-                row.with_key(text: t(".opponents_application_reason"))
+                row.with_key(text: t("shared.check_answers.merits.merits_proceeding_section.opponents_application_reason"))
                 row.with_value(text: proceeding.opponents_application.reason_for_applying)
               end
             end

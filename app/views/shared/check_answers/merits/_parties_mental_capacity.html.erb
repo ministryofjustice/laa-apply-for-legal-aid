@@ -7,12 +7,12 @@
       end
       card.with_summary_list(actions: false) do |summary_list|
         summary_list.with_row(html_attributes: { id: "app-check-your-answers__opponent_understands_terms_of_court_order" }) do |row|
-          row.with_key(text: t(".understands_terms"), classes: "govuk-!-width-one-third")
+          row.with_key(text: t("shared.check_answers.merits.parties_mental_capacity.understands_terms"), classes: "govuk-!-width-one-third")
           row.with_value(text: yes_no(parties_mental_capacity.understands_terms_of_court_order))
         end
         unless parties_mental_capacity.understands_terms_of_court_order?
           summary_list.with_row do |row|
-            row.with_key(text: t(".reasons"))
+            row.with_key(text: t("shared.check_answers.merits.parties_mental_capacity.reasons"))
             row.with_value(text: parties_mental_capacity.understands_terms_of_court_order_details)
           end
         end
