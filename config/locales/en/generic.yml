@@ -21,9 +21,11 @@ en:
     create_test_applications: Create test applications
     cy: Cymraeg
     cya_inset_text: You cannot change the answers on this page once you save and continue.
+    date_of_birth: Date of birth
     destroy: Destroy
     edit: Edit
     email: Email
+    email_address: Email address
     en: English
     en-GB: English # Needed for testing as en-GB is used by Faker
     enter_text: Enter text
@@ -36,6 +38,7 @@ en:
     list: List
     'no': 'No'
     menu: Menu
+    name: Name
     national_insurance_number: National Insurance number
     none: None
     none_declared: None declared
@@ -71,6 +74,7 @@ en:
     upload: Upload
     upload_file: Upload a file
     uploaded_files_will_be_deleted: Any related files you uploaded will be deleted if you change your answer
+    username: Username
     view: View
     'yes': 'Yes'
     yes_but_none: Yes, but none specified
