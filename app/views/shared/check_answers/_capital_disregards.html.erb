@@ -3,25 +3,25 @@
                        html_attributes: { id: "app-check-your-answers__capital_disregards" }) do |card|
       card.with_summary_list(actions: !read_only) do |summary_list|
         summary_list.with_row(html_attributes: { id: "app-check-your-mandatory_capital_disregards" }) do |row|
-          row.with_key(text: t(".mandatory.heading"), classes: "govuk-!-width-one-third")
+          row.with_key(text: t("shared.check_answers.capital_disregards.mandatory.heading"), classes: "govuk-!-width-one-third")
           row.with_value { @legal_aid_application.mandatory_capital_disregards.any? ? mandatory_capital_disregards_list(@legal_aid_application) : t("generic.none") }
           unless read_only
             row.with_action(
               text: t("generic.change"),
               href: check_answer_url_for(journey_type, :capital_disregards_mandatory, @legal_aid_application),
-              visually_hidden_text: t(".mandatory.heading"),
+              visually_hidden_text: t("shared.check_answers.capital_disregards.mandatory.heading"),
             )
           end
         end
 
         summary_list.with_row(html_attributes: { id: "app-check-your-discretionary_capital_disregards" }) do |row|
-          row.with_key(text: t(".discretionary.heading"), classes: "govuk-!-width-one-third")
+          row.with_key(text: t("shared.check_answers.capital_disregards.discretionary.heading"), classes: "govuk-!-width-one-third")
           row.with_value(text: @legal_aid_application.discretionary_capital_disregards.any? ? discretionary_capital_disregards_list(@legal_aid_application) : t("generic.none"))
           unless read_only
             row.with_action(
               text: t("generic.change"),
               href: check_answer_url_for(journey_type, :capital_disregards_discretionary, @legal_aid_application),
-              visually_hidden_text: t(".discretionary.heading"),
+              visually_hidden_text: t("shared.check_answers.capital_disregards.discretionary.heading"),
             )
           end
         end

@@ -160,8 +160,6 @@ en:
       index:
         heading_1: Provider users for firm %{firm_name}
         all_firms_heading_1: All provider users
-        email_address: Email address
-        username: Username
     user_dashboard:
       index:
         heading_1: User administration main menu

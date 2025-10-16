@@ -13,15 +13,15 @@
     <h1 class="govuk-heading-xl"><%= t(".heading") %></h1>
     <%= govuk_summary_list(actions: false, classes: "govuk-summary-list--no-border") do |summary_list|
           summary_list.with_row do |row|
-            row.with_key { t(".reference") }
+            row.with_key { t("providers.link_application.copies.show.reference") }
             row.with_value { @target_application.application_ref }
           end
           summary_list.with_row do |row|
-            row.with_key { t(".client") }
+            row.with_key { t("providers.link_application.copies.show.client") }
             row.with_value { @target_application.applicant_full_name }
           end
           summary_list.with_row do |row|
-            row.with_key { t(".proceedings") }
+            row.with_key { t("providers.link_application.copies.show.proceedings") }
             row.with_value { @target_application.proceedings.map(&:meaning).join(",") }
           end
         end %>
