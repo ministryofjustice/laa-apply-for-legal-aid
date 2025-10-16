@@ -18,12 +18,12 @@
   <% end %>
   <%= card.with_summary_list(html_attributes: { id: "employment-#{individual}-notes-questions" }) do |summary_list| %>
     <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__extra_employment_information" }) do |row| %>
-      <%= row.with_key(text: t(".question", individual_with_determiner:), classes: "govuk-!-width-one-third") %>
+      <%= row.with_key(text: t("shared.check_answers.employed_income.question", individual_with_determiner:), classes: "govuk-!-width-one-third") %>
       <%= row.with_value(text: safe_yes_or_no(model.extra_employment_information?)) %>
     <% end %>
     <% if model.extra_employment_information? %>
       <%= summary_list.with_row(html_attributes: { id: "app-check-your-answers__extra_employment_information_details" }) do |row| %>
-        <%= row.with_key(text: t(".details_for", individual_with_determiner:), classes: "govuk-!-width-one-third") %>
+        <%= row.with_key(text: t("shared.check_answers.employed_income.details_for", individual_with_determiner:), classes: "govuk-!-width-one-third") %>
         <%= row.with_value(text: model.extra_employment_information_details) %>
       <% end %>
     <% end %>
