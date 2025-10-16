@@ -8,11 +8,11 @@
       card.with_summary_list(actions: false) do |summary_list|
         @legal_aid_application.involved_children.each_with_index do |child, i|
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__involved_child_name_#{i + 1}" }) do |row|
-            row.with_key(text: t(".child_name", number: i + 1).to_s, classes: "govuk-!-width-one-third")
+            row.with_key(text: t("shared.check_answers.merits.children_involved.child_name", number: i + 1).to_s, classes: "govuk-!-width-one-third")
             row.with_value(text: child.full_name.to_s)
           end
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__involved_child_date_of_birth_#{i + 1}" }) do |row|
-            row.with_key(text: t(".child_date_of_birth", number: i + 1).to_s)
+            row.with_key(text: t("shared.check_answers.merits.children_involved.child_date_of_birth", number: i + 1).to_s)
             row.with_value(text: child.date_of_birth.strftime("%e %B %Y").to_s)
           end
         end
