@@ -17,23 +17,23 @@
   <div class="govuk-summary-card__content">
     <%= govuk_summary_list(actions: false) do |summary_list|
           summary_list.with_row do |row|
-            row.with_key { t(".created_at") }
+            row.with_key { t("admin.ccms_queues.show.created_at") }
             row.with_value { l(@submission.created_at, format: :long_date_time) }
           end
           summary_list.with_row do |row|
-            row.with_key { t(".updated_at") }
+            row.with_key { t("admin.ccms_queues.show.updated_at") }
             row.with_value { l(@submission.updated_at, format: :long_date_time) }
           end
           summary_list.with_row do |row|
-            row.with_key { t(".status") }
+            row.with_key { t("admin.ccms_queues.show.status") }
             row.with_value { @submission.aasm_state }
           end
           summary_list.with_row do |row|
-            row.with_key { t(".applicant_poll_count") }
+            row.with_key { t("admin.ccms_queues.show.applicant_poll_count") }
             row.with_value { @submission.applicant_poll_count.to_s }
           end
           summary_list.with_row do |row|
-            row.with_key { t(".case_poll_count") }
+            row.with_key { t("admin.ccms_queues.show.case_poll_count") }
             row.with_value { @submission.case_poll_count.to_s }
           end
         end %>
@@ -65,11 +65,11 @@
     <div class="govuk-summary-card__content">
       <%= govuk_summary_list(actions: false) do |summary_list|
             summary_list.with_row do |row|
-              row.with_key { t(".from_state") }
+              row.with_key { t("admin.ccms_queues.show.from_state") }
               row.with_value { history.from_state }
             end
             summary_list.with_row do |row|
-              row.with_key { t(".to_state") }
+              row.with_key { t("admin.ccms_queues.show.to_state") }
               row.with_value { history.to_state }
             end
             summary_list.with_row do |row|
@@ -77,24 +77,24 @@
               row.with_value { history.success.to_s }
             end
             summary_list.with_row do |row|
-              row.with_key { t(".request") }
+              row.with_key { t("admin.ccms_queues.show.request") }
               row.with_value do
                 if history.request.nil?
-                  t(".request_is_nil")
+                  t("admin.ccms_queues.show.request_is_nil")
                 else
-                  govuk_details(summary_text: t(".expand")) do
+                  govuk_details(summary_text: t("admin.ccms_queues.show.expand")) do
                     history.request
                   end
                 end
               end
             end
             summary_list.with_row do |row|
-              row.with_key { t(".response") }
+              row.with_key { t("admin.ccms_queues.show.response") }
               row.with_value do
                 if history.response.nil?
-                  t(".response_is_nil")
+                  t("admin.ccms_queues.show.response_is_nil")
                 else
-                  govuk_details(summary_text: t(".expand")) do
+                  govuk_details(summary_text: t("admin.ccms_queues.show.expand")) do
                     history.response
                   end
                 end
