@@ -76,7 +76,7 @@ en:
         - LAA can check my details with my bank and credit reference agencies
         - the information I have given is complete and correct
     address_lookup:
-      address_manual_link: Enter address manually
+      address_manual_link: Enter an address manually
       heading: Find your client's %{location} address
       label:
         postcode: Postcode
