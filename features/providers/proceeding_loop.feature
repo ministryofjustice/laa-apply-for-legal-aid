@@ -75,7 +75,7 @@ Feature: Loop through proceeding questions
     And I should see "Have you used delegated functions for this proceeding?"
 
     When I choose "Yes"
-    And I enter the 'delegated functions on' date of 31 days ago
+    And I enter the 'delegated functions on' date of 31 days ago using the date picker field
     And I click 'Save and continue'
     And I should be on a page showing "Proceeding 1 of 2"
     And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
@@ -210,7 +210,7 @@ Feature: Loop through proceeding questions
     And I should see "Have you used delegated functions for this proceeding?"
 
     When I choose "Yes"
-    And I enter the 'delegated functions on' date of 1 day ago
+    And I enter the 'delegated functions on' date of 1 day ago using the date picker field
     And I click 'Save and continue'
     And I should be on a page showing "Proceeding 1 of 2"
     And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
@@ -289,7 +289,7 @@ Feature: Loop through proceeding questions
     And I should see "Have you used delegated functions for this proceeding?"
 
     When I choose "Yes"
-    And I enter the 'delegated functions on' date of 1 day ago
+    And I enter the 'delegated functions on' date of 1 day ago using the date picker field
     And I click 'Save and continue'
     And I should be on a page showing "Proceeding 1"
     And I should be on a page showing "Enforcement order 11J"

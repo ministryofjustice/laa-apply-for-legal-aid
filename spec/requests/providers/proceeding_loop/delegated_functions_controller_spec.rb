@@ -85,9 +85,7 @@ RSpec.describe "DelegatedFunctionsController" do
             {
               proceeding: {
                 used_delegated_functions: true,
-                "used_delegated_functions_on(3i)": 5.days.ago.day.to_s,
-                "used_delegated_functions_on(2i)": 5.days.ago.month.to_s,
-                "used_delegated_functions_on(1i)": 5.days.ago.year.to_s,
+                used_delegated_functions_on: 5.days.ago.to_date.to_s(:date_picker),
               },
             }
           end
@@ -108,15 +106,55 @@ RSpec.describe "DelegatedFunctionsController" do
             {
               proceeding: {
                 used_delegated_functions: true,
-                "used_delegated_functions_on(3i)": 35.days.ago.day.to_s,
-                "used_delegated_functions_on(2i)": 35.days.ago.month.to_s,
-                "used_delegated_functions_on(1i)": 35.days.ago.year.to_s,
+                used_delegated_functions_on: 35.days.ago.to_date.to_s(:date_picker),
               },
             }
           end
 
           it "redirects to the confirmation page" do
             expect(response.body).to redirect_to(providers_legal_aid_application_confirm_delegated_functions_date_path(application_id, proceeding_id))
+          end
+
+          context "when provider changes yes to no" do
+            before do
+              proceeding.update!(
+                used_delegated_functions: true,
+                used_delegated_functions_on: 1.day.ago.to_date,
+                used_delegated_functions_reported_on: Date.current,
+              )
+            end
+
+            let(:skip_patch) { true }
+
+            let(:params) do
+              {
+                proceeding: {
+                  used_delegated_functions: false,
+                },
+              }
+            end
+
+            it "updates the proceeding to remove the previous values" do
+              expect { post_df }
+                .to change { proceeding.reload.attributes.symbolize_keys }
+                  .from(
+                    hash_including(
+                      {
+                        used_delegated_functions: true,
+                        used_delegated_functions_on: 1.day.ago.to_date,
+                        used_delegated_functions_reported_on: Date.current,
+                      },
+                    ),
+                  ).to(
+                    hash_including(
+                      {
+                        used_delegated_functions: false,
+                        used_delegated_functions_on: nil,
+                        used_delegated_functions_reported_on: nil,
+                      },
+                    ),
+                  )
+            end
           end
         end
 
@@ -167,9 +205,7 @@ RSpec.describe "DelegatedFunctionsController" do
               {
                 proceeding: {
                   used_delegated_functions: true,
-                  "used_delegated_functions_on(3i)": 35.days.ago.day.to_s,
-                  "used_delegated_functions_on(2i)": 35.days.ago.month.to_s,
-                  "used_delegated_functions_on(1i)": 35.days.ago.year.to_s,
+                  used_delegated_functions_on: 35.days.ago.to_date.to_s(:date_picker),
                 },
               }
             end
@@ -184,9 +220,7 @@ RSpec.describe "DelegatedFunctionsController" do
               {
                 proceeding: {
                   used_delegated_functions: true,
-                  "used_delegated_functions_on(3i)": 5.days.ago.day.to_s,
-                  "used_delegated_functions_on(2i)": 5.days.ago.month.to_s,
-                  "used_delegated_functions_on(1i)": 5.days.ago.year.to_s,
+                  used_delegated_functions_on: 5.days.ago.to_date.to_s(:date_picker),
                 },
               }
             end

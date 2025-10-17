@@ -14,14 +14,15 @@ private
 
   def parse_date(date_str, format)
     format ||= DEFAULT_FORMAT
-    Time.strptime(date_str, format).in_time_zone
+    Time.strptime(date_str.strip, format).in_time_zone
   rescue StandardError
     nil
   end
 
   def valid_date?(record, attribute, value)
     message = options[:message] || :date_not_valid
-    unless value.is_a?(Date)
+
+    unless value.is_a?(Date) || value.is_a?(Time)
       record.errors.add(attribute, message)
       return false
     end
@@ -41,7 +42,7 @@ private
     required = options[:earliest_allowed_date]
     return if required.blank?
 
-    formatted_date = earliest_allowed_date.strftime("%d %m %Y")
+    formatted_date = earliest_allowed_date.to_date.to_s(:default)
     message = required[:message] if required.is_a?(Hash)
     message ||= :earliest_allowed_date
     record.errors.add(attribute, message, date: formatted_date) if value < earliest_allowed_date

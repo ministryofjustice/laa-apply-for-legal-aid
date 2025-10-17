@@ -706,17 +706,15 @@ en:
             hearing_date:
               blank: Enter a valid hearing date
               date_not_valid: Enter a valid hearing date
-        proceedings:
-          attributes:
             used_delegated_functions:
               blank: Select yes if you have used delegated functions for this proceeding
             used_delegated_functions_on:
               nothing_selected: Select proceedings you've used delegated functions for
               none_and_proceeding_selected: Select proceedings you've used delegated functions for or I have not used delegated functions
-              date_not_in_range: "The date you used delegated functions cannot be before %{months}"
               date_is_in_the_future: The date you used delegated functions must be in the past
-              date_invalid: Enter the date you used delegated functions
-              blank: Select a response
+              earliest_allowed_date: The date you used delegated functions cannot be before %{date}
+              date_not_valid: Enter the date you used delegated functions in the correct format
+              blank: Enter the date you used delegated functions
         proceeding_merits_task/chances_of_success:
           attributes:
             application_purpose:

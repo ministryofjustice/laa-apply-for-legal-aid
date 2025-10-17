@@ -11,9 +11,15 @@
                                           legend: { size: "m", tag: "h2", text: t(".question") },
                                           hint: { text: @proceeding.special_children_act? ? t(".sca_hint") : "" }) do %>
       <%= form.govuk_radio_button :used_delegated_functions, true, label: { text: t("generic.yes") } do %>
-        <%= form.govuk_date_field :used_delegated_functions_on,
-                                  legend: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_label"), class: "govuk-label govuk-date-input__label" },
-                                  hint: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_hint", options: number_of_days_ago(5)) } %>
+
+        <%= date_picker_field(
+              form,
+              :used_delegated_functions_on,
+              value: params.dig("proceeding", "used_delegated_functions_on") || @proceeding.used_delegated_functions_on&.to_s(:date_picker),
+              label: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_label"), class: "govuk-label govuk-date-input__label" },
+              hint: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_hint", options: number_of_days_ago(5, Date::DATE_FORMATS[:date_picker])) },
+            ) %>
+
       <% end %>
       <%= form.govuk_radio_button :used_delegated_functions, false, label: { text: t("generic.no") } %>
     <% end %>

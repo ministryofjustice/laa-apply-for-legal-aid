@@ -58,7 +58,7 @@ Feature: Non-means-tested applicant journey with use of delegation functions
     Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
 
     When I choose 'Yes'
-    And I enter the 'delegated functions on' date of 1 day ago
+    And I enter the 'delegated functions on' date of 1 day ago using the date picker field
     And I click 'Save and continue'
     Then I should see 'Proceeding 1\nNon-molestation order'
     And I should see 'Do you want to use the default level of service and scope for the emergency application?'
