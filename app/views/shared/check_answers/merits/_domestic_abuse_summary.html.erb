@@ -10,25 +10,25 @@
           summary_list.with_row(
             html_attributes: { id: "app-check-your-answers__opponent_warning_letter_sent" },
           ) do |row|
-            row.with_key(text: t(".warning_letter_reasons"), classes: "govuk-!-width-one-third")
+            row.with_key(text: t("shared.check_answers.merits.domestic_abuse_summary.warning_letter_reasons"), classes: "govuk-!-width-one-third")
             row.with_value(text: domestic_abuse_summary.warning_letter_sent_details)
           end
         end
 
         police_question = domestic_abuse_summary.police_notified? ? "police_notified_details" : "police_not_notified"
         summary_list.with_row(html_attributes: { id: "app-check-your-answers__police_notified_details" }) do |row|
-          row.with_key(text: t(".#{police_question}"), classes: "govuk-!-width-one-third")
+          row.with_key(text: t("shared.check_answers.merits.domestic_abuse_summary.#{police_question}"), classes: "govuk-!-width-one-third")
           row.with_value(text: domestic_abuse_summary.police_notified_details)
         end
 
         if domestic_abuse_summary.bail_conditions_set
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__bail_conditions" }) do |row|
-            row.with_key(text: t(".bail_conditions"))
+            row.with_key(text: t("shared.check_answers.merits.domestic_abuse_summary.bail_conditions"))
             row.with_value(text: domestic_abuse_summary.bail_conditions_set_details)
           end
         else
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__bail_conditions_set" }) do |row|
-            row.with_key(text: t(".bail_conditions_set"))
+            row.with_key(text: t("shared.check_answers.merits.domestic_abuse_summary.bail_conditions_set"))
             row.with_value(text: yes_no(domestic_abuse_summary.bail_conditions_set))
           end
         end

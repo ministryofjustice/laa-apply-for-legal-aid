@@ -4,19 +4,19 @@
   <%= govuk_summary_card(title: t(".account", index: index + 1)) do |card|
         card.with_summary_list(actions: false) do |summary_list|
           summary_list.with_row do |row|
-            row.with_key { t(".bank") }
+            row.with_key { t("citizens.check_answers.bank_accounts.bank") }
             row.with_value { account.bank_provider.name }
           end
           summary_list.with_row do |row|
-            row.with_key { t(".account_number") }
+            row.with_key { t("citizens.check_answers.bank_accounts.account_number") }
             row.with_value { account.account_number }
           end
           summary_list.with_row do |row|
-            row.with_key { t(".sort_code") }
+            row.with_key { t("citizens.check_answers.bank_accounts.sort_code") }
             row.with_value { account.sort_code }
           end
           summary_list.with_row do |row|
-            row.with_key { t(".balance") }
+            row.with_key { t("citizens.check_answers.bank_accounts.balance") }
             row.with_value { value_with_currency_unit(account.balance, account.currency) }
           end
         end

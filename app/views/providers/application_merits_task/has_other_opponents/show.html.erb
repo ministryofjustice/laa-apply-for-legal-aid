@@ -17,8 +17,8 @@
 
             table.with_head do |head|
               head.with_row do |row|
-                row.with_cell(text: "Name")
-                row.with_cell(text: "Type")
+                row.with_cell(text: t("providers.application_merits_task.has_other_opponents.show.name"))
+                row.with_cell(text: t("providers.application_merits_task.has_other_opponents.show.type"))
                 row.with_cell(colspan: 2, scope: "colgroup") do
                   tag.span("Change or remove opponent", class: "govuk-visually-hidden")
                 end
@@ -42,7 +42,7 @@
                   end
                   row.with_cell do
                     govuk_link_to(
-                      t(".remove"),
+                      t("generic.remove"),
                       providers_legal_aid_application_remove_opponent_path(@legal_aid_application, opponent),
                       class: "change-link",
                       "aria-label": opponent.full_name,
@@ -58,7 +58,7 @@
                                             yes_no_options,
                                             :value,
                                             :label,
-                                            legend: { text: t(".add_another"), size: "l", tag: "h2" } %>
+                                            legend: { text: t("providers.application_merits_task.has_other_opponents.show.add_another"), size: "l", tag: "h2" } %>
 
   <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>

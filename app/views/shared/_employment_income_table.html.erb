@@ -6,24 +6,24 @@
 
         table.with_body do |body|
           body.with_row do |row|
-            row.with_cell(header: true, text: t(".monthly_income_before_tax"))
+            row.with_cell(header: true, text: t("shared.employment_income_table.monthly_income_before_tax"))
             row.with_cell(numeric: true, text: gds_number_to_currency(@legal_aid_application.cfe_result.employment_income_gross_income))
           end
           body.with_row do |row|
-            row.with_cell(header: true, text: t(".benefits_in_kind"))
+            row.with_cell(header: true, text: t("shared.employment_income_table.benefits_in_kind"))
             row.with_cell(numeric: true, text: gds_number_to_currency(@legal_aid_application.cfe_result.employment_income_benefits_in_kind))
           end
           body.with_row do |row|
-            row.with_cell(header: true, text: t(".tax"))
+            row.with_cell(header: true, text: t("shared.employment_income_table.tax"))
             row.with_cell(numeric: true, text: gds_number_to_currency(@legal_aid_application.cfe_result.employment_income_tax))
           end
           body.with_row do |row|
-            row.with_cell(header: true, text: t(".national_insurance"))
+            row.with_cell(header: true, text: t("shared.employment_income_table.national_insurance"))
             row.with_cell(numeric: true, text: gds_number_to_currency(@legal_aid_application.cfe_result.employment_income_national_insurance))
           end
           if @legal_aid_application.applicant.extra_employment_information
             body.with_row do |row|
-              row.with_cell(header: true, text: t(".employment_details"))
+              row.with_cell(header: true, text: t("shared.employment_income_table.employment_details"))
               row.with_cell(numeric: true, text: gds_number_to_currency(@legal_aid_application.applicant.extra_employment_information_details))
             end
           end

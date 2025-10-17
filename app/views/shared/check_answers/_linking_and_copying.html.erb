@@ -2,22 +2,25 @@
 <%= govuk_summary_card(title: t(".section_linking.heading"), heading_level: 3) do |card|
       card.with_summary_list(actions: !read_only, html_attributes: { id: "app-check-your-answers__linking_items" }) do |summary_list|
         summary_list.with_row(classes: "app-check-your-answers__linking_question") do |row|
-          row.with_key(text: t(".section_linking.linked"), classes: "govuk-!-width-one-third")
+          row.with_key(text: t("shared.check_answers.linking_and_copying.section_linking.linked"), classes: "govuk-!-width-one-third")
           row.with_value { safe_yes_or_no(@legal_aid_application&.lead_linked_application&.confirm_link? || t("generic.no")) }
           row.with_action(
             text: t("generic.change"),
             href: providers_legal_aid_application_link_application_make_link_path(@legal_aid_application),
-            visually_hidden_text: t(".section_linking.linked"),
+            visually_hidden_text: t("shared.check_answers.linking_and_copying.section_linking.linked"),
           )
         end
         if @legal_aid_application&.lead_linked_application&.confirm_link?
           summary_list.with_row(classes: "app-check-your-answers__linking_case") do |row|
-            row.with_key(text: t(".section_linking.#{@legal_aid_application.lead_linked_application.link_type_code}"))
+            row.with_key(text: t("shared.check_answers.linking_and_copying.section_linking.#{@legal_aid_application.lead_linked_application.link_type_code}"))
             row.with_value(text: sanitize(@legal_aid_application.lead_linked_application.target_application.link_description))
             row.with_action(
               text: t("generic.change"),
               href: providers_legal_aid_application_link_application_find_link_application_path(@legal_aid_application),
-              visually_hidden_text: [t(".section_linking.aria_prefix"), t(".section_linking.#{@legal_aid_application.lead_linked_application.link_type_code}")].join(" "),
+              visually_hidden_text: [
+                t("shared.check_answers.linking_and_copying.section_linking.aria_prefix"),
+                t("shared.check_answers.linking_and_copying.section_linking.#{@legal_aid_application.lead_linked_application.link_type_code}"),
+              ].join(" "),
             )
           end
         end
@@ -44,17 +47,17 @@
             govuk_link_to(t("generic.change"),
                           providers_legal_aid_application_link_application_copy_path(@legal_aid_application),
                           id: "app-check-your-answers__copying",
-                          visually_hidden_suffix: t(".section_copying.heading"))
+                          visually_hidden_suffix: t("shared.check_answers.linking_and_copying.section_copying.heading"))
           end
         end
         card.with_summary_list(actions: false, html_attributes: { id: "app-check-your-answers__copying_items" }) do |summary_list|
           summary_list.with_row(classes: "app-check-your-answers__copy_question") do |row|
-            row.with_key(text: t(".section_copying.question"), classes: "govuk-!-width-one-third")
+            row.with_key(text: t("shared.check_answers.linking_and_copying.section_copying.question"), classes: "govuk-!-width-one-third")
             row.with_value { safe_yes_or_no(@legal_aid_application.copy_case?) }
           end
           if @legal_aid_application.copy_case?
             summary_list.with_row(classes: "app-check-your-answers__copying_case") do |row|
-              row.with_key(text: t(".section_copying.copied"))
+              row.with_key(text: t("shared.check_answers.linking_and_copying.section_copying.copied"))
               row.with_value(text: sanitize(@source_application.link_description))
             end
           end
