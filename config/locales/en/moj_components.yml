@@ -1,0 +1,4 @@
+en:
+  date_picker:
+    label: Date
+    hint: For example, %{hint_date}.
