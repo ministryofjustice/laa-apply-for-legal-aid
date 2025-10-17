@@ -1,6 +1,7 @@
 module Providers
   class HasEvidenceOfBenefitsController < ProviderBaseController
     include ApplicantDetailsCheckable
+    include DWPOutcomeHelper
 
     def show
       @form = LegalAidApplications::HasEvidenceOfBenefitForm.new(model: dwp_override)
@@ -16,6 +17,7 @@ module Providers
 
       if @form.save
         details_checked! unless details_checked?
+        confirm_dwp_status_correct!(legal_aid_application) unless evidence_of_benefit?
         go_forward(evidence_of_benefit?)
       else
         render :show

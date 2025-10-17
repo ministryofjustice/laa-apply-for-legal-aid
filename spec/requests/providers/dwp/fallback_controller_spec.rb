@@ -24,6 +24,17 @@ RSpec.describe Providers::DWP::FallbackController do
       it "returns success" do
         expect(response).to be_successful
       end
+
+      context "when confirm_dwp_result is not nil" do
+        before do
+          application.dwp_result_confirmed = true
+        end
+
+        it "resets dwp_result_confirmed to nil" do
+          get_request
+          expect(application.reload.dwp_result_confirmed).to be_nil
+        end
+      end
     end
 
     describe "HMRC inset text" do
@@ -93,6 +104,11 @@ RSpec.describe Providers::DWP::FallbackController do
           end
         end
 
+        it "sets the legal_aid_application dwp_result_confirmed field to be dwp_correct" do
+          patch_request
+          expect(application.reload.dwp_result_confirmed).to be true
+        end
+
         it "redirects to the next page" do
           patch_request
           expect(response).to have_http_status(:redirect)
@@ -151,6 +167,11 @@ RSpec.describe Providers::DWP::FallbackController do
           end
         end
 
+        it "sets the legal_aid_application dwp_result_confirmed field to be true" do
+          patch_request
+          expect(application.reload.dwp_result_confirmed).to be true
+        end
+
         it "redirects to the next page" do
           patch_request
           expect(response).to have_http_status(:redirect)
@@ -198,6 +219,11 @@ RSpec.describe Providers::DWP::FallbackController do
         it "sets the applicant shared benefit field to true" do
           patch_request
           expect(application.reload.applicant.shared_benefit_with_partner).to be true
+        end
+
+        it "sets the legal_aid_application confirm_dwp_result field to be joint_with_partner_true" do
+          patch_request
+          expect(application.reload.dwp_result_confirmed).to be true
         end
 
         it "redirects to the next page" do

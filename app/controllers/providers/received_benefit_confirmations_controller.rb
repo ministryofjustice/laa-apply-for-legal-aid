@@ -1,6 +1,7 @@
 module Providers
   class ReceivedBenefitConfirmationsController < ProviderBaseController
     include ApplicantDetailsCheckable
+    include DWPOutcomeHelper
 
     def show
       @form = Providers::ReceivedBenefitConfirmationForm.new(model: dwp_override)
@@ -12,6 +13,7 @@ module Providers
       @form = Providers::ReceivedBenefitConfirmationForm.new(form_params)
 
       if @form.valid?
+        confirm_dwp_status_correct!(legal_aid_application) unless benefit?
         benefit? ? @form.save! : dwp_override.destroy!
         details_checked! unless details_checked? || benefit?
         go_forward(benefit?)
