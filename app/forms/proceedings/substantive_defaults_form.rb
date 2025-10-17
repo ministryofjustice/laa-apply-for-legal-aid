@@ -17,18 +17,18 @@ module Proceedings
                   :substantive_scope_limitation_code,
                   :additional_params
 
-    validates :accepted_substantive_defaults, presence: true, unless: proc { draft? || model.special_children_act? }
+    validates :accepted_substantive_defaults, inclusion: ["true", "false", true, false], unless: proc { draft? || model.special_children_act? }
 
     def initialize(*args)
       super
       @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], false))
-      self.substantive_level_of_service = @defaults["default_level_of_service"]["level"]
-      self.substantive_level_of_service_name = @defaults["default_level_of_service"]["name"]
-      self.substantive_level_of_service_stage = @defaults["default_level_of_service"]["stage"]
-      self.substantive_scope_limitation_meaning = @defaults["default_scope"]["meaning"]
-      self.substantive_scope_limitation_description = @defaults["default_scope"]["description"]
-      self.substantive_scope_limitation_code = @defaults["default_scope"]["code"]
-      self.additional_params = @defaults["default_scope"]["additional_params"]
+      self.substantive_level_of_service = @defaults.dig("default_level_of_service", "level")
+      self.substantive_level_of_service_name = @defaults.dig("default_level_of_service", "name")
+      self.substantive_level_of_service_stage = @defaults.dig("default_level_of_service", "stage")
+      self.substantive_scope_limitation_meaning = @defaults.dig("default_scope", "meaning")
+      self.substantive_scope_limitation_description = @defaults.dig("default_scope", "description")
+      self.substantive_scope_limitation_code = @defaults.dig("default_scope", "code")
+      self.additional_params = @defaults.dig("default_scope", "additional_params")
     end
 
     def save
