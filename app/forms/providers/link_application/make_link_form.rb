@@ -8,7 +8,14 @@ module Providers
       validates :link_type_code, presence: true, unless: :draft?
 
       def save
-        model.update!(confirm_link: link_type_code == "false" ? false : nil)
+        if link_type_code == "false"
+          model.update!(confirm_link: false)
+          model.associated_application.update!(linked_application_completed: true)
+        else
+          model.update!(confirm_link: nil)
+          model.associated_application.update!(linked_application_completed: false)
+        end
+
         if link_type_code.eql?("LEGAL")
           model.associated_application.update!(copy_case: nil, copy_case_id: nil)
         end
