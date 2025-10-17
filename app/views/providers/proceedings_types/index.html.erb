@@ -61,20 +61,21 @@
         <% end %>
     </div>
   </div>
-  <div class="govuk-grid-row no-proceeding-items display-none">
+  <div class="govuk-grid-row no-proceeding-items display-none govuk-!-margin-bottom-3">
     <div class="govuk-grid-column-two-thirds">
       <span class="govuk-body"><%= t ".no_results" %></span>
     </div>
   </div>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <%= govuk_details(summary_text: t(".details.summary_text"), text: simple_format(t(".details.text"))) %>
 
       <% if @legal_aid_application.proceedings.any? %>
-        <p class="govuk-body">
+        <p class="govuk-body govuk-!-margin-bottom-3">
           <%= govuk_link_to(t(".chosen_proceedings"), providers_legal_aid_application_has_other_proceedings_path) %>
         </p>
       <% end %>
+
+      <%= govuk_details(summary_text: t(".details.summary_text"), text: simple_format(t(".details.text"))) %>
 
       <%= next_action_buttons(form:, show_draft: true) %>
     </div>
