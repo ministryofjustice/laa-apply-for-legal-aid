@@ -84,7 +84,7 @@ Feature: Scope limitations not being set
 
     Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence\nHave you used delegated functions for this proceeding?'
     When I choose 'Yes'
-    And I enter the 'delegated functions on' date of 2 days ago
+    And I enter the 'delegated functions on' date of 2 days ago using the date picker field
     When I click 'Save and continue'
     Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence'
     And I should see 'Do you want to use the default level of service and scope for the emergency application?'

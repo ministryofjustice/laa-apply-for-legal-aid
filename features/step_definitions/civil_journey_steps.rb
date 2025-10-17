@@ -1401,6 +1401,13 @@ Then(/^I enter the (.*) date of (\d+) day(?:s)? ago$/) do |name, number|
   fill_in(fields[2][:name].to_s, with: date.year)
 end
 
+Then(/^I enter the (.*) date of (\d+) day(?:s)? ago using the date picker field$/) do |name, number|
+  name.gsub!(/\s+/, "_")
+  date = number.days.ago
+  field = page.find("input[name*=#{name}]")
+  fill_in(field[:name], with: date.to_date.to_s(:date_picker))
+end
+
 Then("I should see a {string} date of {int} days ago") do |name, number|
   name.gsub!(/\s+/, "_")
   date = number.days.ago
