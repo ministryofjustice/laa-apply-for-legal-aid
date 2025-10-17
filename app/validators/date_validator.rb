@@ -14,14 +14,14 @@ private
 
   def parse_date(date_str, format)
     format ||= DEFAULT_FORMAT
-    Time.strptime(date_str, format).in_time_zone
+    Time.strptime(date_str.strip, format).in_time_zone
   rescue StandardError
     nil
   end
 
   def valid_date?(record, attribute, value)
     message = options[:message] || :date_not_valid
-    unless value.is_a?(Date)
+    unless value.is_a?(Time)
       record.errors.add(attribute, message)
       return false
     end
