@@ -33,10 +33,7 @@ module Proceedings
       end
 
       def populate_hearing_date_attr_accessors(code)
-        attr_accessor :"hearing_date_#{code}_1i",
-                      :"hearing_date_#{code}_2i",
-                      :"hearing_date_#{code}_3i",
-                      :"hearing_date_#{code}"
+        attr_accessor :"hearing_date_#{code}"
       end
 
       def populate_limitation_note_attr_accessors(code)
@@ -81,18 +78,7 @@ module Proceedings
     end
 
     def populate_inputted_date(code)
-      __send__(:"hearing_date_#{code}=", date_fields(code).form_date) if scope_codes.include? code
-    end
-
-    def date_fields(code, value = nil)
-      DateFieldBuilder.new(
-        label: value,
-        form: self,
-        model: self,
-        method: :"hearing_date_#{code}",
-        prefix: :"hearing_date_#{code}_",
-        suffix: :gov_uk,
-      )
+      __send__(:"hearing_date_#{code}=", hearing_date_for(code)) if scope_codes.include? code
     end
 
     def meaning_for(code)
@@ -147,12 +133,17 @@ module Proceedings
       hearing_dates.each do |code|
         next unless mandatory?("hearing_date", code) && scope_codes.include?(code)
 
-        date_field = date_fields(code)
-        attr_name = date_field.method
-        valid = !date_field.form_date_invalid?
-
-        errors.add attr_name.to_sym, I18n.t("providers.proceeding_loop.enter_valid_hearing_date_error", scope_limitation: meaning_for(code)) unless valid
+        validate_hearing_date_for_code!(code)
       end
+    end
+
+    def validate_hearing_date_for_code!(code)
+      attribute_name = :"hearing_date_#{code}"
+      date_string = __send__(:"hearing_date_#{code}")
+
+      Time.strptime(date_string.strip, Date::DATE_FORMATS[:date_picker_parse_format]).in_time_zone
+    rescue StandardError
+      errors.add attribute_name.to_sym, I18n.t("providers.proceeding_loop.enter_valid_hearing_date_error", scope_limitation: meaning_for(code))
     end
 
     def validate_limitation_notes
