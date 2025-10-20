@@ -26,7 +26,7 @@ module TaskStatus
     end
 
     def completed?
-      application.linked_application_completed
+      application.linked_application_completed?
     end
   end
 end
