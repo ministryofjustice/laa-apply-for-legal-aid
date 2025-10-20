@@ -11,12 +11,17 @@ module Providers
         super
         if confirm_link == "No"
           model.update!(confirm_link: nil)
-          model.associated_application.update!(linked_application_completed: true)
-        elsif confirm_link == "true" && model.link_type_code.eql?("LEGAL")
+        elsif legal_linking? || confirm_link == "false"
           model.associated_application.update!(linked_application_completed: true)
         end
       end
       alias_method :save!, :save
+
+    private
+
+      def legal_linking?
+        confirm_link == "true" && model.link_type_code.eql?("LEGAL")
+      end
     end
   end
 end

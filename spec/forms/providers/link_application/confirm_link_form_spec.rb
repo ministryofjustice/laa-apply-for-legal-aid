@@ -48,6 +48,10 @@ RSpec.describe Providers::LinkApplication::ConfirmLinkForm, type: :form do
       it "sets confirm_link to false" do
         expect(linked_application.confirm_link).to be false
       end
+
+      it "sets linked_application_completed to true" do
+        expect(legal_aid_application.reload.linked_application_completed).to be true
+      end
     end
 
     context "with confirm_link No" do
@@ -62,7 +66,7 @@ RSpec.describe Providers::LinkApplication::ConfirmLinkForm, type: :form do
       end
 
       it "sets linked_application_completed to true" do
-        expect(legal_aid_application.reload.linked_application_completed).to be true
+        expect(legal_aid_application.reload.linked_application_completed).to be false
       end
     end
 
