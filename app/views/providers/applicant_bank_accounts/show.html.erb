@@ -16,7 +16,7 @@
           applicant_account.bank_accounts.each do |bank_account| %>
             <p class="govuk-body">
               <strong><%= t("providers.applicant_bank_accounts.show.account") %>:</strong> <%= bank_account.bank_and_account_name %><br>
-              <strong><%= t("providers.applicant_bank_accounts.show.balance") %>:</strong> <%= value_with_currency_unit(bank_account.balance, bank_account.currency) %>
+              <strong><%= t("providers.applicant_bank_accounts.show.balance") %>:</strong> <%= gds_number_to_currency(bank_account.balance) %>
             </p>
           <% end
         end %>
