@@ -15,6 +15,20 @@ en:
               invalid: address is not in the right format
             national_insurance_number:
               invalid: is not in the right format
+        announcement:
+          attributes:
+            heading:
+              blank: Include, at minimum, a heading
+            link_url:
+              blank: Include a link URL if setting display text
+            link_display:
+              blank: Include link display text if setting a link URL
+            start_at:
+              blank: Set a start date/time
+              unparseable: Enter a valid start date and time
+            end_at:
+              blank: Set an end date/time
+              unparseable: Enter a valid end date and time
         application_proceeding_type:
           attributes:
             lead_proceeding:

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_29_104707) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_20_101525) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -105,6 +105,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_29_104707) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_allegations_on_legal_aid_application_id"
+  end
+
+  create_table "announcements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "display_type"
+    t.string "gov_uk_header_bar"
+    t.string "heading"
+    t.string "link_display"
+    t.string "link_url"
+    t.string "body"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "appeals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
