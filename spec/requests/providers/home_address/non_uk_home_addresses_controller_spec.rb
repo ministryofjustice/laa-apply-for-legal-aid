@@ -145,16 +145,18 @@ RSpec.describe Providers::HomeAddress::NonUkHomeAddressesController, :vcr do
         end
 
         context "with an overseas home address" do
-          it "does not create a new address record" do
+          it "updates the current home address" do
             create(:address, applicant:, location: "home", country_code: "DEU")
-            expect { patch_request }.not_to change { applicant.addresses.count }
+            expect { patch_request }.to change { applicant.reload.home_address.country_code }.from("DEU").to("CHN")
+            expect(applicant.addresses.where(location: "home").count).to eq 1
           end
         end
 
         context "with a UK home address" do
-          it "does not create a new address record" do
+          it "creates a new home address record and deletes the existing home address" do
             create(:address, applicant:, location: "home", country_code: "GBR")
-            expect { patch_request }.to change { applicant.addresses.count }.by(1)
+            expect { patch_request }.to change { applicant.reload.home_address.country_code }.from("GBR").to("CHN")
+            expect(applicant.addresses.where(location: "home").count).to eq 1
           end
         end
 

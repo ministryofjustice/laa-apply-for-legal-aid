@@ -137,8 +137,9 @@ RSpec.describe Providers::HomeAddress::ManualsController do
       context "with an already existing non-UK home address" do
         before { create(:address, applicant:, location: "home", country_code: "DEU") }
 
-        it "creates a new home address record" do
-          expect { patch_request }.to change { applicant.addresses.count }.by(1)
+        it "creates a new home address record and deletes the existing home address record" do
+          patch_request
+          expect(applicant.addresses.where(location: "home").count).to eq 1
           expect(home_address.address_line_one).to eq(address_params[:address][:address_line_one])
           expect(home_address.address_line_two).to eq(address_params[:address][:address_line_two])
           expect(home_address.city).to eq(address_params[:address][:city])

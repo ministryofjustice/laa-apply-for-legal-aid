@@ -15,6 +15,7 @@ module Providers
     private
 
       def build_address
+        applicant.addresses&.where(location: "home")&.destroy_all
         Address.new(
           applicant:,
           location: "home",
