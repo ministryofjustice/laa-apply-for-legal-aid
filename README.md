@@ -1,7 +1,7 @@
 
 
 [![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid.svg?style=shield)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/main)
-[![Ministry of Justice Repository Compliance Badge](https://github-community.service.justice.gov.uk/repository-standards/api/laa-apply-for-legal-aid/badge)](https://github-community.service.justice.gov.uk/repository-standards/laa-apply-for-legal-aid) 
+[![Ministry of Justice Repository Compliance Badge](https://github-community.service.justice.gov.uk/repository-standards/api/laa-apply-for-legal-aid/badge)](https://github-community.service.justice.gov.uk/repository-standards/laa-apply-for-legal-aid)
 
 # LAA Apply for civil legal aid
 
@@ -410,4 +410,4 @@ The URL for this service should be set using the environment variable `LEGAL_FRA
 
 ## Troubleshooting
 
-Refer to the specific [README](./docs/troubleshooting.md)
+Refer to the specific [README](./docs/troubleshooting.md).
