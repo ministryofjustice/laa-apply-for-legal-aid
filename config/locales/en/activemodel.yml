@@ -231,7 +231,7 @@ en:
         final_hearing:
           attributes:
             date:
-              blank: &invalid_hearing_date Enter a valid final hearing date
+              blank: &invalid_hearing_date Enter a valid final hearing date in the correct format
               date_not_valid: *invalid_hearing_date
             details:
               blank: Enter details to explain why you have selected full representation without a final hearing date

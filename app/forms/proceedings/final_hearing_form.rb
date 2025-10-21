@@ -10,9 +10,16 @@ module Proceedings
 
     validates :work_type, inclusion: { in: %i[substantive emergency] }
     validates :listed, inclusion: { in: %w[true false] }
-    validates :date, date: { format: Date::DATE_FORMATS[:date_picker_parse_format] }, allow_nil: true, if: :date_required?
-    validates :date, presence: true, if: :date_required?
     validates :details, presence: true, if: :details_required?
+    validates :date, presence: true, if: :date_required?
+
+    validates :date,
+              date: {
+                format: Date::DATE_FORMATS[:date_picker_parse_format],
+                strict_format: /^\d{1,2}\/\d{1,2}\/\d{4}$/,
+              },
+              allow_nil: true,
+              if: :date_required?
 
     before_validation :clear_date_fields, unless: :date_required?
     before_validation :clear_details, if: :date_required?
