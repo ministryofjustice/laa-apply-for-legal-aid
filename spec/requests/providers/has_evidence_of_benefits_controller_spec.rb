@@ -8,6 +8,7 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
            :with_proceedings,
            :with_delegated_functions_on_proceedings,
            explicit_proceedings: %i[da004],
+           dwp_result_confirmed: false,
            df_options: { DA004: [Time.zone.now, Time.zone.now] })
   end
 
@@ -102,6 +103,10 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
       expect(legal_aid_application.reload.state_machine).to be_a PassportedStateMachine
     end
 
+    it "does not update the confirm_dwp_result" do
+      expect(legal_aid_application.reload.dwp_result_confirmed).to be false
+    end
+
     context "when the provider chose no" do
       let(:has_evidence_of_benefit) { "false" }
 
@@ -116,6 +121,10 @@ RSpec.describe Providers::HasEvidenceOfBenefitsController do
 
       it "updates the state machine type" do
         expect(legal_aid_application.reload.state_machine).to be_a NonPassportedStateMachine
+      end
+
+      it "updates confirm_dwp_result to true" do
+        expect(legal_aid_application.reload.dwp_result_confirmed).to be true
       end
     end
 

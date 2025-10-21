@@ -1,6 +1,9 @@
 module Providers
   class CheckClientDetailsController < ProviderBaseController
+    include DWPOutcomeHelper
+
     def show
+      checking_dwp_status!(legal_aid_application)
       applicant
       partner
 

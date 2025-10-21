@@ -26,6 +26,16 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
         login_as application.provider
       end
 
+      context "when confirm_dwp_result is not nil" do
+        before do
+          application.dwp_result_confirmed = true
+        end
+
+        it "resets dwp_result_confirmed to nil" do
+          expect(application.reload.dwp_result_confirmed).to be_nil
+        end
+      end
+
       context "without delegated functions" do
         it "updates application state and renders template successfully with expected content", :aggregate_failures do
           expect { request }
@@ -98,6 +108,13 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
         login_as application.provider
       end
 
+      it "updates dwp_result_confirmed to true" do
+        expect { request }
+          .to change { application.reload.dwp_result_confirmed }
+          .from(nil)
+          .to true
+      end
+
       it "creates a skipped benefit check result" do
         expect { request }
           .to change { application.reload.benefit_check_result&.result }
@@ -112,7 +129,7 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
           .to("no_assessment")
       end
 
-      it "updates application statre and redirects to the next page", :aggregate_failures do
+      it "updates application state and redirects to the next page", :aggregate_failures do
         expect { request }.to change { application.reload.state }.from("applicant_details_checked").to("provider_entering_merits")
         expect(response).to have_http_status(:redirect)
       end

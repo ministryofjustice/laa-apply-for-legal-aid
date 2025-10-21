@@ -1,7 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Providers::DWP::ResultsController do
-  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address, dwp_override:, dwp_result_confirmed:) }
+  let(:dwp_result_confirmed) { nil }
+  let(:dwp_override) { nil }
 
   describe "GET /providers/applications/:legal_aid_application_id/dwp/dwp-result" do
     subject(:get_request) { get providers_legal_aid_application_dwp_result_path(legal_aid_application) }
@@ -24,6 +26,26 @@ RSpec.describe Providers::DWP::ResultsController do
 
       it "marks the applicant_details_checked!" do
         expect { get_request }.to change { legal_aid_application.reload.state }.from("checking_applicant_details").to("applicant_details_checked")
+      end
+
+      context "when dwp_result_confirmed is not nil" do
+        let(:dwp_result_confirmed) { false }
+
+        it "resets dwp_result_confirmed to nil" do
+          expect { get_request }
+            .to change { legal_aid_application.reload.dwp_result_confirmed }
+            .from(false)
+            .to nil
+        end
+      end
+
+      context "when there is an existing dwp_overide" do
+        let(:dwp_override) { create(:dwp_override, :with_evidence) }
+
+        it "removes any existing dwp_override" do
+          get_request
+          expect(legal_aid_application.reload.dwp_override).to be_nil
+        end
       end
 
       context "when applicant has a partner" do
@@ -238,9 +260,20 @@ RSpec.describe Providers::DWP::ResultsController do
       }
     end
 
+    before do
+      login_as legal_aid_application.provider
+    end
+
     it "redirects to the next page" do
       patch_request
       expect(response).to have_http_status(:redirect)
+    end
+
+    it "updates confirm_dwp_result to true" do
+      expect { patch_request }
+        .to change { legal_aid_application.reload.dwp_result_confirmed }
+        .from(nil)
+        .to true
     end
   end
 end

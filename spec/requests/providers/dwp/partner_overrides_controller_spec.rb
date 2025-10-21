@@ -31,6 +31,13 @@ RSpec.describe Providers::DWP::PartnerOverridesController do
           .to have_css(".govuk-radios label", text: "On their own")
           .and have_css(".govuk-radios label", text: "With a partner")
       end
+
+      it "updates confirm_dwp_result to false" do
+        expect { get_request }
+          .to change { application.reload.dwp_result_confirmed }
+          .from(nil)
+          .to false
+      end
     end
   end
 
