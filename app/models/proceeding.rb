@@ -69,4 +69,28 @@ class Proceeding < ApplicationRecord
   def domestic_abuse?
     ccms_matter_code == "MINJN"
   end
+
+  def uses_emergency_certificate?
+    !special_children_act?
+  end
+
+  def family_help_higher?
+    emergency_level_of_service.to_i.eql?(1)
+  end
+
+  def emergency_full_representation?
+    emergency_level_of_service.to_i.eql?(3)
+  end
+
+  def substantive_full_representation?
+    substantive_level_of_service.to_i.eql?(3)
+  end
+
+  def emergency_final_hearing
+    final_hearings.emergency.first || final_hearings.build(work_type: :emergency)
+  end
+
+  def substantive_final_hearing
+    final_hearings.substantive.first || final_hearings.build(work_type: :substantive)
+  end
 end

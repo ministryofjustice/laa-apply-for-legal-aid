@@ -39,6 +39,7 @@ module TaskList
       client_and_case_details: {
         applicants: true, # Steps::ProviderStart::ApplicantsStep
         make_link: true, # Steps::ProviderStart::MakeLinkStep
+        proceedings_types: true, # Steps::ProviderStart::ProceedingsTypesStep
         check_provider_answers: true, # Steps::ProviderStart::CheckProviderAnswersStep,
       },
       means_assessment: {

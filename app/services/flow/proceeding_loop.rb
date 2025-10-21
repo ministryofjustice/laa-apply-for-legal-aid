@@ -44,7 +44,7 @@ module Flow
         when "client_involvement_type"
           :delegated_functions
         when "delegated_functions", "confirm_delegated_functions_date"
-          current_proceeding.used_delegated_functions? && !current_proceeding.special_children_act? ? :emergency_defaults : :substantive_defaults
+          current_proceeding.used_delegated_functions? && current_proceeding.uses_emergency_certificate? ? :emergency_defaults : :substantive_defaults
         when "emergency_defaults"
           current_proceeding.accepted_emergency_defaults ? :substantive_defaults : :emergency_level_of_service
         when "substantive_defaults"
