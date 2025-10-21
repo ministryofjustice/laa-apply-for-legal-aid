@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module MojComponent
-  class HeaderComponent < ViewComponent::Base
+  class HeaderComponent < ApplicationComponent
     renders_many :navigation_items, "NavigationItem"
 
     attr_reader :organisation_name,
@@ -13,10 +13,10 @@ module MojComponent
       @organisation_name = organisation_name
       @url = url
       @new_tab = new_tab
-      super
+      super()
     end
 
-    class NavigationItem < ViewComponent::Base
+    class NavigationItem < ApplicationComponent
       attr_reader :text, :href, :current, :options
 
       def initialize(text:, href: nil, current: nil, options: {})
@@ -24,7 +24,7 @@ module MojComponent
         @href = href
         @current = current
         @options = options
-        super
+        super()
       end
 
       def call
