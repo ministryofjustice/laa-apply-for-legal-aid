@@ -334,7 +334,7 @@ Feature: Loop through proceeding questions
     And I should see "Has the proceeding been listed for a final contested hearing?"
 
     When I choose "Yes"
-    And I enter the 'date' date of 1 day ago
+    And I enter the 'date' date of 1 day ago using the date picker field
     And I click 'Save and continue'
     Then I should be on a page showing "Proceeding 1"
     And I should be on a page showing "Enforcement order 11J"
