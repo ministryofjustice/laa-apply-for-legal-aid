@@ -4,30 +4,18 @@ module Proceedings
 
     attr_accessor :work_type,
                   :listed,
-                  :date_1i,
-                  :date_2i,
-                  :date_3i,
+                  :date,
                   :details,
                   :proceeding_id
 
-    attr_writer :date
-
     validates :work_type, inclusion: { in: %i[substantive emergency] }
     validates :listed, inclusion: { in: %w[true false] }
-    validates :date, date: true, allow_nil: true, if: :date_required?
+    validates :date, date: { format: Date::DATE_FORMATS[:date_picker_parse_format] }, allow_nil: true, if: :date_required?
     validates :date, presence: true, if: :date_required?
     validates :details, presence: true, if: :details_required?
 
     before_validation :clear_date_fields, unless: :date_required?
     before_validation :clear_details, if: :date_required?
-
-    def date
-      return @date if @date.present?
-      return if date_fields.blank?
-      return date_fields.input_field_values if date_fields.partially_complete? || date_fields.form_date_invalid?
-
-      @date = attributes[:date] = date_fields.form_date
-    end
 
   private
 
@@ -37,9 +25,6 @@ module Proceedings
 
     def clear_date_fields
       attributes[:date] = nil
-      attributes[:date_3i] = nil
-      attributes[:date_2i] = nil
-      attributes[:date_1i] = nil
     end
 
     def date_required?
@@ -48,20 +33,6 @@ module Proceedings
 
     def details_required?
       listed.to_s == "false"
-    end
-
-    def exclude_from_model
-      date_fields.fields
-    end
-
-    def date_fields
-      @date_fields ||= DateFieldBuilder.new(
-        form: self,
-        model:,
-        method: :date,
-        prefix: :date_,
-        suffix: :gov_uk,
-      )
     end
   end
 end
