@@ -106,7 +106,7 @@ Background: I have started an application and not linked or copied it
     Then I should see 'Proceeding 2 of 3\nOccupation order'
     And I should see 'Do you want to use the default level of service and scope for the emergency application?'
     When I choose 'Yes'
-    And I enter the 'proceeding hearing date' date of 1 month in the future
+    And I enter the 'proceeding hearing date' date of 1 month in the future using the date picker field
     And I click 'Save and continue'
     Then I should see 'Proceeding 2 of 3\nOccupation order'
     And I should see 'Do you want to use the default level of service and scope for the substantive application?'

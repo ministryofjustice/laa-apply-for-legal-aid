@@ -1,72 +1,100 @@
 require "rails_helper"
 
 RSpec.describe MojComponentsHelper do
-  context "when interruption_card is called with a heading only" do
-    subject(:interruption_card) { helper.interruption_card(heading: "Heading") }
+  describe "#interruption_card" do
+    context "when interruption_card is called with a heading only" do
+      subject(:interruption_card) { helper.interruption_card(heading: "Heading") }
 
-    it "renders the interruption card template with the heading and body" do
-      expected_html = <<~HTML
-        <div class="moj-interruption-card">
-          <div class="moj-interruption-card__content">
-            <div class="govuk-grid-row">
-              <div class="govuk-grid-column-two-thirds">
-                <h1 class="govuk-heading-l moj-interruption-card__heading">Heading</h1>
+      it "renders the interruption card template with the heading and body" do
+        expected_html = <<~HTML
+          <div class="moj-interruption-card">
+            <div class="moj-interruption-card__content">
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                  <h1 class="govuk-heading-l moj-interruption-card__heading">Heading</h1>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      HTML
+        HTML
 
-      expect(interruption_card).to eq(expected_html)
+        expect(interruption_card).to eq(expected_html)
+      end
+    end
+
+    context "when interruption_card is called with a heading and a block" do
+      subject(:interruption_card) { helper.interruption_card(heading: "Heading") { "Body" } }
+
+      it "renders the interruption card template with the heading and body" do
+        expected_html = <<~HTML
+          <div class="moj-interruption-card">
+            <div class="moj-interruption-card__content">
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                  <h1 class="govuk-heading-l moj-interruption-card__heading">Heading</h1>
+                  <div class="govuk-body moj-interruption-card__body">
+                    Body
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        HTML
+
+        expect(interruption_card).to eq(expected_html)
+      end
+    end
+
+    context "when interruption_card is called with a heading, a body block and an actions proc" do
+      subject(:interruption_card) { helper.interruption_card(heading: "Heading", actions: -> { "My actions" }) { "Body" } }
+
+      it "renders the interruption card template with the heading and body" do
+        expected_html = <<~HTML
+          <div class="moj-interruption-card">
+            <div class="moj-interruption-card__content">
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-two-thirds">
+                  <h1 class="govuk-heading-l moj-interruption-card__heading">Heading</h1>
+                  <div class="govuk-body moj-interruption-card__body">
+                    Body
+                  </div>
+                  <div class="govuk-button-group moj-interruption-card__actions">
+                    My actions
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        HTML
+
+        expect(interruption_card).to eq(expected_html)
+      end
     end
   end
 
-  context "when interruption_card is called with a heading and a block" do
-    subject(:interruption_card) { helper.interruption_card(heading: "Heading") { "Body" } }
+  describe "#date_picker_field", skip: "TODO: remove or implement" do
+    subject(:date_picker_field) { helper.date_picker_field(form, :my_date_picker_field, label: "my date picker label", hint: "my date picker hint") }
 
-    it "renders the interruption card template with the heading and body" do
-      expected_html = <<~HTML
-        <div class="moj-interruption-card">
-          <div class="moj-interruption-card__content">
-            <div class="govuk-grid-row">
-              <div class="govuk-grid-column-two-thirds">
-                <h1 class="govuk-heading-l moj-interruption-card__heading">Heading</h1>
-                <div class="govuk-body moj-interruption-card__body">
-                  Body
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      HTML
-
-      expect(interruption_card).to eq(expected_html)
+    let(:form) do
+      Class.new(GOVUKDesignSystemFormBuilder::FormBuilder) do
+        # attr_accessor :my_date_picker_field
+      end
     end
-  end
 
-  context "when interruption_card is called with a heading, a body block and an actions proc" do
-    subject(:interruption_card) { helper.interruption_card(heading: "Heading", actions: -> { "My actions" }) { "Body" } }
+    before do
+      allow(helper).to receive(:form).and_return(form)
+      allow(form).to receive(:govuk_text_field)
+    end
 
-    it "renders the interruption card template with the heading and body" do
+    it "renders the date picker field with the expected attributes" do
       expected_html = <<~HTML
-        <div class="moj-interruption-card">
-          <div class="moj-interruption-card__content">
-            <div class="govuk-grid-row">
-              <div class="govuk-grid-column-two-thirds">
-                <h1 class="govuk-heading-l moj-interruption-card__heading">Heading</h1>
-                <div class="govuk-body moj-interruption-card__body">
-                  Body
-                </div>
-                <div class="govuk-button-group moj-interruption-card__actions">
-                  My actions
-                </div>
-              </div>
-            </div>
+        <div class="moj-datepicker" data-module="moj-date-picker">
+          <div class="govuk-form-group">
           </div>
         </div>
       HTML
 
-      expect(interruption_card).to eq(expected_html)
+      expect(date_picker_field).to eq(expected_html)
     end
   end
 end
