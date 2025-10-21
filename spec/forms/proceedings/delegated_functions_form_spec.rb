@@ -59,7 +59,55 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
           }
         end
 
-        it "is invalid with expect error" do
+        it "is invalid with expected error" do
+          expect(form).not_to be_valid
+          expect(form.errors[:used_delegated_functions_on]).to include("Enter the date you used delegated functions in the correct format")
+        end
+      end
+
+      context "when the date is using 2 digit year" do
+        let(:used_df?) { true }
+
+        let(:params) do
+          {
+            used_delegated_functions: used_df?,
+            used_delegated_functions_on: "#{Time.zone.yesterday.day}/#{Time.zone.yesterday.month}/#{Time.zone.yesterday.strftime('%y').to_i}",
+          }
+        end
+
+        it "is invalid with expected error" do
+          expect(form).not_to be_valid
+          expect(form.errors[:used_delegated_functions_on]).to include("Enter the date you used delegated functions in the correct format")
+        end
+      end
+
+      context "when the date is using an invalid month" do
+        let(:used_df?) { true }
+
+        let(:params) do
+          {
+            used_delegated_functions: used_df?,
+            used_delegated_functions_on: "#{Time.zone.yesterday.day}/13/#{Time.zone.yesterday.year}",
+          }
+        end
+
+        it "is invalid with expected error" do
+          expect(form).not_to be_valid
+          expect(form.errors[:used_delegated_functions_on]).to include("Enter the date you used delegated functions in the correct format")
+        end
+      end
+
+      context "when the date is using an invalid day" do
+        let(:used_df?) { true }
+
+        let(:params) do
+          {
+            used_delegated_functions: used_df?,
+            used_delegated_functions_on: "32/#{Time.zone.yesterday.month}/#{Time.zone.yesterday.year}",
+          }
+        end
+
+        it "is invalid with expected error" do
           expect(form).not_to be_valid
           expect(form.errors[:used_delegated_functions_on]).to include("Enter the date you used delegated functions in the correct format")
         end
