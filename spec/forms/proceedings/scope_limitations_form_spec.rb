@@ -73,19 +73,43 @@ RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
         end
       end
 
-      context "when a mandatory hearing date is invalid" do
+      context "when a mandatory hearing date is blank" do
         let(:hearing_date_cv027) { "" }
 
-        it "is invalid" do
+        it "is invalid with expected error" do
           expect(form).not_to be_valid
+          expect(form.errors.messages[:hearing_date_CV027]).to include("Enter a valid hearing date for Hearing/Adjournment in the correct format")
         end
 
         it "does not update the scope limitations" do
           expect(proceeding.scope_limitations.where(scope_type: "substantive").map(&:code)).to be_empty
         end
+      end
 
-        it "generates the expected error message" do
-          expect(form.errors.map(&:attribute)).to eq [:hearing_date_CV027]
+      context "when a mandatory hearing date is using a 2 digit year" do
+        let(:hearing_date_cv027) { "#{Time.zone.tomorrow.day}/#{Time.zone.tomorrow.month}/#{Time.zone.tomorrow.strftime('%y').to_i}" }
+
+        it "is invalid with expected error" do
+          expect(form).not_to be_valid
+          expect(form.errors.messages[:hearing_date_CV027]).to include("Enter a valid hearing date for Hearing/Adjournment in the correct format")
+        end
+      end
+
+      context "when a mandatory hearing date is using an invalid month" do
+        let(:hearing_date_cv027) { "1/13/#{Time.zone.tomorrow.year}" }
+
+        it "is invalid with expected error" do
+          expect(form).not_to be_valid
+          expect(form.errors.messages[:hearing_date_CV027]).to include("Enter a valid hearing date for Hearing/Adjournment in the correct format")
+        end
+      end
+
+      context "when a mandatory hearing date is using an invalid day" do
+        let(:hearing_date_cv027) { "32/#{Time.zone.tomorrow.month}/#{Time.zone.tomorrow.year}" }
+
+        it "is invalid with expected error" do
+          expect(form).not_to be_valid
+          expect(form.errors.messages[:hearing_date_CV027]).to include("Enter a valid hearing date for Hearing/Adjournment in the correct format")
         end
       end
 
