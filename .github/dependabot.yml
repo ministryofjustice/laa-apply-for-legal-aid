@@ -13,17 +13,11 @@ updates:
       rubocop:
         patterns:
           - "rubocop*"
-      components:
-        patterns:
-          - "govuk-components"
-          - "view_component"
       bundler:
         patterns:
           - "*"
         exclude-patterns:
           - "rubocop*"
-          - "govuk-components"
-          - "view_component"
     open-pull-requests-limit: 10
   # Removed until shai-hulud threat has abated
   # - package-ecosystem: "npm"
