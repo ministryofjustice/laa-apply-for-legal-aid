@@ -1,15 +1,15 @@
 module MojComponent
-  class SubNavigationComponent < ViewComponent::Base
+  class SubNavigationComponent < ApplicationComponent
     renders_many :navigation_items, "NavigationItem"
 
-    class NavigationItem < ViewComponent::Base
+    class NavigationItem < ApplicationComponent
       attr_reader :text, :href, :current
 
       def initialize(text:, href: "#", current: nil)
         @text = text
         @href = href
         @current = current
-        super
+        super()
       end
 
       def call
