@@ -127,27 +127,6 @@ RSpec.describe "EmergencyDefaultsController", :vcr do
             post_sd
             expect(response.body).to redirect_to(providers_legal_aid_application_emergency_level_of_service_path(application.id, proceeding.id))
           end
-
-          it "clears the emergency levels of service" do
-            expect { post_sd }.to change { proceeding.reload.attributes.symbolize_keys }
-              .from(
-                hash_including(
-                  {
-                    emergency_level_of_service: nil,
-                    emergency_level_of_service_name: nil,
-                    emergency_level_of_service_stage: nil,
-                  },
-                ),
-              ).to(
-                hash_including(
-                  {
-                    emergency_level_of_service: nil,
-                    emergency_level_of_service_name: nil,
-                    emergency_level_of_service_stage: nil,
-                  },
-                ),
-              )
-          end
         end
 
         context "when checking answers" do

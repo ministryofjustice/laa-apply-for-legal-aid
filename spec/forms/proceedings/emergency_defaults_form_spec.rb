@@ -76,9 +76,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
             emergency_level_of_service_name: "Full Representation",
             emergency_level_of_service_stage: 8,
             additional_params: { name: "hearing_date" },
-            hearing_date_1i: nil,
-            hearing_date_2i: nil,
-            hearing_date_3i: nil,
+            hearing_date: nil,
           }
         end
 
@@ -90,7 +88,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
         end
       end
 
-      context "when the user accepts the defaults but additional input is incomplete" do
+      context "when the user accepts the defaults but additional input is incomplete/invalid" do
         let(:params) do
           {
             accepted_emergency_defaults: true,
@@ -98,9 +96,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
             emergency_level_of_service_name: "Full Representation",
             emergency_level_of_service_stage: 8,
             additional_params: { name: "hearing_date" },
-            hearing_date_1i: Time.zone.today.year,
-            hearing_date_2i: nil,
-            hearing_date_3i: nil,
+            hearing_date: Time.zone.today.year.to_s,
           }
         end
 
@@ -112,7 +108,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
         end
       end
 
-      context "when the user accepts the defaults and additional input is complete" do
+      context "when the user accepts the defaults and additional input is complete/valid" do
         let(:params) do
           {
             accepted_emergency_defaults: true,
@@ -120,9 +116,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
             emergency_level_of_service_name: "Full Representation",
             emergency_level_of_service_stage: 8,
             additional_params: { name: "hearing_date" },
-            hearing_date_1i: Time.zone.today.year,
-            hearing_date_2i: Time.zone.today.month,
-            hearing_date_3i: Time.zone.today.day,
+            hearing_date: Time.zone.today.to_date.to_s(:date_picker),
           }
         end
 
@@ -182,9 +176,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
               emergency_level_of_service: 3,
               emergency_level_of_service_name: "Full Representation",
               emergency_level_of_service_stage: 8,
-              hearing_date_3i: Date.yesterday.day,
-              hearing_date_2i: Date.yesterday.month,
-              hearing_date_1i: Date.yesterday.year,
+              hearing_date: Date.yesterday.to_s(:date_picker),
             }
           end
 
@@ -199,7 +191,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
           end
         end
 
-        context "and the proceeding already has scope limitations" do
+        context "when the proceeding already has scope limitations" do
           before do
             proceeding.scope_limitations.create!(
               scope_type: 1,
@@ -215,33 +207,37 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
               emergency_level_of_service: 3,
               emergency_level_of_service_name: "Full Representation",
               emergency_level_of_service_stage: 8,
-              hearing_date_3i: Date.yesterday.day,
-              hearing_date_2i: Date.yesterday.month,
-              hearing_date_1i: Date.yesterday.year,
+              hearing_date: Date.yesterday.to_s(:date_picker),
             }
           end
 
-          it "deletes the existing emergency scope limitations and creates one new emergency scope limitation" do
-            save_form
+          it "replaces the existing emergency scope limitation with a new emergency scope limitation" do
             expect(proceeding.scope_limitations.where(scope_type: :emergency).count).to eq 1
 
-            expect(proceeding.scope_limitations.find_by(scope_type: :emergency))
-              .to have_attributes(code: "CV117",
-                                  meaning: "Interim order inc. return date",
-                                  description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
-                                  hearing_date: Date.yesterday)
-          end
-        end
+            expect { save_form }.to change { proceeding.scope_limitations.find_by(scope_type: :emergency).attributes.symbolize_keys }
+              .from(
+                hash_including(
+                  {
+                    scope_type: "emergency",
+                    code: "CV118",
+                    meaning: "Hearing",
+                    description: "Limited to all steps up to and including the hearing on [see additional limitation notes]",
+                    hearing_date: nil,
+                  },
+                ),
+              ).to(
+                hash_including(
+                  {
+                    scope_type: "emergency",
+                    code: "CV117",
+                    meaning: "Interim order inc. return date",
+                    description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                    hearing_date: Date.yesterday,
+                  },
+                ),
+              )
 
-        context "without calling the subject" do
-          it "creates a scope_limitation object" do
-            expect { save_form }.to change(proceeding.reload.scope_limitations, :count).by(1)
-
-            expect(proceeding.scope_limitations.find_by(scope_type: :emergency))
-              .to have_attributes(code: "CV117",
-                                  meaning: "Interim order inc. return date",
-                                  description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
-                                  hearing_date: nil)
+            expect(proceeding.scope_limitations.where(scope_type: :emergency).count).to eq 1
           end
         end
       end
@@ -253,31 +249,39 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
           expect { save_form }.to change(proceeding, :accepted_emergency_defaults).from(nil).to(false)
         end
 
-        it "clears the default values" do
-          expect { save_form }.to change { proceeding.reload.attributes.symbolize_keys }
-          .from(
-            hash_including(
-              {
-                emergency_level_of_service: nil,
-                emergency_level_of_service_name: nil,
-                emergency_level_of_service_stage: nil,
-              },
-            ),
-          ).to(
-            hash_including(
-              {
-                emergency_level_of_service: nil,
-                emergency_level_of_service_name: nil,
-                emergency_level_of_service_stage: nil,
-              },
-            ),
-          )
+        context "when proceeding already has emergency level of service set" do
+          before do
+            proceeding.update!(
+              emergency_level_of_service: 3,
+              emergency_level_of_service_name: "Full Representation",
+              emergency_level_of_service_stage: 8,
+            )
+          end
+
+          it "clears the default values" do
+            expect { save_form }.to change { proceeding.reload.attributes.symbolize_keys }
+            .from(
+              hash_including(
+                {
+                  emergency_level_of_service: 3,
+                  emergency_level_of_service_name: "Full Representation",
+                  emergency_level_of_service_stage: 8,
+                },
+              ),
+            ).to(
+              hash_including(
+                {
+                  emergency_level_of_service: nil,
+                  emergency_level_of_service_name: nil,
+                  emergency_level_of_service_stage: nil,
+                },
+              ),
+            )
+          end
         end
 
-        context "without calling the subject" do
-          it "does not create a scope_limitation object" do
-            expect { save_form }.not_to change(proceeding.reload.scope_limitations, :count)
-          end
+        it "does not create a scope_limitation object" do
+          expect { save_form }.not_to change(proceeding.reload.scope_limitations, :count)
         end
       end
     end
@@ -348,9 +352,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
               emergency_level_of_service: 3,
               emergency_level_of_service_name: "Full Representation",
               emergency_level_of_service_stage: 8,
-              hearing_date_3i: Date.yesterday.day,
-              hearing_date_2i: Date.yesterday.month,
-              hearing_date_1i: Date.yesterday.year,
+              hearing_date: Date.yesterday.to_s(:date_picker),
             }
           end
 
@@ -381,9 +383,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form, vcr: { cassette_
               emergency_level_of_service: 3,
               emergency_level_of_service_name: "Full Representation",
               emergency_level_of_service_stage: 8,
-              hearing_date_3i: Date.yesterday.day,
-              hearing_date_2i: Date.yesterday.month,
-              hearing_date_1i: Date.yesterday.year,
+              hearing_date: Date.yesterday.to_s(:date_picker),
             }
           end
 
