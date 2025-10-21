@@ -1,13 +1,13 @@
 module MojComponent
-  class InterruptionCardComponent < ViewComponent::Base
+  class InterruptionCardComponent < ApplicationComponent
     attr_reader :heading
 
     renders_one :body
     renders_one :actions
 
     def initialize(heading:)
-      super
       @heading = heading
+      super()
     end
   end
 end
