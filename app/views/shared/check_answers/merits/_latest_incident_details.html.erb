@@ -10,16 +10,16 @@
       card.with_summary_list(actions: false) do |summary_list|
         if latest_incident_details
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__notification_of_latest_incident" }) do |row|
-            row.with_key(text: t(".notification_of_latest_incident"), classes: "govuk-!-width-one-third")
+            row.with_key(text: t("shared.check_answers.merits.latest_incident_details.notification_of_latest_incident"), classes: "govuk-!-width-one-third")
             row.with_value(text: incident&.told_on)
           end
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__date_of_latest_incident" }) do |row|
-            row.with_key(text: t(".date_of_latest_incident"))
+            row.with_key(text: t("shared.check_answers.merits.latest_incident_details.date_of_latest_incident"))
             row.with_value(text: incident&.occurred_on)
           end
         else
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__when_contact_was_made" }) do |row|
-            row.with_key(text: t(".first-contact-date"))
+            row.with_key(text: t("shared.check_answers.merits.latest_incident_details.first-contact-date"))
             row.with_value(text: incident&.first_contact_date)
           end
         end

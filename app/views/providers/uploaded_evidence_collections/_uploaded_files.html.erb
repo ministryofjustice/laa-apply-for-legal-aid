@@ -15,9 +15,9 @@
 
         table.with_head do |head|
           head.with_row do |row|
-            row.with_cell(text: t(".filename"))
-            row.with_cell(text: t(".select_a_category"))
-            row.with_cell(text: t(".action"))
+            row.with_cell(text: t("providers.uploaded_evidence_collections.uploaded_files.filename"))
+            row.with_cell(text: t("providers.uploaded_evidence_collections.uploaded_files.select_a_category"))
+            row.with_cell(text: t("providers.uploaded_evidence_collections.uploaded_files.action"))
           end
         end
 
@@ -35,14 +35,14 @@
                                                @attachment_type_options,
                                                :first,
                                                :last,
-                                               label: { text: t(".select_a_category_label", filename: attachment.document.filename), class: "govuk-visually-hidden" },
+                                               label: { text: t("providers.uploaded_evidence_collections.uploaded_files.select_a_category_label", filename: attachment.document.filename), class: "govuk-visually-hidden" },
                                                options: { selected: @allowed_documents.size > 1 ? attachment.attachment_type : @attachment_type_options.first },
                                                class: [select_error],
                                                data: { categorisation_select: true, attachment_id: attachment.id }
                 end
                 row.with_cell do
                   govuk_button_to(
-                    t(".delete_html", filename: attachment.document.filename),
+                    t("providers.uploaded_evidence_collections.uploaded_files.delete_html", filename: attachment.document.filename),
                     providers_legal_aid_application_uploaded_evidence_collection_path(@legal_aid_application),
                     method: :patch,
                     name: "delete_button",

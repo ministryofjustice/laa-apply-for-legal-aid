@@ -275,8 +275,6 @@ en:
         h2_client: Client's details
         h2_partner: Partner's details
         partner_text: These details must be correct for our caseworkers to review them. We will not use them to check DWP records.
-        name: Name
-        date_of_birth: Date of birth
         national_insurance_number: National Insurance number
         client_name: Client name
         client_date_of_birth: Client date of birth
@@ -550,7 +548,6 @@ en:
           page_title: You have added %{count}
           existing: You have added %{count}
           table_caption: Children added
-          remove: Remove
           add_another: Do you need to add another child?
       remove_involved_child:
         show: &remove_show
@@ -643,8 +640,9 @@ en:
           page_title: You have added %{count}
           existing: You have added %{count}
           table_caption: Opponents added
-          remove: Remove
           add_another: Do you need to add another opponent?
+          name: Name
+          type: Type
       opponents_mental_capacities:
         show:
           h1-heading: Do all parties have the mental capacity to understand the terms of a court order?

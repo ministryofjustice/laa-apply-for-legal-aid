@@ -6,13 +6,13 @@
 
           table.with_head do |head|
             head.with_row do |row|
-              row.with_cell(text: t(".applicant_name"))
-              row.with_cell(text: t(".created_at"))
-              row.with_cell(text: t(".application_ref"))
-              row.with_cell(text: t(".status"))
-              row.with_cell(text: t(".provider_username"))
-              row.with_cell(text: t(".action"))
-              row.with_cell(text: t(".submission_data"))
+              row.with_cell(text: t("admin.legal_aid_applications.legal_aid_applications.applicant_name"))
+              row.with_cell(text: t("admin.legal_aid_applications.legal_aid_applications.created_at"))
+              row.with_cell(text: t("admin.legal_aid_applications.legal_aid_applications.application_ref"))
+              row.with_cell(text: t("admin.legal_aid_applications.legal_aid_applications.status"))
+              row.with_cell(text: t("admin.legal_aid_applications.legal_aid_applications.provider_username"))
+              row.with_cell(text: t("admin.legal_aid_applications.legal_aid_applications.action"))
+              row.with_cell(text: t("admin.legal_aid_applications.legal_aid_applications.submission_data"))
             end
           end
 
@@ -25,25 +25,25 @@
                 row.with_cell(text: t(application.state, scope: %i[enums legal_aid_application state]))
                 row.with_cell(text: mail_to(application.provider.email, application.provider.username))
                 row.with_cell do
-                  t(".discarded", date: application.discarded_at.strftime("%d-%m-%Y")) if application.discarded?
+                  t("admin.legal_aid_applications.legal_aid_applications.discarded", date: application.discarded_at.strftime("%d-%m-%Y")) if application.discarded?
 
                   if destroy_enabled?
                     govuk_button_to(
-                      t(".delete"),
+                      t("admin.legal_aid_applications.legal_aid_applications.delete"),
                       admin_legal_aid_application_path(application.id),
                       warning: true,
                       method: :delete,
                       class: "request-delete-button",
                       "data-application-id": application.id,
-                      "data-original-text": t(".delete"),
-                      "data-delete-name": "#{t('.applicant_name')}: #{application.applicant_full_name || t('generic.undefined')}",
-                      "data-delete-ref": "#{t('.application_ref')}: #{application.application_ref}",
-                      "data-delete-message": t(".warning.delete"),
+                      "data-original-text": t("admin.legal_aid_applications.legal_aid_applications.delete"),
+                      "data-delete-name": "#{t('admin.legal_aid_applications.legal_aid_applications.applicant_name')}: #{application.applicant_full_name || t('generic.undefined')}",
+                      "data-delete-ref": "#{t('admin.legal_aid_applications.legal_aid_applications.application_ref')}: #{application.application_ref}",
+                      "data-delete-message": t("admin.legal_aid_applications.legal_aid_applications.warning.delete"),
                     )
                   end
                 end
                 row.with_cell do
-                  govuk_button_link_to(t(".data_view_html", application_ref: application.application_ref), admin_legal_aid_applications_submission_path(application))
+                  govuk_button_link_to(t("admin.legal_aid_applications.legal_aid_applications.data_view_html", application_ref: application.application_ref), admin_legal_aid_applications_submission_path(application))
                 end
               end
             end

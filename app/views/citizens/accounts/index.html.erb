@@ -6,11 +6,11 @@
     <% @applicant_banks.each do |applicant_bank| %>
       <%= govuk_summary_list(actions: false, classes: "govuk-!-padding-bottom-6") do |summary_list| %>
         <%= summary_list.with_row do |row| %>
-          <%= row.with_key { t(".account_holder_name_heading") } %>
+          <%= row.with_key { t("citizens.accounts.index.account_holder_name_heading") } %>
           <%= row.with_value { applicant_bank.main_account_holder_name } %>
         <% end %>
         <%= summary_list.with_row do |row| %>
-          <%= row.with_key { t(".account_holder_address_heading") } %>
+          <%= row.with_key { t("citizens.accounts.index.account_holder_address_heading") } %>
           <%= row.with_value { applicant_bank.main_account_holder_address } %>
         <% end %>
       <% end %>
@@ -20,10 +20,10 @@
 
             table.with_head do |head|
               head.with_row do |row|
-                row.with_cell(text: t(".type_heading"))
-                row.with_cell(text: t(".account_number_heading"))
-                row.with_cell(text: t(".sort_code_heading"))
-                row.with_cell(numeric: true, text: t(".balance_heading"))
+                row.with_cell(text: t("citizens.accounts.index.type_heading"))
+                row.with_cell(text: t("citizens.accounts.index.account_number_heading"))
+                row.with_cell(text: t("citizens.accounts.index.sort_code_heading"))
+                row.with_cell(numeric: true, text: t("citizens.accounts.index.balance_heading"))
               end
             end
 
