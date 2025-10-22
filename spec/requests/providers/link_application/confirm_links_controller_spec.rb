@@ -1,11 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Providers::LinkApplication::ConfirmLinksController do
-  let(:linked_application) { create(:linked_application, lead_application: create(:legal_aid_application, :with_applicant), associated_application: create(:legal_aid_application), link_type_code:) }
+  let(:linked_application) { create(:linked_application, lead_application: create(:legal_aid_application, :with_applicant, linked_application_completed:), associated_application: create(:legal_aid_application), link_type_code:) }
   let(:legal_aid_application) { linked_application.associated_application }
   let(:lead_application) { linked_application.lead_application }
   let(:provider) { legal_aid_application.provider }
   let(:link_type_code) { "FC_LEAD" }
+  let(:linked_application_completed) { nil }
 
   describe "GET /providers/applications/:legal_aid_application_id/link_application/confirm_link" do
     subject(:get_request) do
@@ -30,6 +31,14 @@ RSpec.describe Providers::LinkApplication::ConfirmLinksController do
           "h1",
           text: "Search result",
         )
+      end
+
+      context "when navigating with the back button and the linked application task task has previously been completed" do
+        let(:linked_application_completed) { true }
+
+        it "resets linked_application" do
+          expect(legal_aid_application.reload.linked_application_completed).to be false
+        end
       end
     end
 

@@ -1,9 +1,10 @@
 require "rails_helper"
 
 RSpec.describe Providers::LinkApplication::FindLinkApplicationsController do
-  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, linked_application_completed:) }
   let(:linked_application) { create(:linked_application, associated_application: legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
+  let(:linked_application_completed) { nil }
 
   describe "GET /providers/applications/:legal_aid_application_id/link_application/find_link_case" do
     subject(:get_request) { get providers_legal_aid_application_link_application_find_link_application_path(legal_aid_application) }
@@ -23,6 +24,14 @@ RSpec.describe Providers::LinkApplication::FindLinkApplicationsController do
       it "shows the find link application page" do
         expect(response).to be_successful
         expect(unescaped_response_body).to include("What is the LAA reference of the application you want to link to?")
+      end
+
+      context "when navigating with the back button and the linked application task task has previously been completed" do
+        let(:linked_application_completed) { true }
+
+        it "resets linked_application" do
+          expect(legal_aid_application.reload.linked_application_completed).to be false
+        end
       end
     end
   end

@@ -6,6 +6,7 @@ module Providers
 
       def show
         @form = Providers::LinkApplication::ConfirmLinkForm.new(model: linked_application)
+        legal_aid_application.update!(linked_application_completed: false)
       end
 
       def update
