@@ -31,4 +31,3 @@ Style/SafeNavigationChainLength:
     - app/models/uploaded_evidence_collection.rb
     - app/presenters/applicant_account_presenter.rb
     - app/services/flow/steps/addresses/correspondence_address_choices_step.rb
-    - app/services/reports/base_report_creator.rb
