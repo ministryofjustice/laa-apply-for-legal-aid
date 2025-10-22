@@ -259,8 +259,8 @@ en:
             hearing_date_set:
               blank: Select yes if the hearing date has been set
             hearing_date:
-              blank: Enter a valid hearing date
-              date_not_valid: Enter a valid hearing date
+              blank: Enter a valid hearing date in the correct format
+              date_not_valid: Enter a valid hearing date in the correct format
         application_merits_task/opponent:
           attributes:
             first_name:

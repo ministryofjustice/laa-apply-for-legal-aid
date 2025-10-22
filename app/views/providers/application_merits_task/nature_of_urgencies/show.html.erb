@@ -12,7 +12,13 @@
       <%= form.govuk_text_area :nature_of_urgency, label: { text: t(".no-hint") }, rows: 5 %>
       <%= form.govuk_radio_buttons_fieldset :hearing_date_set, legend: { size: "xl", tag: "h1", text: t(".hearing-date-set") } do %>
         <%= form.govuk_radio_button :hearing_date_set, true, link_errors: true, label: { text: t("generic.yes") } do %>
-          <%= form.govuk_date_field :hearing_date, legend: { text: t(".hearing-date") }, hint: { text: t(".hearing-date-hint") } %>
+          <%= date_picker_field(
+                form,
+                :hearing_date,
+                value: params.dig("application_merits_task_urgency", "hearing_date") || form.object.model.hearing_date&.to_s(:date_picker),
+                label: { text: t(".hearing-date"), class: "govuk-label govuk-date-input__label" },
+                hint: { text: t(".hearing-date-hint"), options: number_of_days_ago(0, Date::DATE_FORMATS[:date_picker]) },
+              ) %>
         <% end %>
         <%= form.govuk_radio_button :hearing_date_set, false, label: { text: t("generic.no") } %>
       <% end %>
