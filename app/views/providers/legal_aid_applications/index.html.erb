@@ -1,3 +1,15 @@
+<% if @announcements.present?
+     @announcements.each do |message|
+       if message.display_type == "gov_uk" %>
+         <%= govuk_notification_banner(title_text: message.gov_uk_header_bar.presence || t("generic.important")) do |nb|
+               nb.with_heading(text: message.heading,
+                               link_text: message.link_display,
+                               link_href: message.link_url)
+               concat tag.p(class: "govuk-body") { message.body }
+             end %>
+       <% end
+     end
+   end %>
 <%= page_template(page_title: t(".heading_1"), back_link: :none, column_width: "full") do %>
   <div class="govuk-button-group">
     <%= govuk_button_link_to(t("generic.new_app"), providers_declaration_path, html_attributes: { id: "start" }) %>

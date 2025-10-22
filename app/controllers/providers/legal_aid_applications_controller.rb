@@ -4,7 +4,7 @@ module Providers
 
     legal_aid_application_not_required!
 
-    before_action :set_scope, only: %i[in_progress search submitted voided]
+    before_action :set_scope, :load_announcements, only: %i[in_progress search submitted voided]
 
     DEFAULT_PAGE_SIZE = 20
 
@@ -45,6 +45,10 @@ module Providers
 
     def set_scope
       @scope = params[:action].to_sym
+    end
+
+    def load_announcements
+      @announcements = Announcement.active
     end
 
     def applications(query)
