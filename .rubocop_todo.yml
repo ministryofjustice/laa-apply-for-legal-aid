@@ -28,5 +28,4 @@ RSpec/AnyInstance:
 
 Style/SafeNavigationChainLength:
   Exclude:
-    - app/models/uploaded_evidence_collection.rb
     - app/presenters/applicant_account_presenter.rb
