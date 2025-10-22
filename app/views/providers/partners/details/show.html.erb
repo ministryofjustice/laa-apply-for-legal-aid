@@ -7,20 +7,16 @@
 
   <%= page_template(
         page_title: t(".page_title"),
-        template: :basic,
         form:,
       ) do %>
 
-    <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: t(".page_title") },
-                            class: "govuk-!-padding-top-2 govuk-!-padding-bottom-4" do %>
+    <%= form.govuk_fieldset legend: { text: t("generic.name") } do %>
       <%= form.govuk_text_field :first_name, label: { text: "First name" }, width: "three-quarters" %>
       <%= form.govuk_text_field :last_name, label: { text: "Last name" }, width: "three-quarters" %>
     <% end %>
 
-    <%= form.govuk_date_field :date_of_birth,
-                              legend: { text: t("shared.forms.date_input_fields.date_of_birth_label") },
-                              hint: { text: t("shared.forms.date_input_fields.date_of_birth_hint") },
-                              class: "govuk-!-padding-bottom-2" %>
+    <%= form.govuk_date_field :date_of_birth, legend: { text: t("shared.forms.date_input_fields.date_of_birth_label") },
+                                              hint: { text: t("shared.forms.date_input_fields.date_of_birth_hint") } %>
 
     <%= form.govuk_radio_buttons_fieldset(:has_national_insurance_number,
                                           legend: { text: t(".has_national_insurance_number") }) do %>
@@ -35,6 +31,7 @@
               label: { text: t(".nino_label") },
               hint: { text: t("helpers.hint.applicant.national_insurance_number") },
               width: 10,
+              extra_letter_spacing: true,
             ) %>
       <% end %>
 
