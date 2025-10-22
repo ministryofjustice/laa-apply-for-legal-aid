@@ -45,8 +45,8 @@ Feature: Review and print your application
       | h3  | Payments the partner pays |
       | h3  | Payments the partner pays in cash|
 
-      | h2  | Housing benefit |
-      | h3  | Housing benefit details |
+      | h2  | Housing Benefit |
+      | h3  | Housing Benefit details |
 
       | h2  | Dependants |
 
@@ -250,7 +250,7 @@ Feature: Review and print your application
       | h3  | Payments your client pays in cash|
 
       | h2  | Housing Benefit |
-      | h3  | Housing benefit details |
+      | h3  | Housing Benefit details |
 
       | h2  | Dependants |
       | h3  | Any dependants |
@@ -276,7 +276,7 @@ Feature: Review and print your application
       | h3  | Payments the partner pays in cash|
 
       | h2  | Housing Benefit |
-      | h3  | Housing benefit details |
+      | h3  | Housing Benefit details |
 
       | h2  | Dependants |
       | h3  | Any dependants |
