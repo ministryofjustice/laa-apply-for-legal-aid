@@ -39,7 +39,7 @@ Feature: non_passported_journey with bank transactions
       | h2  | 3. Pension |
 
     And I should not see "Disregarded benefits"
-    And I should not see "Housing benefit"
+    And I should not see "Housing Benefit"
 
     Then I click the first link 'View statements and add transactions'
     Then I select the first checkbox
@@ -91,7 +91,7 @@ Feature: non_passported_journey with bank transactions
 
     And the following sections should exist:
       | tag | section |
-      | h2  | Housing benefit |
+      | h2  | Housing Benefit |
       | h2  | Dependants |
 
   @javascript
@@ -132,7 +132,7 @@ Feature: non_passported_journey with bank transactions
       | h2  | 2. Financial help from friends or family |
 
     And I should not see "Disregarded benefits"
-    And I should not see "Housing benefit"
+    And I should not see "Housing Benefit"
 
     Then I click the first link 'View statements and add transactions'
     Then I select the first checkbox
@@ -213,7 +213,7 @@ Feature: non_passported_journey with bank transactions
       | h3  | Student finance |
       | h2  | The partner's outgoings |
       | h3  | Payments the partner pays |
-      | h2  | Housing benefit |
+      | h2  | Housing Benefit |
       | h2  | Dependants |
 
     And the following sections should not exist:
