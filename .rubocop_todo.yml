@@ -28,12 +28,9 @@ RSpec/AnyInstance:
 
 Style/SafeNavigationChainLength:
   Exclude:
-    - app/controllers/concerns/address_handling.rb
     - app/models/uploaded_evidence_collection.rb
     - app/presenters/applicant_account_presenter.rb
     - app/services/flow/steps/addresses/correspondence_address_choices_step.rb
     - app/services/reports/base_report_creator.rb
     - spec/i18n_spec.rb
-    - app/views/providers/link_application/confirm_links/show.html.erb
     - app/helpers/uploaded_evidence_helper.rb
-    - app/views/shared/check_answers/_assets.html.erb
