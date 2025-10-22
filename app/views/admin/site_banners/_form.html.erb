@@ -1,0 +1,44 @@
+<%= form_with(
+      model: @announcement,
+      url: url,
+      method: method,
+      local: true,
+    ) do |form| %>
+  <%= page_template(
+        page_title: page_title,
+        form:,
+      ) do %>
+    <%= form.hidden_field :display_type, value: :gov_uk %>
+    <%= form.govuk_text_field :gov_uk_header_bar,
+                              label: { size: "m", text: t(".gov_uk_header_bar") },
+                              hint: { text: t(".gov_uk_header_bar_hint") },
+                              width: 20,
+                              value: @announcement.gov_uk_header_bar.presence || "Important" %>
+    <%= form.govuk_text_field :heading,
+                              label: { size: "m", text: t(".heading") },
+                              width: 20 %>
+    <%= form.govuk_text_field :link_url,
+                              label: { size: "m", text: t(".link_url") },
+                              hint: { text: t("generic.optional") },
+                              width: 20 %>
+    <%= form.govuk_text_field :link_display,
+                              label: { size: "m", text: t(".link_display") },
+                              hint: { text: t("generic.optional") },
+                              width: 20 %>
+    <%= form.govuk_text_area :body,
+                             label: { size: "m", text: t(".body") },
+                             hint: { text: t("generic.optional") },
+                             rows: 5 %>
+    <%= form.govuk_text_field :start_at,
+                              label: { size: "m", text: t(".start_at") },
+                              hint: { text: t(".date_time_hint") },
+                              width: 20,
+                              value: @announcement.start_at.present? ? l(@announcement.start_at.presence, format: :announcement_date_time) : "" %>
+    <%= form.govuk_text_field :end_at,
+                              label: { size: "m", text: t(".end_at") },
+                              hint: { text: t(".date_time_hint") },
+                              width: 20,
+                              value: @announcement.end_at.present? ? l(@announcement.end_at.presence, format: :announcement_date_time) : "" %>
+    <%= form.govuk_submit t(".save") %>
+  <% end %>
+<% end %>

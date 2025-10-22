@@ -3,6 +3,7 @@ en:
   time:
     formats:
       long_date_time: "%-d %B %Y @ %l:%M%p"
+      announcement_date_time: "%d/%m/%Y %H:%M"
   date:
     formats:
       default: "%Y-%m-%d"

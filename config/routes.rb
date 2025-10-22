@@ -117,6 +117,7 @@ Rails.application.routes.draw do
         get "restart_current_submission"
       end
     end
+    resources :site_banners, only: %i[index new create update show destroy]
     resource :submitted_applications_report, only: %i[show]
     resource :feedback, controller: :feedback, only: %i[show]
     resources :reports, only: %i[index create]
