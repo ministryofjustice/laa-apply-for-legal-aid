@@ -17,10 +17,9 @@ module Providers
       end
 
       def form_params
-        merged_params = merge_with_model(incident) do
+        merge_with_model(incident) do
           params.expect(application_merits_task_incident: %i[told_on occurred_on])
         end
-        convert_date_params(merged_params)
       end
     end
   end
