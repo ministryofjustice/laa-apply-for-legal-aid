@@ -118,8 +118,9 @@ RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
           [{ "code" => "CV027",
              "meaning" => "Hearing/Adjournment",
              "description" => "Limited to all steps (including any adjournment thereof) up to and including the hearing on",
-             "additional_params" => [{ "name" => "limitation_note", "type" => "limitation_note", "mandatory" => true }] }]
+             "additional_params" => [{ "name" => "limitation_note", "type" => "text", "mandatory" => true }] }]
         end
+
         let(:params) do
           {
             scope_codes:,

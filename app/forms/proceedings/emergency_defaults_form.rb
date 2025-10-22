@@ -20,17 +20,21 @@ module Proceedings
     def initialize(*args)
       super
       @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], true))
-      self.emergency_level_of_service = @defaults["default_level_of_service"]["level"]
-      self.emergency_level_of_service_name = @defaults["default_level_of_service"]["name"]
-      self.emergency_level_of_service_stage = @defaults["default_level_of_service"]["stage"]
-      self.delegated_functions_scope_limitation_code = @defaults["default_scope"]["code"]
-      self.delegated_functions_scope_limitation_meaning = @defaults["default_scope"]["meaning"]
-      self.delegated_functions_scope_limitation_description = @defaults["default_scope"]["description"]
-      self.additional_params = @defaults["default_scope"]["additional_params"]
+      self.emergency_level_of_service = default_level_of_service["level"]
+      self.emergency_level_of_service_name = default_level_of_service["name"]
+      self.emergency_level_of_service_stage = default_level_of_service["stage"]
+      self.delegated_functions_scope_limitation_code = default_scope["code"]
+      self.delegated_functions_scope_limitation_meaning = default_scope["meaning"]
+      self.delegated_functions_scope_limitation_description = default_scope["description"]
+      self.additional_params = default_scope["additional_params"]
+    end
+
+    def default_level_of_service
+      @default_level_of_service ||= @defaults["default_level_of_service"]
     end
 
     def default_scope
-      @defaults["default_scope"]
+      @default_scope ||= @defaults["default_scope"]
     end
 
     def save
