@@ -87,8 +87,8 @@
 #    Then I should be on a page showing "Provide details of the case"
 #    Then I click 'Continue'
 #    Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
-#    Then I enter the 'told' date of 2 days ago
-#    Then I enter the 'occurred' date of 2 days ago
+#    Then I enter the 'told' date of 2 days ago using the date picker field
+#    Then I enter the 'occurred' date of 2 days ago using the date picker field
 #    Then I click 'Save and continue'
 #    Then I should be on a page showing "Domestic abuse summary"
 #    Then I fill "Full Name" with "John Doe"

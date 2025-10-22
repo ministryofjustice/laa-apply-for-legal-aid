@@ -82,8 +82,8 @@ Feature: Non-means-tested applicant journey without use of delegation functions
 
     When I click link 'Latest incident details'
     Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
-    And I enter the 'told' date of 2 days ago
-    And I enter the 'occurred' date of 2 days ago
+    And I enter the 'told' date of 2 days ago using the date picker field
+    And I enter the 'occurred' date of 2 days ago using the date picker field
 
     When I click 'Save and continue'
     Then  I should be on a page with title "Is the opponent an individual or an organisation?"

@@ -2,92 +2,43 @@ module Incidents
   class ToldOnForm < BaseForm
     form_for ApplicationMeritsTask::Incident
 
-    attr_accessor :told_on_1i, :told_on_2i, :told_on_3i, :occurred_on_1i, :occurred_on_2i, :occurred_on_3i
-    attr_writer :told_on, :occurred_on
+    DATE_OPTIONS = {
+      date: {
+        format: Date::DATE_FORMATS[:date_picker_parse_format],
+        strict_format: /^\d{1,2}\/\d{1,2}\/\d{4}$/,
+        not_in_the_future: true,
+      },
+    }.freeze
 
-    validates :told_on, presence: true, unless: :draft_and_not_partially_complete_told_on_date?
-    validates :told_on, date: { not_in_the_future: true }, allow_nil: true
+    attr_accessor :told_on, :occurred_on
 
-    validates :occurred_on, presence: true, unless: :draft_and_not_partially_complete_occurred_on_date?
-    validates :occurred_on, date: { not_in_the_future: true }, allow_nil: true
+    validates :told_on, presence: true, unless: :draft?
+    validates :told_on, **DATE_OPTIONS, allow_nil: true
 
-    validate :occurred_on_before_told_on
+    validates :occurred_on, presence: true, unless: :draft?
+    validates :occurred_on, **DATE_OPTIONS, allow_nil: true
 
-    def initialize(*args)
-      super
-      set_instance_variables_for_attributes_if_not_set_but_in_model(
-        attrs: (told_on_date_fields.fields + occurred_on_date_fields.fields),
-        model_attributes:
-        [
-          told_on_date_fields.model_attributes,
-          occurred_on_date_fields.model_attributes,
-        ].compact.reduce(&:merge),
-      )
-    end
-
-    def told_on
-      return @told_on if @told_on.present?
-      return if told_on_date_fields.blank?
-      return told_on_date_fields.input_field_values if told_on_incomplete?
-
-      @told_on = attributes[:told_on] = told_on_date_fields.form_date
-    end
-
-    def occurred_on
-      return @occurred_on if @occurred_on.present?
-      return if occurred_on_date_fields.blank?
-      return occurred_on_date_fields.input_field_values if occurred_on_incomplete?
-
-      @occurred_on = attributes[:occurred_on] = occurred_on_date_fields.form_date
-    end
+    validate :occurred_on_before_told_on, unless: :draft?
 
   private
 
-    def told_on_incomplete?
-      told_on_date_fields.partially_complete? || told_on_date_fields.form_date_invalid?
-    end
-
-    def occurred_on_incomplete?
-      occurred_on_date_fields.partially_complete? || occurred_on_date_fields.form_date_invalid?
-    end
-
     def occurred_on_before_told_on
-      return if occurred_on.blank? || told_on.blank?
-      return if occurred_on_incomplete? || told_on_incomplete?
+      return unless date_valid?(:told_on, told_on) && date_valid?(:occurred_on, occurred_on)
 
-      errors.add(:occurred_on, :invalid_timeline) if told_on < occurred_on
+      errors.add(:occurred_on, :invalid_timeline) if told_on.to_date < occurred_on.to_date
     end
 
-    def exclude_from_model
-      (told_on_date_fields.fields + occurred_on_date_fields.fields)
-    end
+    # NOTE: explicitly use the validator that is used for the dates attributes themselves to centralise the logic
+    # Also. clear the errors after to avoid double error adding (although i am no t sure it is a problem but have
+    # seen doubled errors in the tests)
+    def date_valid?(attribute_name, attribute_value)
+      validator = DateValidator.new(attributes: [attribute_name], **DATE_OPTIONS[:date])
+      validator.validate_each(self, attribute_name, attribute_value)
 
-    def draft_and_not_partially_complete_told_on_date?
-      draft? && !told_on_date_fields.partially_complete?
-    end
+      errors_exist = errors[attribute_name].any?
+      errors.delete(:attribute_name)
 
-    def draft_and_not_partially_complete_occurred_on_date?
-      draft? && !occurred_on_date_fields.partially_complete?
-    end
-
-    def told_on_date_fields
-      @told_on_date_fields ||= DateFieldBuilder.new(
-        form: self,
-        model:,
-        method: :told_on,
-        prefix: :told_on_,
-        suffix: :gov_uk,
-      )
-    end
-
-    def occurred_on_date_fields
-      @occurred_on_date_fields ||= DateFieldBuilder.new(
-        form: self,
-        model:,
-        method: :occurred_on,
-        prefix: :occurred_on_,
-        suffix: :gov_uk,
-      )
+      !errors_exist
     end
   end
 end

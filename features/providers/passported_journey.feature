@@ -49,9 +49,9 @@ Feature: passported_journey completes application
     Then I should be on the 'merits_task_list' page showing 'Latest incident details Not started'
     When I click link 'Latest incident details'
     Then I should be on a page showing 'When did your client contact you about the latest domestic abuse incident?'
-    Then I enter the 'told' date of 2 days ago
-    Then I enter the 'occurred' date of 2 days ago
-    Then I click 'Save and continue'
+    And I enter the 'told' date of 2 days ago using the date picker field
+    And I enter the 'occurred' date of 2 days ago using the date picker field
+    When I click 'Save and continue'
     Then I should be on a page with title "Is the opponent an individual or an organisation?"
     And I choose a 'An individual' radio button
     When I click 'Save and continue'
