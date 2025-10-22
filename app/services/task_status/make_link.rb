@@ -22,7 +22,7 @@ module TaskStatus
     end
 
     def in_progress?
-      application.lead_linked_application.present?
+      application.linked_application_completed == false
     end
 
     def completed?
