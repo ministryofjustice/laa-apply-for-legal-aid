@@ -21,7 +21,9 @@ RSpec.describe "I18n", :i18n do
     it "does not have missing keys for the applicant journey" do
       missing_applicant_keys = []
       missing_keys.leaves.each do |leaf|
-        missing_applicant_keys << leaf if welsh_paths.any? { |path| leaf.data[:occurrences]&.first&.path&.include? "views#{path}" }
+        missing_applicant_keys << leaf if welsh_paths.any? do |path|
+          leaf.data[:occurrences].first.path.include? "views#{path}" if leaf.data[:occurrences]
+        end
       end
       print_missing_keys(missing_applicant_keys) unless missing_applicant_keys.empty?
       expect(missing_applicant_keys).to be_empty,
