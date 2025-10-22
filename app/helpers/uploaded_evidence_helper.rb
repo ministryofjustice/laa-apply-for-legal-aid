@@ -26,7 +26,8 @@ private
     content_tag(:div, t("#{prefix}.list_text"), class: "govuk-body") +
       govuk_list(
         legal_aid_application.allowed_document_categories.map do |evidence|
-          t("#{prefix}.#{evidence}", benefit: legal_aid_application&.dwp_override&.passporting_benefit&.titleize)
+          benefit = legal_aid_application&.dwp_override&.passporting_benefit
+          t("#{prefix}.#{evidence}", benefit: benefit&.titleize)
         end,
         type: :bullet,
       )
