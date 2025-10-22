@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Providers::ApplicantBankAccountsController do
+  include ActionView::Helpers::NumberHelper
+
   let(:applicant) { create(:applicant) }
   let!(:bank_provider) { create(:bank_provider, applicant:) }
   let!(:bank_account) { create(:bank_account, bank_provider:) }
@@ -35,7 +37,7 @@ RSpec.describe Providers::ApplicantBankAccountsController do
       it "shows the client bank account name and balance" do
         get_request
         expect(unescaped_response_body).to include(bank_provider.name)
-        expect(response.body).to include(bank_account.balance.to_fs(:delimited))
+        expect(response.body).to include(gds_number_to_currency(bank_account.balance))
       end
     end
   end

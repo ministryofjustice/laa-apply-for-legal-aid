@@ -12,19 +12,13 @@
 
     <p class="govuk-body"><%= t(".previously_told") %></p>
 
-    <%= govuk_summary_list(actions: false, borders: false) do |summary_list|
-          @applicant_accounts.each do |applicant_account|
-            applicant_account.bank_accounts.each do |bank_account|
-              summary_list.with_row do |row|
-                row.with_key { t("providers.applicant_bank_accounts.show.account") }
-                row.with_value { bank_account.bank_and_account_name }
-              end
-              summary_list.with_row do |row|
-                row.with_key { t("providers.applicant_bank_accounts.show.balance") }
-                row.with_value { value_with_currency_unit(bank_account.balance, bank_account.currency) }
-              end
-            end
-          end
+    <% @applicant_accounts.each do |applicant_account|
+          applicant_account.bank_accounts.each do |bank_account| %>
+            <p class="govuk-body">
+              <strong><%= t("providers.applicant_bank_accounts.show.account") %>:</strong> <%= bank_account.bank_and_account_name %><br>
+              <strong><%= t("providers.applicant_bank_accounts.show.balance") %>:</strong> <%= gds_number_to_currency(bank_account.balance) %>
+            </p>
+          <% end
         end %>
 
     <%= form.govuk_radio_buttons_fieldset :applicant_bank_account,
