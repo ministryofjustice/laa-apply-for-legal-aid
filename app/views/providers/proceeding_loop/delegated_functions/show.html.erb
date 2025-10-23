@@ -12,8 +12,7 @@
                                           hint: { text: @proceeding.special_children_act? ? t(".sca_hint") : "" }) do %>
       <%= form.govuk_radio_button :used_delegated_functions, true, label: { text: t("generic.yes") } do %>
 
-        <%= date_picker_field(
-              form,
+        <%= form.moj_date_picker_field(
               :used_delegated_functions_on,
               value: params.dig("proceeding", "used_delegated_functions_on") || @proceeding.used_delegated_functions_on&.to_s(:date_picker),
               label: { text: t("shared.forms.date_input_fields.used_delegated_functions_on_label"), class: "govuk-label govuk-date-input__label" },

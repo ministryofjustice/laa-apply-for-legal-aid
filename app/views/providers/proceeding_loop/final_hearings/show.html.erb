@@ -10,8 +10,7 @@
     <%= form.govuk_radio_buttons_fieldset(:listed,
                                           legend: { size: "m", tag: "h2", text: t(".question") }) do %>
       <%= form.govuk_radio_button :listed, true, link_errors: true, label: { text: t("generic.yes") } do %>
-        <%= date_picker_field(
-              form,
+        <%= form.moj_date_picker_field(
               :date,
               value: params.dig("final_hearing", "date") || form.object.model.date&.to_s(:date_picker),
               label: { text: t(".hearing"), class: "govuk-label govuk-date-input__label" },

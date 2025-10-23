@@ -71,30 +71,4 @@ RSpec.describe MojComponentsHelper do
       end
     end
   end
-
-  describe "#date_picker_field", skip: "TODO: remove or implement" do
-    subject(:date_picker_field) { helper.date_picker_field(form, :my_date_picker_field, label: "my date picker label", hint: "my date picker hint") }
-
-    let(:form) do
-      Class.new(GOVUKDesignSystemFormBuilder::FormBuilder) do
-        # attr_accessor :my_date_picker_field
-      end
-    end
-
-    before do
-      allow(helper).to receive(:form).and_return(form)
-      allow(form).to receive(:govuk_text_field)
-    end
-
-    it "renders the date picker field with the expected attributes" do
-      expected_html = <<~HTML
-        <div class="moj-datepicker" data-module="moj-date-picker">
-          <div class="govuk-form-group">
-          </div>
-        </div>
-      HTML
-
-      expect(date_picker_field).to eq(expected_html)
-    end
-  end
 end
