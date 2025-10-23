@@ -37,6 +37,7 @@ en:
         submitted_applications_report: Submitted
         user_admin: User admin
         your_applications: Your applications
+        site_banner: Site banner
     header:
       legal_aid_agency: Legal Aid Agency
     logout:

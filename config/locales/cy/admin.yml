@@ -94,6 +94,32 @@ cy:
 
       update:
         notice: Settings have been updated
+    site_banners:
+      index:
+        heading_1: Site banners
+        message: Message
+        between: Between
+        start_at: Start at
+        end_at: End at
+        actions: Action
+        delete: Delete
+        no_messages: No announcements present
+        new_message: Add announcement
+      new:
+        page_title: Add announcement
+      show:
+        page_title: Announcement
+      form:
+        gov_uk_header_bar: GOV UK notification bar header
+        gov_uk_header_bar_hint: Defaults to Important, but can be overridden
+        heading: Heading
+        link_url: Heading link url
+        link_display: Heading link display text
+        body: Message body
+        start_at: Start display at
+        end_at: Display until
+        date_time_hint: Input as date time dd/mm/yyyy hh:mm (24 hour clock)
+        save: Save
     submitted_applications_reports:
       show:
         heading_1: Submitted Applications

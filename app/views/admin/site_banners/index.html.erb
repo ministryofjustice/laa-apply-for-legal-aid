@@ -1,0 +1,62 @@
+<%= page_template(
+      page_title: t(".heading_1"),
+      back_link: :none,
+    ) %>
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-full">
+    <%= govuk_button_link_to t(".new_message"), new_admin_site_banner_path, role: "button" %>
+
+    <% if @messages.present? %>
+      <%= govuk_table do |table|
+            table.with_caption(html_attributes: { class: "govuk-visually-hidden" }, text: t(".heading_1"))
+
+            table.with_head do |head|
+              head.with_row do |row|
+                row.with_cell(html_attributes: { class: "govuk-!-width-two-thirds" }, text: t(".message"))
+                row.with_cell(text: t(".between"))
+                row.with_cell(text: t(".actions"))
+              end
+            end
+
+            table.with_body do |body|
+              @messages.each do |message|
+                body.with_row do |row|
+                  row.with_cell do
+                    if message.display_type == "gov_uk"
+                      govuk_notification_banner(title_text: message.gov_uk_header_bar.presence || t("generic.important")) do |nb|
+                        nb.with_heading(text: message.heading,
+                                        link_text: message.link_display,
+                                        link_href: message.link_url)
+                        concat tag.p(class: "govuk-body") { message.body }
+                      end
+                    end
+                  end
+                  row.with_cell do
+                    concat tag.div(l(message.start_at, format: :announcement_date_time))
+                    concat tag.div("and")
+                    concat tag.div(l(message.end_at, format: :announcement_date_time))
+                  end
+                  row.with_cell do
+                    concat govuk_button_to(
+                      t("generic.edit"),
+                      admin_site_banner_path(message.id),
+                      method: :get,
+                    )
+                    concat govuk_button_to(
+                      t(".delete"),
+                      admin_site_banner_path(message.id),
+                      method: :delete,
+                      warning: true,
+                      data: { confirm: "Are you sure?" },
+                    )
+                  end
+                end
+              end
+            end
+          end %>
+    <% else %>
+      <h2 class="govuk-body"><%= t(".no_messages") %></h2>
+    <% end %>
+  </div>
+</div>
