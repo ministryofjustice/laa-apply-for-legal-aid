@@ -33,8 +33,8 @@ Feature: Review and print your application
       | h3  | Payments your client pays |
       | h3  | Payments your client pays in cash|
 
-      | h2  | Housing benefit |
-      | h3  | Housing benefit details |
+      | h2  | Housing Benefit |
+      | h3  | Housing Benefit details |
 
       | h2  | Dependants |
 
@@ -147,7 +147,7 @@ Feature: Review and print your application
       | h3  | Bank statements |
       | h3  | Client benefits, charitable or government payments |
 
-      | h2  | Housing benefit |
+      | h2  | Housing Benefit |
 
     And the "Payments your client gets" review section should contain:
       | question |
@@ -157,7 +157,7 @@ Feature: Review and print your application
       | Income from a property or lodger |
       | Pension |
 
-    And I should not see "Housing benefit total"
+    And I should not see "Housing Benefit total"
 
     And I should see "Housing payments"
     And I should see "Childcare payments"
@@ -238,7 +238,7 @@ Feature: Review and print your application
       | h3  | Payments your client pays in cash|
 
       | h2  | Housing Benefit |
-      | h3  | Housing benefit details |
+      | h3  | Housing Benefit details |
 
       | h2  | Dependants |
       | h3  | Any dependants |
