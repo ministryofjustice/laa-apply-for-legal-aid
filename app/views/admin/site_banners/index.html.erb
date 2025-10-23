@@ -13,9 +13,9 @@
 
             table.with_head do |head|
               head.with_row do |row|
-                row.with_cell(html_attributes: { class: "govuk-!-width-two-thirds" }, text: t(".message"))
-                row.with_cell(text: t(".between"))
-                row.with_cell(text: t(".actions"))
+                row.with_cell(html_attributes: { class: "govuk-!-width-two-thirds" }, text: t("admin.site_banners.index.message"))
+                row.with_cell(text: t("admin.site_banners.index.between"))
+                row.with_cell(text: t("admin.site_banners.index.actions"))
               end
             end
 
@@ -44,7 +44,7 @@
                       method: :get,
                     )
                     concat govuk_button_to(
-                      t(".delete"),
+                      t("admin.site_banners.index.delete"),
                       admin_site_banner_path(message.id),
                       method: :delete,
                       warning: true,
