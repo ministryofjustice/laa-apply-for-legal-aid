@@ -109,10 +109,10 @@ RSpec.describe Providers::HomeAddress::LookupsController do
         end
 
         context "when the applicant has an existing overseas home address" do
-          it "creates a new home address record with country GBR" do
+          it "creates a new home address record with country GBR and deletes the existing home address" do
             create(:address, applicant:, location: "home", address_line_one: "Konigstrasse 1", address_line_two: "Stuttgart", country_code: "DEU", country_name: "Germany")
-            expect { patch_request }.to change { applicant.addresses.count }.by(1)
-            expect(applicant.home_address.country_code).to eq("GBR")
+            expect { patch_request }.to change { applicant.reload.home_address.country_code }.from("DEU").to("GBR")
+            expect(applicant.addresses.where(location: "home").count).to eq 1
           end
         end
 
