@@ -10,21 +10,19 @@
                       form:) do %>
 
     <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: page_title } do %>
-       <%= date_picker_field(
-              form,
-              :told_on,
-              value: params.dig("application_merits_task_incident", "told_on") || form.object.model.told_on&.to_s(:date_picker),
-              label: { text: t("shared.forms.date_input_fields.told_on_label"), size: 'm', class: "govuk-label govuk-date-input__label" },
-              hint: { text: t("shared.forms.date_input_fields.date_hint", options: number_of_days_ago(0, Date::DATE_FORMATS[:date_picker])) },
-            ) %>
+      <%= form.moj_date_picker_field(
+            :told_on,
+            value: params.dig("application_merits_task_incident", "told_on") || form.object.model.told_on&.to_s(:date_picker),
+            label: { text: t("shared.forms.date_input_fields.told_on_label"), size: "m", class: "govuk-label govuk-date-input__label" },
+            hint: { text: t("shared.forms.date_input_fields.date_hint", options: number_of_days_ago(0, Date::DATE_FORMATS[:date_picker])) },
+          ) %>
 
-      <%= date_picker_field(
-              form,
-              :occurred_on,
-              value: params.dig("application_merits_task_incident", "occurred_on") || form.object.model.occurred_on&.to_s(:date_picker),
-              label: { text: t("shared.forms.date_input_fields.occurred_on_label"), size: 'm', class: "govuk-label govuk-date-input__label" },
-              hint: { text: t("shared.forms.date_input_fields.date_hint", options: number_of_days_ago(0, Date::DATE_FORMATS[:date_picker])) },
-            ) %>
+      <%= form.moj_date_picker_field(
+            :occurred_on,
+            value: params.dig("application_merits_task_incident", "occurred_on") || form.object.model.occurred_on&.to_s(:date_picker),
+            label: { text: t("shared.forms.date_input_fields.occurred_on_label"), size: "m", class: "govuk-label govuk-date-input__label" },
+            hint: { text: t("shared.forms.date_input_fields.date_hint", options: number_of_days_ago(0, Date::DATE_FORMATS[:date_picker])) },
+          ) %>
     <% end %>
 
     <div class="govuk-!-padding-bottom-4"></div>

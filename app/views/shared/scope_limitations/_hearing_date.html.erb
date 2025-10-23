@@ -1,5 +1,4 @@
-<%= date_picker_field(
-      form,
+<%= form.moj_date_picker_field(
       field_name,
       # TODO: 6303/6306 handle displying of database value for the model -  e.g. value: params.dig("proceeding", "hearing_date") || <from DB>
       label: { text: t("shared.forms.date_input_fields.scope_limitations_label"), class: "govuk-label govuk-date-input__label" },
