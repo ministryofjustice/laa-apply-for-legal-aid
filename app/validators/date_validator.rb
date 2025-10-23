@@ -15,8 +15,8 @@ private
   def parse_date(date_str, format)
     format ||= DEFAULT_FORMAT
 
-    if options[:strict_format] && !date_str.strip.match?(options[:strict_format])
-      raise StandardError, "strict date format not met for #{date_str}, expected #{options[:strict_format]}"
+    if options[:strict_pattern] && !date_str.strip.match?(options[:strict_pattern])
+      raise StandardError, "strict date format not met for #{date_str}, expected #{options[:strict_pattern]}"
     end
 
     Time.strptime(date_str.strip, format).in_time_zone

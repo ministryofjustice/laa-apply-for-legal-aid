@@ -141,8 +141,8 @@ module Proceedings
       attribute_name = :"hearing_date_#{code}"
       date_string = __send__(:"hearing_date_#{code}")
 
-      unless date_string.strip.match?(/^\d{1,2}\/\d{1,2}\/\d{4}$/)
-        raise StandardError, "strict date format not met for #{date_str}, expected #{options[:strict_format]}"
+      unless date_string.strip.match?(Date::DATE_PATTERNS[:date_picker_strict])
+        raise StandardError, "strict date format not met for #{date_str}, expected #{options[:strict_pattern]}"
       end
 
       Time.strptime(date_string.strip, Date::DATE_FORMATS[:date_picker_parse_format]).in_time_zone

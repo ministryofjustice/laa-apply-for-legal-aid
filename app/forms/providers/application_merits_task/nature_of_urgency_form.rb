@@ -17,7 +17,7 @@ module Providers
       validates :hearing_date,
                 date: {
                   format: Date::DATE_FORMATS[:date_picker_parse_format],
-                  strict_format: /^\d{1,2}\/\d{1,2}\/\d{4}$/,
+                  strict_pattern: Date::DATE_PATTERNS[:date_picker_strict],
                 },
                 allow_nil: true,
                 if: :hearing_date_required?
