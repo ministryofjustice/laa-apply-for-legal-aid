@@ -79,7 +79,7 @@ Rails.application.configure do
   config.x.pda.url = "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk"
 
   # Test url for user api
-  config.x.ccms_user_api.url = "https://laa-ccms-user-management-api-dev.apps.live.cloud-platform.service.justice.gov.uk/api/v1"
+  config.x.ccms_user_api.url = "https://laa-ccms-user-details-api-dev.apps.live.cloud-platform.service.justice.gov.uk/api/v1"
 
   # allow en-GB locale in test environment for Faker
   config.i18n.available_locales = %i[en cy en-GB]
