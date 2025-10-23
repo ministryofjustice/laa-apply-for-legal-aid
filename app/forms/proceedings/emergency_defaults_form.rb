@@ -15,7 +15,13 @@ module Proceedings
 
     validates :accepted_emergency_defaults, presence: { unless: :draft? }
     validates :hearing_date, presence: true, if: :hearing_date_required?
-    validates :hearing_date, date: { format: Date::DATE_FORMATS[:date_picker_parse_format] }, allow_nil: true, if: :hearing_date_required?
+    validates :hearing_date,
+              date: {
+                format: Date::DATE_FORMATS[:date_picker_parse_format],
+                strict_pattern: Date::DATE_PATTERNS[:date_picker_strict],
+              },
+              allow_nil: true,
+              if: :hearing_date_required?
 
     def initialize(*args)
       super
