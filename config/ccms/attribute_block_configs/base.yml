@@ -4868,7 +4868,7 @@ proceeding_merits:
     response_type: text
     user_defined: false
   FAMILY_PROSPECTS_OF_SUCCESS:
-    generate_block?: "#lead_proceeding_chances_of_success?"
+    generate_block?: "#proceeding_chances_of_success?"
     value: "#ccms_equivalent_prospects_of_success"
     br100_meaning: 'Fam: The Family Prospects Of Success For The Proceeding'
     response_type: text
