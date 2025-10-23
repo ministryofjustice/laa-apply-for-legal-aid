@@ -705,7 +705,7 @@ en:
               blank: Select a level of service
             hearing_date:
               blank: Enter a valid hearing date
-              date_not_valid: Enter a valid hearing date
+              date_not_valid: Enter a valid hearing date in the correct format
             used_delegated_functions:
               blank: Select yes if you have used delegated functions for this proceeding
             used_delegated_functions_on:
