@@ -9,7 +9,7 @@ module Proceedings
     validates :used_delegated_functions_on,
               date: {
                 format: Date::DATE_FORMATS[:date_picker_parse_format],
-                strict_format: /^\d{1,2}\/\d{1,2}\/\d{4}$/,
+                strict_pattern: Date::DATE_PATTERNS[:date_picker_strict],
                 not_in_the_future: true,
                 earliest_allowed_date: { date: 12.months.ago.to_date.strftime(Date::DATE_FORMATS[:date_picker_parse_format]) },
               },
