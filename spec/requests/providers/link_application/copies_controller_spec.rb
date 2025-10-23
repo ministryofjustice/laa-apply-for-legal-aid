@@ -2,8 +2,9 @@ require "rails_helper"
 
 RSpec.describe Providers::LinkApplication::CopiesController do
   let(:lead_application) { create(:legal_aid_application) }
-  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, linked_application_completed:) }
   let(:provider) { legal_aid_application.provider }
+  let(:linked_application_completed) { nil }
 
   before { create(:linked_application, lead_application:, target_application: lead_application, associated_application: legal_aid_application) }
 
@@ -25,6 +26,14 @@ RSpec.describe Providers::LinkApplication::CopiesController do
       it "shows the link application invitation page" do
         expect(response).to be_successful
         expect(unescaped_response_body).to match(/Do you want to copy the proceedings and merits from L-.{3}-.{3} to this one\?/)
+      end
+
+      context "when navigating with the back button and the linked application task task has previously been completed" do
+        let(:linked_application_completed) { true }
+
+        it "resets linked_application" do
+          expect(legal_aid_application.reload.linked_application_completed).to be false
+        end
       end
     end
   end

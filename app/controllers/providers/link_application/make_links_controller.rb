@@ -6,6 +6,7 @@ module Providers
 
       def show
         @form = Providers::LinkApplication::MakeLinkForm.new(model: linked_application)
+        legal_aid_application.update!(linked_application_completed: nil)
       end
 
       def update

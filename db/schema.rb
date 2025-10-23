@@ -695,6 +695,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_20_101525) do
     t.boolean "plf_court_order"
     t.text "reviewed"
     t.boolean "dwp_result_confirmed"
+    t.boolean "linked_application_completed"
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"

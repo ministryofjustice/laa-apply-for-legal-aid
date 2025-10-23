@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Providers::LinkApplication::ConfirmLinkForm, type: :form do
   subject(:instance) { described_class.new(params) }
 
-  let(:linked_application) { LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code: "FC_LEAD") }
+  let(:linked_application) { LinkedApplication.create!(lead_application_id: lead_application.id, associated_application_id: legal_aid_application.id, link_type_code:) }
 
   let(:params) do
     {
@@ -11,8 +11,9 @@ RSpec.describe Providers::LinkApplication::ConfirmLinkForm, type: :form do
       model: linked_application,
     }
   end
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, linked_application_completed: false) }
   let(:lead_application) { create(:legal_aid_application) }
+  let(:link_type_code) { "FC_LEAD" }
 
   describe "#save" do
     subject(:call_save) { instance.save }
@@ -25,6 +26,20 @@ RSpec.describe Providers::LinkApplication::ConfirmLinkForm, type: :form do
       it "sets link_case to true" do
         expect(linked_application.confirm_link).to be true
       end
+
+      context "when family linking" do
+        it "linked_application_completed remains false" do
+          expect(legal_aid_application.reload.linked_application_completed).to be false
+        end
+      end
+
+      context "when legally linking" do
+        let(:link_type_code) { "LEGAL" }
+
+        it "sets linked_application_completed to true" do
+          expect(legal_aid_application.reload.linked_application_completed).to be true
+        end
+      end
     end
 
     context "with confirm_link false" do
@@ -32,6 +47,10 @@ RSpec.describe Providers::LinkApplication::ConfirmLinkForm, type: :form do
 
       it "sets confirm_link to false" do
         expect(linked_application.confirm_link).to be false
+      end
+
+      it "sets linked_application_completed to true" do
+        expect(legal_aid_application.reload.linked_application_completed).to be true
       end
     end
 
@@ -44,6 +63,10 @@ RSpec.describe Providers::LinkApplication::ConfirmLinkForm, type: :form do
 
       it "does not not destroy the linked application" do
         expect(legal_aid_application.reload.lead_application).to eq lead_application
+      end
+
+      it "sets linked_application_completed to true" do
+        expect(legal_aid_application.reload.linked_application_completed).to be false
       end
     end
 
