@@ -174,5 +174,15 @@ RSpec.describe Admin::SiteBannersController do
     it "removes the announcement" do
       expect { delete_request }.to change(Announcement, :count).by(-1)
     end
+
+    context "when an dismissible announcement has been created and been dismissed" do
+      let(:announcement) { Announcement.create(display_type: :moj, body: "Big news!", start_at: Time.zone.local(2025, 11, 1, 9, 0), end_at: Time.zone.local(2025, 12, 1, 9, 0)) }
+
+      before { ProviderDismissedAnnouncement.create(provider: create(:provider), announcement:) }
+
+      it "deletes the provider_dismissed_announcement records too" do
+        expect { delete_request }.to change(ProviderDismissedAnnouncement, :count).from(1).to(0)
+      end
+    end
   end
 end
