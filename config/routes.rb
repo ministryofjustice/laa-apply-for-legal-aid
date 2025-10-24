@@ -146,6 +146,7 @@ Rails.application.routes.draw do
     resources :uploaded_evidence_collections, only: [:create]
     resources :attachments, only: [:update]
     resources :providers, only: [:update]
+    resources :skip_announcements, only: [:destroy]
     namespace :partners do
       resources :bank_statements, only: [:create]
     end

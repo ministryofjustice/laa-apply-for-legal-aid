@@ -8,7 +8,18 @@
         page_title: page_title,
         form:,
       ) do %>
-    <%= form.hidden_field :display_type, value: :gov_uk %>
+    <%= form.govuk_collection_radio_buttons(
+          :display_type,
+          [
+            [:gov_uk, t(".display_type_gov_uk")],
+            [:moj, t(".display_type_moj")],
+          ],
+          :first,
+          :second,
+          inline: true,
+          hint: { text: t(".display_type_hint") },
+          legend: { text: t(".display_type") },
+        ) %>
     <%= form.govuk_text_field :gov_uk_header_bar,
                               label: { size: "m", text: t(".gov_uk_header_bar") },
                               hint: { text: t(".gov_uk_header_bar_hint") },
