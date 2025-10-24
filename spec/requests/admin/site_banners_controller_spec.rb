@@ -25,6 +25,17 @@ RSpec.describe Admin::SiteBannersController do
         expect(response.body).to include("Big news!")
       end
     end
+
+    context "when a dismissible announcement has been created" do
+      before { Announcement.create(display_type: :moj, body: "You can now create popcorn!", start_at: Time.zone.local(2025, 11, 1, 9, 0), end_at: Time.zone.local(2025, 12, 1, 9, 0)) }
+
+      it "includes the message" do
+        get_request
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to include("You can now create popcorn!")
+        expect(response.body).to have_css("a", text: "Dismiss")
+      end
+    end
   end
 
   describe "GET /admin/site_banners/new" do
@@ -43,6 +54,7 @@ RSpec.describe Admin::SiteBannersController do
     let(:params) do
       {
         announcement: {
+          display_type:,
           gov_uk_header_bar:,
           link_display:,
           link_url:,
@@ -53,6 +65,7 @@ RSpec.describe Admin::SiteBannersController do
         },
       }
     end
+    let(:display_type) { nil }
     let(:gov_uk_header_bar) { nil }
     let(:link_display) { nil }
     let(:link_url) { nil }
@@ -65,13 +78,14 @@ RSpec.describe Admin::SiteBannersController do
       it "renders expected errors" do
         post_request
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include("Include, at minimum, a heading")
+        expect(response.body).to include("Select a display type")
         expect(response.body).to include("Set a start date/time")
         expect(response.body).to include("Set an end date/time")
       end
     end
 
     context "when the minimum params are complete" do
+      let(:display_type) { :gov_uk }
       let(:heading) { "A heading" }
       let(:start_at) { Time.zone.local(2025, 11, 1, 9, 0) }
       let(:end_at) { Time.zone.local(2025, 12, 1, 9, 0) }
@@ -99,7 +113,7 @@ RSpec.describe Admin::SiteBannersController do
   describe "GET /admin/site_banner/id" do
     subject(:get_request) { get admin_site_banner_path(announcement) }
 
-    let(:announcement) { Announcement.create(heading: "Big news!", start_at: Time.zone.local(2025, 11, 1, 9, 0), end_at: Time.zone.local(2025, 12, 1, 9, 0)) }
+    let(:announcement) { Announcement.create(display_type: :gov_uk, heading: "Big news!", start_at: Time.zone.local(2025, 11, 1, 9, 0), end_at: Time.zone.local(2025, 12, 1, 9, 0)) }
 
     it "renders the expected page" do
       get_request
@@ -109,7 +123,7 @@ RSpec.describe Admin::SiteBannersController do
   end
 
   describe "PATCH /admin/site_banner/id" do
-    let(:announcement) { Announcement.create(heading: "Big news!", start_at: Time.zone.local(2025, 11, 1, 9, 0), end_at: Time.zone.local(2025, 12, 1, 9, 0)) }
+    let(:announcement) { Announcement.create(display_type: :gov_uk, heading: "Big news!", start_at: Time.zone.local(2025, 11, 1, 9, 0), end_at: Time.zone.local(2025, 12, 1, 9, 0)) }
 
     before { patch admin_site_banner_path(announcement), params: }
 
@@ -153,7 +167,7 @@ RSpec.describe Admin::SiteBannersController do
   describe "DELETE /admin/site_banner/id" do
     subject(:delete_request) { delete admin_site_banner_path(announcement) }
 
-    before { Announcement.create(heading: "Big news!", start_at: Time.zone.local(2025, 11, 1, 9, 0), end_at: Time.zone.local(2025, 12, 1, 9, 0)) }
+    before { Announcement.create(display_type: :gov_uk, heading: "Big news!", start_at: Time.zone.local(2025, 11, 1, 9, 0), end_at: Time.zone.local(2025, 12, 1, 9, 0)) }
 
     let(:announcement) { Announcement.first }
 
