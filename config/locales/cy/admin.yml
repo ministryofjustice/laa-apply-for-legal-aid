@@ -110,12 +110,18 @@ cy:
       show:
         page_title: Announcement
       form:
+        display_type: Display type
+        display_type_hint: GOV UK for permanent, MOJ for dismissable
+        display_type_moj: MOJ
+        display_type_gov_uk: GOV UK
         gov_uk_header_bar: GOV UK notification bar header
         gov_uk_header_bar_hint: Defaults to Important, but can be overridden
         heading: Heading
+        heading_hint: Optional for dismissible, MOJ style, announcements
         link_url: Heading link url
         link_display: Heading link display text
         body: Message body
+        body_hint: Optional for GOVUK style announcements
         start_at: Start display at
         end_at: Display until
         date_time_hint: Input as date time dd/mm/yyyy hh:mm (24 hour clock)
