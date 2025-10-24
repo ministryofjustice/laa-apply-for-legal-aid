@@ -14,6 +14,8 @@ class ApplicantAccountPresenter
   end
 
   def main_account_holder_address
-    main_account_holder&.addresses&.first&.values&.join(", ")
+    return nil unless main_account_holder && main_account_holder.addresses
+
+    main_account_holder.addresses.first.values.join(", ")
   end
 end

@@ -58,7 +58,7 @@ module Reports
     end
 
     def report_document_exists
-      @report_document_exists ||= legal_aid_application&.send(report_type)&.document&.present?
+      @report_document_exists ||= legal_aid_application.send(report_type)&.document.present?
     end
   end
 end

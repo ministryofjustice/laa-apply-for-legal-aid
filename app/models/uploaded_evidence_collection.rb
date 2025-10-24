@@ -45,7 +45,9 @@ private
   end
 
   def passporting_benefit_title
-    legal_aid_application&.dwp_override&.passporting_benefit&.titleize
+    return nil unless legal_aid_application && legal_aid_application.dwp_override
+
+    legal_aid_application.dwp_override.passporting_benefit.titleize
   end
 
   def error_path

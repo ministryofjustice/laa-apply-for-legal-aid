@@ -17,20 +17,21 @@
     <%= govuk_summary_list(
           classes: "govuk-summary-list govuk-summary-list--no-border",
           actions: false,
-        ) do |summary_list| %>
-      <%= summary_list.with_row do |row| %>
-        <%= row.with_key(text: t(".laa_reference")) %>
-        <%= row.with_value(text: @legal_aid_application.target_application&.application_ref) %>
-      <% end %>
-      <%= summary_list.with_row do |row| %>
-        <%= row.with_key(text: t(".client")) %>
-        <%= row.with_value(text: @legal_aid_application.target_application&.applicant&.full_name) %>
-      <% end %>
-      <%= summary_list.with_row do |row| %>
-        <%= row.with_key(text: t(".proceedings")) %>
-        <%= row.with_value(text: @legal_aid_application.target_application&.proceedings&.map(&:meaning)&.join(", ")) %>
-      <% end %>
-    <% end %>
+        ) do |summary_list|
+          summary_list.with_row do |row|
+            row.with_key(text: t(".laa_reference"))
+            row.with_value(text: @legal_aid_application.target_application&.application_ref)
+          end
+          summary_list.with_row do |row|
+            row.with_key(text: t(".client"))
+            row.with_value(text: @legal_aid_application.target_application&.applicant&.full_name)
+          end
+          summary_list.with_row do |row|
+            text = @legal_aid_application.target_application.proceedings.map(&:meaning).join(", ") if @legal_aid_application.target_application
+            row.with_key(text: t(".proceedings"))
+            row.with_value(text:)
+          end
+        end %>
 
     <%= render partial: "shared/all_linked_applications" %>
 
@@ -38,7 +39,6 @@
       <%= form.govuk_radio_button :confirm_link, true, label: { text: t("generic.yes") }, link_errors: true %>
       <%= form.govuk_radio_button :confirm_link, "No", label: { text: t(".options.no_link_to_different_case") } %>
       <%= form.govuk_radio_button :confirm_link, false, label: { text: t(".options.no_carry_on_without_linking") } %>
-
     <% end %>
 
     <%= next_action_buttons(show_draft: true, form:) %>
