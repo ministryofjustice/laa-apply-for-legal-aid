@@ -110,6 +110,10 @@ cy:
       show:
         page_title: Announcement
       form:
+        display_type: Display type
+        display_type_hint: GOV UK for permanent, MOJ for dismissable
+        display_type_moj: MOJ
+        display_type_gov_uk: GOV UK
         gov_uk_header_bar: GOV UK notification bar header
         gov_uk_header_bar_hint: Defaults to Important, but can be overridden
         heading: Heading
