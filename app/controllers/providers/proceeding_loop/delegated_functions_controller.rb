@@ -32,13 +32,12 @@ module Providers
       end
 
       def form_params
-        merged_params = merge_with_model(proceeding) do
+        merge_with_model(proceeding) do
           return {} unless params[:proceeding]
 
           params.expect(proceeding: %i[used_delegated_functions
                                        used_delegated_functions_on])
         end
-        convert_date_params(merged_params)
       end
 
       def reset_proceeding_loop

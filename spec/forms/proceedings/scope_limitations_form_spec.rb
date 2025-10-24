@@ -33,23 +33,21 @@ RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
   let(:proceeding) { create(:proceeding, :se013, :without_df_date, :with_cit_z, no_scope_limitations: true) }
   let(:scope_type) { "substantive" }
   let(:scope_codes) { ["", "CV027"] }
-  let(:hearing_date_cv027_1i) { "2022" }
-  let(:hearing_date_cv027_2i) { "10" }
-  let(:hearing_date_cv027_3i) { "4" }
+  let(:hearing_date_cv027) { "4/10/2022" }
   let(:meaning_cv027) { "Hearing/Adjournment" }
   let(:description_cv027) { "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date." }
   let(:limitation_note_cv027) { "" }
+
   let(:params) do
     {
       scope_codes:,
       scope_type:,
       meaning_CV027: meaning_cv027,
       description_CV027: description_cv027,
-      hearing_date_CV027_1i: hearing_date_cv027_1i,
-      hearing_date_CV027_2i: hearing_date_cv027_2i,
-      hearing_date_CV027_3i: hearing_date_cv027_3i,
+      hearing_date_CV027: hearing_date_cv027,
     }
   end
+
   let(:form_params) { params.merge(model: proceeding) }
 
   describe "#save" do
@@ -75,19 +73,43 @@ RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
         end
       end
 
-      context "when a mandatory hearing date is invalid" do
-        let(:hearing_date_cv027_1i) { [""] }
+      context "when a mandatory hearing date is blank" do
+        let(:hearing_date_cv027) { "" }
 
-        it "is invalid" do
+        it "is invalid with expected error" do
           expect(form).not_to be_valid
+          expect(form.errors.messages[:hearing_date_CV027]).to include("Enter a valid hearing date for Hearing/Adjournment in the correct format")
         end
 
         it "does not update the scope limitations" do
           expect(proceeding.scope_limitations.where(scope_type: "substantive").map(&:code)).to be_empty
         end
+      end
 
-        it "generates the expected error message" do
-          expect(form.errors.map(&:attribute)).to eq [:hearing_date_CV027]
+      context "when a mandatory hearing date is using a 2 digit year" do
+        let(:hearing_date_cv027) { "#{Time.zone.tomorrow.day}/#{Time.zone.tomorrow.month}/#{Time.zone.tomorrow.strftime('%y').to_i}" }
+
+        it "is invalid with expected error" do
+          expect(form).not_to be_valid
+          expect(form.errors.messages[:hearing_date_CV027]).to include("Enter a valid hearing date for Hearing/Adjournment in the correct format")
+        end
+      end
+
+      context "when a mandatory hearing date is using an invalid month" do
+        let(:hearing_date_cv027) { "1/13/#{Time.zone.tomorrow.year}" }
+
+        it "is invalid with expected error" do
+          expect(form).not_to be_valid
+          expect(form.errors.messages[:hearing_date_CV027]).to include("Enter a valid hearing date for Hearing/Adjournment in the correct format")
+        end
+      end
+
+      context "when a mandatory hearing date is using an invalid day" do
+        let(:hearing_date_cv027) { "32/#{Time.zone.tomorrow.month}/#{Time.zone.tomorrow.year}" }
+
+        it "is invalid with expected error" do
+          expect(form).not_to be_valid
+          expect(form.errors.messages[:hearing_date_CV027]).to include("Enter a valid hearing date for Hearing/Adjournment in the correct format")
         end
       end
 
@@ -96,8 +118,9 @@ RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
           [{ "code" => "CV027",
              "meaning" => "Hearing/Adjournment",
              "description" => "Limited to all steps (including any adjournment thereof) up to and including the hearing on",
-             "additional_params" => [{ "name" => "limitation_note", "type" => "limitation_note", "mandatory" => true }] }]
+             "additional_params" => [{ "name" => "limitation_note", "type" => "text", "mandatory" => true }] }]
         end
+
         let(:params) do
           {
             scope_codes:,
@@ -160,15 +183,14 @@ RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
       let(:scope_codes) { ["", "CV027", "FM015"] }
       let(:meaning_fm015) { "Section 37 Report" }
       let(:description_fm015) { "Limited to a section 37 report only." }
+
       let(:params) do
         {
           scope_codes:,
           scope_type:,
           meaning_CV027: meaning_cv027,
           description_CV027: description_cv027,
-          hearing_date_CV027_1i: hearing_date_cv027_1i,
-          hearing_date_CV027_2i: hearing_date_cv027_2i,
-          hearing_date_CV027_3i: hearing_date_cv027_3i,
+          hearing_date_CV027: hearing_date_cv027,
           meaning_FM015: meaning_fm015,
           description_FM015: description_fm015,
         }

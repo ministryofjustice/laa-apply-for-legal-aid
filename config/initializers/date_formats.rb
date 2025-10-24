@@ -12,6 +12,10 @@ end
 Date::DATE_FORMATS[:default] = "%e %B %Y"
 Time::DATE_FORMATS[:datetime] = "%H:%M %d-%b-%Y"
 
+# This is the format returned by the moj datepicker component (no padding on day and month, e.g. 1/1/2001)
+Date::DATE_FORMATS[:date_picker] = "%-d/%-m/%Y"
+Date::DATE_FORMATS[:date_picker_parse_format] = "%d/%m/%Y"
+
 ccms_formats = {
   ccms_date: "%Y-%m-%d",
   ccms_date_time: "%Y-%m-%dT%H:%M:%S.%3N",

@@ -683,7 +683,7 @@ en:
         occurred_on_label: When did the incident occur?
         told_on_label: When did your client contact you about the latest domestic abuse incident?
         first_contact_date_label: When did your client first contact you about this matter?
-        date_hint: "For example %{options}."
+        date_hint: "For example, %{options}."
         used_delegated_functions_on_label: Date you used delegated functions
         used_delegated_functions_on_hint: "For example, %{options}."
         scope_limitations_label: When is the hearing?

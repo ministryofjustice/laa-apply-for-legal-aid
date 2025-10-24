@@ -83,8 +83,8 @@ Background: I have started an application and not linked or copied it
     And I click 'Save and continue'
     Then I should see 'Proceeding 1 of 3\nFemale genital mutilation \(FGM\) protection order\nHave you used delegated functions for this proceeding?'
     When I choose 'Yes'
-    And I enter the 'delegated functions on' date of 2 days ago
-    When I click 'Save and continue'
+    And I enter the 'delegated functions on' date of 2 days ago using the date picker field
+    And I click 'Save and continue'
     Then I should see 'Proceeding 1 of 3\nFemale genital mutilation \(FGM\) protection order'
     And I should see 'Do you want to use the default level of service and scope for the emergency application?'
     When I choose 'Yes'
@@ -98,7 +98,7 @@ Background: I have started an application and not linked or copied it
     And I click 'Save and continue'
     Then I should see 'Proceeding 2 of 3\nOccupation order\nHave you used delegated functions for this proceeding?'
     When I choose 'Yes'
-    And I enter the 'delegated functions on' date of 35 days ago
+    And I enter the 'delegated functions on' date of 35 days ago using the date picker field
     When I click 'Save and continue'
     Then I should see 'Proceeding 2 of 3\nOccupation order\n!\nWarning\nThe date you said you used delegated functions is over one month old.\nDid you use delegated functions for this proceeding'
     When I choose 'Yes'
@@ -106,7 +106,7 @@ Background: I have started an application and not linked or copied it
     Then I should see 'Proceeding 2 of 3\nOccupation order'
     And I should see 'Do you want to use the default level of service and scope for the emergency application?'
     When I choose 'Yes'
-    And I enter the 'proceeding hearing date' date of 1 month in the future
+    And I enter the 'proceeding hearing date' date of 1 month in the future using the date picker field
     And I click 'Save and continue'
     Then I should see 'Proceeding 2 of 3\nOccupation order'
     And I should see 'Do you want to use the default level of service and scope for the substantive application?'
@@ -412,7 +412,7 @@ Background: I have started an application and not linked or copied it
     And I click 'Save and continue'
     Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
     When I choose 'Yes'
-    And I enter the 'delegated functions on' date of 35 days ago
+    And I enter the 'delegated functions on' date of 35 days ago using the date picker field
     When I click 'Save and continue'
     Then I should see 'Proceeding 1\nNon-molestation order\n!\nWarning\nThe date you said you used delegated functions is over one month old.\nDid you use delegated functions for this proceeding'
     When I choose 'Yes'
@@ -576,7 +576,7 @@ Background: I have started an application and not linked or copied it
     And I click 'Save and continue'
     Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
     When I choose 'Yes'
-    And I enter the 'delegated functions on' date of 5 days ago
+    And I enter the 'delegated functions on' date of 5 days ago using the date picker field
     When I click 'Save and continue'
     Then I should see 'Proceeding 1\nNon-molestation order'
     And I should see 'Do you want to use the default level of service and scope for the emergency application?'
