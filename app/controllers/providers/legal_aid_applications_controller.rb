@@ -48,7 +48,7 @@ module Providers
     end
 
     def load_announcements
-      @announcements = Announcement.active
+      @announcements = current_provider.announcements
     end
 
     def applications(query)
