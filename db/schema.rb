@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_20_101525) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_24_080229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -936,6 +936,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_20_101525) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["proceeding_id"], name: "index_prohibited_steps_on_proceeding_id"
+  end
+
+  create_table "provider_dismissed_announcements", id: false, force: :cascade do |t|
+    t.uuid "announcement_id", null: false
+    t.uuid "provider_id", null: false
+    t.index ["provider_id", "announcement_id"], name: "idx_on_provider_id_announcement_id_d796f4e801"
   end
 
   create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
