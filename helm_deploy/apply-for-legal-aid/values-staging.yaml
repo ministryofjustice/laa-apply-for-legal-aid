@@ -119,7 +119,7 @@ pda:
 
 # We point staging to UAT/Test CUMA as there is no preprod/staging env to use and it is more suitable than Dev.
 ccms_user_api:
-  url: "http://user-api-service.laa-ccms-user-details-api-test.svc.cluster.local:8080/api/v1"
+  url: "http://user-details-api-service.laa-ccms-user-details-api-test.svc.cluster.local:8080/api/v1"
 
 trueLayer:
   enableMock: "true"
