@@ -19,7 +19,7 @@ Feature: Bank statement upload check your answers
 
     And the following sections should exist:
       | tag | section |
-      | h2  | Housing benefit |
+      | h2  | Housing Benefit |
       | h2  | Dependants |
 
     And the following sections should not exist:
@@ -50,7 +50,7 @@ Feature: Bank statement upload check your answers
 
     And the "Housing Benefit" section's questions and answers should match:
       | question | answer |
-      | Amount of Housing benefit | £1,200 total in last 3 months |
+      | Amount of Housing Benefit | £1,200 total in last 3 months |
 
     When I click Check Your Answers Change link for "bank statements partner"
     And I upload an evidence file named "hello_world.pdf"
