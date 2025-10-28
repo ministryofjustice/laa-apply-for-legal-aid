@@ -12,7 +12,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PAT }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Build the Docker image
         run: |
           docker build . --file ./docker/apply_base.dockerfile --tag ministryofjustice/apply-base:latest --tag ministryofjustice/apply-base:latest-$(cat .ruby-version)
@@ -22,7 +22,7 @@ jobs:
           docker push ministryofjustice/apply-base:latest-$(cat .ruby-version)
       - name: Slack Notification on failure
         if: failure()
-        uses: slackapi/slack-github-action@v1.18.0
+        uses: slackapi/slack-github-action@v2.1.1
         with:
           channel-id: 'apply-devtest'
           payload: |
