@@ -29,16 +29,13 @@ module Incidents
     end
 
     # NOTE: explicitly use the validator that is used for the dates attributes themselves to centralise the logic
-    # Also. clear the errors after to avoid double error adding (although i am no t sure it is a problem but have
+    # Also, clear the errors after to avoid double error adding (although I am not sure it is a problem but have
     # seen doubled errors in the tests)
     def date_valid?(attribute_name, attribute_value)
       validator = DateValidator.new(attributes: [attribute_name], **DATE_OPTIONS[:date])
       validator.validate_each(self, attribute_name, attribute_value)
 
-      errors_exist = errors[attribute_name].any?
-      errors.delete(:attribute_name)
-
-      !errors_exist
+      errors[attribute_name].none?
     end
   end
 end
