@@ -1,5 +1,22 @@
 version: 2
 updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: thursday
+      time: "21:00"
+      timezone: Europe/London
+    groups:
+      ruby:
+        patterns:
+          - "ruby*"
+      actions:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "ruby*"
+    open-pull-requests-limit: 10
   - package-ecosystem: "bundler"
     directory: "/"
     allow:
