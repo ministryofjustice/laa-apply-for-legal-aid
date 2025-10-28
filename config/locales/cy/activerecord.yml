@@ -15,6 +15,24 @@ cy:
               invalid: tamrof thgir eht ni ton si sserdda
             national_insurance_number:
               invalid: tamrof thgir eht ni ton si
+        announcement:
+          attributes:
+            display_type:
+              blank: Select a display type
+            heading:
+              blank: Include, at minimum, a heading
+            body:
+              blank: Include, at minimum, some body text
+            link_url:
+              blank: Include a link URL if setting display text
+            link_display:
+              blank: Include link display text if setting a link URL
+            start_at:
+              blank: Set a start date/time
+              unparseable: Enter a valid start date and time
+            end_at:
+              blank: Set an end date/time
+              unparseable: Enter a valid end date and time
         feedback:
           attributes:
             satisfaction:
