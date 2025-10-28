@@ -54,13 +54,45 @@ RSpec.describe Announcement do
 
       it { is_expected.to be_invalid }
     end
+
+    context "when the display_type is govuk" do
+      context "and the heading is present" do
+        it { is_expected.to be_valid }
+      end
+
+      context "and the heading is missing" do
+        let(:heading) { nil }
+
+        it { is_expected.to be_invalid }
+      end
+    end
+
+    context "when the display_type is moj" do
+      let(:display_type) { :moj }
+
+      context "and the heading and body are present" do
+        it { is_expected.to be_valid }
+      end
+
+      context "and the heading is missing" do
+        let(:heading) { nil }
+
+        it { is_expected.to be_valid }
+      end
+
+      context "and the body is missing" do
+        let(:body) { nil }
+
+        it { is_expected.to be_invalid }
+      end
+    end
   end
 
   describe "scopes" do
     before do
-      described_class.create!(heading: "one", start_at: Time.zone.local(2025, 11, 1, 9, 0), end_at: Time.zone.local(2025, 11, 10, 17, 0))
-      described_class.create!(heading: "two", start_at: Time.zone.local(2025, 11, 11, 9, 0), end_at: Time.zone.local(2025, 11, 21, 17, 0))
-      described_class.create!(heading: "three", start_at: Time.zone.local(2025, 11, 20, 9, 0), end_at: Time.zone.local(2025, 11, 30, 17, 0))
+      described_class.create!(display_type: :gov_uk, heading: "one", start_at: Time.zone.local(2025, 11, 1, 9, 0), end_at: Time.zone.local(2025, 11, 10, 17, 0))
+      described_class.create!(display_type: :gov_uk, heading: "two", start_at: Time.zone.local(2025, 11, 11, 9, 0), end_at: Time.zone.local(2025, 11, 21, 17, 0))
+      described_class.create!(display_type: :gov_uk, heading: "three", start_at: Time.zone.local(2025, 11, 20, 9, 0), end_at: Time.zone.local(2025, 11, 30, 17, 0))
     end
 
     describe ".active" do
