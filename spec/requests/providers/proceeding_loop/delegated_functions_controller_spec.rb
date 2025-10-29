@@ -6,7 +6,6 @@ RSpec.describe "DelegatedFunctionsController" do
   let(:proceeding) { application.proceedings.first }
   let(:proceeding_id) { proceeding.id }
   let(:provider) { application.provider }
-  let(:skip_patch) { false }
 
   describe "GET /providers/applications/:legal_aid_application_id/delegated_functions/:proceeding_id" do
     subject(:get_df) { get "/providers/applications/#{application_id}/delegated_functions/#{proceeding_id}" }
@@ -74,7 +73,6 @@ RSpec.describe "DelegatedFunctionsController" do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        post_df unless skip_patch
       end
 
       context "when the Continue button is pressed" do
@@ -91,12 +89,14 @@ RSpec.describe "DelegatedFunctionsController" do
           end
 
           it "redirects to next page" do
+            post_df
             expect(response.body).to redirect_to(providers_legal_aid_application_emergency_default_path(application_id, proceeding_id))
           end
         end
 
         context "and the proceeding has not used delegated functions" do
           it "redirects to next page" do
+            post_df
             expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
           end
         end
@@ -112,6 +112,7 @@ RSpec.describe "DelegatedFunctionsController" do
           end
 
           it "redirects to the confirmation page" do
+            post_df
             expect(response.body).to redirect_to(providers_legal_aid_application_confirm_delegated_functions_date_path(application_id, proceeding_id))
           end
 
@@ -124,12 +125,10 @@ RSpec.describe "DelegatedFunctionsController" do
               )
             end
 
-            let(:skip_patch) { true }
-
             let(:params) do
               {
                 proceeding: {
-                  used_delegated_functions: false,
+                  used_delegated_functions: "false",
                 },
               }
             end
@@ -158,6 +157,317 @@ RSpec.describe "DelegatedFunctionsController" do
           end
         end
 
+        context "and pre-existing data is present" do
+          before do
+            application.update!(
+              emergency_cost_override: true,
+              emergency_cost_requested: 1001.01,
+              emergency_cost_reasons: "some emergency reason",
+              substantive_cost_override: true,
+              substantive_cost_requested: 2001.01,
+              substantive_cost_reasons: "some substantive reason",
+            )
+
+            proceeding.update!(accepted_emergency_defaults: true, accepted_substantive_defaults: false)
+          end
+
+          context "and user changes Yes to No" do
+            before do
+              proceeding.update!(
+                used_delegated_functions: true,
+                used_delegated_functions_on: Time.zone.yesterday,
+                used_delegated_functions_reported_on: Time.zone.yesterday,
+              )
+            end
+
+            let(:params) do
+              {
+                proceeding: {
+                  used_delegated_functions: "false",
+                },
+              }
+            end
+
+            it "changes the proceeding object's uaed_delegated_functions related data" do
+              expect { post_df }.to change { proceeding.reload.attributes.symbolize_keys }
+                .from(
+                  hash_including(
+                    used_delegated_functions: true,
+                    used_delegated_functions_on: Time.zone.yesterday,
+                    used_delegated_functions_reported_on: Time.zone.yesterday,
+                  ),
+                )
+                .to(
+                  hash_including(
+                    used_delegated_functions: false,
+                    used_delegated_functions_on: nil,
+                    used_delegated_functions_reported_on: nil,
+                  ),
+                )
+            end
+
+            it "resets the proceeding object's emergency and substantive default acceptance data" do
+              expect { post_df }.to change { proceeding.reload.attributes.symbolize_keys }
+                .from(
+                  hash_including(
+                    accepted_emergency_defaults: true,
+                    accepted_substantive_defaults: false,
+                  ),
+                )
+                .to(
+                  hash_including(
+                    accepted_emergency_defaults: nil,
+                    accepted_substantive_defaults: nil,
+                  ),
+                )
+            end
+
+            it "resets the legal_aid_application object's emergency and substantive cost override data" do
+              expect { post_df }.to change { application.reload.attributes.symbolize_keys }
+                .from(
+                  hash_including(
+                    emergency_cost_override: true,
+                    emergency_cost_requested: 1001.01,
+                    emergency_cost_reasons: "some emergency reason",
+                    substantive_cost_override: true,
+                    substantive_cost_requested: 2001.01,
+                    substantive_cost_reasons: "some substantive reason",
+                  ),
+                )
+                .to(
+                  hash_including(
+                    emergency_cost_override: nil,
+                    emergency_cost_requested: nil,
+                    emergency_cost_reasons: nil,
+                    substantive_cost_override: nil,
+                    substantive_cost_requested: nil,
+                    substantive_cost_reasons: nil,
+                  ),
+                )
+            end
+          end
+
+          context "and user changes No to Yes" do
+            before do
+              proceeding.update!(
+                used_delegated_functions: false,
+                used_delegated_functions_on: nil,
+                used_delegated_functions_reported_on: nil,
+              )
+            end
+
+            let(:params) do
+              {
+                proceeding: {
+                  used_delegated_functions: "true",
+                  used_delegated_functions_on: Time.zone.yesterday.to_s(:date_picker),
+                },
+              }
+            end
+
+            it "changes the proceeding object's used_delegated_functions related data" do
+              expect { post_df }.to change { proceeding.reload.attributes.symbolize_keys }
+                .from(
+                  hash_including(
+                    used_delegated_functions: false,
+                    used_delegated_functions_on: nil,
+                    used_delegated_functions_reported_on: nil,
+                  ),
+                )
+                .to(
+                  hash_including(
+                    used_delegated_functions: true,
+                    used_delegated_functions_on: Time.zone.yesterday,
+                    used_delegated_functions_reported_on: Time.zone.today,
+                  ),
+                )
+            end
+
+            it "resets the proceeding object's emergency and substantive default acceptance data" do
+              expect { post_df }.to change { proceeding.reload.attributes.symbolize_keys }
+                .from(
+                  hash_including(
+                    accepted_emergency_defaults: true,
+                    accepted_substantive_defaults: false,
+                  ),
+                )
+                .to(
+                  hash_including(
+                    accepted_emergency_defaults: nil,
+                    accepted_substantive_defaults: nil,
+                  ),
+                )
+            end
+
+            it "resets the legal_aid_application object's emergency and substantive cost override data" do
+              expect { post_df }.to change { application.reload.attributes.symbolize_keys }
+                .from(
+                  hash_including(
+                    emergency_cost_override: true,
+                    emergency_cost_requested: 1001.01,
+                    emergency_cost_reasons: "some emergency reason",
+                    substantive_cost_override: true,
+                    substantive_cost_requested: 2001.01,
+                    substantive_cost_reasons: "some substantive reason",
+                  ),
+                )
+                .to(
+                  hash_including(
+                    emergency_cost_override: nil,
+                    emergency_cost_requested: nil,
+                    emergency_cost_reasons: nil,
+                    substantive_cost_override: nil,
+                    substantive_cost_requested: nil,
+                    substantive_cost_reasons: nil,
+                  ),
+                )
+            end
+          end
+
+          context "and user changes used_delegated_functions on date" do
+            before do
+              proceeding.update!(
+                used_delegated_functions: true,
+                used_delegated_functions_on: 1.week.ago.to_date,
+                used_delegated_functions_reported_on: 1.week.ago.to_date,
+              )
+            end
+
+            let(:params) do
+              {
+                proceeding: {
+                  used_delegated_functions: "true", # would this be submitted if unchanged
+                  used_delegated_functions_on: Time.zone.yesterday.to_s(:date_picker),
+                },
+              }
+            end
+
+            it "changes the rspecproceeding object's uaed_delegated_functions related data" do
+              expect { post_df }.to change { proceeding.reload.attributes.symbolize_keys }
+                .from(
+                  hash_including(
+                    used_delegated_functions: true,
+                    used_delegated_functions_on: 1.week.ago.to_date,
+                    used_delegated_functions_reported_on: 1.week.ago.to_date,
+                  ),
+                )
+                .to(
+                  hash_including(
+                    used_delegated_functions: true,
+                    used_delegated_functions_on: Time.zone.yesterday,
+                    used_delegated_functions_reported_on: Time.zone.today,
+                  ),
+                )
+            end
+
+            it "does NOT reset the proceeding object's emergency and substantive default acceptance data" do
+              expect { post_df }
+                .not_to change {
+                          proceeding.reload.slice(:accepted_substantive_defaults, :accepted_emergency_defaults).symbolize_keys
+                        }
+              .from(
+                hash_including(
+                  accepted_emergency_defaults: true,
+                  accepted_substantive_defaults: false,
+                ),
+              )
+            end
+
+            it "does NOT reset the legal_aid_application object's emergency and substantive cost override data" do
+              expect { post_df }
+                .not_to change {
+                          application.reload.slice(
+                            :emergency_cost_override,
+                            :emergency_cost_requested,
+                            :emergency_cost_reasons,
+                            :substantive_cost_override,
+                            :substantive_cost_requested,
+                            :substantive_cost_reasons,
+                          ).symbolize_keys
+                        }
+                .from(
+                  hash_including(
+                    emergency_cost_override: true,
+                    emergency_cost_requested: 1001.01,
+                    emergency_cost_reasons: "some emergency reason",
+                    substantive_cost_override: true,
+                    substantive_cost_requested: 2001.01,
+                    substantive_cost_reasons: "some substantive reason",
+                  ),
+                )
+            end
+          end
+
+          context "and user does NOT change any data" do
+            before do
+              proceeding.update!(
+                used_delegated_functions: true,
+                used_delegated_functions_on: 1.week.ago.to_date,
+                used_delegated_functions_reported_on: 1.week.ago.to_date,
+              )
+            end
+
+            let(:params) do
+              {
+                proceeding: {
+                  used_delegated_functions: "true", # would this be submitted if unchanged
+                },
+              }
+            end
+
+            it "does NOT change the proceeding object's uaed_delegated_functions related data" do
+              expect { post_df }
+                .not_to change {
+                  proceeding.reload.slice(:used_delegated_functions, :used_delegated_functions_on, :used_delegated_functions_reported_on).symbolize_keys
+                }
+                .from(
+                  hash_including(
+                    used_delegated_functions: true,
+                    used_delegated_functions_on: 1.week.ago.to_date,
+                    used_delegated_functions_reported_on: 1.week.ago.to_date,
+                  ),
+                )
+            end
+
+            it "does NOT reset the proceeding object's emergency and substantive default acceptance data" do
+              expect { post_df }
+                .not_to change {
+                          proceeding.reload.slice(:accepted_substantive_defaults, :accepted_emergency_defaults).symbolize_keys
+                        }
+              .from(
+                hash_including(
+                  accepted_emergency_defaults: true,
+                  accepted_substantive_defaults: false,
+                ),
+              )
+            end
+
+            it "does NOT reset the legal_aid_application object's emergency and substantive cost override data" do
+              expect { post_df }
+                .not_to change {
+                          application.reload.slice(
+                            :emergency_cost_override,
+                            :emergency_cost_requested,
+                            :emergency_cost_reasons,
+                            :substantive_cost_override,
+                            :substantive_cost_requested,
+                            :substantive_cost_reasons,
+                          ).symbolize_keys
+                        }
+                .from(
+                  hash_including(
+                    emergency_cost_override: true,
+                    emergency_cost_requested: 1001.01,
+                    emergency_cost_reasons: "some emergency reason",
+                    substantive_cost_override: true,
+                    substantive_cost_requested: 2001.01,
+                    substantive_cost_reasons: "some substantive reason",
+                  ),
+                )
+            end
+          end
+        end
+
         context "when checking answers" do
           let(:application) do
             create(
@@ -172,35 +482,23 @@ RSpec.describe "DelegatedFunctionsController" do
             ).reload
           end
 
-          context "when pre-existing data is present" do
-            let(:skip_patch) { true }
-
-            before do
-              proceeding.update!(accepted_emergency_defaults: true, accepted_substantive_defaults: false)
-              post_df
+          context "and the date is within the last month" do
+            let(:params) do
+              {
+                proceeding: {
+                  used_delegated_functions: true,
+                  used_delegated_functions_on: 28.days.ago.to_date.to_s(:date_picker),
+                },
+              }
             end
 
-            it "resets the data" do
-              expect(application.reload).to have_attributes(
-                emergency_cost_requested: nil,
-                emergency_cost_reasons: nil,
-                substantive_cost_requested: nil,
-                substantive_cost_reasons: nil,
-              )
-              expect(proceeding.reload).to have_attributes(
-                accepted_emergency_defaults: nil,
-                accepted_substantive_defaults: nil,
-              )
-            end
-          end
-
-          context "when the date is within the last month" do
             it "continues through the sub flow" do
-              expect(response).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id))
+              post_df
+              expect(response).to redirect_to(providers_legal_aid_application_emergency_default_path(application_id))
             end
           end
 
-          context "when the date is more than a month old" do
+          context "and the date is more than a month old" do
             let(:params) do
               {
                 proceeding: {
@@ -211,6 +509,7 @@ RSpec.describe "DelegatedFunctionsController" do
             end
 
             it "redirects to confirm delegated functions date page" do
+              post_df
               expect(response).to redirect_to(providers_legal_aid_application_confirm_delegated_functions_date_path(application_id, proceeding_id))
             end
           end
@@ -226,12 +525,22 @@ RSpec.describe "DelegatedFunctionsController" do
             end
 
             it "redirects to next page" do
+              post_df
               expect(response.body).to redirect_to(providers_legal_aid_application_emergency_default_path(application_id, proceeding_id))
             end
           end
 
           context "and the proceeding has not used delegated functions" do
+            let(:params) do
+              {
+                proceeding: {
+                  used_delegated_functions: false,
+                },
+              }
+            end
+
             it "redirects to next page" do
+              post_df
               expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
             end
           end
