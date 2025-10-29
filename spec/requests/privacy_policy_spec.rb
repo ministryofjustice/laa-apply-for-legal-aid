@@ -9,9 +9,9 @@ RSpec.describe "privacy policy page" do
 
     it "display contact information" do
       get privacy_policy_index_path
-      expect(response.body).to include(I18n.t("privacy_policy.index.more_details.header"))
-      expect(response.body).to include(I18n.t("privacy_policy.index.purpose_of_processing.header"))
-      expect(response.body).to include(I18n.t("privacy_policy.index.complaints.link_html"))
+      expect(response.body).to include("The Data Protection Officer")
+      expect(response.body).to include("Purpose of processing and the lawful basis for the process")
+      expect(response.body).to include("<a href='http://www.ico.org.uk'>ico.org.uk</a>")
     end
   end
 end
