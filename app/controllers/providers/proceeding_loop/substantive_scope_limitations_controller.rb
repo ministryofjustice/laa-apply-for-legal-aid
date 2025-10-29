@@ -30,8 +30,7 @@ module Providers
 
       def form_params
         merge_with_model(proceeding) do
-          merged_params = params.require(:proceeding).merge({ scope_type: :substantive })
-          convert_date_params(merged_params)
+          params.require(:proceeding).merge({ scope_type: :substantive })
         end
       end
 

@@ -106,14 +106,10 @@ Feature: Check single employment
 
     When I click link 'Latest incident details'
     Then I should be on a page showing 'Latest incident details'
+    And I enter the 'told' date of 2 days ago using the date picker field
+    And I enter the 'occurred' date of 2 days ago using the date picker field
 
-    When I fill "application_merits_task_incident_told_on_3i" with "5"
-    And I fill "application_merits_task_incident_told_on_2i" with "5"
-    And I fill "application_merits_task_incident_told_on_1i" with "21"
-    And I fill "application_merits_task_incident_occurred_on_3i" with "4"
-    And I fill "application_merits_task_incident_occurred_on_2i" with "4"
-    And I fill "application_merits_task_incident_occurred_on_1i" with "21"
-    And I click 'Save and continue'
+    When I click 'Save and continue'
     # already an opponent added by the setup
     Then I should be on a page showing "You have added 1 opponent"
     When I choose "No"

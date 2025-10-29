@@ -32,13 +32,9 @@ Feature: Checking ccms means does NOT auto grant
     Then I should be on the 'merits_task_list' page showing 'Latest incident details Not started'
     When I click link 'Latest incident details'
     Then I should be on a page showing 'Latest incident details'
-    Then I fill "application_merits_task_incident_told_on_3i" with "5"
-    Then I fill "application_merits_task_incident_told_on_2i" with "5"
-    Then I fill "application_merits_task_incident_told_on_1i" with "20"
-    Then I fill "application_merits_task_incident_occurred_on_3i" with "4"
-    Then I fill "application_merits_task_incident_occurred_on_2i" with "4"
-    Then I fill "application_merits_task_incident_occurred_on_1i" with "20"
-    Then I click 'Save and continue'
+    And I enter the 'told' date of 2 days ago using the date picker field
+    And I enter the 'occurred' date of 2 days ago using the date picker field
+    When I click 'Save and continue'
     Then  I should be on a page with title "Is the opponent an individual or an organisation?"
     And I choose a 'An individual' radio button
     When I click 'Save and continue'
@@ -109,12 +105,8 @@ Feature: Checking ccms means does NOT auto grant
     Then I should be on the 'merits_task_list' page showing 'Latest incident details Not started'
     When I click link 'Latest incident details'
     Then I should be on a page showing 'Latest incident details'
-    Then I fill "application_merits_task_incident_told_on_3i" with "5"
-    Then I fill "application_merits_task_incident_told_on_2i" with "5"
-    Then I fill "application_merits_task_incident_told_on_1i" with "20"
-    Then I fill "application_merits_task_incident_occurred_on_3i" with "4"
-    Then I fill "application_merits_task_incident_occurred_on_2i" with "4"
-    Then I fill "application_merits_task_incident_occurred_on_1i" with "20"
+    And I enter the 'told' date of 2 days ago using the date picker field
+    And I enter the 'occurred' date of 2 days ago using the date picker field
     Then I click 'Save and continue'
     Then  I should be on a page with title "Is the opponent an individual or an organisation?"
     And I choose a 'An individual' radio button

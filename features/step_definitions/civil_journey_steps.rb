@@ -1401,6 +1401,13 @@ Then(/^I enter the (.*) date of (\d+) day(?:s)? ago$/) do |name, number|
   fill_in(fields[2][:name].to_s, with: date.year)
 end
 
+Then(/^I enter the (.*) date of (\d+) day(?:s)? ago using the date picker field$/) do |name, number|
+  name.gsub!(/\s+/, "_")
+  date = number.days.ago
+  field = page.find("input[name*=#{name}]")
+  fill_in(field[:name], with: date.to_date.to_s(:date_picker))
+end
+
 Then("I should see a {string} date of {int} days ago") do |name, number|
   name.gsub!(/\s+/, "_")
   date = number.days.ago
@@ -1419,13 +1426,11 @@ Then("I enter a {string} for a {int} year old") do |name, number|
   fill_in(fields[2][:name].to_s, with: date.year)
 end
 
-Then(/^I enter the (.*) date of (\d+) month(?:s)? in the future$/) do |name, number|
-  name.gsub!(/\s+/, "_")
+Then(/^I enter the (.*) date of (\d+) month(?:s)? in the future using the date picker field$/) do |name, number|
+  name.gsub!(/\s+/, "-")
   date = Time.zone.today + number.months
-  fields = page.all("input[id*=#{name}]")
-  fill_in(fields[0][:name].to_s, with: date.day)
-  fill_in(fields[1][:name].to_s, with: date.month)
-  fill_in(fields[2][:name].to_s, with: date.year)
+  field = page.find("input[id*=#{name}]")
+  fill_in(field[:name], with: date.to_date.to_s(:date_picker))
 end
 
 # rubocop:disable Rails/SaveBang

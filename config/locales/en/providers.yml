@@ -714,7 +714,7 @@ en:
           no-hint: Give details of the specific work needed as a matter of urgency
           hearing-date-set: Has a date been set for the hearing?
           hearing-date: Enter the date
-          hearing-date-hint: For example, 12 11 2007
+          hearing-date-hint: "For example, %{options}."
       second_appeals:
         show:
           page_title: Is this a second appeal?
@@ -2172,7 +2172,7 @@ en:
         show:
           select_substantive_scope: For the substantive application, select the scope
       select_a_scope_limitation_error: Select a scope limitation
-      enter_valid_hearing_date_error: Enter a valid hearing date for %{scope_limitation}
+      enter_valid_hearing_date_error: Enter a valid hearing date for %{scope_limitation} in the correct format
       enter_limitation_note_error: Enter a limitation note for %{scope_limitation}
     interrupt:
       blocks:

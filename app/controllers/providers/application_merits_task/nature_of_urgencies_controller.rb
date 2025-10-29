@@ -17,10 +17,9 @@ module Providers
       end
 
       def form_params
-        merged_params = merge_with_model(urgency) do
+        merge_with_model(urgency) do
           params.expect(application_merits_task_urgency: %i[nature_of_urgency hearing_date_set hearing_date])
         end
-        convert_date_params(merged_params)
       end
     end
   end

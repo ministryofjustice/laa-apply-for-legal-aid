@@ -8,21 +8,23 @@ module Providers
       let(:smtl) { create(:legal_framework_merits_task_list, :da001_and_child_section_8_with_delegated_functions, legal_aid_application:) }
 
       describe "GET /providers/applications/:legal_aid_application_id/nature_of_urgencies" do
-        subject(:nature_of_urgencies) { get providers_legal_aid_application_nature_of_urgencies_path(legal_aid_application) }
+        subject(:get_nature_of_urgencies) { get providers_legal_aid_application_nature_of_urgencies_path(legal_aid_application) }
 
         before do
           login_provider
-          nature_of_urgencies
-        end
-
-        it "renders successfully" do
-          expect(response).to have_http_status(:ok)
+          get_nature_of_urgencies
         end
 
         context "when not authenticated" do
           let(:login_provider) { nil }
 
           it_behaves_like "a provider not authenticated"
+        end
+
+        context "when authenticated" do
+          it "renders successfully" do
+            expect(response).to have_http_status(:ok)
+          end
         end
       end
 
@@ -34,22 +36,22 @@ module Providers
           )
         end
 
-        let(:nature_of_urgency) { "This is the nature of the urgency" }
-        let(:hearing_date_set) { false }
-        let(:hearing_date_1i) { Date.yesterday.year }
-        let(:hearing_date_2i) { Date.yesterday.month }
-        let(:hearing_date_3i) { Date.yesterday.day }
         let(:params) do
           {
             application_merits_task_urgency: {
               nature_of_urgency:,
               hearing_date_set:,
-              "hearing_date(1i)": hearing_date_1i,
-              "hearing_date(2i)": hearing_date_2i,
-              "hearing_date(3i)": hearing_date_3i,
+              hearing_date:,
             },
           }
         end
+
+        let(:nature_of_urgency) { "This is the nature of the urgency" }
+        let(:hearing_date_set) { false }
+
+        let(:a_date) { Time.zone.yesterday }
+        let(:hearing_date) { a_date.to_s(:date_picker) }
+
         let(:draft_button) { { draft_button: "Save as draft" } }
         let(:button_clicked) { {} }
         let(:urgency) { legal_aid_application.reload.urgency }
@@ -61,10 +63,13 @@ module Providers
 
         context "when hearing_date_set is false" do
           it "creates a new urgency with the values entered without a hearing date" do
-            expect { post_nature_of_urgencies }.to change(::ApplicationMeritsTask::Urgency, :count).by(1)
-            expect(urgency.nature_of_urgency).to eq "This is the nature of the urgency"
-            expect(urgency.hearing_date_set).to be_falsey
-            expect(urgency.hearing_date).to be_nil
+            expect { post_nature_of_urgencies }.to change(::ApplicationMeritsTask::Urgency, :count).from(0).to(1)
+
+            expect(urgency).to have_attributes(
+              nature_of_urgency: "This is the nature of the urgency",
+              hearing_date_set: false,
+              hearing_date: nil,
+            )
           end
 
           it "redirects to the next page" do
@@ -77,15 +82,61 @@ module Providers
           let(:hearing_date_set) { true }
 
           it "creates a new urgency with the values entered without a hearing date" do
-            expect { post_nature_of_urgencies }.to change(::ApplicationMeritsTask::Urgency, :count).by(1)
-            expect(urgency.nature_of_urgency).to eq "This is the nature of the urgency"
-            expect(urgency.hearing_date_set).to be true
-            expect(urgency.hearing_date).to eq Date.yesterday
+            expect { post_nature_of_urgencies }.to change(::ApplicationMeritsTask::Urgency, :count).from(0).to(1)
+
+            expect(urgency).to have_attributes(
+              nature_of_urgency: "This is the nature of the urgency",
+              hearing_date_set: true,
+              hearing_date: a_date,
+            )
           end
 
           it "redirects to the next page" do
             post_nature_of_urgencies
             expect(response).to redirect_to(flow_forward_path)
+          end
+        end
+
+        context "when hearing_date_set is false but was previously true with a hearing_date" do
+          before do
+            create(
+              :urgency,
+              legal_aid_application:,
+              nature_of_urgency: "nature of urgency before",
+              hearing_date_set: true,
+              hearing_date: a_date,
+            )
+          end
+
+          let(:params) do
+            {
+              application_merits_task_urgency: {
+                nature_of_urgency: "nature of urgency after",
+                hearing_date_set: false,
+              },
+            }
+          end
+
+          it "updates the urgency to amend or remove the previous values" do
+            expect { post_nature_of_urgencies }
+              .to change { urgency.reload.attributes.symbolize_keys }
+                .from(
+                  hash_including(
+                    {
+                      nature_of_urgency: "nature of urgency before",
+                      hearing_date_set: true,
+                      hearing_date: a_date,
+                    },
+                  ),
+                ).to(
+                  hash_including(
+                    {
+                      nature_of_urgency: "nature of urgency after",
+                      hearing_date_set: false,
+                      hearing_date: nil,
+                    },
+                  ),
+                )
           end
         end
 

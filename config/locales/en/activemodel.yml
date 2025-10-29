@@ -200,11 +200,11 @@ en:
         application_merits_task/incident:
           attributes:
             told_on:
-              date_not_valid: Enter a valid date for when your client contacted you about the incident
+              date_not_valid: Enter a valid date for when your client contacted you about the incident in the correct format
               date_is_in_the_future: Date your client told you about the latest incident must be in the past
               blank: Enter the date your client told you about the latest incident
             occurred_on:
-              date_not_valid: Enter a valid date for when the incident occurred
+              date_not_valid: Enter a valid date for when the incident occurred in the correct format
               date_is_in_the_future: Date the incident occurred must be in the past
               blank: Enter the date the incident occurred
               invalid_timeline: Date the incident occurred must be before the date your client told you about it
@@ -231,7 +231,7 @@ en:
         final_hearing:
           attributes:
             date:
-              blank: &invalid_hearing_date Enter a valid final hearing date
+              blank: &invalid_hearing_date Enter a valid final hearing date in the correct format
               date_not_valid: *invalid_hearing_date
             details:
               blank: Enter details to explain why you have selected full representation without a final hearing date
@@ -259,8 +259,8 @@ en:
             hearing_date_set:
               blank: Select yes if the hearing date has been set
             hearing_date:
-              blank: Enter a valid hearing date
-              date_not_valid: Enter a valid hearing date
+              blank: Enter a valid hearing date in the correct format
+              date_not_valid: Enter a valid hearing date in the correct format
         application_merits_task/opponent:
           attributes:
             first_name:
@@ -705,18 +705,16 @@ en:
               blank: Select a level of service
             hearing_date:
               blank: Enter a valid hearing date
-              date_not_valid: Enter a valid hearing date
-        proceedings:
-          attributes:
+              date_not_valid: Enter a valid hearing date in the correct format
             used_delegated_functions:
               blank: Select yes if you have used delegated functions for this proceeding
             used_delegated_functions_on:
               nothing_selected: Select proceedings you've used delegated functions for
               none_and_proceeding_selected: Select proceedings you've used delegated functions for or I have not used delegated functions
-              date_not_in_range: "The date you used delegated functions cannot be before %{months}"
               date_is_in_the_future: The date you used delegated functions must be in the past
-              date_invalid: Enter the date you used delegated functions
-              blank: Select a response
+              earliest_allowed_date: The date you used delegated functions cannot be before %{date}
+              date_not_valid: Enter the date you used delegated functions in the correct format
+              blank: Enter the date you used delegated functions
         proceeding_merits_task/chances_of_success:
           attributes:
             application_purpose:

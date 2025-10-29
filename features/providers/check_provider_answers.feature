@@ -527,7 +527,7 @@ Feature: Checking client details answers backwards and forwards
     Then I should see 'Proceeding 1\nNon-molestation order\nFor the emergency application, select the scope'
 
     When I select "Hearing"
-    And I enter the "hearing date" date of 2 months in the future
+    And I enter the "hearing date" date of 2 months in the future using the date picker field
     And I select "Warrant of arrest FLA"
     And I click 'Save and continue'
     Then I should see 'Proceeding 1\nNon-molestation order'
@@ -543,7 +543,7 @@ Feature: Checking client details answers backwards and forwards
     Then I should see 'Proceeding 1\nNon-molestation order\nFor the substantive application, select the scope'
 
     When I select "Hearing/Adjournment"
-    And I enter the "hearing date" date of 3 months in the future
+    And I enter the "hearing date" date of 3 months in the future using the date picker field
     And I click 'Save and continue'
     Then I should be on a page with title "What you're applying for"
 

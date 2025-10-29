@@ -98,9 +98,7 @@ RSpec.describe "EmergencyScopeLimitationsController", :vcr do
                 scope_codes: %w[CV027],
                 meaning_CV027: "Hearing/Adjournment",
                 description_CV027: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
-                hearing_date_CV027_1i: "",
-                hearing_date_CV027_2i: "",
-                hearing_date_CV027_3i: "",
+                hearing_date_CV027: "",
               },
             }
           end

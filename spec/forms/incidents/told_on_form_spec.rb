@@ -1,170 +1,132 @@
 require "rails_helper"
 
 RSpec.describe Incidents::ToldOnForm, type: :form do
-  subject(:described_form) { described_class.new(params.merge(model: incident)) }
+  subject(:form) { described_class.new(params.merge(model: incident)) }
 
   let(:incident) { create(:incident) }
-  let(:told_on) { 3.days.ago.to_date }
-  let(:occurred_on) { 5.days.ago.to_date }
-  let(:i18n_scope) { "activemodel.errors.models.application_merits_task/incident.attributes" }
-  let(:error_locale) { :defined_in_spec }
-  let(:message) { I18n.t(error_locale, scope: i18n_scope) }
+  let(:params) { { occurred_on: occurred_on_string, told_on: told_on_string } }
 
-  let(:params) { { occurred_on:, told_on: } }
+  let(:told_on_string) { 3.days.ago.to_date.to_s(:date_picker) }
+  let(:occurred_on_string) { 5.days.ago.to_date.to_s(:date_picker) }
+
+  describe "#valid?" do
+    context "when the told_on and occurred on dates are provided" do
+      let(:told_on_string) { 3.days.ago.to_date.to_s(:date_picker) }
+      let(:occurred_on_string) { 5.days.ago.to_date.to_s(:date_picker) }
+
+      it { expect(form).to be_valid }
+    end
+
+    context "when the told_on date is missing" do
+      let(:told_on_string) { "" }
+
+      it "is invalid with expected error" do
+        expect(form).to be_invalid
+        expect(form.errors.messages[:told_on]).to include("Enter the date your client told you about the latest incident")
+      end
+    end
+
+    context "when the told_on date is using 2 digit year" do
+      let(:told_on_string) { "#{Time.zone.today.day}/#{Time.zone.today.month}/#{Time.zone.today.strftime('%y').to_i}" }
+
+      it "is invalid with expected error" do
+        expect(form).to be_invalid
+        expect(form.errors.messages[:told_on]).to include("Enter a valid date for when your client contacted you about the incident in the correct format")
+      end
+    end
+
+    context "when the told_on date is using an invalid month" do
+      let(:told_on_string) { "#{Time.zone.today.day}/13/#{Time.zone.today.year}" }
+
+      it "is invalid with expected error" do
+        expect(form).to be_invalid
+        expect(form.errors.messages[:told_on]).to include("Enter a valid date for when your client contacted you about the incident in the correct format")
+      end
+    end
+
+    context "when the told_on date is using an invalid day" do
+      let(:told_on_string) { "32/#{Time.zone.today.month}/#{Time.zone.today.year}" }
+
+      it "is invalid with expected error" do
+        expect(form).to be_invalid
+        expect(form.errors.messages[:told_on]).to include("Enter a valid date for when your client contacted you about the incident in the correct format")
+      end
+    end
+
+    context "when the told_on date is in the future" do
+      let(:told_on_string) { Time.zone.tomorrow.to_s(:date_picker) }
+
+      it "is invalid with expected error" do
+        expect(form).to be_invalid
+        expect(form.errors.messages[:told_on]).to include("Date your client told you about the latest incident must be in the past")
+      end
+    end
+
+    context "when the occurred_on date is missing" do
+      let(:occurred_on_string) { "" }
+
+      it "is invalid with expected error" do
+        expect(form).to be_invalid
+        expect(form.errors.messages[:occurred_on]).to include("Enter the date the incident occurred")
+      end
+    end
+
+    context "when the occurred_on date is using 2 digit year" do
+      let(:occurred_on_string) { "#{Time.zone.today.day}/#{Time.zone.today.month}/#{Time.zone.today.strftime('%y').to_i}" }
+
+      it "is invalid with expected error" do
+        expect(form).to be_invalid
+        expect(form.errors.messages[:occurred_on]).to include("Enter a valid date for when the incident occurred in the correct format")
+      end
+    end
+
+    context "when the occurred_on date is using an invalid month" do
+      let(:occurred_on_string) { "#{Time.zone.today.day}/13/#{Time.zone.today.year}" }
+
+      it "is invalid with expected error" do
+        expect(form).to be_invalid
+        expect(form.errors.messages[:occurred_on]).to include("Enter a valid date for when the incident occurred in the correct format")
+      end
+    end
+
+    context "when the occurred_on date is using an invalid day" do
+      let(:occurred_on_string) { "32/#{Time.zone.today.month}/#{Time.zone.today.year}" }
+
+      it "is invalid with expected error" do
+        expect(form).to be_invalid
+        expect(form.errors.messages[:occurred_on]).to include("Enter a valid date for when the incident occurred in the correct format")
+      end
+    end
+
+    context "when the occurred_on date is in the future" do
+      let(:occurred_on_string) { Time.zone.tomorrow.to_s(:date_picker) }
+
+      it "is invalid with expected error" do
+        expect(form).to be_invalid
+        expect(form.errors.messages[:occurred_on]).to include("Date the incident occurred must be in the past")
+      end
+    end
+
+    context "when the occurred_on is after the told_on date" do
+      let(:told_on_string) { 2.days.ago.to_date.to_s(:date_picker) }
+      let(:occurred_on_string) { 1.day.ago.to_date.to_s(:date_picker) }
+
+      it "is invalid with expected error" do
+        expect(form).to be_invalid
+        expect(form.errors.messages[:occurred_on]).to include("Date the incident occurred must be before the date your client told you about it")
+      end
+    end
+  end
 
   describe "#save" do
     before do
-      described_form.save!
+      form.save!
       incident.reload
     end
 
     it "updates the incident" do
-      expect(incident.occurred_on).to eq(occurred_on)
-      expect(incident.told_on).to eq(told_on)
-    end
-
-    context "when occurred on is invalid" do
-      let(:params) do
-        {
-          occurred_on_1i: occurred_on.year.to_s,
-          occurred_on_2i: "55",
-          occurred_on_3i: occurred_on.day.to_s,
-        }
-      end
-      let(:error_locale) { "occurred_on.date_not_valid" }
-
-      it "is invalid" do
-        expect(described_form).not_to be_valid
-      end
-
-      it "generates an error" do
-        expect(described_form.errors[:occurred_on].join).to match(message)
-      end
-    end
-
-    context "when told on is invalid" do
-      let(:params) do
-        {
-          told_on_1i: told_on.year.to_s,
-          told_on_2i: "55",
-          told_on_3i: told_on.day.to_s,
-        }
-      end
-      let(:error_locale) { "told_on.date_not_valid" }
-
-      it "is invalid" do
-        expect(described_form).not_to be_valid
-      end
-
-      it "generates an error" do
-        expect(described_form.errors[:told_on].join).to match(message)
-      end
-    end
-
-    context "when occurred on is in future" do
-      let(:occurred_on) { 1.day.from_now.to_date }
-      let(:error_locale) { "occurred_on.date_is_in_the_future" }
-
-      it "is invalid" do
-        expect(described_form).not_to be_valid
-      end
-
-      it "generates an error" do
-        expect(described_form.errors[:occurred_on].join).to match(message)
-      end
-    end
-
-    context "when told on is in future" do
-      let(:told_on) { 1.day.from_now.to_date }
-      let(:error_locale) { "told_on.date_is_in_the_future" }
-
-      it "is invalid" do
-        expect(described_form).not_to be_valid
-      end
-
-      it "generates an error" do
-        expect(described_form.errors[:told_on].join).to match(message)
-      end
-    end
-
-    context "with told date entered in parts" do
-      let(:params) do
-        {
-          told_on_1i: told_on.year.to_s,
-          told_on_2i: told_on.month.to_s,
-          told_on_3i: told_on.day.to_s,
-        }
-      end
-
-      it "updates the incident" do
-        expect(incident.told_on).to eq(told_on)
-      end
-    end
-
-    context "without occurred on date" do
-      let(:occurred_on) { "" }
-      let(:incident) { create(:incident, occurred_on: nil) }
-      let(:error_locale) { "occurred_on.blank" }
-
-      it "is invalid" do
-        expect(described_form).not_to be_valid
-      end
-
-      it "generates an error" do
-        expect(described_form.errors[:occurred_on].join).to match(message)
-      end
-    end
-
-    context "without told on date" do
-      let(:told_on) { "" }
-      let(:incident) { create(:incident, told_on: nil) }
-      let(:error_locale) { "told_on.blank" }
-
-      it "is invalid" do
-        expect(described_form).not_to be_valid
-      end
-
-      it "generates an error" do
-        expect(described_form.errors[:told_on].join).to match(message)
-      end
-    end
-
-    context "with an invalid partial occurred on date" do
-      let(:error_locale) { "occurred_on.date_not_valid" }
-      let(:params) do
-        {
-          occurred_on_1i: occurred_on.year.to_s,
-          occurred_on_2i: "",
-          occurred_on_3i: occurred_on.day.to_s,
-        }
-      end
-
-      it "is invalid" do
-        expect(described_form).not_to be_valid
-      end
-
-      it "generates an error" do
-        expect(described_form.errors[:occurred_on].join).to match(message)
-      end
-    end
-
-    context "with an invalid partial told on date" do
-      let(:error_locale) { "told_on.date_not_valid" }
-      let(:params) do
-        {
-          told_on_1i: told_on.year.to_s,
-          told_on_2i: "",
-          told_on_3i: told_on.day.to_s,
-        }
-      end
-
-      it "is invalid" do
-        expect(described_form).not_to be_valid
-      end
-
-      it "generates an error" do
-        expect(described_form.errors[:told_on].join).to match(message)
-      end
+      expect(incident.told_on).to eq(3.days.ago.to_date)
+      expect(incident.occurred_on).to eq(5.days.ago.to_date)
     end
   end
 end
