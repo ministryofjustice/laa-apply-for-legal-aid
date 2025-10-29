@@ -11,17 +11,27 @@
                                                       hint: { text: t("generic.select_all_that_apply") } do %>
       <div class="deselect-group" data-deselect-ctrl="#substantive-scope-none-selected-true-field">
         <% @form.scopes.each_with_index do |scope, index| %>
+          <% substantive_scope_limitation = form.object.model.scope_limitations.find_by(code: scope["code"], scope_type: :substantive)
+             checked = substantive_scope_limitation.present? %>
+
           <%= form.hidden_field :"meaning_#{scope['code']}", value: scope["meaning"] %>
           <%= form.hidden_field :"description_#{scope['code']}", value: scope["description"] %>
-          <%= form.govuk_check_box :scope_codes, scope["code"], link_errors: true,
-                                                                label: { text: scope["meaning"] } do %>
+
+          <%= form.govuk_check_box(:scope_codes,
+                                   scope["code"],
+                                   checked:,
+                                   link_errors: index.zero?,
+                                   label: { text: scope["meaning"] }) do %>
             <% scope["additional_params"].each do |ap| %>
               <% if ap["name"] == "hearing_date" %>
-                <%= render partial: "shared/scope_limitations/hearing_date", locals: { form:, field_name: :"hearing_date_#{scope['code']}" } %>
+                <% field_name = :"hearing_date_#{scope['code']}"
+                   field_value = substantive_scope_limitation&.hearing_date&.to_s(:date_picker) %>
+                <%= render partial: "shared/scope_limitations/hearing_date", locals: { form:, field_name:, field_value: } %>
               <% elsif ap["name"] == "limitation_note" %>
                 <%= render partial: "shared/scope_limitations/limitation_note", locals: { form:, scope: } %>
               <% end %>
             <% end %>
+
           <% end %>
         <% end %>
       </div>

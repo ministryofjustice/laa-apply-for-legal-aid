@@ -19,7 +19,7 @@ module Providers
         return false if @form.invalid?
 
         DelegatedFunctionsDateService.call(legal_aid_application, draft_selected: draft_selected?)
-        reset_proceeding_loop if @legal_aid_application.checking_answers?
+        reset_proceeding_loop! if @legal_aid_application.checking_answers?
         continue_or_draft(**)
       end
 
@@ -40,7 +40,7 @@ module Providers
         end
       end
 
-      def reset_proceeding_loop
+      def reset_proceeding_loop!
         proceeding.update!(
           accepted_emergency_defaults: nil,
           accepted_substantive_defaults: nil,

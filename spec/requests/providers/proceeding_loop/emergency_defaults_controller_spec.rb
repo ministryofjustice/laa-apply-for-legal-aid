@@ -96,6 +96,8 @@ RSpec.describe "EmergencyDefaultsController" do
         substantive_level_of_service_name: nil,
         substantive_level_of_service_stage: nil,
       )
+
+      app.proceedings.first.scope_limitations.destroy_all
     end
   end
 
@@ -160,8 +162,6 @@ RSpec.describe "EmergencyDefaultsController" do
     subject(:post_sd) { patch "/providers/applications/#{application.id}/emergency_defaults/#{proceeding.id}", params: }
 
     before do
-      allow(DelegatedFunctionsDateService).to receive(:call).and_return(true)
-
       stub_request(:post, %r{#{Rails.configuration.x.legal_framework_api_host}/proceeding_type_defaults})
         .to_return(
           status: 200,
@@ -203,11 +203,6 @@ RSpec.describe "EmergencyDefaultsController" do
             }
           end
 
-          it "redirects to next page" do
-            post_sd
-            expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application.id, proceeding.id))
-          end
-
           it "sets the default emergency levels of service" do
             expect { post_sd }.to change { proceeding.reload.attributes.symbolize_keys }
               .from(
@@ -228,9 +223,14 @@ RSpec.describe "EmergencyDefaultsController" do
                 ),
               )
           end
+
+          it "redirects to next page" do
+            post_sd
+            expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application.id, proceeding.id))
+          end
         end
 
-        context "when the provider does not accept the defaults" do
+        context "when the provider does NOT accept the defaults" do
           let(:params) do
             {
               proceeding: {
@@ -239,9 +239,264 @@ RSpec.describe "EmergencyDefaultsController" do
             }
           end
 
+          it "does NOT set the default emergency levels of service" do
+            post_sd
+
+            expect(proceeding).to have_attributes(
+              emergency_level_of_service: nil,
+              emergency_level_of_service_name: nil,
+              emergency_level_of_service_stage: nil,
+            )
+          end
+
           it "redirects to next page" do
             post_sd
             expect(response.body).to redirect_to(providers_legal_aid_application_emergency_level_of_service_path(application.id, proceeding.id))
+          end
+        end
+
+        context "when the user has already answered this question" do
+          context "and changes answer from No to Yes" do
+            let(:params) do
+              {
+                proceeding: {
+                  accepted_emergency_defaults: "true",
+                },
+              }
+            end
+
+            before do
+              # set a value which will be updated even though only some proceedings have a choice of level of service other than default, so fake that here
+              proceeding.update!(
+                accepted_emergency_defaults: false,
+                emergency_level_of_service: 33,
+                emergency_level_of_service_name: "Not a real level of service",
+                emergency_level_of_service_stage: 88,
+              )
+
+              # When user has prevously added a non-default scope limitation
+              proceeding.scope_limitations.create!(
+                scope_type: :emergency,
+                code: "CV027",
+                meaning: "Hearing/Adjournment",
+                description: "Limited to all steps (including any adjournment thereof) up to and including the hearing on",
+                hearing_date: Time.zone.tomorrow,
+              )
+            end
+
+            it "changes proceeding attributes to default level of service" do
+              expect { post_sd }.to change { proceeding.reload.attributes.symbolize_keys }
+                 .from(
+                   hash_including(
+                     {
+                       accepted_emergency_defaults: false,
+                       emergency_level_of_service: 33,
+                       emergency_level_of_service_name: "Not a real level of service",
+                       emergency_level_of_service_stage: 88,
+                     },
+                   ),
+                 ).to(
+                   hash_including(
+                     {
+                       accepted_emergency_defaults: true,
+                       emergency_level_of_service: 3,
+                       emergency_level_of_service_name: "Full Representation",
+                       emergency_level_of_service_stage: 8,
+                     },
+                   ),
+                 )
+            end
+
+            it "replaces user-chosen scope limitation with defaults" do
+              expect { post_sd }.to change { proceeding.scope_limitations.where(scope_type: :emergency).first.attributes.symbolize_keys }
+                .from(
+                  hash_including(
+                    {
+                      scope_type: "emergency",
+                      code: "CV027",
+                      meaning: "Hearing/Adjournment",
+                      description: "Limited to all steps (including any adjournment thereof) up to and including the hearing on",
+                      hearing_date: instance_of(Date),
+                    },
+                  ),
+                ).to(
+                  hash_including(
+                    {
+                      scope_type: "emergency",
+                      code: "CV117",
+                      meaning: "Interim order inc. return date",
+                      description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                      hearing_date: nil,
+                    },
+                  ),
+                )
+            end
+          end
+
+          context "and changes their answer from Yes to No" do
+            let(:params) do
+              {
+                proceeding: {
+                  accepted_emergency_defaults: "false",
+                },
+              }
+            end
+
+            before do
+              # set a value which will be updated even though only some proceedings have a choice of level of service other than default, so fake that here
+              proceeding.update!(
+                accepted_emergency_defaults: true,
+                emergency_level_of_service: 11,
+                emergency_level_of_service_name: "My pretend default level of service",
+                emergency_level_of_service_stage: 99,
+              )
+
+              # When user has prevously added/accepted the default scope limitation
+              proceeding.scope_limitations.create!(
+                scope_type: "emergency",
+                code: "CV117",
+                meaning: "Interim order inc. return date",
+                description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                hearing_date: nil,
+              )
+            end
+
+            it "nullifies default level of service proceeding attributes - in preparation for picking a non-default level of service" do
+              expect { post_sd }.to change { proceeding.reload.attributes.symbolize_keys }
+                 .from(
+                   hash_including(
+                     {
+                       accepted_emergency_defaults: true,
+                       emergency_level_of_service: 11,
+                       emergency_level_of_service_name: "My pretend default level of service",
+                       emergency_level_of_service_stage: 99,
+                     },
+                   ),
+                 ).to(
+                   hash_including(
+                     {
+                       accepted_emergency_defaults: false,
+                       emergency_level_of_service: nil,
+                       emergency_level_of_service_name: nil,
+                       emergency_level_of_service_stage: nil,
+                     },
+                   ),
+                 )
+            end
+
+            it "removes existing emergency default scope limitation" do
+              expect { post_sd }.to change(proceeding.scope_limitations.where(scope_type: :emergency), :count).from(1).to(0)
+            end
+          end
+
+          context "and does NOT change their answer from No" do
+            let(:params) do
+              {
+                proceeding: {
+                  accepted_emergency_defaults: "false",
+                },
+              }
+            end
+
+            before do
+              # set a value which will be updated even though only some proceedings have a choice of level of service other than default, so fake that here
+              proceeding.update!(accepted_emergency_defaults: false,
+                                 emergency_level_of_service: 33,
+                                 emergency_level_of_service_name: "Not a real level of service",
+                                 emergency_level_of_service_stage: 88)
+
+              # When user has prevously added a non-default scope limitation
+              proceeding.scope_limitations.create!(
+                scope_type: :emergency,
+                code: "CV027",
+                meaning: "Hearing/Adjournment",
+                description: "Limited to all steps (including any adjournment thereof) up to and including the hearing on",
+                hearing_date: Time.zone.tomorrow,
+              )
+            end
+
+            it "does NOT change proceeding attributes from what they were" do
+              expect { post_sd }.not_to change { proceeding.reload.attributes.symbolize_keys }
+                 .from(
+                   hash_including(
+                     {
+                       accepted_emergency_defaults: false,
+                       emergency_level_of_service: 33,
+                       emergency_level_of_service_name: "Not a real level of service",
+                       emergency_level_of_service_stage: 88,
+                     },
+                   ),
+                 )
+            end
+
+            it "does NOT remove the existing scope limitation" do
+              expect { post_sd }.not_to change(proceeding.scope_limitations.where(scope_type: :emergency), :count).from(1)
+
+              expect(proceeding.scope_limitations.where(scope_type: :emergency).first)
+                .to have_attributes(
+                  scope_type: "emergency",
+                  code: "CV027",
+                  meaning: "Hearing/Adjournment",
+                  description: "Limited to all steps (including any adjournment thereof) up to and including the hearing on",
+                  hearing_date: Time.zone.tomorrow,
+                )
+            end
+          end
+
+          context "and does NOT change their answer from Yes" do
+            let(:params) do
+              {
+                proceeding: {
+                  accepted_emergency_defaults: "true",
+                },
+              }
+            end
+
+            before do
+              # set a value which will be updated even though only some proceedings have a choice of level of service other than default, so fake that here
+              proceeding.update!(
+                accepted_emergency_defaults: true,
+                emergency_level_of_service: 11,
+                emergency_level_of_service_name: "My pretend default level of service",
+                emergency_level_of_service_stage: 99,
+              )
+
+              # When user has prevously added/accepted a default scope limitation
+              proceeding.scope_limitations.create!(
+                scope_type: "emergency",
+                code: "CV117",
+                meaning: "Interim order inc. return date",
+                description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                hearing_date: nil,
+              )
+            end
+
+            it "does NOT change proceeding attributes from what they were" do
+              expect { post_sd }.not_to change { proceeding.reload.attributes.symbolize_keys }
+                 .from(
+                   hash_including(
+                     {
+                       accepted_emergency_defaults: true,
+                       emergency_level_of_service: 11,
+                       emergency_level_of_service_name: "My pretend default level of service",
+                       emergency_level_of_service_stage: 99,
+                     },
+                   ),
+                 )
+            end
+
+            it "does NOT remove the existing scope limitation" do
+              expect { post_sd }.not_to change(proceeding.scope_limitations.where(scope_type: :emergency), :count).from(1)
+
+              expect(proceeding.scope_limitations.where(scope_type: :emergency).first)
+                .to have_attributes(
+                  scope_type: "emergency",
+                  code: "CV117",
+                  meaning: "Interim order inc. return date",
+                  description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                  hearing_date: nil,
+                )
+            end
           end
         end
 

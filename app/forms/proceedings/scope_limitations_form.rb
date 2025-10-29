@@ -11,10 +11,11 @@ module Proceedings
              :validate_limitation_notes
 
     class << self
-      def call(scopes)
+      def call(scopes, model:)
         scopes.each do |scope|
           code = scope["code"]
           populate_attr_accessors(code)
+
           scope["additional_params"].each do |ap|
             case ap["name"]
             when "hearing_date"
@@ -24,7 +25,7 @@ module Proceedings
             end
           end
         end
-        new({ scopes: })
+        new({ scopes:, model: })
       end
 
       def populate_attr_accessors(code)
@@ -51,6 +52,8 @@ module Proceedings
       return false unless valid?
 
       update_populated_dates
+      # TODO: this will destroy emergency or substantive default scope limitations as well
+      # but what about if they are just back paging?
       model.scope_limitations.where(scope_type:).destroy_all
       scope_codes.reject!(&:empty?).each do |code|
         model.scope_limitations.create!(scope_type:,
