@@ -78,6 +78,8 @@ module Proceedings
         substantive_cost_requested: nil,
         substantive_cost_reasons: nil,
       )
+
+      model.scope_limitations.destroy_all
     end
   end
 end
