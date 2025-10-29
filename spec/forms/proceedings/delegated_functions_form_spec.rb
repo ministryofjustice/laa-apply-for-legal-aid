@@ -21,10 +21,25 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
       let(:df_date) { Time.zone.yesterday.to_s(:date_picker) }
 
       it "updates the proceeding" do
-        save_form
-        expect(proceeding.reload.used_delegated_functions).to be true
-        expect(proceeding.reload.used_delegated_functions_on).to eq Time.zone.yesterday
-        expect(proceeding.reload.used_delegated_functions_reported_on).to eq Time.zone.today
+        expect { save_form }
+          .to change { proceeding.reload.attributes.symbolize_keys }
+            .from(
+              hash_including(
+                {
+                  used_delegated_functions: nil,
+                  used_delegated_functions_on: nil,
+                  used_delegated_functions_reported_on: nil,
+                },
+              ),
+            ).to(
+              hash_including(
+                {
+                  used_delegated_functions: true,
+                  used_delegated_functions_on: Time.zone.yesterday,
+                  used_delegated_functions_reported_on: Time.zone.today,
+                },
+              ),
+            )
       end
     end
 

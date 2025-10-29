@@ -22,17 +22,26 @@ module Proceedings
     def initialize(*args)
       super
       @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], false))
-      self.substantive_level_of_service = @defaults["default_level_of_service"]["level"]
-      self.substantive_level_of_service_name = @defaults["default_level_of_service"]["name"]
-      self.substantive_level_of_service_stage = @defaults["default_level_of_service"]["stage"]
-      self.substantive_scope_limitation_meaning = @defaults["default_scope"]["meaning"]
-      self.substantive_scope_limitation_description = @defaults["default_scope"]["description"]
-      self.substantive_scope_limitation_code = @defaults["default_scope"]["code"]
-      self.additional_params = @defaults["default_scope"]["additional_params"]
+      self.substantive_level_of_service = default_level_of_service["level"]
+      self.substantive_level_of_service_name = default_level_of_service["name"]
+      self.substantive_level_of_service_stage = default_level_of_service["stage"]
+      self.substantive_scope_limitation_code = default_scope["code"]
+      self.substantive_scope_limitation_meaning = default_scope["meaning"]
+      self.substantive_scope_limitation_description = default_scope["description"]
+      self.additional_params = default_scope["additional_params"]
+    end
+
+    def default_level_of_service
+      @default_level_of_service ||= @defaults["default_level_of_service"]
+    end
+
+    def default_scope
+      @default_scope ||= @defaults["default_scope"]
     end
 
     def save
       return false unless valid?
+      return unless accepted_substantive_defaults_changed?
 
       model.scope_limitations.where(scope_type: :substantive).destroy_all
 
@@ -44,10 +53,11 @@ module Proceedings
         model.update!(substantive_level_of_service:,
                       substantive_level_of_service_name:,
                       substantive_level_of_service_stage:)
+
         model.scope_limitations.create!(scope_type: :substantive,
-                                        code: substantive_scope_limitation_code,
-                                        meaning: substantive_scope_limitation_meaning,
-                                        description: substantive_scope_limitation_description)
+                                        code: default_scope["code"],
+                                        meaning: default_scope["meaning"],
+                                        description: default_scope["description"])
       end
 
       super
@@ -59,6 +69,12 @@ module Proceedings
          substantive_scope_limitation_code
          substantive_scope_limitation_meaning
          substantive_scope_limitation_description]
+    end
+
+  private
+
+    def accepted_substantive_defaults_changed?
+      accepted_substantive_defaults.to_s != model.accepted_substantive_defaults.to_s
     end
   end
 end
