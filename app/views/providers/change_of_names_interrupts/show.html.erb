@@ -1,5 +1,12 @@
 <%= page_template(page_title: t(".title_html"), template: :basic, column_width: "full") do %>
-  <% interruption_card(heading: t(".title_html"), actions: -> { render "actions" }) do %>
-    <p><%= t(".paragraph") %></p>
+  <%= render MojComponent::InterruptionCardComponent.new(heading: t(".title_html")) do |card| %>
+    <% card.with_body do %>
+      <p><%= t(".paragraph") %></p>
+    <% end %>
+
+    <% card.with_actions do %>
+      <%= govuk_button_link_to t(".change"), providers_legal_aid_application_change_of_names_path, inverse: true, role: "button" %>
+      <%= govuk_link_to t("generic.back_to_your_applications"), home_path, inverse: true %>
+    <% end %>
   <% end %>
 <% end %>
