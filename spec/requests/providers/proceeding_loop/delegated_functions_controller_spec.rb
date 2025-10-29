@@ -245,6 +245,10 @@ RSpec.describe "DelegatedFunctionsController" do
                   ),
                 )
             end
+
+            it "destroys the proceeding object's emergency and substantive scope_limitations data" do
+              expect { post_df }.to change { proceeding.reload.scope_limitations.count }.from(2).to(0)
+            end
           end
 
           context "and user changes No to Yes" do
@@ -322,6 +326,10 @@ RSpec.describe "DelegatedFunctionsController" do
                   ),
                 )
             end
+
+            it "destroys the proceeding object's emergency and substantive scope_limitations data" do
+              expect { post_df }.to change { proceeding.reload.scope_limitations.count }.from(2).to(0)
+            end
           end
 
           context "and user changes used_delegated_functions on date" do
@@ -336,7 +344,7 @@ RSpec.describe "DelegatedFunctionsController" do
             let(:params) do
               {
                 proceeding: {
-                  used_delegated_functions: "true", # would this be submitted if unchanged
+                  used_delegated_functions: "true",
                   used_delegated_functions_on: Time.zone.yesterday.to_s(:date_picker),
                 },
               }
@@ -396,6 +404,10 @@ RSpec.describe "DelegatedFunctionsController" do
                   ),
                 )
             end
+
+            it "does NOT destroy the proceeding object's emergency and substantive scope_limitations data" do
+              expect { post_df }.not_to change { proceeding.reload.scope_limitations.count }.from(2)
+            end
           end
 
           context "and user does NOT change any data" do
@@ -410,7 +422,7 @@ RSpec.describe "DelegatedFunctionsController" do
             let(:params) do
               {
                 proceeding: {
-                  used_delegated_functions: "true", # would this be submitted if unchanged
+                  used_delegated_functions: "true",
                 },
               }
             end
@@ -464,6 +476,10 @@ RSpec.describe "DelegatedFunctionsController" do
                     substantive_cost_reasons: "some substantive reason",
                   ),
                 )
+            end
+
+            it "does NOT destroy the proceeding object's emergency and substantive scope_limitations data" do
+              expect { post_df }.not_to change { proceeding.reload.scope_limitations.count }.from(2)
             end
           end
         end
