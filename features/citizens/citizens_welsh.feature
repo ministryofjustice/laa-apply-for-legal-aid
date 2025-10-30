@@ -64,7 +64,7 @@ Feature: Citizen journey in Welsh
     Given An application has been created
     Then I visit the start of the financial assessment in Welsh
     Then I click link 'ycilop ycavirP'
-    Then I should be on a page showing 'esopruP'
+    Then I should be on a page showing 'Purpose'
     Then I return to English
 
   @javascript @vcr
