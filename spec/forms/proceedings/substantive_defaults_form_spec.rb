@@ -37,9 +37,12 @@ RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
 
           it "creates a scope_limitation object" do
             expect { save_form }.to change(proceeding.scope_limitations, :count).by(1)
-            expect(proceeding.scope_limitations.find_by(scope_type: :substantive)).to have_attributes(code: "AA019",
-                                                                                                      meaning: "Injunction FLA-to final hearing",
-                                                                                                      description: "As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).")
+            expect(proceeding.scope_limitations.find_by(scope_type: :substantive))
+              .to have_attributes(
+                code: "AA019",
+                meaning: "Injunction FLA-to final hearing",
+                description: "As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).",
+              )
           end
         end
 
@@ -109,7 +112,7 @@ RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
     end
 
     context "with a Special Childrens Act proceeding" do
-      let(:params) { {} }
+      let(:accepted) { "true" }
       let(:proceeding) { create(:proceeding, :pb003, :without_df_date, :no_substantive_level_of_service, client_involvement_type_ccms_code: "A", no_scope_limitations: true) }
 
       it "sets the default values" do
@@ -126,7 +129,12 @@ RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
           expect(proceeding.substantive_level_of_service_name).to be_nil
           expect(proceeding.substantive_level_of_service_stage).to be_nil
           expect { save_form }.to change(proceeding.scope_limitations, :count).by(1)
-          expect(proceeding.scope_limitations.find_by(scope_type: :substantive)).to have_attributes(code: "FM062", description: "Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.")
+
+          expect(proceeding.scope_limitations.find_by(scope_type: :substantive))
+            .to have_attributes(
+              code: "FM062",
+              description: "Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.",
+            )
         end
       end
     end
