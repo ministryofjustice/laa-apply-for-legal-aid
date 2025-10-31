@@ -8,26 +8,34 @@
         page_title: page_title,
         form:,
       ) do %>
-    <%= form.hidden_field :display_type, value: :gov_uk %>
-    <%= form.govuk_text_field :gov_uk_header_bar,
-                              label: { size: "m", text: t(".gov_uk_header_bar") },
-                              hint: { text: t(".gov_uk_header_bar_hint") },
-                              width: 20,
-                              value: @announcement.gov_uk_header_bar.presence || "Important" %>
+    <%= form.govuk_radio_buttons_fieldset(:display_type,
+                                          legend: { text: t(".display_type") },
+                                          hint: { text: t(".display_type_hint") }) do %>
+      <%= form.govuk_radio_button :display_type, :gov_uk, label: { text: t(".display_type_gov_uk") } do %>
+        <%= form.govuk_text_field :gov_uk_header_bar,
+                                  label: { size: "m", text: t(".gov_uk_header_bar") },
+                                  hint: { text: t(".gov_uk_header_bar_hint") },
+                                  width: 20,
+                                  value: @announcement.gov_uk_header_bar.presence || "Important" %>
+        <%= form.govuk_text_field :link_url,
+                                  label: { size: "m", text: t(".link_url") },
+                                  hint: { text: t("generic.optional") },
+                                  width: 20 %>
+        <%= form.govuk_text_field :link_display,
+                                  label: { size: "m", text: t(".link_display") },
+                                  hint: { text: t("generic.optional") },
+                                  width: 20 %>
+      <% end %>
+      <%= form.govuk_radio_button :display_type, :moj, label: { text: t(".display_type_moj") } %>
+    <% end %>
+
     <%= form.govuk_text_field :heading,
                               label: { size: "m", text: t(".heading") },
-                              width: 20 %>
-    <%= form.govuk_text_field :link_url,
-                              label: { size: "m", text: t(".link_url") },
-                              hint: { text: t("generic.optional") },
-                              width: 20 %>
-    <%= form.govuk_text_field :link_display,
-                              label: { size: "m", text: t(".link_display") },
-                              hint: { text: t("generic.optional") },
+                              hint: { size: "m", text: t(".heading_hint") },
                               width: 20 %>
     <%= form.govuk_text_area :body,
                              label: { size: "m", text: t(".body") },
-                             hint: { text: t("generic.optional") },
+                             hint: { text: t(".body_hint") },
                              rows: 5 %>
     <%= form.govuk_text_field :start_at,
                               label: { size: "m", text: t(".start_at") },

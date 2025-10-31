@@ -45,6 +45,14 @@ class Provider < ApplicationRecord
     @silas_office_codes ||= office_codes.split(":") || []
   end
 
+  def announcements
+    # get skipped announcement_ids
+    skip_these_ids = ProviderDismissedAnnouncement.where(provider: self).pluck(:announcement_id)
+
+    # get remaining announcements
+    Announcement.active.where.not(id: skip_these_ids)
+  end
+
   def user_permissions
     permissions.empty? ? firm_permissions : permissions
   end

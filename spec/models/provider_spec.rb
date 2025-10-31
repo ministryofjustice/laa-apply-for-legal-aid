@@ -157,4 +157,35 @@ RSpec.describe Provider do
       it { expect(described_class.from_omniauth(auth)).to be_nil }
     end
   end
+
+  describe "#announcements" do
+    subject(:announcements) { provider.announcements }
+
+    let(:provider) { create(:provider) }
+
+    context "when there are multiple types of alerts" do
+      before do
+        Announcement.create!(display_type: :gov_uk, heading: "Big news!", start_at: Time.zone.local(2025, 11, 1, 9, 0), end_at: Time.zone.local(2025, 12, 1, 9, 0))
+        Announcement.create!(display_type: :moj, body: "You won't believe this new feature", start_at: Time.zone.local(2025, 11, 11, 9, 0), end_at: Time.zone.local(2025, 12, 11, 9, 0))
+      end
+
+      it "returns all current announcements" do
+        travel_to Time.zone.local(2025, 11, 20, 13, 24, 44) do
+          expect(announcements.count).to eq 2
+        end
+      end
+
+      context "when the provider has dismissed the feature announcement" do
+        before do
+          ProviderDismissedAnnouncement.create!(provider:, announcement: Announcement.find_by(body: "You won't believe this new feature"))
+        end
+
+        it "only returns the unskipped announcement" do
+          travel_to Time.zone.local(2025, 11, 20, 13, 24, 44) do
+            expect(announcements.count).to eq 1
+          end
+        end
+      end
+    end
+  end
 end
