@@ -43,7 +43,7 @@ Feature: Loop through proceeding questions
     When I click 'Save and continue'
     Then I should be on a page with title "Do you want to add another proceeding?"
     And I should be on a page showing "You have added 1 proceeding"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
 
     When I choose "Yes"
     And I click 'Save and continue'
@@ -53,14 +53,14 @@ Feature: Loop through proceeding questions
     When I click 'Save and continue'
     Then I should be on a page with title "Do you want to add another proceeding?"
     And I should be on a page showing "You have added 2 proceedings"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should be on a page showing "Enforcement order 11J"
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page with title "Child arrangements order (CAO) - residence - appeal"
+    Then I should be on a page with title "Child arrangements order (CAO) - residence - appeal - vary"
     And I should be on a page showing "Proceeding 1 of 2"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should be on a page showing "What is your client's role in this proceeding?"
     And I should see "Applicant, claimant or petitioner"
     And I should see "Defendant or respondent"
@@ -71,53 +71,77 @@ Feature: Loop through proceeding questions
     When I choose "Applicant, claimant or petitioner"
     And I click 'Save and continue'
     And I should be on a page showing "Proceeding 1 of 2"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should see "Have you used delegated functions for this proceeding?"
 
     When I choose "Yes"
     And I enter the 'delegated functions on' date of 31 days ago using the date picker field
     And I click 'Save and continue'
     And I should be on a page showing "Proceeding 1 of 2"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should see "The date you said you used delegated functions is over one month old"
     And I should see "Did you use delegated functions for this proceeding on"
 
     When I choose "Yes"
     And I click 'Save and continue'
     And I should be on a page showing "Proceeding 1 of 2"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should see "Do you want to use the default level of service and scope for the emergency application?"
 
     When I choose "No"
     And I click 'Save and continue'
     And I should be on a page showing "Proceeding 1 of 2"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should see "You cannot change the default level of service for the emergency application for this proceeding"
 
     When I click 'Save and continue'
     And I should be on a page showing "Proceeding 1 of 2"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should see "For the emergency application, select the scope"
-
-    When I select "Court of Appeal-final hearing"
+    Then I select "Court of Appeal-final hearing"
+    And I select "Hearing/Adjournment"
+    And I fill in "When is the hearing?" with "01/01/2025"
     And I click 'Save and continue'
+
+    # Test that existing emergency scope limitation data is displayed
+    When I click link "Back"
     Then I should be on a page showing "Proceeding 1 of 2"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
+    And I should see "For the emergency application, select the scope"
+    And the checkbox "Court of Appeal-final hearing" is checked
+    And the checkbox "Hearing/Adjournment" is checked
+    And the field "proceeding-hearing-date-cv027-field" has value "1/1/2025"
+    And I click 'Save and continue'
+
+    Then I should be on a page showing "Proceeding 1 of 2"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should see "Substantive application"
     And I should see "Do you want to use the default level of service and scope for the substantive application?"
 
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on a page showing "Proceeding 1 of 2"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should see "You cannot change the default level of service for the substantive application for this proceeding"
 
     When I click 'Save and continue'
-    And I should be on a page showing "Proceeding 1 of 2"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
+    Then I should be on a page showing "Proceeding 1 of 2"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should see "For the substantive application, select the scope"
 
     When I select "Court of Appeal-final hearing"
+    And I select "Hearing/Adjournment"
+    And I fill in "When is the hearing?" with "02/02/2025"
+    And I click 'Save and continue'
+
+    # Test that existing substantive scope limitation data is displayed
+    When I click link "Back"
+    Then I should be on a page showing "Proceeding 1 of 2"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
+    And I should see "For the substantive application, select the scope"
+    And the checkbox "Court of Appeal-final hearing" is checked
+    And the checkbox "Hearing/Adjournment" is checked
+    And the field "proceeding-hearing-date-cv027-field" has value "2/2/2025"
     And I click 'Save and continue'
 
     Then I should be on a page with title "Enforcement order 11J"
@@ -156,7 +180,7 @@ Feature: Loop through proceeding questions
 
     Then I should be on a page with title "What you're applying for"
     And I should see "What you're applying for"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should see "Client role: Applicant, claimant or petitioner"
     And I should be on a page showing "Enforcement order 11J"
     And I should see "Client role: Joined party"

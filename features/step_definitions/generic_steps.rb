@@ -82,6 +82,20 @@ Then("I should see the following checkboxes checked or unchecked:") do |table|
   end
 end
 
+Then("the checkbox {string} is checked") do |text|
+  label = first(:label, text:)
+  input = label.sibling("input", visible: false)
+  expect(input).to be_checked
+end
+
+Then("the field {string} has value {string}") do |locator, text|
+  expect(page).to have_field(locator, with: text)
+end
+
+Then("I fill in {string} with {string}") do |locator, text|
+  fill_in(locator, with: text)
+end
+
 Then("the govuk-summary-card titled {string} should contain:") do |card_title, table|
   element = page.find(class: "govuk-summary-card", text: card_title)
 
