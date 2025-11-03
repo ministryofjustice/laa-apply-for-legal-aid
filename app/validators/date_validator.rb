@@ -47,7 +47,7 @@ private
     required = options[:earliest_allowed_date]
     return if required.blank?
 
-    formatted_date = earliest_allowed_date.to_date.to_s(:default)
+    formatted_date = earliest_allowed_date.to_date.to_s(:default).squish
     message = required[:message] if required.is_a?(Hash)
     message ||= :earliest_allowed_date
     record.errors.add(attribute, message, date: formatted_date) if value < earliest_allowed_date
