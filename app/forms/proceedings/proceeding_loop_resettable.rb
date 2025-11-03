@@ -9,6 +9,12 @@ module Proceedings
           model.update!(
             accepted_emergency_defaults: nil,
             accepted_substantive_defaults: nil,
+            emergency_level_of_service: nil,
+            emergency_level_of_service_name: nil,
+            emergency_level_of_service_stage: nil,
+            substantive_level_of_service: nil,
+            substantive_level_of_service_name: nil,
+            substantive_level_of_service_stage: nil,
           )
 
           model.legal_aid_application.update!(

@@ -168,7 +168,16 @@ RSpec.describe "DelegatedFunctionsController" do
               substantive_cost_reasons: "some substantive reason",
             )
 
-            proceeding.update!(accepted_emergency_defaults: true, accepted_substantive_defaults: false)
+            proceeding.update!(
+              accepted_emergency_defaults: true,
+              accepted_substantive_defaults: false,
+              emergency_level_of_service: 3,
+              emergency_level_of_service_name: "Full Representation",
+              emergency_level_of_service_stage: 8,
+              substantive_level_of_service: 3,
+              substantive_level_of_service_name: "Full Representation",
+              substantive_level_of_service_stage: 8,
+            )
           end
 
           context "and user changes Yes to No" do
@@ -212,12 +221,24 @@ RSpec.describe "DelegatedFunctionsController" do
                   hash_including(
                     accepted_emergency_defaults: true,
                     accepted_substantive_defaults: false,
+                    emergency_level_of_service: 3,
+                    emergency_level_of_service_name: "Full Representation",
+                    emergency_level_of_service_stage: 8,
+                    substantive_level_of_service: 3,
+                    substantive_level_of_service_name: "Full Representation",
+                    substantive_level_of_service_stage: 8,
                   ),
                 )
                 .to(
                   hash_including(
                     accepted_emergency_defaults: nil,
                     accepted_substantive_defaults: nil,
+                    emergency_level_of_service: nil,
+                    emergency_level_of_service_name: nil,
+                    emergency_level_of_service_stage: nil,
+                    substantive_level_of_service: nil,
+                    substantive_level_of_service_name: nil,
+                    substantive_level_of_service_stage: nil,
                   ),
                 )
             end
@@ -293,12 +314,24 @@ RSpec.describe "DelegatedFunctionsController" do
                   hash_including(
                     accepted_emergency_defaults: true,
                     accepted_substantive_defaults: false,
+                    emergency_level_of_service: 3,
+                    emergency_level_of_service_name: "Full Representation",
+                    emergency_level_of_service_stage: 8,
+                    substantive_level_of_service: 3,
+                    substantive_level_of_service_name: "Full Representation",
+                    substantive_level_of_service_stage: 8,
                   ),
                 )
                 .to(
                   hash_including(
                     accepted_emergency_defaults: nil,
                     accepted_substantive_defaults: nil,
+                    emergency_level_of_service: nil,
+                    emergency_level_of_service_name: nil,
+                    emergency_level_of_service_stage: nil,
+                    substantive_level_of_service: nil,
+                    substantive_level_of_service_name: nil,
+                    substantive_level_of_service_stage: nil,
                   ),
                 )
             end
@@ -350,7 +383,7 @@ RSpec.describe "DelegatedFunctionsController" do
               }
             end
 
-            it "changes the rspecproceeding object's uaed_delegated_functions related data" do
+            it "changes the proceeding object's uaed_delegated_functions related data" do
               expect { post_df }.to change { proceeding.reload.attributes.symbolize_keys }
                 .from(
                   hash_including(
@@ -371,12 +404,27 @@ RSpec.describe "DelegatedFunctionsController" do
             it "does NOT reset the proceeding object's emergency and substantive default acceptance data" do
               expect { post_df }
                 .not_to change {
-                          proceeding.reload.slice(:accepted_substantive_defaults, :accepted_emergency_defaults).symbolize_keys
+                          proceeding.reload.slice(
+                            :accepted_substantive_defaults,
+                            :accepted_emergency_defaults,
+                            :emergency_level_of_service,
+                            :emergency_level_of_service_name,
+                            :emergency_level_of_service_stage,
+                            :substantive_level_of_service,
+                            :substantive_level_of_service_name,
+                            :substantive_level_of_service_stage,
+                          ).symbolize_keys
                         }
               .from(
                 hash_including(
                   accepted_emergency_defaults: true,
                   accepted_substantive_defaults: false,
+                  emergency_level_of_service: 3,
+                  emergency_level_of_service_name: "Full Representation",
+                  emergency_level_of_service_stage: 8,
+                  substantive_level_of_service: 3,
+                  substantive_level_of_service_name: "Full Representation",
+                  substantive_level_of_service_stage: 8,
                 ),
               )
             end
@@ -444,12 +492,27 @@ RSpec.describe "DelegatedFunctionsController" do
             it "does NOT reset the proceeding object's emergency and substantive default acceptance data" do
               expect { post_df }
                 .not_to change {
-                          proceeding.reload.slice(:accepted_substantive_defaults, :accepted_emergency_defaults).symbolize_keys
+                          proceeding.reload.slice(
+                            :accepted_substantive_defaults,
+                            :accepted_emergency_defaults,
+                            :emergency_level_of_service,
+                            :emergency_level_of_service_name,
+                            :emergency_level_of_service_stage,
+                            :substantive_level_of_service,
+                            :substantive_level_of_service_name,
+                            :substantive_level_of_service_stage,
+                          ).symbolize_keys
                         }
               .from(
                 hash_including(
                   accepted_emergency_defaults: true,
                   accepted_substantive_defaults: false,
+                  emergency_level_of_service: 3,
+                  emergency_level_of_service_name: "Full Representation",
+                  emergency_level_of_service_stage: 8,
+                  substantive_level_of_service: 3,
+                  substantive_level_of_service_name: "Full Representation",
+                  substantive_level_of_service_stage: 8,
                 ),
               )
             end

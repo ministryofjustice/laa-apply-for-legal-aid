@@ -115,6 +115,12 @@ RSpec.describe "ClientInvolvementTypeController" do
               client_involvement_type_description: "Applicant, claimant or petitioner",
               accepted_emergency_defaults: true,
               accepted_substantive_defaults: false,
+              emergency_level_of_service: 3,
+              emergency_level_of_service_name: "Full Representation",
+              emergency_level_of_service_stage: 8,
+              substantive_level_of_service: 3,
+              substantive_level_of_service_name: "Full Representation",
+              substantive_level_of_service_stage: 8,
             )
           end
 
@@ -149,12 +155,24 @@ RSpec.describe "ClientInvolvementTypeController" do
                   hash_including(
                     accepted_emergency_defaults: true,
                     accepted_substantive_defaults: false,
+                    emergency_level_of_service: 3,
+                    emergency_level_of_service_name: "Full Representation",
+                    emergency_level_of_service_stage: 8,
+                    substantive_level_of_service: 3,
+                    substantive_level_of_service_name: "Full Representation",
+                    substantive_level_of_service_stage: 8,
                   ),
                 )
                 .to(
                   hash_including(
                     accepted_emergency_defaults: nil,
                     accepted_substantive_defaults: nil,
+                    emergency_level_of_service: nil,
+                    emergency_level_of_service_name: nil,
+                    emergency_level_of_service_stage: nil,
+                    substantive_level_of_service: nil,
+                    substantive_level_of_service_name: nil,
+                    substantive_level_of_service_stage: nil,
                   ),
                 )
             end
@@ -213,12 +231,27 @@ RSpec.describe "ClientInvolvementTypeController" do
             it "does NOT reset the proceeding object's emergency and substantive default acceptance data" do
               expect { post_cit }
                 .not_to change {
-                          proceeding.reload.slice(:accepted_substantive_defaults, :accepted_emergency_defaults).symbolize_keys
+                          proceeding.reload.slice(
+                            :accepted_substantive_defaults,
+                            :accepted_emergency_defaults,
+                            :emergency_level_of_service,
+                            :emergency_level_of_service_name,
+                            :emergency_level_of_service_stage,
+                            :substantive_level_of_service,
+                            :substantive_level_of_service_name,
+                            :substantive_level_of_service_stage,
+                          ).symbolize_keys
                         }
               .from(
                 hash_including(
                   accepted_emergency_defaults: true,
                   accepted_substantive_defaults: false,
+                  emergency_level_of_service: 3,
+                  emergency_level_of_service_name: "Full Representation",
+                  emergency_level_of_service_stage: 8,
+                  substantive_level_of_service: 3,
+                  substantive_level_of_service_name: "Full Representation",
+                  substantive_level_of_service_stage: 8,
                 ),
               )
             end
