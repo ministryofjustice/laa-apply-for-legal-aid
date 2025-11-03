@@ -188,7 +188,7 @@ RSpec.describe "DelegatedFunctionsController" do
               }
             end
 
-            it "changes the proceeding object's uaed_delegated_functions related data" do
+            it "changes the proceeding object's used_delegated_functions related data" do
               expect { post_df }.to change { proceeding.reload.attributes.symbolize_keys }
                 .from(
                   hash_including(
