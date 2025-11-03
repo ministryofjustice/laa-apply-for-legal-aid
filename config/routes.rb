@@ -183,10 +183,10 @@ Rails.application.routes.draw do
       resource :task_list, only: %i[show] # if ENV.fetch("EDITABLE_APPLICATIONS", "false") == "true"
 
       collection do
-        get :submitted
-        get :in_progress
-        get :voided
-        get :search
+        get :submitted, to: "legal_aid_applications#submitted"
+        get :in_progress, to: "legal_aid_applications#in_progress"
+        get :voided, to: "legal_aid_applications#voided"
+        get :search, to: "legal_aid_applications#search"
       end
       namespace :means do
         resource :cash_outgoing, only: %i[show update]
