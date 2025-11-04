@@ -46,11 +46,7 @@ class Provider < ApplicationRecord
   end
 
   def announcements
-    # get skipped announcement_ids
-    skip_these_ids = ProviderDismissedAnnouncement.where(provider: self).pluck(:announcement_id)
-
-    # get remaining announcements
-    Announcement.active.where.not(id: skip_these_ids)
+    Announcement.active.where.not(id: ProviderDismissedAnnouncement.where(provider: self).select("announcement_id"))
   end
 
   def user_permissions
