@@ -45,6 +45,7 @@ module Proceedings
 
     def save
       return false unless valid?
+      return unless accepted_emergency_defaults_changed?
 
       model.scope_limitations.where(scope_type: :emergency).destroy_all
 
@@ -57,14 +58,11 @@ module Proceedings
                       emergency_level_of_service_name:,
                       emergency_level_of_service_stage:)
 
-        new_scope = {
-          scope_type: :emergency,
-          code: delegated_functions_scope_limitation_code,
-          meaning: delegated_functions_scope_limitation_meaning,
-          description: delegated_functions_scope_limitation_description,
-        }
-        new_scope[:hearing_date] = hearing_date if hearing_date.present?
-        model.scope_limitations.create!(new_scope)
+        model.scope_limitations.create!(scope_type: :emergency,
+                                        code: default_scope["code"],
+                                        meaning: default_scope["meaning"],
+                                        description: default_scope["description"],
+                                        hearing_date: hearing_date.presence)
       end
 
       super
@@ -72,6 +70,10 @@ module Proceedings
     alias_method :save!, :save
 
   private
+
+    def accepted_emergency_defaults_changed?
+      accepted_emergency_defaults.to_s != model.accepted_emergency_defaults.to_s
+    end
 
     def hearing_date_required?
       !draft? &&
