@@ -19,17 +19,19 @@ RSpec.describe "The sign in lifespan and timeout works" do
     Rails.application.reload_routes!
   end
 
-  feature "with idle timeouts disabled" do
+  feature "with idle timeouts disabled and business hours extended" do
     before do
       allow(Provider).to receive(:timeout_in).and_return(99_999.minutes) # stub/disable idle timeout
+      allow(Rails.configuration.x.business_hours).to receive(:end).and_return(20) # extend the standard hours to allow 12 hour tests
     end
 
     after do
       allow(Provider).to receive(:timeout_in).and_call_original # unstub idle timeout
+      allow(Rails.configuration.x.business_hours).to receive(:end).and_call_original # unstub business hours
     end
 
     scenario "I am signed out if session lifespan of 12 hours is exceeded" do
-      travel_to 721.minutes.ago
+      travel_to Time.zone.local(2025, 11, 4, 7, 30)
 
       visit "/"
       click_on(class: "govuk-button", text: "Sign in")
@@ -41,14 +43,14 @@ RSpec.describe "The sign in lifespan and timeout works" do
       click_on("My profile")
       expect(page).to have_css("h1", text: "Your profile")
 
-      travel_back
+      travel_to Time.zone.local(2025, 11, 4, 19, 31)
 
       click_on("My profile")
       expect(page).to have_css("h1", text: "Sign in")
     end
 
     scenario "I am NOT signed out if session lifespan is NOT exceeded" do
-      travel_to 719.minutes.ago
+      travel_to Time.zone.local(2025, 11, 4, 7, 30)
 
       visit "/"
       click_on(class: "govuk-button", text: "Sign in")
@@ -60,7 +62,7 @@ RSpec.describe "The sign in lifespan and timeout works" do
       click_on("My profile")
       expect(page).to have_css("h1", text: "Your profile")
 
-      travel_back
+      travel_to Time.zone.local(2025, 11, 4, 19, 29)
 
       click_on("My profile")
       expect(page).to have_css("h1", text: "Your profile")
@@ -68,8 +70,8 @@ RSpec.describe "The sign in lifespan and timeout works" do
   end
 
   feature "with idle timeouts enabled" do
-    scenario "I am signed out if session idle timout of 1 hour is exceeded" do
-      travel_to 60.minutes.ago
+    scenario "I am signed out if session idle timeout of 1 hour is exceeded" do
+      travel_to Time.zone.local(2025, 11, 4, 7, 30)
 
       visit "/"
       click_on(class: "govuk-button", text: "Sign in")
@@ -81,14 +83,14 @@ RSpec.describe "The sign in lifespan and timeout works" do
       click_on("My profile")
       expect(page).to have_css("h1", text: "Your profile")
 
-      travel_back
+      travel_to Time.zone.local(2025, 11, 4, 8, 30)
 
       click_on("My profile")
       expect(page).to have_css("h1", text: "Sign in")
     end
 
     scenario "I am NOT signed out if session idle timout of 1 hour is NOT exceeded" do
-      travel_to 59.minutes.ago
+      travel_to Time.zone.local(2025, 11, 4, 7, 30)
 
       visit "/"
       click_on(class: "govuk-button", text: "Sign in")
@@ -100,7 +102,7 @@ RSpec.describe "The sign in lifespan and timeout works" do
       click_on("My profile")
       expect(page).to have_css("h1", text: "Your profile")
 
-      travel_back
+      travel_to Time.zone.local(2025, 11, 4, 8, 29)
 
       click_on("My profile")
       expect(page).to have_css("h1", text: "Your profile")
