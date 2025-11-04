@@ -99,6 +99,8 @@ Feature: Loop through proceeding questions
     And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should see "For the emergency application, select the scope"
     Then I select "Court of Appeal-final hearing"
+    And I select "Court of Appeal-limited steps (resp)"
+    And I fill in "Give details of the Court of Appeal-limited steps (resp)" with "Details for CoA, resp, limited steps note"
     And I select "Hearing/Adjournment"
     And I fill in "When is the hearing?" with "01/01/2025"
     And I click 'Save and continue'
@@ -109,6 +111,8 @@ Feature: Loop through proceeding questions
     And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should see "For the emergency application, select the scope"
     And the checkbox "Court of Appeal-final hearing" is checked
+    And the checkbox "Court of Appeal-limited steps (resp)" is checked
+    And the field "Give details of the Court of Appeal-limited steps (resp)" has value "Details for CoA, resp, limited steps note"
     And the checkbox "Hearing/Adjournment" is checked
     And the field "proceeding-hearing-date-cv027-field" has value "1/1/2025"
     And I click 'Save and continue'

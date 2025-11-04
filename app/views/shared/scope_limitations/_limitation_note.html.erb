@@ -1,5 +1,6 @@
 <%= form.govuk_text_area(
-      "limitation_note_#{scope['code']}",
+      field_name,
+      value: field_value,
       label: { text: t(".details", scope_limitation: scope["meaning"]), size: "s" },
       rows: 5,
     ) %>
