@@ -28,9 +28,6 @@ module Providers
         merge_with_model(proceeding) do
           params
             .expect(proceeding: %i[accepted_emergency_defaults
-                                   emergency_level_of_service
-                                   emergency_level_of_service_name
-                                   emergency_level_of_service_stage
                                    hearing_date])
         end
       end

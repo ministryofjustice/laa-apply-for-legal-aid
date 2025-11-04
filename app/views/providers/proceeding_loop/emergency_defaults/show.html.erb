@@ -10,7 +10,7 @@
 
     <h2 class="govuk-heading-m"><%= t(".h2_header") %></h2>
 
-    <p><strong><%= t(".los_header") %></strong> <%= form.object.emergency_level_of_service_name %></p>
+    <p><strong><%= t(".los_header") %></strong> <%= form.object.default_level_of_service["name"] %></p>
     <p><strong><%= t(".scope_header") %></strong> <%= form.object.default_scope["meaning"] %></p>
     <p><strong><%= t(".scope_description_header") %></strong> <%= form.object.default_scope["description"] %></p>
 
@@ -19,10 +19,6 @@
     <%= form.govuk_radio_buttons_fieldset :accepted_emergency_defaults,
                                           inline: false,
                                           legend: { size: "m", tag: "h2", text: t(".question") } do %>
-
-      <%= form.hidden_field :emergency_level_of_service %>
-      <%= form.hidden_field :emergency_level_of_service_name %>
-      <%= form.hidden_field :emergency_level_of_service_stage %>
 
       <% emergency_scope_limitation = form.object.model.scope_limitations.find_by(scope_type: :emergency) %>
 

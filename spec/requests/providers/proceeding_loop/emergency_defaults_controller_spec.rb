@@ -182,7 +182,7 @@ RSpec.describe "EmergencyDefaultsController" do
     let(:params) do
       {
         proceeding: {
-          accepted_emergency_defaults: false,
+          accepted_emergency_defaults: "false",
         },
       }
     end
@@ -205,7 +205,7 @@ RSpec.describe "EmergencyDefaultsController" do
           let(:params) do
             {
               proceeding: {
-                accepted_emergency_defaults: true,
+                accepted_emergency_defaults: "true",
               },
             }
           end
@@ -257,7 +257,7 @@ RSpec.describe "EmergencyDefaultsController" do
           let(:params) do
             {
               proceeding: {
-                accepted_emergency_defaults: false,
+                accepted_emergency_defaults: "false",
               },
             }
           end

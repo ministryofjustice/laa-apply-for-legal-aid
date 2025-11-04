@@ -3,9 +3,6 @@ module Proceedings
     form_for Proceeding
 
     attr_accessor :accepted_emergency_defaults,
-                  :emergency_level_of_service,
-                  :emergency_level_of_service_name,
-                  :emergency_level_of_service_stage,
                   :additional_params,
                   :hearing_date,
                   :limitation_note
@@ -23,9 +20,6 @@ module Proceedings
     def initialize(*args)
       super
       @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], true))
-      self.emergency_level_of_service = default_level_of_service["level"]
-      self.emergency_level_of_service_name = default_level_of_service["name"]
-      self.emergency_level_of_service_stage = default_level_of_service["stage"]
       self.additional_params = default_scope["additional_params"]
     end
 
@@ -48,9 +42,9 @@ module Proceedings
         attributes[:emergency_level_of_service_name] = nil
         attributes[:emergency_level_of_service_stage] = nil
       else
-        model.update!(emergency_level_of_service:,
-                      emergency_level_of_service_name:,
-                      emergency_level_of_service_stage:)
+        attributes[:emergency_level_of_service] = default_level_of_service["level"]
+        attributes[:emergency_level_of_service_name] = default_level_of_service["name"]
+        attributes[:emergency_level_of_service_stage] = default_level_of_service["stage"]
 
         model.scope_limitations.create!(scope_type: :emergency,
                                         code: default_scope["code"],
