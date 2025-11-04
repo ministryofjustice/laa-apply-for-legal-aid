@@ -55,7 +55,7 @@ gem "jwt"
 
 # background processing
 gem "redis"
-gem "sidekiq", "~> 8.0.8"
+gem "sidekiq", "~> 8.0.9"
 gem "sidekiq-status", "~> 4.0.0"
 
 # URL and path parsing
@@ -147,7 +147,7 @@ group :test do
   gem "rails-controller-testing"
   gem "rspec-sidekiq"
   gem "selenium-webdriver"
-  gem "shoulda-matchers", "~> 6.5"
+  gem "shoulda-matchers", "~> 7.0"
   gem "simplecov", require: false
   gem "simplecov-rcov"
   gem "super_diff"
