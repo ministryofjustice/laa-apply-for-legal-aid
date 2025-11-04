@@ -21,6 +21,7 @@ en:
         feedback: feedback
         phase: Beta
         phase_banner_html: This is a new service – your %{link} will help us to improve it.
+        out_of_hours_phase_banner_html: This is a new service.
         title: Apply for civil legal aid
         notice: Notice
         my_profile: My profile

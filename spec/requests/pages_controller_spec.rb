@@ -160,6 +160,8 @@ RSpec.describe PagesController, :clamav do
         it "blocks provider traffic" do
           landing_page_request
           expect(response).to render_template("pages/service_out_of_hours")
+          expect(response.body).not_to include("Sign in") # sign in link removed
+          expect(response.body).not_to include("help us to improve it") # phase banner feedback link removed
         end
       end
 

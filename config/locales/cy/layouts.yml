@@ -22,6 +22,7 @@ cy:
         feedback: kcabdeef
         phase: ateB
         phase_banner_html: This is a new service – your %{link} will help us to improve it.
+        out_of_hours_phase_banner_html: .ecivres wen a si sihT
         title: dia lagel rof ylppA
         development: Development
         staging: Staging

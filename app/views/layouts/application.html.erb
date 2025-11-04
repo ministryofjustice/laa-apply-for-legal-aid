@@ -51,9 +51,14 @@
 
     <div class="govuk-width-container">
 
+      <% feedback_text = if Setting.out_of_hours?
+                           t(".header.out_of_hours_phase_banner_html")
+                         else
+                           t(".header.phase_banner_html", link: govuk_link_to(t(".header.feedback"), new_feedback_path, new_tab: true))
+                         end %>
       <%= govuk_phase_banner(
             tag: phase_banner_tag,
-            text: t(".header.phase_banner_html", link: govuk_link_to(t(".header.feedback"), new_feedback_path, new_tab: true)),
+            text: feedback_text,
             classes: "no-print",
             html_attributes: { role: "complementary" },
           ) %>
