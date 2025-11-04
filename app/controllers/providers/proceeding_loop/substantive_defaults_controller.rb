@@ -29,10 +29,7 @@ module Providers
           params.expect(proceeding: %i[accepted_substantive_defaults
                                        substantive_level_of_service
                                        substantive_level_of_service_name
-                                       substantive_level_of_service_stage
-                                       substantive_scope_limitation_meaning
-                                       substantive_scope_limitation_description
-                                       substantive_scope_limitation_code])
+                                       substantive_level_of_service_stage])
         end
       end
 
