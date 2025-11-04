@@ -40,6 +40,6 @@ class Setting < ApplicationRecord
     # Citizen access is required 24/7
     # This can be overridden on different environments for testing
 
-    (Time.zone.now.hour < ENV.fetch("BUSINESS_HOURS_START", 7).to_i || Time.zone.now.hour >= ENV.fetch("BUSINESS_HOURS_END", 19).to_i) || Time.zone.now.on_weekend?
+    (Time.zone.now.hour < Rails.configuration.x.business_hours.start || Time.zone.now.hour >= Rails.configuration.x.business_hours.end) || Time.zone.now.on_weekend?
   end
 end
