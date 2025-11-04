@@ -26,10 +26,7 @@ module Providers
         return { model: proceeding } if form_submitted_without_selection?
 
         merge_with_model(proceeding) do
-          params.expect(proceeding: %i[accepted_substantive_defaults
-                                       substantive_level_of_service
-                                       substantive_level_of_service_name
-                                       substantive_level_of_service_stage])
+          params.expect(proceeding: %i[accepted_substantive_defaults])
         end
       end
 
