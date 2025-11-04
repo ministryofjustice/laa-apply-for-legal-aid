@@ -31,9 +31,6 @@ module Providers
                                    emergency_level_of_service
                                    emergency_level_of_service_name
                                    emergency_level_of_service_stage
-                                   delegated_functions_scope_limitation_meaning
-                                   delegated_functions_scope_limitation_description
-                                   delegated_functions_scope_limitation_code
                                    hearing_date])
         end
       end

@@ -6,9 +6,6 @@ module Proceedings
                   :emergency_level_of_service,
                   :emergency_level_of_service_name,
                   :emergency_level_of_service_stage,
-                  :delegated_functions_scope_limitation_code,
-                  :delegated_functions_scope_limitation_meaning,
-                  :delegated_functions_scope_limitation_description,
                   :additional_params,
                   :hearing_date,
                   :limitation_note
@@ -29,9 +26,6 @@ module Proceedings
       self.emergency_level_of_service = default_level_of_service["level"]
       self.emergency_level_of_service_name = default_level_of_service["name"]
       self.emergency_level_of_service_stage = default_level_of_service["stage"]
-      self.delegated_functions_scope_limitation_code = default_scope["code"]
-      self.delegated_functions_scope_limitation_meaning = default_scope["meaning"]
-      self.delegated_functions_scope_limitation_description = default_scope["description"]
       self.additional_params = default_scope["additional_params"]
     end
 
@@ -83,9 +77,6 @@ module Proceedings
 
     def exclude_from_model
       %i[additional_params
-         delegated_functions_scope_limitation_code
-         delegated_functions_scope_limitation_meaning
-         delegated_functions_scope_limitation_description
          hearing_date
          limitation_note]
     end
