@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MojComponent
   class InterruptionCardComponent < ApplicationComponent
     attr_reader :heading
