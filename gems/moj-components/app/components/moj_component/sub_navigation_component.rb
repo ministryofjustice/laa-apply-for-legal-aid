@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MojComponent
   class SubNavigationComponent < ApplicationComponent
     renders_many :navigation_items, "NavigationItem"
@@ -21,9 +23,9 @@ module MojComponent
     private
 
       def current_override
-        if current
-          { current: "page" }
-        end
+        return unless current
+
+        { current: "page" }
       end
     end
   end

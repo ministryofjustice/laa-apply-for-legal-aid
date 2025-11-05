@@ -91,6 +91,7 @@ gem "govuk_design_system_formbuilder"
 
 # ViewComponent
 gem "govuk-components"
+gem "moj-components", path: "gems/moj-components"
 gem "view_component"
 
 # Catching unsafe migrations in development

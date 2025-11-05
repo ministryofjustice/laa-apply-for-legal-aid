@@ -8,6 +8,12 @@ GIT
       activesupport
       capybara
 
+PATH
+  remote: gems/moj-components
+  specs:
+    moj-components (0.1.0)
+      view_component (>= 4.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -840,6 +846,7 @@ DEPENDENCIES
   launchy
   libreconv
   listen (>= 3.0.5, < 3.10)
+  moj-components!
   nesty
   net-imap
   net-pop
