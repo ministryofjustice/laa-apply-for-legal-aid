@@ -27,13 +27,28 @@
       <%= form.hidden_field :delegated_functions_scope_limitation_description %>
       <%= form.hidden_field :delegated_functions_scope_limitation_code %>
 
+      <% emergency_scope_limitation = form.object.model.scope_limitations.find_by(scope_type: :emergency) %>
+
       <%= form.govuk_radio_button :accepted_emergency_defaults, true, label: { text: t("generic.yes") }, link_errors: true do %>
         <% if form.object.additional_params.find { |ap| ap["name"] == "hearing_date" }.present? %>
-          <% emergency_scope_limitation = form.object.model.scope_limitations.find_by(scope_type: :emergency)
-             field_value = emergency_scope_limitation&.hearing_date&.to_s(:date_picker) %>
-          <%= render partial: "shared/scope_limitations/hearing_date", locals: { form:, field_name: :hearing_date, field_value: } %>
+          <%= render(
+                partial: "shared/scope_limitations/hearing_date",
+                locals: {
+                  form:,
+                  field_name: :hearing_date,
+                  field_value: emergency_scope_limitation&.hearing_date&.to_s(:date_picker),
+                },
+              ) %>
         <% elsif form.object.additional_params.find { |ap| ap["name"] == "limitation_note" }.present? %>
-          <%= render partial: "shared/scope_limitations/limitation_note", locals: { form:, scope: form.object.default_scope } %>
+          <%= render(
+                partial: "shared/scope_limitations/limitation_note",
+                locals: {
+                  form:,
+                  field_name: :limitation_note,
+                  field_value: emergency_scope_limitation&.limitation_note,
+                  scope: form.object.default_scope,
+                },
+              ) %>
         <% end %>
       <% end %>
       <%= form.govuk_radio_button :accepted_emergency_defaults, false, label: { text: t("generic.no") } %>

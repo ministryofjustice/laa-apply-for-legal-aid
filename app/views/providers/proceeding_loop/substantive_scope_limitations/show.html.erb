@@ -24,11 +24,24 @@
                                    label: { text: scope["meaning"] }) do %>
             <% scope["additional_params"].each do |ap| %>
               <% if ap["name"] == "hearing_date" %>
-                <% field_name = :"hearing_date_#{scope['code']}"
-                   field_value = substantive_scope_limitation&.hearing_date&.to_s(:date_picker) %>
-                <%= render partial: "shared/scope_limitations/hearing_date", locals: { form:, field_name:, field_value: } %>
+                <%= render(
+                      partial: "shared/scope_limitations/hearing_date",
+                      locals: {
+                        form:,
+                        field_name: :"hearing_date_#{scope['code']}",
+                        field_value: substantive_scope_limitation&.hearing_date&.to_s(:date_picker),
+                      },
+                    ) %>
               <% elsif ap["name"] == "limitation_note" %>
-                <%= render partial: "shared/scope_limitations/limitation_note", locals: { form:, scope: } %>
+                <%= render(
+                      partial: "shared/scope_limitations/limitation_note",
+                      locals: {
+                        form:,
+                        field_name: :"limitation_note_#{scope['code']}",
+                        field_value: substantive_scope_limitation&.limitation_note,
+                        scope:,
+                      },
+                    ) %>
               <% end %>
             <% end %>
 
