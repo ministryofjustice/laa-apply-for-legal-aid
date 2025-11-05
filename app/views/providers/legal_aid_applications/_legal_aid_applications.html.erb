@@ -1,7 +1,7 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <% unless @scope == :search %>
-      <%= render MojComponent::SubNavigationComponent.new do |component|
+      <%= moj_sub_navigation do |component|
             component.with_navigation_item(
               text: "In progress",
               href: in_progress_providers_legal_aid_applications_path,

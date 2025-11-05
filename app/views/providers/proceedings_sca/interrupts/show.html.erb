@@ -1,6 +1,6 @@
 <%= page_template(page_title: t(".#{@type}.title_html"), template: :basic, column_width: "full") do %>
 
-  <%= render MojComponent::InterruptionCardComponent.new(heading: t(".#{@type}.title_html")) do |card| %>
+  <%= moj_interruption_card(heading: t(".#{@type}.title_html")) do |card| %>
     <% card.with_body do %>
       <% if I18n.exists?("providers.proceedings_sca.interrupts.show.#{@type}.paragraph") %>
         <p><%= t(".#{@type}.paragraph") %></p>
