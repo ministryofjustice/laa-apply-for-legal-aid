@@ -1,5 +1,5 @@
 <%= page_template(page_title: t(".h1-heading"), head_title: t(".h1-heading"), template: :basic, column_width: "full") do %>
-  <%= render MojComponent::InterruptionCardComponent.new(heading: t(".h1-heading")) do |card| %>
+  <%= moj_interruption_card(heading: t(".h1-heading")) do |card| %>
     <% card.with_body do %>
       <p><%= t(".paragraph-1") %></p>
       <p><%= t(".contact_us_html", support_url: contact_path) %></p>

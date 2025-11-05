@@ -9,7 +9,7 @@
                  t(".title.under_18_now")
                end %>
 
-  <%= render MojComponent::InterruptionCardComponent.new(heading:) do |card| %>
+  <%= moj_interruption_card(heading:) do |card| %>
     <% card.with_actions do %>
       <%= next_action_buttons_with_form(
             url: providers_legal_aid_application_confirm_non_means_tested_applications_path,

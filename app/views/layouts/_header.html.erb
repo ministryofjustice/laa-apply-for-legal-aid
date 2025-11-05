@@ -2,6 +2,6 @@
   <%= render(partial: "shared/partials/cookie_banner") if display_cookie_banner?(current_provider) %>
 <% end %>
 
-<%= render MojComponent::HeaderComponent.new(organisation_name: t(".legal_aid_agency"), url: Rails.configuration.x.laa_landing_page_target_url, new_tab: "") do |header|
+<%= moj_header(organisation_name: t(".legal_aid_agency"), url: Rails.configuration.x.laa_landing_page_target_url, new_tab: "") do |header|
       user_header_navigation(header)
     end %>
