@@ -1,5 +1,5 @@
 <%= page_template(page_title: t(".tab_title"), template: :basic, column_width: "full") do %>
-  <%= render MojComponent::InterruptionCardComponent.new(heading: t(".title")) do |card| %>
+  <%= moj_interruption_card(heading: t(".title")) do |card| %>
     <% card.with_body do %>
       <p><%= t(".body") %></p>
     <% end %>
