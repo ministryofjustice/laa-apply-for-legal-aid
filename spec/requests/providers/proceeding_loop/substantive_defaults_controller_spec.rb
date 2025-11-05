@@ -77,9 +77,17 @@ RSpec.describe "SubstantiveDefaultsController" do
       end
 
       it "displays the proceeding header" do
-        expect(response.body).to include("Proceeding 1")
-        expect(response.body).to include("Inherent jurisdiction high court injunction")
-        expect(response.body).to include("Do you want to use the default level of service and scope for the substantive application?")
+        expect(page)
+          .to have_content("Proceeding 1")
+          .and have_content("Inherent jurisdiction high court injunction")
+          .and have_content("Do you want to use the default level of service and scope for the substantive application?")
+      end
+
+      it "displays the default substantive level of service and scope limitation details" do
+        expect(page)
+          .to have_content("Default level of service: Full Representation")
+          .and have_content("Default scope: Injunction FLA-to final hearing")
+          .and have_content("Scope description: As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).")
       end
     end
   end
@@ -127,7 +135,7 @@ RSpec.describe "SubstantiveDefaultsController" do
             }
           end
 
-          it "sets the default substantive levels of service" do
+          it "sets the default substantive levels of service on the proceeding" do
             expect { post_sd }.to change { proceeding.reload.attributes.symbolize_keys }
               .from(
                 hash_including(
@@ -143,6 +151,22 @@ RSpec.describe "SubstantiveDefaultsController" do
                     substantive_level_of_service: 3,
                     substantive_level_of_service_name: "Full Representation",
                     substantive_level_of_service_stage: 8,
+                  },
+                ),
+              )
+          end
+
+          it "adds the default substantive scope limitation to the proceeding" do
+            expect { post_sd }.to change { proceeding.scope_limitations.find_by(scope_type: :substantive)&.attributes&.symbolize_keys }
+              .from(nil)
+              .to(
+                hash_including(
+                  {
+                    scope_type: "substantive",
+                    code: "AA019",
+                    meaning: "Injunction FLA-to final hearing",
+                    description: "As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).",
+                    hearing_date: nil,
                   },
                 ),
               )

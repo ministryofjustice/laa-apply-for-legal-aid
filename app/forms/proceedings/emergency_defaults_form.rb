@@ -3,12 +3,6 @@ module Proceedings
     form_for Proceeding
 
     attr_accessor :accepted_emergency_defaults,
-                  :emergency_level_of_service,
-                  :emergency_level_of_service_name,
-                  :emergency_level_of_service_stage,
-                  :delegated_functions_scope_limitation_code,
-                  :delegated_functions_scope_limitation_meaning,
-                  :delegated_functions_scope_limitation_description,
                   :additional_params,
                   :hearing_date,
                   :limitation_note
@@ -26,12 +20,6 @@ module Proceedings
     def initialize(*args)
       super
       @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], true))
-      self.emergency_level_of_service = default_level_of_service["level"]
-      self.emergency_level_of_service_name = default_level_of_service["name"]
-      self.emergency_level_of_service_stage = default_level_of_service["stage"]
-      self.delegated_functions_scope_limitation_code = default_scope["code"]
-      self.delegated_functions_scope_limitation_meaning = default_scope["meaning"]
-      self.delegated_functions_scope_limitation_description = default_scope["description"]
       self.additional_params = default_scope["additional_params"]
     end
 
@@ -54,9 +42,9 @@ module Proceedings
         attributes[:emergency_level_of_service_name] = nil
         attributes[:emergency_level_of_service_stage] = nil
       else
-        model.update!(emergency_level_of_service:,
-                      emergency_level_of_service_name:,
-                      emergency_level_of_service_stage:)
+        attributes[:emergency_level_of_service] = default_level_of_service["level"]
+        attributes[:emergency_level_of_service_name] = default_level_of_service["name"]
+        attributes[:emergency_level_of_service_stage] = default_level_of_service["stage"]
 
         model.scope_limitations.create!(scope_type: :emergency,
                                         code: default_scope["code"],
@@ -83,9 +71,6 @@ module Proceedings
 
     def exclude_from_model
       %i[additional_params
-         delegated_functions_scope_limitation_code
-         delegated_functions_scope_limitation_meaning
-         delegated_functions_scope_limitation_description
          hearing_date
          limitation_note]
     end

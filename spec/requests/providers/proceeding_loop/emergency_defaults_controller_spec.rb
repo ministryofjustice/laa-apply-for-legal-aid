@@ -105,10 +105,10 @@ RSpec.describe "EmergencyDefaultsController" do
   let(:provider) { application.provider }
 
   describe "GET /providers/applications/:legal_aid_application_id/emergency_defaults/:proceeding_id" do
-    subject(:get_sd) { get "/providers/applications/#{application.id}/emergency_defaults/#{proceeding.id}" }
+    subject(:get_ed) { get "/providers/applications/#{application.id}/emergency_defaults/#{proceeding.id}" }
 
     context "when the provider is not authenticated" do
-      before { get_sd }
+      before { get_ed }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -123,7 +123,7 @@ RSpec.describe "EmergencyDefaultsController" do
           )
 
         login_as provider
-        get_sd
+        get_ed
       end
 
       let(:default_scope_response) { da001_applicant_with_df }
@@ -137,6 +137,13 @@ RSpec.describe "EmergencyDefaultsController" do
           .to have_content("Proceeding 1")
           .and have_content("Inherent jurisdiction high court injunction")
           .and have_content("Do you want to use the default level of service and scope for the emergency application?")
+      end
+
+      it "displays the default emergency level of service and scope limitation details" do
+        expect(page)
+          .to have_content("Default level of service: Full Representation")
+          .and have_content("Default scope: Interim order inc. return date")
+          .and have_content("Scope description: Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.")
       end
 
       context "when default scope limitations includes hearing_date as an additional_params" do
@@ -159,7 +166,7 @@ RSpec.describe "EmergencyDefaultsController" do
   end
 
   describe "POST /providers/applications/:legal_aid_application_id/emergency_defaults/:proceeding_id" do
-    subject(:post_sd) { patch "/providers/applications/#{application.id}/emergency_defaults/#{proceeding.id}", params: }
+    subject(:post_ed) { patch "/providers/applications/#{application.id}/emergency_defaults/#{proceeding.id}", params: }
 
     before do
       stub_request(:post, %r{#{Rails.configuration.x.legal_framework_api_host}/proceeding_type_defaults})
@@ -175,13 +182,13 @@ RSpec.describe "EmergencyDefaultsController" do
     let(:params) do
       {
         proceeding: {
-          accepted_emergency_defaults: false,
+          accepted_emergency_defaults: "false",
         },
       }
     end
 
     context "when the provider is not authenticated" do
-      before { post_sd }
+      before { post_ed }
 
       it_behaves_like "a provider not authenticated"
     end
@@ -198,13 +205,13 @@ RSpec.describe "EmergencyDefaultsController" do
           let(:params) do
             {
               proceeding: {
-                accepted_emergency_defaults: true,
+                accepted_emergency_defaults: "true",
               },
             }
           end
 
-          it "sets the default emergency levels of service" do
-            expect { post_sd }.to change { proceeding.reload.attributes.symbolize_keys }
+          it "sets the default emergency levels of service on the proceeding" do
+            expect { post_ed }.to change { proceeding.reload.attributes.symbolize_keys }
               .from(
                 hash_including(
                   {
@@ -224,8 +231,24 @@ RSpec.describe "EmergencyDefaultsController" do
               )
           end
 
+          it "adds the default emergency scope limitation to the proceeding" do
+            expect { post_ed }.to change { proceeding.scope_limitations.find_by(scope_type: :emergency)&.attributes&.symbolize_keys }
+              .from(nil)
+              .to(
+                hash_including(
+                  {
+                    scope_type: "emergency",
+                    code: "CV117",
+                    meaning: "Interim order inc. return date",
+                    description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                    hearing_date: nil,
+                  },
+                ),
+              )
+          end
+
           it "redirects to next page" do
-            post_sd
+            post_ed
             expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application.id, proceeding.id))
           end
         end
@@ -234,13 +257,13 @@ RSpec.describe "EmergencyDefaultsController" do
           let(:params) do
             {
               proceeding: {
-                accepted_emergency_defaults: false,
+                accepted_emergency_defaults: "false",
               },
             }
           end
 
           it "does NOT set the default emergency levels of service" do
-            post_sd
+            post_ed
 
             expect(proceeding).to have_attributes(
               emergency_level_of_service: nil,
@@ -250,7 +273,7 @@ RSpec.describe "EmergencyDefaultsController" do
           end
 
           it "redirects to next page" do
-            post_sd
+            post_ed
             expect(response.body).to redirect_to(providers_legal_aid_application_emergency_level_of_service_path(application.id, proceeding.id))
           end
         end
@@ -285,7 +308,7 @@ RSpec.describe "EmergencyDefaultsController" do
             end
 
             it "changes proceeding attributes to default level of service" do
-              expect { post_sd }.to change { proceeding.reload.attributes.symbolize_keys }
+              expect { post_ed }.to change { proceeding.reload.attributes.symbolize_keys }
                  .from(
                    hash_including(
                      {
@@ -308,7 +331,7 @@ RSpec.describe "EmergencyDefaultsController" do
             end
 
             it "replaces user-chosen scope limitation with defaults" do
-              expect { post_sd }.to change { proceeding.scope_limitations.where(scope_type: :emergency).first.attributes.symbolize_keys }
+              expect { post_ed }.to change { proceeding.scope_limitations.find_by(scope_type: :emergency).attributes.symbolize_keys }
                 .from(
                   hash_including(
                     {
@@ -362,7 +385,7 @@ RSpec.describe "EmergencyDefaultsController" do
             end
 
             it "nullifies default level of service proceeding attributes - in preparation for picking a non-default level of service" do
-              expect { post_sd }.to change { proceeding.reload.attributes.symbolize_keys }
+              expect { post_ed }.to change { proceeding.reload.attributes.symbolize_keys }
                  .from(
                    hash_including(
                      {
@@ -385,7 +408,7 @@ RSpec.describe "EmergencyDefaultsController" do
             end
 
             it "removes existing emergency default scope limitation" do
-              expect { post_sd }.to change(proceeding.scope_limitations.where(scope_type: :emergency), :count).from(1).to(0)
+              expect { post_ed }.to change(proceeding.scope_limitations.where(scope_type: :emergency), :count).from(1).to(0)
             end
           end
 
@@ -416,7 +439,7 @@ RSpec.describe "EmergencyDefaultsController" do
             end
 
             it "does NOT change proceeding attributes from what they were" do
-              expect { post_sd }.not_to change { proceeding.reload.attributes.symbolize_keys }
+              expect { post_ed }.not_to change { proceeding.reload.attributes.symbolize_keys }
                  .from(
                    hash_including(
                      {
@@ -430,9 +453,9 @@ RSpec.describe "EmergencyDefaultsController" do
             end
 
             it "does NOT remove the existing scope limitation" do
-              expect { post_sd }.not_to change(proceeding.scope_limitations.where(scope_type: :emergency), :count).from(1)
+              expect { post_ed }.not_to change(proceeding.scope_limitations.where(scope_type: :emergency), :count).from(1)
 
-              expect(proceeding.scope_limitations.where(scope_type: :emergency).first)
+              expect(proceeding.scope_limitations.find_by(scope_type: :emergency))
                 .to have_attributes(
                   scope_type: "emergency",
                   code: "CV027",
@@ -472,7 +495,7 @@ RSpec.describe "EmergencyDefaultsController" do
             end
 
             it "does NOT change proceeding attributes from what they were" do
-              expect { post_sd }.not_to change { proceeding.reload.attributes.symbolize_keys }
+              expect { post_ed }.not_to change { proceeding.reload.attributes.symbolize_keys }
                  .from(
                    hash_including(
                      {
@@ -486,9 +509,9 @@ RSpec.describe "EmergencyDefaultsController" do
             end
 
             it "does NOT remove the existing scope limitation" do
-              expect { post_sd }.not_to change(proceeding.scope_limitations.where(scope_type: :emergency), :count).from(1)
+              expect { post_ed }.not_to change(proceeding.scope_limitations.where(scope_type: :emergency), :count).from(1)
 
-              expect(proceeding.scope_limitations.where(scope_type: :emergency).first)
+              expect(proceeding.scope_limitations.find_by(scope_type: :emergency))
                 .to have_attributes(
                   scope_type: "emergency",
                   code: "CV117",
@@ -515,7 +538,7 @@ RSpec.describe "EmergencyDefaultsController" do
 
           context "when the date is within the last month" do
             it "continues through the sub flow" do
-              post_sd
+              post_ed
               expect(response).to redirect_to(providers_legal_aid_application_emergency_level_of_service_path(application.id))
             end
           end

@@ -10,22 +10,15 @@
 
     <h2 class="govuk-heading-m"><%= t(".h2_header") %></h2>
 
-    <p><strong><%= t(".los_header") %></strong> <%= form.object.emergency_level_of_service_name %></p>
-    <p><strong><%= t(".scope_header") %></strong> <%= form.object.delegated_functions_scope_limitation_meaning %></p>
-    <p><strong><%= t(".scope_description_header") %></strong> <%= form.object.delegated_functions_scope_limitation_description %></p>
+    <p><strong><%= t(".los_header") %></strong> <%= form.object.default_level_of_service["name"] %></p>
+    <p><strong><%= t(".scope_header") %></strong> <%= form.object.default_scope["meaning"] %></p>
+    <p><strong><%= t(".scope_description_header") %></strong> <%= form.object.default_scope["description"] %></p>
 
     <div class="govuk-!-padding-2"></div>
 
     <%= form.govuk_radio_buttons_fieldset :accepted_emergency_defaults,
                                           inline: false,
                                           legend: { size: "m", tag: "h2", text: t(".question") } do %>
-
-      <%= form.hidden_field :emergency_level_of_service %>
-      <%= form.hidden_field :emergency_level_of_service_name %>
-      <%= form.hidden_field :emergency_level_of_service_stage %>
-      <%= form.hidden_field :delegated_functions_scope_limitation_meaning %>
-      <%= form.hidden_field :delegated_functions_scope_limitation_description %>
-      <%= form.hidden_field :delegated_functions_scope_limitation_code %>
 
       <% emergency_scope_limitation = form.object.model.scope_limitations.find_by(scope_type: :emergency) %>
 
