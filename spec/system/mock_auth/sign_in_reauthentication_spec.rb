@@ -62,7 +62,7 @@ RSpec.describe "The sign in lifespan and timeout works" do
       click_on("My profile")
       expect(page).to have_css("h1", text: "Your profile")
 
-      travel_to Time.zone.local(2025, 11, 4, 19, 29)
+      travel_to Time.zone.local(2025, 11, 4, 19, 30)
 
       click_on("My profile")
       expect(page).to have_css("h1", text: "Your profile")
