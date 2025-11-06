@@ -30,15 +30,21 @@ class Address < ApplicationRecord
     country_name != "United Kingdom"
   end
 
-  def to_json(*_args)
-    {
-      address_line_one:,
-      address_line_two:,
-      city:,
-      county:,
-      postcode:,
-      lookup_id:,
-    }.to_json
+  # NOTE: under the hood as_json method is called on the model first when you call to_json
+  # so we override this method.
+  # see https://api.rubyonrails.org/classes/ActiveModel/Serializers/JSON.html#method-i-as_json
+  def as_json(options = {})
+    super(
+      only: %i[
+        address_line_one
+        address_line_two
+        city
+        county
+        postcode
+        lookup_id
+      ],
+      **options,
+    )
   end
 
   def care_of_recipient
