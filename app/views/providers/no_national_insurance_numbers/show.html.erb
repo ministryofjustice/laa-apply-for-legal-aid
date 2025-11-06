@@ -1,5 +1,17 @@
 <%= page_template(page_title: t(".tab_title"), template: :basic, column_width: "full") do %>
-  <% interruption_card(heading: t(".title"), actions: -> { render "actions" }) do %>
-    <p><%= t(".body") %></p>
+  <%= moj_interruption_card(heading: t(".title")) do |card| %>
+    <% card.with_body do %>
+      <p><%= t(".body") %></p>
+    <% end %>
+
+    <% card.with_actions do %>
+      <%= next_action_buttons_with_form(
+            url: providers_legal_aid_application_no_national_insurance_number_path,
+            method: :patch,
+            show_draft: true,
+            inverse_continue: true,
+            continue_button_text: t("generic.continue"),
+          ) %>
+    <% end %>
   <% end %>
 <% end %>

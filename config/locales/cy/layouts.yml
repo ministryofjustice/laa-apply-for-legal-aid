@@ -7,7 +7,8 @@ cy:
         contact: tcatnoC
         cookies: seikooC
         copyright: thgirypoc nworC
-        digital_services_html: secivreS latigiD >rbba/<JOM>'ecitsuJ fo yrtsiniM'=eltit
+        digital_services_html:
+          secivreS latigiD >rbba/<JOM>'ecitsuJ fo yrtsiniM'=eltit
           rbba<
         feedback: kcabdeeF
         research_panel: lenap hcraeser ruo noiJ

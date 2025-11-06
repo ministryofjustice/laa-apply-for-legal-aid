@@ -1,14 +1,20 @@
 <%= page_template(page_title: t(".h1-heading"), head_title: t(".h1-heading"), template: :basic, column_width: "full") do %>
-  <%= interruption_card(heading: t(".h1-heading"), actions: -> { render "actions" }) do %>
-    <p><%= t(".paragraph-1") %></p>
-    <p><%= t(".paragraph-2") %></p>
-    <p><%= t(".actions_text") %></p>
+  <%= moj_interruption_card(heading: t(".h1-heading")) do |card| %>
+    <% card.with_body do %>
+      <p><%= t(".paragraph-1") %></p>
+      <p><%= t(".paragraph-2") %></p>
+      <p><%= t(".actions_text") %></p>
 
-    <%= govuk_list(
-          t(".actions_list_html",
-            ccms_url: Rails.configuration.x.laa_landing_page_target_url,
-            support_url: Rails.configuration.x.online_support),
-          type: :bullet,
-        ) %>
+      <%= govuk_list(
+            t(".actions_list_html",
+              ccms_url: Rails.configuration.x.laa_landing_page_target_url,
+              support_url: Rails.configuration.x.online_support),
+            type: :bullet,
+          ) %>
+    <% end %>
+
+    <% card.with_actions do %>
+      <%= govuk_button_link_to(t("providers.invalid_schedules.show.button_text"), providers_select_office_path, inverse: true, role: "button") %>
+    <% end %>
   <% end %>
 <% end %>
