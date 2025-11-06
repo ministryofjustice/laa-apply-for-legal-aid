@@ -50,6 +50,9 @@ module LaaApplyForLegalAid
     config.active_record.encryption.deterministic_key = ENV.fetch("ENCRYPTION_DETERMINISTIC_KEY", "fake-deterministic-key")
     config.active_record.encryption.key_derivation_salt = ENV.fetch("ENCRYPTION_KEY_DERIVATION_SALT", "fake-key-derivation-salt")
 
+    # we do not use image variants, this prevents a warning
+    config.active_storage.variant_processor = :disabled
+
     config.x.application.host             = ENV.fetch("HOST", nil)
     config.x.benefit_check.service_name   = ENV.fetch("BC_LSC_SERVICE_NAME", nil)
     config.x.benefit_check.client_org_id  = ENV.fetch("BC_CLIENT_ORG_ID", nil)
