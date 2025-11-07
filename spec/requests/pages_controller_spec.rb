@@ -76,4 +76,146 @@ RSpec.describe PagesController, :clamav do
       end
     end
   end
+
+  describe "out of hours access" do
+    let(:citizen_access_token) do
+      create(
+        :citizen_access_token,
+        legal_aid_application: create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :awaiting_applicant),
+      )
+    end
+    let(:token) { citizen_access_token.token }
+    let(:citizen_access_request) { get citizens_legal_aid_application_path(token) }
+    let(:landing_page_request) { get root_path }
+
+    around do |example|
+      travel_to(new_time) { example.run }
+    end
+
+    context "when it's British Summer Time" do
+      context "when it's 0500 on a Monday" do
+        let(:new_time) { Time.zone.local(2025, 9, 8, 5, 0, 0) }
+
+        it "allows citizen traffic" do
+          citizen_access_request
+          expect(response).to redirect_to(citizens_legal_aid_applications_path)
+        end
+
+        it "blocks provider traffic" do
+          landing_page_request
+          expect(response).to render_template("pages/service_out_of_hours")
+        end
+      end
+
+      context "when it's 0700 on a Monday" do
+        let(:new_time) { Time.zone.local(2025, 9, 8, 7, 0, 0) }
+
+        it "allows citizen traffic" do
+          citizen_access_request
+          expect(response).to redirect_to(citizens_legal_aid_applications_path)
+        end
+
+        it "allows provider traffic" do
+          landing_page_request
+          expect(response).to render_template("providers/start/index")
+        end
+      end
+
+      context "when it's 0900 on a Monday" do
+        let(:new_time) { Time.zone.local(2025, 9, 8, 9, 0, 0) }
+
+        it "allows citizen traffic" do
+          citizen_access_request
+          expect(response).to redirect_to(citizens_legal_aid_applications_path)
+        end
+
+        it "allows provider traffic" do
+          landing_page_request
+          expect(response).to render_template("providers/start/index")
+        end
+      end
+
+      context "when it's 1859 on a Monday" do
+        let(:new_time) { Time.zone.local(2025, 9, 8, 18, 59, 0) }
+
+        it "allows citizen traffic" do
+          citizen_access_request
+          expect(response).to redirect_to(citizens_legal_aid_applications_path)
+        end
+
+        it "allows provider traffic" do
+          landing_page_request
+          expect(response).to render_template("providers/start/index")
+        end
+      end
+
+      context "when it's 1900 on a Monday" do
+        let(:new_time) { Time.zone.local(2025, 9, 8, 19, 0, 0) }
+
+        it "allows citizen traffic" do
+          citizen_access_request
+          expect(response).to redirect_to(citizens_legal_aid_applications_path)
+        end
+
+        it "blocks provider traffic" do
+          landing_page_request
+          expect(response).to render_template("pages/service_out_of_hours")
+          expect(response.body).not_to include("Sign in") # sign in link removed
+          expect(response.body).not_to include("help us to improve it") # phase banner feedback link removed
+        end
+      end
+
+      context "when it's 1300 on a Sunday" do
+        let(:new_time) { Time.zone.local(2025, 9, 7, 13, 0, 0) }
+
+        it "allows citizen traffic" do
+          citizen_access_request
+          expect(response).to redirect_to(citizens_legal_aid_applications_path)
+        end
+
+        it "blocks provider traffic" do
+          landing_page_request
+          expect(response).to render_template("pages/service_out_of_hours")
+        end
+      end
+    end
+
+    context "when it's GMT" do
+      context "when it's 0630 on a Monday" do
+        let(:new_time) { Time.zone.local(2025, 11, 3, 6, 30, 0) }
+
+        it "blocks provider traffic" do
+          landing_page_request
+          expect(response).to render_template("pages/service_out_of_hours")
+        end
+      end
+
+      context "when it's 0730 on a Monday" do
+        let(:new_time) { Time.zone.local(2025, 11, 3, 7, 30, 0) }
+
+        it "allows provider traffic" do
+          landing_page_request
+          expect(response).to render_template("providers/start/index")
+        end
+      end
+
+      context "when it's 1830 on a Monday" do
+        let(:new_time) { Time.zone.local(2025, 11, 3, 18, 30, 0) }
+
+        it "allows provider traffic" do
+          landing_page_request
+          expect(response).to render_template("providers/start/index")
+        end
+      end
+
+      context "when it's 1930 on a Monday" do
+        let(:new_time) { Time.zone.local(2025, 11, 3, 19, 30, 0) }
+
+        it "blocks provider traffic" do
+          landing_page_request
+          expect(response).to render_template("pages/service_out_of_hours")
+        end
+      end
+    end
+  end
 end

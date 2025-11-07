@@ -46,6 +46,8 @@ module ApplicationHelper
         content_tag(:li, link_to(t("layouts.logout.provider"), destroy_provider_session_path, class: "moj-header__navigation-link", method: :delete), class: "moj-header__navigation-item"),
       ])
     else
+      return if Setting.out_of_hours?
+
       content_tag(:li, link_to(t("layouts.login"), providers_select_office_path, class: "moj-header__navigation-link"), class: "moj-header__navigation-item")
     end
   end
@@ -71,17 +73,26 @@ module ApplicationHelper
   end
 
   def govuk_footer_meta_items
-    {
-      t("layouts.application.footer.contact") => contact_path,
-      t("layouts.application.footer.feedback") => new_feedback_path,
-      t("layouts.application.footer.research_panel") => ENV.fetch("RESEARCH_PANEL_FORM_LINK", root_path),
-      # Currently we can only update and store cookie preferences for the provider, citizen users are shown the generic GOV.UK cookies page
-      t("layouts.application.footer.cookies") => (current_provider ? providers_cooky_path(current_provider) : "https://www.gov.uk/help/cookies"),
-      t("layouts.application.footer.privacy_policy") => privacy_policy_index_path,
-      t("layouts.application.footer.accessibility_statement") => accessibility_statement_index_path,
-      t("layouts.application.footer.terms") => "https://www.gov.uk/government/publications/laa-online-portal-help-and-information",
-      t("layouts.application.footer.digital_services_html") => "https://mojdigital.blog.gov.uk",
-    }.freeze
+    if Setting.out_of_hours?
+      {
+        t("layouts.application.footer.research_panel") => ENV.fetch("RESEARCH_PANEL_FORM_LINK", root_path),
+        t("layouts.application.footer.cookies") => "https://www.gov.uk/help/cookies",
+        t("layouts.application.footer.terms") => "https://www.gov.uk/government/publications/laa-online-portal-help-and-information",
+        t("layouts.application.footer.digital_services_html") => "https://mojdigital.blog.gov.uk",
+      }.freeze
+    else
+      {
+        t("layouts.application.footer.contact") => contact_path,
+        t("layouts.application.footer.feedback") => new_feedback_path,
+        t("layouts.application.footer.research_panel") => ENV.fetch("RESEARCH_PANEL_FORM_LINK", root_path),
+        # Currently we can only update and store cookie preferences for the provider, citizen users are shown the generic GOV.UK cookies page
+        t("layouts.application.footer.cookies") => (current_provider ? providers_cooky_path(current_provider) : "https://www.gov.uk/help/cookies"),
+        t("layouts.application.footer.privacy_policy") => privacy_policy_index_path,
+        t("layouts.application.footer.accessibility_statement") => accessibility_statement_index_path,
+        t("layouts.application.footer.terms") => "https://www.gov.uk/government/publications/laa-online-portal-help-and-information",
+        t("layouts.application.footer.digital_services_html") => "https://mojdigital.blog.gov.uk",
+      }.freeze
+    end
   end
 
   def application_ref_non_breaking(application_ref)

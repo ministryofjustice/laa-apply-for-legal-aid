@@ -7,3 +7,6 @@ en:
           <p>
             You will be able to use the service again once we resolve the problem we’ve found.
           </p>
+    service_out_of_hours:
+        title: Sorry, the service is unavailable
+        warning: You can use this service from 7am to 7pm, Monday to Friday.

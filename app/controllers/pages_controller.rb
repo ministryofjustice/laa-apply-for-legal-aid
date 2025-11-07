@@ -20,4 +20,6 @@ class PagesController < ApplicationController
       end
     end
   end
+
+  def service_out_of_hours; end
 end
