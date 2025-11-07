@@ -12,7 +12,7 @@
     <%= govuk_link_to(
           t("generic.dismiss"),
           dismiss_href,
-          method: dismiss_href == "#build-per-user" ? :get : :delete,
+          method: dismiss_href == "#build-per-user" ? :get : :post,
           class: "moj-alert__dismiss",
         ) %>
   </div>

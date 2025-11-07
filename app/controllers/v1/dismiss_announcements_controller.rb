@@ -1,19 +1,19 @@
 module V1
   class DismissAnnouncementsController < ApiController
-    def destroy
+    def create
       provider = current_provider
       ProviderDismissedAnnouncement.create!(provider:, announcement:)
-      redirect_to strong_params[:return_to]
+      redirect_to return_to_param
     end
 
   private
 
-    def strong_params
-      params.permit(:id, :return_to)
+    def return_to_param
+      params.expect(:return_to)
     end
 
     def announcement
-      Announcement.find(strong_params[:id])
+      Announcement.find(params.expect(:id))
     end
   end
 end
