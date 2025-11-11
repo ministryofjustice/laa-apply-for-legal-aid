@@ -1,3 +1,4 @@
 <%= govuk_footer(classes: "no-print", meta_items_title: t("layouts.application.footer.support"), meta_items: govuk_footer_meta_items) %>
 
 <%= govuk_link_to("Task list", providers_legal_aid_application_task_list_path(@legal_aid_application)) if @legal_aid_application.present? && Rails.env.development? %>
+<%= govuk_link_to("Json payload", test_datastore_payloads_path(@legal_aid_application)) if @legal_aid_application.present? && Rails.env.development? %>
