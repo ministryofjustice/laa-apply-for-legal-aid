@@ -76,13 +76,13 @@ RSpec.describe Proceeding do
     end
   end
 
-  describe "non_sca_used_delegated_functions_proceeding?" do
+  describe "non_sca_used_delegated_functions?" do
     context "when delegated functions not used" do
       let(:df_used) { false }
       let(:df_date) { nil }
 
       it "returns false" do
-        expect(proceeding.non_sca_used_delegated_functions_proceeding?).to be false
+        expect(proceeding.non_sca_used_delegated_functions?).to be false
       end
     end
 
@@ -91,7 +91,7 @@ RSpec.describe Proceeding do
       let(:df_date) { Time.zone.yesterday }
 
       it "returns true" do
-        expect(proceeding.non_sca_used_delegated_functions_proceeding?).to be true
+        expect(proceeding.non_sca_used_delegated_functions?).to be true
       end
     end
 
@@ -107,7 +107,7 @@ RSpec.describe Proceeding do
       let(:df_date) { Time.zone.yesterday }
 
       it "returns false" do
-        expect(proceeding.non_sca_used_delegated_functions_proceeding?).to be false
+        expect(proceeding.non_sca_used_delegated_functions?).to be false
       end
     end
   end

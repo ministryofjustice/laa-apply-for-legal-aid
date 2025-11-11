@@ -17,7 +17,7 @@
       </span>
     </h3>
     <%= govuk_details(summary_text: t(".details_heading")) do %>
-      <% if proceeding.non_sca_used_delegated_functions_proceeding? %>
+      <% if proceeding.non_sca_used_delegated_functions? %>
         <h4 class="govuk-heading-m"><%= t(".emergency_certificate") %></h4>
         <p><strong><%= t(".form_of_service") %></strong>
           <%= proceeding.emergency_level_of_service_name %>
