@@ -1,24 +1,12 @@
-class ChancesOfSuccessJsonBuilder
-  extend NilSafeBuilder
-
-  def initialize(chances_of_success)
-    @chances_of_success = chances_of_success
-  end
-
-  attr_reader :chances_of_success
-
-  delegate :id,
-           :details,
-           :created_at,
-           :updated_at,
-           to: :chances_of_success
-
+class ChancesOfSuccessJsonBuilder < BaseJsonBuilder
   def as_json
-    return unless chances_of_success
-
     {
       id:,
-      details:,
+      proceeding_id:,
+      application_purpose:,
+      success_prospect:,
+      success_prospect_details:,
+      success_likely:,
       created_at:,
       updated_at:,
     }
