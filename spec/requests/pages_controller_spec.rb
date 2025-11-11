@@ -135,8 +135,8 @@ RSpec.describe PagesController, :clamav do
         end
       end
 
-      context "when it's 1859 on a Monday" do
-        let(:new_time) { Time.zone.local(2025, 9, 8, 18, 59, 0) }
+      context "when it's 2129 on a Monday" do
+        let(:new_time) { Time.zone.local(2025, 9, 8, 21, 29, 0) }
 
         it "allows citizen traffic" do
           citizen_access_request
@@ -149,8 +149,8 @@ RSpec.describe PagesController, :clamav do
         end
       end
 
-      context "when it's 1900 on a Monday" do
-        let(:new_time) { Time.zone.local(2025, 9, 8, 19, 0, 0) }
+      context "when it's 2130 on a Monday" do
+        let(:new_time) { Time.zone.local(2025, 9, 8, 21, 30, 0) }
 
         it "allows citizen traffic" do
           citizen_access_request
@@ -173,9 +173,9 @@ RSpec.describe PagesController, :clamav do
           expect(response).to redirect_to(citizens_legal_aid_applications_path)
         end
 
-        it "blocks provider traffic" do
+        it "allows provider traffic" do
           landing_page_request
-          expect(response).to render_template("pages/service_out_of_hours")
+          expect(response).to render_template("providers/start/index")
         end
       end
     end
@@ -208,8 +208,8 @@ RSpec.describe PagesController, :clamav do
         end
       end
 
-      context "when it's 1930 on a Monday" do
-        let(:new_time) { Time.zone.local(2025, 11, 3, 19, 30, 0) }
+      context "when it's 2200 on a Monday" do
+        let(:new_time) { Time.zone.local(2025, 11, 3, 22, 0, 0) }
 
         it "blocks provider traffic" do
           landing_page_request
