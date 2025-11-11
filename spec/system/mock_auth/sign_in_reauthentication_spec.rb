@@ -22,12 +22,10 @@ RSpec.describe "The sign in lifespan and timeout works" do
   feature "with idle timeouts disabled and business hours extended" do
     before do
       allow(Provider).to receive(:timeout_in).and_return(99_999.minutes) # stub/disable idle timeout
-      allow(Rails.configuration.x.business_hours).to receive(:end).and_return(20) # extend the standard hours to allow 12 hour tests
     end
 
     after do
       allow(Provider).to receive(:timeout_in).and_call_original # unstub idle timeout
-      allow(Rails.configuration.x.business_hours).to receive(:end).and_call_original # unstub business hours
     end
 
     scenario "I am signed out if session lifespan of 12 hours is exceeded" do
