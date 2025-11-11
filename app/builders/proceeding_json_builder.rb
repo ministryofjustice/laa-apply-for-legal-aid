@@ -1,49 +1,7 @@
-class ProceedingJsonBuilder
-  extend NilSafeBuilder
-
-  def initialize(proceeding)
-    @proceeding = proceeding
-  end
-
-  attr_reader :proceeding
-
-  delegate :id,
-           :legal_aid_application_id,
-           :proceeding_case_id,
-           :lead_proceeding,
-           :ccms_code,
-           :meaning,
-           :description,
-           :substantive_cost_limitation,
-           :delegated_functions_cost_limitation,
-           :used_delegated_functions_on,
-           :used_delegated_functions_reported_on,
-           :created_at,
-           :updated_at,
-           :name,
-           :matter_type,
-           :category_of_law,
-           :category_law_code,
-           :ccms_matter_code,
-           :client_involvement_type_ccms_code,
-           :client_involvement_type_description,
-           :used_delegated_functions,
-           :emergency_level_of_service,
-           :emergency_level_of_service_name,
-           :emergency_level_of_service_stage,
-           :substantive_level_of_service,
-           :substantive_level_of_service_name,
-           :substantive_level_of_service_stage,
-           :accepted_emergency_defaults,
-           :accepted_substantive_defaults,
-           :sca_type,
-           :related_orders,
-           to: :proceeding
-
+class ProceedingJsonBuilder < BaseJsonBuilder
   def as_json
-    return unless proceeding
-
     {
+      id:,
       legal_aid_application_id:,
       proceeding_case_id:,
       lead_proceeding:,
@@ -76,20 +34,20 @@ class ProceedingJsonBuilder
       related_orders:,
 
       # nested relations below this line
-      scope_limitations: proceeding.scope_limitations.map { |sl| ScopeLimitationJsonBuilder.build(sl).as_json },
+      scope_limitations: scope_limitations.map { |sl| ScopeLimitationJsonBuilder.build(sl).as_json },
 
       # merits
-      opponents_application: OpponentsApplicationJsonBuilder.build(proceeding.opponents_application),
-      attempts_to_settle: AttemptsToSettleJsonBuilder.build(proceeding.attempts_to_settle),
-      specific_issue: SpecificIssueJsonBuilder.build(proceeding.specific_issue),
-      vary_order: VaryOrderJsonBuilder.build(proceeding.vary_order),
-      chances_of_success: ChancesOfSuccessJsonBuilder.build(proceeding.chances_of_success),
-      prohibited_steps: ProhibitedStepsJsonBuilder.build(proceeding.prohibited_steps),
-      child_care_assessment: ChildCareAssessmentJsonBuilder.build(proceeding.child_care_assessment),
+      opponents_application: OpponentsApplicationJsonBuilder.build(opponents_application),
+      attempts_to_settle: AttemptsToSettleJsonBuilder.build(attempts_to_settle),
+      specific_issue: SpecificIssueJsonBuilder.build(specific_issue),
+      vary_order: VaryOrderJsonBuilder.build(vary_order),
+      chances_of_success: ChancesOfSuccessJsonBuilder.build(chances_of_success),
+      prohibited_steps: ProhibitedStepsJsonBuilder.build(prohibited_steps),
+      child_care_assessment: ChildCareAssessmentJsonBuilder.build(child_care_assessment),
 
-      final_hearings: proceeding.final_hearings.map { |fh| FinalHearingJsonBuilder.build(fh) },
-      proceeding_linked_children: proceeding.proceeding_linked_children.map { |lc| ProceedingLinkedChildJsonBuilder.build(lc) },
-      involved_children: proceeding.involved_children.map { |ic| InvolvedChildJsonBuilder.build(ic) },
+      final_hearings: final_hearings.map { |fh| FinalHearingJsonBuilder.build(fh) },
+      proceeding_linked_children: proceeding_linked_children.map { |lc| ProceedingLinkedChildJsonBuilder.build(lc) },
+      involved_children: involved_children.map { |ic| InvolvedChildJsonBuilder.build(ic) },
 
       # has_one :opponents_application, class_name: "ProceedingMeritsTask::OpponentsApplication", dependent: :destroy
       # has_one :attempts_to_settle, class_name: "ProceedingMeritsTask::AttemptsToSettle", dependent: :destroy

@@ -1,75 +1,5 @@
-class LegalAidApplicationJsonBuilder
-  extend NilSafeBuilder
-
-  def initialize(legal_aid_application)
-    @legal_aid_application = legal_aid_application
-  end
-
-  attr_reader :legal_aid_application
-
-  delegate :id,
-           :application_ref,
-           :created_at,
-           :updated_at,
-           :applicant_id,
-           :has_offline_accounts,
-           :open_banking_consent,
-           :open_banking_consent_choice_at,
-           :own_home,
-           :property_value,
-           :shared_ownership,
-           :outstanding_mortgage_amount,
-           :percentage_home,
-           :provider_step,
-           :provider_id,
-           :draft,
-           :transaction_period_start_on,
-           :transaction_period_finish_on,
-           :transactions_gathered,
-           :completed_at,
-           :declaration_accepted_at,
-           :provider_step_params,
-           :own_vehicle,
-           :substantive_application_deadline_on,
-           :substantive_application,
-           :has_dependants,
-           :office_id,
-           :has_restrictions,
-           :restrictions_details,
-           :no_credit_transaction_types_selected,
-           :no_debit_transaction_types_selected,
-           :provider_received_citizen_consent,
-           :discarded_at,
-           :merits_submitted_at,
-           :in_scope_of_laspo,
-           :emergency_cost_override,
-           :emergency_cost_requested,
-           :emergency_cost_reasons,
-           :no_cash_income,
-           :no_cash_outgoings,
-           :purgeable_on,
-           :allowed_document_categories,
-           :extra_employment_information,
-           :extra_employment_information_details,
-           :full_employment_details,
-           :client_declaration_confirmed_at,
-           :substantive_cost_override,
-           :substantive_cost_requested,
-           :substantive_cost_reasons,
-           :applicant_in_receipt_of_housing_benefit,
-           :copy_case,
-           :copy_case_id,
-           :case_cloned,
-           :separate_representation_required,
-           :plf_court_order,
-           :reviewed,
-           :dwp_result_confirmed,
-           :linked_application_completed,
-           to: :legal_aid_application
-
+class LegalAidApplicationJsonBuilder < BaseJsonBuilder
   def as_json
-    return unless legal_aid_application
-
     {
       id:,
       application_ref:,
@@ -129,10 +59,10 @@ class LegalAidApplicationJsonBuilder
       reviewed:,
       dwp_result_confirmed:,
       linked_application_completed:,
-      office: OfficeJsonBuilder.build(legal_aid_application.office),
-      provider: ProviderJsonBuilder.build(legal_aid_application.provider),
-      applicant: ApplicantJsonBuilder.build(legal_aid_application.applicant).as_json,
-      proceedings: legal_aid_application.proceedings.map { |p| ProceedingJsonBuilder.build(p).as_json },
+      office: OfficeJsonBuilder.build(office),
+      provider: ProviderJsonBuilder.build(provider),
+      applicant: ApplicantJsonBuilder.build(applicant).as_json,
+      proceedings: proceedings.map { |p| ProceedingJsonBuilder.build(p).as_json },
     }
   end
 end
