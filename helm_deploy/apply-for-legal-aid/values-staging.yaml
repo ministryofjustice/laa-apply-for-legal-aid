@@ -33,7 +33,7 @@ ingress:
     nginx.ingress.kubernetes.io/enable-modsecurity: "true"
     nginx.ingress.kubernetes.io/modsecurity-snippet: |
       SecRuleEngine On
-      SecDefaultAction "phase:2,pass,log,tag:github_team=laa-apply-for-legal-aid,tag:namespace={{ .Release.Namespace }}"
+      SecDefaultAction "phase:2,pass,log,tag:github_team=laa-apply-for-legal-aid,tag:namespace=laa-apply-for-legalaid-staging"
       SecAction "id:900110,phase:1,nolog,pass,t:none,setvar:tx.inbound_anomaly_score_threshold=6,setvar:tx.outbound_anomaly_score_threshold=4"
       SecRuleUpdateActionById 949110 "t:none,deny,status:423,logdata:%{SERVER_NAME}"
       SecRuleUpdateActionById 959100 "t:none,deny,status:423,logdata:%{SERVER_NAME}"
