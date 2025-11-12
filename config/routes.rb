@@ -458,7 +458,8 @@ Rails.application.routes.draw do
 
   # development only routes for aiding development/visualisation
   if Rails.env.development?
-    get "test/datastore_payloads/:legal_aid_application_id", to: "test/datastore_payloads#show", as: "test_datastore_payloads", defaults: { format: :json }
+    get "test/datastore_payloads/:legal_aid_application_id/application_as_json", to: "test/datastore_payloads#application_as_json", as: "test_datastore_payloads_application_as_json", defaults: { format: :json }
+    get "test/datastore_payloads/:legal_aid_application_id/generated_json", to: "test/datastore_payloads#generated_json", as: "test_datastore_payloads_generated_json", defaults: { format: :json }
   end
 
   get "/submission_feedback/:application_ref", to: "feedback#submission"
