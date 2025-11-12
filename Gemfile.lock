@@ -788,6 +788,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-24
+  arm64-darwin-25
   x86_64-darwin
   x86_64-linux
 
