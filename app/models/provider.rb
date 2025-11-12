@@ -45,6 +45,10 @@ class Provider < ApplicationRecord
     @silas_office_codes ||= office_codes.split(":") || []
   end
 
+  def announcements
+    Announcement.active.where.not(id: ProviderDismissedAnnouncement.where(provider: self).select("announcement_id"))
+  end
+
   def user_permissions
     permissions.empty? ? firm_permissions : permissions
   end

@@ -17,8 +17,12 @@ en:
               invalid: is not in the right format
         announcement:
           attributes:
+            display_type:
+              blank: Select a display type
             heading:
               blank: Include, at minimum, a heading
+            body:
+              blank: Include, at minimum, some body text
             link_url:
               blank: Include a link URL if setting display text
             link_display:

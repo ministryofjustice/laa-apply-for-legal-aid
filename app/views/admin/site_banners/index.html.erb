@@ -30,6 +30,8 @@
                                         link_href: message.link_url)
                         concat tag.p(class: "govuk-body") { message.body }
                       end
+                    else
+                      information_alert(heading: message.heading, body: message.body, dismiss_href: "#build-per-user")
                     end
                   end
                   row.with_cell do
