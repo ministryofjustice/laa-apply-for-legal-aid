@@ -2,15 +2,22 @@
 module Test
   # This controller is used to render the payload that would be sent to the datastore.
   #
-  # The test_datastore_payloads_path route is defined in development only
+  # The test_datastore_payloads_xxx_path(s) route are defined in development only
   #
 
   class DatastorePayloadsController < ApplicationController
     before_action :legal_aid_application
 
-    def show
+    def application_as_json
       respond_to do |format|
         format.json { render json: LegalAidApplicationJsonBuilder.build(legal_aid_application).to_json }
+        format.all { render plain: "Not found", status: :not_found }
+      end
+    end
+
+    def generated_json
+      respond_to do |format|
+        format.json { render json: Datastore::PayloadGenerator.call(legal_aid_application) }
         format.all { render plain: "Not found", status: :not_found }
       end
     end

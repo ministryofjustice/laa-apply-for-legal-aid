@@ -11,7 +11,7 @@ module Datastore
     end
 
     def call
-      payload.deep_transform_keys { |k| k.to_s.camelize(:lower).to_sym }
+      transformer.call(payload)
     end
 
   private
@@ -40,7 +40,15 @@ module Datastore
     end
 
     def application_content
-      @application_content ||= LegalAidApplicationJsonBuilder.build(legal_aid_application).to_json
+      @application_content ||= transformer.call(legal_aid_application_hash).to_json
+    end
+
+    def legal_aid_application_hash
+      @legal_aid_application_hash ||= LegalAidApplicationJsonBuilder.build(legal_aid_application).as_json
+    end
+
+    def transformer
+      Transformer
     end
   end
 end

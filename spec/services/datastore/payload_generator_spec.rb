@@ -42,10 +42,10 @@ RSpec.describe Datastore::PayloadGenerator do
       expect(call).to include(status: "SUBMITTED")
     end
 
-    it "includes the application content" do
+    it "includes the application content as json with transformed keys" do
       payload = LegalAidApplicationJsonBuilder.build(legal_aid_application)
 
-      expect(call).to include(applicationContent: payload.to_json)
+      expect(call).to include(applicationContent: Datastore::Transformer.call(payload.as_json).to_json)
     end
 
     context "when there is one or more nil objects/relations" do
