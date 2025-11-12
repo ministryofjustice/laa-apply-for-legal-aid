@@ -80,7 +80,7 @@ RSpec.describe ApplicationHelper do
 
     context "when primary is not set" do
       it "outputs a secondary button" do
-        expect(print_btn).to have_css(:button, class: "govuk-button--secondary")
+        expect(print_btn).to have_button(class: "govuk-button--secondary")
       end
     end
 
@@ -88,7 +88,7 @@ RSpec.describe ApplicationHelper do
       let(:primary) { true }
 
       it "outputs a primary button" do
-        expect(print_btn).to have_no_css(:button, class: "govuk-button--secondary")
+        expect(print_btn).to have_button(class: "govuk-button--secondary")
       end
     end
   end
