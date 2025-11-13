@@ -18,6 +18,8 @@ ingress:
       }
     external-dns.alpha.kubernetes.io/aws-weight: '100'
     nginx.ingress.kubernetes.io/enable-modsecurity: "true"
+    nginx.ingress.kubernetes.io/enable-owasp-core-rules: "true"
+    nginx.ingress.kubernetes.io/modsecurity-transaction-id: "$request_id"
     nginx.ingress.kubernetes.io/modsecurity-snippet: |
       SecRuleEngine On
       SecDefaultAction "phase:1,pass,log,tag:github_team=laa-apply-for-legal-aid,tag:namespace=laa-apply-for-legalaid-uat"
@@ -25,6 +27,7 @@ ingress:
       SecAction "id:900110,phase:1,nolog,pass,t:none,setvar:tx.inbound_anomaly_score_threshold=6,setvar:tx.outbound_anomaly_score_threshold=4"
       SecRuleUpdateActionById 949110 "t:none,deny,status:423,logdata:%{SERVER_NAME}"
       SecRuleUpdateActionById 959100 "t:none,deny,status:423,logdata:%{SERVER_NAME}"
+      SecRule ARGS "@rx testlog" "id:210001,phase:2,log,deny,status:406,tag:github_team=laa-apply-for-legal-aid,tag:namespace=laa-apply-for-legalaid-uat,tag:joel_test=1"
       SecRule REQUEST_FILENAME "^.*statement_of_case.*" "id:300001,ctl:ruleRemoveById=949110"
       SecRuleRemoveById 921110
       SecRuleRemoveById 200003
