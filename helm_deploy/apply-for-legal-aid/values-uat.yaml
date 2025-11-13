@@ -191,7 +191,7 @@ session:
    idle_timeout_after_minutes: "60"
 
 business_hours:
-  start: 7
-  end: 19
+  start: "7:00"
+  end: "21:30"
 
 env: uat

@@ -160,8 +160,8 @@ module LaaApplyForLegalAid
     config.x.session.timeout_in = ENV.fetch("IDLE_TIMEOUT_AFTER_MINUTES", 60).to_i.minutes
 
     # business hours
-    config.x.business_hours.start = ENV.fetch("BUSINESS_HOURS_START", 7).to_i
-    config.x.business_hours.end = ENV.fetch("BUSINESS_HOURS_END", 19).to_i
+    config.x.business_hours.start = ENV.fetch("BUSINESS_HOURS_START", "7:00")
+    config.x.business_hours.end = ENV.fetch("BUSINESS_HOURS_END", "21:30")
 
     # automatically include locale in the query string when generating urls with url_helpers
     Rails.application.routes.default_url_options[:locale] = I18n.locale
