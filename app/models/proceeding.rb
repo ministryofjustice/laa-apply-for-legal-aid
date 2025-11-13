@@ -69,4 +69,8 @@ class Proceeding < ApplicationRecord
   def domestic_abuse?
     ccms_matter_code == "MINJN"
   end
+
+  def non_sca_used_delegated_functions?
+    used_delegated_functions? && !special_children_act?
+  end
 end

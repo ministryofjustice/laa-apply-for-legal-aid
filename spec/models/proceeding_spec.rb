@@ -75,4 +75,40 @@ RSpec.describe Proceeding do
       expect(proceeding.proceeding_case_p_num).to eq "P_55200301"
     end
   end
+
+  describe "non_sca_used_delegated_functions?" do
+    context "when delegated functions not used" do
+      let(:df_used) { false }
+      let(:df_date) { nil }
+
+      it "returns false" do
+        expect(proceeding.non_sca_used_delegated_functions?).to be false
+      end
+    end
+
+    context "when delegated functions used" do
+      let(:df_used) { true }
+      let(:df_date) { Time.zone.yesterday }
+
+      it "returns true" do
+        expect(proceeding.non_sca_used_delegated_functions?).to be true
+      end
+    end
+
+    context "with an sca proceeding" do
+      let(:proceeding) do
+        create(:proceeding,
+               :pb003,
+               proceeding_case_id: 55_123_456,
+               used_delegated_functions: df_used,
+               used_delegated_functions_on: df_date)
+      end
+      let(:df_used) { true }
+      let(:df_date) { Time.zone.yesterday }
+
+      it "returns false" do
+        expect(proceeding.non_sca_used_delegated_functions?).to be false
+      end
+    end
+  end
 end
