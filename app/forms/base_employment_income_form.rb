@@ -9,7 +9,7 @@ class BaseEmploymentIncomeForm < BaseForm
 private
 
   def extra_employment_information_presence
-    return if draft? || extra_employment_information.present?
+    return if draft? || extra_employment_information.to_s.present?
 
     add_blank_error_for :extra_employment_information
   end
