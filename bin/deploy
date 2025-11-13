@@ -28,7 +28,8 @@ deploy_branch() {
                 --set publicIngress.annotations."external-dns\.alpha\.kubernetes\.io/set-identifier"="$PUBLIC_INGRESS_IDENTIFIER" \
                 --set omniauth_entraid.redirect_uri="https://${RELEASE_HOST}/auth/entra_id/callback" \
                 --set admin_omniauth_entraid.redirect_uri="https://${RELEASE_HOST}/auth/admin_entra_id/callback" \
-                --set-string pingdomIPs="$PINGDOM_IPS"
+                --set-string pingdomIPs="$PINGDOM_IPS" \
+                --set branch_builder.database_name="$RELEASE_NAME"
 }
 
 deploy_main() {
@@ -38,7 +39,8 @@ deploy_main() {
                 --values ./helm_deploy/apply-for-legal-aid/values-"$ENVIRONMENT".yaml \
                 --set image.repository="${ECR_REGISTRY}/${ECR_REPOSITORY}" \
                 --set image.tag="${CIRCLE_SHA1}" \
-                --set-string pingdomIPs="$PINGDOM_IPS"
+                --set-string pingdomIPs="$PINGDOM_IPS" \
+                --set branch_builder.database_name="main"
 }
 
 if [[ "$ENVIRONMENT" == "uat" ]]; then

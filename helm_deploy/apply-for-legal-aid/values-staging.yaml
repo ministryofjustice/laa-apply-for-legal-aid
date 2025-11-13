@@ -89,8 +89,9 @@ affinity: {}
 deploy:
   host: "staging.apply-for-legal-aid.service.justice.gov.uk"
 
-postgresql:
+branch_builder:
   enabled: false
+  database_name: null
 
 redis:
   enabled: false
