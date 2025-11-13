@@ -9,4 +9,4 @@ en:
           </p>
     service_out_of_hours:
         title: Sorry, the service is unavailable
-        warning: You can use this service from 7am to 7pm, Monday to Friday.
+        warning: You can use this service from %{start} to %{end}, Monday to Friday.

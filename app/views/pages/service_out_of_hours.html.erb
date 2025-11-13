@@ -1,5 +1,6 @@
 <%= page_template page_title: t(".title"), back_link: :none do %>
   <p class="govuk-body">
-    <%= t(".warning") %>
+    <%= t(".warning", start: Rails.configuration.x.business_hours.start.to_time.strftime("%l:%M%P"),
+                      end: Rails.configuration.x.business_hours.end.to_time.strftime("%l:%M%P")) %>
   </p>
 <% end %>
