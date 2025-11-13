@@ -50,37 +50,10 @@ affinity: {}
 deploy:
   host: ""
 
-postgresql:
+# database_name and redirect_uri value must be set by `helm --set` command when enabled
+branch_builder:
   enabled: true
-  image:
-    repository: bitnamilegacy/postgresql
-  global:
-    security:
-      allowInsecureImages: true
-  resources:
-    limits:
-     cpu: 250m
-     memory: 256Mi
-    requests:
-     cpu: 10m
-     memory: 64Mi
-  postgresqlUsername: postgres
-  auth:
-    Database: apply_for_legal_aid_uat
-    enablePostgresUser: true
-    existingSecret: laa-apply-for-legalaid-secrets
-    secretKeys:
-      adminPasswordKey: postgresqlPassword
-  persistence:
-    enabled: false
-  primary:
-    containerSecurityContext:
-      runAsNonRoot: true
-      allowPrivilegeEscalation: false
-      seccompProfile:
-        type: RuntimeDefault
-      capabilities:
-        drop: [ "ALL" ]
+  database_name: null
 
 # see https://artifacthub.io/packages/helm/bitnami/redis for parameters
 redis:
