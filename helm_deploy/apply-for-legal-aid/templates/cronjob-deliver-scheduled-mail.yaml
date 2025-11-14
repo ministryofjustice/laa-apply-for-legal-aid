@@ -9,7 +9,6 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   schedule: '11,41 8-19 * * *'
-  suspend: true  # This suspends the CronJob
   timeZone: "Europe/London"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 0

@@ -5,7 +5,7 @@ en:
         title: Sorry, the service is unavailable
         warning_html: |
           <p>
-            You will be able to use the service again once we resolve the problem we’ve found.
+            Use <a href="%{sso_page}">CCMS (Client and Cost Management System)</a>
           </p>
     service_out_of_hours:
         title: Sorry, the service is unavailable
