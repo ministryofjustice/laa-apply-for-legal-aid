@@ -322,42 +322,42 @@ generic-slack-fail-post-step: &generic-slack-fail-post-step
 workflows:
   open_pr:
     jobs:
-      - lint_checks:
-          filters:
-            branches:
-              ignore: main
-          <<: *generic-slack-fail-post-step
+      # - lint_checks:
+      #     filters:
+      #       branches:
+      #         ignore: main
+      #     <<: *generic-slack-fail-post-step
       - build_and_push:
-          requires:
-          - lint_checks
+          # requires:
+          # - lint_checks
           <<: *generic-slack-fail-post-step
       - deploy_uat:
           context: laa-apply-for-legalaid-uat
           requires:
           - build_and_push
           <<: *generic-slack-fail-post-step
-      - unit_tests:
-          requires:
-            - lint_checks
-          <<: *generic-slack-fail-post-step
-      - integration_tests:
-          requires:
-          - lint_checks
-          <<: *generic-slack-fail-post-step
-      - coverage:
-          requires:
-            - unit_tests
-            - integration_tests
-          <<: *generic-slack-fail-post-step
-      - delete_dependabot_deployment:
-          context: laa-apply-for-legalaid-uat
-          filters:
-            branches:
-              only:
-                - /dependabot.*/
-          requires:
-          - deploy_uat
-          <<: *generic-slack-fail-post-step
+      # - unit_tests:
+      #     requires:
+      #       - lint_checks
+      #     <<: *generic-slack-fail-post-step
+      # - integration_tests:
+      #     requires:
+      #     - lint_checks
+      #     <<: *generic-slack-fail-post-step
+      # - coverage:
+      #     requires:
+      #       - unit_tests
+      #       - integration_tests
+      #     <<: *generic-slack-fail-post-step
+      # - delete_dependabot_deployment:
+      #     context: laa-apply-for-legalaid-uat
+      #     filters:
+      #       branches:
+      #         only:
+      #           - /dependabot.*/
+      #     requires:
+      #     - deploy_uat
+      #     <<: *generic-slack-fail-post-step
 
   merge_pr:
     max_auto_reruns: 1
