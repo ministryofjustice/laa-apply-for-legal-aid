@@ -47,7 +47,7 @@ class ProceedingJsonBuilder < BaseJsonBuilder
 
       final_hearings: final_hearings.map { |fh| FinalHearingJsonBuilder.build(fh) },
       proceeding_linked_children: proceeding_linked_children.map { |lc| ProceedingLinkedChildJsonBuilder.build(lc) },
-      involved_children: involved_children.map { |ic| InvolvedChildJsonBuilder.build(ic) },
+      involved_children: involved_children.map { |ic| InvolvedChildJsonBuilder.build(ic) }, # DO WE NEEDS THIS AS IS PRESENT ON APPLICATION LEVEL TOO
 
       # has_one :opponents_application, class_name: "ProceedingMeritsTask::OpponentsApplication", dependent: :destroy
       # has_one :attempts_to_settle, class_name: "ProceedingMeritsTask::AttemptsToSettle", dependent: :destroy
