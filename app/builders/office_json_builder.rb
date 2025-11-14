@@ -7,6 +7,7 @@ class OfficeJsonBuilder < BaseJsonBuilder
       ccms_id:,
       code:,
       firm_id:,
+      schedules: schedules.map { |s| ScheduleJsonBuilder.build(s).as_json },
     }
   end
 end

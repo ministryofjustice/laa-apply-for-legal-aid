@@ -8,7 +8,8 @@ RSpec.describe Datastore::PayloadGenerator do
       :legal_aid_application,
       :with_proceedings,
       :at_assessment_submitted,
-      office: build(:office),
+      office: build(:office, :with_valid_schedule),
+      benefit_check_result: build(:benefit_check_result, :negative),
     ).tap do |application|
       p = application.proceedings.first
 
