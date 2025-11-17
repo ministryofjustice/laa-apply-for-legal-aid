@@ -25,6 +25,7 @@ RSpec.describe Providers::ProvidersController do
       expect(page)
         .to have_content(provider.name)
         .and have_content(provider.email)
+        .and have_content(provider.selected_office.code)
     end
   end
 

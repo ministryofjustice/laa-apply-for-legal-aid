@@ -994,7 +994,7 @@ en:
     user_not_founds:
       show:
         h1-heading:  Sorry, there was a problem getting your account information
-        paragraph-1: Try again later. 
+        paragraph-1: Try again later.
         contact_us_html: <a class="govuk-link govuk-link--inverse" href="%{support_url}">Contact our support team</a> if this problem continues.
         button_text: Try again now
     legal_aid_applications:
@@ -1860,6 +1860,7 @@ en:
       show:
         account_number: Account number
         email: Email address
+        office_code: Office code
         name: Name
         page_title: Your profile
         role: Permission
