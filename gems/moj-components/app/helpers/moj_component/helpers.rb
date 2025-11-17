@@ -2,6 +2,10 @@
 
 module MojComponent
   module Helpers
+    def moj_alert(**kwargs, &block)
+      render(MojComponent::AlertComponent.new(**kwargs), &block)
+    end
+
     def moj_header(**kwargs, &block)
       render(MojComponent::HeaderComponent.new(**kwargs), &block)
     end
