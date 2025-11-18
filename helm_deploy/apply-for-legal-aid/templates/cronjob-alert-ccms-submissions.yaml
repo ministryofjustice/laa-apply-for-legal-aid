@@ -10,7 +10,6 @@ metadata:
     heritage: {{ .Release.Service }}
 spec:
   schedule: '0 7 * * 2' # Every tuesday at 07:00
-  suspend: true  # This suspends the CronJob
   timeZone: "Europe/London"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 1

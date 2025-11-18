@@ -18,6 +18,7 @@ RSpec.describe PagesController, :clamav do
 
   context "when in maintenance mode" do
     before do
+      allow(Rails.configuration.x).to receive(:laa_landing_page_target_url).and_return("https://my-made-up-single-sign-on-page")
       allow(Rails.application.config.x).to receive(:maintenance_mode).and_return(true)
       Rails.application.reload_routes!
     end
@@ -30,7 +31,12 @@ RSpec.describe PagesController, :clamav do
     shared_examples "maintenance page" do
       it { expect(response).to have_http_status(:ok) }
       it { expect(response).to render_template("pages/servicedown") }
-      it { expect(response.body).to include("Sorry, the service is unavailable") }
+
+      it "has expected content" do
+        expect(page)
+          .to have_content("Sorry, the service is unavailable")
+          .and have_link("CCMS (Client and Cost Management System)", href: "https://my-made-up-single-sign-on-page")
+      end
     end
 
     shared_examples "maintenance json" do
