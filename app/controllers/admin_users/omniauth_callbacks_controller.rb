@@ -5,7 +5,7 @@ module AdminUsers
     def entra_id
       admin = AdminUser.from_omniauth(auth_data)
       if admin
-        flash[:notice] = I18n.t "devise.omniauth_callbacks.success"
+        flash[:notice] = I18n.t("devise.omniauth_callbacks.success", kind: "entra")
         sign_in_and_redirect admin, event: :authentication
       else
         flash[:notice] = I18n.t "devise.omniauth_callbacks.unauthorised"
