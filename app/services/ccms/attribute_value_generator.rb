@@ -324,6 +324,8 @@ module CCMS
     end
 
     def benefit_check_passed?(_options)
+      return false if legal_aid_application.benefit_check_status == :unsuccessful
+
       legal_aid_application.benefit_check_result.result == "Yes"
     end
 
