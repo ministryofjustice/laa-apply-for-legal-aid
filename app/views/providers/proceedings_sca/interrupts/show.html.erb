@@ -1,11 +1,21 @@
 <%= page_template(page_title: t(".#{@type}.title_html"), template: :basic, column_width: "full") do %>
 
-  <%= interruption_card(heading: t(".#{@type}.title_html"), actions: -> { render "actions" }) do %>
+  <%= moj_interruption_card(heading: t(".#{@type}.title_html")) do |card| %>
+    <% card.with_body do %>
       <% if I18n.exists?("providers.proceedings_sca.interrupts.show.#{@type}.paragraph") %>
         <p><%= t(".#{@type}.paragraph") %></p>
       <% end %>
 
       <p><%= t(".#{@type}.options") %></p>
       <%= govuk_list(t(".#{@type}.option_bullets_html", url: Rails.configuration.x.laa_landing_page_target_url), type: :bullet) %>
+    <% end %>
+
+    <% card.with_actions do %>
+      <%= govuk_button_link_to(t("providers.proceedings_sca.interrupts.show.#{@type}.proceedings"),
+                               providers_legal_aid_application_sca_interrupt_path(@legal_aid_application, @type),
+                               method: :delete,
+                               inverse: true,
+                               role: "button") %>
+    <% end %>
   <% end %>
 <% end %>
