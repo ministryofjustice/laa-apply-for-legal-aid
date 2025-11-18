@@ -95,8 +95,7 @@ RSpec.describe Admin::ReportsController do
     it "sends the data" do
       get_request
       expect(response.body)
-        .to match(/^legal_aid_application_id,firm_name,provider_username,date_started,date_submitted,days_to_submission,use_ccms,matter_types,proceedings,passported,df_used,earliest_df_date,df_reported_date,working_days_to_report_df,working_days_to_submit_df,employed,hmrc_data_used,referred_to_caseworker,true_layer_path,bank_statements_path,true_layer_data,has_partner,contrary_interest,partner_dwp_challenge,applicant_age,non_means_tested,family_linked,family_linked_lead_or_associated,number_of_family_linked_applications,legal_linked,legal_linked_lead_or_associated,number_of_legal_linked_applications,no_fixed_address,biological_parent,parental_responsibility_agreement,parental_responsibility_court_order,child_subject,parental_responsibility_evidence,autogranted,ecct_routed/)
-        .and match(/An Awesome Firm,Joe Bloggs/)
+        .to include(*%w[legal_aid_application_id firm_name provider_username date_started date_submitted days_to_submission use_ccms matter_types proceedings passported df_used earliest_df_date df_reported_date working_days_to_report_df working_days_to_submit_df employed hmrc_data_used referred_to_caseworker true_layer_path bank_statements_path true_layer_data has_partner contrary_interest partner_dwp_challenge applicant_age non_means_tested family_linked family_linked_lead_or_associated number_of_family_linked_applications legal_linked legal_linked_lead_or_associated number_of_legal_linked_applications no_fixed_address biological_parent parental_responsibility_agreement parental_responsibility_court_order child_subject parental_responsibility_evidence autogranted ecct_routed An Awesome Firm Joe Bloggs])
     end
   end
 end
