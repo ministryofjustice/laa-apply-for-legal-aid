@@ -27,6 +27,8 @@ RSpec.describe "admin users omniauth call back" do
 
     it "redirects to admin user root" do
       expect(get_request).to redirect_to(admin_root_path)
+      follow_redirect!
+      expect(response.body).to include("Successfully authenticated from entra account.")
     end
 
     context "with unknown email" do
