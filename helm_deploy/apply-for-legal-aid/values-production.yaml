@@ -97,7 +97,7 @@ redis:
   enabled: false
 
 benefit_checker:
-  wsdlUrl: "https://laa-benefit-checker.service.justice.gov.uk/lsx/lsc-services/benefitChecker?wsdl"
+  wsdlUrl: "https://laa-benefitchecker.apps.live.cloud-platform.service.justice.gov.uk/lsx/lsc-services/benefitChecker?wsdl"
 
 ccms_soa:
   submit_applications: "true"
