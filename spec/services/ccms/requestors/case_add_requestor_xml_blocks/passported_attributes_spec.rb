@@ -780,18 +780,27 @@ module CCMS
 
         describe "LAR_INFER_B_1WP1_36A" do
           context "when benefit check result is yes" do
-            it "uses the DWP benefit check result" do
+            before { legal_aid_application.benefit_check_result = create(:benefit_check_result, :positive) }
+
+            it "is set to true" do
               block = XmlExtractor.call(xml, :global_means, "LAR_INFER_B_1WP1_36A")
               expect(block).to have_boolean_response true
             end
           end
 
           context "when benefit check result is no" do
-            let(:benefit_check_result) { create(:benefit_check_result, :negative) }
+            before { legal_aid_application.benefit_check_result = create(:benefit_check_result, :negative) }
 
-            before { legal_aid_application.benefit_check_result = benefit_check_result }
+            it "is set to false" do
+              block = XmlExtractor.call(xml, :global_means, "LAR_INFER_B_1WP1_36A")
+              expect(block).to have_boolean_response false
+            end
+          end
 
-            it "uses the DWP benefit check result" do
+          context "when benefit check is unsuccessfull" do
+            before { legal_aid_application.benefit_check_result = nil }
+
+            it "is set to false" do
               block = XmlExtractor.call(xml, :global_means, "LAR_INFER_B_1WP1_36A")
               expect(block).to have_boolean_response false
             end
