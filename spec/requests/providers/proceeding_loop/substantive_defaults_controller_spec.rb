@@ -126,6 +126,19 @@ RSpec.describe "SubstantiveDefaultsController" do
       context "when the Continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
+        context "when the provider does not provide an answer" do
+          let(:params) {  {} }
+
+          it "renders a validation error" do
+            post_sd
+            expect(response).to have_http_status(:ok)
+
+            expect(page)
+              .to have_content("There is a problem")
+              .and have_content("Select yes if you accept the default service level and scope for the substantive application")
+          end
+        end
+
         context "when the provider accepts the defaults" do
           let(:params) do
             {
