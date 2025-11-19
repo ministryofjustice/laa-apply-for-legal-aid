@@ -205,11 +205,38 @@ RSpec.describe "SubstantiveDefaultsController" do
 
         context "when the application is a Special Childrens Act application" do
           let(:application) { create(:legal_aid_application, :with_multiple_sca_proceedings) }
-          let(:params) { {} }
+          let(:params) do
+            {
+              proceeding: {
+                accepted_substantive_defaults: "true",
+              },
+            }
+          end
 
           it "redirects to next page" do
             post_sd
             expect(response).to have_http_status(:redirect)
+          end
+
+          it "sets the default substantive levels of service on the proceeding" do
+            expect { post_sd }.to change { proceeding.reload.attributes.symbolize_keys }
+                                    .from(
+                                      hash_including(
+                                        {
+                                          substantive_level_of_service: nil,
+                                          substantive_level_of_service_name: nil,
+                                          substantive_level_of_service_stage: nil,
+                                        },
+                                      ),
+                                    ).to(
+                                      hash_including(
+                                        {
+                                          substantive_level_of_service: 3,
+                                          substantive_level_of_service_name: "Full Representation",
+                                          substantive_level_of_service_stage: 8,
+                                        },
+                                      ),
+                                    )
           end
         end
 
