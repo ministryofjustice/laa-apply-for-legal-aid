@@ -22,7 +22,7 @@ RSpec.describe ApplicationHelper do
   let(:header) { GovukComponent::HeaderComponent.new }
   let(:signed_in) { true }
   let(:journey_type) { :citizens }
-  let(:provider) { create(:provider, username: "Test User") }
+  let(:provider) { create(:provider, email: "test@example.com") }
 
   describe "#user_header_navigation" do
     context "when called on citizens journey" do
@@ -37,7 +37,7 @@ RSpec.describe ApplicationHelper do
       context "when provider is signed in" do
         it "returns a link to edit provider details and a logout link" do
           expect(user_header_navigation).to have_css("li", count: 2)
-            .and have_css("li", text: "My profile")
+            .and have_css("li", text: "test@example.com")
             .and have_css("li", text: "Sign out")
         end
       end

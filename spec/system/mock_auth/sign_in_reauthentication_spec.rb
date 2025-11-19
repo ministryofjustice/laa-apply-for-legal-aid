@@ -14,6 +14,8 @@ RSpec.describe "The sign in lifespan and timeout works" do
     Rails.application.reload_routes!
   end
 
+  let(:provider_email) { "martin.ronan@example.com" }
+
   after do
     allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_call_original
     Rails.application.reload_routes!
@@ -38,12 +40,12 @@ RSpec.describe "The sign in lifespan and timeout works" do
 
       click_on(class: "govuk-button", text: "Sign in")
       expect(page).to have_css("h1", text: "Select the account number of the office handling this application")
-      click_on("My profile")
+      click_on(provider_email)
       expect(page).to have_css("h1", text: "Your profile")
 
       travel_to Time.zone.local(2025, 11, 4, 19, 31)
 
-      click_on("My profile")
+      click_on(provider_email)
       expect(page).to have_css("h1", text: "Sign in")
     end
 
@@ -57,12 +59,12 @@ RSpec.describe "The sign in lifespan and timeout works" do
 
       click_on(class: "govuk-button", text: "Sign in")
       expect(page).to have_css("h1", text: "Select the account number of the office handling this application")
-      click_on("My profile")
+      click_on(provider_email)
       expect(page).to have_css("h1", text: "Your profile")
 
       travel_to Time.zone.local(2025, 11, 4, 19, 30)
 
-      click_on("My profile")
+      click_on(provider_email)
       expect(page).to have_css("h1", text: "Your profile")
     end
   end
@@ -78,12 +80,12 @@ RSpec.describe "The sign in lifespan and timeout works" do
 
       click_on(class: "govuk-button", text: "Sign in")
       expect(page).to have_css("h1", text: "Select the account number of the office handling this application")
-      click_on("My profile")
+      click_on(provider_email)
       expect(page).to have_css("h1", text: "Your profile")
 
       travel_to Time.zone.local(2025, 11, 4, 8, 30)
 
-      click_on("My profile")
+      click_on(provider_email)
       expect(page).to have_css("h1", text: "Sign in")
     end
 
@@ -97,12 +99,12 @@ RSpec.describe "The sign in lifespan and timeout works" do
 
       click_on(class: "govuk-button", text: "Sign in")
       expect(page).to have_css("h1", text: "Select the account number of the office handling this application")
-      click_on("My profile")
+      click_on(provider_email)
       expect(page).to have_css("h1", text: "Your profile")
 
       travel_to Time.zone.local(2025, 11, 4, 8, 29)
 
-      click_on("My profile")
+      click_on(provider_email)
       expect(page).to have_css("h1", text: "Your profile")
     end
   end

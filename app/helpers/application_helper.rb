@@ -42,7 +42,7 @@ module ApplicationHelper
   def provider_header_navigation
     if provider_signed_in?
       safe_join([
-        content_tag(:li, link_to(t("layouts.application.header.my_profile"), providers_provider_path, class: "moj-header__navigation-link"), class: "moj-header__navigation-item"),
+        content_tag(:li, link_to(current_provider.email, providers_provider_path, class: "moj-header__navigation-link"), class: "moj-header__navigation-item"),
         content_tag(:li, link_to(t("layouts.logout.provider"), destroy_provider_session_path, class: "moj-header__navigation-link", method: :delete), class: "moj-header__navigation-item"),
       ])
     else
