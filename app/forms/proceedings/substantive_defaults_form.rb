@@ -11,7 +11,7 @@ module Proceedings
     attr_accessor :accepted_substantive_defaults,
                   :additional_params
 
-    validates :accepted_substantive_defaults, presence: true, unless: proc { draft? || model.special_children_act? }
+    validates :accepted_substantive_defaults, presence: true, unless: :draft?
 
     def initialize(*args)
       super
