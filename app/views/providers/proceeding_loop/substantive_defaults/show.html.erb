@@ -22,6 +22,8 @@
         <%= form.govuk_radio_button :accepted_substantive_defaults, true, label: { text: t("generic.yes") }, link_errors: true %>
         <%= form.govuk_radio_button :accepted_substantive_defaults, false, label: { text: t("generic.no") } %>
       <% end %>
+    <% else %>
+      <%= form.hidden_field :accepted_substantive_defaults, value: true %>
     <% end %>
     <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
