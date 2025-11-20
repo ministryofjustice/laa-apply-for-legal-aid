@@ -81,7 +81,7 @@ en:
           enable_evidence_upload: Enable the new evidence upload feature
           collect_hmrc_data: Collect HMRC data
           collect_dwp_data: Collect DWP data
-          enable_datastore_submission: Send data to datastore via the Data Access API
+          enable_datastore_submission: Allow datastore submissions
 
         hints:
           mock_true_layer_data: Select Yes and TrueLayer data will be replaced by mock data from %{bank_transaction_filename}
