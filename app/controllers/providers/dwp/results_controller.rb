@@ -13,6 +13,8 @@ module Providers
         details_checked! unless details_checked?
         reset_confirm_dwp_status!(legal_aid_application)
 
+        HMRC::CreateResponsesService.call(legal_aid_application) if make_hmrc_call?
+
         # set the path for the "This is not correct" link flow
         @override_path = if legal_aid_application.partner
                            providers_legal_aid_application_dwp_partner_override_path
