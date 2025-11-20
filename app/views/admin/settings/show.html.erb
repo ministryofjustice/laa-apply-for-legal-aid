@@ -66,6 +66,16 @@
           legend: { text: t(".labels.collect_dwp_data") },
         ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+          :enable_datastore_submission,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          hint: { text: t(".hints.enable_datastore_submission") },
+          legend: { text: t(".labels.enable_datastore_submission") },
+        ) %>
+
     <%= form.govuk_submit(t("generic.submit")) %>
   <% end %>
 <% end %>

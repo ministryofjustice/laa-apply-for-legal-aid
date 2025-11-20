@@ -23,7 +23,8 @@ module Admin
                                 allow_welsh_translation
                                 enable_ccms_submission
                                 collect_hmrc_data
-                                collect_dwp_data])
+                                collect_dwp_data
+                                enable_datastore_submission])
     end
 
     def setting

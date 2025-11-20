@@ -31,6 +31,10 @@ class Setting < ApplicationRecord
     setting.collect_dwp_data
   end
 
+  def self.enable_datastore_submission?
+    setting.enable_datastore_submission
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end
