@@ -12,7 +12,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PAT }}
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Build the Docker image
         run: |
           docker build . --file ./docker/apply_base.dockerfile --tag ministryofjustice/apply-base:latest --tag ministryofjustice/apply-base:latest-$(cat .ruby-version)
