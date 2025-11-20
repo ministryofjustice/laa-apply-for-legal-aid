@@ -19,7 +19,7 @@
           end
         else
           summary_list.with_row(html_attributes: { id: "app-check-your-answers__when_contact_was_made" }) do |row|
-            row.with_key(text: t("shared.check_answers.merits.latest_incident_details.first-contact-date"))
+            row.with_key(text: t("shared.check_answers.merits.latest_incident_details.first-contact-date"), classes: "govuk-!-width-one-third")
             row.with_value(text: incident&.first_contact_date)
           end
         end
