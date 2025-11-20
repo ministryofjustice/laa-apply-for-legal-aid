@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_10_24_080229) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_20_125313) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -1064,6 +1064,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_10_24_080229) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "digest_extracted_at", precision: nil, default: "1970-01-01 00:00:01"
     t.boolean "enable_ccms_submission", default: true, null: false
+    t.boolean "enable_datastore_submission", default: false, null: false
     t.boolean "manually_review_all_cases", default: true
     t.boolean "mock_true_layer_data", default: false, null: false
     t.datetime "updated_at", precision: nil, null: false

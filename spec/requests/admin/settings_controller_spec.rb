@@ -43,6 +43,7 @@ RSpec.describe Admin::SettingsController do
           collect_hmrc_data: "true",
           home_address: "true",
           collect_dwp_data: "true",
+          enable_datastore_submission: "true",
         },
       }
     end
@@ -58,6 +59,7 @@ RSpec.describe Admin::SettingsController do
       expect(setting.allow_welsh_translation?).to be(true)
       expect(setting.collect_hmrc_data?).to be(true)
       expect(setting.collect_dwp_data?).to be(true)
+      expect(setting.enable_datastore_submission?).to be(true)
     end
 
     it "creates settings if they do not exist" do

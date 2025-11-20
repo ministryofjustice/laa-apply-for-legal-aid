@@ -15,6 +15,7 @@ RSpec.describe Setting do
         expect(rec.alert_via_sentry?).to be true
         expect(rec.collect_hmrc_data?).to be false
         expect(rec.collect_dwp_data?).to be true
+        expect(rec.enable_datastore_submission?).to be false
       end
     end
 
@@ -29,6 +30,7 @@ RSpec.describe Setting do
           alert_via_sentry: false,
           collect_hmrc_data: true,
           collect_dwp_data: true,
+          enable_datastore_submission: true,
         )
       end
 
@@ -42,6 +44,7 @@ RSpec.describe Setting do
         expect(rec.alert_via_sentry?).to be false
         expect(rec.collect_hmrc_data?).to be true
         expect(rec.collect_dwp_data?).to be true
+        expect(rec.enable_datastore_submission?).to be true
       end
     end
   end
@@ -58,6 +61,7 @@ RSpec.describe Setting do
       expect(described_class.alert_via_sentry?).to be true
       expect(described_class.collect_hmrc_data?).to be false
       expect(described_class.collect_dwp_data?).to be true
+      expect(described_class.enable_datastore_submission?).to be false
     end
   end
 end
