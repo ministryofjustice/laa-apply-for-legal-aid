@@ -40,7 +40,7 @@ class ApplicantJsonBuilder < BaseJsonBuilder
       previous_reference:,
       relationship_to_children:,
       addresses: addresses.map { |a| AddressJsonBuilder.build(a).as_json },
-      bank_providers: bank_providers.map { |bp| BankProviderJsonBuilder.build(bp).as_json },
+      # bank_providers: bank_providers.map { |bp| BankProviderJsonBuilder.build(bp).as_json }, Moved to LegalAidApplicationJsonBuilder to group with means??
     }
   end
 

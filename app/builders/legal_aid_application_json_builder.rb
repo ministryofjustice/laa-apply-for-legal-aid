@@ -74,29 +74,52 @@ class LegalAidApplicationJsonBuilder < BaseJsonBuilder
       hmrc_responses: hmrc_responses.map { |hr| HMRCResponseJsonBuilder.build(hr).as_json },
       employments: employments.map { |e| EmploymentJsonBuilder.build(e).as_json },
 
-      # means
-      other_assets_declaration: OtherAssetsDeclarationJsonBuilder.build(other_assets_declaration).as_json,
-      savings_amount: SavingsAmountJsonBuilder.build(savings_amount).as_json,
-      dependants: dependants.map { |d| DependantJsonBuilder.build(d).as_json },
-      vehicles: vehicles.map { |v| VehicleJsonBuilder.build(v).as_json },
-      capital_disregards: capital_disregards.map { |cd| CapitalDisregardJsonBuilder.build(cd).as_json },
-      legal_aid_application_transaction_types: legal_aid_application_transaction_types.map { |latt| LegalAidApplicationTransactionTypeJsonBuilder.build(latt).as_json },
-      regular_transactions: regular_transactions.map { |rt| RegularTransactionJsonBuilder.build(rt).as_json },
-      cash_transactions: cash_transactions.map { |ct| CashTransactionJsonBuilder.build(ct).as_json },
-      most_recent_cfe_submission: CFESubmissionJsonBuilder.build(most_recent_cfe_submission).as_json,
+      # means: this will include open banking data belong to the applicant too, if available
+      means: {
+        open_banking: {
+          bank_providers: applicant&.bank_providers&.map { |bp| BankProviderJsonBuilder.build(bp).as_json },
+        },
+        other_assets_declaration: OtherAssetsDeclarationJsonBuilder.build(other_assets_declaration).as_json,
+        savings_amount: SavingsAmountJsonBuilder.build(savings_amount).as_json,
+        dependants: dependants.map { |d| DependantJsonBuilder.build(d).as_json },
+        vehicles: vehicles.map { |v| VehicleJsonBuilder.build(v).as_json },
+        capital_disregards: capital_disregards.map { |cd| CapitalDisregardJsonBuilder.build(cd).as_json },
+        legal_aid_application_transaction_types: legal_aid_application_transaction_types.map { |latt| LegalAidApplicationTransactionTypeJsonBuilder.build(latt).as_json },
+        regular_transactions: regular_transactions.map { |rt| RegularTransactionJsonBuilder.build(rt).as_json },
+        cash_transactions: cash_transactions.map { |ct| CashTransactionJsonBuilder.build(ct).as_json },
+        most_recent_cfe_submission: CFESubmissionJsonBuilder.build(most_recent_cfe_submission).as_json,
+      },
 
-      # merits
-      statement_of_case: StatementOfCaseJsonBuilder.build(statement_of_case).as_json,
-      domestic_abuse_summary: DomesticAbuseSummaryJsonBuilder.build(domestic_abuse_summary).as_json,
-      opponents: opponents.map { |o| OpponentJsonBuilder.build(o).as_json },
-      parties_mental_capacity: PartiesMentalCapacityJsonBuilder.build(parties_mental_capacity).as_json,
-      latest_incident: LatestIncidentJsonBuilder.build(latest_incident).as_json,
-      allegation: AllegationJsonBuilder.build(allegation).as_json,
-      undertaking: UndertakingJsonBuilder.build(undertaking).as_json,
-      urgency: UrgencyJsonBuilder.build(urgency).as_json,
-      appeal: AppealJsonBuilder.build(appeal).as_json,
-      matter_opposition: MatterOppositionJsonBuilder.build(matter_opposition).as_json,
-      involved_children: involved_children.map { |ic| InvolvedChildJsonBuilder.build(ic).as_json }, # DO WE NEEDS THIS AS IS PRESENT ON PROCEEDING LEVEL TOO
+      # application (level) merits
+      application_merits: {
+        statement_of_case: StatementOfCaseJsonBuilder.build(statement_of_case).as_json,
+        domestic_abuse_summary: DomesticAbuseSummaryJsonBuilder.build(domestic_abuse_summary).as_json,
+        opponents: opponents.map { |o| OpponentJsonBuilder.build(o).as_json },
+        parties_mental_capacity: PartiesMentalCapacityJsonBuilder.build(parties_mental_capacity).as_json,
+        latest_incident: LatestIncidentJsonBuilder.build(latest_incident).as_json,
+        allegation: AllegationJsonBuilder.build(allegation).as_json,
+        undertaking: UndertakingJsonBuilder.build(undertaking).as_json,
+        urgency: UrgencyJsonBuilder.build(urgency).as_json,
+        appeal: AppealJsonBuilder.build(appeal).as_json,
+        matter_opposition: MatterOppositionJsonBuilder.build(matter_opposition).as_json,
+        involved_children: involved_children.map { |ic| InvolvedChildJsonBuilder.build(ic).as_json }, # DO WE NEEDS THIS AS IS PRESENT ON PROCEEDING LEVEL TOO
+      },
+
+      # proceeding (level) merits
+      proceeding_merits:
+        proceedings.map do |p|
+          {
+            opponents_application: OpponentsApplicationJsonBuilder.build(p.opponents_application),
+            attempts_to_settle: AttemptsToSettleJsonBuilder.build(p.attempts_to_settle),
+            specific_issue: SpecificIssueJsonBuilder.build(p.specific_issue),
+            vary_order: VaryOrderJsonBuilder.build(p.vary_order),
+            chances_of_success: ChancesOfSuccessJsonBuilder.build(p.chances_of_success),
+            prohibited_steps: ProhibitedStepsJsonBuilder.build(p.prohibited_steps),
+            child_care_assessment: ChildCareAssessmentJsonBuilder.build(p.child_care_assessment),
+            proceeding_linked_children: p.proceeding_linked_children.map { |lc| ProceedingLinkedChildJsonBuilder.build(lc) },
+            involved_children: p.involved_children.map { |ic| InvolvedChildJsonBuilder.build(ic) }, # DO WE NEEDS THIS AS IS PRESENT ON APPLICATION LEVEL TOO
+          }
+        end,
     }
   end
 
@@ -163,8 +186,8 @@ class LegalAidApplicationJsonBuilder < BaseJsonBuilder
   # has_many :legal_framework_submissions, -> { order(created_at: :asc) }, class_name: "LegalFramework::Submission", inverse_of: :legal_aid_application, dependent: :destroy
   # has_many :scheduled_mailings, dependent: :destroy
   # has_many :cfe_submissions, -> { order(created_at: :asc) }, class_name: "CFE::Submission", inverse_of: :legal_aid_application, dependent: :destroy # WE SUPPLY ONLY THE most_recent_cfe_submission FOR NOW?!
-  # has_many :discretionary_capital_disregards, -> { where(mandatory: "false") }, class_name: "CapitalDisregard"
-  # has_many :mandatory_capital_disregards, -> { where(mandatory: "true") }, class_name: "CapitalDisregard"
+  # has_many :discretionary_capital_disregards, -> { where(mandatory: "false") }, class_name: "CapitalDisregard" # WE PROVIDE the capital_disregards AS A WHOLE
+  # has_many :mandatory_capital_disregards, -> { where(mandatory: "true") }, class_name: "CapitalDisregard"  # WE PROVIDE the capital_disregards AS A WHOLE
   #
   # LINKED APPLICATIONS - NOT NEEDED? handled via all_linked_applications method above
   # ---------------------

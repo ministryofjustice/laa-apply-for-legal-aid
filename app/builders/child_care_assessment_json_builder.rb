@@ -2,6 +2,7 @@ class ChildCareAssessmentJsonBuilder < BaseJsonBuilder
   def as_json
     {
       id:,
+      proceeding_id:,
       assessed:,
       result:,
       details:,

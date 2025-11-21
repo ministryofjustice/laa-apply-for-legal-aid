@@ -35,19 +35,20 @@ class ProceedingJsonBuilder < BaseJsonBuilder
 
       # nested relations below this line
       scope_limitations: scope_limitations.map { |sl| ScopeLimitationJsonBuilder.build(sl).as_json },
-
-      # merits
-      opponents_application: OpponentsApplicationJsonBuilder.build(opponents_application),
-      attempts_to_settle: AttemptsToSettleJsonBuilder.build(attempts_to_settle),
-      specific_issue: SpecificIssueJsonBuilder.build(specific_issue),
-      vary_order: VaryOrderJsonBuilder.build(vary_order),
-      chances_of_success: ChancesOfSuccessJsonBuilder.build(chances_of_success),
-      prohibited_steps: ProhibitedStepsJsonBuilder.build(prohibited_steps),
-      child_care_assessment: ChildCareAssessmentJsonBuilder.build(child_care_assessment),
-
       final_hearings: final_hearings.map { |fh| FinalHearingJsonBuilder.build(fh) },
-      proceeding_linked_children: proceeding_linked_children.map { |lc| ProceedingLinkedChildJsonBuilder.build(lc) },
-      involved_children: involved_children.map { |ic| InvolvedChildJsonBuilder.build(ic) }, # DO WE NEEDS THIS AS IS PRESENT ON APPLICATION LEVEL TOO
+
+      # NOTE: Moved to legal aid applxaiotn level as proceeding_merits
+      # merits: {
+      #   opponents_application: OpponentsApplicationJsonBuilder.build(opponents_application),
+      #   attempts_to_settle: AttemptsToSettleJsonBuilder.build(attempts_to_settle),
+      #   specific_issue: SpecificIssueJsonBuilder.build(specific_issue),
+      #   vary_order: VaryOrderJsonBuilder.build(vary_order),
+      #   chances_of_success: ChancesOfSuccessJsonBuilder.build(chances_of_success),
+      #   prohibited_steps: ProhibitedStepsJsonBuilder.build(prohibited_steps),
+      #   child_care_assessment: ChildCareAssessmentJsonBuilder.build(child_care_assessment),
+      #   proceeding_linked_children: proceeding_linked_children.map { |lc| ProceedingLinkedChildJsonBuilder.build(lc) },
+      #   involved_children: involved_children.map { |ic| InvolvedChildJsonBuilder.build(ic) }, # DO WE NEEDS THIS AS IS PRESENT ON APPLICATION LEVEL TOO
+      # },
 
       # has_one :opponents_application, class_name: "ProceedingMeritsTask::OpponentsApplication", dependent: :destroy
       # has_one :attempts_to_settle, class_name: "ProceedingMeritsTask::AttemptsToSettle", dependent: :destroy
