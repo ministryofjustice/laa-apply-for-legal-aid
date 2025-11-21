@@ -994,7 +994,7 @@ en:
     user_not_founds:
       show:
         h1-heading:  Sorry, there was a problem getting your account information
-        paragraph-1: Try again later. 
+        paragraph-1: Try again later.
         contact_us_html: <a class="govuk-link govuk-link--inverse" href="%{support_url}">Contact our support team</a> if this problem continues.
         button_text: Try again now
     legal_aid_applications:
@@ -1911,6 +1911,7 @@ en:
           <a href=%{url}>CCMS (Client and Cost Management System)</a>
           instead.
         progress_saved: Your progress is saved so that you can come back to it later.
+        opening_hours: You can use this service every day from 7am to 9.30pm. You’ll be signed out after one hour of inactivity or after 12 hours of being signed in.
     start_chances_of_successes:
       show:
         h1-heading: Provide details of the case
