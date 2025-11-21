@@ -10,9 +10,9 @@ class BankProviderJsonBuilder < BaseJsonBuilder
       # true_layer_provider_id:,
       created_at:,
       updated_at:,
-      # bank_account_holders: # TODO
-      # bank_accounts: # TODO
-      # main_account_holder: # TODO
+      bank_account_holders: bank_account_holders.map { |bah| BankAccountHolderJsonBuilder.build(bah).as_json },
+      bank_accounts: bank_accounts.map { |ba| BankAccountJsonBuilder.build(ba).as_json },
+      # main_account_holder: # TODO??
     }
   end
 end
