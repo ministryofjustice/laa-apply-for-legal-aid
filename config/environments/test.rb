@@ -76,6 +76,7 @@ Rails.application.configure do
   config.x.legal_framework_api_host = ENV.fetch("LEGAL_FRAMEWORK_API_HOST", "https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk")
   config.x.pda.url = ENV.fetch("PDA_URL", "https://laa-provider-details-api-uat.apps.live.cloud-platform.service.justice.gov.uk")
   config.x.ccms_user_api.url = ENV.fetch("CCMS_USER_API_URL", "https://laa-ccms-user-details-api-dev.apps.live.cloud-platform.service.justice.gov.uk/api/v1")
+  config.x.data_access_api.url = ENV.fetch("DATA_ACCESS_API_URL", "https://laa-data-access-api-uat.apps.live.cloud-platform.service.justice.gov.uk/api/v0")
 
   # allow en-GB locale in test environment for Faker
   config.i18n.available_locales = %i[en cy en-GB]

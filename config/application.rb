@@ -103,6 +103,9 @@ module LaaApplyForLegalAid
     config.x.legal_framework_api_host = ENV.fetch("LEGAL_FRAMEWORK_API_HOST", nil)
     config.x.legal_framework_api_host_for_js = ENV.fetch("LEGAL_FRAMEWORK_API_HOST_JS", config.x.legal_framework_api_host)
 
+    # datastore API
+    config.x.data_access_api.url = ENV.fetch("DATA_ACCESS_API_URL", nil)
+
     config.x.metrics_service_host = ENV.fetch("METRICS_SERVICE_HOST", "localhost")
 
     config.x.cfe_civil_host = ENV.fetch("CFE_CIVIL_HOST", nil)

@@ -177,6 +177,8 @@ env:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
         key: ccmsUserApiAuthKey
+  - name: DATA_ACCESS_API_URL
+    value: {{ .Values.data_access_api.url | quote }}
   - name: TRUE_LAYER_CLIENT_ID
     valueFrom:
       secretKeyRef:
