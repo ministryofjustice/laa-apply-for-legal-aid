@@ -1912,6 +1912,7 @@ en:
           <a href=%{url}>CCMS (Client and Cost Management System)</a>
           instead.
         progress_saved: Your progress is saved so that you can come back to it later.
+        opening_hours: You can use this service every day from 7am to 9.30pm. You’ll be signed out after one hour of inactivity or after 12 hours of being signed in.
     start_chances_of_successes:
       show:
         h1-heading: Provide details of the case
