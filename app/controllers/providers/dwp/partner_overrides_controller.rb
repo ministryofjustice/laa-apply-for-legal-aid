@@ -18,7 +18,6 @@ module Providers
         if @form.valid?
           update_joint_benefit_response
           update_application_state
-          HMRC::CreateResponsesService.call(legal_aid_application) if make_hmrc_call?
           return go_forward
         end
 
