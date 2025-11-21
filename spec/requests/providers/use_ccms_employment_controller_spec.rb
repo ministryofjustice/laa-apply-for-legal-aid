@@ -16,7 +16,6 @@ RSpec.describe Providers::UseCCMSEmploymentController do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        allow(HMRC::CreateResponsesService).to receive(:call).with(legal_aid_application).and_return(instance_double(HMRC::CreateResponsesService, call: %w[one two]))
         get_request
       end
 
@@ -26,10 +25,6 @@ RSpec.describe Providers::UseCCMSEmploymentController do
 
       it "shows text to use CCMS" do
         expect(response.body).to include(I18n.t("shared.use_ccms.title_html"))
-      end
-
-      it "calls the HMRC::CreateResponsesService" do
-        expect(HMRC::CreateResponsesService).to have_received(:call).once
       end
 
       context "and the applicant is self employed" do

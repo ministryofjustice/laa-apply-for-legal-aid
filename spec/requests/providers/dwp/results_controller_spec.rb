@@ -4,6 +4,9 @@ RSpec.describe Providers::DWP::ResultsController do
   let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_address, dwp_override:, dwp_result_confirmed:) }
   let(:dwp_result_confirmed) { nil }
   let(:dwp_override) { nil }
+  let(:enable_hmrc_collection) { true }
+
+  before { allow(Setting).to receive(:collect_hmrc_data?).and_return(enable_hmrc_collection) }
 
   describe "GET /providers/applications/:legal_aid_application_id/dwp/dwp-result" do
     subject(:get_request) { get providers_legal_aid_application_dwp_result_path(legal_aid_application) }
@@ -17,6 +20,7 @@ RSpec.describe Providers::DWP::ResultsController do
     context "when the provider is authenticated" do
       before do
         login_as legal_aid_application.provider
+        allow(HMRC::CreateResponsesService).to receive(:call).with(legal_aid_application).and_return(instance_double(HMRC::CreateResponsesService, call: %w[one two]))
       end
 
       it "returns success" do
@@ -26,6 +30,22 @@ RSpec.describe Providers::DWP::ResultsController do
 
       it "marks the applicant_details_checked!" do
         expect { get_request }.to change { legal_aid_application.reload.state }.from("checking_applicant_details").to("applicant_details_checked")
+      end
+
+      context "when the hmrc toggle is true" do
+        it "calls the HMRC::CreateResponsesService" do
+          get_request
+          expect(HMRC::CreateResponsesService).to have_received(:call).once
+        end
+      end
+
+      context "when the hmrc toggle is false" do
+        let(:enable_hmrc_collection) { false }
+
+        it "doesn't call the HMRC::CreateResponsesService" do
+          get_request
+          expect(HMRC::CreateResponsesService).not_to have_received(:call)
+        end
       end
 
       context "when dwp_result_confirmed is not nil" do

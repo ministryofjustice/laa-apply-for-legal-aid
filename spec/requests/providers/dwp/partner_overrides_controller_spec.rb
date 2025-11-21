@@ -2,9 +2,6 @@ require "rails_helper"
 
 RSpec.describe Providers::DWP::PartnerOverridesController do
   let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_partner) }
-  let(:enable_hmrc_collection) { true }
-
-  before { allow(Setting).to receive(:collect_hmrc_data?).and_return(enable_hmrc_collection) }
 
   describe "GET /providers/applications/:legal_aid_application_id/dwp/dwp-override" do
     subject(:get_request) { get providers_legal_aid_application_dwp_partner_override_path(application) }
@@ -53,7 +50,6 @@ RSpec.describe Providers::DWP::PartnerOverridesController do
 
       before do
         login_as application.provider
-        allow(HMRC::CreateResponsesService).to receive(:call).with(application).and_return(instance_double(HMRC::CreateResponsesService, call: %w[one two]))
       end
 
       context "when the joint-benefit-with-partner option is selected" do
@@ -81,22 +77,6 @@ RSpec.describe Providers::DWP::PartnerOverridesController do
         it "redirects to the next page" do
           patch_request
           expect(response).to redirect_to providers_legal_aid_application_check_client_details_path(application)
-        end
-
-        context "when the hmrc toggle is true" do
-          it "calls the HMRC::CreateResponsesService" do
-            patch_request
-            expect(HMRC::CreateResponsesService).to have_received(:call).once
-          end
-        end
-
-        context "when the hmrc toggle is false" do
-          let(:enable_hmrc_collection) { false }
-
-          it "doesn't call the HMRC::CreateResponsesService" do
-            patch_request
-            expect(HMRC::CreateResponsesService).not_to have_received(:call)
-          end
         end
       end
 
@@ -134,11 +114,6 @@ RSpec.describe Providers::DWP::PartnerOverridesController do
           patch_request
           expect(partner.reload.shared_benefit_with_applicant).to be false
         end
-
-        it "calls the HMRC::CreateResponsesService" do
-          patch_request
-          expect(HMRC::CreateResponsesService).to have_received(:call)
-        end
       end
 
       context "when no option is selected" do
@@ -160,7 +135,6 @@ RSpec.describe Providers::DWP::PartnerOverridesController do
 
       before do
         login_as application.provider
-        allow(HMRC::CreateResponsesService).to receive(:call).with(application).and_return(instance_double(HMRC::CreateResponsesService, call: %w[one two]))
       end
 
       it "redirects provider to provider's applications page" do
@@ -171,11 +145,6 @@ RSpec.describe Providers::DWP::PartnerOverridesController do
       it "sets the application as draft" do
         patch_request
         expect(application.reload).to be_draft
-      end
-
-      it "does not call the HMRC::CreateResponsesService" do
-        patch_request
-        expect(HMRC::CreateResponsesService).not_to have_received(:call)
       end
     end
   end
