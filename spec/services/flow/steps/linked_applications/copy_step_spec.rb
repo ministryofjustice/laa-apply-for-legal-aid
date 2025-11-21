@@ -15,6 +15,12 @@ RSpec.describe Flow::Steps::LinkedApplications::CopyStep, type: :request do
 
     context "when the provider confirms they wish to copy the application" do
       it { is_expected.to be :client_has_partners }
+
+      context "when the application is non-means tested" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_sca_proceedings, copy_case:) }
+
+        it { is_expected.to be :check_provider_answers }
+      end
     end
 
     context "when the provider confirms they do not wish to copy the application" do
