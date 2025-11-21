@@ -99,8 +99,19 @@ RSpec.describe Datastore::PayloadGenerator do
       it "generates the payload with empty array for collections with no objects" do
         payload = call
         application_content = JSON.parse(payload[:applicationContent])
-
         expect(application_content["proceedings"]).to be_empty
+      end
+    end
+
+    describe "This is not a test" do
+      it "generate a full json payload for PoC purposes" do
+        skip "Skipped payload generation - run \"GENERATE=true rspec <test-path>\" to generate a payload" unless ENV["GENERATE"]
+
+        payload = described_class.call(legal_aid_application)
+        application_content = JSON.parse(payload[:applicationContent])
+
+        File.write("tmp/full_payload.json", JSON.pretty_generate(application_content))
+        system("open tmp/full_payload.json")
       end
     end
   end
