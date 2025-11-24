@@ -4,6 +4,7 @@ module Providers
 
     def show
       initialize_page_history
+      addresses
       @form = Providers::OfficeForm.new(model: current_provider)
     end
 
@@ -39,6 +40,15 @@ module Providers
 
         params.expect(provider: [:selected_office_code])
       end
+    end
+
+    def addresses
+      addresses = []
+      current_provider.silas_office_codes.each do |office_code|
+        address = PDA::OfficeAddressRetriever.call(office_code)
+        addresses << address unless address.nil?
+      end
+      addresses
     end
 
     def initialize_page_history
