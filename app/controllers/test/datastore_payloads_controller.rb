@@ -22,6 +22,13 @@ module Test
       end
     end
 
+    def submit
+      body = Datastore::Submission.call(legal_aid_application)
+
+      flash[:notice] = "Submitted application \"#{legal_aid_application.application_ref}\" to datastore. Response body: #{body.presence || 'nil'}"
+      redirect_back(fallback_location: authenticated_root_path)
+    end
+
   private
 
     def legal_aid_application

@@ -17,6 +17,15 @@
 
   <div class="govuk-button-group">
     <%= print_button t(".print_button"), primary: true %>
+
+    <% if Rails.env.development? %>
+        <%= govuk_button_link_to(
+              "Submit to datastore (ensure no PII present)",
+              test_datastore_payloads_submit_path(@legal_aid_application),
+              warning: true,
+            ) %>
+    <% end %>
+
     <%= govuk_link_to(t(".back_home"), forward_path, class: "no-print") %>
   </div>
 
