@@ -34,7 +34,7 @@ gem "devise" # User authentication
 gem "omniauth", ">= 2.0.0"
 gem "omniauth-oauth2", ">= 1.7.1" # Provide Oauth2 strategy framework
 gem "omniauth_openid_connect"
-gem "omniauth-rails_csrf_protection", "~> 1.0"
+gem "omniauth-rails_csrf_protection", "~> 2.0"
 
 # Improve backtrace in nested error recues
 gem "nesty"
@@ -133,7 +133,7 @@ end
 
 group :test do
   gem "action_dispatch-testing-integration-capybara",
-      github: "thoughtbot/action_dispatch-testing-integration-capybara", tag: "v0.1.1",
+      github: "thoughtbot/action_dispatch-testing-integration-capybara", tag: "v0.2.0",
       require: "action_dispatch/testing/integration/capybara/rspec"
   gem "axe-core-cucumber"
   gem "capybara", ">= 3.36.0", "< 4.0"
