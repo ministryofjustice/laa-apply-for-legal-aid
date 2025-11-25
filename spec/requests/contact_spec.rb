@@ -12,7 +12,7 @@ RSpec.describe "contact page" do
 
       expect(page)
         .to have_content("Telephone: 0203 8144 350")
-        .and have_link("apply-for-civil-legal-aid@justice.gov.uk", href: "mailto:apply-for-civil-legal-aid@justice.gov.uk")
+        .and have_link("Online Support (opens in new tab)", href: "https://legalaidlearning.justice.gov.uk/online-support-2/")
     end
   end
 end

@@ -1,19 +1,9 @@
 <%= page_template page_title: t(".h1-heading") do %>
-  <p class="govuk-heading-m">
-    <%= t(".case_enquiries.heading") %>
-  </p>
+  <p class="govuk-heading-m"><%= t(".case_enquiries.heading") %></p>
 
-  <p class="govuk-body">
-    <%= t(".case_enquiries.phone_number") %>
-  </p>
+  <p class="govuk-body"><%= t(".case_enquiries.phone_number") %></p>
 
-  <p class="govuk-heading-m">
-    <%= t(".technical_support.heading") %>
-  </p>
+  <p class="govuk-heading-m"><%= t(".technical_support.heading") %></p>
 
-  <p class="govuk-body">
-    <%= t(".technical_support.email_text") %>
-    <%= govuk_link_to(Rails.configuration.x.support_email_address, "mailto:#{Rails.configuration.x.support_email_address}") %>
-  </p>
-
+  <p class="govuk-body"><%= t(".technical_support.online_support_html") %></p>
 <% end %>
