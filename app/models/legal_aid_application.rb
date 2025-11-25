@@ -198,6 +198,10 @@ class LegalAidApplication < ApplicationRecord
     proceedings.any? { |proceeding| proceeding.ccms_matter_code.eql?("KPBLW") }
   end
 
+  def sca_or_plf_non_means_tested_proceedings?
+    special_children_act_proceedings? || plf_non_means_tested_proceeding?
+  end
+
   def has_sca_secure_accommodation_order_proceeding?
     proceedings.any? { |proceeding| proceeding.ccms_code.eql?("PB006") }
   end

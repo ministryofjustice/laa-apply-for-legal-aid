@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe Flow::Steps::LinkedApplications::CopyStep, type: :request do
   let(:legal_aid_application) { create(:legal_aid_application, copy_case:) }
+  let(:lead_application) { create(:legal_aid_application) }
   let(:copy_case) { true }
 
   describe "#path" do
@@ -13,8 +14,19 @@ RSpec.describe Flow::Steps::LinkedApplications::CopyStep, type: :request do
   describe "#forward" do
     subject { described_class.forward.call(legal_aid_application) }
 
+    before do
+      LinkedApplication.create!(lead_application_id: lead_application.id,
+                                associated_application_id: legal_aid_application.id)
+    end
+
     context "when the provider confirms they wish to copy the application" do
       it { is_expected.to be :client_has_partners }
+
+      context "when the lead application is non-means tested" do
+        let(:lead_application) { create(:legal_aid_application, :with_multiple_sca_proceedings) }
+
+        it { is_expected.to be :check_provider_answers }
+      end
     end
 
     context "when the provider confirms they do not wish to copy the application" do
