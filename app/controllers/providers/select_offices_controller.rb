@@ -1,10 +1,14 @@
 module Providers
   class SelectOfficesController < ProviderBaseController
+    include AddressHelper
+
     legal_aid_application_not_required!
+
+    OfficeAddressSelectionItem = Struct.new(:code, :address)
 
     def show
       initialize_page_history
-      addresses
+      @addresses = addresses
       @form = Providers::OfficeForm.new(model: current_provider)
     end
 
@@ -42,15 +46,6 @@ module Providers
       end
     end
 
-    def addresses
-      addresses = []
-      current_provider.silas_office_codes.each do |office_code|
-        address = PDA::OfficeAddressRetriever.call(office_code)
-        addresses << address unless address.nil?
-      end
-      addresses
-    end
-
     def initialize_page_history
       session[:page_history_id] = SecureRandom.uuid
     end
@@ -65,6 +60,18 @@ module Providers
 
     def provider
       @provider ||= form_params[:model]
+    end
+
+    def addresses
+      addresses ||= begin
+        addresses = []
+        current_provider.silas_office_codes.each do |office_code|
+          address = PDA::OfficeAddressRetriever.call(office_code)
+          # TODO: we need to decide what to do if PDA returns no address for the office/what should be displayed to user?
+          addresses << OfficeAddressSelectionItem.new(code: address.code, address: office_address_one_line(address))
+        end
+        addresses
+      end
     end
   end
 end
