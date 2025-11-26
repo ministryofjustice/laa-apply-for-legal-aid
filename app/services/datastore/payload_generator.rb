@@ -1,9 +1,10 @@
 module Datastore
   class PayloadGenerator
-    attr_reader :legal_aid_application
+    attr_reader :legal_aid_application, :transformer
 
-    def initialize(legal_aid_application)
+    def initialize(legal_aid_application, transformer: Transformer)
       @legal_aid_application = legal_aid_application
+      @transformer = transformer
     end
 
     def self.call(legal_aid_application)
@@ -41,10 +42,6 @@ module Datastore
 
     def legal_aid_application_hash
       @legal_aid_application_hash ||= LegalAidApplicationJsonBuilder.build(legal_aid_application).as_json
-    end
-
-    def transformer
-      Transformer
     end
   end
 end
