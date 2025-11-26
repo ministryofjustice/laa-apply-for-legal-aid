@@ -2,15 +2,13 @@ class HostEnv
   def self.environment
     return Rails.env.to_sym unless Rails.env.production?
 
-    case root_url
-    when /staging\.apply-for-legal-aid\.service\.justice\.gov\.uk/
-      :staging
-    when /uat\.cloud-platform\.service\.justice\.gov\.uk/
-      :uat
-    when /apply-for-legal-aid\.service\.justice\.gov\.uk/
-      :production
-    else raise "Unable to determine HostEnv from #{root_url}"
-    end
+    raise "Unable to determine HostEnv from HOST_ENV envar" if host_env.nil?
+
+    host_env
+  end
+
+  def self.host_env
+    ENV.fetch("HOST_ENV", nil)&.to_sym
   end
 
   def self.development?
@@ -39,9 +37,5 @@ class HostEnv
 
   def self.staging_or_production?
     environment.in?(%i[staging production])
-  end
-
-  def self.root_url
-    Rails.application.routes.url_helpers.root_url
   end
 end
