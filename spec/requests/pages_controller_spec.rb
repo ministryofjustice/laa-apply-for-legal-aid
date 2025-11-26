@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe PagesController, :clamav do
+RSpec.describe PagesController, :clamav, tz: "London" do
   context "when not in maintenance mode" do
     context "when provider signs in" do
       before do
