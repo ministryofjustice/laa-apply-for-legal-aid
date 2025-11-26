@@ -85,6 +85,7 @@ Rails.application.routes.draw do
   get "auth/failure", to: "auth#failure"
   get "providers/auth/failure", to: "providers/auth#failure"
 
+  get "downtime_help", to: "downtime_help#guidance"
   resource :contact, only: [:show]
   resources :accessibility_statement, only: [:index]
   resources :privacy_policy, only: [:index]
