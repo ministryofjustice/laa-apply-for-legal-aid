@@ -60,6 +60,9 @@ class LegalAidApplicationJsonBuilder < BaseJsonBuilder
       dwp_result_confirmed:,
       linked_application_completed:,
 
+      # derived attributes
+      auto_grant: auto_grant?,
+
       # associations
       office: OfficeJsonBuilder.build(office).as_json,
       provider: ProviderJsonBuilder.build(provider).as_json,
@@ -121,5 +124,11 @@ class LegalAidApplicationJsonBuilder < BaseJsonBuilder
           }
         end,
     }
+  end
+
+private
+
+  def auto_grant?
+    auto_grant_special_children_act?
   end
 end

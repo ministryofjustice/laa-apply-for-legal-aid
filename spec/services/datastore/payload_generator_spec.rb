@@ -121,6 +121,36 @@ RSpec.describe Datastore::PayloadGenerator do
       end
     end
 
+    context "with a non auto-grantable special children act application" do
+      let(:legal_aid_application) do
+        create(
+          :legal_aid_application,
+          :at_assessment_submitted,
+          :with_non_auto_grantable_sca_proceeding,
+        )
+      end
+
+      it "sets auto_grant to false in the payload" do
+        payload = call
+        expect(payload.dig(:applicationContent, :autoGrant)).to be false
+      end
+    end
+
+    context "with an auto grantable special children act application" do
+      let(:legal_aid_application) do
+        create(
+          :legal_aid_application,
+          :at_assessment_submitted,
+          :with_multiple_sca_proceedings,
+        )
+      end
+
+      it "sets auto_grant to true in the payload" do
+        payload = call
+        expect(payload.dig(:applicationContent, :autoGrant)).to be true
+      end
+    end
+
     describe "This is not a test" do
       it "generate a full json payload for PoC purposes" do
         skip "Skipped payload generation - run \"GENERATE=true rspec <test-path>\" to generate a payload" unless ENV["GENERATE"]
