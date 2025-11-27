@@ -94,8 +94,17 @@ RSpec.describe PagesController, :clamav do
     let(:citizen_access_request) { get citizens_legal_aid_application_path(token) }
     let(:landing_page_request) { get root_path }
 
+    before do
+      allow(Rails.configuration.x.business_hours).to receive_messages(start: "7:00", end: "21:30")
+    end
+
     around do |example|
       travel_to(new_time) { example.run }
+    end
+
+    after do
+      allow(Rails.configuration.x.business_hours).to receive(:start).and_call_original
+      allow(Rails.configuration.x.business_hours).to receive(:end).and_call_original
     end
 
     context "when it's British Summer Time" do
@@ -163,7 +172,7 @@ RSpec.describe PagesController, :clamav do
           expect(response).to redirect_to(citizens_legal_aid_applications_path)
         end
 
-        it "blocks provider traffic", skip: "broken on CI" do
+        it "blocks provider traffic" do
           landing_page_request
           expect(response).to render_template("pages/service_out_of_hours")
           expect(response.body).not_to include("Sign in") # sign in link removed
@@ -187,7 +196,7 @@ RSpec.describe PagesController, :clamav do
     end
 
     context "when it's GMT" do
-      context "when it's 0630 on a Monday", skip: "broken on CI" do
+      context "when it's 0630 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 11, 3, 6, 30, 0) }
 
         it "blocks provider traffic" do
