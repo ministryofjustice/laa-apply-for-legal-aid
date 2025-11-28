@@ -5,9 +5,10 @@
 
     <%= form.govuk_collection_radio_buttons(
           :selected_office_code,
-          @form.model.silas_office_codes,
-          :to_s,
-          :to_s,
+          @addresses,
+          :code,
+          :address,
+          :code,
           legend: {
             text: content_for(:page_title),
             tag: "h1",
