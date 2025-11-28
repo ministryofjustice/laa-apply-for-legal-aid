@@ -171,10 +171,20 @@ RSpec.describe HostEnv do
       let(:rails_env) { :production }
 
       describe ".environment" do
-        it "raises" do
-          expect {
-            described_class.environment
-          }.to raise_error RuntimeError, "Unable to determine HostEnv from HOST_ENV envar"
+        it "returns nil" do
+          expect(described_class.environment).to be_nil
+        end
+
+        context "with interrogations" do
+          it "returns the correct values" do
+            expect(described_class.development?).to be false
+            expect(described_class.test?).to be false
+            expect(described_class.uat?).to be false
+            expect(described_class.staging?).to be false
+            expect(described_class.production?).to be false
+            expect(described_class.not_production?).to be true
+            expect(described_class.staging_or_production?).to be false
+          end
         end
       end
     end

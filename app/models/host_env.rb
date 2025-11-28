@@ -2,8 +2,6 @@ class HostEnv
   def self.environment
     return Rails.env.to_sym unless Rails.env.production?
 
-    raise "Unable to determine HostEnv from HOST_ENV envar" if host_env.nil?
-
     host_env
   end
 

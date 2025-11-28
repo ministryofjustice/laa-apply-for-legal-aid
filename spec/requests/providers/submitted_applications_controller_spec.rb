@@ -9,6 +9,11 @@ RSpec.describe Providers::SubmittedApplicationsController do
   let(:print_buttons) { html.xpath('//button[contains(text(), "Print application")]') }
   let(:smtl) { create(:legal_framework_merits_task_list, :da001, legal_aid_application:) }
   let!(:provider) { create(:provider, firm:) }
+
+  let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
+  let(:linked_application_count) { 0 }
+  let(:skip_get) { false }
+
   let!(:legal_aid_application) do
     create(:legal_aid_application,
            :with_everything,
@@ -19,8 +24,6 @@ RSpec.describe Providers::SubmittedApplicationsController do
            set_lead_proceeding: :da001,
            provider:)
   end
-  let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
-  let(:linked_application_count) { 0 }
 
   before do
     create(:chances_of_success, proceeding:)
@@ -36,7 +39,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
     before do
       legal_aid_application.reload
       login
-      get_request
+      get_request unless skip_get
     end
 
     it "renders successfully" do
@@ -58,8 +61,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
     end
 
     it "includes the name of the firm" do
-      get_request
-      expect(unescaped_response_body).to include(firm.name)
+      expect(page).to have_content(firm.name)
     end
 
     context "when the provider is not authenticated" do
@@ -76,21 +78,93 @@ RSpec.describe Providers::SubmittedApplicationsController do
       end
     end
 
+    describe "Submit to datastore button" do
+      let(:skip_get) { true }
+
+      def stub_host_env_as(env)
+        allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new("production"))
+        allow(HostEnv).to receive(:host_env).and_return(env)
+        Rails.application.reload_routes!
+      end
+
+      def unstub_host_env
+        allow(Rails).to receive(:env).and_call_original
+        allow(HostEnv).to receive(:host_env).and_call_original
+        Rails.application.reload_routes!
+      end
+
+      # IMPORTANT: not doing this will break other tests
+      after do
+        unstub_host_env
+      end
+
+      context "when in local development" do
+        before do
+          allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new("development"))
+          Rails.application.reload_routes!
+          get_request
+        end
+
+        it "displays the button" do
+          expect(page).to have_link("Submit to datastore (ensure no PII present)")
+        end
+      end
+
+      context "when in uat host environment" do
+        before do
+          stub_host_env_as(:uat)
+          get_request
+        end
+
+        it "does display the button" do
+          expect(page).to have_content("Submit to datastore")
+        end
+      end
+
+      context "when in staging host environment" do
+        before do
+          stub_host_env_as(:staging)
+          get_request
+        end
+
+        it "does display the button" do
+          expect(page).to have_content("Submit to datastore")
+        end
+      end
+
+      context "when in production host environment" do
+        before do
+          stub_host_env_as(:production)
+          get_request
+        end
+
+        it "does NOT display the button" do
+          expect(page).to have_no_content("Submit to datastore")
+        end
+      end
+    end
+
     describe "linked application header" do
       context "when this is the lead application for no cases" do
-        it { expect(response.body).to have_no_css("govuk-notification-banner") }
+        it "does not display a banner" do
+          expect(page).to have_no_css("govuk-notification-banner")
+        end
       end
 
       context "when this is the lead application for one case" do
         let(:linked_application_count) { 1 }
 
-        it { expect(response.body).to include("This application has been linked with another one since you submitted it.") }
+        it "displays notification banner warning the user" do
+          expect(page).to have_content("This application has been linked with another one since you submitted it.")
+        end
       end
 
       context "when this is the lead application for many cases" do
         let(:linked_application_count) { 3 }
 
-        it { expect(response.body).to include("This application has been linked with 3 other ones since you submitted it.") }
+        it "displays notification banner warning the user" do
+          expect(page).to have_content("This application has been linked with 3 other ones since you submitted it.")
+        end
       end
     end
   end

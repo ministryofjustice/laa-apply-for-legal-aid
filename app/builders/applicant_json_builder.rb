@@ -1,0 +1,36 @@
+class ApplicantJsonBuilder < BaseJsonBuilder
+  def as_json
+    {
+      id:,
+      first_name:,
+      date_of_birth:,
+      created_at:,
+      updated_at:,
+      last_name:,
+      email:,
+      national_insurance_number:,
+      employed:,
+      self_employed:,
+      armed_forces:,
+      has_national_insurance_number:,
+      age_for_means_test_purposes:,
+      has_partner:,
+      receives_state_benefits:,
+      partner_has_contrary_interest:,
+      student_finance:,
+      student_finance_amount:,
+      extra_employment_information:,
+      extra_employment_information_details:,
+      last_name_at_birth:,
+      changed_last_name:,
+      same_correspondence_and_home_address:,
+      no_fixed_residence:,
+      correspondence_address_choice:,
+      shared_benefit_with_partner:,
+      applied_previously:,
+      previous_reference:,
+      relationship_to_children:,
+      addresses: addresses.map { |a| AddressJsonBuilder.build(a).as_json },
+    }
+  end
+end
