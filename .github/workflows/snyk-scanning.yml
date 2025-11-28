@@ -10,7 +10,7 @@ jobs:
     name: Scan code, dependencies and container using snyk
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd #--v4.2.2
+    - uses: actions/checkout@c2d88d3ecc89a9ef08eebf45d9637801dcee7eb5 #--v4.2.2
 
     - name: Build docker image
       run: |
@@ -77,19 +77,19 @@ jobs:
         sed -i 's/"security-severity": "undefined"/"security-severity": "0"/g' snyk-open.sarif
 
     - name: Upload static code analysis result to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@ce729e4d353d580e6cacd6a8cf2921b72e5e310a #--v4.30.7 @7/10/2025
+      uses: github/codeql-action/upload-sarif@c178e03ec888882ce814ed2b300db864f3580f88 #--v4.30.7 @7/10/2025
       with:
         sarif_file: snyk-code.sarif
         category: snyk-code
 
     - name: Upload open source dependencies test result to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@ce729e4d353d580e6cacd6a8cf2921b72e5e310a #--v4.30.7 @7/10/2025
+      uses: github/codeql-action/upload-sarif@c178e03ec888882ce814ed2b300db864f3580f88 #--v4.30.7 @7/10/2025
       with:
         sarif_file: snyk-open.sarif
         category: snyk-open
 
     - name: Upload container test result to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@ce729e4d353d580e6cacd6a8cf2921b72e5e310a #--v4.30.7 @7/10/2025
+      uses: github/codeql-action/upload-sarif@c178e03ec888882ce814ed2b300db864f3580f88 #--v4.30.7 @7/10/2025
       with:
         sarif_file: snyk-container.sarif
         category: snyk-container
