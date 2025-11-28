@@ -10,6 +10,7 @@ RSpec.describe Datastore::PayloadGenerator do
       :with_proceedings,
       :with_dependant,
       :with_bank_transactions,
+      :with_merits_submitted_at,
       :at_assessment_submitted,
       office: build(:office, :with_valid_schedule),
       benefit_check_result: build(:benefit_check_result, :negative),
@@ -148,6 +149,14 @@ RSpec.describe Datastore::PayloadGenerator do
       it "sets auto_grant to true in the payload" do
         payload = call
         expect(payload.dig(:applicationContent, :autoGrant)).to be true
+      end
+    end
+
+    context "with an unsubmitted application" do
+      let(:legal_aid_application) { create(:legal_aid_application) }
+
+      it "has an in progress status" do
+        expect(call).to include(status: "IN_PROGRESS")
       end
     end
 

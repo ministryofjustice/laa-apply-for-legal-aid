@@ -31,9 +31,8 @@ module Datastore
 
     # Valid values at time of writing: "IN_PROGRESS", "SUBMITTED"
     # NOTE: sending an invalid value results in a 400 from datastore
-    # TODO: could determine via state_machine?
     def status
-      "SUBMITTED"
+      Constants.status_value(legal_aid_application.summary_state)
     end
 
     def application_content
