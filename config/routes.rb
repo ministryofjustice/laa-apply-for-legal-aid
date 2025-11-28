@@ -456,8 +456,8 @@ Rails.application.routes.draw do
     end
   end
 
-  # development only routes for aiding development/visualisation
-  if Rails.env.development?
+  # routes for aiding development/visualisation
+  if Rails.env.development? || HostEnv.uat? || HostEnv.staging?
     get "test/datastore_payloads/:legal_aid_application_id/application_as_json", to: "test/datastore_payloads#application_as_json", as: "test_datastore_payloads_application_as_json", defaults: { format: :json }
     get "test/datastore_payloads/:legal_aid_application_id/generated_json", to: "test/datastore_payloads#generated_json", as: "test_datastore_payloads_generated_json", defaults: { format: :json }
     get "test/datastore_payloads/:legal_aid_application_id/submit", to: "test/datastore_payloads#submit", as: "test_datastore_payloads_submit"

@@ -6,6 +6,7 @@ module Test
   #
 
   class DatastorePayloadsController < ApplicationController
+    before_action :authenticate_provider!
     before_action :legal_aid_application
 
     def application_as_json
@@ -26,6 +27,9 @@ module Test
       body = Datastore::Submission.call(legal_aid_application)
 
       flash[:notice] = "Submitted application \"#{legal_aid_application.application_ref}\" to datastore. Response body: #{body.presence || 'nil'}"
+    rescue Datastore::Submission::ApiError => e
+      flash[:error] = e.message
+    ensure
       redirect_back(fallback_location: authenticated_root_path)
     end
 

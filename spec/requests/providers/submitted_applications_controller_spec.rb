@@ -81,6 +81,23 @@ RSpec.describe Providers::SubmittedApplicationsController do
     describe "Submit to datastore button" do
       let(:skip_get) { true }
 
+      def stub_host_env_as(env)
+        allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new("production"))
+        allow(HostEnv).to receive(:host_env).and_return(env)
+        Rails.application.reload_routes!
+      end
+
+      def unstub_host_env
+        allow(Rails).to receive(:env).and_call_original
+        allow(HostEnv).to receive(:host_env).and_call_original
+        Rails.application.reload_routes!
+      end
+
+      # IMPORTANT: not doing this will break other tests
+      after do
+        unstub_host_env
+      end
+
       context "when in local development" do
         before do
           allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new("development"))
@@ -88,20 +105,36 @@ RSpec.describe Providers::SubmittedApplicationsController do
           get_request
         end
 
-        after do
-          allow(Rails).to receive(:env).and_call_original # unstub
-          Rails.application.reload_routes!
-        end
-
         it "displays the button" do
           expect(page).to have_link("Submit to datastore (ensure no PII present)")
         end
       end
 
-      context "when in production environment" do
+      context "when in uat host environment" do
         before do
-          allow(Rails).to receive(:env).and_return(ActiveSupport::StringInquirer.new("production"))
-          allow(HostEnv).to receive_messages(development?: false, staging?: false, uat?: false)
+          stub_host_env_as(:uat)
+          get_request
+        end
+
+        it "does display the button" do
+          expect(page).to have_content("Submit to datastore")
+        end
+      end
+
+      context "when in staging host environment" do
+        before do
+          stub_host_env_as(:staging)
+          get_request
+        end
+
+        it "does display the button" do
+          expect(page).to have_content("Submit to datastore")
+        end
+      end
+
+      context "when in production host environment" do
+        before do
+          stub_host_env_as(:production)
           get_request
         end
 
