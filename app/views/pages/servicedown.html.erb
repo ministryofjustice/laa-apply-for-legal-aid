@@ -1,5 +1,5 @@
 <%= page_template page_title: t(".title"), back_link: :none do %>
-    <p class="govuk-body">
-      <%= t(".warning_html", sso_page: Rails.configuration.x.laa_landing_page_target_url) %>
-    </p>
+  <% t(".warning_html").each do |line| %>
+    <p class="govuk-body"><%= line %></p>
+  <% end %>
 <% end %>
