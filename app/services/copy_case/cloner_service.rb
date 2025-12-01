@@ -74,6 +74,7 @@ module CopyCase
         statement_of_case
         undertaking
         urgency
+        appeal
       ]
 
       merits.each do |merit|
