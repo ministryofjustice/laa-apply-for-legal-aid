@@ -111,6 +111,7 @@ RSpec.describe CopyCase::ClonerService do
       create(:matter_opposition, legal_aid_application: source)
       create(:undertaking, :with_data, legal_aid_application: source)
       create(:urgency, legal_aid_application: source)
+      create(:appeal, legal_aid_application: source)
 
       expect { call }
         .to change { target.reload.allegation }.from(nil)
@@ -124,6 +125,7 @@ RSpec.describe CopyCase::ClonerService do
         .and change { target.reload.statement_of_case }.from(nil)
         .and change { target.reload.undertaking }.from(nil)
         .and change { target.reload.urgency }.from(nil)
+        .and change { target.reload.appeal }.from(nil)
     end
 
     it "does not change source opponents" do

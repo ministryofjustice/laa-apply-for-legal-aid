@@ -7,11 +7,11 @@
       end
       card.with_summary_list(actions: false) do |summary_list|
         summary_list.with_row(html_attributes: { id: "app-check-your-answers__nature_of_urgency" }) do |row|
-          row.with_key(text: t(".nature_of_urgency"), classes: "govuk-!-width-one-third")
+          row.with_key(text: t("shared.check_answers.merits.urgency.nature_of_urgency"), classes: "govuk-!-width-one-third")
           row.with_value(text: urgency.nature_of_urgency)
         end
         summary_list.with_row(html_attributes: { id: "app-check-your-answers__hearing_date_set" }) do |row|
-          row.with_key(text: t(".hearing_date_set"))
+          row.with_key(text: t("shared.check_answers.merits.urgency.hearing_date_set"))
           row.with_value { sanitize("#{yes_no(urgency.hearing_date_set)}<br>#{urgency.hearing_date}#{urgency.additional_information}") }
         end
       end
