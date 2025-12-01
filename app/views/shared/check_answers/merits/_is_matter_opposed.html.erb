@@ -7,7 +7,7 @@
       end
       card.with_summary_list(actions: false) do |summary_list|
         summary_list.with_row(html_attributes: { id: "app-check-your-answers__matter_is_opposed" }) do |row|
-          row.with_key(text: t(".description"), classes: "govuk-!-width-one-third")
+          row.with_key(text: t("shared.check_answers.merits.is_matter_opposed.description"), classes: "govuk-!-width-one-third")
           row.with_value(text: yes_no(@legal_aid_application.matter_opposition.matter_opposed?))
         end
       end
