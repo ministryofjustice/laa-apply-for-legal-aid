@@ -68,7 +68,8 @@ module Providers
         current_provider.silas_office_codes.each do |office_code|
           address = PDA::OfficeAddressRetriever.call(office_code)
           # TODO: we need to decide what to do if PDA returns no address for the office/what should be displayed to user?
-          addresses << OfficeAddressSelectionItem.new(code: address.code, address: office_address_one_line(address))
+          # For now, just display "Address unknown"
+          addresses << OfficeAddressSelectionItem.new(code: address.code, address: office_address_one_line(address).presence || "Address unknown")
         end
         addresses
       end
