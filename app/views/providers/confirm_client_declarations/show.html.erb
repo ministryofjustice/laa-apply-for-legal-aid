@@ -8,7 +8,9 @@
   <%= page_template page_title: t(".h1-heading"), form: do %>
 
     <% provider_firm_name = @legal_aid_application.provider.firm.name %>
-    <% if @legal_aid_application.applicant&.under_18? %>
+    <% if @legal_aid_application.special_children_act_proceedings? %>
+      <% i18n_prefix = @legal_aid_application.applicant&.under_18? ? "sca_under_18" : "sca" %>
+    <% elsif @legal_aid_application.applicant&.under_18? %>
       <% i18n_prefix = "non_means_tested" %>
     <% elsif @legal_aid_application&.applicant&.has_partner_with_no_contrary_interest? %>
       <% i18n_prefix = "means_tested" %>
@@ -32,13 +34,15 @@
       <%= govuk_list t(".means_tested_with_partner.partner_list_html", provider_firm_name:), type: :bullet %>
     <% end %>
 
-    <%= govuk_warning_text do %>
-      <%= t(".#{i18n_prefix}.sign_app_text", applicant_name: @legal_aid_application.applicant_full_name) %>
-      <ul class="govuk-list--bullet">
-        <% t(".warning").each do |bullet| %>
-          <li><%= bullet %></li>
-        <% end %>
-      </ul>
+    <% unless @legal_aid_application.special_children_act_proceedings? %>
+      <%= govuk_warning_text do %>
+        <%= t(".#{i18n_prefix}.sign_app_text", applicant_name: @legal_aid_application.applicant_full_name) %>
+        <ul class="govuk-list--bullet">
+          <% t(".warning").each do |bullet| %>
+            <li><%= bullet %></li>
+          <% end %>
+        </ul>
+      <% end %>
     <% end %>
 
     <%= form.govuk_check_boxes_fieldset :client_declaration_confirmed, legend: nil do %>

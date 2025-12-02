@@ -291,6 +291,21 @@ en:
     confirm_client_declarations:
       show:
         h1-heading: Confirm the following
+        sca_under_18:
+          text: "You agree for %{applicant_name} that:"
+          list_html:
+            - their date of birth on the application is correct based on the information you have
+            - they or their guardian have read the <a href="/privacy_policy">LAA privacy policy</a>
+            - they've instructed %{provider_firm_name} to represent them
+            - the information they've given is complete and correct
+          confirmation_checkbox: I confirm the above is correct
+        sca:
+          text: "You agree for %{applicant_name} that:"
+          list_html:
+            - they've instructed %{provider_firm_name} to represent them
+            - they've read the <a href="/privacy_policy">LAA privacy policy</a>
+            - the information they've given is complete and correct
+          confirmation_checkbox: I confirm the above is correct
         means_tested:
           text: "%{applicant_name} agrees that:"
           list_html:

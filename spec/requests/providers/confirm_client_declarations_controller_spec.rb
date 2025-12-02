@@ -21,6 +21,31 @@ RSpec.describe Providers::ConfirmClientDeclarationsController do
         expect(response).to have_http_status(:ok)
         expect(page).to have_content("Confirm the following")
       end
+
+      context "when the application is an sca application" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_sca_proceedings, applicant:) }
+        let(:applicant) { create(:applicant, age_for_means_test_purposes:) }
+        let(:age_for_means_test_purposes) { 18 }
+
+        it "does not show the govuk_warning_text" do
+          expect(page).to have_no_css(".govuk-warning-text")
+        end
+
+        context "when applicant is over 18 do" do
+          it "displays the correct bullets" do
+            expect(page).to have_no_content("they'll report any changes to their financial situation immediately")
+          end
+        end
+
+        context "when applicant is under 18 do" do
+          let(:age_for_means_test_purposes) { 17 }
+
+          it "displays the correct bullets" do
+            expect(page).to have_content("their date of birth on the application is correct based on the information you have")
+            expect(page).to have_no_content("they'll report any changes to their financial situation immediately")
+          end
+        end
+      end
     end
 
     context "when the provider is not authenticated" do
