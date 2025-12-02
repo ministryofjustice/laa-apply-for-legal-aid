@@ -82,6 +82,7 @@ module ApplicationHelper
       }.freeze
     else
       {
+        t("layouts.application.footer.downtime_help") => downtime_help_path,
         t("layouts.application.footer.contact") => contact_path,
         t("layouts.application.footer.feedback") => new_feedback_path,
         t("layouts.application.footer.research_panel") => ENV.fetch("RESEARCH_PANEL_FORM_LINK", root_path),
