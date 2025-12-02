@@ -128,7 +128,7 @@ trueLayer:
   enableMock: "false"
 
 worker:
-  replicaCount: 2
+  replicaCount: 4
 
 clamav:
   replicaCount: 2
