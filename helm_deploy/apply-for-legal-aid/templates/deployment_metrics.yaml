@@ -46,11 +46,11 @@ spec:
             periodSeconds: 60
           resources:
             limits:
-              cpu: 50m
-              memory: 128Mi
+              cpu: 500m
+              memory: 1Gi
             requests:
               cpu: 10m
-              memory: 64Mi
+              memory: 512Mi
           securityContext:
             runAsNonRoot: true
             allowPrivilegeEscalation: false
