@@ -9,6 +9,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
+  suspend: true
   schedule: '45 17 * * 1' # Every monday at 17:45
   timeZone: "Europe/London"
   concurrencyPolicy: Forbid
