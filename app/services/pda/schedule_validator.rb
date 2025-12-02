@@ -25,7 +25,7 @@ module PDA
       validate_schedule_status
       validate_not_cancelled
 
-      capture_errors if errors
+      capture_errors if errors.any?
       errors.empty?
     end
 
