@@ -88,7 +88,7 @@ module Providers
               create_request
               expect(response.body).to include("govuk-input--error")
               expect(response.body).to include("govuk-form-group--error")
-              expect(response.body).to have_content("Search for and select a unique organisation")
+              expect(response.body).to have_content("You cannot select the same organisation twice. Choose a different one.")
             end
           end
 

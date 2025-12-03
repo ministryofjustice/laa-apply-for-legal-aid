@@ -8,7 +8,11 @@ module Providers
       def create
         return continue_or_draft if draft_selected?
 
-        if add_organisation
+        if duplicate_organisation?
+          legal_aid_application.errors.add(:"organisation-search-input", t(".unique_organisation"))
+          organisations
+          render :index
+        elsif add_organisation
           go_forward
         else
           legal_aid_application.errors.add(:"organisation-search-input", t(".search_and_select"))
@@ -18,6 +22,12 @@ module Providers
       end
 
     private
+
+      def duplicate_organisation?
+        legal_aid_application.opponents.where(ccms_opponent_id: form_params).any?
+      rescue ActionController::ParameterMissing
+        false
+      end
 
       def add_organisation
         organisation_to_add = organisations.find { |org| org.ccms_opponent_id == form_params }
