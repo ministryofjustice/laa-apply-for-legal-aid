@@ -742,6 +742,23 @@ class LegalAidApplication < ApplicationRecord
     mandatory_capital_disregards.select(&:incomplete?).min_by(&:name)
   end
 
+  def all_linked_applications
+    return [] unless lead_application
+
+    LinkedApplication
+      .where(
+        associated_application_id: lead_application.id,
+        link_type_code: lead_linked_application&.link_type_code,
+      )
+      .or(
+        LinkedApplication
+          .where(
+            lead_application_id: lead_application.id,
+            link_type_code: lead_linked_application&.link_type_code,
+          ),
+      )
+  end
+
 private
 
   def benefit_check_response

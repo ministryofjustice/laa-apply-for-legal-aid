@@ -486,6 +486,12 @@ FactoryBot.define do
       end
     end
 
+    trait :with_non_auto_grantable_sca_proceeding do
+      after(:create) do |application|
+        application.proceedings << create(:proceeding, :pb007)
+      end
+    end
+
     trait :with_public_law_family_prohibited_steps_order do
       after(:create) do |application|
         application.proceedings << create(:proceeding, :pbm16)

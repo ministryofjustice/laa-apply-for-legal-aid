@@ -457,6 +457,13 @@ Rails.application.routes.draw do
     end
   end
 
+  # routes for aiding development/visualisation
+  if Rails.env.development? || HostEnv.uat? || HostEnv.staging?
+    get "test/datastore_payloads/:legal_aid_application_id/application_as_json", to: "test/datastore_payloads#application_as_json", as: "test_datastore_payloads_application_as_json", defaults: { format: :json }
+    get "test/datastore_payloads/:legal_aid_application_id/generated_json", to: "test/datastore_payloads#generated_json", as: "test_datastore_payloads_generated_json", defaults: { format: :json }
+    get "test/datastore_payloads/:legal_aid_application_id/submit", to: "test/datastore_payloads#submit", as: "test_datastore_payloads_submit"
+  end
+
   get "/submission_feedback/:application_ref", to: "feedback#submission"
   get "test/trapped_error", to: "test/generate_error#trapped_error"
   get "test/untrapped_error", to: "test/generate_error#untrapped_error"
