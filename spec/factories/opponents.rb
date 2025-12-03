@@ -25,6 +25,7 @@ FactoryBot.define do
       opposable factory: :organisation
 
       after(:build) do |opponent, evaluator|
+        opponent.ccms_opponent_id { evaluator.ccms_opponent_id } if evaluator.ccms_opponent_id
         opponent.opposable.name = evaluator.organisation_name if evaluator.organisation_name
         opponent.opposable.ccms_type_code = evaluator.organisation_ccms_type_code if evaluator.organisation_ccms_type_code
         opponent.opposable.ccms_type_text = evaluator.organisation_ccms_type_text if evaluator.organisation_ccms_type_text

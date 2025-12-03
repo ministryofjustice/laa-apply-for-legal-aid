@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/organisation_types/all
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 03 Dec 2025 07:59:07 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '781'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"6f0aecf3c20f8f5e70a8bda15e4b2f63"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 81af1d6323f13b8b993413f3b18bc25f
+      X-Runtime:
+      - '0.064807'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '[{"ccms_code":"CHAR","description":"Charity"},{"ccms_code":"CO","description":"Court"},{"ccms_code":"GOVT","description":"Government
+        Department"},{"ccms_code":"HMO","description":"HM Prison or Young Offender
+        Institute"},{"ccms_code":"HOA","description":"Housing Association"},{"ccms_code":"IRC","description":"Immigration
+        Removal Centre"},{"ccms_code":"LTD","description":"Limited Company"},{"ccms_code":"LLP","description":"Limited
+        Liability Partnership"},{"ccms_code":"LA","description":"Local Authority"},{"ccms_code":"NHS","description":"National
+        Health Service"},{"ccms_code":"PART","description":"Partnership"},{"ccms_code":"POLICE","description":"Police
+        Authority"},{"ccms_code":"PLC","description":"Public Limited Company"},{"ccms_code":"SOLE","description":"Sole
+        Trader"}]'
+  recorded_at: Wed, 03 Dec 2025 07:59:07 GMT
+recorded_with: VCR 6.3.1
