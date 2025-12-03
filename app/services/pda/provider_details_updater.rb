@@ -112,7 +112,7 @@ module PDA
     end
 
     def office_address_result
-      @office_address_result = PDA::OfficeAddressRetriever.call(@office_code)
+      @office_address_result = PDA::OfficeAddressRetriever.call([@office_code]).detect { |office| office.code == @office_code }
     end
 
     def ccms_contact_id
