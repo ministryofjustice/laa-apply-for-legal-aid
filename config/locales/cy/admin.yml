@@ -50,6 +50,8 @@ cy:
         state: State
         sidekiq:
           in_retry: on retry queue
+          scheduled: Scheduled
+          dead: Dead
           false: Expired
           running: Running
       show:
