@@ -50,7 +50,9 @@ en:
         state: State
         sidekiq:
           in_retry: on retry queue
-          false: Expired
+          scheduled: Scheduled
+          dead: Dead
+          false: Undetermined
           running: Running
       show:
         submission: CCMS submission

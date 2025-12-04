@@ -197,6 +197,18 @@ module CCMS
         end
       end
 
+      context "when the submission.id is in the dead set" do
+        let(:sidekiq_entry) { instance_double Sidekiq::SortedEntry, args: [submission.id, "applicant_submitted"] }
+
+        before do
+          allow(Sidekiq::DeadSet).to receive(:new).and_return([sidekiq_entry])
+        end
+
+        it "returns :dead" do
+          expect(sidekiq_running?).to eq :dead
+        end
+      end
+
       context "when the submission.id is not in any queue" do
         it "returns :false" do
           expect(sidekiq_running?).to be false
