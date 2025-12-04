@@ -58,6 +58,7 @@ en:
         updated_at: Updated at
         status: Status
         applicant_poll_count: Applicant poll count
+        sidekiq_argument: Sidekiq argument
         case_poll_count: Case poll count
         actions: Actions
         restart: Restart at current step

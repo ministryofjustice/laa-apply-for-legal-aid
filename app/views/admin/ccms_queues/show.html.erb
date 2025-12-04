@@ -36,6 +36,10 @@
             row.with_key { t("admin.ccms_queues.show.case_poll_count") }
             row.with_value { @submission.case_poll_count.to_s }
           end
+          summary_list.with_row do |row|
+            row.with_key { t("admin.ccms_queues.show.sidekiq_argument") }
+            row.with_value { @submission.id }
+          end
         end %>
   </div>
 </div>
