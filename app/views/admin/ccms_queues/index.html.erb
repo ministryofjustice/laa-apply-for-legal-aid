@@ -18,7 +18,9 @@
               head.with_row do |row|
                 row.with_cell(text: t("admin.ccms_queues.index.references"))
                 row.with_cell(text: t("admin.ccms_queues.index.state"))
-                row.with_cell(text: t("admin.ccms_queues.index.created_at"))
+                row.with_cell(text: t("admin.ccms_queues.index.application_created_at"))
+                row.with_cell(text: t("admin.ccms_queues.index.submission_created_at"))
+                row.with_cell(text: t("admin.ccms_queues.index.submission_updated_at"))
                 row.with_cell(text: t("admin.ccms_queues.index.state"))
               end
             end
@@ -31,6 +33,8 @@
                   end
                   row.with_cell(text: submission.aasm_state)
                   row.with_cell(text: l(submission.legal_aid_application.created_at, format: :long_date_time))
+                  row.with_cell(text: l(submission.created_at, format: :long_date_time))
+                  row.with_cell(text: l(submission.updated_at, format: :long_date_time))
                   row.with_cell(text: t("admin.ccms_queues.index.sidekiq.#{submission.sidekiq_running?}"))
                 end
               end
@@ -56,7 +60,7 @@
               head.with_row do |row|
                 row.with_cell(text: t("admin.ccms_queues.index.case_reference"))
                 row.with_cell(text: t("admin.ccms_queues.index.state"))
-                row.with_cell(text: t("admin.ccms_queues.index.created_at"))
+                row.with_cell(text: t("admin.ccms_queues.index.application_created_at"))
               end
             end
 
