@@ -68,6 +68,8 @@ cy:
         submission_histories: Submission histories
         from_state: From state
         to_state: To state
+        created_at: Created at
+        updated_at: Updated at
         request: Request
         request_is_nil: Request is nil
         response: Response
