@@ -59,6 +59,7 @@ cy:
         status: Status
         applicant_poll_count: Applicant poll count
         case_poll_count: Case poll count
+        sidekiq_argument: Sidekiq argument
         actions: Actions
         restart: Restart at current step
         restart_details: This will restart the submission at the current step and attempt to complete it another 10 times
