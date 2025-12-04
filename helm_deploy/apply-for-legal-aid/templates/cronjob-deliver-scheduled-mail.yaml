@@ -10,6 +10,7 @@ metadata:
 spec:
   schedule: '11,41 8-19 * * *'
   timeZone: "Europe/London"
+  suspend: true  # This suspends the CronJob
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 0
   failedJobsHistoryLimit: 0
