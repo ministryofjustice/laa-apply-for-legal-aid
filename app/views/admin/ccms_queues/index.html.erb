@@ -3,7 +3,7 @@
       back_link: :none,
     ) %>
 
-<h2 class="govuk-heading-m"><%= t(".progress_queue.heading") %></h2>
+<h2 class="govuk-heading-m"><%= t(".progress_queue.heading", count: @in_progress.size) %></h2>
 <% if @in_progress.empty? %>
   <h3 class="govuk-heading-s"><%= t(".progress_queue.empty") %></h3>
 <% else %>
@@ -32,7 +32,7 @@
                     govuk_link_to("#{submission.case_ccms_reference}, (#{submission.legal_aid_application.application_ref})", admin_ccms_queue_path(submission.id))
                   end
                   row.with_cell(text: submission.aasm_state)
-                  row.with_cell(text: l(submission.legal_aid_application.created_at, format: :long_date_time))
+                  row.with_cell(text: l(submission.legal_aid_application.merits_submitted_at, format: :long_date_time))
                   row.with_cell(text: l(submission.created_at, format: :long_date_time))
                   row.with_cell(text: l(submission.updated_at, format: :long_date_time))
                   row.with_cell(text: t("admin.ccms_queues.index.sidekiq.#{submission.sidekiq_status}"))
@@ -46,7 +46,7 @@
 
 <% end %>
 
-<h2 class="govuk-heading-m"><%= t(".paused_submission.heading") %></h2>
+<h2 class="govuk-heading-m"><%= t(".paused_submission.heading", count: @paused.size) %></h2>
 <% if @paused.empty? %>
   <h3 class="govuk-heading-s"><%= t(".paused_submission.empty") %></h3>
 <% else %>
@@ -71,7 +71,7 @@
                     govuk_link_to(application.application_ref, admin_legal_aid_applications_submission_path(application))
                   end
                   row.with_cell(text: application.state.humanize)
-                  row.with_cell(text: l(application.created_at, format: :long_date_time))
+                  row.with_cell(text: l(application.merits_submitted_at, format: :long_date_time))
                 end
               end
             end
