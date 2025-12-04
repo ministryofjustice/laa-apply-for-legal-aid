@@ -77,6 +77,14 @@
               row.with_value { history.to_state }
             end
             summary_list.with_row do |row|
+              row.with_key { t("admin.ccms_queues.show.created_at") }
+              row.with_value { l(history.created_at, format: :long_date_time) }
+            end
+            summary_list.with_row do |row|
+              row.with_key { t("admin.ccms_queues.show.updated_at") }
+              row.with_value { l(history.updated_at, format: :long_date_time) }
+            end
+            summary_list.with_row do |row|
               row.with_key { t("generic.success") }
               row.with_value { history.success.to_s }
             end
