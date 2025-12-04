@@ -44,7 +44,9 @@ cy:
         applicant_name: Client's name
         references: CCMS & case reference
         case_reference: Case reference
-        created_at: Date started
+        application_created_at: Application created at
+        submission_created_at: Submission created at
+        submission_updated_at: Submission updated at
         state: State
         sidekiq:
           in_retry: on retry queue
