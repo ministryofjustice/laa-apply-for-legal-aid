@@ -74,6 +74,24 @@ module Providers
             }
           end
 
+          context "when the selected organisation has already been added to the current application" do
+            before do
+              create(:opponent, :for_organisation, legal_aid_application:, ccms_opponent_id: "280370")
+            end
+
+            it "renders index" do
+              create_request
+              expect(response).to have_http_status(:ok)
+            end
+
+            it "displays errors" do
+              create_request
+              expect(response.body).to include("govuk-input--error")
+              expect(response.body).to include("govuk-form-group--error")
+              expect(response.body).to have_content("You cannot select the same organisation twice. Choose a different one.")
+            end
+          end
+
           context "when LegalFramework::AddOpponentOrganisationService call returns true" do
             let(:service) { instance_double(LegalFramework::AddOpponentOrganisationService, call: true) }
 

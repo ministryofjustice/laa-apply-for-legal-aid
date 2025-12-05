@@ -626,6 +626,7 @@ en:
       opponent_existing_organisations:
         create:
           search_and_select: Search for and select an organisation
+          unique_organisation: You cannot select the same organisation twice. Choose a different one.
         index:
           clear_search: Clear search
           cannot_find_organisation: I cannot find the organisation
