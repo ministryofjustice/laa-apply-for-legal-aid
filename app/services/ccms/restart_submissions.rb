@@ -2,7 +2,7 @@ module CCMS
   class RestartSubmissions
     def initialize
       # get applications where state is submission_paused
-      @applications = LegalAidApplication.joins(:state_machine).where(state_machine_proxies: { aasm_state: "submission_paused" }).order(:created_at)
+      @applications = LegalAidApplication.joins(:state_machine).where(state_machine_proxies: { aasm_state: "submission_paused" }).order(:merits_submitted_at)
     end
 
     def self.call
