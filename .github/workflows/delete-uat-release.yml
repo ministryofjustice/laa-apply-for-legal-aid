@@ -9,7 +9,7 @@ jobs:
   delete_uat_job:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6.0.0
+      - uses: actions/checkout@v6.0.1
       - name: Delete UAT release action
         id: delete_uat
         uses: ministryofjustice/laa-civil-apply-delete-uat-release@23e404138cfb4442ec62d8a13dfccc5355231b17
