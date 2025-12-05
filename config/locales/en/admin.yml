@@ -36,10 +36,10 @@ en:
       index:
         page_title: Incomplete CCMS Submissions
         progress_queue:
-          heading: Processing queue
+          heading: Processing queue (%{count})
           empty: The sidekiq queue is empty
         paused_submission:
-          heading: Paused submissions
+          heading: Paused submissions (%{count})
           empty: There are no paused submissions
         applicant_name: Client's name
         references: CCMS & case reference
