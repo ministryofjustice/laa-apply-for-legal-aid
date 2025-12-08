@@ -128,7 +128,7 @@
             row.with_value(text: correspondence_address_text(applicant))
             row.with_action(
               text: t("generic.change"),
-              href: change_address_link(@legal_aid_application),
+              href: correspondence_address_change_link(@legal_aid_application),
               visually_hidden_text: "#{t('shared.check_answers.client_details.aria_prefix')} #{t('shared.check_answers.client_details.address')}",
             )
           end
