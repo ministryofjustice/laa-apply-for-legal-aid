@@ -11,7 +11,6 @@ RSpec.describe "admin users omniauth call back" do
     OmniAuth.config.add_mock(
       :admin_entra_id,
       info: { email: },
-      origin: target_url,
     )
 
     example.run
@@ -22,13 +21,43 @@ RSpec.describe "admin users omniauth call back" do
 
   describe "GET /auth/admin_entra_id/callback" do
     subject(:get_request) do
-      get admin_user_entra_omniauth_callback_path
+      get admin_user_entra_omniauth_callback_path, env: { "omniauth.origin" => target_url }
     end
 
-    it "redirects to admin user root" do
-      expect(get_request).to redirect_to(admin_root_path)
+    it "redirects to the target URL when it is safe" do
+      expect(get_request).to redirect_to(target_url)
       follow_redirect!
       expect(response.body).to include("Successfully authenticated from entra account.")
+    end
+
+    context "when origin is an external URL" do
+      let(:target_url) { "https://statics.teams.cdn.office.net/" }
+
+      it "successfully redirects to admin root instead of external URL" do
+        expect(get_request).to redirect_to(admin_root_path)
+        follow_redirect!
+        expect(response.body).to include("Successfully authenticated from entra account.")
+      end
+    end
+
+    context "when origin is a relative path" do
+      let(:target_url) { "/admin/ccms_queues" }
+
+      it "redirects to the relative path" do
+        expect(get_request).to redirect_to(target_url)
+        follow_redirect!
+        expect(response.body).to include("Successfully authenticated from entra account.")
+      end
+    end
+
+    context "when origin is an invalid URI" do
+      let(:target_url) { "http://invalid url with spaces" }
+
+      it "redirects to admin root instead" do
+        expect(get_request).to redirect_to(admin_root_path)
+        follow_redirect!
+        expect(response.body).to include("Successfully authenticated from entra account.")
+      end
     end
 
     context "with unknown email" do
