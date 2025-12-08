@@ -35,7 +35,7 @@
                   row.with_cell(text: l(submission.legal_aid_application.created_at, format: :long_date_time))
                   row.with_cell(text: l(submission.created_at, format: :long_date_time))
                   row.with_cell(text: l(submission.updated_at, format: :long_date_time))
-                  row.with_cell(text: t("admin.ccms_queues.index.sidekiq.#{submission.sidekiq_running?}"))
+                  row.with_cell(text: t("admin.ccms_queues.index.sidekiq.#{submission.sidekiq_status}"))
                 end
               end
             end

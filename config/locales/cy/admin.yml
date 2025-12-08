@@ -52,7 +52,7 @@ cy:
           in_retry: on retry queue
           scheduled: Scheduled
           dead: Dead
-          false: Undetermined
+          undetermined: Undetermined
           running: Running
       show:
         submission: CCMS submission

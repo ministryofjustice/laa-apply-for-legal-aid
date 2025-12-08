@@ -172,8 +172,8 @@ module CCMS
       end
     end
 
-    describe "#sidekiq_running?" do
-      subject(:sidekiq_running?) { submission.sidekiq_running? }
+    describe "#sidekiq_status" do
+      subject(:sidekiq_status) { submission.sidekiq_status }
 
       context "when the submission.id is in the retry queue" do
         let(:sidekiq_entry) { instance_double Sidekiq::SortedEntry, args: [submission.id, "applicant_submitted"] }
@@ -183,7 +183,7 @@ module CCMS
         end
 
         it "returns :in_retry" do
-          expect(sidekiq_running?).to eq :in_retry
+          expect(sidekiq_status).to eq :in_retry
         end
       end
 
@@ -193,7 +193,7 @@ module CCMS
         end
 
         it "returns :running" do
-          expect(sidekiq_running?).to eq :running
+          expect(sidekiq_status).to eq :running
         end
       end
 
@@ -205,14 +205,38 @@ module CCMS
         end
 
         it "returns :dead" do
-          expect(sidekiq_running?).to eq :dead
+          expect(sidekiq_status).to eq :dead
         end
       end
 
       context "when the submission.id is not in any queue" do
-        it "returns :false" do
-          expect(sidekiq_running?).to be false
+        it "returns :undetermined" do
+          expect(sidekiq_status).to be :undetermined
         end
+      end
+    end
+
+    describe "#sidekiq_running?" do
+      subject(:sidekiq_running?) { submission.sidekiq_running? }
+
+      context "when the submission.id is in the retry queue" do
+        let(:sidekiq_entry) { instance_double Sidekiq::SortedEntry, args: [submission.id, "applicant_submitted"] }
+
+        before do
+          allow(Sidekiq::RetrySet).to receive(:new).and_return([sidekiq_entry])
+        end
+
+        it { is_expected.to be true }
+      end
+
+      context "when the submission.id is in the dead set" do
+        let(:sidekiq_entry) { instance_double Sidekiq::SortedEntry, args: [submission.id, "applicant_submitted"] }
+
+        before do
+          allow(Sidekiq::DeadSet).to receive(:new).and_return([sidekiq_entry])
+        end
+
+        it { is_expected.to be false }
       end
     end
 
