@@ -11,7 +11,7 @@ module Providers
 
       def update
         @form = Addresses::ChoiceForm.new(form_params)
-        render :show unless save_continue_or_draft(@form)
+        render :show unless save_continue_or_draft(@form, correspondence_address_choice_changed: @form.correspondence_address_choice_changed?)
       end
 
     private

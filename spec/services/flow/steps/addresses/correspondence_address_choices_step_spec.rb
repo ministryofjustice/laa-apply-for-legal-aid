@@ -41,8 +41,22 @@ RSpec.describe Flow::Steps::Addresses::CorrespondenceAddressChoicesStep, type: :
   end
 
   describe "#carry_on_sub_flow" do
-    subject { described_class.carry_on_sub_flow }
+    context "when correspondence_address_choice_changed option is false" do
+      subject { described_class.carry_on_sub_flow.call(legal_aid_application, correspondence_address_choice_changed: false) }
 
-    it { is_expected.to be true }
+      it { is_expected.to be false }
+    end
+
+    context "when correspondence_address_choice_changed option is true" do
+      subject { described_class.carry_on_sub_flow.call(legal_aid_application, correspondence_address_choice_changed: true) }
+
+      it { is_expected.to be true }
+    end
+
+    context "when no (or unknown) option is supplied" do
+      subject { described_class.carry_on_sub_flow.call(legal_aid_application) }
+
+      it { is_expected.to be true }
+    end
   end
 end
