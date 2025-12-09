@@ -49,10 +49,10 @@ RSpec.describe Admin::CCMSQueuesController do
         expect(page).to have_link(href: admin_ccms_queue_path(ccms_submission.id))
       end
 
-      it "displays the date application was submitted" do
+      it "displays the date submission was created" do
         freeze_time do
           get_index
-          expect(page).to have_content(ccms_submission.legal_aid_application.merits_submitted_at.strftime("%-d %B %Y @ %l:%M%p").squish)
+          expect(page).to have_content(ccms_submission.legal_aid_application.ccms_submission.created_at.strftime("%-d %B %Y @ %l:%M%p").squish)
         end
       end
     end
