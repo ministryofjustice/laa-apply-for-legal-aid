@@ -172,6 +172,50 @@ module CCMS
       end
     end
 
+    describe "#sidekiq_status" do
+      subject(:sidekiq_status) { submission.sidekiq_status }
+
+      context "when the submission.id is in the retry queue" do
+        let(:sidekiq_entry) { instance_double Sidekiq::SortedEntry, args: [submission.id, "applicant_submitted"] }
+
+        before do
+          allow(Sidekiq::RetrySet).to receive(:new).and_return([sidekiq_entry])
+        end
+
+        it "returns :in_retry" do
+          expect(sidekiq_status).to eq :in_retry
+        end
+      end
+
+      context "when the submission.id is currently running" do
+        before do
+          allow(Sidekiq::Workers).to receive(:new).and_return(["[\"FAKE:DATA:IDENTIFIER\", \"48ly\", {\"queue\"=>\"default\", \"payload\"=>{\"retry\"=>10, \"queue\"=>\"default\", \"args\"=>[\"#{submission.id}\", \"applicant_submitted\"], \"class\"=>\"CCMS::SubmissionProcessWorker\", \"jid\"=>\"97ead0dbe80ecb151b14ba46\", \"created_at\"=>1678181274.640068, \"enqueued_at\"=>1678196740.5113559, \"error_message\"=>\"Submission `#{submission.id}` failed at `applicant_submitted` on retry 9 with error CCMS::SubmissionStateUnchanged\", \"error_class\"=>\"CCMS::SentryIgnoreThisSidekiqFailError\", \"failed_at\"=>1678181277.234848, \"retry_count\"=>8, \"retried_at\"=>1678195277.342509}, \"run_at\"=>1678196740}]"])
+        end
+
+        it "returns :running" do
+          expect(sidekiq_status).to eq :running
+        end
+      end
+
+      context "when the submission.id is in the dead set" do
+        let(:sidekiq_entry) { instance_double Sidekiq::SortedEntry, args: [submission.id, "applicant_submitted"] }
+
+        before do
+          allow(Sidekiq::DeadSet).to receive(:new).and_return([sidekiq_entry])
+        end
+
+        it "returns :dead" do
+          expect(sidekiq_status).to eq :dead
+        end
+      end
+
+      context "when the submission.id is not in any queue" do
+        it "returns :undetermined" do
+          expect(sidekiq_status).to be :undetermined
+        end
+      end
+    end
+
     describe "#sidekiq_running?" do
       subject(:sidekiq_running?) { submission.sidekiq_running? }
 
@@ -182,25 +226,17 @@ module CCMS
           allow(Sidekiq::RetrySet).to receive(:new).and_return([sidekiq_entry])
         end
 
-        it "returns :in_retry" do
-          expect(sidekiq_running?).to eq :in_retry
-        end
+        it { is_expected.to be true }
       end
 
-      context "when the submission.id is currently running" do
+      context "when the submission.id is in the dead set" do
+        let(:sidekiq_entry) { instance_double Sidekiq::SortedEntry, args: [submission.id, "applicant_submitted"] }
+
         before do
-          allow(Sidekiq::Workers).to receive(:new).and_return(["[\"FAKE:DATA:IDENTIFIER\", \"48ly\", {\"queue\"=>\"default\", \"payload\"=>{\"retry\"=>10, \"queue\"=>\"default\", \"args\"=>[\"#{submission.id}\", \"applicant_submitted\"], \"class\"=>\"CCMS::SubmissionProcessWorker\", \"jid\"=>\"97ead0dbe80ecb151b14ba46\", \"created_at\"=>1678181274.640068, \"enqueued_at\"=>1678196740.5113559, \"error_message\"=>\"Submission `#{submission.id}` failed at `applicant_submitted` on retry 9 with error CCMS::SubmissionStateUnchanged\", \"error_class\"=>\"CCMS::SentryIgnoreThisSidekiqFailError\", \"failed_at\"=>1678181277.234848, \"retry_count\"=>8, \"retried_at\"=>1678195277.342509}, \"run_at\"=>1678196740}]"])
+          allow(Sidekiq::DeadSet).to receive(:new).and_return([sidekiq_entry])
         end
 
-        it "returns :running" do
-          expect(sidekiq_running?).to eq :running
-        end
-      end
-
-      context "when the submission.id is not in any queue" do
-        it "returns :false" do
-          expect(sidekiq_running?).to be false
-        end
+        it { is_expected.to be false }
       end
     end
 

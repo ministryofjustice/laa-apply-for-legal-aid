@@ -36,6 +36,10 @@
             row.with_key { t("admin.ccms_queues.show.case_poll_count") }
             row.with_value { @submission.case_poll_count.to_s }
           end
+          summary_list.with_row do |row|
+            row.with_key { t("admin.ccms_queues.show.sidekiq_argument") }
+            row.with_value { @submission.id }
+          end
         end %>
   </div>
 </div>
@@ -71,6 +75,14 @@
             summary_list.with_row do |row|
               row.with_key { t("admin.ccms_queues.show.to_state") }
               row.with_value { history.to_state }
+            end
+            summary_list.with_row do |row|
+              row.with_key { t("admin.ccms_queues.show.created_at") }
+              row.with_value { l(history.created_at, format: :long_date_time) }
+            end
+            summary_list.with_row do |row|
+              row.with_key { t("admin.ccms_queues.show.updated_at") }
+              row.with_value { l(history.updated_at, format: :long_date_time) }
             end
             summary_list.with_row do |row|
               row.with_key { t("generic.success") }

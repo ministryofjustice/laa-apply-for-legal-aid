@@ -44,11 +44,15 @@ en:
         applicant_name: Client's name
         references: CCMS & case reference
         case_reference: Case reference
-        created_at: Date started
+        application_created_at: Application created at
+        submission_created_at: Submission created at
+        submission_updated_at: Submission updated at
         state: State
         sidekiq:
           in_retry: on retry queue
-          false: Expired
+          scheduled: Scheduled
+          dead: Dead
+          undetermined: Undetermined
           running: Running
       show:
         submission: CCMS submission
@@ -56,6 +60,7 @@ en:
         updated_at: Updated at
         status: Status
         applicant_poll_count: Applicant poll count
+        sidekiq_argument: Sidekiq argument
         case_poll_count: Case poll count
         actions: Actions
         restart: Restart at current step
@@ -65,6 +70,8 @@ en:
         submission_histories: Submission histories
         from_state: From state
         to_state: To state
+        created_at: Created at
+        updated_at: Updated at
         request: Request
         request_is_nil: Request is nil
         response: Response

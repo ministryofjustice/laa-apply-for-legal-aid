@@ -42,11 +42,17 @@ module CCMS
     end
     alias_method :restart_current_step!, :process_async!
 
-    def sidekiq_running?
+    def sidekiq_status
       return :running if Sidekiq::Workers.new.map(&:to_s).to_s.scan(id).any?
       return :in_retry if Sidekiq::RetrySet.new.any? { |job| job.args.include?(id) }
+      return :scheduled if Sidekiq::ScheduledSet.new.any? { |job| job.args.include?(id) }
+      return :dead if Sidekiq::DeadSet.new.any? { |job| job.args.include?(id) }
 
-      false
+      :undetermined
+    end
+
+    def sidekiq_running?
+      %i[running in_retry].include? sidekiq_status
     end
 
     def restart_from_beginning!
