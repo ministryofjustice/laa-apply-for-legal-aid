@@ -17,38 +17,76 @@ RSpec.describe Admin::CCMSQueuesController do
 
     it "displays page title" do
       get_index
-      expect(response.body).to include("Incomplete CCMS Submissions")
+      expect(page).to have_title("Incomplete CCMS Submissions")
     end
 
     context "when there are no applications on the queue" do
+      it "displays a count in header" do
+        get_index
+        expect(page).to have_css("h2", text: "Processing queue (0)")
+      end
+
       it "displays a warning message" do
         get_index
-        expect(response.body).to include("The sidekiq queue is empty")
+        expect(page).to have_content("The sidekiq queue is empty")
       end
     end
 
     context "when an application is on the queue" do
-      let!(:ccms_submission) { create(:ccms_submission, :case_ref_obtained) }
+      let!(:ccms_submission) do
+        create(:ccms_submission, :case_ref_obtained).tap do |submission|
+          submission.legal_aid_application.update!(merits_submitted_at: 1.hour.ago)
+        end
+      end
+
+      it "displays a count in header" do
+        get_index
+        expect(page).to have_css("h2", text: "Processing queue (1)")
+      end
 
       it "has a link to the application" do
         get_index
-        expect(response.body).to include(admin_ccms_queue_path(ccms_submission.id))
+        expect(page).to have_link(href: admin_ccms_queue_path(ccms_submission.id))
+      end
+
+      it "displays the date submission was created" do
+        freeze_time do
+          get_index
+          expect(page).to have_content(ccms_submission.legal_aid_application.ccms_submission.created_at.strftime("%-d %B %Y @ %l:%M%p").squish)
+        end
       end
     end
 
     context "when there are no paused applications" do
+      it "displays a count in header" do
+        get_index
+        expect(page).to have_css("h2", text: "Paused submissions (0)")
+      end
+
       it "displays a warning message" do
         get_index
-        expect(response.body).to include("There are no paused submissions")
+        expect(page).to have_content("There are no paused submissions")
       end
     end
 
     context "when there is a paused application" do
-      let!(:legal_aid_application) { create(:legal_aid_application, :submission_paused) }
+      let!(:legal_aid_application) { create(:legal_aid_application, :submission_paused, merits_submitted_at: 1.hour.ago) }
+
+      it "displays a count in header" do
+        get_index
+        expect(page).to have_css("h2", text: "Paused submissions (1)")
+      end
 
       it "has a link to the application" do
         get_index
-        expect(response.body).to include(admin_legal_aid_applications_submission_path(legal_aid_application))
+        expect(page).to have_link(href: admin_legal_aid_applications_submission_path(legal_aid_application))
+      end
+
+      it "displays the date application was submitted" do
+        freeze_time do
+          get_index
+          expect(page).to have_content(legal_aid_application.merits_submitted_at.strftime("%-d %B %Y @ %l:%M%p").squish)
+        end
       end
     end
   end
@@ -68,7 +106,7 @@ RSpec.describe Admin::CCMSQueuesController do
     end
 
     it "displays ccms case reference" do
-      expect(response.body).to include(ccms_submission.case_ccms_reference)
+      expect(page).to have_content(ccms_submission.case_ccms_reference)
     end
   end
 
