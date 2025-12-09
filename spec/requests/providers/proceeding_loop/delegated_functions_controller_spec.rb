@@ -92,6 +92,34 @@ RSpec.describe "DelegatedFunctionsController" do
             post_df
             expect(response.body).to redirect_to(providers_legal_aid_application_emergency_default_path(application_id, proceeding_id))
           end
+
+          it "calls the DelegatedFunctionsDateService service" do
+            post_df
+            expect(DelegatedFunctionsDateService).to have_received(:call).once
+          end
+        end
+
+        context "and the special children act proceeding has used delegated functions" do
+          let(:application) { create(:legal_aid_application, :with_multiple_sca_proceedings) }
+
+          let(:params) do
+            {
+              proceeding: {
+                used_delegated_functions: true,
+                used_delegated_functions_on: 5.days.ago.to_date.to_s(:date_picker),
+              },
+            }
+          end
+
+          it "redirects to the substantive defaults page" do
+            post_df
+            expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
+          end
+
+          it "does not call the DelegatedFunctionsDateService service" do
+            post_df
+            expect(DelegatedFunctionsDateService).not_to have_received(:call)
+          end
         end
 
         context "and the proceeding has not used delegated functions" do
