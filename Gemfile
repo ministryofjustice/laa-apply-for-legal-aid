@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby file: ".ruby-version"
 
 gem "aasm", "~> 5.5.2"
-gem "active_model_serializers", "~> 0.10.15"
+gem "active_model_serializers", "~> 0.10.16"
 gem "csv"
 gem "discard", "~> 1.4"
 gem "faraday"
