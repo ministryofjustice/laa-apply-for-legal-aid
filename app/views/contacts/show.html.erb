@@ -5,5 +5,5 @@
 
   <p class="govuk-heading-m"><%= t(".technical_support.heading") %></p>
 
-  <p class="govuk-body"><%= t(".technical_support.online_support_html") %></p>
+  <p class="govuk-body"><%= t(".technical_support.online_support_html", online_support: govuk_link_to("Online Support", Rails.configuration.x.online_support, new_tab: true)) %></p>
 <% end %>

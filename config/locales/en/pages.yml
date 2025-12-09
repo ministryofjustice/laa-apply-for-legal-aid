@@ -6,7 +6,7 @@ en:
       warning_html:
         - Try reloading the page.
         - If the page still does not load, try again later.
-        - If you keep seeing this page, you can contact <a href="https://legalaidlearning.justice.gov.uk/online-support-2/">Online Support (opens in new tab)</a> from 9am to 5pm, Monday to Friday (closed on bank holidays).
+        - If you keep seeing this page, you can contact %{online_support} from 9am to 5pm, Monday to Friday (closed on bank holidays).
 
     service_out_of_hours:
       title: Sorry, the service is unavailable
