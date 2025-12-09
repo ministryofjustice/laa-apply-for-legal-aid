@@ -1,12 +1,14 @@
 require "rails_helper"
 require Rails.root.join("spec/services/datastore/data_access_api_stubs")
 
-RSpec.describe Datastore::Submission do
+RSpec.describe Datastore::Submitter do
   let(:uri) { "#{Rails.configuration.x.data_access_api.url}/applications" }
   let(:legal_aid_application) { create(:legal_aid_application) }
 
   describe ".call" do
-    subject(:call) { described_class.call(legal_aid_application) }
+    subject(:call) { described_class.call(legal_aid_application, persister:) }
+
+    let(:persister) { Datastore::Persister }
 
     context "with successful response" do
       before do
@@ -20,6 +22,38 @@ RSpec.describe Datastore::Submission do
 
       it "returns the id of the datastore record created" do
         expect(call).to eq("67359989-7268-47e7-b3f9-060ccff9b150")
+      end
+
+      context "when a persister is NOT supplied" do
+        let(:persister) { nil }
+
+        it "does not persist the datastore_id to the legal_aid_application" do
+          expect { call }
+            .not_to change { legal_aid_application.reload.datastore_id }
+              .from(nil)
+        end
+
+        it "does not create a datastore submission record" do
+          expect { call }.not_to change { legal_aid_application.reload.datastore_submissions.count }.from(0)
+        end
+      end
+
+      context "when a persister is supplied" do
+        let(:persister) { Datastore::Persister }
+
+        it "persists the datastore_id to the legal_aid_application" do
+          expect { call }
+            .to change { legal_aid_application.reload.datastore_id }
+              .from(nil)
+              .to("67359989-7268-47e7-b3f9-060ccff9b150")
+        end
+
+        it "persists the response against the legal_aid_application" do
+          expect { call }
+            .to change { legal_aid_application.reload.datastore_submissions }
+              .from([])
+              .to([instance_of(Datastore::Submission)])
+        end
       end
     end
 

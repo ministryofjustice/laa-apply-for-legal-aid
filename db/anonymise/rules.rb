@@ -107,6 +107,10 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
     end,
   },
   citizen_access_tokens: {},
+  datastore_submissions: {
+    body: -> { "" },
+    headers: -> { { "location" => "https://fake-api-domain-for-data-access-api/api/v0/applications/#{Faker::Internet.uuid}" } },
+  },
   debugs: {},
   dependants: {
     name: -> { Faker::Name.name },

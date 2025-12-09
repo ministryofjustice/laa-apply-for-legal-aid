@@ -24,10 +24,10 @@ module Test
     end
 
     def submit
-      datastore_id = Datastore::Submission.call(legal_aid_application)
+      datastore_id = Datastore::Submitter.call(legal_aid_application)
 
       flash[:notice] = "Submitted application \"#{legal_aid_application.application_ref}\" to datastore. It was given an id of \"#{datastore_id}\"."
-    rescue Datastore::Submission::ApiError => e
+    rescue Datastore::Submitter::ApiError => e
       flash[:error] = e.message
     ensure
       redirect_back(fallback_location: authenticated_root_path)

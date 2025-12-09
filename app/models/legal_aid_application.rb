@@ -67,6 +67,7 @@ class LegalAidApplication < ApplicationRecord
   has_many :capital_disregards, dependent: :destroy
   has_many :discretionary_capital_disregards, -> { where(mandatory: "false") }, class_name: "CapitalDisregard"
   has_many :mandatory_capital_disregards, -> { where(mandatory: "true") }, class_name: "CapitalDisregard"
+  has_many :datastore_submissions, -> { order(created_at: :asc) }, class_name: "Datastore::Submission", inverse_of: :legal_aid_application, dependent: :destroy
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref
