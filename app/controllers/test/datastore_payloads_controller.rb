@@ -24,9 +24,9 @@ module Test
     end
 
     def submit
-      body = Datastore::Submission.call(legal_aid_application)
+      datastore_id = Datastore::Submission.call(legal_aid_application)
 
-      flash[:notice] = "Submitted application \"#{legal_aid_application.application_ref}\" to datastore. Response body: #{body.presence || 'nil'}"
+      flash[:notice] = "Submitted application \"#{legal_aid_application.application_ref}\" to datastore. It was given an id of \"#{datastore_id}\"."
     rescue Datastore::Submission::ApiError => e
       flash[:error] = e.message
     ensure

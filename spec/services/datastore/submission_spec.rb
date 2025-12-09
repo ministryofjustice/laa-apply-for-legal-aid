@@ -18,18 +18,8 @@ RSpec.describe Datastore::Submission do
         expect(a_request(:post, uri)).to have_been_made.times(1)
       end
 
-      it "returns expected response" do
-        expect(call).to eq("message" => "Submission created successfully")
-      end
-    end
-
-    context "with successful response with no body (current situation at time of writing)" do
-      before do
-        stub_successful_datastore_submission_without_body
-      end
-
-      it "returns empty hash" do
-        expect(call).to eq({})
+      it "returns the id of the datastore record created" do
+        expect(call).to eq("67359989-7268-47e7-b3f9-060ccff9b150")
       end
     end
 
@@ -59,7 +49,7 @@ RSpec.describe Datastore::Submission do
       end
 
       it "raises error" do
-        expect { call }.to raise_error(described_class::ApiError, "Datastore Submission Failed: status 403, body {\"type\":\"about:blank\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Check your request was has been authenticated\",\"instance\":\"/api/v0/applications\"}")
+        expect { call }.to raise_error(described_class::ApiError, "Datastore Submission Failed: status 403, body {\"type\":\"about:blank\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Check your request has been authenticated\",\"instance\":\"/api/v0/applications\"}")
       end
     end
 

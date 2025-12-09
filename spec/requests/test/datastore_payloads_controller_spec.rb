@@ -117,7 +117,7 @@ RSpec.describe Test::DatastorePayloadsController do
 
           follow_redirect!
 
-          expect(flash[:notice]).to match("Submitted application \"#{legal_aid_application.application_ref}\" to datastore.")
+          expect(flash[:notice]).to match("Submitted application \"#{legal_aid_application.application_ref}\" to datastore. It was given an id of \"67359989-7268-47e7-b3f9-060ccff9b150\".")
           expect(page).to have_content("Submitted application")
         end
       end

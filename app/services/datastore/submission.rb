@@ -19,7 +19,7 @@ module Datastore
 
     def call
       if response.success?
-        JSON.parse(response.body.presence || "{}")
+        datastore_id_from_response
       else
         raise ApiError, "Datastore Submission Failed: status #{response.status}, body #{response.body.presence || 'nil'}"
       end
@@ -29,6 +29,10 @@ module Datastore
 
     def response
       @response ||= connection.post("applications", payload.to_json)
+    end
+
+    def datastore_id_from_response
+      response.headers["location"]&.split("/")&.last
     end
 
     def payload
