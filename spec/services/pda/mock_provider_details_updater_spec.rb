@@ -66,14 +66,15 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
 
     context "when called with an office for the second time, or more" do
       let(:provider) do
-        create(:provider, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a", ccms_contact_id: 654_321, username: "MY-CCMS-USERNAME", firm:, with_office_selected: false).tap do |provider|
-          provider.offices << office
+        create(:provider, silas_id: "51cdbbb4-75d2-48d0-aaac-fa67f013c50a", ccms_contact_id: 654_321, username: "MY-CCMS-USERNAME", firm:, selected_office: old_office, with_office_selected: false).tap do |provider|
+          provider.offices << old_office
           provider.save!
         end
       end
 
       let(:firm) { create(:firm, name: "original firm name", ccms_id: "19148") }
       let(:office) { create(:office, code: office_code, ccms_id: "12345") }
+      let(:old_office) { create(:office) }
 
       it "updates the firm name of the provider" do
         expect { call }
@@ -89,25 +90,25 @@ RSpec.describe PDA::MockProviderDetailsUpdater do
             .to("137570")
       end
 
-      it "does not update the provider's CCMS contact id" do
+      it "update the provider's CCMS contact id" do
         expect { call }
-          .not_to change { provider.reload.ccms_contact_id }
+          .to change { provider.reload.ccms_contact_id }
             .from(654_321)
+            .to(66_731_970)
       end
 
-      it "does not update the provider's username" do
+      it "updates the provider's username" do
         expect { call }
-          .not_to change { provider.reload.username }
+          .to change { provider.reload.username }
             .from("MY-CCMS-USERNAME")
+            .to("DGRAY-BRUCE-DAVID-GRA-LLP1")
       end
 
-      context "when office was selected previously" do
-        before { provider.update!(selected_office: office) }
-
-        it "updates the selected_office_id, if it was not before" do
-          expect { call }
-            .not_to change { provider.reload.selected_office_id }
-        end
+      it "updates the selected_office_id, if it was not before" do
+        expect { call }
+          .to change { provider.reload.selected_office }
+            .from(old_office)
+            .to(office)
       end
 
       context "when office was not selected previously" do

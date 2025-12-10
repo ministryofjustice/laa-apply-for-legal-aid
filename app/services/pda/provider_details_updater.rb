@@ -72,8 +72,8 @@ module PDA
       @provider.firm = firm
       @provider.offices << office unless @provider.offices.include?(office)
       @provider.selected_office_id = office.id
-      @provider.ccms_contact_id ||= ccms_contact_id
-      @provider.username ||= ccms_username
+      @provider.ccms_contact_id = ccms_contact_id
+      @provider.username = ccms_username
       @provider.save!
     end
 
@@ -116,7 +116,7 @@ module PDA
     end
 
     def ccms_user
-      @ccms_user = CCMSUser::UserDetails.call(@provider.silas_id)
+      @ccms_user ||= CCMSUser::UserDetails.call(@provider.silas_id)
     end
 
     def pda_conn

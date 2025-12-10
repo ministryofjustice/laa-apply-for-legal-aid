@@ -264,23 +264,22 @@ RSpec.describe "provider selects office" do
         end
       end
 
-      context "when CCMS user details already exist on the provider (and CCMS User Management API unavailable)" do
+      context "when CCMS user details already exist on the provider" do
         before do
           provider.update!(ccms_contact_id: 111_111_111, username: "MY-CCMS-USERNAME")
 
           stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules").to_return(body:, status: status)
-
-          stub_provider_user_failure_for(provider.silas_id, status: 500)
+          stub_provider_user_for(provider.silas_id)
 
           allow(ProviderContractDetailsWorker)
             .to receive(:perform_async).and_return(true)
         end
 
-        it "does not call CCMS User Management API" do
+        it "still calls CCMS User Management API once to check for updates" do
           stub_request(:get, "#{Rails.configuration.x.pda.url}/provider-offices/#{selected_office_code}/schedules").to_return(body:, status: 200)
           allow(CCMSUser::UserDetails).to receive(:call).and_call_original
           patch_request
-          expect(CCMSUser::UserDetails).not_to have_received(:call)
+          expect(CCMSUser::UserDetails).to have_received(:call).once
         end
 
         context "with valid schedules" do

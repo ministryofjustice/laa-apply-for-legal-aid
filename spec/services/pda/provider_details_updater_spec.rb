@@ -105,11 +105,45 @@ RSpec.describe PDA::ProviderDetailsUpdater do
         expect { call }.to change { provider.reload.ccms_contact_id }.from(nil).to(66_731_970)
       end
 
-      it "updates the provider's selected office" do
+      it "updates the provider username" do
+        expect { call }.to change { provider.reload.username }.from(nil).to("DGRAY-BRUCE-DAVID-GRA-LLP1")
+      end
+
+      it "updates the provider's selected_office" do
         expect { described_class.call(provider, office_code) }
           .to change { provider.reload.selected_office }
             .from(nil)
             .to(office)
+      end
+
+      context "when the provider already has details" do
+        before do
+          provider.update!(ccms_contact_id: 12_345, username: "old_username", selected_office_id: old_office.id, firm: old_office.firm)
+        end
+
+        let(:old_office) { create(:office) }
+
+        it "overwrites the provider's firm" do
+          expect { described_class.call(provider, office_code) }
+            .to change { provider.reload.firm }
+              .from(old_office.firm)
+              .to(office.firm)
+        end
+
+        it "overwrites the provider's selected_office" do
+          expect { described_class.call(provider, office_code) }
+            .to change { provider.reload.selected_office }
+              .from(old_office)
+              .to(office)
+        end
+
+        it "overwrites the provider ccms_contact_id" do
+          expect { call }.to change { provider.reload.ccms_contact_id }.from(12_345).to(66_731_970)
+        end
+
+        it "overwrites the provider username" do
+          expect { call }.to change { provider.reload.username }.from("old_username").to("DGRAY-BRUCE-DAVID-GRA-LLP1")
+        end
       end
 
       context "when the office ccms_id changes" do
