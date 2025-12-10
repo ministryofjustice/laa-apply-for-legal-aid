@@ -72,8 +72,8 @@ module PDA
       @provider.firm = firm
       @provider.offices << office unless @provider.offices.include?(office)
       @provider.selected_office_id = office.id
-      @provider.ccms_contact_id ||= ccms_contact_id
-      @provider.username ||= ccms_username
+      @provider.ccms_contact_id = ccms_contact_id
+      @provider.username = ccms_username
       @provider.save!
     end
 
