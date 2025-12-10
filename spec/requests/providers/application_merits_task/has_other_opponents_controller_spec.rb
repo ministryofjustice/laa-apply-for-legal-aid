@@ -147,6 +147,11 @@ module Providers
             delete_request
             expect(response.body).to include("You have added 1 opponent")
           end
+
+          it "sets the correct flash message" do
+            delete_request
+            expect(response.body).to have_css(".moj-alert__content", text: "You removed #{opponent_one.first_name} #{opponent_one.last_name} as an opponent")
+          end
         end
       end
     end
