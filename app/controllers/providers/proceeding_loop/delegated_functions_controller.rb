@@ -18,7 +18,7 @@ module Providers
         draft_selected? ? @form.save_as_draft : @form.save!
         return false if @form.invalid?
 
-        DelegatedFunctionsDateService.call(legal_aid_application, draft_selected: draft_selected?)
+        DelegatedFunctionsDateService.call(legal_aid_application, draft_selected: draft_selected?) unless proceeding.special_children_act?
         continue_or_draft(**)
       end
 
