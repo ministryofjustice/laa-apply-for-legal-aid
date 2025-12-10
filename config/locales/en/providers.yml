@@ -876,11 +876,7 @@ en:
         error: Select yes if you need to add another child
     has_other_opponents:
       show:
-<<<<<<< Updated upstream
-        error: Select yes if you need to add another opponent
-=======
         removed: You removed %{name} as an opponent
->>>>>>> Stashed changes
     is_individuals:
       show:
         error: Select whether you want to add an individual or an organisation.

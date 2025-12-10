@@ -16,8 +16,8 @@ module Providers
 
       def destroy
         opponent&.destroy!
-
         @form = LegalAidApplications::HasOtherOpponentsForm.new(model: legal_aid_application)
+        flash[:moj_success] = I18n.t("providers.has_other_opponents.show.removed", name: opponent.full_name)
         render :show
       end
 
