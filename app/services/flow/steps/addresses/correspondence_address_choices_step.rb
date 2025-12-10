@@ -12,7 +12,9 @@ module Flow
           }[correspondence_address_choice.to_sym]
         end,
         check_answers: :check_provider_answers,
-        carry_on_sub_flow: true,
+        carry_on_sub_flow: lambda do |_application, options = {}|
+          options.fetch(:correspondence_address_choice_changed, true)
+        end,
       )
     end
   end

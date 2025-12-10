@@ -49,7 +49,11 @@ module Flow
 
       return carry_on_sub_flow unless carry_on_sub_flow.is_a?(Proc)
 
-      carry_on_sub_flow.call(legal_aid_application)
+      if carry_on_sub_flow.arity == -2
+        carry_on_sub_flow.call(legal_aid_application, params)
+      else
+        carry_on_sub_flow.call(legal_aid_application)
+      end
     end
 
     def path(step)

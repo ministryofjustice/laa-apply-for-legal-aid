@@ -9,12 +9,20 @@ RSpec.describe CheckProviderAnswersHelper do
   let(:correspondence_address_choice) { "home" }
   let(:address) { create(:address, lookup_used:) }
 
-  describe ".change_address_link" do
-    subject(:link) { helper.change_address_link(legal_aid_application) }
+  describe ".correspondence_address_change_link" do
+    subject(:link) { helper.correspondence_address_change_link(legal_aid_application) }
 
     let(:location) { "correspondence" }
 
-    context "when mail is sent to office address" do
+    context "when mail is to be sent to home address" do
+      let(:correspondence_address_choice) { "home" }
+
+      it "returns no link" do
+        expect(link).to be_nil
+      end
+    end
+
+    context "when mail is to be sent to office address" do
       let(:correspondence_address_choice) { "office" }
 
       it "returns the address choice path" do
@@ -22,7 +30,9 @@ RSpec.describe CheckProviderAnswersHelper do
       end
     end
 
-    context "when mail is not sent to office address" do
+    context "when mail is to be sent to another uk residential address" do
+      let(:correspondence_address_choice) { "residence" }
+
       it "returns the address choice path" do
         expect(link).to eq "/providers/applications/#{legal_aid_application.id}/correspondence_address/find_correspondence_address?locale=en"
       end

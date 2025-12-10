@@ -90,6 +90,32 @@ RSpec.describe Providers::CorrespondenceAddress::ChoicesController do
           patch_request
           expect(response).to have_http_status(:redirect)
         end
+
+        context "when checking answers" do
+          let(:legal_aid_application) do
+            create(:legal_aid_application, :with_applicant, :checking_applicant_details).tap do |laa|
+              laa.applicant.update!(correspondence_address_choice: "home")
+            end
+          end
+
+          context "and the choice has not changed" do
+            let(:correspondence_address_choice) { "home" }
+
+            it "redirects to check providers answers page" do
+              patch_request
+              expect(response).to redirect_to(providers_legal_aid_application_check_provider_answers_path(legal_aid_application))
+            end
+          end
+
+          context "and the choice has changed" do
+            let(:correspondence_address_choice) { "office" }
+
+            it "redirects to next page" do
+              patch_request
+              expect(response).to redirect_to(providers_legal_aid_application_correspondence_address_manual_path(legal_aid_application))
+            end
+          end
+        end
       end
 
       context "with form submitted using Save as draft button" do
