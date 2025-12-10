@@ -116,7 +116,7 @@ module PDA
     end
 
     def ccms_user
-      @ccms_user = CCMSUser::UserDetails.call(@provider.silas_id)
+      @ccms_user ||= CCMSUser::UserDetails.call(@provider.silas_id)
     end
 
     def pda_conn
