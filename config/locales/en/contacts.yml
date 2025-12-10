@@ -8,4 +8,4 @@ en:
         phone_number: "Telephone: 0203 8144 350"
       technical_support:
         heading: Technical support
-        online_support_html: Contact <a href="https://legalaidlearning.justice.gov.uk/online-support-2/">Online Support (opens in new tab)</a> from 9am to 5pm, Monday to Friday (closed on bank holidays).
+        online_support_html: Contact %{online_support} from 9am to 5pm, Monday to Friday (closed on bank holidays).

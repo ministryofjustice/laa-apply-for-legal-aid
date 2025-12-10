@@ -13,7 +13,7 @@
       ) do %>
 
     <p class="govuk-body">
-      <%= t(".paragraph_1_html", support_email_address: govuk_link_to(Rails.configuration.x.support_email_address, "mailto:#{Rails.configuration.x.support_email_address}")) %>
+      <%= t(".paragraph_1_html", online_support: govuk_link_to("Online Support", Rails.configuration.x.online_support, new_tab: true)) %>
     </p>
 
     <p class="govuk-body">

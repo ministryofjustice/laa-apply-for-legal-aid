@@ -9,7 +9,7 @@ cy:
       difficulty_reason: Based on how easy or difficult you found the service to use
       difficulty_reason_hint: Explain your answer
       page_title: "[Welsh] Help us improve the Apply for civil legal aid service"
-      paragraph_1_html: If you have problems using this service, email %{support_email_address} to get help.
+      paragraph_1_html: If you have problems using this service, email %{online_support} to get help.
       paragraph_2: We’ll use your answers to help improve the service. Anything you provide will be confidential and will not be shared outside the Ministry of Justice.
       paragraph_3_html: Findings from this research will not contain any personal information. %{protect_personal_info}
       paragraph_4: Do not include personal information in your answers.

@@ -4,8 +4,7 @@ Feature: Provider feedback
     Given I start the journey as far as the applicant page
     When I click link "feedback (opens in new tab)"
     Then I should be on a new tab with title "Help us improve the Apply for civil legal aid service"
-    And I should be on a page showing "If you have problems using this service, email apply-for-civil-legal-aid@justice.gov.uk to get help."
-    And I should see a mailto link text "apply-for-civil-legal-aid@justice.gov.uk" for email "apply-for-civil-legal-aid@justice.gov.uk"
+    And I should be on a page showing "If you have problems using this service contact Online Support (opens in new tab) to get help."
     And I should be on a page showing "Help us improve the Apply for civil legal aid service"
     And I should be on a page showing "We'll use your answers to help improve the service"
     And I should see a link with text "See how we protect your personal information"
