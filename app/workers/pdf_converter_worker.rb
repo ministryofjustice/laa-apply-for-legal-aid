@@ -2,6 +2,8 @@ class PdfConverterWorker
   include Sidekiq::Worker
   include Sidekiq::Status::Worker
 
+  class SentryIgnoreThisSidekiqFailError < StandardError; end
+
   attr_accessor :retry_count
 
   ALERT_ON_RETRY_COUNT = 3
