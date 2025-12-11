@@ -1,12 +1,14 @@
 require "rails_helper"
 require Rails.root.join("spec/services/datastore/data_access_api_stubs")
 
-RSpec.describe Datastore::Submission do
+RSpec.describe Datastore::Submitter do
   let(:uri) { "#{Rails.configuration.x.data_access_api.url}/applications" }
   let(:legal_aid_application) { create(:legal_aid_application) }
 
   describe ".call" do
-    subject(:call) { described_class.call(legal_aid_application) }
+    subject(:call) { described_class.call(legal_aid_application, persister:) }
+
+    let(:persister) { Datastore::Persister }
 
     context "with successful response" do
       before do
@@ -18,18 +20,40 @@ RSpec.describe Datastore::Submission do
         expect(a_request(:post, uri)).to have_been_made.times(1)
       end
 
-      it "returns expected response" do
-        expect(call).to eq("message" => "Submission created successfully")
-      end
-    end
-
-    context "with successful response with no body (current situation at time of writing)" do
-      before do
-        stub_successful_datastore_submission_without_body
+      it "returns the id of the datastore record created" do
+        expect(call).to eq("67359989-7268-47e7-b3f9-060ccff9b150")
       end
 
-      it "returns empty hash" do
-        expect(call).to eq({})
+      context "when a persister is NOT supplied" do
+        let(:persister) { nil }
+
+        it "does not persist the datastore_id to the legal_aid_application" do
+          expect { call }
+            .not_to change { legal_aid_application.reload.datastore_id }
+              .from(nil)
+        end
+
+        it "does not create a datastore submission record" do
+          expect { call }.not_to change { legal_aid_application.reload.datastore_submissions.count }.from(0)
+        end
+      end
+
+      context "when a persister is supplied" do
+        let(:persister) { Datastore::Persister }
+
+        it "persists the datastore_id to the legal_aid_application" do
+          expect { call }
+            .to change { legal_aid_application.reload.datastore_id }
+              .from(nil)
+              .to("67359989-7268-47e7-b3f9-060ccff9b150")
+        end
+
+        it "persists the response against the legal_aid_application" do
+          expect { call }
+            .to change { legal_aid_application.reload.datastore_submissions }
+              .from([])
+              .to([instance_of(Datastore::Submission)])
+        end
       end
     end
 
@@ -59,7 +83,7 @@ RSpec.describe Datastore::Submission do
       end
 
       it "raises error" do
-        expect { call }.to raise_error(described_class::ApiError, "Datastore Submission Failed: status 403, body {\"type\":\"about:blank\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Check your request was has been authenticated\",\"instance\":\"/api/v0/applications\"}")
+        expect { call }.to raise_error(described_class::ApiError, "Datastore Submission Failed: status 403, body {\"type\":\"about:blank\",\"title\":\"Forbidden\",\"status\":403,\"detail\":\"Check your request has been authenticated\",\"instance\":\"/api/v0/applications\"}")
       end
     end
 

@@ -1,19 +1,10 @@
+# Realistic stub at time of wrirting - returns 201 with Location header but no body
 def stub_successful_datastore_submission
   stub_request(:post, %r{(http|https).*laa-data-access-api.*\.cloud-platform\.service\.justice\.gov\.uk/api/v0/.*})
      .to_return(
        status: 201,
-       body: { message: "Submission created successfully" }.to_json,
-       headers: { "Content-Type" => "application/json; charset=utf-8" },
-     )
-end
-
-# TODO: AP-6378 - this can be removed once the hoped for response body is confirmed
-def stub_successful_datastore_submission_without_body
-  stub_request(:post, %r{(http|https).*laa-data-access-api.*\.cloud-platform\.service\.justice\.gov\.uk/api/v0/.*})
-     .to_return(
-       status: 201,
        body: "",
-       headers: { "Content-Type" => "application/json; charset=utf-8" },
+       headers: { "location" => "https://main-laa-data-access-api-uat.cloud-platform.service.justice.gov.uk/api/v0/applications/67359989-7268-47e7-b3f9-060ccff9b150" },
      )
 end
 
@@ -28,7 +19,6 @@ def stub_bad_request_datastore_submission
          detail: "Check your request was valid",
          instance: "/api/v0/applications",
        }.to_json,
-       headers: { "Content-Type" => "application/json; charset=utf-8" },
      )
 end
 
@@ -43,7 +33,6 @@ def stub_unauthorized_datastore_submission
          detail: "Check your request was has been authorized",
          instance: "/api/v0/applications",
        }.to_json,
-       headers: { "Content-Type" => "application/json; charset=utf-8" },
      )
 end
 
@@ -55,10 +44,9 @@ def stub_forbidden_datastore_submission
          type: "about:blank",
          title: "Forbidden",
          status: 403,
-         detail: "Check your request was has been authenticated",
+         detail: "Check your request has been authenticated",
          instance: "/api/v0/applications",
        }.to_json,
-       headers: { "Content-Type" => "application/json; charset=utf-8" },
      )
 end
 
@@ -73,6 +61,5 @@ def stub_internal_server_error_datastore_submission
          detail: "An unexpected application error has occurred.",
          instance: "/api/v0/applications",
        }.to_json,
-       headers: { "Content-Type" => "application/json; charset=utf-8" },
      )
 end

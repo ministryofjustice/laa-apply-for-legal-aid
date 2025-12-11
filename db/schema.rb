@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_20_125313) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_09_160131) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -454,6 +454,16 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_20_125313) do
     t.index ["legal_aid_application_id"], name: "index_citizen_access_tokens_on_legal_aid_application_id"
   end
 
+  create_table "datastore_submissions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.jsonb "headers"
+    t.uuid "legal_aid_application_id", null: false
+    t.integer "status"
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "index_datastore_submissions_on_legal_aid_application_id"
+  end
+
   create_table "debugs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "auth_params"
     t.string "browser_details"
@@ -649,6 +659,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_20_125313) do
     t.boolean "copy_case"
     t.uuid "copy_case_id"
     t.datetime "created_at", precision: nil, null: false
+    t.uuid "datastore_id"
     t.datetime "declaration_accepted_at", precision: nil
     t.datetime "discarded_at", precision: nil
     t.boolean "draft"
@@ -698,6 +709,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_20_125313) do
     t.datetime "updated_at", precision: nil, null: false
     t.index ["applicant_id"], name: "index_legal_aid_applications_on_applicant_id"
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
+    t.index ["datastore_id"], name: "index_legal_aid_applications_on_datastore_id", unique: true
     t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"
     t.index ["office_id"], name: "index_legal_aid_applications_on_office_id"
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
@@ -1194,6 +1206,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_20_125313) do
   add_foreign_key "chances_of_successes", "proceedings", on_delete: :cascade
   add_foreign_key "child_care_assessments", "proceedings"
   add_foreign_key "citizen_access_tokens", "legal_aid_applications", on_delete: :cascade
+  add_foreign_key "datastore_submissions", "legal_aid_applications"
   add_foreign_key "dependants", "legal_aid_applications"
   add_foreign_key "domestic_abuse_summaries", "legal_aid_applications", on_delete: :cascade
   add_foreign_key "dwp_overrides", "legal_aid_applications"

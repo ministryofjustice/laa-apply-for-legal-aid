@@ -105,20 +105,33 @@ RSpec.describe Test::DatastorePayloadsController do
       end
 
       context "when submission is successful" do
-        before do
-          stub_successful_datastore_submission
+        subject(:get_submit) do
           get "/test/datastore_payloads/#{legal_aid_application.id}/submit", headers: { "HTTP_REFERER" => "/same-page" }
         end
 
+        before do
+          stub_successful_datastore_submission
+        end
+
         it "redirects back and flashes success" do
+          get_submit
+
           expect(response)
             .to have_http_status(:redirect)
             .and redirect_to("/same-page")
 
           follow_redirect!
 
-          expect(flash[:notice]).to match("Submitted application \"#{legal_aid_application.application_ref}\" to datastore.")
+          expect(flash[:notice]).to match("Submitted application \"#{legal_aid_application.application_ref}\" to datastore. It was given an id of \"67359989-7268-47e7-b3f9-060ccff9b150\".")
           expect(page).to have_content("Submitted application")
+        end
+
+        it "persists the datastore_id against the legal aid application" do
+          expect { get_submit }.to change { legal_aid_application.reload.datastore_id }.from(nil).to("67359989-7268-47e7-b3f9-060ccff9b150")
+        end
+
+        it "creates a datastore submission record" do
+          expect { get_submit }.to change { legal_aid_application.reload.datastore_submissions.count }.from(0).to(1)
         end
       end
 
