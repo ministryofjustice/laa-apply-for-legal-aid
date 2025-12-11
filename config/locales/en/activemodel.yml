@@ -470,6 +470,8 @@ en:
             has_other_proceeding:
               blank: Select yes if you want to add another proceeding
               must_add_domestic_abuse: You must add at least one domestic abuse proceeding
+            has_other_opponents:
+              blank: Select yes if you need to add another opponent
             has_restrictions:
               blank: Select yes if your client is prohibited from selling or borrowing against their assets
               blank_with_partner: Select if your client or their partner is banned from selling or borrowing against their assets
