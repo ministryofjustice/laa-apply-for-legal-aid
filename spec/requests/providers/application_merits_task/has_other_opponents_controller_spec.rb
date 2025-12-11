@@ -152,6 +152,24 @@ module Providers
             delete_request
             expect(response.body).to have_css(".moj-alert__content", text: "You removed #{opponent_one.first_name} #{opponent_one.last_name} as an opponent")
           end
+
+          context "when removing the only opponent on the application" do
+            let(:opponents) { [opponent_one] }
+
+            it "removes one opponent" do
+              expect { delete_request }.to change { application.opponents.count }.by(-1)
+            end
+
+            it "leaves the correct number of remaining opponents" do
+              delete_request
+              expect(application.opponents.count).to eq 0
+            end
+
+            it "redirects to opponent type" do
+              delete_request
+              expect(response).to redirect_to(providers_legal_aid_application_opponent_type_path(application))
+            end
+          end
         end
       end
     end
