@@ -64,18 +64,20 @@
         ) %>
   </section>
 
-  <section id="client-declaration" class="app-print-only govuk-!-padding-top-6">
-    <h2 class="govuk-heading-l"><%= t(".client_declaration.heading") %></h2>
+  <% unless @legal_aid_application.special_children_act_proceedings? %>
+    <section id="client-declaration" class="app-print-only govuk-!-padding-top-6">
+      <h2 class="govuk-heading-l"><%= t(".client_declaration.heading") %></h2>
 
-    <%= render "shared/applicant_declaration" %>
+      <%= render "shared/applicant_declaration" %>
 
-    <p class="govuk-body govuk-!-font-weight-bold">
-      <%= t(".client_declaration.signature") %>
-    </p>
-    <p class="govuk-body govuk-!-font-weight-bold">
-      <%= t(".client_declaration.date") %>
-    </p>
-  </section>
+      <p class="govuk-body govuk-!-font-weight-bold">
+        <%= t(".client_declaration.signature") %>
+      </p>
+      <p class="govuk-body govuk-!-font-weight-bold">
+        <%= t(".client_declaration.date") %>
+      </p>
+    </section>
 
-  <%= render "shared/partner_declaration" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+    <%= render "shared/partner_declaration" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+  <% end %>
 </div>

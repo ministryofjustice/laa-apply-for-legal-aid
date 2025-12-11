@@ -39,6 +39,25 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController do
       it "renders the confirm client declaration page" do
         expect(response).to render_template("providers/review_and_print_applications/show")
         expect(response.body).to include("Print and submit your application")
+        expect(response.body).to include("Client declaration")
+      end
+
+      context "when the application is an sca application" do
+        let(:smtl) { create(:legal_framework_merits_task_list, :pb003_pb059_application, legal_aid_application: application) }
+        let(:application) do
+          create(:legal_aid_application,
+                 :with_applicant,
+                 :with_proceedings,
+                 :provider_entering_merits,
+                 :with_cfe_v5_result,
+                 explicit_proceedings: %i[pb003 pb059])
+        end
+
+        it "does not render the client declaration" do
+          expect(response).to render_template("providers/review_and_print_applications/show")
+          expect(response.body).to include("Print and submit your application")
+          expect(response.body).not_to include("Client declaration")
+        end
       end
     end
   end
