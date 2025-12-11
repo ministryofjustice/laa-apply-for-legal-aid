@@ -8,8 +8,7 @@
     <span class="govuk-caption-xl"><%= position_in_array(@proceeding) %></span>
     <h1 class="govuk-heading-xl"><%= page_title %></h1>
     <%= form.govuk_radio_buttons_fieldset(:used_delegated_functions,
-                                          legend: { size: "m", tag: "h2", text: t(".question") },
-                                          hint: { text: @proceeding.special_children_act? ? t(".sca_hint") : "" }) do %>
+                                          legend: { size: "m", tag: "h2", text: t(".question") }) do %>
       <%= form.govuk_radio_button :used_delegated_functions, true, label: { text: t("generic.yes") } do %>
 
         <%= form.moj_date_picker_field(
@@ -23,6 +22,13 @@
       <%= form.govuk_radio_button :used_delegated_functions, false, label: { text: t("generic.no") } %>
     <% end %>
 
+    <% if @proceeding.special_children_act? %>
+      <%= govuk_warning_text do %>
+        <p class="govuk-body">
+          <strong><%= t(".sca_warning") %></strong>
+        </p>
+      <% end %>
+    <% end %>
     <%= next_action_buttons(form:, show_draft: true) %>
   <% end %>
 <% end %>
