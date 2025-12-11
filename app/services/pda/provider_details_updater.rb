@@ -65,7 +65,15 @@ module PDA
     end
 
     def update_office
-      office.update!(ccms_id: office_schedules_result.dig("office", "ccmsFirmOfficeId"), firm:)
+      office.update!(ccms_id: office_schedules_result.dig("office", "ccmsFirmOfficeId"),
+                     firm:,
+                     address_line_one: office_address_result.address_line_one,
+                     address_line_two: office_address_result.address_line_two,
+                     address_line_three: office_address_result.address_line_three,
+                     address_line_four: office_address_result.address_line_four,
+                     city: office_address_result.city,
+                     county: office_address_result.county,
+                     postcode: office_address_result.postcode)
     end
 
     def update_provider
@@ -101,6 +109,10 @@ module PDA
 
     def office_schedules_response
       @office_schedules_response ||= pda_conn.get("provider-offices/#{@office_code}/schedules")
+    end
+
+    def office_address_result
+      @office_address_result = PDA::OfficeAddressRetriever.call([@office_code]).detect { |office| office.code == @office_code }
     end
 
     def ccms_contact_id

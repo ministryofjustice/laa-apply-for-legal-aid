@@ -1876,6 +1876,7 @@ en:
       show:
         account_number: Account number
         email: Email address
+        office_address: Office address
         office_code: Office code
         name: Name
         page_title: Your profile

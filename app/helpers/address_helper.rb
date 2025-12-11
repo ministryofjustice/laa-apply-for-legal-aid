@@ -20,4 +20,16 @@ module AddressHelper
               address.pretty_postcode,
               address.country_name?].compact.compact_blank.join(", ")
   end
+
+  def office_address_one_line(office_address)
+    return unless office_address
+
+    ActionController::Base.helpers.sanitize [office_address.address_line_one,
+                                             office_address.address_line_two,
+                                             office_address.address_line_three,
+                                             office_address.address_line_four,
+                                             office_address.city,
+                                             office_address.county,
+                                             office_address.postcode].compact.compact_blank.join(", ")
+  end
 end

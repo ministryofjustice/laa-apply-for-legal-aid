@@ -1,9 +1,14 @@
 module Providers
   class SelectOfficesController < ProviderBaseController
+    include AddressHelper
+
     legal_aid_application_not_required!
+
+    OfficeAddressSelectionItem = Struct.new(:code, :address)
 
     def show
       initialize_page_history
+      @addresses = addresses
       @form = Providers::OfficeForm.new(model: current_provider)
     end
 
@@ -55,6 +60,16 @@ module Providers
 
     def provider
       @provider ||= form_params[:model]
+    end
+
+    def addresses
+      @addresses ||= pda_addresses.map do |address|
+        OfficeAddressSelectionItem.new(code: address.code, address: office_address_one_line(address).presence || "Address unknown")
+      end
+    end
+
+    def pda_addresses
+      @pda_addresses ||= PDA::OfficeAddressRetriever.call(current_provider.silas_office_codes)
     end
   end
 end
