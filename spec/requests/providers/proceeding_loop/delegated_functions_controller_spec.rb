@@ -28,24 +28,23 @@ RSpec.describe "DelegatedFunctionsController" do
 
       context "with a non-Special children act (non-SCA) proceeding" do
         it "displays expected header, question and [not] hint" do
-          expect(response.body)
-            .to include("Proceeding 1")
-            .and include("Inherent jurisdiction high court injunction")
-            .and include("Have you used delegated functions for this proceeding?")
-
-          expect(response.body).not_to include("Answer this, even for special children act")
+          expect(page)
+            .to have_content("Proceeding 1")
+            .and have_content("Inherent jurisdiction high court injunction")
+            .and have_content("Have you used delegated functions for this proceeding?")
+            .and have_no_content("For special children act")
         end
       end
 
       context "with an Special children act (SCA) proceeding" do
         let(:application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[pb003], set_lead_proceeding: :pb003) }
 
-        it "displays expected header, question and SCA hint" do
-          expect(response.body)
-            .to include("Proceeding 1")
-            .and include("Child assessment order")
-            .and include("Have you used delegated functions for this proceeding?")
-            .and include("Answer this, even for special children act")
+        it "displays expected warning, question and SCA warning" do
+          expect(page)
+            .to have_content("Proceeding 1")
+            .and have_content("Child assessment order")
+            .and have_content("Have you used delegated functions for this proceeding?")
+            .and have_css("strong", text: "For special children act, always answer yes and give the delegated functions date now")
         end
       end
     end
@@ -90,7 +89,7 @@ RSpec.describe "DelegatedFunctionsController" do
 
           it "redirects to next page" do
             post_df
-            expect(response.body).to redirect_to(providers_legal_aid_application_emergency_default_path(application_id, proceeding_id))
+            expect(response).to redirect_to(providers_legal_aid_application_emergency_default_path(application_id, proceeding_id))
           end
 
           it "calls the DelegatedFunctionsDateService service" do
@@ -113,7 +112,7 @@ RSpec.describe "DelegatedFunctionsController" do
 
           it "redirects to the substantive defaults page" do
             post_df
-            expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
+            expect(response).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
           end
 
           it "does not call the DelegatedFunctionsDateService service" do
@@ -125,7 +124,7 @@ RSpec.describe "DelegatedFunctionsController" do
         context "and the proceeding has not used delegated functions" do
           it "redirects to next page" do
             post_df
-            expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
+            expect(response).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
           end
         end
 
@@ -141,7 +140,7 @@ RSpec.describe "DelegatedFunctionsController" do
 
           it "redirects to the confirmation page" do
             post_df
-            expect(response.body).to redirect_to(providers_legal_aid_application_confirm_delegated_functions_date_path(application_id, proceeding_id))
+            expect(response).to redirect_to(providers_legal_aid_application_confirm_delegated_functions_date_path(application_id, proceeding_id))
           end
 
           context "when provider changes yes to no" do
@@ -633,7 +632,7 @@ RSpec.describe "DelegatedFunctionsController" do
 
             it "redirects to next page" do
               post_df
-              expect(response.body).to redirect_to(providers_legal_aid_application_emergency_default_path(application_id, proceeding_id))
+              expect(response).to redirect_to(providers_legal_aid_application_emergency_default_path(application_id, proceeding_id))
             end
           end
 
@@ -648,7 +647,7 @@ RSpec.describe "DelegatedFunctionsController" do
 
             it "redirects to next page" do
               post_df
-              expect(response.body).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
+              expect(response).to redirect_to(providers_legal_aid_application_substantive_default_path(application_id, proceeding_id))
             end
           end
         end
