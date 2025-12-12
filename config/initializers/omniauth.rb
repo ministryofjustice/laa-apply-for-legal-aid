@@ -12,7 +12,7 @@ OmniAuth.config.logger = Rails.logger
 # is redirected to /auth/failure.
 #
 OmniAuth.config.on_failure = proc do |env|
-  AlertManager.capture_message("Omniauth error: #{env['omniauth.error']} and message: #{env['omniauth.error']}")
+  AlertManager.capture_message("Omniauth error: #{env['omniauth.error']}")
   OmniAuth::FailureEndpoint.new(env).redirect_to_failure
 end
 
