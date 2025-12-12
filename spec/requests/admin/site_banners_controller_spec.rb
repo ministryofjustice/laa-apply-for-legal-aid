@@ -36,6 +36,15 @@ RSpec.describe Admin::SiteBannersController do
         expect(response.body).to have_css("a", text: "Dismiss")
       end
     end
+
+    context "when an announcement is currently live" do
+      before { Announcement.create(display_type: :moj, body: "The movie started 5 minutes ago!", start_at: 5.minutes.ago, end_at: 5.minutes.from_now) }
+
+      it "includes the message" do
+        get_request
+        expect(response.body).to have_css("strong", class: "govuk-tag", text: "Live")
+      end
+    end
   end
 
   describe "GET /admin/site_banners/new" do
