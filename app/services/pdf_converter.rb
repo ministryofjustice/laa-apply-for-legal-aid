@@ -36,8 +36,49 @@ private
   def converted_file
     return downloaded_file if @original_attachment.document.content_type == "application/pdf"
 
+    # Libreconv.convert(source, target, soffice_command = nil, convert_to = nil)
+    #
+    # libreoffice \
+    #   --headless \
+    #   --convert-to pdf:writer_pdf_Export \
+    #   --image-resolution=150 \
+    #   --image-compression=jpeg \
+    #   --image-quality=70 \
+    #   input.docx
+
     file = Tempfile.new
-    Libreconv.convert(downloaded_file.path, file.path)
+    # Libreconv.convert(downloaded_file.path, file.path)
+    # Libreconv.convert(downloaded_file.path, file.path, nil, "pdf:writer_pdf_Export --image-resolution=150 --image-compression=jpeg --image-quality=70") # =>Error: "Error: Please verify input parameters...
+    # Libreconv.convert(downloaded_file.path, file.path, nil, "pdf:writer_pdf_Export") # No size difference observed without image options
+    # Libreconv.convert(downloaded_file.path, file.path, nil, "pdf:writer_pdf_Export:ReduceImageResolution=true;MaxImageResolution=150;SelectPdfVersion=1;Quality=80;CompressImages=true;ExportBookmarks=false;UseTaggedPDF=false;EmbedStandardFonts=false;SubsetFonts=false;ExportFormFields=false;CreateTaggedPDF=false;UseLosslessCompression=false;ExportNotes=false") # No size difference observed without image options
+    # Libreconv.convert(downloaded_file.path, file.path, nil, "pdf:writer_pdf_Export:SelectPdfVersion=2;ReduceImageResolution=true;MaxImageResolution=150;Quality=60;ExportNotes=false;UseTaggedPDF=false;ExportBookmarks=false") # Suggested by chatgpt, failed with either a "Task policy set failed: 4 ((os/kern) invalid argument)" error or a libreconv failed error depending on soffice verion and type of install
+
+    # cmd = [
+    #   "soffice", # use which soffice
+    #   "--headless",
+    #   "--nologo",
+    #   "--nolockcheck",
+    #   "--norestore",
+    #   "--nofirststartwizard",
+    #   "--convert-to",
+    #   "pdf:writer_pdf_Export:SelectPdfVersion=2;ReduceImageResolution=true;MaxImageResolution=150;Quality=60;UseTaggedPDF=false;ExportBookmarks=false;ExportNotes=false",
+    #   "--outdir",
+    #   File.dirname(file.path),
+    #   downloaded_file.path,
+    # ] # No error but pdf is empty :(
+
+    cmd = [
+      "soffice", # use which soffice
+      "--headless",
+      "--convert-to",
+      "pdf",
+      "--outdir",
+      File.dirname(file.path),
+      downloaded_file.path,
+    ]
+
+    system(*cmd) # No error but pdf is empty :(
+
     file.close
     file
   end
