@@ -38,6 +38,11 @@
                     concat tag.div(l(message.start_at, format: :announcement_date_time))
                     concat tag.div("and")
                     concat tag.div(l(message.end_at, format: :announcement_date_time))
+                    if message.active?
+                      concat govuk_tag(text: "Live", colour: "green")
+                    else
+                      concat govuk_tag(text: "Inactive", colour: "red")
+                    end
                   end
                   row.with_cell do
                     concat govuk_button_to(
