@@ -18,7 +18,8 @@ OmniAuth.config.on_failure = proc do |env|
   AlertManager.capture_message("Omniauth error: #{omniauth_error}")
 
   provider_error = omniauth_error.respond_to?(:error) ? omniauth_error.error : "unknown_error"
-  provider_error_reason = omniauth_error.respond_to?(:reason) ? omniauth_error.reason : "no_reason_provided"
+  provider_error_reason = omniauth_error.respond_to?(:reason) ? omniauth_error.reason : nil
+  provider_error_message = omniauth_error.respond_to?(:message) ? omniauth_error.message : nil
   provider_error_desc = omniauth_error.respond_to?(:error_description) ? omniauth_error.error_description : nil
   provider_error_uri = omniauth_error.respond_to?(:error_uri) ? omniauth_error.error_uri : nil
   provider_error_wrapped = omniauth_error.respond_to?(:wrapped_exception) ? omniauth_error.wrapped_exception : nil
@@ -27,9 +28,22 @@ OmniAuth.config.on_failure = proc do |env|
   Rails.logger.warn("  error: #{omniauth_error}")
   Rails.logger.warn("  provider error: #{provider_error || 'none'}")
   Rails.logger.warn("  reason: #{provider_error_reason || 'none'}")
+  Rails.logger.warn("  message: #{provider_error_message || 'none'}")
   Rails.logger.warn("  description: #{provider_error_desc || 'none'}")
   Rails.logger.warn("  uri: #{provider_error_uri || 'none'}")
   Rails.logger.warn("  wrapped: #{provider_error_wrapped || 'none'}")
+
+  Rails.logger.warn("  error: #{omniauth_error.class}")
+
+  if omniauth_error.class.is_a? Hash
+    Rails.logger.warn("  error hash keys: #{omniauth_error.keys.join(', ')}")
+    Rails.logger.warn("  error error: #{omniauth_error['error'] || 'none'}")
+    Rails.logger.warn("  error error (sym): #{omniauth_error[:error] || 'none'}")
+    Rails.logger.warn("  error reason: #{omniauth_error['reason'] || 'none'}")
+    Rails.logger.warn("  error reason (sym): #{omniauth_error[:reason] || 'none'}")
+    Rails.logger.warn("  error message: #{omniauth_error['message'] || 'none'}")
+    Rails.logger.warn("  error message (sym): #{omniauth_error[:message] || 'none'}")
+  end
 
   OmniAuth::FailureEndpoint.new(env).redirect_to_failure
 end
