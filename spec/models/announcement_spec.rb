@@ -88,6 +88,28 @@ RSpec.describe Announcement do
     end
   end
 
+  describe ".active?" do
+    let(:announcement) { described_class.create!(display_type: :gov_uk, heading: "one", start_at:, end_at:) }
+
+    context "when the current time is between the start and end date" do
+      let(:start_at) { 5.minutes.ago }
+      let(:end_at) { 5.minutes.from_now }
+
+      it "returns true" do
+        expect(announcement.active?).to be true
+      end
+    end
+
+    context "when the current time is not between the start and end date" do
+      let(:start_at) { 10.minutes.ago }
+      let(:end_at) { 5.minutes.ago }
+
+      it "returns false" do
+        expect(announcement.active?).to be false
+      end
+    end
+  end
+
   describe "scopes" do
     before do
       described_class.create!(display_type: :gov_uk, heading: "one", start_at: Time.zone.local(2025, 11, 1, 9, 0), end_at: Time.zone.local(2025, 11, 10, 17, 0))
