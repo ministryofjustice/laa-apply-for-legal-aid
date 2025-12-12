@@ -13,36 +13,15 @@ OmniAuth.config.logger = Rails.logger
 #
 OmniAuth.config.on_failure = proc do |env|
   omniauth_error = env["omniauth.error"]
-  omniauth_error_type = env["omniauth.error.type"]
 
-  AlertManager.capture_message("Omniauth error: #{omniauth_error}")
-
-  provider_error = omniauth_error.respond_to?(:error) ? omniauth_error.error : "unknown_error"
-  provider_error_reason = omniauth_error.respond_to?(:reason) ? omniauth_error.reason : nil
-  provider_error_message = omniauth_error.respond_to?(:message) ? omniauth_error.message : nil
-  provider_error_desc = omniauth_error.respond_to?(:error_description) ? omniauth_error.error_description : nil
-  provider_error_uri = omniauth_error.respond_to?(:error_uri) ? omniauth_error.error_uri : nil
-  provider_error_wrapped = omniauth_error.respond_to?(:wrapped_exception) ? omniauth_error.wrapped_exception : nil
-
-  Rails.logger.warn("Omniauth error type: #{omniauth_error_type || 'none'}")
-  Rails.logger.warn("  error: #{omniauth_error}")
-  Rails.logger.warn("  provider error: #{provider_error || 'none'}")
-  Rails.logger.warn("  reason: #{provider_error_reason || 'none'}")
-  Rails.logger.warn("  message: #{provider_error_message || 'none'}")
-  Rails.logger.warn("  description: #{provider_error_desc || 'none'}")
-  Rails.logger.warn("  uri: #{provider_error_uri || 'none'}")
-  Rails.logger.warn("  wrapped: #{provider_error_wrapped || 'none'}")
-
-  Rails.logger.warn("  error: #{omniauth_error.class}")
-
-  if omniauth_error.class.is_a? Hash
-    Rails.logger.warn("  error hash keys: #{omniauth_error.keys.join(', ')}")
-    Rails.logger.warn("  error error: #{omniauth_error['error'] || 'none'}")
-    Rails.logger.warn("  error error (sym): #{omniauth_error[:error] || 'none'}")
-    Rails.logger.warn("  error reason: #{omniauth_error['reason'] || 'none'}")
-    Rails.logger.warn("  error reason (sym): #{omniauth_error[:reason] || 'none'}")
-    Rails.logger.warn("  error message: #{omniauth_error['message'] || 'none'}")
-    Rails.logger.warn("  error message (sym): #{omniauth_error[:message] || 'none'}")
+  # NOTE: do not bother to alert on CSRF state mismatch errors - these are common and
+  # usually caused by various user and client browser behaviours. Session timeout during callback,
+  # browser pivacy features, multi tab logins, and bots are common causes.
+  if omniauth_error.to_s.include?("Invalid 'state' parameter")
+    Rails.logger.warn("Omniauth CSRF state mismatch error: #{omniauth_error}")
+  else
+    Rails.logger.warn("Omniauth error: #{omniauth_error}")
+    AlertManager.capture_exception(omniauth_error)
   end
 
   OmniAuth::FailureEndpoint.new(env).redirect_to_failure
