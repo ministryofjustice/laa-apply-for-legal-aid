@@ -16,10 +16,11 @@ OmniAuth.config.on_failure = proc do |env|
 
   # NOTE: do not bother to alert on CSRF state mismatch errors - these are common and
   # usually caused by various user and client browser behaviours. Session timeout during callback,
-  # browser pivacy features, multi tab logins, and bots are common causes.
+  # browser privacy features, multi tab logins, and bots are common causes.
   if omniauth_error.to_s.include?("Invalid 'state' parameter")
     Rails.logger.warn("Omniauth CSRF state mismatch error: #{omniauth_error}")
   else
+
     Rails.logger.warn("Omniauth error: #{omniauth_error}")
     AlertManager.capture_exception(omniauth_error)
   end
