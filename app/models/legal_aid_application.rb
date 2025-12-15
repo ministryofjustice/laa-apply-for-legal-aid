@@ -364,18 +364,23 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def upsert_benefit_check_result
-    return false unless benefit_check_response
-
     self.benefit_check_result ||= build_benefit_check_result
 
-    benefit_check_result.update!(
-      result: benefit_check_response[:benefit_checker_status],
-      dwp_ref: benefit_check_response[:confirmation_ref],
-    )
+    if benefit_check_response
+      benefit_check_result.update!(
+        result: benefit_check_response[:benefit_checker_status],
+        dwp_ref: benefit_check_response[:confirmation_ref],
+      )
+    else
+      benefit_check_result.update!(
+        result: "failure:no_response",
+        dwp_ref: nil,
+      )
+    end
   end
 
   def benefit_check_status
-    if benefit_check_result.nil?
+    if benefit_check_result.nil? || benefit_check_result.failure?
       :unsuccessful
     else
       applicant_receives_benefit? ? :positive : :negative
@@ -408,7 +413,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def benefit_check_result_needs_updating?
-    return true unless benefit_check_result
+    return true if benefit_check_result.nil? || benefit_check_result.failure?
 
     applicant_updated_after_benefit_check_result_updated?
   end
