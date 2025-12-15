@@ -1966,6 +1966,7 @@ en:
         keep_a_copy:
           means_tested: You'll need to keep a copy of it on file, along with any evidence you used to determine your client's financial situation.
           non_means_tested: You'll need to keep a copy of it on file, along with any evidence you included.
+          special_children_act: You'll need to keep a copy of the application on file, along with any evidence you included.
         back_to_your_applications: Back to your applications
     substantive_applications:
       show:

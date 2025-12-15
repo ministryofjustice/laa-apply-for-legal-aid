@@ -293,3 +293,6 @@ Feature: Review and print your application
       | h2  | Emergency cost limit |
 
     And I should not see any change links
+    And I should see "You'll need to keep a copy of the application on file, along with any evidence you included."
+    And I should not see "Print the application and get the person acting for"
+
