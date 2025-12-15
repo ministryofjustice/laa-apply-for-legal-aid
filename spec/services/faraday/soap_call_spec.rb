@@ -63,7 +63,7 @@ RSpec.describe Faraday::SoapCall do
   describe ".call", vcr: { cassette_name: "benefit_check_service/successful_call" } do
     let(:calling) { faraday_soap_call.call(payload) }
     let(:type) { :benefit_checker }
-    let(:initial_object) { "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl" }
+    let(:initial_object) { Rails.configuration.x.benefit_check.wsdl_url }
     let(:payload) do
       <<~PAYLOAD.squish
         <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -88,7 +88,7 @@ RSpec.describe Faraday::SoapCall do
         xmlns="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns1:originalClientRef
         xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">df56670b-aecf-49cc-8f1b-1c410cace3c5</ns1:originalClientRef><ns2:benefitCheckerStatus
         xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Yes</ns2:benefitCheckerStatus><ns3:confirmationRef
-        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1707145428938</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1765875076825</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
       XML
     end
 
