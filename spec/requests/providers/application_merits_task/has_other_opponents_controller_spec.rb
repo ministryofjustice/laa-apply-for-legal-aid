@@ -17,29 +17,38 @@ module Providers
       describe "show: GET /providers/applications/:legal_aid_application_id/has_other_opponents" do
         subject(:get_has_other) { get providers_legal_aid_application_has_other_opponent_path(application) }
 
-        before do
-          create(:opponent, legal_aid_application: application)
-          create(:opponent, :for_organisation, organisation_name: "Mid Beds Council", organisation_ccms_type_code: "LA", organisation_ccms_type_text: "Local Authority", legal_aid_application: application)
-          create(:opponent, :for_individual, first_name: "John", last_name: "Doe", legal_aid_application: application)
+        context "when the application has opponent(s)" do
+          before do
+            create(:opponent, legal_aid_application: application)
+            create(:opponent, :for_organisation, organisation_name: "Mid Beds Council", organisation_ccms_type_code: "LA", organisation_ccms_type_text: "Local Authority", legal_aid_application: application)
+            create(:opponent, :for_individual, first_name: "John", last_name: "Doe", legal_aid_application: application)
+          end
+
+          it "returns success" do
+            get_has_other
+            expect(response).to have_http_status(:ok)
+          end
+
+          it "displays the opponent organisation and opponent individual" do
+            get_has_other
+            expect(response.body)
+              .to include("Mid Beds Council")
+              .and include("Local Authority")
+              .and include("John Doe")
+          end
+
+          it "displays the do you want to add more page" do
+            get_has_other
+            expect(response.body).to include("You have added 3 opponents")
+            expect(response.body).to include("Do you need to add another opponent?")
+          end
         end
 
-        it "returns success" do
-          get_has_other
-          expect(response).to have_http_status(:ok)
-        end
-
-        it "displays the opponent organisation and opponent individual" do
-          get_has_other
-          expect(response.body)
-            .to include("Mid Beds Council")
-            .and include("Local Authority")
-            .and include("John Doe")
-        end
-
-        it "displays the do you want to add more page" do
-          get_has_other
-          expect(response.body).to include("You have added 3 opponents")
-          expect(response.body).to include("Do you need to add another opponent?")
+        context "when the application does not have any opponents" do
+          it "redirects to opponent type" do
+            get_has_other
+            expect(response).to redirect_to(providers_legal_aid_application_opponent_type_path(application))
+          end
         end
       end
 

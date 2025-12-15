@@ -2,6 +2,8 @@ module Providers
   module ApplicationMeritsTask
     class HasOtherOpponentsController < ProviderBaseController
       def show
+        return redirect_to providers_legal_aid_application_opponent_type_path(legal_aid_application) unless opponents.any?
+
         @form = LegalAidApplications::HasOtherOpponentsForm.new(model: legal_aid_application)
       end
 
@@ -15,7 +17,7 @@ module Providers
       end
 
       def destroy
-        opponent&.destroy!
+        opponent.destroy!
         flash[:moj_success] = I18n.t("providers.has_other_opponents.show.removed", name: opponent.full_name)
         return redirect_to providers_legal_aid_application_opponent_type_path(legal_aid_application) unless opponents.any?
 
