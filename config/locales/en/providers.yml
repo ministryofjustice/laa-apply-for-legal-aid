@@ -919,14 +919,16 @@ en:
         confirmation_email_sent: We've sent you a confirmation email.
         need_to_do: What you need to do
         print_application:
-          under_18: Print the completed application and get the person acting for %{applicant_name} to sign it. For example, a litigation friend, a professional children’s guardian or a parental order report.
+          under_18: Print the completed application and get the person acting for %{applicant_name} to sign it. For example, a litigation friend, a professional children's guardian or a parental order report.
           over_18: Print the completed application and get your client to sign it.
           with_partner: Print the completed application and get your client and their partner to sign it.
-        financial_evidence: any evidence you used to determine your client's financial situation
-        client_sign: a signed copy of the declaration
+          special_children_act: Keep a copy of the application for records, along with any evidence you included.
         keep_file: "Keep on file:"
-        copy_application: a copy of the application
-        audit: You may need to show these if you’re audited by the LAA in the future.
+        keep_bullets:
+          - a copy of the application
+          - any evidence you used to determine your client's financial situation
+          - a signed copy of the declaration
+        audit: You may need to show these if you're audited by the LAA in the future.
         what_next: What happens next
         application_to_be_checked: We'll check your application to see if your client is entitled to legal aid.
         decision_in_ccms_html: We'll let you know our decision in CCMS (Client and Cost Management System).
