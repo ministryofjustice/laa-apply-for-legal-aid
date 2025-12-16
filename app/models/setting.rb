@@ -44,6 +44,8 @@ class Setting < ApplicationRecord
     # Citizen access is required 24/7
     # This can be overridden on different environments for testing
 
-    Time.zone.now < Rails.configuration.x.business_hours.start.to_time || Time.zone.now >= Rails.configuration.x.business_hours.end.to_time
+    Time.zone.now < Rails.configuration.x.business_hours.start.to_time ||
+      Time.zone.now >= Rails.configuration.x.business_hours.end.to_time ||
+      BankHoliday.dates.include?(Time.zone.now.to_date.iso8601)
   end
 end
