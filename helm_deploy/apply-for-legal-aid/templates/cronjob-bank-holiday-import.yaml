@@ -1,0 +1,45 @@
+{{- $defaultStartHour := 2 }}
+{{- $startHourOffset := include "apply-for-legal-aid.cronjob-hour-to-start-offset" . -}}
+{{- $startHour := add $defaultStartHour $startHourOffset }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Release.Name | trunc 26 }}-bank-holiday-import
+  labels:
+    app: {{ template "apply-for-legal-aid.name" . }}
+    chart: {{ template "apply-for-legal-aid.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  schedule: '15 {{ $startHour }} * * *'
+  timeZone: "Europe/London"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      template:
+        spec:
+          serviceAccountName: "{{ .Values.service_account.name }}"
+          containers:
+          - name: bank-holiday-import
+            image: '{{ .Values.image.repository }}:{{ .Values.image.tag }}'
+            imagePullPolicy: IfNotPresent
+            command: ['rake', "job:bank_holiday_import:perform"]
+{{ include "apply-for-legal-aid.envs" . | nindent 12 }}
+            resources:
+              limits:
+                cpu: 200m
+                memory: 2048Mi
+              requests:
+                cpu: 100m
+                memory: 1024Mi
+            securityContext:
+              runAsNonRoot: true
+              allowPrivilegeEscalation: false
+              seccompProfile:
+                type: RuntimeDefault
+              capabilities:
+                drop: [ "ALL" ]
+          restartPolicy: Never
