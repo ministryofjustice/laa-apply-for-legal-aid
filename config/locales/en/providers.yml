@@ -1957,7 +1957,9 @@ en:
         heading: Print and submit your application
         print_heading:  Application for legal aid and client declaration
         print_button: Print application
+        print_button_sca: Print or save application
         print_your_application: Print your application
+        print_your_application_sca: Print or save your application
         print_the_application:
           means_tested: Print the application and get your client to sign the declaration.
           means_tested_with_partner: Print the application and get your client and their partner to sign the declaration.

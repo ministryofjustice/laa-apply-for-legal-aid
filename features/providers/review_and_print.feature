@@ -280,7 +280,7 @@ Feature: Review and print your application
       | h2  | Client |
       | h2  | What you're applying for |
       | h2  | Case details |
-      | h2  | Print your application |
+      | h2  | Print or save your application |
 
     And I should see 'Delegated functions'
     And I should not see 'Email address'

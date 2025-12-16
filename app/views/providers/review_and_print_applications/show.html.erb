@@ -11,7 +11,7 @@
   <%= render "shared/review_application/questions_and_answers" %>
 
   <div class="no-print govuk-!-padding-top-6">
-    <h2 class="govuk-heading-l"><%= t(".print_your_application") %></h2>
+    <h2 class="govuk-heading-l"><%= @legal_aid_application.special_children_act_proceedings? ? t(".print_your_application_sca") : t(".print_your_application") %></h2>
 
     <p class="govuk-body">
       <% unless @legal_aid_application.special_children_act_proceedings? %>
@@ -37,7 +37,7 @@
 
     <p class="govuk-body"><%= t(".audit") %></p>
 
-    <%= print_button t(".print_button") %>
+    <%= print_button @legal_aid_application.special_children_act_proceedings? ? t(".print_button_sca") : t(".print_button") %>
 
     <%= next_action_buttons_with_form(
           url: continue_providers_legal_aid_application_review_and_print_application_path(@legal_aid_application),
