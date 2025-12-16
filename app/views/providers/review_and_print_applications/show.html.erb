@@ -14,12 +14,14 @@
     <h2 class="govuk-heading-l"><%= t(".print_your_application") %></h2>
 
     <p class="govuk-body">
-      <% if @legal_aid_application.applicant&.no_means_test_required? || @legal_aid_application.plf_non_means_tested_proceeding? %>
-        <%= t(".print_the_application.non_means_tested", applicant_name: @legal_aid_application.applicant_full_name) %>
-      <% elsif @legal_aid_application&.applicant&.has_partner_with_no_contrary_interest? %>
-        <%= t(".print_the_application.means_tested_with_partner") %>
-      <% elsif !@legal_aid_application.special_children_act_proceedings? %>
-        <%= t(".print_the_application.means_tested") %>
+      <% unless @legal_aid_application.special_children_act_proceedings? %>
+        <% if @legal_aid_application.non_means_tested? %>
+          <%= t(".print_the_application.non_means_tested", applicant_name: @legal_aid_application.applicant_full_name) %>
+        <% elsif @legal_aid_application&.applicant&.has_partner_with_no_contrary_interest? %>
+          <%= t(".print_the_application.means_tested_with_partner") %>
+        <% else %>
+          <%= t(".print_the_application.means_tested") %>
+        <% end %>
       <% end %>
     </p>
 
