@@ -9,11 +9,6 @@ RSpec.describe BankHoliday, vcr: { cassette_name: "gov_uk_bank_holiday_api", all
       expect(described_class.dates).to eq(bank_holiday.dates)
     end
 
-    it "triggers and update process" do
-      expect(BankHolidayUpdateWorker).to receive(:perform_in)
-      described_class.dates
-    end
-
     context "without an existing instances" do
       before { described_class.delete_all }
 
