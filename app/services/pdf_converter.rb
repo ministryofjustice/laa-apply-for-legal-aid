@@ -14,6 +14,9 @@ class PdfConverter
     return if @original_attachment&.pdf_attachment_id.present?
 
     file = converted_file
+    # :nocov:
+    raise_alarm_for(file.size) if file.size > 8_000_000
+    # :nocov:
 
     Attachment.transaction do
       pdf_filename = "#{File.basename(@original_attachment.attachment_name, '.*')}.pdf"
@@ -49,4 +52,12 @@ private
     file.close
     file
   end
+
+  # :nocov:
+  def raise_alarm_for(file_size)
+    message = "FileSizeWarning: attachment #{@original_attachment.id} converted to #{(file_size.to_f / 1_000_000).round(2)}MB"
+    Rails.logger.error(message)
+    Sentry.capture_message(message)
+  end
+  # :nocov:
 end
