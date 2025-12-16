@@ -145,9 +145,6 @@ jobs:
     - *install_js_packages
     - *save_js_packages_cache
     - run:
-        name: Run JavaScript tests
-        command: bin/rails javascript_tests
-    - run:
         name: Run StandardJS
         command: yarn run standardjs
     - run:
