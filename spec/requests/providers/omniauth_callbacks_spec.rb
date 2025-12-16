@@ -57,12 +57,23 @@ RSpec.describe "provider omniauth call back" do
         get_request
         expect(request).to redirect_to(a_string_starting_with("/auth/failure"))
         follow_redirect!
+
         expect(response).to redirect_to(error_path(:access_denied))
+        follow_redirect!
+
+        expect(page).to have_content("Access denied")
       end
 
-      it "logs an error to AlertManager" do
-        get provider_entra_id_omniauth_callback_path
-        expect(AlertManager).to have_received(:capture_message).with(/Omniauth error/)
+      it "logs the exception" do
+        expect(Rails.logger).to receive(:warn).with(/Omniauth error: /)
+
+        get_request
+      end
+
+      it "captures the exception with AlertManager" do
+        expect(AlertManager).to receive(:capture_exception)
+
+        get_request
       end
     end
   end
