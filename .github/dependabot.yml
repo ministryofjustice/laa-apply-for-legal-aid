@@ -52,7 +52,3 @@ updates:
   #       patterns:
   #         - "*"
   #   open-pull-requests-limit: 10
-  #   ignore:
-  #     # REMOVE once a satisfactory solution to https://github.com/jestjs/jest/issues/15674 is found
-  #     - dependency-name: "jest-environment-jsdom"
-  #       versions: [ ">=30.0.0" ]
