@@ -107,6 +107,20 @@ RSpec.describe PagesController, :clamav do
       allow(Rails.configuration.x.business_hours).to receive(:end).and_call_original
     end
 
+    shared_examples "out of hours access page displayed" do
+      it "blocks provider traffic" do
+        landing_page_request
+        expect(response).to render_template("pages/service_out_of_hours")
+        expect(response.body).not_to include("Sign in") # sign in link removed
+        expect(response.body).not_to include("help us to improve it") # phase banner feedback link removed
+      end
+
+      it "displays expected content" do
+        landing_page_request
+        expect(response.body).to include("This service is available daily from 7am to 9:30pm. It is not available on bank holidays.")
+      end
+    end
+
     context "when it's British Summer Time" do
       context "when it's 0500 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 9, 8, 5, 0, 0) }
@@ -116,10 +130,7 @@ RSpec.describe PagesController, :clamav do
           expect(response).to redirect_to(citizens_legal_aid_applications_path)
         end
 
-        it "blocks provider traffic" do
-          landing_page_request
-          expect(response).to render_template("pages/service_out_of_hours")
-        end
+        it_behaves_like "out of hours access page displayed"
       end
 
       context "when it's 0700 on a Monday" do
@@ -172,12 +183,7 @@ RSpec.describe PagesController, :clamav do
           expect(response).to redirect_to(citizens_legal_aid_applications_path)
         end
 
-        it "blocks provider traffic" do
-          landing_page_request
-          expect(response).to render_template("pages/service_out_of_hours")
-          expect(response.body).not_to include("Sign in") # sign in link removed
-          expect(response.body).not_to include("help us to improve it") # phase banner feedback link removed
-        end
+        it_behaves_like "out of hours access page displayed"
       end
 
       context "when it's 1300 on a Sunday" do
@@ -199,10 +205,7 @@ RSpec.describe PagesController, :clamav do
       context "when it's 0630 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 11, 3, 6, 30, 0) }
 
-        it "blocks provider traffic" do
-          landing_page_request
-          expect(response).to render_template("pages/service_out_of_hours")
-        end
+        it_behaves_like "out of hours access page displayed"
       end
 
       context "when it's 0730 on a Monday" do
@@ -226,10 +229,7 @@ RSpec.describe PagesController, :clamav do
       context "when it's 2200 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 11, 3, 22, 0, 0) }
 
-        it "blocks provider traffic" do
-          landing_page_request
-          expect(response).to render_template("pages/service_out_of_hours")
-        end
+        it_behaves_like "out of hours access page displayed"
       end
     end
   end
