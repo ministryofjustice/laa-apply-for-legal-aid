@@ -11,7 +11,7 @@ class BankHolidayUpdateWorker
   end
 
   def last_updated
-    @last_updated ||= BankHoliday.by_updated_at.last
+    @last_updated ||= BankHoliday.by_updated_at.last || BankHoliday.create!
   end
 
   def lastest_data
