@@ -10,7 +10,9 @@
   <h2 class="govuk-heading-m"><%= t(".need_to_do") %></h2>
 
   <p class="govuk-body">
-    <% if @legal_aid_application.non_means_tested? %>
+    <% if @legal_aid_application.special_children_act_proceedings? %>
+      <%= t(".print_application.special_children_act") %>
+    <% elsif @legal_aid_application.non_means_tested? %>
       <%= t(".print_application.under_18", applicant_name: @legal_aid_application.applicant_full_name) %>
     <% elsif @legal_aid_application&.applicant&.has_partner_with_no_contrary_interest? %>
       <%= t(".print_application.with_partner") %>
@@ -19,12 +21,11 @@
     <% end %>
   </p>
 
-  <p class="govuk-body"><%= t(".keep_file") %></p>
-  <ul class="govuk-list govuk-list--bullet">
-    <li><%= t(".copy_application") %></li>
-    <li><%= t(".financial_evidence") %></li>
-    <li><%= t(".client_sign") %></li>
-  </ul>
+  <% unless @legal_aid_application.special_children_act_proceedings? %>
+    <p class="govuk-body"><%= t(".keep_file") %></p>
+    <%= govuk_list t(".keep_bullets"), type: :bullet %>
+  <% end %>
+
   <p class="govuk-body"><%= t(".audit") %></p>
 
   <h2 class="govuk-heading-m"><%= t(".what_next") %></h2>

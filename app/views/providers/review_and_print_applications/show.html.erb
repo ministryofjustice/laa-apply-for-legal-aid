@@ -11,20 +11,24 @@
   <%= render "shared/review_application/questions_and_answers" %>
 
   <div class="no-print govuk-!-padding-top-6">
-    <h2 class="govuk-heading-l"><%= t(".print_your_application") %></h2>
+    <h2 class="govuk-heading-l"><%= @legal_aid_application.special_children_act_proceedings? ? t(".print_your_application_sca") : t(".print_your_application") %></h2>
 
     <p class="govuk-body">
-      <% if @legal_aid_application.non_means_tested? %>
-        <%= t(".print_the_application.non_means_tested", applicant_name: @legal_aid_application.applicant_full_name) %>
-      <% elsif @legal_aid_application&.applicant&.has_partner_with_no_contrary_interest? %>
-        <%= t(".print_the_application.means_tested_with_partner") %>
-      <% else %>
-        <%= t(".print_the_application.means_tested") %>
+      <% unless @legal_aid_application.special_children_act_proceedings? %>
+        <% if @legal_aid_application.non_means_tested? %>
+          <%= t(".print_the_application.non_means_tested", applicant_name: @legal_aid_application.applicant_full_name) %>
+        <% elsif @legal_aid_application&.applicant&.has_partner_with_no_contrary_interest? %>
+          <%= t(".print_the_application.means_tested_with_partner") %>
+        <% else %>
+          <%= t(".print_the_application.means_tested") %>
+        <% end %>
       <% end %>
     </p>
 
     <p class="govuk-body">
-      <% if @legal_aid_application.non_means_tested? %>
+      <% if @legal_aid_application.special_children_act_proceedings? %>
+        <%= t(".keep_a_copy.special_children_act") %>
+      <% elsif @legal_aid_application.non_means_tested? %>
         <%= t(".keep_a_copy.non_means_tested") %>
       <% else %>
         <%= t(".keep_a_copy.means_tested") %>
@@ -33,9 +37,7 @@
 
     <p class="govuk-body"><%= t(".audit") %></p>
 
-    <br>
-
-    <%= print_button t(".print_button") %>
+    <%= print_button @legal_aid_application.special_children_act_proceedings? ? t(".print_button_sca") : t(".print_button") %>
 
     <%= next_action_buttons_with_form(
           url: continue_providers_legal_aid_application_review_and_print_application_path(@legal_aid_application),
