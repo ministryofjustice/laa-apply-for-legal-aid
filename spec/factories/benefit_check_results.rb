@@ -18,6 +18,12 @@ FactoryBot.define do
 
     trait :skipped do
       result { "skipped:some_reason" }
+      dwp_ref { nil }
+    end
+
+    trait :failure do
+      result { "failure:no_response" }
+      dwp_ref { nil }
     end
   end
 end

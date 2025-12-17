@@ -6,4 +6,8 @@ class BenefitCheckResult < ApplicationRecord
   def positive?
     result.to_s.downcase == POSITIVE_RESULT
   end
+
+  def failure?
+    result.to_s.downcase.start_with?("failure:")
+  end
 end

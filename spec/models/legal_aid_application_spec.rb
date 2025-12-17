@@ -209,8 +209,8 @@ RSpec.describe LegalAidApplication do
     context "when benefit check service is working" do
       let(:benefit_check_response) do
         {
-          benefit_checker_status: Faker::Lorem.word,
-          confirmation_ref: SecureRandom.hex,
+          benefit_checker_status: "Yes",
+          confirmation_ref: "T1765791054660",
         }
       end
 
@@ -220,22 +220,22 @@ RSpec.describe LegalAidApplication do
             .from(nil)
             .to(instance_of(BenefitCheckResult))
 
-        expect(legal_aid_application.benefit_check_result.result).to eq(benefit_check_response[:benefit_checker_status])
-        expect(legal_aid_application.benefit_check_result.dwp_ref).to eq(benefit_check_response[:confirmation_ref])
+        expect(legal_aid_application.benefit_check_result)
+          .to have_attributes(result: "Yes", dwp_ref: "T1765791054660")
       end
     end
 
     context "when benefit check service is down" do
       let(:benefit_check_response) { false }
 
-      it "returns false" do
-        expect(upsert_benefit_check_result).to be false
-      end
-
-      it "leaves benefit_check_result empty" do
+      it "creates a benefit_check_result indicating failure, with the right values" do
         expect { upsert_benefit_check_result }
-          .not_to change { legal_aid_application.reload.benefit_check_result }
+          .to change { legal_aid_application.reload.benefit_check_result }
             .from(nil)
+            .to(instance_of(BenefitCheckResult))
+
+        expect(legal_aid_application.benefit_check_result)
+          .to have_attributes(result: "failure:no_response", dwp_ref: nil)
       end
     end
 
@@ -414,8 +414,20 @@ RSpec.describe LegalAidApplication do
     let!(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :at_entering_applicant_details) }
     let(:applicant) { legal_aid_application.applicant }
 
-    it "is true if no benefit check results" do
-      expect(legal_aid_application).to be_benefit_check_result_needs_updating
+    context "with no benefit check result" do
+      before { legal_aid_application.benefit_check_result&.destroy! }
+
+      it "returns true" do
+        expect(legal_aid_application).to be_benefit_check_result_needs_updating
+      end
+    end
+
+    context "with a failed benefit check result" do
+      before { create(:benefit_check_result, :failure, legal_aid_application:) }
+
+      it "returns true" do
+        expect(legal_aid_application).to be_benefit_check_result_needs_updating
+      end
     end
 
     context "with up to date benefit check results" do

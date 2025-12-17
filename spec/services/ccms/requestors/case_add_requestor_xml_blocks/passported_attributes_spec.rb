@@ -797,8 +797,17 @@ module CCMS
             end
           end
 
-          context "when benefit check is unsuccessfull" do
+          context "when benefit check is unsuccessful/nil" do
             before { legal_aid_application.benefit_check_result = nil }
+
+            it "is set to false" do
+              block = XmlExtractor.call(xml, :global_means, "LAR_INFER_B_1WP1_36A")
+              expect(block).to have_boolean_response false
+            end
+          end
+
+          context "when benefit check is unsuccessful/failure" do
+            before { legal_aid_application.benefit_check_result = create(:benefit_check_result, :failure) }
 
             it "is set to false" do
               block = XmlExtractor.call(xml, :global_means, "LAR_INFER_B_1WP1_36A")

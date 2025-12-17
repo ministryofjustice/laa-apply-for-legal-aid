@@ -4,7 +4,7 @@ RSpec.describe BenefitCheckService do
   subject(:benefit_check_service) { described_class.new(application) }
 
   before do
-    allow(Rails.configuration.x.benefit_check).to receive_messages(service_name: "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl", client_org_id: "dummy_client_org_id", client_user_id: "dummy_client_user_id")
+    allow(Rails.configuration.x.benefit_check).to receive_messages(service_name: Rails.configuration.x.benefit_check.wsdl_url, client_org_id: "dummy_client_org_id", client_user_id: "dummy_client_user_id")
   end
 
   let(:last_name) { "WALKER" }
@@ -79,7 +79,7 @@ RSpec.describe BenefitCheckService do
     end
 
     context "when calling the API raises a Faraday::ConnectionFailed error" do
-      before { stub_request(:post, "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl").to_raise(Faraday::ConnectionFailed.new("Service unavailable")) }
+      before { stub_request(:post, Rails.configuration.x.benefit_check.wsdl_url).to_raise(Faraday::ConnectionFailed.new("Service unavailable")) }
 
       it "captures error" do
         expect(AlertManager).to receive(:capture_exception).with(message_contains("Service unavailable"))
@@ -92,7 +92,7 @@ RSpec.describe BenefitCheckService do
     end
 
     context "when calling the API raises a StandardError" do
-      before { stub_request(:post, "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl").to_raise(StandardError.new("Fake error")) }
+      before { stub_request(:post, Rails.configuration.x.benefit_check.wsdl_url).to_raise(StandardError.new("Fake error")) }
 
       it "captures error" do
         expect(AlertManager).to receive(:capture_exception).with(message_contains("Fake error"))
@@ -105,7 +105,7 @@ RSpec.describe BenefitCheckService do
     end
 
     context "when the API times out" do
-      before { stub_request(:post, "https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl").to_raise(Net::ReadTimeout) }
+      before { stub_request(:post, Rails.configuration.x.benefit_check.wsdl_url).to_raise(Net::ReadTimeout) }
 
       it "captures error and returns false" do
         expect(AlertManager).to receive(:capture_exception).with(Faraday::TimeoutError)

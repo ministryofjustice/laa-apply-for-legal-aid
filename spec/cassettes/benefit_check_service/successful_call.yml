@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl
+    uri: https://uat.laa-benefit-checker.service.justice.gov.uk/lsx/lsc-services/benefitChecker?wsdl
     body:
       encoding: UTF-8
       string: <?xml version="1.0" encoding="UTF-8"?><env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -18,7 +18,7 @@ http_interactions:
       Content-Type:
       - text/xml
       User-Agent:
-      - Faraday v2.9.0
+      - Faraday v2.14.0
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -29,7 +29,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Mon, 05 Feb 2024 15:03:48 GMT
+      - Tue, 16 Dec 2025 08:51:16 GMT
       Content-Type:
       - text/xml;charset=utf-8
       Transfer-Encoding:
@@ -37,9 +37,11 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Trace-Id:
-      - Root=1-65c0f8d4-6cb04c660b900d4e59eeda61;
+      - Root=1-69411d84-6d3c9c5d0949ad9803f5384c;
       Vary:
       - Accept-Encoding
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
     body:
       encoding: ASCII-8BIT
       string: <?xml version="1.0" encoding="UTF-8"?><soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
@@ -47,6 +49,6 @@ http_interactions:
         xmlns="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"><ns1:originalClientRef
         xmlns:ns1="http://lsc.gov.uk/benefitchecker/data/1.0">df56670b-aecf-49cc-8f1b-1c410cace3c5</ns1:originalClientRef><ns2:benefitCheckerStatus
         xmlns:ns2="http://lsc.gov.uk/benefitchecker/data/1.0">Yes</ns2:benefitCheckerStatus><ns3:confirmationRef
-        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1707145428938</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
-  recorded_at: Mon, 05 Feb 2024 15:03:48 GMT
-recorded_with: VCR 6.2.0
+        xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">T1765875076825</ns3:confirmationRef></benefitCheckerResponse></soapenv:Body></soapenv:Envelope>
+  recorded_at: Tue, 16 Dec 2025 08:51:16 GMT
+recorded_with: VCR 6.3.1

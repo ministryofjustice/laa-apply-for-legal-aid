@@ -8,10 +8,10 @@ http_interactions:
       string: <?xml version="1.0" encoding="UTF-8"?> <env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wsdl="https://lsc.gov.uk/benefitchecker/service/1.0/API_1.0_Check"
         xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"> <env:Body> <wsdl:check>
-        <wsdl:clientReference>ab776214-9323-42a4-962f-50642f954247</wsdl:clientReference>
+        <wsdl:clientReference>19f216a4-852e-4a03-8fcf-bcb4f264d123</wsdl:clientReference>
         <wsdl:nino>JA293483A</wsdl:nino> <wsdl:surname>WALKER</wsdl:surname> <wsdl:dateOfBirth>19800110</wsdl:dateOfBirth>
-        <wsdl:dateOfAward>20251215</wsdl:dateOfAward> <wsdl:lscServiceName>https://uat.laa-benefit-checker.service.justice.gov.uk/lsx/lsc-services/benefitChecker?wsdl</wsdl:lscServiceName>
-        <wsdl:clientOrgId/> <wsdl:clientUserId>dummy_client_user_id</wsdl:clientUserId>
+        <wsdl:dateOfAward>20251215</wsdl:dateOfAward> <wsdl:lscServiceName>https://benefitchecker.stg.legalservices.gov.uk/lsx/lsc-services/benefitChecker?wsdl</wsdl:lscServiceName>
+        <wsdl:clientOrgId>dummy_client_org_id</wsdl:clientOrgId> <wsdl:clientUserId>dummy_client_user_id</wsdl:clientUserId>
         </wsdl:check> </env:Body> </env:Envelope>
     headers:
       Soapaction:
@@ -30,7 +30,7 @@ http_interactions:
       message: ''
     headers:
       Date:
-      - Mon, 15 Dec 2025 16:09:14 GMT
+      - Mon, 15 Dec 2025 16:05:51 GMT
       Content-Type:
       - text/xml;charset=utf-8
       Transfer-Encoding:
@@ -38,7 +38,7 @@ http_interactions:
       Connection:
       - keep-alive
       X-Amzn-Trace-Id:
-      - Root=1-694032aa-f8d225e3a7591af764e224cf;
+      - Root=1-694031df-7729a5e0c23951874260ac41;
       Vary:
       - Accept-Encoding
       Strict-Transport-Security:
@@ -52,5 +52,5 @@ http_interactions:
         xmlns:ns3="http://lsc.gov.uk/benefitchecker/data/1.0">Invalid request credentials.</ns3:MessageText></ns1:benefitCheckerFaultException><ns4:exceptionName
         xmlns:ns4="http://xml.apache.org/axis/">uk.gov.lsc.benefitchecker.data._1_0.BenefitCheckerFaultException</ns4:exceptionName><ns5:hostname
         xmlns:ns5="http://xml.apache.org/axis/">laa-benefitchecker-c6b4587d5-n84c7</ns5:hostname></detail></soapenv:Fault></soapenv:Body></soapenv:Envelope>
-  recorded_at: Mon, 15 Dec 2025 16:09:14 GMT
+  recorded_at: Mon, 15 Dec 2025 16:05:51 GMT
 recorded_with: VCR 6.3.1
