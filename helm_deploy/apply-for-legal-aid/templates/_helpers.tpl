@@ -56,7 +56,7 @@ This means that overnight cronjobs on staging all fail as the DB is not present
   {{- if contains "-staging" .Release.Namespace -}}
     {{- 7 -}}
   {{- else if contains "-uat" .Release.Namespace -}}
-    {{- 1 -}}
+    {{- 7 -}}
   {{- else -}}
     {{ 0 }}
   {{- end -}}
