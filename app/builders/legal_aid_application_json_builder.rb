@@ -66,6 +66,7 @@ class LegalAidApplicationJsonBuilder < BaseJsonBuilder
       # associations
       office: OfficeJsonBuilder.build(office).as_json,
       provider: ProviderJsonBuilder.build(provider).as_json,
+      firm: FirmJsonBuilder.build(provider.firm).as_json,
       applicant: ApplicantJsonBuilder.build(applicant).as_json,
       partner: PartnerJsonBuilder.build(partner).as_json,
       proceedings: proceedings.map { |p| ProceedingJsonBuilder.build(p).as_json },
