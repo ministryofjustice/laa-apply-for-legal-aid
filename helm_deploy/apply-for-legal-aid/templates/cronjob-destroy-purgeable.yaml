@@ -20,9 +20,6 @@ spec:
     spec:
       backoffLimit: 1
       template:
-        metadata:
-          labels:
-            reportuploader: cronjob
         spec:
           serviceAccountName: "{{ .Values.service_account.name }}"
           containers:
