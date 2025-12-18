@@ -151,6 +151,7 @@ module LaaApplyForLegalAid
     config.x.redis.page_history_url = "#{config.x.redis.base_url}/1"
     config.x.redis.oauth_session_url = "#{config.x.redis.base_url}/2"
     config.x.redis.rack_attack_url = "#{config.x.redis.base_url}/3"
+    config.x.redis.bank_holidays_url = "#{config.x.redis.base_url}/4" # TODO: AP-6504 do we need a separate redis db for bank holidays?
 
     config.x.maintenance_mode = ENV.fetch("MAINTENANCE_MODE", nil)&.downcase&.eql?("true")
 
@@ -162,14 +163,12 @@ module LaaApplyForLegalAid
 
     config.x.session.timeout_in = ENV.fetch("IDLE_TIMEOUT_AFTER_MINUTES", 60).to_i.minutes
 
-    # business hours
-    config.x.business_hours.start = ENV.fetch("BUSINESS_HOURS_START", "7:00")
-    config.x.business_hours.end = ENV.fetch("BUSINESS_HOURS_END", "21:30")
-
+    # Business hours
     # TODO: The bank_holidays array needs handling and is only added here as a temporary fix for
     # out of hours implementation over the Christmas holidays of 2025 - by Easter 2026 we should
     # be able to handle this better using the BankHoliday model
-    config.x.bank_holidays = %w[2025-12-25 2025-12-26 2026-01-01]
+    config.x.business_hours.start = ENV.fetch("BUSINESS_HOURS_START", "7:00")
+    config.x.business_hours.end = ENV.fetch("BUSINESS_HOURS_END", "21:30")
     config.x.bank_holidays_url = "https://www.gov.uk/bank-holidays.json"
 
     # automatically include locale in the query string when generating urls with url_helpers

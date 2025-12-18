@@ -19,7 +19,17 @@ RSpec.describe "Backable", vcr: { cassette_name: "backable", allow_playback_repe
     }
   end
 
-  before { login_as application.provider }
+  let(:page_history_cache) { Redis.new(url: Rails.configuration.x.redis.page_history_url) }
+
+  before do
+    page_history_cache.flushdb
+    login_as application.provider
+  end
+
+  after do
+    page_history_cache.flushdb
+    page_history_cache.quit
+  end
 
   describe "#back_path" do
     context "when navigating through several pages" do
