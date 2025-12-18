@@ -65,8 +65,6 @@ RSpec.describe Providers::ResumesController do
 
       context "when saved as draft and adding a new involved child" do
         it do
-          # application.provider_step = "involved_children"
-          # application.provider_step_params = { application_merits_task_involved_child: { full_name: nil }, id: "new" }
           application.update!(provider_step: "involved_children", provider_step_params: { application_merits_task_involved_child: { full_name: nil }, id: "new" })
           request
           expect(response).to redirect_to("/providers/applications/#{application.id}/involved_children/new?locale=en")
@@ -112,6 +110,19 @@ RSpec.describe Providers::ResumesController do
           application.update!(provider_step: "remove_dependants", provider_step_params: { id: dependant.id })
           request
           expect(response).to redirect_to("/providers/applications/#{application.id}/means/remove_dependants/#{dependant.id}?locale=en")
+        end
+      end
+
+      context "when legal_aid_application current path is unknown" do
+        it "links to start of journey" do
+          application.update!(provider_step: :unknown)
+          request
+          start_path = Flow::KeyPoint.path_for(
+            journey: :providers,
+            key_point: :edit_applicant,
+            legal_aid_application: application,
+          )
+          expect(response).to redirect_to(start_path)
         end
       end
 
