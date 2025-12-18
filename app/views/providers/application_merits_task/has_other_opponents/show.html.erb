@@ -43,7 +43,8 @@
                   row.with_cell do
                     govuk_link_to(
                       t("generic.remove"),
-                      providers_legal_aid_application_remove_opponent_path(@legal_aid_application, opponent),
+                      providers_legal_aid_application_has_other_opponent_path(@legal_aid_application, opponent_id: opponent.id),
+                      method: :delete,
                       class: "change-link",
                       "aria-label": opponent.full_name,
                     )
