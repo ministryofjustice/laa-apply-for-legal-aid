@@ -8,6 +8,7 @@ class BankHolidayUpdateWorker
     return last_updated.touch if stored_data_current?
 
     lastest_data.save!
+    BankHolidayStore.write(lastest_data.dates)
   end
 
   def last_updated

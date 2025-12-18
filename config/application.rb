@@ -151,6 +151,7 @@ module LaaApplyForLegalAid
     config.x.redis.page_history_url = "#{config.x.redis.base_url}/1"
     config.x.redis.oauth_session_url = "#{config.x.redis.base_url}/2"
     config.x.redis.rack_attack_url = "#{config.x.redis.base_url}/3"
+    config.x.redis.bank_holidays_url = "#{config.x.redis.base_url}/4"
 
     config.x.maintenance_mode = ENV.fetch("MAINTENANCE_MODE", nil)&.downcase&.eql?("true")
 
