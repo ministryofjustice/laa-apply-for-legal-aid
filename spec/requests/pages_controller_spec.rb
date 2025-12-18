@@ -146,14 +146,21 @@ RSpec.describe PagesController, :clamav do
       end
     end
 
+    shared_examples "in hours access" do
+      it "allows citizen traffic" do
+        citizen_access_request
+        expect(response).to redirect_to(citizens_legal_aid_applications_path)
+      end
+
+      it "allows provider traffic" do
+        landing_page_request
+        expect(response).to render_template("providers/start/index")
+      end
+    end
+
     context "when it's British Summer Time" do
       context "when it's 0500 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 9, 8, 5, 0, 0) }
-
-        it "allows citizen traffic" do
-          citizen_access_request
-          expect(response).to redirect_to(citizens_legal_aid_applications_path)
-        end
 
         it_behaves_like "out of hours access"
       end
@@ -161,52 +168,23 @@ RSpec.describe PagesController, :clamav do
       context "when it's 0700 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 9, 8, 7, 0, 0) }
 
-        it "allows citizen traffic" do
-          citizen_access_request
-          expect(response).to redirect_to(citizens_legal_aid_applications_path)
-        end
-
-        it "allows provider traffic" do
-          landing_page_request
-          expect(response).to render_template("providers/start/index")
-        end
+        it_behaves_like "in hours access"
       end
 
       context "when it's 0900 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 9, 8, 9, 0, 0) }
 
-        it "allows citizen traffic" do
-          citizen_access_request
-          expect(response).to redirect_to(citizens_legal_aid_applications_path)
-        end
-
-        it "allows provider traffic" do
-          landing_page_request
-          expect(response).to render_template("providers/start/index")
-        end
+        it_behaves_like "in hours access"
       end
 
       context "when it's 2129 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 9, 8, 21, 29, 0) }
 
-        it "allows citizen traffic" do
-          citizen_access_request
-          expect(response).to redirect_to(citizens_legal_aid_applications_path)
-        end
-
-        it "allows provider traffic" do
-          landing_page_request
-          expect(response).to render_template("providers/start/index")
-        end
+        it_behaves_like "in hours access"
       end
 
       context "when it's 2130 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 9, 8, 21, 30, 0) }
-
-        it "allows citizen traffic" do
-          citizen_access_request
-          expect(response).to redirect_to(citizens_legal_aid_applications_path)
-        end
 
         it_behaves_like "out of hours access"
       end
@@ -214,28 +192,34 @@ RSpec.describe PagesController, :clamav do
       context "when it's 1300 on a Sunday" do
         let(:new_time) { Time.zone.local(2025, 9, 7, 13, 0, 0) }
 
-        it "allows citizen traffic" do
-          citizen_access_request
-          expect(response).to redirect_to(citizens_legal_aid_applications_path)
-        end
-
-        it "allows provider traffic" do
-          landing_page_request
-          expect(response).to render_template("providers/start/index")
-        end
+        it_behaves_like "in hours access"
       end
     end
 
     context "when it's a bank holiday" do
-      let(:new_time) { Time.zone.local(2024, 12, 25, 13, 0, 0) }
+      let(:bank_holidays_cache) { Redis.new(url: Rails.configuration.x.redis.bank_holidays_url) }
 
-      it_behaves_like "out of hours access"
-    end
+      before do
+        bank_holidays_cache.flushdb
+        stub_bankholiday_success
+      end
 
-    context "when it's a zero day bank holiday" do
-      let(:new_time) { Time.zone.local(2025, 1, 1, 13, 0, 0) }
+      after do
+        bank_holidays_cache.flushdb
+        bank_holidays_cache.quit
+      end
 
-      it_behaves_like "out of hours access"
+      context "when it's a non-zero day bank holiday" do
+        let(:new_time) { Time.zone.local(2025, 12, 25, 13, 0, 0) }
+
+        it_behaves_like "out of hours access"
+      end
+
+      context "when it's a zero day bank holiday" do
+        let(:new_time) { Time.zone.local(2026, 1, 1, 13, 0, 0) }
+
+        it_behaves_like "out of hours access"
+      end
     end
 
     context "when it's GMT" do
@@ -248,19 +232,13 @@ RSpec.describe PagesController, :clamav do
       context "when it's 0730 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 11, 3, 7, 30, 0) }
 
-        it "allows provider traffic" do
-          landing_page_request
-          expect(response).to render_template("providers/start/index")
-        end
+        it_behaves_like "in hours access"
       end
 
       context "when it's 1830 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 11, 3, 18, 30, 0) }
 
-        it "allows provider traffic" do
-          landing_page_request
-          expect(response).to render_template("providers/start/index")
-        end
+        it_behaves_like "in hours access"
       end
 
       context "when it's 2200 on a Monday" do

@@ -1,3 +1,4 @@
+@stub_bank_holidays
 Feature: Admin sign in
 
   @javascript @mock_admin_auth_enabled @vcr_turned_off
