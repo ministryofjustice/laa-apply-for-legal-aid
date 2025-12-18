@@ -10,4 +10,4 @@ en:
 
     service_out_of_hours:
       title: Sorry, the service is unavailable
-      warning: You can use this service from %{start} to %{end}, Monday to Friday.
+      warning: This service is available daily from %{start} to %{end}. It is not available on bank holidays.
