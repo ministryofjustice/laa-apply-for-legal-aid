@@ -29,6 +29,10 @@
             row.with_value { @submission.aasm_state }
           end
           summary_list.with_row do |row|
+            row.with_key { t("admin.ccms_queues.show.latest_details") }
+            row.with_value { @submission.submission_history.order(created_at: :asc).last&.details&.truncate(64) || "Latest details are nil" }
+          end
+          summary_list.with_row do |row|
             row.with_key { t("admin.ccms_queues.show.applicant_poll_count") }
             row.with_value { @submission.applicant_poll_count.to_s }
           end
@@ -87,6 +91,10 @@
             summary_list.with_row do |row|
               row.with_key { t("generic.success") }
               row.with_value { history.success.to_s }
+            end
+            summary_list.with_row do |row|
+              row.with_key { t("admin.ccms_queues.show.details") }
+              row.with_value { history.details&.truncate(64) || "Details are nil" }
             end
             summary_list.with_row do |row|
               row.with_key { t("admin.ccms_queues.show.request") }
