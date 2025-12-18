@@ -14,7 +14,7 @@
             table.with_head do |head|
               head.with_row do |row|
                 row.with_cell(html_attributes: { class: "govuk-!-width-two-thirds" }, text: t("admin.site_banners.index.message"))
-                row.with_cell(text: t("admin.site_banners.index.between"))
+                row.with_cell(text: t("admin.site_banners.index.status"))
                 row.with_cell(text: t("admin.site_banners.index.actions"))
               end
             end
@@ -38,6 +38,7 @@
                     concat tag.div(l(message.start_at, format: :announcement_date_time))
                     concat tag.div("and")
                     concat tag.div(l(message.end_at, format: :announcement_date_time))
+                    concat govuk_tag(text: message.active? ? "Live" : "Inactive", colour: message.active? ? "green" : "red", classes: "govuk-!-margin-top-1")
                   end
                   row.with_cell do
                     concat govuk_button_to(

@@ -5,7 +5,9 @@
     </svg>
   </div>
   <div class="moj-alert__content">
-    <h2 class="moj-alert__heading"><%= heading %></h2>
+    <% if heading.present? %>
+      <h2 class="moj-alert__heading"><%= heading %></h2>
+    <% end %>
     <%= body %>
   </div>
   <div class="moj-alert__action">

@@ -103,7 +103,7 @@ cy:
       index:
         heading_1: Site banners
         message: Message
-        between: Between
+        status: Display status
         start_at: Start at
         end_at: End at
         actions: Action

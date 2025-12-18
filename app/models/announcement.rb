@@ -11,4 +11,8 @@ class Announcement < ApplicationRecord
   validates :start_at, :end_at, date_time: ->(field) { announcement.send(field).present? }
 
   scope :active, -> { where(start_at: ...Time.current, end_at: Time.current...) }
+
+  def active?
+    Time.zone.now >= start_at.to_time && Time.zone.now < end_at.to_time
+  end
 end
