@@ -57,6 +57,7 @@ en:
         created_at: Created at
         updated_at: Updated at
         status: Status
+        latest_details: Latest details
         applicant_poll_count: Applicant poll count
         sidekiq_argument: Sidekiq argument
         case_poll_count: Case poll count
@@ -70,6 +71,7 @@ en:
         to_state: To state
         created_at: Created at
         updated_at: Updated at
+        details: Details
         request: Request
         request_is_nil: Request is nil
         response: Response
