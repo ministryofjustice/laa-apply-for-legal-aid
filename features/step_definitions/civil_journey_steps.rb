@@ -1553,3 +1553,22 @@ Then(/^the value of the ['|"](.*)['|"] input should (be|not be) ['|"](.*)['|"]$/
     expect(input.value).not_to eq answer
   end
 end
+
+When("the country suggestions include {string}") do |string|
+  within("#country-list") do
+    expect(page).to have_content(/#{string}/m)
+  end
+end
+
+Then("the country result list on page returns a {string} message") do |string|
+  expect(page).to have_css(".no-country-items", text: string, visible: :visible)
+end
+
+# NOTE: this step does not work unless put after the step "the country suggestions include {string}" :(
+Then(/^country suggestions has (\d+) result[s]?$/) do |count|
+  expect(page).to have_css(".country-item", visible: :visible, count:)
+end
+
+Then("country search field is empty") do
+  expect(page).to have_field("non-uk-home-address-country-name-field", with: "")
+end

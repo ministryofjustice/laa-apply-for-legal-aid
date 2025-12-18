@@ -760,6 +760,37 @@ private
           ],
         },
       },
+      {
+        "fra" =>
+        {
+          success: true,
+          data: [
+            {
+              description: "France",
+              code: "FRA",
+              description_headline: "<mark>France</mark>",
+            },
+          ],
+        },
+      },
+      {
+        "gree" =>
+        {
+          success: true,
+          data: [
+            {
+              description: "Greenland",
+              code: "GRL",
+              description_headline: "<mark>Greenland</mark>",
+            },
+            {
+              description: "Greece",
+              code: "GRC",
+              description_headline: "<mark>Greece</mark>",
+            },
+          ],
+        },
+      },
     )
   end
 end
