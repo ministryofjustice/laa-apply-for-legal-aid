@@ -195,6 +195,22 @@ RSpec.describe PagesController, :clamav do
       end
     end
 
+    context "when it's a bank holiday" do
+      let(:new_time) { Time.zone.local(2024, 12, 25, 13, 0, 0) }
+
+      it "allows citizen traffic" do
+        citizen_access_request
+        expect(response).to redirect_to(citizens_legal_aid_applications_path)
+      end
+
+      it "blocks provider traffic" do
+        landing_page_request
+        expect(response).to render_template("pages/service_out_of_hours")
+        expect(response.body).not_to include("Sign in") # sign in link removed
+        expect(response.body).not_to include("help us to improve it") # phase banner feedback link removed
+      end
+    end
+
     context "when it's GMT" do
       context "when it's 0630 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 11, 3, 6, 30, 0) }

@@ -95,4 +95,9 @@ Rails.application.configure do
   config.x.admin_omniauth.mock_auth_enabled = false
   config.x.admin_omniauth.mock_username = "apply-for-civil-legal-aid@justice.gov.uk"
   config.x.admin_omniauth.mock_password = "not-a-real-password"
+
+  # business hours
+  config.x.business_hours.start = ENV.fetch("BUSINESS_HOURS_START", "7:00")
+  config.x.business_hours.end = ENV.fetch("BUSINESS_HOURS_END", "21:30")
+  config.x.bank_holidays = %w[2024-12-25 2024-12-26 2025-1-1]
 end
