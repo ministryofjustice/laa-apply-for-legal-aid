@@ -1,18 +1,18 @@
 require "rails_helper"
 
-RSpec.describe PdfConverterWorker, type: :worker do
+RSpec.describe PDFConverterWorker, type: :worker do
   subject(:perform) { described_class.new.perform(uuid) }
 
   let(:uuid) { SecureRandom.uuid }
   let(:worker) { described_class.new }
 
   it "calls CreatePDFAttachment" do
-    expect(CreatePdfAttachment).to receive(:call).with(uuid)
+    expect(CreatePDFAttachment).to receive(:call).with(uuid)
     perform
   end
 
   context "when an error occurs" do
-    let(:pdf_converter) { class_double CreatePdfAttachment }
+    let(:pdf_converter) { class_double CreatePDFAttachment }
 
     before do
       allow(pdf_converter).to receive(:call).with(uuid).and_return(false)
@@ -24,7 +24,7 @@ RSpec.describe PdfConverterWorker, type: :worker do
       let(:expected_error) do
         <<~MESSAGE
           Attachment id:  failed
-          Moving PdfConverterWorker to dead set, it failed with: /An error occurred
+          Moving PDFConverterWorker to dead set, it failed with: /An error occurred
         MESSAGE
       end
 
