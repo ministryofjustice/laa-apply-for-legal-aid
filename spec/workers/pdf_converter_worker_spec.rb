@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe PdfConverterWorker, type: :worker do
+RSpec.describe PDFConverterWorker, type: :worker do
   subject(:perform) { instance.perform(uuid) }
 
   let(:instance) { described_class.new }
@@ -9,14 +9,14 @@ RSpec.describe PdfConverterWorker, type: :worker do
   describe "#perform" do
     context "when conversion successful" do
       it "calls CreatePDFAttachment" do
-        expect(CreatePdfAttachment).to receive(:call).with(uuid)
+        expect(CreatePDFAttachment).to receive(:call).with(uuid)
         perform
       end
     end
 
     context "when conversion encounters an error" do
       before do
-        allow(CreatePdfAttachment).to receive(:call).and_raise(StandardError, "Oops, something went wrong error")
+        allow(CreatePDFAttachment).to receive(:call).and_raise(StandardError, "Oops, something went wrong error")
       end
 
       context "when below warning retry count" do
@@ -69,7 +69,7 @@ RSpec.describe PdfConverterWorker, type: :worker do
     let(:expected_error) do
       <<~MESSAGE
         Attachment id:  failed
-        Moving PdfConverterWorker to dead set, it failed with: /Oops, this is the last straw
+        Moving PDFConverterWorker to dead set, it failed with: /Oops, this is the last straw
       MESSAGE
     end
 

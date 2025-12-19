@@ -27,8 +27,8 @@ RSpec.describe "POST /v1/partners/bank_statements" do
       end
 
       it "enqueues job to convert uploaded attachment document to pdf" do
-        expect { request }.to change(PdfConverterWorker.jobs, :size).by(1)
-        expect(PdfConverterWorker.jobs[0]["args"]).to include(legal_aid_application.reload.attachments.last.id)
+        expect { request }.to change(PDFConverterWorker.jobs, :size).by(1)
+        expect(PDFConverterWorker.jobs[0]["args"]).to include(legal_aid_application.reload.attachments.last.id)
       end
 
       it "attachment has expected attributes" do

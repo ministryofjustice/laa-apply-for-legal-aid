@@ -1,4 +1,4 @@
-class PdfConverterWorker
+class PDFConverterWorker
   include Sidekiq::Worker
   include Sidekiq::Status::Worker
 
@@ -13,7 +13,7 @@ class PdfConverterWorker
   end
 
   def perform(attachment_id)
-    CreatePdfAttachment.call(attachment_id)
+    CreatePDFAttachment.call(attachment_id)
   rescue StandardError => e
     raise if should_warn?
 

@@ -1,4 +1,4 @@
-class CreatePdfAttachment
+class CreatePDFAttachment
   def self.call(attachment_id)
     new(attachment_id).call
   end

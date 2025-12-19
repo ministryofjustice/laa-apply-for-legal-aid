@@ -92,7 +92,7 @@ private
                                          original_filename: file.original_filename,
                                          attachment_name: sequenced_attachment_name)
 
-    PdfConverterWorker.perform_async(attachment.id)
+    PDFConverterWorker.perform_async(attachment.id)
   end
 
   def too_big
