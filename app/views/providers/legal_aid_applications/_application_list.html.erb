@@ -16,7 +16,7 @@
 
         table.with_body do |body|
           @legal_aid_applications.each do |application|
-            name = @scope == :voided ? application.applicant_full_name : link_to_application(application.applicant_full_name, application)
+            name = @scope == :voided ? application.applicant_full_name : govuk_link_to(application.applicant_full_name, providers_legal_aid_application_resume_path(application))
             body.with_row do |row|
               row.with_cell(text: name, html_attributes: { "data-sort-value": application.applicant_full_name })
               row.with_cell(text: l(application.created_at.to_date, format: :short_date), html_attributes: { "data-sort-value": application.created_at.to_i })
