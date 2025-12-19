@@ -6,13 +6,13 @@ RSpec.describe PdfConverterWorker, type: :worker do
   let(:uuid) { SecureRandom.uuid }
   let(:worker) { described_class.new }
 
-  it "calls PdfConverter" do
-    expect(PdfConverter).to receive(:call).with(uuid)
+  it "calls CreatePDFAttachment" do
+    expect(CreatePdfAttachment).to receive(:call).with(uuid)
     perform
   end
 
   context "when an error occurs" do
-    let(:pdf_converter) { class_double PdfConverter }
+    let(:pdf_converter) { class_double CreatePdfAttachment }
 
     before do
       allow(pdf_converter).to receive(:call).with(uuid).and_return(false)
