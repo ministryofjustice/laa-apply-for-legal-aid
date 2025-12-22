@@ -31,7 +31,7 @@ module UploadedEvidence
       return if uploaded_evidence_collection.nil?
 
       uploaded_evidence_collection.original_attachments.each do |attachment|
-        PdfConverterWorker.perform_async(attachment.id)
+        PDFConverterWorker.perform_async(attachment.id)
       end
     end
   end
