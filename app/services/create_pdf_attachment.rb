@@ -14,9 +14,7 @@ class CreatePDFAttachment
     return if @original_attachment&.pdf_attachment_id.present?
 
     file = converted_file
-    # :nocov:
     raise_alarm_for(file.size) if file.size > 8_000_000
-    # :nocov:
 
     Attachment.transaction do
       pdf_filename = "#{File.basename(@original_attachment.attachment_name, '.*')}.pdf"
@@ -39,13 +37,14 @@ private
   def converted_file
     return downloaded_file if @original_attachment.document.content_type == "application/pdf"
 
-    file = Tempfile.new
-    Libreconv.convert(downloaded_file.path, file.path)
-    file.close
-    file
+    PDF::ConvertFile.call(downloaded_file)
   end
 
   def downloaded_file
+    @downloaded_file ||= original_attachment_download
+  end
+
+  def original_attachment_download
     file = Tempfile.new
     file.binmode
     file.write(@original_attachment.document.download)
@@ -53,11 +52,9 @@ private
     file
   end
 
-  # :nocov:
   def raise_alarm_for(file_size)
     message = "FileSizeWarning: attachment #{@original_attachment.id} converted to #{(file_size.to_f / 1_000_000).round(2)}MB"
     Rails.logger.error(message)
     Sentry.capture_message(message)
   end
-  # :nocov:
 end
