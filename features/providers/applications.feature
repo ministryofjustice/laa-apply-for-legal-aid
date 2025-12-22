@@ -19,6 +19,15 @@ Feature: Applications page
     Then I should be on a page showing "You have 0 applications."
 
   @javascript
+  Scenario: Test application page for paused submission
+    Given I have an application with a paused submission
+    When I visit the submitted applications page
+    Then I should see the previously created application
+    
+    When I visit the in progress applications page
+    Then I should be on a page showing "You have 0 applications."
+
+  @javascript
     Scenario: Test expired application page
       Given I have created a voided application
       When I visit the in progress applications page
