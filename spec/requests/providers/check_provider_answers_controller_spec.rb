@@ -357,6 +357,32 @@ RSpec.describe Providers::CheckProviderAnswersController do
         end
       end
 
+      describe "the merits task list" do
+        let(:remove_merits_task_list_service_double) { instance_double(LegalFramework::RemoveMeritsTaskListService, call: nil) }
+        let(:smtl) { nil }
+
+        before do
+          allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl)
+          allow(LegalFramework::RemoveMeritsTaskListService).to receive(:new).and_return(remove_merits_task_list_service_double)
+        end
+
+        context "when the application does not have a legal_framework_merits_task_list" do
+          it "does not call RemoveMeritsTaskListService" do
+            request
+            expect(LegalFramework::RemoveMeritsTaskListService).not_to have_received(:new)
+          end
+        end
+
+        context "when the application has a legal_framework_merits_task_list" do
+          let(:smtl) { create(:legal_framework_merits_task_list, :da001, legal_aid_application: application) }
+
+          it "calls RemoveMeritsTaskListService" do
+            request
+            expect(LegalFramework::RemoveMeritsTaskListService).to have_received(:new)
+          end
+        end
+      end
+
       context "when passported with no benefit_check_result (default)" do
         let(:application) do
           create(

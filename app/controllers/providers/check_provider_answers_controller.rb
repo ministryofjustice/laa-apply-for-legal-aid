@@ -16,6 +16,7 @@ module Providers
 
     def continue
       update_applicant_age_for_means_test_purposes!
+      LegalFramework::RemoveMeritsTaskListService.call(legal_aid_application) if legal_aid_application.legal_framework_merits_task_list
 
       draft_selected? ? review_in_progress! : review_completed!
 
