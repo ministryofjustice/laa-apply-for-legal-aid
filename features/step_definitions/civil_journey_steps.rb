@@ -794,6 +794,7 @@ Given("I complete the passported journey as far as check your answers for client
     applicant:,
   )
   create(:legal_framework_merits_task_list, :da001, legal_aid_application: @legal_aid_application)
+  @legal_aid_application.proceedings.find_by(ccms_code: "DA001").update!(used_delegated_functions: false)
   login_as @legal_aid_application.provider
 
   visit(providers_legal_aid_application_check_provider_answers_path(@legal_aid_application))

@@ -5,7 +5,7 @@ http_interactions:
     uri: https://cfe-civil-staging.cloud-platform.service.justice.gov.uk/v6/assessments
     body:
       encoding: UTF-8
-      string: '{"assessment":{"client_reference_id":"L-FXR-TN7","submission_date":"2025-01-31","level_of_help":"certificated"},"proceeding_types":[{"ccms_code":"DA001","client_involvement_type":"A"}],"applicant":{"date_of_birth":"1980-01-10","employed":false,"involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true},"capitals":{"bank_accounts":[{"description":"Current
+      string: '{"assessment":{"client_reference_id":"L-76Y-NJX","submission_date":"2025-12-22","level_of_help":"certificated"},"proceeding_types":[{"ccms_code":"DA001","client_involvement_type":"A"}],"applicant":{"date_of_birth":"1980-01-10","employed":false,"involvement_type":"applicant","has_partner_opponent":false,"receives_qualifying_benefit":true},"capitals":{"bank_accounts":[{"description":"Current
         accounts","value":"10.0"},{"description":"Money not in a bank account","value":"10000.0"}],"non_liquid_capital":[{"description":"Land","value":"50000.0"}]},"vehicles":[],"properties":{"main_home":{"value":200000.0,"outstanding_mortgage":100000.0,"percentage_owned":50.0,"shared_with_housing_assoc":false},"additional_properties":[{"value":0.0,"outstanding_mortgage":0.0,"percentage_owned":0.0,"shared_with_housing_assoc":false}]},"explicit_remarks":[]}'
     headers:
       Content-Type:
@@ -20,7 +20,7 @@ http_interactions:
       message: OK
     headers:
       date:
-      - Fri, 31 Jan 2025 16:30:47 GMT
+      - Mon, 22 Dec 2025 09:29:45 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -40,18 +40,68 @@ http_interactions:
       vary:
       - Accept
       etag:
-      - W/"c7fe33663210418d9ccfdf715d4718d9"
+      - W/"d8613674728760382c0dcd613d5868a4"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - bd1e8b5ea5369ac1a81e8d5b1ea583e7
+      - 0a312abd201e0057b40916473709fe65
       x-runtime:
-      - '0.061904'
+      - '0.078360'
       strict-transport-security:
       - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"version":"6","timestamp":"2025-01-31T16:30:47.222Z","success":true,"result_summary":{"overall_result":{"result":"contribution_required","capital_contribution":57010.0,"income_contribution":0,"proceeding_types":[{"ccms_code":"DA001","upper_threshold":0.0,"lower_threshold":0.0,"result":"contribution_required","client_involvement_type":"A"}]},"gross_income":{"total_gross_income":0.0,"proceeding_types":[{"ccms_code":"DA001","upper_threshold":999999999999.0,"lower_threshold":0.0,"result":"not_calculated","client_involvement_type":"A"}],"combined_total_gross_income":0},"disposable_income":{"dependant_allowance_under_16":0,"dependant_allowance_over_16":0,"dependant_allowance":0,"gross_housing_costs":0.0,"housing_costs":0.0,"housing_benefit":0.0,"net_housing_costs":0.0,"allowed_housing_costs":0.0,"maintenance_allowance":0.0,"total_outgoings_and_allowances":0.0,"total_disposable_income":0.0,"employment_income":{"gross_income":0.0,"benefits_in_kind":0.0,"tax":0.0,"national_insurance":0.0,"prisoner_levy":0.0,"student_debt_repayment":0.0,"fixed_employment_deduction":0.0,"net_employment_income":0.0},"proceeding_types":[{"ccms_code":"DA001","upper_threshold":999999999999.0,"lower_threshold":315.0,"result":"not_calculated","client_involvement_type":"A"}],"combined_total_disposable_income":0.0,"combined_total_outgoings_and_allowances":0.0,"partner_allowance":0,"lone_parent_allowance":0,"income_contribution":0},"capital":{"pensioner_disregard_applied":0.0,"total_liquid":10010.0,"total_non_liquid":50000.0,"total_vehicle":0.0,"total_property":0.0,"total_mortgage_allowance":999999999999.0,"total_capital":60010.0,"subject_matter_of_dispute_disregard":0.0,"assessed_capital":60010.0,"total_capital_with_smod":60010.0,"disputed_non_property_disregard":0,"proceeding_types":[{"ccms_code":"DA001","upper_threshold":999999999999.0,"lower_threshold":3000.0,"result":"contribution_required","client_involvement_type":"A"}],"combined_disputed_capital":0,"combined_non_disputed_capital":60010.0,"capital_contribution":57010.0,"pensioner_capital_disregard":0.0,"combined_assessed_capital":60010.0}},"assessment":{"id":"7308a082-797b-4ef3-994c-147fa4017bda","client_reference_id":"L-FXR-TN7","submission_date":"2025-01-31","level_of_help":"certificated","applicant":{"date_of_birth":"1980-01-10","involvement_type":"applicant","employed":false,"has_partner_opponent":false,"receives_qualifying_benefit":true},"gross_income":{"employment_income":[],"irregular_income":{"monthly_equivalents":{"student_loan":0.0,"unspecified_source":0.0}},"state_benefits":{"monthly_equivalents":{"all_sources":0.0,"cash_transactions":0,"bank_transactions":[]}},"other_income":{"monthly_equivalents":{"all_sources":{"friends_or_family":0,"maintenance_in":0,"property_or_lodger":0,"pension":0},"bank_transactions":{"friends_or_family":0,"maintenance_in":0,"property_or_lodger":0,"pension":0},"cash_transactions":{"friends_or_family":0,"maintenance_in":0,"property_or_lodger":0,"pension":0}}}},"disposable_income":{"monthly_equivalents":{"all_sources":{"child_care":0.0,"rent_or_mortgage":0.0,"maintenance_out":0.0,"legal_aid":0.0,"pension_contribution":0.0,"council_tax":0.0,"priority_debt_repayment":0.0},"bank_transactions":{"child_care":0.0,"rent_or_mortgage":0.0,"maintenance_out":0.0,"legal_aid":0.0,"pension_contribution":0.0,"council_tax":0.0,"priority_debt_repayment":0.0},"cash_transactions":{"child_care":0.0,"rent_or_mortgage":0.0,"maintenance_out":0.0,"legal_aid":0.0,"pension_contribution":0.0,"council_tax":0.0,"priority_debt_repayment":0.0}},"childcare_allowance":0.0,"deductions":{"dependants_allowance":0.0,"disregarded_state_benefits":0.0}},"capital":{"capital_items":{"liquid":[{"description":"Current
+      string: '{"version":"6","timestamp":"2025-12-22T09:29:45.820Z","success":true,"result_summary":{"overall_result":{"result":"contribution_required","capital_contribution":57010.0,"income_contribution":0,"proceeding_types":[{"ccms_code":"DA001","upper_threshold":0.0,"lower_threshold":0.0,"result":"contribution_required","client_involvement_type":"A"}]},"gross_income":{"total_gross_income":0.0,"proceeding_types":[{"ccms_code":"DA001","upper_threshold":999999999999.0,"lower_threshold":0.0,"result":"not_calculated","client_involvement_type":"A"}],"combined_total_gross_income":0},"disposable_income":{"dependant_allowance_under_16":0,"dependant_allowance_over_16":0,"dependant_allowance":0,"gross_housing_costs":0.0,"housing_costs":0.0,"housing_benefit":0.0,"net_housing_costs":0.0,"allowed_housing_costs":0.0,"maintenance_allowance":0.0,"total_outgoings_and_allowances":0.0,"total_disposable_income":0.0,"employment_income":{"gross_income":0.0,"benefits_in_kind":0.0,"tax":0.0,"national_insurance":0.0,"prisoner_levy":0.0,"student_debt_repayment":0.0,"fixed_employment_deduction":0.0,"net_employment_income":0.0},"proceeding_types":[{"ccms_code":"DA001","upper_threshold":999999999999.0,"lower_threshold":315.0,"result":"not_calculated","client_involvement_type":"A"}],"combined_total_disposable_income":0.0,"combined_total_outgoings_and_allowances":0.0,"partner_allowance":0,"lone_parent_allowance":0,"income_contribution":0},"capital":{"pensioner_disregard_applied":0.0,"total_liquid":10010.0,"total_non_liquid":50000.0,"total_vehicle":0.0,"total_property":0.0,"total_mortgage_allowance":999999999999.0,"total_capital":60010.0,"subject_matter_of_dispute_disregard":0.0,"assessed_capital":60010.0,"total_capital_with_smod":60010.0,"disputed_non_property_disregard":0,"proceeding_types":[{"ccms_code":"DA001","upper_threshold":999999999999.0,"lower_threshold":3000.0,"result":"contribution_required","client_involvement_type":"A"}],"combined_disputed_capital":0,"combined_non_disputed_capital":60010.0,"capital_contribution":57010.0,"pensioner_capital_disregard":0.0,"combined_assessed_capital":60010.0}},"assessment":{"id":"0673f724-6fa3-4989-bca9-59a741ad9e2b","client_reference_id":"L-76Y-NJX","submission_date":"2025-12-22","level_of_help":"certificated","applicant":{"date_of_birth":"1980-01-10","involvement_type":"applicant","employed":false,"has_partner_opponent":false,"receives_qualifying_benefit":true},"gross_income":{"employment_income":[],"irregular_income":{"monthly_equivalents":{"student_loan":0.0,"unspecified_source":0.0}},"state_benefits":{"monthly_equivalents":{"all_sources":0.0,"cash_transactions":0,"bank_transactions":[]}},"other_income":{"monthly_equivalents":{"all_sources":{"friends_or_family":0,"maintenance_in":0,"property_or_lodger":0,"pension":0},"bank_transactions":{"friends_or_family":0,"maintenance_in":0,"property_or_lodger":0,"pension":0},"cash_transactions":{"friends_or_family":0,"maintenance_in":0,"property_or_lodger":0,"pension":0}}}},"disposable_income":{"monthly_equivalents":{"all_sources":{"child_care":0.0,"rent_or_mortgage":0.0,"maintenance_out":0.0,"legal_aid":0.0,"pension_contribution":0.0,"council_tax":0.0,"priority_debt_repayment":0.0},"bank_transactions":{"child_care":0.0,"rent_or_mortgage":0.0,"maintenance_out":0.0,"legal_aid":0.0,"pension_contribution":0.0,"council_tax":0.0,"priority_debt_repayment":0.0},"cash_transactions":{"child_care":0.0,"rent_or_mortgage":0.0,"maintenance_out":0.0,"legal_aid":0.0,"pension_contribution":0.0,"council_tax":0.0,"priority_debt_repayment":0.0}},"childcare_allowance":0.0,"deductions":{"dependants_allowance":0.0,"disregarded_state_benefits":0.0}},"capital":{"capital_items":{"liquid":[{"description":"Current
         accounts","value":10.0},{"description":"Money not in a bank account","value":10000.0}],"non_liquid":[{"description":"Land","value":50000.0}],"vehicles":[],"properties":{"main_home":{"value":200000.0,"outstanding_mortgage":100000.0,"percentage_owned":50.0,"main_home":true,"shared_with_housing_assoc":false,"transaction_allowance":6000.0,"allowable_outstanding_mortgage":100000.0,"net_value":94000.0,"net_equity":47000.0,"smod_allowance":0,"main_home_equity_disregard":47000.0,"assessed_equity":0.0,"subject_matter_of_dispute":null},"additional_properties":[{"value":0.0,"outstanding_mortgage":0.0,"percentage_owned":0.0,"main_home":false,"shared_with_housing_assoc":false,"transaction_allowance":0.0,"allowable_outstanding_mortgage":0.0,"net_value":0.0,"net_equity":0.0,"smod_allowance":0,"main_home_equity_disregard":0.0,"assessed_equity":0.0,"subject_matter_of_dispute":null}]}}},"remarks":{"client_current_account_balance":{"residual_balance":[]}}}}'
-  recorded_at: Fri, 31 Jan 2025 16:30:47 GMT
+  recorded_at: Mon, 22 Dec 2025 09:29:45 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/civil_merits_questions
+    body:
+      encoding: UTF-8
+      string: '{"request_id":"cc0067d8-6ec4-46b6-81a5-a94f59f13b1a","proceedings":[{"ccms_code":"DA001","delegated_functions_used":false,"client_involvement_type":"A","substantive_level_of_service":3}]}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 22 Dec 2025 09:29:46 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '295'
+      connection:
+      - keep-alive
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - '0'
+      x-content-type-options:
+      - nosniff
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      vary:
+      - Accept, Origin
+      etag:
+      - W/"eef4f9b0cd37173b9017ba69aec9adf1"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 82d74aa46179407e92d1a6a752f75122
+      x-runtime:
+      - '0.093811'
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"request_id":"cc0067d8-6ec4-46b6-81a5-a94f59f13b1a","success":true,"application":{"tasks":{"latest_incident_details":[],"opponent_name":[],"opponent_mental_capacity":[],"domestic_abuse_summary":[],"statement_of_case":[]}},"proceedings":[{"ccms_code":"DA001","tasks":{"chances_of_success":[]}}]}'
+  recorded_at: Mon, 22 Dec 2025 09:29:46 GMT
 recorded_with: VCR 6.3.1
