@@ -86,7 +86,7 @@ RSpec.describe Datastore::PayloadGenerator do
     subject(:call) { described_class.call(legal_aid_application) }
 
     it "includes the application reference, at the top-level" do
-      expect(call).to include(applicationReference: legal_aid_application.application_ref)
+      expect(call).to include(laaReference: legal_aid_application.application_ref)
     end
 
     it "includes the applications status, at the top-level" do
