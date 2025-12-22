@@ -61,19 +61,19 @@ module Providers
     end
 
     def applications_query
-      query = firms_applications.includes(:applicant, :chances_of_success).excluding(firms_applications.voided_applications)
+      query = firms_applications.includes(:applicant, :chances_of_success).excluding(voided_query)
 
       query.search(search_term)
     end
 
     def submitted_query
-      firms_applications.submitted_applications
+      firms_applications.completed_applications
     end
 
     def in_progress_query
       firms_applications.includes(:applicant, :chances_of_success)
-                        .excluding(firms_applications.voided_applications)
-                        .excluding(firms_applications.submitted_applications)
+                        .excluding(voided_query)
+                        .excluding(submitted_query)
                         .latest
     end
 
