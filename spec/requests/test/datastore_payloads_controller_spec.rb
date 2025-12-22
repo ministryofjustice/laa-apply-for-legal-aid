@@ -37,7 +37,7 @@ RSpec.describe Test::DatastorePayloadsController do
 
         expect(response.parsed_body)
           .to be_a(Hash)
-          .and include("applicationReference" => legal_aid_application.application_ref)
+          .and include("laaReference" => legal_aid_application.application_ref)
       end
     end
   end
@@ -65,7 +65,7 @@ RSpec.describe Test::DatastorePayloadsController do
 
         expect(response.parsed_body)
           .to be_a(Hash)
-          .and include("applicationReference" => legal_aid_application.application_ref)
+          .and include("laaReference" => legal_aid_application.application_ref)
       end
     end
   end

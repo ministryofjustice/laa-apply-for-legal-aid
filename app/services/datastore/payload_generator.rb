@@ -19,13 +19,13 @@ module Datastore
 
     def payload
       {
-        application_reference:,
+        laa_reference:,
         application_status:,
         application_content:,
       }
     end
 
-    def application_reference
+    def laa_reference
       legal_aid_application.application_ref
     end
 
