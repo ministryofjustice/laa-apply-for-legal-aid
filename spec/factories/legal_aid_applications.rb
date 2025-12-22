@@ -341,6 +341,12 @@ FactoryBot.define do
       end
     end
 
+    trait :lead_application_pending do
+      before(:create) do |application|
+        application.state_machine_proxy.update!(aasm_state: :lead_application_pending)
+      end
+    end
+
     trait :use_ccms do
       before(:create) do |application|
         application.state_machine_proxy.update!(aasm_state: :use_ccms, ccms_reason: :unknown)
