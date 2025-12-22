@@ -23,7 +23,7 @@ RSpec.describe BaseStateMachine do
     context "when application is non_means_tested" do
       before { allow(legal_aid_application).to receive(:non_means_tested?).and_return(true) }
 
-      it { is_expected.to transition_from(:provider_entering_merits).to(:checking_applicant_details).on_event(event) }
+      it { is_expected.not_to transition_from(:provider_entering_merits).to(:checking_applicant_details).on_event(event) }
     end
   end
 
@@ -46,7 +46,7 @@ RSpec.describe BaseStateMachine do
     context "when application is non_means_tested" do
       before { allow(legal_aid_application).to receive(:non_means_tested?).and_return(true) }
 
-      it { is_expected.to transition_from(:provider_entering_merits).to(:applicant_details_checked).on_event(event) }
+      it { is_expected.not_to transition_from(:provider_entering_merits).to(:applicant_details_checked).on_event(event) }
     end
   end
 

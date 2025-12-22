@@ -69,8 +69,6 @@ class BaseStateMachine < ApplicationRecord
                     use_ccms
                   ],
                   to: :checking_applicant_details
-
-      transitions from: :provider_entering_merits, to: :checking_applicant_details, guard: :non_means_tested?
     end
 
     event :applicant_details_checked do
@@ -83,8 +81,6 @@ class BaseStateMachine < ApplicationRecord
                     overriding_dwp_result
                   ],
                   to: :applicant_details_checked
-
-      transitions from: :provider_entering_merits, to: :applicant_details_checked, guard: proc { non_means_tested? }
     end
 
     event :override_dwp_result do
