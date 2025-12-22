@@ -8,6 +8,12 @@ class BaseStateMachine < ApplicationRecord
     EnableCCMSSubmission.call || ENV.fetch("LOCAL_CCMS_OVERRIDE", "false") == "true"
   end
 
+  def blocked_by_lead_case_submission?
+    return false if legal_aid_application.lead_application.nil? || legal_aid_application.lead_application&.ccms_submission&.completed?
+
+    true
+  end
+
   def log_status_change
     Rails.logger.info "BaseStateMachine::StateChange, laa_id: #{legal_aid_application.id}, event: #{aasm.current_event}, from: #{aasm.from_state}, to: #{aasm.to_state}"
   end
@@ -42,6 +48,7 @@ class BaseStateMachine < ApplicationRecord
     state :checking_merits_answers
     state :generating_reports
     state :submission_paused
+    state :lead_application_pending
     state :submitting_assessment
     state :assessment_submitted
     state :use_ccms
@@ -174,10 +181,12 @@ class BaseStateMachine < ApplicationRecord
     end
 
     event :generated_reports do
-      transitions from: :generating_reports, to: :submitting_assessment,
-                  after: proc { |legal_aid_application|
-                           legal_aid_application.find_or_create_ccms_submission.process_async! if Rails.configuration.x.ccms_soa.submit_applications_to_ccms
-                         }
+      transitions from: :generating_reports, to: :lead_application_pending,
+                  guards: [:blocked_by_lead_case_submission?]
+      transitions from: %i[generating_reports lead_application_pending], to: :submitting_assessment,
+                  after: proc {
+                    legal_aid_application.find_or_create_ccms_submission.process_async! if Rails.configuration.x.ccms_soa.submit_applications_to_ccms
+                  }
     end
 
     event :restart_submission do
@@ -191,6 +200,7 @@ class BaseStateMachine < ApplicationRecord
 
     event :submitted_assessment do
       transitions from: %i[submission_paused submitting_assessment], to: :assessment_submitted
+      # when complete, check for submissions in lead_application_pending where this is the lead application
     end
 
     event :reset_from_use_ccms do

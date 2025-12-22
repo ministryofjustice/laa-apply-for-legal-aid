@@ -112,4 +112,44 @@ RSpec.describe BaseStateMachine do
     it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :partner_self_employed) }
     it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :partner_armed_forces) }
   end
+
+  context "when the application has a lead application" do
+    describe "generated_reports" do
+      let(:event) { :generated_reports }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_base_state_machine, linked_application_completed:) }
+      let(:lead_application) { create(:legal_aid_application) }
+
+      describe "when the lead application submission has not started" do
+        let(:linked_application_completed) { true }
+
+        before do
+          create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "FC_LEAD")
+        end
+
+        it { is_expected.to transition_from(:generating_reports).to(:lead_application_pending).on_event(event) }
+      end
+
+      describe "when the lead application submission is still in progress" do
+        let(:linked_application_completed) { false }
+
+        before do
+          create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "FC_LEAD")
+          create(:ccms_submission, :document_ids_obtained, legal_aid_application: lead_application)
+        end
+
+        it { is_expected.to transition_from(:generating_reports).to(:lead_application_pending).on_event(event) }
+      end
+
+      describe "when the lead application submission has completed" do
+        let(:linked_application_completed) { true }
+
+        before do
+          create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "FC_LEAD")
+          create(:ccms_submission, :case_completed, legal_aid_application: lead_application)
+        end
+
+        it { is_expected.to transition_from(:generating_reports).to(:submitting_assessment).on_event(event) }
+      end
+    end
+  end
 end
