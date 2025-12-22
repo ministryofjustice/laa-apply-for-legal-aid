@@ -51,6 +51,7 @@ en:
         generating_reports: Generating reports
         submitting_assessment: Submitting application
         submission_paused: Submission paused
+        lead_application_pending: Lead application pending
         use_ccms: use_ccms
       summary_state:
         expired: Cannot be submitted

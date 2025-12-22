@@ -15,7 +15,7 @@ cy:
         easy: ysaE
         very_easy: ysae yreV
       time_taken_satisfaction:
-        great_deal: It was a great deal of time 
+        great_deal: It was a great deal of time
         alot: It was a lot of time
         neither_too_much_nor_too_little: Neither too much or too little time
         moderate: It was a  moderate amount of time
@@ -45,6 +45,8 @@ cy:
         provider_confirming_applicant_eligibility: ssergorp nI
         generating_reports: stroper gnitareneG
         submitting_assessment: noitacilppa gnittimbuS
+        submission_paused: desuap noissimbuS
+        lead_application_pending: gnidnep noitacilppa daeL
         use_ccms: smcc_esu
       summary_state:
         in_progress: ssergorp nI
