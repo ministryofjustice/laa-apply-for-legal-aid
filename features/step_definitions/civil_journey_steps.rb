@@ -96,6 +96,19 @@ Given("I have created but not submitted an application") do
   login_as @legal_aid_application.provider
 end
 
+Given("I have an application with a paused submission") do
+  @legal_aid_application = create(
+    :application,
+    :with_applicant,
+    :submission_paused,
+    created_at: 3.days.ago,
+    merits_submitted_at: 2.days.ago,
+    provider_step: "submitted_applications",
+    provider: create(:provider),
+  )
+  login_as @legal_aid_application.provider
+end
+
 Given("I have created a voided application") do
   @legal_aid_application = create(
     :application,

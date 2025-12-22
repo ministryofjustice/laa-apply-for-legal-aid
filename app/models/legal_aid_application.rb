@@ -145,6 +145,7 @@ class LegalAidApplication < ApplicationRecord
     applications
   }
 
+  scope :completed_applications, -> { where.not(merits_submitted_at: nil) }
   scope :submitted_applications, -> { joins(:state_machine).where(state_machine_proxies: { aasm_state: CCMS_SUBMITTED_STATES }).order(created_at: :desc) }
 
   scope :voided_applications, lambda {
