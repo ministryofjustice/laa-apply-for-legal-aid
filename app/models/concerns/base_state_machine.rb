@@ -199,8 +199,12 @@ class BaseStateMachine < ApplicationRecord
     end
 
     event :submitted_assessment do
-      transitions from: %i[submission_paused submitting_assessment], to: :assessment_submitted
-      # when complete, check for submissions in lead_application_pending where this is the lead application
+      transitions from: %i[submission_paused submitting_assessment], to: :assessment_submitted,
+                  after: proc {
+                    if legal_aid_application.associated_applications.any?
+                      legal_aid_application.associated_applications.each(&:generated_reports!)
+                    end
+                  }
     end
 
     event :reset_from_use_ccms do
