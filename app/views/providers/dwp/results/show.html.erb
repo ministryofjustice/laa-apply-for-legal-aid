@@ -1,6 +1,29 @@
 <%= page_template(page_title: t(".tab_title.#{@benefit_check_status}"), template: :basic, column_width: "full") do %>
-  <%= interruption_card(heading: t(".title.#{@benefit_check_status}_html"),
-                        actions: -> { render "#{@benefit_check_status.eql?(:negative) ? 'negative' : 'standard'}_actions" }) do %>
-        <p class="govuk-body"><%= t(".body.#{@benefit_check_status}", default: "") %></p>
+  <%= moj_interruption_card(heading: t(".title.#{@benefit_check_status}_html")) do |card| %>
+    <% card.with_body do %>
+      <p class="govuk-body"><%= t(".body.#{@benefit_check_status}", default: "") %></p>
+    <% end %>
+
+    <% card.with_actions do %>
+      <% if @benefit_check_status.eql?(:negative) %>
+        <%= next_action_buttons_with_form(
+              url: providers_legal_aid_application_dwp_result_path,
+              method: :patch,
+              show_draft: false,
+              inverse_continue: true,
+              continue_button_text: t(".yes_continue"),
+            ) %>
+
+        <%= govuk_link_to t(".no_amend"), @override_path, inverse: true, class: "govuk-!-margin-left-4" %>
+      <% else %>
+        <%= next_action_buttons_with_form(
+              url: providers_legal_aid_application_dwp_result_path,
+              method: :patch,
+              show_draft: false,
+              inverse_continue: true,
+              continue_button_text: t("generic.save_and_continue"),
+            ) %>
       <% end %>
+    <% end %>
+  <% end %>
 <% end %>
