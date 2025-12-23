@@ -2,20 +2,20 @@
 
 module MojComponent
   module Helpers
-    def moj_alert(**kwargs, &block)
-      render(MojComponent::AlertComponent.new(**kwargs), &block)
+    def moj_alert(**, &)
+      render(MojComponent::AlertComponent.new(**), &)
     end
 
-    def moj_header(**kwargs, &block)
-      render(MojComponent::HeaderComponent.new(**kwargs), &block)
+    def moj_header(**, &)
+      render(MojComponent::HeaderComponent.new(**), &)
     end
 
-    def moj_interruption_card(**kwargs, &block)
-      render(MojComponent::InterruptionCardComponent.new(**kwargs), &block)
+    def moj_interruption_card(**, &)
+      render(MojComponent::InterruptionCardComponent.new(**), &)
     end
 
-    def moj_sub_navigation(**kwargs, &block)
-      render(MojComponent::SubNavigationComponent.new(**kwargs), &block)
+    def moj_sub_navigation(**, &)
+      render(MojComponent::SubNavigationComponent.new(**), &)
     end
   end
 end
