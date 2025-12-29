@@ -1,8 +1,9 @@
 module Admin
   class CCMSQueuesController < AdminBaseController
     def index
-      @in_progress = CCMS::Submission.where.not(aasm_state: %w[completed abandoned]).order(created_at: :desc)
-      @paused = BaseStateMachine.where(aasm_state: :submission_paused).order(:created_at).map(&:legal_aid_application)
+      @in_progress = CCMS::Submission.where.not(aasm_state: %w[completed abandoned lead_application_pending]).order(created_at: :desc)
+      @pending = CCMS::Submission.where(aasm_state: :lead_application_pending).order(created_at: :desc).map(&:legal_aid_application)
+      @paused = BaseStateMachine.where(aasm_state: %w[submission_paused]).order(:created_at).map(&:legal_aid_application)
     end
 
     def show
