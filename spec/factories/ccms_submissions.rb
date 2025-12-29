@@ -6,6 +6,15 @@ FactoryBot.define do
       aasm_state { "initialised" }
     end
 
+    trait :lead_application_pending do
+      case_ccms_reference { Faker::Number.number(digits: 12) }
+      aasm_state { "lead_application_pending" }
+
+      after(:create) do |submission|
+        create(:ccms_submission_history, submission:)
+      end
+    end
+
     trait :case_ref_obtained do
       case_ccms_reference { Faker::Number.number(digits: 12) }
       aasm_state { "case_ref_obtained" }
