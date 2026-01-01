@@ -107,7 +107,12 @@ RSpec.describe PagesController, :clamav do
       allow(Rails.configuration.x.business_hours).to receive(:end).and_call_original
     end
 
-    shared_examples "out of hours access page displayed" do
+    shared_examples "out of hours access" do
+      it "allows citizen traffic" do
+        citizen_access_request
+        expect(response).to redirect_to(citizens_legal_aid_applications_path)
+      end
+
       it "blocks provider traffic" do
         landing_page_request
         expect(response).to render_template("pages/service_out_of_hours")
@@ -130,7 +135,7 @@ RSpec.describe PagesController, :clamav do
           expect(response).to redirect_to(citizens_legal_aid_applications_path)
         end
 
-        it_behaves_like "out of hours access page displayed"
+        it_behaves_like "out of hours access"
       end
 
       context "when it's 0700 on a Monday" do
@@ -183,7 +188,7 @@ RSpec.describe PagesController, :clamav do
           expect(response).to redirect_to(citizens_legal_aid_applications_path)
         end
 
-        it_behaves_like "out of hours access page displayed"
+        it_behaves_like "out of hours access"
       end
 
       context "when it's 1300 on a Sunday" do
@@ -204,40 +209,20 @@ RSpec.describe PagesController, :clamav do
     context "when it's a bank holiday" do
       let(:new_time) { Time.zone.local(2024, 12, 25, 13, 0, 0) }
 
-      it "allows citizen traffic" do
-        citizen_access_request
-        expect(response).to redirect_to(citizens_legal_aid_applications_path)
-      end
-
-      it "blocks provider traffic" do
-        landing_page_request
-        expect(response).to render_template("pages/service_out_of_hours")
-        expect(response.body).not_to include("Sign in") # sign in link removed
-        expect(response.body).not_to include("help us to improve it") # phase banner feedback link removed
-      end
+      it_behaves_like "out of hours access"
     end
 
     context "when it's a zero day bank holiday" do
       let(:new_time) { Time.zone.local(2025, 1, 1, 13, 0, 0) }
 
-      it "allows citizen traffic" do
-        citizen_access_request
-        expect(response).to redirect_to(citizens_legal_aid_applications_path)
-      end
-
-      it "blocks provider traffic" do
-        landing_page_request
-        expect(response).to render_template("pages/service_out_of_hours")
-        expect(response.body).not_to include("Sign in") # sign in link removed
-        expect(response.body).not_to include("help us to improve it") # phase banner feedback link removed
-      end
+      it_behaves_like "out of hours access"
     end
 
     context "when it's GMT" do
       context "when it's 0630 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 11, 3, 6, 30, 0) }
 
-        it_behaves_like "out of hours access page displayed"
+        it_behaves_like "out of hours access"
       end
 
       context "when it's 0730 on a Monday" do
@@ -261,7 +246,7 @@ RSpec.describe PagesController, :clamav do
       context "when it's 2200 on a Monday" do
         let(:new_time) { Time.zone.local(2025, 11, 3, 22, 0, 0) }
 
-        it_behaves_like "out of hours access page displayed"
+        it_behaves_like "out of hours access"
       end
     end
   end
