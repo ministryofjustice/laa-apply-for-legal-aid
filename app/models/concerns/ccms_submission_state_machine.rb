@@ -1,7 +1,7 @@
 module CCMSSubmissionStateMachine
   extend ActiveSupport::Concern
 
-  def blocked_by_lead_case_submission?
+  def awaiting_lead_case_submission?
     return false if legal_aid_application.lead_application.nil? ||
       legal_aid_application.lead_application&.ccms_submission&.aasm_state.in?(%w[case_created completed])
 
@@ -25,12 +25,12 @@ module CCMSSubmissionStateMachine
       state :abandoned
 
       event :obtain_case_ref do
-        transitions from: :initialised, to: :lead_application_pending, guard: :blocked_by_lead_case_submission?
+        transitions from: :initialised, to: :lead_application_pending, if: :awaiting_lead_case_submission?
         transitions from: :initialised, to: :case_ref_obtained
       end
 
       event :restart_linked_application do
-        transitions from: :lead_application_pending, to: :case_ref_obtained, unless: :blocked_by_lead_case_submission?
+        transitions from: :lead_application_pending, to: :case_ref_obtained, unless: :awaiting_lead_case_submission?
       end
 
       event :submit_applicant do
@@ -85,7 +85,7 @@ module CCMSSubmissionStateMachine
         transitions from: :case_submitted, to: :abandoned
         transitions from: :case_created, to: :abandoned
         transitions from: :document_ids_obtained, to: :abandoned
-        transitions from: :restart_linked_application, to: :abandoned
+        transitions from: :lead_application_pending, to: :abandoned
       end
     end
   end
