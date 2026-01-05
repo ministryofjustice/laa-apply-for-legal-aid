@@ -5,11 +5,13 @@ module Providers
     RSpec.describe NatureOfUrgencyForm do
       subject(:form) { described_class.new(params) }
 
+      let(:urgency) { create(:urgency) }
       let(:params) do
         {
           nature_of_urgency:,
           hearing_date_set:,
           hearing_date:,
+          model: urgency,
         }
       end
 
@@ -101,6 +103,25 @@ module Providers
           it "is invalid with expected error" do
             expect(form).to be_invalid
             expect(form.errors.messages[:hearing_date]).to include("Enter a valid hearing date in the correct format")
+          end
+        end
+      end
+
+      describe "#save_as_draft" do
+        subject(:save_as_draft) { form.save_as_draft }
+
+        before { save_as_draft }
+
+        context "when nature_of_urgency is blank" do
+          let(:nature_of_urgency) { "" }
+
+          it "is valid" do
+            expect(form).to be_valid
+          end
+
+          it "updates the urgency record" do
+            expect(urgency.reload.nature_of_urgency).to be_nil
+            expect(urgency.hearing_date_set).to be true
           end
         end
       end
