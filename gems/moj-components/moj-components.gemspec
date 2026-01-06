@@ -5,11 +5,11 @@ require_relative "lib/moj_component/version"
 Gem::Specification.new do |spec|
   spec.name = "moj-components"
   spec.version = MojComponent::VERSION
-  spec.authors = ["Adam Goldstone"]
-  spec.email = ["13471320+agoldstone93@users.noreply.github.com"]
+  spec.authors = ["Ministry of Justice"]
+  spec.email = ["apply-for-legal-aid@justice.gov.uk"]
 
-  spec.summary = "TODO: Write a short summary, because RubyGems requires one."
-  spec.description = "TODO: Write a longer description or delete this line."
+  spec.summary = "MoJ Components library for Ruby on Rails"
+  spec.description = "This provides view components for implementing the MoJ Design System."
   spec.homepage = "TODO: Put your gem's website or public repo URL here."
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.4.0"
