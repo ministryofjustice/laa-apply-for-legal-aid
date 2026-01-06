@@ -34,7 +34,7 @@ class LegalAidApplicationJsonBuilder < BaseJsonBuilder
       no_debit_transaction_types_selected:,
       provider_received_citizen_consent:,
       discarded_at:,
-      merits_submitted_at:,
+      submitted_at: merits_submitted_at,
       in_scope_of_laspo:,
       emergency_cost_override:,
       emergency_cost_requested:,

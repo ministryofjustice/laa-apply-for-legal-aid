@@ -86,11 +86,11 @@ RSpec.describe Datastore::PayloadGenerator do
     subject(:call) { described_class.call(legal_aid_application) }
 
     it "includes the application reference, at the top-level" do
-      expect(call).to include(applicationReference: legal_aid_application.application_ref)
+      expect(call).to include(laaReference: legal_aid_application.application_ref)
     end
 
     it "includes the applications status, at the top-level" do
-      expect(call).to include(status: "SUBMITTED")
+      expect(call).to include(applicationStatus: "APPLICATION_SUBMITTED")
     end
 
     it "includes the application content as json with transformed keys" do
@@ -156,7 +156,7 @@ RSpec.describe Datastore::PayloadGenerator do
       let(:legal_aid_application) { create(:legal_aid_application) }
 
       it "has an in progress status" do
-        expect(call).to include(status: "IN_PROGRESS")
+        expect(call).to include(applicationStatus: "APPLICATION_IN_PROGRESS")
       end
     end
 
