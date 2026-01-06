@@ -99,5 +99,5 @@ Rails.application.configure do
   # business hours
   config.x.business_hours.start = ENV.fetch("BUSINESS_HOURS_START", "7:00")
   config.x.business_hours.end = ENV.fetch("BUSINESS_HOURS_END", "21:30")
-  config.x.bank_holidays = %w[2024-12-25 2024-12-26 2025-1-1]
+  config.x.bank_holidays = %w[2024-12-25 2024-12-26 2025-01-01]
 end

@@ -165,7 +165,7 @@ module LaaApplyForLegalAid
     # business hours
     config.x.business_hours.start = ENV.fetch("BUSINESS_HOURS_START", "7:00")
     config.x.business_hours.end = ENV.fetch("BUSINESS_HOURS_END", "21:30")
-    config.x.bank_holidays = %w[2025-12-25 2025-12-26 2026-1-1]
+    config.x.bank_holidays = %w[2025-12-25 2025-12-26 2026-01-01]
     # TODO: The bank_holidays array needs handling and is only added here as a temporary fix for
     # out of hours implementation over the Christmas holidays of 2025 - by Easter 2026 we should
     # be able to handle this better using the BankHoliday model
