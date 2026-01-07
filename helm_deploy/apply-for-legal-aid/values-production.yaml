@@ -51,6 +51,7 @@ ingress:
       SecRule MULTIPART_INVALID_HEADER_FOLDING "!@eq 0" "id:300010,phase:2,t:none,log,deny,status:400, msg:`Multipart request body failed custom  validation: DB %{MULTIPART_INVALID_HEADER_FOLDING}.`"
       SecRule MULTIPART_FILE_LIMIT_EXCEEDED "!@eq 0" "id:300011,phase:2,t:none,log,deny,status:400, msg:`Multipart request body failed custom  validation: DB %{MULTIPART_FILE_LIMIT_EXCEEDED}.`"
       SecRule REQUEST_FILENAME "^.*address_selection.*" "id:300012,ctl:ruleRemoveById=949110, msg:`Request filename anonmaly score exception for address selection failed custom validation: REQUEST_FILENAME %{REQUEST_FILENAME}.`"
+      SecRule REMOTE_ADDR "@ipMatch 35.178.228.46,34.253.210.223,34.245.84.220" "id:300013,phase:1,deny,status:403,log,tag:github_team=laa-apply-for-legal-aid,tag:namespace=laa-apply-for-legalaid-uat"
   path: /
   hosts:
     - "apply-for-legal-aid.service.justice.gov.uk"
