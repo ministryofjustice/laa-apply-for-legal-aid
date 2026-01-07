@@ -509,7 +509,6 @@ Given("I have completed a non-passported application and reached the merits task
   )
   create :legal_framework_merits_task_list, legal_aid_application: @legal_aid_application
   login_as @legal_aid_application.provider
-  visit(providers_root_path)
   visit(providers_legal_aid_application_merits_task_list_path(@legal_aid_application))
 end
 
