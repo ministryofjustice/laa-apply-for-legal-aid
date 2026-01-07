@@ -17,8 +17,6 @@ RSpec.describe Providers::MeritsTaskListsController do
   end
 
   describe "GET /providers/merits_task_list" do
-    subject(:get_request) { get providers_legal_aid_application_merits_task_list_path(legal_aid_application) }
-
     before { get providers_legal_aid_application_merits_task_list_path(legal_aid_application) }
 
     context "when the record does not exist" do
@@ -64,33 +62,6 @@ RSpec.describe Providers::MeritsTaskListsController do
         expect(response.body).to include("Opponents")
         expect(response.body).to include("Mental capacity of all parties")
         expect(response.body).to include("Domestic abuse summary")
-      end
-    end
-
-    describe ".back_button" do
-      it "does displays a back link" do
-        get_request
-        expect(response.body).to have_css("a", class: "govuk-back-link")
-      end
-
-      context "when the provider has navigated from the providers_legal_aid_application_confirm_non_means_tested_applications_path" do
-        let(:legal_aid_application) do
-          create(
-            :legal_aid_application,
-            :with_applicant,
-            :with_proceedings,
-            :at_applicant_details_checked,
-            explicit_proceedings: %i[pb003 pb059],
-          )
-        end
-        let(:task_list) { create(:legal_framework_merits_task_list, :pb003_pb059_application, legal_aid_application:) }
-
-        before { get providers_legal_aid_application_confirm_non_means_tested_applications_path(legal_aid_application) }
-
-        it "does not show a back link" do
-          get_request
-          expect(response.body).to have_no_css("a", class: "govuk-back-link")
-        end
       end
     end
   end

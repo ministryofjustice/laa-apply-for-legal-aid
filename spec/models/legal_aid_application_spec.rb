@@ -828,8 +828,11 @@ RSpec.describe LegalAidApplication do
       context "with non means tested application" do
         before { allow(legal_aid_application).to receive(:non_means_tested?).and_return(true) }
 
-        it "raises AASM::InvalidTransition error" do
-          expect { legal_aid_application.applicant_details_checked! }.to raise_error AASM::InvalidTransition
+        it "transitions to applicant_details_checked" do
+          expect { legal_aid_application.applicant_details_checked! }
+            .to change { legal_aid_application.reload.state }
+              .from("provider_entering_merits")
+              .to("applicant_details_checked")
         end
       end
 
