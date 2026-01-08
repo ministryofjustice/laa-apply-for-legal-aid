@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_09_160131) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_05_114917) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -1161,7 +1161,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_09_160131) do
     t.date "hearing_date"
     t.boolean "hearing_date_set"
     t.uuid "legal_aid_application_id", null: false
-    t.string "nature_of_urgency", null: false
+    t.string "nature_of_urgency"
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_urgencies_on_legal_aid_application_id"
   end
