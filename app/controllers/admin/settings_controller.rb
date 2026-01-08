@@ -8,7 +8,7 @@ module Admin
       @form = Settings::SettingForm.new(form_params.merge(model: setting))
       @ccms_setting_changing = ccms_setting_changed?
       if @form.save
-        CCMS::RestartSubmissions.call if ccms_restarting?
+        CCMS::TurnOnSubmissionsWorker.perform_async if ccms_restarting?
         redirect_to admin_settings_path, notice: t(".notice")
       else
         render :show
