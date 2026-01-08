@@ -89,6 +89,9 @@ module Backable
       return [] if history.nil?
 
       JSON.parse(history)
+    rescue JSON::ParserError => e
+      Rails.logger.error("#{self.class.name} page_history JSON parse error: #{e.message}")
+      []
     end
 
     def page_history_service
