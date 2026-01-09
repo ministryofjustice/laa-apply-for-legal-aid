@@ -27,14 +27,14 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response has persistable employment details" do
-      let(:hmrc_response) { create(:hmrc_response, use_case: "one", response: valid_response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, use_case: "one", response: valid_response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       it { expect(call).to be_truthy }
     end
 
     context "when HRMC response use_case is \"two\"" do
       let(:instance) { described_class.new(hmrc_response, person: applicant) }
-      let(:hmrc_response) { create(:hmrc_response, use_case: "two", response: valid_response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, use_case: "two", response: valid_response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       it { expect(instance.call).to be_falsey }
 
@@ -46,7 +46,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
 
     context "when person is nil" do
       let(:instance) { described_class.new(hmrc_response, person: nil) }
-      let(:hmrc_response) { create(:hmrc_response, use_case: "one", response: valid_response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, use_case: "one", response: valid_response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       it { expect(instance.call).to be_falsey }
 
@@ -57,7 +57,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response is nil" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
       let(:response_hash) { nil }
 
       it { expect(call).to be_falsey }
@@ -69,7 +69,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response is empty hash" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
       let(:response_hash) { {} }
 
       it { expect(instance.call).to be_falsey }
@@ -81,7 +81,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response status is not \"completed\"" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         { "submission" => "must-be-present",
@@ -98,7 +98,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response submission is nil" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         { "submission" => nil,
@@ -115,7 +115,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response submission is blank" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         { "submission" => "",
@@ -132,7 +132,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response submission is missing" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         { "status" => "completed",
@@ -148,7 +148,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data is a hash" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         { "submission" => "must-be-present",
@@ -165,7 +165,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data is nil" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         { "submission" => "must-be-present",
@@ -182,7 +182,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data has \"individuals/matching/individual\" details matching request" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class, legal_aid_application:) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class, legal_aid_application:) }
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
       let(:response_hash) do
@@ -199,7 +199,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data has \"individuals/matching/individual\" details matching but different name" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class, legal_aid_application:) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class, legal_aid_application:) }
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
       let(:valid_individual_response) do
@@ -223,7 +223,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"individuals/matching/individual\" details are missing" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         { "submission" => "must-be-present",
@@ -242,7 +242,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"individuals/matching/individual\" details are empty" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         { "submission" => "must-be-present",
@@ -262,7 +262,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"individuals/matching/individual\" details has invalid dateOfBirth date" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class, legal_aid_application:) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class, legal_aid_application:) }
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
       let(:response_hash) do
@@ -288,7 +288,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"individuals/matching/individual\" details do not match applicant" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class, legal_aid_application:) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class, legal_aid_application:) }
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
       let(:response_hash) do
@@ -316,7 +316,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"income/paye/paye\" \"income\" is nil" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         { "submission" => "must-be-present",
@@ -333,7 +333,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"income/paye/paye\" \"income\" is hash" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         { "submission" => "must-be-present",
@@ -350,7 +350,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains invalid inPayPeriod1 string" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         {
@@ -381,7 +381,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains valid inPayPeriod1 float" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         {
@@ -410,7 +410,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains valid inPayPeriod1 integer" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         {
@@ -439,7 +439,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains multiple inPayPeriod1 including one invalid string" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         {
@@ -477,7 +477,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains valid format of paymentDate" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         {
@@ -506,7 +506,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains invalid date for paymentDate" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         {
@@ -538,7 +538,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains non-iso8601 format of paymentDate" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         {
@@ -570,7 +570,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains multiple paymentDates including one invalid" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         {
@@ -609,7 +609,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"employments/paye/employments\" is valid" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class, legal_aid_application:) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class, legal_aid_application:) }
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
 
       let(:response_hash) do
@@ -626,7 +626,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"employments/paye/employments\" is missing" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         { "submission" => "must-be-present",
@@ -643,7 +643,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"employments/paye/employments\" is nil" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         { "submission" => "must-be-present",
@@ -660,7 +660,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when response data \"employments/paye/employments\" is empty" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
 
       let(:response_hash) do
         { "submission" => "must-be-present",
@@ -688,7 +688,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       end
 
       context "with use_case \"one\"" do
-        let(:hmrc_response) { create(:hmrc_response, response: response_hash, use_case: "one", owner_id: applicant.id, owner_type: applicant.class) }
+        let(:hmrc_response) { build(:hmrc_response, response: response_hash, use_case: "one", owner_id: applicant.id, owner_type: applicant.class) }
 
         before do
           allow(AlertManager).to receive(:capture_message)
@@ -702,7 +702,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       end
 
       context "with use_case \"two\"" do
-        let(:hmrc_response) { create(:hmrc_response, response: response_hash, use_case: "two", owner_id: applicant.id, owner_type: applicant.class) }
+        let(:hmrc_response) { build(:hmrc_response, response: response_hash, use_case: "two", owner_id: applicant.id, owner_type: applicant.class) }
 
         before do
           allow(AlertManager).to receive(:capture_message)
@@ -716,7 +716,8 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when client details are not found by HMRC" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+
       let!(:response_hash) do
         { "submission" => "must-be-present",
           "status" => "failed",
@@ -736,7 +737,7 @@ RSpec.describe HMRC::ParsedResponse::Validator do
     end
 
     context "when client has no employments recorded by HMRC" do
-      let(:hmrc_response) { create(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
       let(:response_hash) do
         { "submission" => "must-be-present",
           "status" => "completed",
