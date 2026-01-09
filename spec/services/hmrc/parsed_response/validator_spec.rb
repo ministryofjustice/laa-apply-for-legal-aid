@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe HMRC::ParsedResponse::Validator do
-  describe ".call" do
-    subject(:call) { described_class.call(hmrc_response, person: applicant) }
+  describe "#call" do
+    subject(:call) { instance.call }
 
     let(:instance) { described_class.new(hmrc_response, person: applicant) }
     let(:applicant) { create(:legal_aid_application, :with_applicant).applicant }
@@ -24,6 +24,10 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           { "income/paye/paye" => { "income" => [] } },
           { "employments/paye/employments" => valid_employments_response },
         ] }
+    end
+
+    before do
+      allow(AlertManager).to receive(:capture_message)
     end
 
     context "when response has persistable employment details" do
@@ -378,6 +382,45 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         instance.call
         expect(instance.errors.collect(&:message)).to include("inPayPeriod1 must be numeric")
       }
+
+      it "sends message to AlertManager with errors" do
+        instance.call
+        expect(AlertManager)
+          .to have_received(:capture_message)
+            .with(/inPayPeriod1 must be numeric/)
+      end
+    end
+
+    context "when response data \"income/paye/paye\" \"income\" inPayPeriod1 is missing" do
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+
+      let(:response_hash) do
+        {
+          "submission" => "must-be-present",
+          "status" => "completed",
+          "data" => [
+            {
+              "income/paye/paye" => {
+                "income" => [
+                  {},
+                ],
+              },
+            },
+          ],
+        }
+      end
+
+      it { expect(instance.call).to be_falsey }
+
+      it {
+        instance.call
+        expect(instance.errors.collect(&:message)).to include("inPayPeriod1 must be present")
+      }
+
+      it "does not send message to AlertManager with errors" do
+        instance.call
+        expect(AlertManager).not_to have_received(:capture_message)
+      end
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains valid inPayPeriod1 float" do
@@ -474,6 +517,13 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         instance.call
         expect(instance.errors.collect(&:message)).to include("inPayPeriod1 must be numeric")
       }
+
+      it "sends message to AlertManager with errors" do
+        instance.call
+        expect(AlertManager)
+          .to have_received(:capture_message)
+            .with(/inPayPeriod1 must be numeric/)
+      end
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains valid format of paymentDate" do
@@ -535,6 +585,13 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         instance.call
         expect(instance.errors.collect(&:message)).to include("paymentDate must be a valid iso8601 formatted date")
       }
+
+      it "sends message to AlertManager with errors" do
+        instance.call
+        expect(AlertManager)
+          .to have_received(:capture_message)
+            .with(/paymentDate must be a valid iso8601 formatted date/)
+      end
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains non-iso8601 format of paymentDate" do
@@ -567,6 +624,13 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         instance.call
         expect(instance.errors.collect(&:message)).to include("paymentDate must be a valid iso8601 formatted date")
       }
+
+      it "sends message to AlertManager with errors" do
+        instance.call
+        expect(AlertManager)
+          .to have_received(:capture_message)
+            .with(/paymentDate must be a valid iso8601 formatted date/)
+      end
     end
 
     context "when response data \"income/paye/paye\" \"income\" contains multiple paymentDates including one invalid" do
@@ -606,6 +670,13 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         instance.call
         expect(instance.errors.collect(&:message)).to include("paymentDate must be a valid iso8601 formatted date")
       }
+
+      it "sends message to AlertManager with errors" do
+        instance.call
+        expect(AlertManager)
+          .to have_received(:capture_message)
+            .with(/paymentDate must be a valid iso8601 formatted date/)
+      end
     end
 
     context "when response data \"employments/paye/employments\" is valid" do
@@ -690,12 +761,8 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       context "with use_case \"one\"" do
         let(:hmrc_response) { build(:hmrc_response, response: response_hash, use_case: "one", owner_id: applicant.id, owner_type: applicant.class) }
 
-        before do
-          allow(AlertManager).to receive(:capture_message)
-          call
-        end
-
         it "sends message to AlertManager with errors" do
+          instance.call
           expect(AlertManager).to have_received(:capture_message)
                                     .with("HMRC Response is unacceptable (id: #{hmrc_response.id}) - response status must be \"completed\"")
         end
@@ -704,12 +771,8 @@ RSpec.describe HMRC::ParsedResponse::Validator do
       context "with use_case \"two\"" do
         let(:hmrc_response) { build(:hmrc_response, response: response_hash, use_case: "two", owner_id: applicant.id, owner_type: applicant.class) }
 
-        before do
-          allow(AlertManager).to receive(:capture_message)
-          call
-        end
-
         it "does not send message to AlertManager with errors" do
+          instance.call
           expect(AlertManager).not_to have_received(:capture_message)
         end
       end
@@ -722,10 +785,6 @@ RSpec.describe HMRC::ParsedResponse::Validator do
         { "submission" => "must-be-present",
           "status" => "failed",
           "data" => [{ "error" => "submitted client details could not be found in HMRC service" }] }
-      end
-
-      before do
-        allow(AlertManager).to receive(:capture_message)
       end
 
       it { expect(instance.call).to be_falsey }
@@ -748,14 +807,31 @@ RSpec.describe HMRC::ParsedResponse::Validator do
           ] }
       end
 
-      before do
-        allow(AlertManager).to receive(:capture_message)
+      it { expect(instance.call).to be_falsey }
+
+      it "does not send message to AlertManager with errors" do
+        instance.call
+        expect(AlertManager).not_to have_received(:capture_message)
+      end
+    end
+
+    context "when client has no grossEarningsForNic, inPayPeriod1" do
+      let(:hmrc_response) { build(:hmrc_response, response: response_hash, owner_id: applicant.id, owner_type: applicant.class) }
+
+      let(:response_hash) do
+        { "submission" => "must-be-present",
+          "status" => "completed",
+          "data" => [
+            { "individuals/matching/individual" => valid_individual_response },
+            { "income/paye/paye" => { "income" => [{}] } },
+            { "employments/paye/employments" => [] },
+          ] }
       end
 
       it { expect(instance.call).to be_falsey }
 
       it "does not send message to AlertManager with errors" do
-        call
+        instance.call
         expect(AlertManager).not_to have_received(:capture_message)
       end
     end
