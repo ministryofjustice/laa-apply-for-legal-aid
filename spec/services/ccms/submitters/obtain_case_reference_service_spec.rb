@@ -12,9 +12,7 @@ module CCMS
       let(:response_body) { ccms_data_from_file "reference_data_response.xml" }
 
       around do |example|
-        VCR.turn_off!
-        example.run
-        VCR.turn_on!
+        VCR.turned_off { example.run }
       end
 
       before do

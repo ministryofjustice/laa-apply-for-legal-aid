@@ -11,9 +11,7 @@ module CCMS
       let(:endpoint) { "https://ccms-soa-managed.laa-test.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/ClientServices/ClientServices_ep" }
 
       around do |example|
-        VCR.turn_off!
-        example.run
-        VCR.turn_on!
+        VCR.turned_off { example.run }
       end
 
       before do

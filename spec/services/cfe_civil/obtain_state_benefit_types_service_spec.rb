@@ -6,9 +6,7 @@ module CFECivil
     let(:cfe_url) { URI.join(Rails.configuration.x.cfe_civil_host, "state_benefit_type") }
 
     around do |example|
-      VCR.turn_off!
-      example.run
-      VCR.turn_on!
+      VCR.turned_off { example.run }
     end
 
     describe ".call" do
