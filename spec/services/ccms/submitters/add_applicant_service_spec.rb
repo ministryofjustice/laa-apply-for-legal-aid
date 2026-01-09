@@ -14,9 +14,7 @@ module CCMS
       let(:response_body) { ccms_data_from_file "applicant_add_response_success.xml" }
 
       around do |example|
-        VCR.turn_off!
-        example.run
-        VCR.turn_on!
+        VCR.turned_off { example.run }
       end
 
       before do

@@ -23,10 +23,10 @@ module CCMS
       before { create(:statement_of_case, legal_aid_application:) }
 
       around do |example|
-        VCR.turn_off!
-        DocumentCategory.populate
-        example.run
-        VCR.turn_on!
+        VCR.turned_off do
+          DocumentCategory.populate
+          example.run
+        end
       end
 
       context "when the operation is successful" do
