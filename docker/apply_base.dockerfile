@@ -32,6 +32,7 @@ RUN apk --no-cache add --virtual build-dependencies \
                   linux-headers \
                   clamav-daemon \
                   libreoffice \
+                  openjdk17-jre-headless \
                   ttf-dejavu \
                   ttf-droid \
                   ttf-freefont \
