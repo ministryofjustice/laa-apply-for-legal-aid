@@ -1,6 +1,26 @@
 require "rails_helper"
 
 RSpec.describe PagesController, :clamav do
+  context "with invalid locale" do
+    before do
+      allow(Rails.logger).to receive(:warn)
+      get unauthenticated_root_path, params: { locale: "enMobile" }
+    end
+
+    it "responds with success" do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "renders page in default locale langauge, english" do
+      expect(response).to render_template("providers/start/index")
+      expect(response.body).to include("Sign in")
+    end
+
+    it "logs the invalid locale request" do
+      expect(Rails.logger).to have_received(:warn).with(/Invalid locale requested: "enMobile".*\. Falling back to default locale./)
+    end
+  end
+
   context "when not in maintenance mode" do
     context "when provider signs in" do
       before do

@@ -29,6 +29,9 @@ private
 
   def update_locale
     I18n.locale = params[:locale] || I18n.default_locale
+  rescue I18n::InvalidLocale => e
+    Rails.logger.warn "Invalid locale requested: #{e.message}. Falling back to default locale."
+    I18n.locale = I18n.default_locale
   end
 
   def convert_date_params(params)
