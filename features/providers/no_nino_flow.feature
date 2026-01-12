@@ -72,10 +72,6 @@ Feature: No national insurance number for applicant
     When I click 'Save and continue'
     Then I should be on a page showing "You will have to do a full means test as part of this application"
 
-    When I click link 'Back'
-    Then I should be on a page with title 'Check your answers'
-    And I click 'Save and continue'
-
     When I click "Continue"
     Then I should be on a page with title "What is your client's employment status?"
 

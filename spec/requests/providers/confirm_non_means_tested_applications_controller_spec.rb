@@ -80,8 +80,8 @@ RSpec.describe Providers::ConfirmNonMeansTestedApplicationsController do
         request
       end
 
-      it "takes you back to check your answers page" do
-        expect(response.body).to have_back_link("#{page}&back=true")
+      it "has no back link" do
+        expect(response.body).to have_no_link("Back")
       end
     end
   end
