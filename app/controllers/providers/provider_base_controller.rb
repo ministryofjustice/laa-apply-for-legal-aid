@@ -9,9 +9,21 @@ module Providers
     include Authorizable
     include Reviewable::Controller
 
-    helper_method :display_hmrc_text?
+    helper_method :display_hmrc_text?, :back_link_for
 
   private
+
+    def back_link_for(target_path)
+      return :none if back_path.blank? || target_path.blank?
+
+      if URI(back_path).path.eql? URI(target_path).path
+        :none
+      else
+        {}
+      end
+    rescue URI::InvalidURIError
+      :none
+    end
 
     def display_employment_income?
       @legal_aid_application.cfe_result.version >= 4 &&
