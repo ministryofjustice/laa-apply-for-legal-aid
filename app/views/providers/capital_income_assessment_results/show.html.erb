@@ -3,6 +3,7 @@
       head_title: t(".tab_title.#{@cfe_result.assessment_result}"),
       template: :basic,
       column_width: :full,
+      back_link: back_link_for(providers_legal_aid_application_check_capital_answers_path),
     ) do %>
 
   <%= moj_interruption_card(heading: t("shared.assessment_results.#{@result_partial}.heading", name: @legal_aid_application.applicant_full_name)) do |card|
