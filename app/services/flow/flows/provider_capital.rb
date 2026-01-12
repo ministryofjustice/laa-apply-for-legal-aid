@@ -5,6 +5,7 @@ module Flow
         capital_introductions: Steps::ProviderCapital::IntroductionsStep,
         own_homes: Steps::ProviderCapital::OwnHomesStep,
         property_details: Steps::ProviderCapital::PropertyDetailsStep,
+        property_details_interrupts: Steps::ProviderCapital::PropertyDetailsInterruptsStep,
         vehicles: Steps::ProviderCapital::VehiclesStep,
         vehicle_details: Steps::ProviderCapital::VehicleDetailsStep,
         add_other_vehicles: Steps::ProviderCapital::AddOtherVehiclesStep,
