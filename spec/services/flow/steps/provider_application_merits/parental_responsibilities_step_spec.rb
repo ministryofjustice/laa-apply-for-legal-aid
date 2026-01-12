@@ -19,7 +19,7 @@ RSpec.describe Flow::Steps::ProviderApplicationMerits::ParentalResponsibilitiesS
     context "when reshow_check_client is set to true" do
       let(:options) { { reshow_check_client: true } }
 
-      it { is_expected.to eq :application_merits_task_check_who_client_is }
+      it { is_expected.to eq :application_merits_task_client_check_parental_answers }
     end
 
     context "when reshow_check_client is set to false" do
