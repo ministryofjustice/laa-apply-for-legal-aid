@@ -1,6 +1,12 @@
 <%= page_template(page_title: t(".h1-heading"), head_title: t(".h1-heading"), template: :basic, column_width: "full") do %>
-  <%= interruption_card(heading: t(".h1-heading"), actions: -> { render "actions" }) do %>
-    <p><%= t(".paragraph-1") %></p>
-    <p><%= t(".contact_us_html", support_url: contact_path) %></p>
+  <%= moj_interruption_card(heading: t(".h1-heading")) do |card| %>
+    <% card.with_body do %>
+      <p><%= t(".paragraph-1") %></p>
+      <p><%= t(".contact_us_html", support_url: contact_path) %></p>
+    <% end %>
+
+    <% card.with_actions do %>
+      <%= govuk_button_link_to(t("providers.user_not_founds.show.button_text"), providers_select_office_path, inverse: true, role: "button") %>
+    <% end %>
   <% end %>
 <% end %>

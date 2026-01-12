@@ -1,23 +1,18 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-full">
     <% unless @scope == :search %>
-      <nav class="moj-sub-navigation" aria-label="Sub navigation">
-        <ul class="moj-sub-navigation__list">
-          <li class="moj-sub-navigation__item">
-            <%= link_to "In progress",
-                        in_progress_providers_legal_aid_applications_path,
-                        "aria-current": @scope == :in_progress ? "page" : nil,
-                        class: "moj-sub-navigation__link" %>
-          </li>
-          <li class="moj-sub-navigation__item">
-            <%= link_to "Submitted",
-                        submitted_providers_legal_aid_applications_path,
-                        "aria-current": @scope == :submitted ? "page" : nil,
-                        class: "moj-sub-navigation__link" %>
-          </li>
-
-        </ul>
-      </nav>
+      <%= moj_sub_navigation do |component|
+            component.with_navigation_item(
+              text: "In progress",
+              href: in_progress_providers_legal_aid_applications_path,
+              current: @scope == :in_progress,
+            )
+            component.with_navigation_item(
+              text: "Submitted",
+              href: submitted_providers_legal_aid_applications_path,
+              current: @scope == :submitted,
+            )
+          end %>
     <% end %>
     <%= render "application_list", legal_aid_applications: @legal_aid_applications, pagy: @pagy %>
   </div>

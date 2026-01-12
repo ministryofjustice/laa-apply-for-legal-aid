@@ -8,7 +8,7 @@
                concat tag.p(class: "govuk-body") { message.body }
              end %>
        <% elsif message.display_type == "moj" %>
-          <%= information_alert(heading: message.heading, body: message.body, dismiss_href: v1_dismiss_announcements_path(params: { id: message.id, return_to: request.fullpath })) %>
+          <%= moj_alert(type: :information, heading: message.heading, body: message.body, dismiss_href: v1_dismiss_announcements_path(params: { id: message.id, return_to: request.fullpath })) %>
        <% end
      end
    end %>

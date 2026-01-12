@@ -19,15 +19,18 @@ RSpec.describe ApplicationHelper do
     end
   end
 
-  let(:header) { GovukComponent::HeaderComponent.new }
+  let(:header) { MojComponent::HeaderComponent.new(organisation_name:, url:) }
   let(:signed_in) { true }
   let(:journey_type) { :citizens }
   let(:provider) { create(:provider, email: "test@example.com") }
+  let(:organisation_name) { "Org" }
+  let(:url) { "#" }
 
   describe "#user_header_navigation" do
     context "when called on citizens journey" do
       it "returns no navigation items" do
-        expect(user_header_navigation).to be_nil
+        user_header_navigation(header)
+        expect(header.navigation_items).to eq []
       end
     end
 
@@ -36,9 +39,8 @@ RSpec.describe ApplicationHelper do
 
       context "when provider is signed in" do
         it "returns a link to edit provider details and a logout link" do
-          expect(user_header_navigation).to have_css("li", count: 2)
-            .and have_css("li", text: "test@example.com")
-            .and have_css("li", text: "Sign out")
+          user_header_navigation(header)
+          expect(header.navigation_items.map(&:text)).to eq ["test@example.com", "Sign out"]
         end
       end
 
@@ -46,8 +48,8 @@ RSpec.describe ApplicationHelper do
         let(:signed_in) { false }
 
         it "returns a login link" do
-          expect(user_header_navigation).to have_css("li", count: 1)
-            .and have_css("li", text: "Sign in")
+          user_header_navigation(header)
+          expect(header.navigation_items.map(&:text)).to eq ["Sign in"]
         end
       end
     end
@@ -57,8 +59,8 @@ RSpec.describe ApplicationHelper do
 
       context "when admin is signed in" do
         it "returns a logout link" do
-          expect(user_header_navigation).to have_css("li", count: 1)
-            .and have_css("li", text: "Admin sign out")
+          user_header_navigation(header)
+          expect(header.navigation_items.map(&:text)).to eq ["Admin sign out"]
         end
       end
 
@@ -66,7 +68,8 @@ RSpec.describe ApplicationHelper do
         let(:signed_in) { false }
 
         it "returns a login link" do
-          expect(user_header_navigation).to be_nil
+          user_header_navigation(header)
+          expect(header.navigation_items.map(&:text)).to eq []
         end
       end
     end

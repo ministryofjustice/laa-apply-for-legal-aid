@@ -4,8 +4,10 @@
       column_width: :full,
     ) do %>
 
-  <%= interruption_card(heading: t("shared.assessment_results.#{@result_partial}.heading", name: @legal_aid_application.applicant_full_name)) do %>
-    <%= render "shared/assessment_results/#{@result_partial}" %>
+  <%= moj_interruption_card(heading: t("shared.assessment_results.#{@result_partial}.heading", name: @legal_aid_application.applicant_full_name)) do |card| %>
+    <% card.with_body do %>
+      <%= render "shared/assessment_results/#{@result_partial}" %>
+    <% end %>
   <% end %>
 
   <%= render "result_details" %>

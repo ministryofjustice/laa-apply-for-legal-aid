@@ -1,8 +1,14 @@
 <%= page_template(page_title: t(".title_html"), template: :basic, column_width: "full") do %>
-  <%= interruption_card(heading: t(".title_html"), actions: -> { render "actions" }) do %>
-    <p><%= t(".body_text") %></p>
-    <p><%= t(".options") %></p>
+  <%= moj_interruption_card(heading: t(".title_html")) do |card| %>
+    <% card.with_body do %>
+      <p><%= t(".body_text") %></p>
+      <p><%= t(".options") %></p>
 
-    <%= govuk_list t(".option_bullets"), type: :bullet %>
+      <%= govuk_list t(".option_bullets"), type: :bullet %>
+    <% end %>
+
+    <% card.with_actions do %>
+      <%= govuk_button_link_to t(".applications"), home_path, inverse: true, role: "button" %>
+    <% end %>
   <% end %>
 <% end %>

@@ -31,7 +31,7 @@
                         concat tag.p(class: "govuk-body") { message.body }
                       end
                     else
-                      information_alert(heading: message.heading, body: message.body, dismiss_href: "#build-per-user")
+                      moj_alert(type: :information, heading: message.heading, body: message.body, dismiss_method: :get, dismiss_href: "#")
                     end
                   end
                   row.with_cell do

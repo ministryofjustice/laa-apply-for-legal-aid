@@ -20,6 +20,8 @@ WORKDIR /usr/src/app
 # Env vars needed for dependency install and asset precompilation
 
 COPY .ruby-version Gemfile Gemfile.lock ./
+# Copy local gem
+COPY gems/moj-components ./gems/moj-components
 
 # only install production dependencies,
 # build nokogiri using libxml2-dev, libxslt-dev

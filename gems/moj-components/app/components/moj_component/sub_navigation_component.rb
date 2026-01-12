@@ -1,0 +1,32 @@
+# frozen_string_literal: true
+
+module MojComponent
+  class SubNavigationComponent < ApplicationComponent
+    renders_many :navigation_items, "NavigationItem"
+
+    class NavigationItem < ApplicationComponent
+      attr_reader :text, :href, :current
+
+      def initialize(text:, href: "#", current: nil)
+        @text = text
+        @href = href
+        @current = current
+        super()
+      end
+
+      def call
+        tag.li class: "moj-sub-navigation__item" do
+          link_to(text, href, class: "moj-sub-navigation__link", aria: current_override)
+        end
+      end
+
+    private
+
+      def current_override
+        return unless current
+
+        { current: "page" }
+      end
+    end
+  end
+end

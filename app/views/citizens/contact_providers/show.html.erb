@@ -1,5 +1,7 @@
 <%= page_template(template: :basic, column_width: "full") do %>
-  <%= interruption_card(heading: t(".title")) do %>
-    <p><%= t(".they_will_check") %></p>
+  <%= moj_interruption_card(heading: t(".title")) do |card| %>
+    <% card.with_body do %>
+      <p><%= t(".they_will_check") %></p>
+    <% end %>
   <% end %>
 <% end %>
