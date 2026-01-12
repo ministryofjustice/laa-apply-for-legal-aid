@@ -208,6 +208,7 @@ Rails.application.routes.draw do
         resource :has_other_dependants, only: %i[show update]
         resource :own_home, only: %i[show update]
         resource :property_details, only: %i[show update]
+        get "/property_details_interrupt", to: "property_details_interrupts#show", as: "property_details_interrupt"
         resource :vehicle, only: %i[show update]
         resources :vehicle_details, only: %i[show new update]
         resource :add_other_vehicles, only: %i[show update]

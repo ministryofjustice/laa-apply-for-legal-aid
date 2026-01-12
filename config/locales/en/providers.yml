@@ -1252,6 +1252,15 @@ en:
           percentage_hint:
             client: Your client's name must be on the property deeds, lease, freehold or mortgage.
             partner: Your client's or their partner's name must be on the property deeds, lease, freehold or mortgage.
+      property_details_interrupts:
+        show:
+          title_html: Is the mortgage and home value correct?
+          para_1: The amount left to pay on the mortgage is higher than the worth of the home.
+          para_2: 'You entered:'
+          worth_of_home: "Worth of home: %{property_value}"
+          mortgage_amount: "Mortgage amount: %{mortgage_amount}"
+          yes_correct: Yes, this is correct
+          go_back: Go back
       vehicles:
         show:
           heading: "Does %{individual} own a vehicle?"
