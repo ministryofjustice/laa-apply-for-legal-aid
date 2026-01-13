@@ -69,7 +69,7 @@ Then("I visit the check_provider_answers page") do
   visit providers_legal_aid_application_check_provider_answers_path(@legal_aid_application)
 end
 
-Then(/^I search for laa reference ["']([\w\s\-]+)["']$/) do |entry|
+Then(/^I search for laa reference ["']([\w\s-]+)["']$/) do |entry|
   name = find("input[name*=laa_reference], #laa-reference")[:name]
   fill_in(name, with: entry)
 end

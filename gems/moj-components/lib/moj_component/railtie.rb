@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 require "rails/railtie"
-require "pathname"
 
 module MojComponent
   class Railtie < ::Rails::Railtie

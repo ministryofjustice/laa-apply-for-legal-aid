@@ -477,8 +477,8 @@ module CFE
       end
 
       describe "liquid_capital_items" do
-        client_current_account = { description: "Current accounts", value: 1.0 }
-        partner_current_account = { description: "Partner current accounts", value: 400.0 }
+        let(:client_current_account) { { description: "Current accounts", value: 1.0 } }
+        let(:partner_current_account) { { description: "Partner current accounts", value: 400.0 } }
 
         it "returns the liquid capital items for client and partner" do
           expect(client_current_account.in?(cfe_result.liquid_capital_items)).to be true
