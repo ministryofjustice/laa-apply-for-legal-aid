@@ -1,11 +1,14 @@
 require "rails_helper"
 
-RSpec.describe "Backable", vcr: { cassette_name: "backable", allow_playback_repeats: true } do
+RSpec.describe "Backable" do
   let(:application) { create(:legal_aid_application, :with_applicant) }
   let(:address_lookup_path) { providers_legal_aid_application_correspondence_address_lookup_path(application) }
   let(:address_path) { providers_legal_aid_application_correspondence_address_manual_path(application) }
   let(:proceeding_type_path) { providers_legal_aid_application_proceedings_types_path(application) }
   let(:statement_of_case_upload_list_path) { list_providers_legal_aid_application_statement_of_case_upload_path(application) }
+
+  let(:confirm_non_means_tested_application_path) { providers_legal_aid_application_confirm_non_means_tested_applications_path(application) }
+
   let(:address_params) do
     {
       address:
@@ -21,7 +24,7 @@ RSpec.describe "Backable", vcr: { cassette_name: "backable", allow_playback_repe
 
   before { login_as application.provider }
 
-  describe "#back_path" do
+  describe "#back_path", vcr: { cassette_name: "backable", allow_playback_repeats: true } do
     context "when navigating through several pages" do
       before do
         get address_lookup_path
@@ -110,6 +113,70 @@ RSpec.describe "Backable", vcr: { cassette_name: "backable", allow_playback_repe
         expect(response).to have_http_status(:ok)
         expect(response).to render_template("providers/proceedings_types/index")
         expect(response.body).not_to include("Back")
+      end
+    end
+  end
+
+  describe "#back_link_for" do
+    let(:page_history_service) { PageHistoryService.new(page_history_id: session[:page_history_id]) }
+
+    before do
+      application.enter_applicant_details!
+      application.check_applicant_details!
+    end
+
+    context "when coming from check provider answers page" do
+      before do
+        get page
+        get confirm_non_means_tested_application_path
+      end
+
+      let(:page) { providers_legal_aid_application_check_provider_answers_path(application) }
+
+      it "has no back link" do
+        expect(response.body).to have_no_link("Back")
+      end
+    end
+
+    context "when coming from another page" do
+      before do
+        get page
+        get confirm_non_means_tested_application_path
+      end
+
+      let(:page) { in_progress_providers_legal_aid_applications_path }
+
+      it "has a back link to the previous page" do
+        expect(response.body).to have_back_link("#{page}&back=true")
+      end
+    end
+
+    context "when the page history is corrupted" do
+      before do
+        get in_progress_providers_legal_aid_applications_path
+
+        # corrupt the last page history entry with invalid UTF-8 characters (an ellipse, "…")
+        old_history = page_history_service.read
+        corrupted_history = old_history.sub(/locale=en(?!.*locale=en)/, 'lo\xE2\x80\xA6')
+        page_history_service.write(corrupted_history)
+
+        get confirm_non_means_tested_application_path
+      end
+
+      it "has no back link" do
+        expect(response.body).to have_no_link("Back")
+      end
+    end
+
+    context "when back_path is blank" do
+      before do
+        get confirm_non_means_tested_application_path
+        page_history_service.write(nil)
+        get confirm_non_means_tested_application_path
+      end
+
+      it "has no back link" do
+        expect(response.body).to have_no_link("Back")
       end
     end
   end
