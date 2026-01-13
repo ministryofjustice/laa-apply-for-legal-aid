@@ -117,7 +117,7 @@ RSpec.describe "Backable" do
     end
   end
 
-  describe "#back_link_for" do
+  describe "#back_link_unless" do
     let(:page_history_service) { PageHistoryService.new(page_history_id: session[:page_history_id]) }
 
     before do

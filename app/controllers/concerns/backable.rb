@@ -27,7 +27,7 @@ module Backable
     end
     helper_method :back_path
 
-    def back_link_for(target_path)
+    def back_link_unless(target_path)
       return :none if back_path.blank? || target_path.blank?
 
       if URI(back_path).path.eql? URI(target_path).path

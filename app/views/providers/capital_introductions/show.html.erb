@@ -1,4 +1,4 @@
-<%= page_template page_title: t(".h1-heading"), back_link: back_link_for(providers_legal_aid_application_means_check_income_answers_path) do %>
+<%= page_template page_title: t(".h1-heading"), back_link: back_link_unless(providers_legal_aid_application_means_check_income_answers_path) do %>
   <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? I18n.t("generic.client_and_partner") : I18n.t("generic.client") %>
 
   <div class="app-counter-list">

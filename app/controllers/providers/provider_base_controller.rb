@@ -9,7 +9,7 @@ module Providers
     include Authorizable
     include Reviewable::Controller
 
-    helper_method :display_hmrc_text?, :back_link_for
+    helper_method :display_hmrc_text?, :back_link_unless
 
   private
 

@@ -1,5 +1,5 @@
 <%= page_template(page_title: t(".tab_title.#{@benefit_check_status}"), template: :basic, column_width: "full",
-                  back_link: back_link_for(providers_legal_aid_application_check_provider_answers_path)) do %>
+                  back_link: back_link_unless(providers_legal_aid_application_check_provider_answers_path)) do %>
   <%= moj_interruption_card(heading: t(".title.#{@benefit_check_status}_html")) do |card| %>
     <% card.with_body do %>
       <p class="govuk-body"><%= t(".body.#{@benefit_check_status}", default: "") %></p>
