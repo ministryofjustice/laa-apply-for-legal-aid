@@ -39,8 +39,14 @@ cy:
           heading: Processing queue
           empty: The sidekiq queue is empty
         paused_submission:
+          table_description: Paused submission list
           heading: Paused submissions
           empty: There are no paused submissions
+        pending_submission:
+          table_description: Submissions pending a lead submission list
+          heading: Pending lead submissions
+          empty: There are no pending submissions
+          lead: Waiting for %{lead} to complete
         applicant_name: Client's name
         references: CCMS & case reference
         case_reference: Case reference

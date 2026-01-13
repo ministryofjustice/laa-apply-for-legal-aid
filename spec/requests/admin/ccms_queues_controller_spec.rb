@@ -89,6 +89,34 @@ RSpec.describe Admin::CCMSQueuesController do
         end
       end
     end
+
+    context "when there is a linked application in lead_application_pending state" do
+      let!(:legal_aid_application) { create(:legal_aid_application, :submitting_assessment, merits_submitted_at: 1.hour.ago) }
+      let(:lead_application) { create(:legal_aid_application) }
+
+      before do
+        create(:linked_application, lead_application:, associated_application: legal_aid_application, link_type_code: "FC_LEAD")
+        create(:ccms_submission, :initialised, legal_aid_application: lead_application)
+        create(:ccms_submission, :lead_application_pending, legal_aid_application:)
+      end
+
+      it "displays a count in header" do
+        get_index
+        expect(page).to have_css("h2", text: "Pending lead submissions (1)")
+      end
+
+      it "has a link to the application" do
+        get_index
+        expect(page).to have_link(href: admin_ccms_queue_path(legal_aid_application.ccms_submission))
+      end
+
+      it "displays the date application was submitted" do
+        freeze_time do
+          get_index
+          expect(page).to have_content(legal_aid_application.merits_submitted_at.strftime("%-d %B %Y @ %l:%M%p").squish)
+        end
+      end
+    end
   end
 
   describe "GET show" do
