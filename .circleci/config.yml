@@ -36,22 +36,22 @@ references:
   restore_gems_cache: &restore_gems_cache
     restore_cache:
       keys:
-        - v3.4.7-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+        - v4.0.1-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
 
   restore_js_packages_cache: &restore_js_packages_cache
     restore_cache:
       keys:
-        - v3.4.7-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+        - v4.0.1-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
 
   save_gems_cache: &save_gems_cache
     save_cache:
-        key: v3.4.7-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+        key: v4.0.1-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
 
   save_js_packages_cache: &save_js_packages_cache
     save_cache:
-      key: v3.4.7-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+      key: v4.0.1-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
 
@@ -61,7 +61,7 @@ executors:
       - image: cimg/base:2020.01
   basic-ruby-executor:
     docker:
-      - image: cimg/ruby:3.4.7-browsers
+      - image: cimg/ruby:4.0.1-browsers
         environment:
           RAILS_ENV: test
           TZ: "Europe/London"
@@ -78,7 +78,7 @@ executors:
     resource_class: small
   test-executor:
     docker:
-      - image: ministryofjustice/apply-ci:latest-3.4.7
+      - image: ministryofjustice/apply-ci:latest-4.0.1
         environment:
           RAILS_ENV: test
           NODE_OPTIONS: --openssl-legacy-provider
