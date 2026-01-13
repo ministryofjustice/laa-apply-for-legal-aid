@@ -11,17 +11,6 @@ module Providers
       render :show
     end
 
-    def back_button
-      # Don't show back link if the user comes from the confirm_non_means_tested_application page,
-      # as clicking on it would generate state transition error.
-      if URI(back_path).path.eql?(URI(providers_legal_aid_application_confirm_non_means_tested_applications_url).path)
-        :none
-      else
-        { path: back_path }
-      end
-    end
-    helper_method :back_button
-
   private
 
     def merits_tasks
