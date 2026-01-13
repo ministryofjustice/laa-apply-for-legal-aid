@@ -36,22 +36,22 @@ references:
   restore_gems_cache: &restore_gems_cache
     restore_cache:
       keys:
-        - v3.4.7-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+        - v4.0.0-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
 
   restore_js_packages_cache: &restore_js_packages_cache
     restore_cache:
       keys:
-        - v3.4.7-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+        - v4.0.0-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
 
   save_gems_cache: &save_gems_cache
     save_cache:
-        key: v3.4.7-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
+      key: v4.0.0-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+      paths:
+        - vendor/bundle
 
   save_js_packages_cache: &save_js_packages_cache
     save_cache:
-      key: v3.4.7-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+      key: v4.0.0-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
       paths:
         - node_modules
 
@@ -61,7 +61,7 @@ executors:
       - image: cimg/base:2020.01
   basic-ruby-executor:
     docker:
-      - image: cimg/ruby:3.4.7-browsers
+      - image: cimg/ruby:4.0.0-browsers
         environment:
           RAILS_ENV: test
           TZ: "Europe/London"
@@ -72,13 +72,13 @@ executors:
           TZ: Europe/London
   notification-executor:
     docker:
-      - image: 'cibuilds/base:latest'
+      - image: "cibuilds/base:latest"
         environment:
           TERM: dumb
     resource_class: small
   test-executor:
     docker:
-      - image: ministryofjustice/apply-ci:latest-3.4.7
+      - image: ministryofjustice/apply-ci:latest-4.0.0
         environment:
           RAILS_ENV: test
           NODE_OPTIONS: --openssl-legacy-provider
@@ -115,147 +115,147 @@ commands:
             fi
 
   deploy-to-environment:
-      description: Deploy image to the specified environment
-      parameters:
-        environment:
-          description: Name of environment to deploy to
-          type: string
-      steps:
-        - aws-cli/setup:
-            role_arn: $ECR_ROLE_TO_ASSUME
-            region: $ECR_REGION
-        - checkout
-        - *authenticate_k8s_live
-        - run:
-            name: Deploy to << parameters.environment >>
-            command: |
-              ./bin/deploy << parameters.environment >>
+    description: Deploy image to the specified environment
+    parameters:
+      environment:
+        description: Name of environment to deploy to
+        type: string
+    steps:
+      - aws-cli/setup:
+          role_arn: $ECR_ROLE_TO_ASSUME
+          region: $ECR_REGION
+      - checkout
+      - *authenticate_k8s_live
+      - run:
+          name: Deploy to << parameters.environment >>
+          command: |
+            ./bin/deploy << parameters.environment >>
 
 jobs:
   lint_checks:
     executor: basic-ruby-executor
     steps:
-    - checkout
-    - setup_remote_docker
-    - *update_packages
-    - *restore_gems_cache
-    - *install_gems
-    - *save_gems_cache
-    - *restore_js_packages_cache
-    - *install_js_packages
-    - *save_js_packages_cache
-    - run:
-        name: Run StandardJS
-        command: yarn run standardjs
-    - run:
-        name: Run Stylelint
-        command: yarn run stylelint
-    - run:
-        name: Run Rubocop
-        command:  bundle exec rubocop
-    - run:
-        name: Run erblint
-        command: bin/rails erblint
-    - run:
-        name: Check if new apply docker images are needed, and build if so
-        command: |
-          COMMITS_IN_BRANCH=$(git rev-list main.. --count)
-          ALL_FILES_CHANGED=$(git diff --name-only HEAD~$COMMITS_IN_BRANCH)
-          RUBY_VERSION_CHANGED=$((echo "$ALL_FILES_CHANGED" | grep ".ruby-version" || true) | wc -l | xargs)
-          if [ "$RUBY_VERSION_CHANGED" = "1" ]; then
-            TOKEN=$(curl -s -H "Content-Type: application/json" -X POST -d '{"username": "'${DOCKER_HUB_USERNAME}'", "password": "'${DOCKER_HUB_PAT}'"}' https://hub.docker.com/v2/users/login/ | jq -r .token)
-            ./.circleci/docker_build ci
-            ./.circleci/docker_build base
-          else
-            echo ".ruby-version not changed"
-          fi
+      - checkout
+      - setup_remote_docker
+      - *update_packages
+      - *restore_gems_cache
+      - *install_gems
+      - *save_gems_cache
+      - *restore_js_packages_cache
+      - *install_js_packages
+      - *save_js_packages_cache
+      - run:
+          name: Run StandardJS
+          command: yarn run standardjs
+      - run:
+          name: Run Stylelint
+          command: yarn run stylelint
+      - run:
+          name: Run Rubocop
+          command: bundle exec rubocop
+      - run:
+          name: Run erblint
+          command: bin/rails erblint
+      - run:
+          name: Check if new apply docker images are needed, and build if so
+          command: |
+            COMMITS_IN_BRANCH=$(git rev-list main.. --count)
+            ALL_FILES_CHANGED=$(git diff --name-only HEAD~$COMMITS_IN_BRANCH)
+            RUBY_VERSION_CHANGED=$((echo "$ALL_FILES_CHANGED" | grep ".ruby-version" || true) | wc -l | xargs)
+            if [ "$RUBY_VERSION_CHANGED" = "1" ]; then
+              TOKEN=$(curl -s -H "Content-Type: application/json" -X POST -d '{"username": "'${DOCKER_HUB_USERNAME}'", "password": "'${DOCKER_HUB_PAT}'"}' https://hub.docker.com/v2/users/login/ | jq -r .token)
+              ./.circleci/docker_build ci
+              ./.circleci/docker_build base
+            else
+              echo ".ruby-version not changed"
+            fi
 
   unit_tests:
     parallelism: 6
     executor: test-executor
     steps:
-    - checkout
-    - *restore_gems_cache
-    - *install_gems
-    - *save_gems_cache
-    - save_cache:
-        key: apply-repo-{{ .Environment.CIRCLE_SHA1 }}
-        paths:
-          - ~/project
-    - run: bundle exec rails db:prepare
-    - *restore_js_packages_cache
-    - *install_js_packages
-    - *save_js_packages_cache
-    - run:
-        name: Install Headless Chrome dependencies
-        command: |
-          sudo apt-get install -yq \
-          gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6 libcairo2 libcups2 libdbus-1-3 \
-          libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 \
-          libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 \
-          libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates \
-          fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
-    - run:
-        name: Install Puppeteer with Chromium
-        command: |
-          yarn add puppeteer
-    - run: bundle exec rails assets:precompile
-    - run:
-        name: Run ruby tests
-        command: |
-          TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
-          echo "${TESTFILES}"
-          bundle exec rspec --format progress \
-          --format RspecJunitFormatter \
-          -o /tmp/test-results/rspec/rspec.xml \
-          -- ${TESTFILES}
+      - checkout
+      - *restore_gems_cache
+      - *install_gems
+      - *save_gems_cache
+      - save_cache:
+          key: apply-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/project
+      - run: bundle exec rails db:prepare
+      - *restore_js_packages_cache
+      - *install_js_packages
+      - *save_js_packages_cache
+      - run:
+          name: Install Headless Chrome dependencies
+          command: |
+            sudo apt-get install -yq \
+            gconf-service libasound2 libatk1.0-0 libatk-bridge2.0-0 libc6 libcairo2 libcups2 libdbus-1-3 \
+            libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 \
+            libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 \
+            libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 ca-certificates \
+            fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
+      - run:
+          name: Install Puppeteer with Chromium
+          command: |
+            yarn add puppeteer
+      - run: bundle exec rails assets:precompile
+      - run:
+          name: Run ruby tests
+          command: |
+            TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
+            echo "${TESTFILES}"
+            bundle exec rspec --format progress \
+            --format RspecJunitFormatter \
+            -o /tmp/test-results/rspec/rspec.xml \
+            -- ${TESTFILES}
 
-    - store_test_results:
-        path: /tmp/test-results/rspec
+      - store_test_results:
+          path: /tmp/test-results/rspec
 
-    - run:
-        name: Stash Coverage Results
-        command: |
-          mkdir coverage_results
-          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-unit.json
-    - persist_to_workspace:
-        root: .
-        paths:
-          - coverage_results
+      - run:
+          name: Stash Coverage Results
+          command: |
+            mkdir coverage_results
+            cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-unit.json
+      - persist_to_workspace:
+          root: .
+          paths:
+            - coverage_results
 
   integration_tests:
     parallelism: 10
     executor: test-executor
     steps:
-    - checkout
-    - *restore_gems_cache
-    - *install_gems
-    - *save_gems_cache
-    - run: bundle exec rails db:prepare
-    - *restore_js_packages_cache
-    - *install_js_packages
-    - *save_js_packages_cache
-    - run: bundle exec rails assets:precompile
-    - browser-tools/install-chrome
-    - run:
-        name: Run integration tests
-        command: |
-          TESTFILES=$(circleci tests glob "features/**/*.feature" | circleci tests split --split-by=timings)
-          echo "${TESTFILES}"
-          bundle exec cucumber --format junit,fileattribute=true --out /tmp/test-results/cucumber --format pretty -- ${TESTFILES}
-    - store_artifacts:
-        path: tmp/capybara
-    - store_test_results:
-        path: /tmp/test-results/cucumber
-    - run:
-        name: Stash Coverage Results
-        command: |
-          mkdir coverage_results
-          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-integration.json
-    - persist_to_workspace:
-        root: .
-        paths:
-          - coverage_results
+      - checkout
+      - *restore_gems_cache
+      - *install_gems
+      - *save_gems_cache
+      - run: bundle exec rails db:prepare
+      - *restore_js_packages_cache
+      - *install_js_packages
+      - *save_js_packages_cache
+      - run: bundle exec rails assets:precompile
+      - browser-tools/install-chrome
+      - run:
+          name: Run integration tests
+          command: |
+            TESTFILES=$(circleci tests glob "features/**/*.feature" | circleci tests split --split-by=timings)
+            echo "${TESTFILES}"
+            bundle exec cucumber --format junit,fileattribute=true --out /tmp/test-results/cucumber --format pretty -- ${TESTFILES}
+      - store_artifacts:
+          path: tmp/capybara
+      - store_test_results:
+          path: /tmp/test-results/cucumber
+      - run:
+          name: Stash Coverage Results
+          command: |
+            mkdir coverage_results
+            cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-integration.json
+      - persist_to_workspace:
+          root: .
+          paths:
+            - coverage_results
 
   coverage:
     executor: basic-ruby-executor
@@ -275,9 +275,9 @@ jobs:
   build_and_push:
     executor: cloud-platform-executor
     steps:
-    - checkout
-    - setup_remote_docker
-    - build-and-push-to-ecr
+      - checkout
+      - setup_remote_docker
+      - build-and-push-to-ecr
 
   deploy_uat: &deploy_uat
     executor: cloud-platform-executor
@@ -303,13 +303,13 @@ jobs:
   delete_dependabot_deployment:
     executor: cloud-platform-executor
     steps:
-    - checkout
-    - setup_remote_docker
-    - *authenticate_k8s_live
-    - run:
-        name: Delete dependabot deployment
-        command: |
-          ./bin/delete_dependabot_deployment
+      - checkout
+      - setup_remote_docker
+      - *authenticate_k8s_live
+      - run:
+          name: Delete dependabot deployment
+          command: |
+            ./bin/delete_dependabot_deployment
 
 generic-slack-fail-post-step: &generic-slack-fail-post-step
   post-steps:
@@ -327,12 +327,12 @@ workflows:
           <<: *generic-slack-fail-post-step
       - build_and_push:
           requires:
-          - lint_checks
+            - lint_checks
           <<: *generic-slack-fail-post-step
       - deploy_uat:
           context: laa-apply-for-legalaid-uat
           requires:
-          - build_and_push
+            - build_and_push
           <<: *generic-slack-fail-post-step
       - unit_tests:
           requires:
@@ -340,7 +340,7 @@ workflows:
           <<: *generic-slack-fail-post-step
       - integration_tests:
           requires:
-          - lint_checks
+            - lint_checks
           <<: *generic-slack-fail-post-step
       - coverage:
           requires:
@@ -354,7 +354,7 @@ workflows:
               only:
                 - /dependabot.*/
           requires:
-          - deploy_uat
+            - deploy_uat
           <<: *generic-slack-fail-post-step
 
   merge_pr:
@@ -367,7 +367,7 @@ workflows:
           <<: *generic-slack-fail-post-step
       - build_and_push:
           requires:
-          - lint_checks
+            - lint_checks
           <<: *generic-slack-fail-post-step
       - unit_tests:
           requires:
