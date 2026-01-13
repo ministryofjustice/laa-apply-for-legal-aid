@@ -151,23 +151,6 @@ RSpec.describe "Backable" do
       end
     end
 
-    context "when the page history is corrupted" do
-      before do
-        get in_progress_providers_legal_aid_applications_path
-
-        # corrupt the last page history entry with invalid UTF-8 characters (an ellipse, "…")
-        old_history = page_history_service.read
-        corrupted_history = old_history.sub(/locale=en(?!.*locale=en)/, 'lo\xE2\x80\xA6')
-        page_history_service.write(corrupted_history)
-
-        get confirm_non_means_tested_application_path
-      end
-
-      it "has no back link" do
-        expect(response.body).to have_no_link("Back")
-      end
-    end
-
     context "when back_path is blank" do
       before do
         get confirm_non_means_tested_application_path

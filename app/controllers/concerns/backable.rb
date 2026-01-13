@@ -35,8 +35,6 @@ module Backable
       else
         {}
       end
-    rescue URI::InvalidURIError, ArgumentError
-      :none
     end
 
     def replace_last_page_in_history(path)
