@@ -1681,6 +1681,7 @@ en:
           partner_uploaded_bank_statements: Check uploaded bank statements for the partner's account details. Open banking was not used
           ineligible: Applicant is ineligible. Check the overall means result
           non_passported: Non-Passported application
+          negative_equity: The client reported negative equity. Check if there's any equity in the property.
       show:
         heading: Means report
         review_required: Review required

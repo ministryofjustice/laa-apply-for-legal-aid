@@ -20,6 +20,7 @@ module CCMS
              :manual_partner_employment_information?,
              :uploading_bank_statements?,
              :client_uploading_bank_statements?,
+             :negative_equity?,
              :partner_uploading_bank_statements?, to: :legal_aid_application
 
     delegate :capital_contribution_required?, to: :cfe_result
@@ -39,7 +40,8 @@ module CCMS
         policy_disregards? ||
         capital_disregards? ||
         manually_entered_employment_information? ||
-        uploading_bank_statements?
+        uploading_bank_statements? ||
+        negative_equity?
     end
 
     def review_reasons
@@ -72,6 +74,7 @@ module CCMS
       application_review_reasons << :client_uploaded_bank_statements if client_uploading_bank_statements?
       application_review_reasons << :partner_uploaded_bank_statements if partner_uploading_bank_statements?
       application_review_reasons << :ineligible if cfe_result.ineligible?
+      application_review_reasons << :negative_equity if negative_equity?
       application_review_reasons
     end
 
