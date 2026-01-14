@@ -27,6 +27,16 @@ module Backable
     end
     helper_method :back_path
 
+    def back_link_unless(target_path)
+      return :none if back_path.blank? || target_path.blank?
+
+      if URI(back_path).path.eql? URI(target_path).path
+        :none
+      else
+        {}
+      end
+    end
+
     def replace_last_page_in_history(path)
       return if page_history.empty?
 

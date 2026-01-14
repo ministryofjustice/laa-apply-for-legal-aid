@@ -1,4 +1,5 @@
-<%= page_template(page_title: t(".tab_title"), template: :basic, column_width: "full") do %>
+<%= page_template(page_title: t(".tab_title"), template: :basic, column_width: "full",
+                  back_link: back_link_unless(providers_legal_aid_application_check_provider_answers_path)) do %>
   <%= moj_interruption_card(heading: t(".title")) do |card| %>
     <% card.with_body do %>
       <p><%= t(".body") %></p>

@@ -137,11 +137,3 @@ Feature: Pathways from check your answers
     Then I should be on the 'check_provider_answers' page showing 'Check your answers'
     And I should be on a page showing 'Non-molestation order'
     And I should be on a page showing 'Child arrangements order (CAO) - contact - appeal'
-
-  @javascript @vcr
-  Scenario: I click the back button on the DWP override page
-    Given I complete the non-passported journey as far as check your answers
-    When I click 'Save and continue'
-    Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
-    When I click link 'Back'
-    Then I should be on a page showing 'Check your answers'

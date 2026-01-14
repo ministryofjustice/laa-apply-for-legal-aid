@@ -5,7 +5,9 @@
       local: true,
     ) do |form| %>
 
-  <%= page_template page_title: t(".h1-heading"), form: do %>
+  <%= page_template page_title: t(".h1-heading"),
+                    form:,
+                    back_link: back_link_unless(providers_legal_aid_application_check_merits_answers_path) do %>
 
     <% provider_firm_name = @legal_aid_application.provider.firm.name %>
     <% if @legal_aid_application.special_children_act_proceedings? %>
