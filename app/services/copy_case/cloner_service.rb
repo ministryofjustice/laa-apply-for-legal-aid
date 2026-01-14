@@ -19,6 +19,7 @@ module CopyCase
       clone_application_merits
       clone_opponents
       clone_merits_task_list
+      clone_applicant_relationship_to_children
     rescue ClonerServiceError => e
       AlertManager.capture_exception(e)
       Rails.logger.error(e.message)
@@ -123,6 +124,15 @@ module CopyCase
       target.save!
     rescue StandardError => e
       raise ClonerServiceError, "clone_merits_task_list error: #{e.message}"
+    end
+
+    def clone_applicant_relationship_to_children
+      return if source.applicant.relationship_to_children.nil?
+
+      target.applicant.relationship_to_children = source.applicant.relationship_to_children
+      target.applicant.save!
+    rescue StandardError => e
+      raise ClonerServiceError, "clone_applicant_relationship_to_children error: #{e.message}"
     end
   end
 end
