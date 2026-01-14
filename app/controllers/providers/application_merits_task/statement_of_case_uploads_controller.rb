@@ -69,7 +69,7 @@ module Providers
 
       def convert_new_files_to_pdf
         statement_of_case.original_attachments.each do |attachment|
-          PdfConverterWorker.perform_async(attachment.id)
+          PDFConverterWorker.perform_async(attachment.id)
         end
       end
 
