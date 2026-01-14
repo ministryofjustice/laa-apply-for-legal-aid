@@ -61,7 +61,7 @@ module CCMSSubmissionStateMachine
                       legal_aid_application.submitted_assessment!
                       if legal_aid_application.associated_applications.any?
                         legal_aid_application.associated_applications.each do |associated_application|
-                          associated_application.ccms_submission.restart_linked_application! if associated_application.ccms_submission.lead_application_pending?
+                          associated_application.ccms_submission.restart_linked_application! if associated_application.ccms_submission&.lead_application_pending?
                         end
                       end
                     }
