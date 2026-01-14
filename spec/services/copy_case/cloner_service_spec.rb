@@ -210,6 +210,14 @@ RSpec.describe CopyCase::ClonerService do
       expect(target.reload.legal_framework_merits_task_list.serialized_data).to eq(source.reload.legal_framework_merits_task_list.serialized_data)
     end
 
+    it "copies applicant relationship to children" do
+      source.applicant.update!(relationship_to_children: "court_order")
+      expect { call }
+        .to change(target.applicant, :relationship_to_children)
+        .from(nil)
+        .to("court_order")
+    end
+
     context "when cloning proceedings raises an error" do
       before do
         allow(source).to receive(:proceedings).and_raise(StandardError, "new fake error")
