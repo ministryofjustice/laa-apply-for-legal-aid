@@ -115,5 +115,17 @@ RSpec.describe CCMSSubmissionStateMachine do
         expect(associated_submission.reload.aasm_state).to eq "initialised"
       end
     end
+
+    context "when the submissions application is a lead with associated applications that is still in progress" do
+      let(:associated_application) { create(:legal_aid_application, :with_base_state_machine) }
+
+      before do
+        create(:linked_application, lead_application: legal_aid_application, associated_application:, link_type_code: "FC_LEAD")
+      end
+
+      it "changes the state of the lead submission and does not attempt to call restart_linked_application on the associated application" do
+        expect(state_machine).to transition_from(:case_created).to(:completed).on_event(event)
+      end
+    end
   end
 end
