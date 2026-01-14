@@ -50,8 +50,13 @@ module HMRC
       def validate_response_income
         errors << error(:income, "income must be an array") unless income.is_a?(Array)
 
+        errors << error(:income, "inPayPeriod1 must be present") if income&.any? do |payment|
+          payment.dig("grossEarningsForNics", "inPayPeriod1").nil?
+        end
+
         errors << error(:income, "inPayPeriod1 must be numeric") if income&.any? do |payment|
-          !payment&.dig("grossEarningsForNics", "inPayPeriod1").is_a?(Numeric)
+          in_pay_period_1 = payment&.dig("grossEarningsForNics", "inPayPeriod1")
+          in_pay_period_1.blank? ? false : !in_pay_period_1.is_a?(Numeric)
         end
 
         errors << error(:income, "paymentDate must be a valid iso8601 formatted date") if income&.any? do |payment|
@@ -120,8 +125,12 @@ module HMRC
         client_details_not_found? || no_employments_found?
       end
 
+      def pay_period_not_found?
+        errors.include?(error(:income, "inPayPeriod1 must be present"))
+      end
+
       def errors_ignoreable?
-        errors.empty? || invalid_use_case_found? || hmrc_not_found?
+        errors.empty? || invalid_use_case_found? || hmrc_not_found? || pay_period_not_found?
       end
     end
   end
