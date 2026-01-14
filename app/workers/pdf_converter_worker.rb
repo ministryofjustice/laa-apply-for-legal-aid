@@ -6,8 +6,8 @@ class PdfConverterWorker
 
   attr_accessor :retry_count
 
-  ALERT_ON_RETRY_COUNT = 3
-  sidekiq_options retry: ALERT_ON_RETRY_COUNT
+  MAX_RETRIES = 5
+  sidekiq_options retry: MAX_RETRIES
   sidekiq_retries_exhausted do |msg, _ex|
     Sentry.capture_message Sidekiq::ExhaustedFailureMessage.call(msg)
   end
@@ -15,8 +15,14 @@ class PdfConverterWorker
   def perform(attachment_id)
     PdfConverter.call(attachment_id)
   rescue StandardError => e
-    raise if retry_count.eql? ALERT_ON_RETRY_COUNT
+    raise if should_warn?
 
     raise SentryIgnoreThisSidekiqFailError, "Attempt to convert file to PDF failed on retry #{retry_count.to_i} with error #{e.message}"
+  end
+
+private
+
+  def should_warn?
+    retry_count == (MAX_RETRIES / 2) + 1
   end
 end
