@@ -766,6 +766,12 @@ class LegalAidApplication < ApplicationRecord
       )
   end
 
+  def negative_equity?
+    return false unless outstanding_mortgage_amount && property_value
+
+    outstanding_mortgage_amount > property_value
+  end
+
 private
 
   def benefit_check_response

@@ -1,0 +1,22 @@
+<%= page_template(page_title: t(".title_html"), template: :basic, column_width: "full") do %>
+  <% moj_interruption_card(heading: t(".title_html")) do |card| %>
+    <% card.with_body do %>
+      <p>
+        <%= t(".para_1") %>
+      </p>
+      <p>
+        <%= t(".para_2") %>
+      </p>
+      <p>
+        <%= t(".worth_of_home", property_value: gds_number_to_currency(@legal_aid_application.property_value)) %>
+        <br>
+        <%= t(".mortgage_amount", mortgage_amount: gds_number_to_currency(@legal_aid_application.outstanding_mortgage_amount)) %>
+      </p>
+    <% end %>
+
+    <% card.with_actions do %>
+      <%= govuk_button_link_to t(".yes_correct"), providers_legal_aid_application_means_vehicle_path, inverse: true, role: "button" %>
+      <%= govuk_link_to t(".go_back"), providers_legal_aid_application_means_property_details_path, inverse: true %>
+    <% end %>
+  <% end %>
+<% end %>

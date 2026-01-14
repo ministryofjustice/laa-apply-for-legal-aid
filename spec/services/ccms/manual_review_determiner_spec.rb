@@ -294,6 +294,26 @@ module CCMS
             expect(manual_review_required).to be true
           end
         end
+
+        context "with negative equity" do
+          let(:legal_aid_application) { create(:legal_aid_application, outstanding_mortgage_amount: 101_000, property_value: 100_000) }
+
+          before { create(:cfe_v6_result, submission: cfe_submission) }
+
+          it "returns true" do
+            expect(manual_review_required).to be true
+          end
+        end
+
+        context "without negative equity" do
+          let(:legal_aid_application) { create(:legal_aid_application, outstanding_mortgage_amount: 100_000, property_value: 101_000) }
+
+          before { create(:cfe_v6_result, submission: cfe_submission) }
+
+          it "returns false" do
+            expect(manual_review_required).to be false
+          end
+        end
       end
     end
 
@@ -427,6 +447,22 @@ module CCMS
 
           it "does not add capital_disregards to the review reasons" do
             expect(review_reasons_result).not_to include(:capital_disregards)
+          end
+        end
+
+        context "with negative equity" do
+          let(:legal_aid_application) { create(:legal_aid_application, outstanding_mortgage_amount: 101_000, property_value: 100_000) }
+
+          it "includes negative_equity in the review reasons" do
+            expect(review_reasons_result).to include(:negative_equity)
+          end
+        end
+
+        context "without negative equity" do
+          let(:legal_aid_application) { create(:legal_aid_application, outstanding_mortgage_amount: 100_000, property_value: 101_000) }
+
+          it "does not include negative_equity in the review reasons" do
+            expect(review_reasons_result).not_to include(:negative_equity)
           end
         end
       end

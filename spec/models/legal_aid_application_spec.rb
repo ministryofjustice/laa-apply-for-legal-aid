@@ -2471,6 +2471,38 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "negative_equity?" do
+    subject { legal_aid_application.negative_equity? }
+
+    let(:legal_aid_application) { create(:legal_aid_application, property_value:, outstanding_mortgage_amount:) }
+    let(:property_value) { nil }
+    let(:outstanding_mortgage_amount) { nil }
+
+    context "when applicant does not own home" do
+      it { is_expected.to be false }
+    end
+
+    context "when applicant owns home outright" do
+      let(:property_value) { 100_000 }
+
+      it { is_expected.to be false }
+    end
+
+    context "when applicant has equity in their home" do
+      let(:property_value) { 101_000 }
+      let(:outstanding_mortgage_amount) { 100_000 }
+
+      it { is_expected.to be false }
+    end
+
+    context "when applicant has negativeequity in their home" do
+      let(:property_value) { 100_000 }
+      let(:outstanding_mortgage_amount) { 101_000 }
+
+      it { is_expected.to be true }
+    end
+  end
+
 private
 
   def find_attachment(evidence_collection, filename)
