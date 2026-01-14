@@ -6,25 +6,50 @@ require "rails_helper"
 #
 RSpec.describe ErrorsController, :show_exceptions do
   context "when page not found due to path not existing" do
-    let(:get_invalid_path) { get("/unknown/path") }
+    context "with no locale" do
+      before { get("/unknown/path") }
 
-    context "with default locale" do
-      it "responds with expected http status" do
-        get_invalid_path
+      it "responds with not found status" do
         expect(response).to have_http_status(:not_found)
       end
 
-      it "renders page not found" do
-        get_invalid_path
+      it "renders page not found with default locale, English content" do
         expect(response).to render_template("errors/show/_page_not_found")
+        expect(page).to have_css("h1", text: "Page not found")
       end
     end
 
     context "with Welsh locale", :use_welsh_locale do
-      it "displays the correct content" do
-        get("/unknown/path", params: { locale: :cy })
-        expect(page)
-          .to have_css("h1", text: "dnuof ton egaP")
+      before { get("/unknown/path", params: { locale: :cy }) }
+
+      it "responds with not found status" do
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it "renders page not found with Welsh content" do
+        expect(response).to render_template("errors/show/_page_not_found")
+        expect(page).to have_css("h1", text: "dnuof ton egaP")
+      end
+    end
+
+    # Real world scenario where an invalid locale is supplied and previusly resulted in a 500 error with no in-app page serveable
+    context "with invalid locale" do
+      before do
+        allow(Rails.logger).to receive(:warn)
+        get("/unknown/path", params: { locale: "enMobile" })
+      end
+
+      it "responds with not found status" do
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it "renders page not found with default locale, English content" do
+        expect(response).to render_template("errors/show/_page_not_found")
+        expect(page).to have_css("h1", text: "Page not found")
+      end
+
+      it "logs the invalid locale request" do
+        expect(Rails.logger).to have_received(:warn).with(/Invalid locale requested: "enMobile".*\. Falling back to default locale./)
       end
     end
   end
