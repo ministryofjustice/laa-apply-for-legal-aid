@@ -11,7 +11,7 @@ module Addresses
               unless: :draft?
 
     validates :postcode, format: { with: POSTCODE_REGEXP, allow_blank: true }
-    validates :city, :county, format: { with: /\A[A-Za-z\.\-\' ]*\z/, allow_blank: true }
+    validates :city, :county, format: { with: /\A[A-Za-z.\-' ]*\z/, allow_blank: true }
 
     def exclude_from_model
       %i[lookup_postcode lookup_error]

@@ -118,7 +118,7 @@ private
   helper_method :back_path, :back_button
 
   def update_return_path
-    return if request.referer&.match?(/\/feedback[\?\/]/)
+    return if request.referer&.match?(/\/feedback[?\/]/)
 
     session[:feedback_return_path] = request.referer
   end

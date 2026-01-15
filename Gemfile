@@ -113,7 +113,8 @@ group :development, :test do
   gem "overcommit"
   gem "pry-byebug"
   gem "rspec_junit_formatter"
-  gem "rubocop-govuk", require: false
+  # gem "rubocop-govuk", require: false
+  gem "rubocop-govuk", github: "alphagov/rubocop-govuk", branch: "main", require: false
   gem "rubocop-performance"
 
   # Available in dev env for generators

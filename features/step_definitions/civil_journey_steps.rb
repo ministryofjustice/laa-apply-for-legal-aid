@@ -1579,7 +1579,7 @@ Then("the country result list on page returns a {string} message") do |string|
 end
 
 # NOTE: this step does not work unless put after the step "the country suggestions include {string}" :(
-Then(/^country suggestions has (\d+) result[s]?$/) do |count|
+Then(/^country suggestions has (\d+) results?$/) do |count|
   expect(page).to have_css(".country-item", visible: :visible, count:)
 end
 
