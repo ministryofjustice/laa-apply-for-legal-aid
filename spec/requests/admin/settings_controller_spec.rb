@@ -75,7 +75,7 @@ RSpec.describe Admin::SettingsController do
       before { allow(CCMS::TurnOnSubmissionsWorker).to receive(:perform_async) }
 
       context "when from false to true" do
-        it "calls CCMS::RestartSubmissions" do
+        it "calls CCMS::TurnOnSubmissionsWorker" do
           expect(CCMS::TurnOnSubmissionsWorker).to receive(:perform_async)
           patch_request
         end
@@ -92,7 +92,7 @@ RSpec.describe Admin::SettingsController do
           }
         end
 
-        it "does not send an active_support notification" do
+        it "does not call CCMS::TurnOnSubmissionsWorker" do
           expect(CCMS::TurnOnSubmissionsWorker).not_to receive(:perform_async)
           patch_request
         end
