@@ -72,16 +72,11 @@ RSpec.describe Admin::SettingsController do
     end
 
     context "when the enable_ccms_submission is changed" do
-      before do
-        allow(CCMS::RestartSubmissions).to receive(:new).and_return(ccms_restart_submissions)
-        allow(ccms_restart_submissions).to receive(:call).and_return(true)
-      end
-
-      let(:ccms_restart_submissions) { instance_double(CCMS::RestartSubmissions) }
+      before { allow(CCMS::TurnOnSubmissionsWorker).to receive(:perform_async) }
 
       context "when from false to true" do
-        it "calls CCMS::RestartSubmissions" do
-          expect(CCMS::RestartSubmissions).to receive(:call)
+        it "calls CCMS::TurnOnSubmissionsWorker" do
+          expect(CCMS::TurnOnSubmissionsWorker).to receive(:perform_async)
           patch_request
         end
       end
@@ -97,8 +92,8 @@ RSpec.describe Admin::SettingsController do
           }
         end
 
-        it "does not send an active_support notification" do
-          expect(CCMS::RestartSubmissions).not_to receive(:call)
+        it "does not call CCMS::TurnOnSubmissionsWorker" do
+          expect(CCMS::TurnOnSubmissionsWorker).not_to receive(:perform_async)
           patch_request
         end
       end

@@ -1474,6 +1474,30 @@ RSpec.describe LegalAidApplication do
     end
   end
 
+  describe "#restart_submission!" do
+    let(:legal_aid_application) { create(:legal_aid_application, :submission_paused) }
+    let(:feedback_url) { "http://test/feedback/new" }
+    let(:submit_applications_to_ccms) { true }
+
+    before { allow(Rails.configuration.x.ccms_soa).to receive(:submit_applications_to_ccms).and_return(submit_applications_to_ccms) }
+
+    it "restarts the ccms submission process" do
+      expect(PostSubmissionProcessingJob).to receive(:perform_later).with(
+        legal_aid_application.id,
+        feedback_url,
+      ).and_call_original
+      legal_aid_application.restart_submission!
+    end
+
+    context "when submit_applications_to_ccms is set to false" do
+      let(:submit_applications_to_ccms) { false }
+
+      it "raises an AASM::InvalidTransition error" do
+        expect { legal_aid_application.restart_submission! }.to raise_error(AASM::InvalidTransition)
+      end
+    end
+  end
+
   describe "#submitted_assessment" do
     let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :checking_merits_answers) }
     let(:feedback_url) { "http://test/feedback/new" }

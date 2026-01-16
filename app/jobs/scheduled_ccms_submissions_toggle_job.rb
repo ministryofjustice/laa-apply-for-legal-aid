@@ -26,7 +26,7 @@ private
 
   def turn_on_ccms_submissions
     Setting.setting.update!(enable_ccms_submission: true)
-    CCMS::RestartSubmissions.call
+    CCMS::TurnOnSubmissionsWorker.perform_async
     alert_slack("CCMS submissions have been automatically turned *ON*. They can be turned back off in the <#{admin_settings_url}|admin settings.>")
   end
 
