@@ -1,6 +1,4 @@
 class Proceeding < ApplicationRecord
-  FIRST_PROCEEDING_CASE_ID = 55_000_000
-
   belongs_to :legal_aid_application
 
   has_one :opponents_application, class_name: "ProceedingMeritsTask::OpponentsApplication", dependent: :destroy
@@ -25,10 +23,6 @@ class Proceeding < ApplicationRecord
   scope :using_delegated_functions, -> { where(used_delegated_functions: true).where.not(used_delegated_functions_on: nil).order(:used_delegated_functions_on) }
   scope :not_using_delegated_functions, -> { where.not(used_delegated_functions: true) }
 
-  before_create do
-    self.proceeding_case_id = highest_proceeding_case_id + 1 if proceeding_case_id.blank?
-  end
-
   def pretty_df_date
     used_delegated_functions_on&.strftime("%F") || "n/a"
   end
@@ -51,11 +45,6 @@ class Proceeding < ApplicationRecord
 
   def emergency_scope_limitations
     scope_limitations.where(scope_type: :emergency)
-  end
-
-  def highest_proceeding_case_id
-    rec = self.class.order(proceeding_case_id: :desc).first
-    rec.nil? || rec.proceeding_case_id.nil? ? FIRST_PROCEEDING_CASE_ID : rec.proceeding_case_id
   end
 
   def proceeding_case_p_num
