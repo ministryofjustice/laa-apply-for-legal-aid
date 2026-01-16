@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_05_114917) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_16_163956) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -917,7 +917,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_05_114917) do
     t.string "matter_type", null: false
     t.string "meaning", null: false
     t.string "name", null: false
-    t.integer "proceeding_case_id"
+    t.integer "proceeding_case_id", default: -> { "nextval('proceeding_case_id_seq'::regclass)" }
     t.string "related_orders", default: [], null: false, array: true
     t.string "sca_type"
     t.decimal "substantive_cost_limitation", null: false
@@ -982,7 +982,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_05_114917) do
     t.index ["firm_id"], name: "index_providers_on_firm_id"
     t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"
     t.index ["type"], name: "index_providers_on_type"
-    t.index ["username"], name: "index_providers_on_username", unique: true
   end
 
   create_table "regular_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
