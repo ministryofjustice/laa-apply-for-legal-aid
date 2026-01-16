@@ -1,5 +1,6 @@
 require "rails_helper"
 require Rails.root.join("spec/services/pda/provider_details_request_stubs")
+require Rails.root.join("spec/support/bank_holiday_retriever_stubs")
 
 RSpec.describe "provider selects office" do
   let(:provider) { create(:provider, :without_ccms_user_details, office_codes: "0X395U:2N078D:A123456", with_office_selected: false) }
@@ -63,6 +64,10 @@ RSpec.describe "provider selects office" do
         nmsAuths: [],
       },
     ]
+  end
+
+  before do
+    stub_bankholiday_success
   end
 
   around do |example|

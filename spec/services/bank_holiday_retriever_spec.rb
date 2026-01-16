@@ -1,52 +1,4 @@
 require "rails_helper"
-
-def stub_bankholiday_success
-  stub_request(:get, %r{#{Rails.configuration.x.bank_holidays_url}})
-    .to_return(
-      status: 200,
-      body: bank_holidays.to_json,
-      headers: { "Content-Type" => "application/json; charset=utf-8" },
-    )
-end
-
-def bank_holidays
-  {
-    "england-and-wales" => {
-      "division" => "england-and-wales",
-      "events" => [
-        { "title" => "New Year's Day", "date" => "2025-01-01", "notes" => "", "bunting" => true },
-        { "title" => "Good Friday", "date" => "2025-04-18", "notes" => "", "bunting" => true },
-        { "title" => "Easter Monday", "date" => "2025-04-21", "notes" => "", "bunting" => true },
-      ],
-    },
-    "scotland" => {
-      "division" => "scotland",
-      "events" => [
-        { "title" => "New Year's Day", "date" => "2025-01-01", "notes" => "", "bunting" => true },
-        { "title" => "2nd January", "date" => "2025-01-02", "notes" => "", "bunting" => true },
-      ],
-    },
-  }
-end
-
-def stub_bankholiday_not_found
-  stub_request(:get, %r{#{Rails.configuration.x.bank_holidays_url}})
-    .to_return(
-      status: 404,
-      body: "",
-      headers: { "Content-Type" => "text/html; charset=utf-8" },
-    )
-end
-
-def stub_bankholiday_unprocessable
-  stub_request(:get, %r{#{Rails.configuration.x.bank_holidays_url}})
-    .to_return(
-      status: 422,
-      body: "",
-      headers: { "Content-Type" => "text/html; charset=utf-8" },
-    )
-end
-
 RSpec.describe BankHolidayRetriever do
   subject(:instance) { described_class.new }
 
@@ -91,7 +43,7 @@ RSpec.describe BankHolidayRetriever do
       it "logs the error" do
         allow(Rails.logger).to receive(:error)
         instance.dates(group)
-      rescue StandardError
+      rescue OpenSSL::SSL::SSLError
         expect(Rails.logger).to have_received(:error).with(/BankHolidayRetriever error: OpenSSL::SSL::SSLError, SSL_connect returned=1 errno=0 state=error: unexpected eof while reading/)
       end
 

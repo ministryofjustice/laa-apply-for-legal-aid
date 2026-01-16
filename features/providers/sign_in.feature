@@ -1,6 +1,6 @@
 Feature: Sign in
 
-  @javascript @mock_auth_enabled @vcr_turned_off
+  @javascript @mock_auth_enabled @vcr_turned_off @stub_bank_holidays
   Scenario: I am able to sign in and select an office when mock auth is enabled
     When I visit the root page
     Then I should see "Providers can use this service to apply for civil legal aid for their clients"

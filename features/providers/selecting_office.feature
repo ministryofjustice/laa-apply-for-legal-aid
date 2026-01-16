@@ -1,3 +1,4 @@
+@stub_bank_holidays
 Feature: Selecting office
 
   @javascript @stub_office_schedules_and_user

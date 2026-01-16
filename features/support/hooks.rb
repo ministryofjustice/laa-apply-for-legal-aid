@@ -1,5 +1,6 @@
 require "super_diff/rspec-rails"
-require_relative "../../spec/services/pda/provider_details_request_stubs"
+require Rails.root.join("spec/services/pda/provider_details_request_stubs")
+require Rails.root.join("spec/support/bank_holiday_retriever_stubs")
 
 # before, after and around hooks for feature tests
 #
@@ -44,6 +45,15 @@ Around("@stub_office_schedules_and_user") do |_scenario, block|
   stub_provider_user_for("51cdbbb4-75d2-48d0-aaac-fa67f013c50a")
   stub_office_schedules_not_found_for("2N078D")
   stub_office_schedules_not_found_for("A123456")
+
+  VCR.turned_off { block.call }
+ensure
+  # Unstub
+  WebMock.reset!
+end
+
+Around("@stub_bank_holidays") do |_scenario, block|
+  stub_bankholiday_success
 
   VCR.turned_off { block.call }
 ensure

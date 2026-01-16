@@ -58,9 +58,7 @@ module LegalFramework
 
     describe ".call" do
       around do |example|
-        VCR.turn_off!
-        example.run
-        VCR.turn_on!
+        VCR.turned_off { example.run }
       end
 
       context "when a response is received from Legal Framework API" do

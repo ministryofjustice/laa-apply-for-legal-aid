@@ -12,6 +12,15 @@ class BankHoliday < ApplicationRecord
   end
 
   def populate_dates
-    self.dates = BankHolidayRetriever.dates if dates.blank?
+    if dates.blank?
+      self.dates = latest_dates
+      BankHolidayStore.write(latest_dates)
+    end
+  end
+
+private
+
+  def latest_dates
+    @latest_dates ||= BankHolidayRetriever.dates
   end
 end
