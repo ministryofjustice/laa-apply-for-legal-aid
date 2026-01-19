@@ -29,7 +29,7 @@ RSpec.describe PdfConverterWorker, type: :worker do
         end
 
         it "raises an ignoreable error" do
-          expect { perform }.to raise_error(described_class::SentryIgnoreThisSidekiqFailError, "Attempt to convert file to PDF failed on retry 2 with error \"Oops, something went wrong error\"")
+          expect { perform }.to raise_error(described_class::SentryIgnoreThisSidekiqFailError, "Attempt to convert file (attachment_id: #{uuid}) to PDF failed on retry 2 with error \"Oops, something went wrong error\"")
         end
       end
 
@@ -49,7 +49,7 @@ RSpec.describe PdfConverterWorker, type: :worker do
         end
 
         it "raises an ignoreable error" do
-          expect { perform }.to raise_error(described_class::SentryIgnoreThisSidekiqFailError, "Attempt to convert file to PDF failed on retry 4 with error \"Oops, something went wrong error\"")
+          expect { perform }.to raise_error(described_class::SentryIgnoreThisSidekiqFailError, "Attempt to convert file (attachment_id: #{uuid}) to PDF failed on retry 4 with error \"Oops, something went wrong error\"")
         end
       end
 
@@ -59,7 +59,7 @@ RSpec.describe PdfConverterWorker, type: :worker do
         end
 
         it "raises an ignoreable error" do
-          expect { perform }.to raise_error(described_class::SentryIgnoreThisSidekiqFailError, "Attempt to convert file to PDF failed on retry 5 with error \"Oops, something went wrong error\"")
+          expect { perform }.to raise_error(described_class::SentryIgnoreThisSidekiqFailError, "Attempt to convert file (attachment_id: #{uuid}) to PDF failed on retry 5 with error \"Oops, something went wrong error\"")
         end
       end
     end
