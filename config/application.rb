@@ -185,6 +185,6 @@ module LaaApplyForLegalAid
     }
 
     # For structure.sql to be used instead of schema.rb so that features unsupported by Ruby DSL, such as sequences, can be used
-    config.active_record.schema_format = :ruby
+    config.active_record.schema_format = :sql
   end
 end
