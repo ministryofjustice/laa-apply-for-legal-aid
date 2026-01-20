@@ -772,6 +772,13 @@ class LegalAidApplication < ApplicationRecord
     outstanding_mortgage_amount > property_value
   end
 
+  def display_merits_task_list?
+    return true unless copy_case?
+    return false unless special_children_act_proceedings?
+
+    proceedings.where(client_involvement_type_ccms_code: "D").any?
+  end
+
 private
 
   def benefit_check_response
