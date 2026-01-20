@@ -183,5 +183,8 @@ module LaaApplyForLegalAid
     config.exceptions_app = lambda { |env|
       ErrorsController.action(:show).call(env)
     }
+
+    # For structure.sql to be used instead of schema.rb so that features unsupported by Ruby DSL, such as sequences, can be used
+    config.active_record.schema_format = :ruby
   end
 end
