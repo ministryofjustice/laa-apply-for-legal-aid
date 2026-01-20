@@ -97,6 +97,44 @@ module LegalFramework
       end
     end
 
+    describe "#mark_as_not_started!" do
+      context "with invalid task name" do
+        it "raises an exception" do
+          expect {
+            smtl.mark_as_not_started!(:application, :rubbish)
+          }.to raise_error KeyError, "key not found: :rubbish"
+        end
+      end
+
+      context "with invalid task group name" do
+        it "raises an exception" do
+          expect {
+            smtl.mark_as_not_started!(:fake, :incident_details)
+          }.to raise_error KeyError, "key not found: :fake"
+        end
+      end
+
+      context "when successful" do
+        context "with application group" do
+          before { smtl.mark_as_complete!(:application, :incident_details) }
+
+          it "marks the task as not started" do
+            smtl.mark_as_not_started!(:application, :incident_details)
+            expect(smtl.task(:application, :incident_details).state).to eq :not_started
+          end
+        end
+
+        context "with proceeding type" do
+          before { smtl.mark_as_complete!(:DA004, :chances_of_success) }
+
+          it "marks the task as not started" do
+            smtl.mark_as_not_started!(:DA004, :chances_of_success)
+            expect(smtl.task(:DA004, :chances_of_success).state).to eq :not_started
+          end
+        end
+      end
+    end
+
     def dummy_response_hash
       {
         request_id: SecureRandom.uuid,

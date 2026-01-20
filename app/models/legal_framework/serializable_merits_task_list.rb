@@ -38,6 +38,10 @@ module LegalFramework
       unblock_dependant_tasks(task_name)
     end
 
+    def mark_as_not_started!(task_group, task_name)
+      task(task_group, task_name).mark_as_not_started!
+    end
+
     def self.new_from_serialized(yaml_string)
       YAML.safe_load(yaml_string, permitted_classes: SAFE_SERIALIZABLE_CLASSES, aliases: true)
     end
