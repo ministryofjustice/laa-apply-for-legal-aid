@@ -11,6 +11,7 @@ if %w[production].include?(Rails.env) && ENV["SENTRY_DSN"].present?
     config.excluded_exceptions += %w[
       CCMS::SentryIgnoreThisSidekiqFailError
       HMRC::SentryIgnoreThisSidekiqFailError
+      PdfConverterWorker::SentryIgnoreThisSidekiqFailError
     ]
 
     config.before_send = lambda { |event, _hint|

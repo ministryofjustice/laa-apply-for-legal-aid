@@ -17,7 +17,7 @@ class PdfConverterWorker
   rescue StandardError => e
     raise if should_warn?
 
-    raise SentryIgnoreThisSidekiqFailError, "Attempt to convert file to PDF failed on retry #{retry_count.to_i} with error #{e.message}"
+    raise SentryIgnoreThisSidekiqFailError, "Attempt to convert file (attachment_id: #{attachment_id}) to PDF failed on retry #{retry_count.to_i} with error \"#{e.message}\""
   end
 
 private

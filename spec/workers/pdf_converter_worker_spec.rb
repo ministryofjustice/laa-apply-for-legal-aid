@@ -1,54 +1,86 @@
 require "rails_helper"
 
 RSpec.describe PdfConverterWorker, type: :worker do
-  subject(:perform) { described_class.new.perform(uuid) }
+  subject(:perform) { instance.perform(uuid) }
 
+  let(:instance) { described_class.new }
   let(:uuid) { SecureRandom.uuid }
-  let(:worker) { described_class.new }
 
-  it "calls PdfConverter" do
-    expect(PdfConverter).to receive(:call).with(uuid)
-    perform
-  end
+  describe "#perform" do
+    context "when conversion successful" do
+      before do
+        allow(PdfConverter).to receive(:call).and_return true
+      end
 
-  context "when an error occurs" do
-    let(:pdf_converter) { class_double PdfConverter }
-
-    before do
-      allow(pdf_converter).to receive(:call).with(uuid).and_return(false)
+      it "calls PdfConverter" do
+        expect(PdfConverter).to receive(:call).with(uuid)
+        perform
+      end
     end
 
-    context "when at ALERT_ON_RETRY_COUNT" do
-      before { worker.retry_count = 3 }
-
-      let(:expected_error) do
-        <<~MESSAGE
-          Attachment id:  failed
-          Moving PdfConverterWorker to dead set, it failed with: /An error occurred
-        MESSAGE
+    context "when conversion encounters an error" do
+      before do
+        allow(PdfConverter).to receive(:call).and_raise(StandardError, "Oops, something went wrong error")
       end
 
-      it "raises an error" do
-        expect { perform }.to raise_error(StandardError)
+      context "when below warning retry count" do
+        before do
+          allow(instance).to receive(:retry_count).and_return(2)
+        end
+
+        it "raises an ignoreable error" do
+          expect { perform }.to raise_error(described_class::SentryIgnoreThisSidekiqFailError, "Attempt to convert file (attachment_id: #{uuid}) to PDF failed on retry 2 with error \"Oops, something went wrong error\"")
+        end
       end
 
-      it "passes the error to Sentry" do
-        described_class.within_sidekiq_retries_exhausted_block do
-          expect(Sentry).to receive(:capture_message).with(expected_error)
+      context "when at warning retry count" do
+        before do
+          allow(instance).to receive(:retry_count).and_return(3)
+        end
+
+        it "raises the erorr encountered" do
+          expect { perform }.to raise_error(StandardError, "Oops, something went wrong error")
+        end
+      end
+
+      context "when above warning retry count but below retry limit" do
+        before do
+          allow(instance).to receive(:retry_count).and_return(4)
+        end
+
+        it "raises an ignoreable error" do
+          expect { perform }.to raise_error(described_class::SentryIgnoreThisSidekiqFailError, "Attempt to convert file (attachment_id: #{uuid}) to PDF failed on retry 4 with error \"Oops, something went wrong error\"")
+        end
+      end
+
+      context "when at retry limit" do
+        before do
+          allow(instance).to receive(:retry_count).and_return(5)
+        end
+
+        it "raises an ignoreable error" do
+          expect { perform }.to raise_error(described_class::SentryIgnoreThisSidekiqFailError, "Attempt to convert file (attachment_id: #{uuid}) to PDF failed on retry 5 with error \"Oops, something went wrong error\"")
         end
       end
     end
+  end
 
-    context "when at less than ALERT_ON_RETRY_COUNT" do
-      before { worker.retry_count = 2 }
+  describe ".sidekiq_retries_exhausted block" do
+    subject(:call_sidekiq_retries_exhausted_block) { described_class.sidekiq_retries_exhausted_block.call(msg) }
 
-      it "raises an error" do
-        expect { perform }.to raise_error(StandardError)
-      end
+    let(:msg) { { "class" => described_class.name, "args" => [], "error_message" => "Oops, this is the last straw" } }
 
-      it "does not pass the error to Sentry" do
-        expect(Sentry).not_to receive(:capture_message)
-      end
+    let(:expected_error) do
+      <<~MESSAGE
+        Attachment id:  failed
+        Moving PdfConverterWorker to dead set, it failed with: /Oops, this is the last straw
+      MESSAGE
+    end
+
+    it "passes the error to Sentry" do
+      allow(Sentry).to receive(:capture_message)
+      call_sidekiq_retries_exhausted_block
+      expect(Sentry).to have_received(:capture_message).with(expected_error)
     end
   end
 end
