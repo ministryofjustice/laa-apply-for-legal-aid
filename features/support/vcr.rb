@@ -15,7 +15,7 @@ VCR.configure do |vcr_config|
 
   vcr_config.ignore_request do |request|
     uri = URI(request.uri).to_s
-    uri.include?("__identify__") || uri =~ /127\.0\.0\.1.*(session|shutdown)/
+    uri.include?("__identify__") || uri =~ /127\.0\.0\.1.*(session|shutdown|status)/
   end
 
   vcr_config.filter_sensitive_data("<GOVUK_NOTIFY_API_KEY>") { ENV.fetch("GOVUK_NOTIFY_API_KEY", nil) }
