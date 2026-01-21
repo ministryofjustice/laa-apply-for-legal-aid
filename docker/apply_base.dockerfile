@@ -25,7 +25,7 @@ RUN apk --no-cache add --virtual build-dependencies \
                     curl \
                     yaml-dev \
 && apk --no-cache add \
-                  postgresql-client \
+                  postgresql18-client \
                   nodejs \
                   yarn \
                   jq \
