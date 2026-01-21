@@ -49,6 +49,8 @@ RUN bundle exec rake assets:precompile SECRET_KEY_BASE=a-real-secret-key-is-not-
 # tidy up installation - these are installed in the apply-base image
 RUN apk del build-dependencies
 
+RUN apk --no-cache add postgresql18-client
+
 # Cleanup to save space in the production image
 RUN rm -rf node_modules log/* tmp/* && \
     rm -rf /usr/local/bundle/cache && \
