@@ -106,7 +106,7 @@ class LegalAidApplicationJsonBuilder < BaseJsonBuilder
         urgency: UrgencyJsonBuilder.build(urgency).as_json,
         appeal: AppealJsonBuilder.build(appeal).as_json,
         matter_opposition: MatterOppositionJsonBuilder.build(matter_opposition).as_json,
-        involved_children: involved_children.map { |ic| InvolvedChildJsonBuilder.build(ic).as_json }, # DO WE NEEDS THIS AS IS PRESENT ON PROCEEDING LEVEL TOO
+        involved_children: involved_children.map { |ic| InvolvedChildJsonBuilder.build(ic).as_json },
       },
 
       # proceeding (level) merits
@@ -121,7 +121,6 @@ class LegalAidApplicationJsonBuilder < BaseJsonBuilder
             prohibited_steps: ProhibitedStepsJsonBuilder.build(p.prohibited_steps).as_json,
             child_care_assessment: ChildCareAssessmentJsonBuilder.build(p.child_care_assessment).as_json,
             proceeding_linked_children: p.proceeding_linked_children.map { |lc| ProceedingLinkedChildJsonBuilder.build(lc).as_json },
-            involved_children: p.involved_children.map { |ic| InvolvedChildJsonBuilder.build(ic).as_json }, # DO WE NEEDS THIS AS IS PRESENT ON APPLICATION LEVEL TOO
           }
         end,
     }
