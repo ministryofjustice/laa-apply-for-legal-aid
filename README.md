@@ -1,7 +1,7 @@
 
 
 [![CircleCI](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid.svg?style=shield)](https://circleci.com/gh/ministryofjustice/laa-apply-for-legal-aid/tree/main)
-[![Ministry of Justice Repository Compliance Badge](https://github-community.service.justice.gov.uk/repository-standards/api/laa-apply-for-legal-aid/badge)](https://github-community.service.justice.gov.uk/repository-standards/laa-apply-for-legal-aid) 
+[![Ministry of Justice Repository Compliance Badge](https://github-community.service.justice.gov.uk/repository-standards/api/laa-apply-for-legal-aid/badge)](https://github-community.service.justice.gov.uk/repository-standards/laa-apply-for-legal-aid)
 
 # LAA Apply for civil legal aid
 
@@ -81,8 +81,8 @@ brew bundle
     ```
     brew services list
     ...
-    brew services stop postgresql@XX
-    brew services start postgresql@14
+    brew services stop postgresql@<current-version-used>
+    brew services start postgresql@<version-used-by-app>
     ```
 
 1. From the root of the project execute the following command:
