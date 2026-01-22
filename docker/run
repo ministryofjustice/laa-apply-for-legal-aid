@@ -6,7 +6,7 @@ set -e
 ./docker/wait_for_pg
 
 # Prepare the database and always seed it
-bundle exec rails db:prepare db:seed
+bundle exec rails db:prepare
 
 # Remove irb prompts from rails console
 echo 'IRB.conf[:USE_AUTOCOMPLETE] = false' >> ~/.irbrc
