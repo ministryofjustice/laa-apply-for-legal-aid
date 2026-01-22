@@ -14,7 +14,7 @@ VCR.configure do |vcr_config|
 
   vcr_config.ignore_request do |request|
     uri = URI(request.uri).to_s
-    uri.include?("__identify__") || uri =~ /127\.0\.0\.1.*(session|shutdown)/
+    uri.include?("__identify__") || uri =~ /127\.0\.0\.1.*(session|shutdown|status)/
   end
 
   vcr_config.configure_rspec_metadata!
