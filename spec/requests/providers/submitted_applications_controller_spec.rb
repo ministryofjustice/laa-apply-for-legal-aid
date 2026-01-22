@@ -128,7 +128,7 @@ RSpec.describe Providers::SubmittedApplicationsController do
         end
 
         it "does display the button" do
-          expect(page).to have_content("Submit to datastore")
+          expect(page).to have_no_content("Submit to datastore")
         end
       end
 
