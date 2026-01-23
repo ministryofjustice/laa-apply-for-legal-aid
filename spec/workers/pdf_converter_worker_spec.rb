@@ -8,15 +8,15 @@ RSpec.describe PDFConverterWorker, type: :worker do
 
   describe "#perform" do
     context "when conversion successful" do
-      it "calls CreatePDFAttachment" do
-        expect(CreatePDFAttachment).to receive(:call).with(uuid)
+      it "calls PDFAttachmentCreator" do
+        expect(PDFAttachmentCreator).to receive(:call).with(uuid)
         perform
       end
     end
 
     context "when conversion encounters an error" do
       before do
-        allow(CreatePDFAttachment).to receive(:call).and_raise(StandardError, "Oops, something went wrong error")
+        allow(PDFAttachmentCreator).to receive(:call).and_raise(StandardError, "Oops, something went wrong error")
       end
 
       context "when below warning retry count" do

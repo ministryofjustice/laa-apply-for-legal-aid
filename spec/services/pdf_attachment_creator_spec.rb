@@ -2,7 +2,7 @@ require "rails_helper"
 
 FileStruct = Struct.new(:name, :content_type)
 
-RSpec.describe CreatePDFAttachment do
+RSpec.describe PDFAttachmentCreator do
   subject(:call) do
     described_class.call(attachment.id)
   end

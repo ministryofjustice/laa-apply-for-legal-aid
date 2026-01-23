@@ -13,7 +13,7 @@ class PDFConverterWorker
   end
 
   def perform(attachment_id)
-    CreatePDFAttachment.call(attachment_id)
+    PDFAttachmentCreator.call(attachment_id)
   rescue StandardError => e
     raise if should_warn?
 
