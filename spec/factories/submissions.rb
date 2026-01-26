@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :submission, class: "CCMS::Submission" do
-    legal_aid_application
+    legal_aid_application { association(:legal_aid_application, merits_submitted_by: create(:provider)) }
 
     sequence(:case_ccms_reference) { |n| sprintf("300000%<number>06d", number: n) }
 

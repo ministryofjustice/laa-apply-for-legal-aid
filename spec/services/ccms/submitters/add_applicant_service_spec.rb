@@ -5,7 +5,7 @@ module CCMS
     RSpec.describe AddApplicantService, :ccms do
       subject(:instance) { described_class.new(submission) }
 
-      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_address) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_address, :with_merits_submitted_at) }
       let(:applicant) { legal_aid_application.applicant }
       let(:address) { applicant.home_address_for_ccms }
       let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:) }

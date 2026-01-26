@@ -5,7 +5,7 @@ module CCMS
     RSpec.describe ObtainApplicantReferenceService, :ccms do
       subject(:instance) { described_class.new(submission) }
 
-      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :with_everything_and_address, applicant:, populate_vehicle: true) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, :with_everything_and_address, :with_merits_submitted_at, applicant:, populate_vehicle: true) }
       let(:applicant) { create(:applicant, :with_address, first_name: "Amy", last_name: "Williams", date_of_birth: Date.new(1972, 1, 1), national_insurance_number: "QQ123456A") }
       let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:) }
       let(:histories) { CCMS::SubmissionHistory.where(submission_id: submission.id).order(:created_at) }

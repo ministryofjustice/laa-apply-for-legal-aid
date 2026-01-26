@@ -11,7 +11,8 @@ module CCMS
                :with_proceedings,
                :with_opponent,
                :with_transaction_period,
-               :with_cfe_v3_result)
+               :with_cfe_v3_result,
+               :with_merits_submitted_at)
       end
       let(:chances_of_success) { create(:chances_of_success, application_proceeding_type: legal_aid_application.lead_application_proceeding_type) }
       let(:submission) { create(:submission, :applicant_ref_obtained, legal_aid_application:, case_ccms_reference: Faker::Number.number) }
