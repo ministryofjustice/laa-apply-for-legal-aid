@@ -59,7 +59,7 @@ module CCMS
       end
 
       def document_id_requestor(document_type)
-        Requestors::DocumentIdRequestor.new(submission.case_ccms_reference, submission.legal_aid_application.provider.username, document_type)
+        Requestors::DocumentIdRequestor.new(submission.case_ccms_reference, submission.legal_aid_application.merits_submitted_by.username, document_type)
       end
 
       def update_document_and_return_response(document, document_id_requestor)

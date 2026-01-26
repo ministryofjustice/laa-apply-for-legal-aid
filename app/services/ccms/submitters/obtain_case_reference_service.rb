@@ -23,7 +23,7 @@ module CCMS
     private
 
       def reference_data_requestor
-        @reference_data_requestor ||= CCMS::Requestors::ReferenceDataRequestor.new(submission.legal_aid_application.provider.username)
+        @reference_data_requestor ||= CCMS::Requestors::ReferenceDataRequestor.new(submission.legal_aid_application.merits_submitted_by.username)
       end
 
       def xml_request

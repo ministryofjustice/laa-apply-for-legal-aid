@@ -36,7 +36,7 @@ module CCMS
         CCMS::Requestors::DocumentUploadRequestor.new(submission.case_ccms_reference,
                                                       submission_document.ccms_document_id,
                                                       Base64.strict_encode64(pdf_binary(submission_document)),
-                                                      submission.legal_aid_application.provider.username,
+                                                      submission.legal_aid_application.merits_submitted_by.username,
                                                       submission_document.document_type)
       end
 

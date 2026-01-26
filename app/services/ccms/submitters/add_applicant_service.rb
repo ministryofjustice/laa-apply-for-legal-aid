@@ -19,7 +19,7 @@ module CCMS
     private
 
       def applicant_add_requestor
-        @applicant_add_requestor ||= CCMS::Requestors::ApplicantAddRequestor.new(legal_aid_application.applicant, legal_aid_application.provider.username)
+        @applicant_add_requestor ||= CCMS::Requestors::ApplicantAddRequestor.new(legal_aid_application.applicant, legal_aid_application.merits_submitted_by.username)
       end
 
       def applicant_add_response_parser
