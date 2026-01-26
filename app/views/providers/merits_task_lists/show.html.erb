@@ -1,7 +1,14 @@
+<% if @legal_aid_application.copy_case? %>
+  <% notification_banner_title = t("generic.important") %>
+  <% notification_banner_text = t(".banner_text") %>
+<% end %>
+
 <%= page_template(
       page_title: t(".page_heading"),
       back_link: back_link_unless(providers_legal_aid_application_confirm_non_means_tested_applications_url),
       show_errors_for: @merits_task_list,
+      notification_banner_title:,
+      notification_banner_text:,
     ) do %>
 
   <div id="task_list" class="<%= "govuk-form-group--error" if @merits_task_list&.errors&.any? && @merits_task_list.errors[:task_list].present? %>">
