@@ -774,9 +774,8 @@ class LegalAidApplication < ApplicationRecord
 
   def display_merits_task_list?
     return true unless copy_case?
-    return false unless special_children_act_proceedings?
 
-    proceedings.where(client_involvement_type_ccms_code: "D").any?
+    legal_framework_merits_task_list&.includes_task?(:application, :client_relationship_to_children)
   end
 
 private
