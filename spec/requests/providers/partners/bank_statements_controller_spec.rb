@@ -122,8 +122,8 @@ RSpec.describe Providers::Partners::BankStatementsController do
         end
 
         it "enqueues job to convert uploaded attachment document to pdf" do
-          expect { request }.to change(PdfConverterWorker.jobs, :size).by(1)
-          expect(PdfConverterWorker.jobs[0]["args"]).to include(legal_aid_application.reload.attachments.last.id)
+          expect { request }.to change(PDFConverterWorker.jobs, :size).by(1)
+          expect(PDFConverterWorker.jobs[0]["args"]).to include(legal_aid_application.reload.attachments.last.id)
         end
 
         it "stores the original filename" do
@@ -194,7 +194,7 @@ RSpec.describe Providers::Partners::BankStatementsController do
         end
 
         it "does not enqueue job to convert upload to pdf" do
-          expect { request }.not_to change(PdfConverterWorker.jobs, :size)
+          expect { request }.not_to change(PDFConverterWorker.jobs, :size)
         end
 
         it "returns http success" do
@@ -216,7 +216,7 @@ RSpec.describe Providers::Partners::BankStatementsController do
         end
 
         it "does not enqueue job to convert upload to pdf" do
-          expect { request }.not_to change(PdfConverterWorker.jobs, :size)
+          expect { request }.not_to change(PDFConverterWorker.jobs, :size)
         end
 
         it "returns http success" do
@@ -238,7 +238,7 @@ RSpec.describe Providers::Partners::BankStatementsController do
         end
 
         it "does not enqueue job to convert upload to pdf" do
-          expect { request }.not_to change(PdfConverterWorker.jobs, :size)
+          expect { request }.not_to change(PDFConverterWorker.jobs, :size)
         end
 
         it "returns http success" do
@@ -260,7 +260,7 @@ RSpec.describe Providers::Partners::BankStatementsController do
         end
 
         it "does not enqueue job to convert upload to pdf" do
-          expect { request }.not_to change(PdfConverterWorker.jobs, :size)
+          expect { request }.not_to change(PDFConverterWorker.jobs, :size)
         end
 
         it "returns http success" do
