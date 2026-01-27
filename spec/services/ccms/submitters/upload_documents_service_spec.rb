@@ -23,7 +23,7 @@ RSpec.describe CCMS::Submitters::UploadDocumentsService, :ccms do
            :with_merits_report,
            :with_bank_transaction_report,
            :submitting_assessment,
-           :with_merits_submitted_at)
+           :with_merits_submitted)
   end
   let!(:proceeding) { create(:proceeding, :da001, legal_aid_application:) }
   let(:statement_of_case) { create(:statement_of_case, :with_original_and_pdf_files_attached, legal_aid_application:) }

@@ -20,7 +20,7 @@ module Reports
                     :with_proceedings,
                     :with_chances_of_success,
                     :at_assessment_submitted,
-                    :with_merits_submitted_at)
+                    :with_merits_submitted)
       end
       let!(:applications_being_submitted) do
         create(:legal_aid_application,
@@ -31,7 +31,7 @@ module Reports
                :with_proceedings,
                :with_chances_of_success,
                :at_submitting_assessment,
-               :with_merits_submitted_at)
+               :with_merits_submitted)
       end
       let(:num_applications) { (unsubmitted_applications + submitted_applications + [applications_being_submitted]).flatten.size }
       let(:report) { described_class.new }

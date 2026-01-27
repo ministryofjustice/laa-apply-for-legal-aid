@@ -10,7 +10,7 @@ RSpec.describe Datastore::PayloadGenerator do
       :with_proceedings,
       :with_dependant,
       :with_bank_transactions,
-      :with_merits_submitted_at,
+      :with_merits_submitted,
       :at_assessment_submitted,
       office: build(:office, :with_valid_schedule),
       benefit_check_result: build(:benefit_check_result, :negative),
