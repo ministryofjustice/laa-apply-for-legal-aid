@@ -12,6 +12,7 @@ module CCMS
                :with_domestic_abuse_summary,
                :with_chances_of_success,
                :with_everything_and_address,
+               :with_merits_submitted,
                :with_passported_state_machine,
                :with_cfe_v5_result,
                :with_positive_benefit_check_result,
@@ -56,6 +57,7 @@ module CCMS
                  :with_chances_of_success,
                  :with_everything_and_address,
                  :with_non_passported_state_machine,
+                 :with_merits_submitted,
                  :with_cfe_v5_result,
                  office_id: office.id)
         end
@@ -77,6 +79,7 @@ module CCMS
                  :with_cfe_empty_result,
                  :with_opponent,
                  :with_chances_of_success,
+                 :with_merits_submitted,
                  office_id: office.id)
         end
 

@@ -24,6 +24,7 @@ module CCMS
                  :with_proceedings,
                  :with_non_passported_state_machine,
                  :submitting_assessment,
+                 :with_merits_submitted,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
                  provider:,
