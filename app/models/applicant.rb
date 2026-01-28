@@ -64,6 +64,11 @@ class Applicant < ApplicationRecord
       age_for_means_test_purposes < 18
   end
 
+  def over_17?
+    age_for_means_test_purposes.present? &&
+      age_for_means_test_purposes >= 17
+  end
+
   def child?
     age < 16
   end

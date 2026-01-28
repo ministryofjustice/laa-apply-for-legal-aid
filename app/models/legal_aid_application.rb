@@ -213,7 +213,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def special_children_act_child_subject_over_17?
-    sca_care_order_or_supervision_order_child_subject? && applicant.age >= 17
+    sca_care_order_or_supervision_order_child_subject? && applicant.over_17?
   end
 
   def client_court_ordered_parental_responsibility?
