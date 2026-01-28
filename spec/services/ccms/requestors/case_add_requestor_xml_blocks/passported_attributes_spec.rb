@@ -19,6 +19,7 @@ module CCMS
                  :with_proceedings,
                  :with_everything,
                  :with_applicant_and_no_partner,
+                 :with_merits_submitted,
                  :with_positive_benefit_check_result,
                  set_lead_proceeding: :da001,
                  populate_vehicle: true,
@@ -249,6 +250,7 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
+                     :with_merits_submitted,
                      vehicles: [],
                      office:)
             end
@@ -286,6 +288,7 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
+                     :with_merits_submitted,
                      with_bank_accounts: 2,
                      vehicles: [],
                      office:)
@@ -315,6 +318,7 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
+                     :with_merits_submitted,
                      populate_vehicle: true,
                      office:)
             end
@@ -831,6 +835,7 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
+                     :with_merits_submitted,
                      set_lead_proceeding: :da004,
                      proceeding_count: 2,
                      populate_vehicle: true,
@@ -868,6 +873,7 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
+                     :with_merits_submitted,
                      set_lead_proceeding: :da004,
                      proceeding_count: 2,
                      populate_vehicle: true,
@@ -1442,6 +1448,7 @@ module CCMS
                      :with_proceedings,
                      :with_everything,
                      :with_applicant_and_address,
+                     :with_merits_submitted,
                      set_lead_proceeding: :da004,
                      explicit_proceedings: [:da004],
                      populate_vehicle: true,
@@ -1475,6 +1482,7 @@ module CCMS
                      :with_everything,
                      :with_applicant_and_address,
                      :with_positive_benefit_check_result,
+                     :with_merits_submitted,
                      set_lead_proceeding: :da004,
                      explicit_proceedings: [:da004],
                      populate_vehicle: true,
@@ -1501,6 +1509,7 @@ module CCMS
               :with_everything,
               :with_applicant_and_address,
               :with_positive_benefit_check_result,
+              :with_merits_submitted,
               set_lead_proceeding: :da001,
               populate_vehicle: true,
               with_bank_accounts: 2,

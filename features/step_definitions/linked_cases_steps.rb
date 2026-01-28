@@ -3,7 +3,7 @@ Given("I have created and submitted an application with the application referenc
     :legal_aid_application,
     :with_everything,
     :with_passported_state_machine,
-    :with_merits_submitted_at,
+    :with_merits_submitted,
     :with_proceedings,
     applicant: create(:applicant, first_name: "Catelyn", last_name: "Stark"),
     provider: @registered_provider,

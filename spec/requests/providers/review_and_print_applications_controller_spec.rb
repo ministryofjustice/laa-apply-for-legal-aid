@@ -86,7 +86,10 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController do
         let(:submit_button) { { continue_button: "Continue" } }
 
         it "updates the record" do
-          expect { request }.to change { application.reload.merits_submitted_at }.from(nil)
+          expect { request }.to change { application.reload.attributes.symbolize_keys }
+                                      .from(hash_including(merits_submitted_at: nil, merits_submitted_by_id: nil))
+                                      .to(hash_including(merits_submitted_by_id: provider.id))
+          expect(application.merits_submitted_at).to be_a ActiveSupport::TimeWithZone
           expect(application.reload).to be_generating_reports
         end
 

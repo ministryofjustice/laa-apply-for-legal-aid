@@ -17,7 +17,7 @@ module CCMS
     private
 
       def applicant_search_requestor
-        @applicant_search_requestor ||= CCMS::Requestors::ApplicantSearchRequestor.new(legal_aid_application.applicant, legal_aid_application.provider.username)
+        @applicant_search_requestor ||= CCMS::Requestors::ApplicantSearchRequestor.new(legal_aid_application.applicant, legal_aid_application.merits_submitted_by.username)
       end
 
       def process_records(parser)

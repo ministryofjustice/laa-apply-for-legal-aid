@@ -19,6 +19,7 @@ class LegalAidApplication < ApplicationRecord
   belongs_to :applicant, optional: true, dependent: :destroy
   belongs_to :provider, optional: false
   belongs_to :office, optional: true
+  belongs_to :merits_submitted_by, class_name: "Provider", optional: true
   has_many :proceedings, dependent: :destroy
   has_many :chances_of_success, through: :proceedings
   has_many :attachments, dependent: :destroy
@@ -630,8 +631,8 @@ class LegalAidApplication < ApplicationRecord
     state_machine_proxy.complete_non_passported_means!(self)
   end
 
-  def merits_complete!
-    update!(merits_submitted_at: Time.current) unless merits_submitted_at?
+  def merits_complete!(current_provider)
+    update!(merits_submitted_at: Time.current, merits_submitted_by: current_provider) unless merits_submitted_at?
   end
 
   def summary_state

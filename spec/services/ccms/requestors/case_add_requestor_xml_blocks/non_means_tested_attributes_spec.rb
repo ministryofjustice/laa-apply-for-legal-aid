@@ -24,6 +24,7 @@ module CCMS
             :with_domestic_abuse_summary,
             :with_incident,
             :with_chances_of_success,
+            :with_merits_submitted,
             prospect: success_prospect,
             set_lead_proceeding: :da001,
             provider:,

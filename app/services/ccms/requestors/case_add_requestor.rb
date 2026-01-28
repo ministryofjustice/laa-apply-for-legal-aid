@@ -479,7 +479,7 @@ module CCMS
       end
 
       def provider
-        @provider ||= @legal_aid_application.provider
+        @provider ||= @legal_aid_application.merits_submitted_by
       end
 
       def proceedings

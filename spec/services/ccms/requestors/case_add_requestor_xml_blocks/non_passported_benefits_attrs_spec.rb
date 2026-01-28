@@ -23,6 +23,7 @@ module CCMS
                  :with_applicant_and_address,
                  :with_negative_benefit_check_result,
                  :with_proceedings,
+                 :with_merits_submitted,
                  populate_vehicle: true,
                  with_bank_accounts: 2,
                  provider:,

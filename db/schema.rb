@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_05_114917) do
+ActiveRecord::Schema[8.1].define(version: 2026_01_26_075308) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -676,6 +676,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_05_114917) do
     t.boolean "in_scope_of_laspo"
     t.boolean "linked_application_completed"
     t.datetime "merits_submitted_at", precision: nil
+    t.uuid "merits_submitted_by_id"
     t.boolean "no_cash_income"
     t.boolean "no_cash_outgoings"
     t.boolean "no_credit_transaction_types_selected"
@@ -711,6 +712,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_05_114917) do
     t.index ["application_ref"], name: "index_legal_aid_applications_on_application_ref", unique: true
     t.index ["datastore_id"], name: "index_legal_aid_applications_on_datastore_id", unique: true
     t.index ["discarded_at"], name: "index_legal_aid_applications_on_discarded_at"
+    t.index ["merits_submitted_by_id"], name: "index_legal_aid_applications_on_merits_submitted_by_id"
     t.index ["office_id"], name: "index_legal_aid_applications_on_office_id"
     t.index ["provider_id"], name: "index_legal_aid_applications_on_provider_id"
   end

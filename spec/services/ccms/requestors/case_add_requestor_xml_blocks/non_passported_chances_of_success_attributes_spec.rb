@@ -60,6 +60,7 @@ module CCMS
                    :with_everything,
                    :with_negative_benefit_check_result,
                    :with_cfe_v6_result,
+                   :with_merits_submitted,
                    :with_proceedings,
                    explicit_proceedings: %i[da001],
                    set_lead_proceeding: :da001,
@@ -87,6 +88,7 @@ module CCMS
                    :with_everything,
                    :with_negative_benefit_check_result,
                    :with_cfe_v6_result,
+                   :with_merits_submitted,
                    :with_proceedings,
                    explicit_proceedings: %i[se014],
                    set_lead_proceeding: :se014,
@@ -105,6 +107,7 @@ module CCMS
                    :with_everything,
                    :with_negative_benefit_check_result,
                    :with_cfe_v6_result,
+                   :with_merits_submitted,
                    applicant:,
                    provider:,
                    office:).tap do |laa|
@@ -153,6 +156,7 @@ module CCMS
                    :with_everything,
                    :with_negative_benefit_check_result,
                    :with_cfe_v6_result,
+                   :with_merits_submitted,
                    applicant:,
                    provider:,
                    office:).tap do |laa|
@@ -172,6 +176,7 @@ module CCMS
                    :with_everything,
                    :with_negative_benefit_check_result,
                    :with_cfe_v6_result,
+                   :with_merits_submitted,
                    applicant:,
                    provider:,
                    office:).tap do |laa|

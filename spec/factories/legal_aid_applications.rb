@@ -374,8 +374,9 @@ FactoryBot.define do
       end
     end
 
-    trait :with_merits_submitted_at do
+    trait :with_merits_submitted do
       merits_submitted_at { Time.current }
+      merits_submitted_by { provider }
     end
 
     # :with_proceedings trait

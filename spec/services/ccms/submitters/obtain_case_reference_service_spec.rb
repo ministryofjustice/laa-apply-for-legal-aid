@@ -5,7 +5,7 @@ module CCMS
     RSpec.describe ObtainCaseReferenceService, :ccms do
       subject(:obtain_case_reference_service) { described_class.new(submission) }
 
-      let(:legal_aid_application) { create(:legal_aid_application) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_merits_submitted) }
       let(:submission) { create(:submission, legal_aid_application:) }
       let(:history) { SubmissionHistory.find_by(submission_id: submission.id) }
       let(:endpoint) { "https://ccms-soa-managed.laa-test.modernisation-platform.service.justice.gov.uk/soa-infra/services/default/GetReferenceData/getreferencedata_ep" }

@@ -13,7 +13,7 @@ module Providers
     def continue
       unless draft_selected?
         legal_aid_application.generate_reports!
-        legal_aid_application.merits_complete!
+        legal_aid_application.merits_complete!(current_provider)
       end
       continue_or_draft
     end

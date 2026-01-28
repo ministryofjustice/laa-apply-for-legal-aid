@@ -573,12 +573,12 @@ RSpec.describe LegalAidApplication do
 
   describe "#merits_complete!" do
     let!(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
-
+    let(:provider) { create(:provider, firm: legal_aid_application.provider.firm) }
     let(:date) { Date.new(2021, 1, 7) }
 
     it "updates the application merits_submitted_at attribute" do
       travel_to(date) do
-        legal_aid_application.merits_complete!
+        legal_aid_application.merits_complete!(provider)
         expect(legal_aid_application.reload.merits_submitted_at).to eq(date)
       end
     end
