@@ -40,11 +40,12 @@ class Setting < ApplicationRecord
   end
 
   def self.out_of_hours?
-    # Provider access to the service only permitted between 7AM and 9:30PM
-    # Citizen access is required 24/7
-    # This can be overridden on different environments for testing
-
-    Time.zone.today.iso8601.in?(Rails.configuration.x.bank_holidays) ||
+    # Provider access to the service only permitted between 7AM and 9:30PM, Citizen access is required 24/7.
+    # This can be overridden on different environments for testing.
+    #
+    # Note: BankHolidayStore cache falls back to [] to avoid blocking access when the cache is empty
+    #
+    Time.zone.today.iso8601.in?(BankHolidayStore.read) ||
       Time.zone.now < Rails.configuration.x.business_hours.start.to_time ||
       Time.zone.now >= Rails.configuration.x.business_hours.end.to_time
   end

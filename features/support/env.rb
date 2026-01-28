@@ -32,7 +32,7 @@ allowed_sites = [
   lambda do |uri|
     [
       /__identify__/,
-      /127.0.0.1.*(session|shutdown)/,
+      /127.0.0.1.*(session|shutdown|status)/,
       /chromedriver\.storage\.googleapis\.com/,
     ].any? { |pattern| uri.to_s =~ pattern }
   end,
