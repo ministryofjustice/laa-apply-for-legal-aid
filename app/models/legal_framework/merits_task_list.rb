@@ -18,6 +18,12 @@ module LegalFramework
       save!
     end
 
+    def mark_as_not_started!(group, task)
+      task_list.mark_as_not_started!(group, task)
+      self.serialized_data = task_list.to_yaml
+      save!
+    end
+
     def can_proceed?
       application_states = task_list.tasks[:application].map(&:state).flatten
       proceeding_states = task_list.tasks[:proceedings].map { |task| task[1][:tasks].map(&:state) }.flatten

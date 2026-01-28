@@ -120,6 +120,7 @@ module CopyCase
     def clone_merits_task_list
       dup_merits_task_list = source.legal_framework_merits_task_list.dup
       target.legal_framework_merits_task_list = dup_merits_task_list
+      target.legal_framework_merits_task_list.mark_as_not_started!(:application, :client_relationship_to_children) if target.legal_framework_merits_task_list.includes_task?(:application, :client_relationship_to_children)
       target.save!
     rescue StandardError => e
       raise ClonerServiceError, "clone_merits_task_list error: #{e.message}"

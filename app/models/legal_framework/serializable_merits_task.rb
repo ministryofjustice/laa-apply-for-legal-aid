@@ -26,5 +26,9 @@ module LegalFramework
 
       @state = :ignored
     end
+
+    def mark_as_not_started!
+      @state = :not_started
+    end
   end
 end

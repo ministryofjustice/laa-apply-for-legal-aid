@@ -369,7 +369,7 @@ en:
         title_truelayer: Your application
         caption: Client details and what they are applying for
         copy_case:
-          heading: The proceedings and merits information was copied from %{application_ref}.
+          heading: The proceedings information was copied from %{application_ref}.
           family_warning: As you have made a family link, the cost limit will be on the certificate of the application you submitted first.
         section_client:
           heading: Client
@@ -1497,6 +1497,7 @@ en:
           client_and_partner: My client and their partner
     merits_task_lists:
       show:
+        banner_text: Some questions could not be copied. Check and answer any questions.
         page_heading: Provide details of the case
         application_section_heading: About the application
         proceeding_section_heading: About the %{proceeding}

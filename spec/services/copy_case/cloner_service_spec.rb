@@ -210,6 +210,21 @@ RSpec.describe CopyCase::ClonerService do
       expect(target.reload.legal_framework_merits_task_list.serialized_data).to eq(source.reload.legal_framework_merits_task_list.serialized_data)
     end
 
+    it "sets the client_relationship_to_children task to not started" do
+      sca_proceeding_one = create(:proceeding, :pb003)
+      sca_proceeding_two = create(:proceeding, :pb059)
+      source.proceedings << sca_proceeding_one
+      source.proceedings << sca_proceeding_two
+      smtl = create(:legal_framework_merits_task_list, :pb003_pb059_application, legal_aid_application: source)
+      smtl.mark_as_complete!(:application, :client_relationship_to_children)
+      expect { call }
+        .to change(target, :legal_framework_merits_task_list)
+        .from(nil)
+        .to(instance_of(LegalFramework::MeritsTaskList))
+      expect(source.legal_framework_merits_task_list.task_list.task(:application, :client_relationship_to_children).state).to eq :complete
+      expect(target.legal_framework_merits_task_list.task_list.task(:application, :client_relationship_to_children).state).to eq :not_started
+    end
+
     context "when cloning proceedings raises an error" do
       before do
         allow(source).to receive(:proceedings).and_raise(StandardError, "new fake error")

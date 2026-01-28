@@ -63,6 +63,19 @@ module LegalFramework
       end
     end
 
+    describe "#mark_as_not_started!" do
+      context "when successful" do
+        let(:serialized_merits_task) { described_class.new(:proceeding_children, dependencies: []) }
+
+        before { serialized_merits_task.mark_as_complete! }
+
+        it "marks the task as not started" do
+          serialized_merits_task.mark_as_not_started!
+          expect(serialized_merits_task.state).to eq :not_started
+        end
+      end
+    end
+
     describe "#mark_as_ignored!" do
       context "with dependencies" do
         it "raises an exception" do

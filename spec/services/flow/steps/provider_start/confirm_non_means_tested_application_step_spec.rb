@@ -15,6 +15,18 @@ RSpec.describe Flow::Steps::ProviderStart::ConfirmNonMeansTestedApplicationStep,
 
     context "when the application has been copied from another application" do
       it { is_expected.to eq :check_merits_answers }
+
+      context "when the application has a merits task list including the client_relationship_to_children task" do
+        before do
+          sca_proceeding_one = create(:proceeding, :pb003)
+          sca_proceeding_two = create(:proceeding, :pb059)
+          legal_aid_application.proceedings << sca_proceeding_one
+          legal_aid_application.proceedings << sca_proceeding_two
+          create(:legal_framework_merits_task_list, :pb003_pb059_application, legal_aid_application:)
+        end
+
+        it { is_expected.to eq :merits_task_lists }
+      end
     end
 
     context "when the application has not been copied from another application" do

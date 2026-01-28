@@ -50,6 +50,21 @@ module LegalFramework
       end
     end
 
+    describe "#mark_as_not_started!" do
+      subject(:mark_as_not_started) { merits_task_list.mark_as_not_started!(:application, task_name) }
+
+      before { merits_task_list.mark_as_complete!(:application, :latest_incident_details) }
+
+      let(:task_name) { :latest_incident_details }
+
+      it { is_expected.to be true }
+
+      it "updates the state of the task" do
+        mark_as_not_started
+        expect(merits_task_list).to have_not_started_task(:application, :latest_incident_details)
+      end
+    end
+
     describe "#can_proceed?" do
       subject(:can_proceed) { merits_task_list.can_proceed? }
 

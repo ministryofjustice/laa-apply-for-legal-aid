@@ -772,6 +772,12 @@ class LegalAidApplication < ApplicationRecord
     outstanding_mortgage_amount > property_value
   end
 
+  def display_merits_task_list?
+    return true unless copy_case?
+
+    legal_framework_merits_task_list&.includes_task?(:application, :client_relationship_to_children)
+  end
+
 private
 
   def benefit_check_response
