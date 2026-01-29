@@ -77,6 +77,7 @@ en:
             see your online banking sign-in details
             share your details with anyone other than the LAA
             have any ongoing access to your bank account details
+        terms_of_service_html: Read <a href="https://truelayer.com/legal/enduser_tos/">Truelayer's terms of service and privacy policy</a>.
     has_offline_accounts:
       new:
         error: Select yes if you have current accounts you cannot access online
