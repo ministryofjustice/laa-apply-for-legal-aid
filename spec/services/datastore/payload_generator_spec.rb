@@ -90,7 +90,7 @@ RSpec.describe Datastore::PayloadGenerator do
     end
 
     it "includes the applications status, at the top-level" do
-      expect(call).to include(applicationStatus: "APPLICATION_SUBMITTED")
+      expect(call).to include(status: "SUBMITTED")
     end
 
     it "includes the application content as json with transformed keys" do
@@ -113,12 +113,12 @@ RSpec.describe Datastore::PayloadGenerator do
 
       it "generates the payload with nil for non-existent objects" do
         payload = call
-        expect(payload.dig(:applicationContent, :applicant)).to be_nil
+        expect(payload.dig(:applicationContent, :applicationContent, :applicant)).to be_nil
       end
 
       it "generates the payload with empty array for collections with no objects" do
         payload = call
-        expect(payload.dig(:applicationContent, :proceedings)).to be_empty
+        expect(payload.dig(:applicationContent, :applicationContent, :proceedings)).to be_empty
       end
     end
 
@@ -133,7 +133,7 @@ RSpec.describe Datastore::PayloadGenerator do
 
       it "sets auto_grant to false in the payload" do
         payload = call
-        expect(payload.dig(:applicationContent, :autoGrant)).to be false
+        expect(payload.dig(:applicationContent, :applicationContent, :autoGrant)).to be false
       end
     end
 
@@ -148,7 +148,7 @@ RSpec.describe Datastore::PayloadGenerator do
 
       it "sets auto_grant to true in the payload" do
         payload = call
-        expect(payload.dig(:applicationContent, :autoGrant)).to be true
+        expect(payload.dig(:applicationContent, :applicationContent, :autoGrant)).to be true
       end
     end
 
@@ -156,7 +156,7 @@ RSpec.describe Datastore::PayloadGenerator do
       let(:legal_aid_application) { create(:legal_aid_application) }
 
       it "has an in progress status" do
-        expect(call).to include(applicationStatus: "APPLICATION_IN_PROGRESS")
+        expect(call).to include(status: "IN_PROGRESS")
       end
     end
 
@@ -165,7 +165,7 @@ RSpec.describe Datastore::PayloadGenerator do
         skip "Skipped payload generation - run \"GENERATE=true rspec <test-path>\" to generate a payload" unless ENV["GENERATE"]
 
         payload = call
-        application_content = payload[:applicationContent]
+        application_content = payload[:applicationContent][:applicationContent]
 
         File.write("tmp/full_payload.json", JSON.pretty_generate(application_content))
         system("open tmp/full_payload.json")
