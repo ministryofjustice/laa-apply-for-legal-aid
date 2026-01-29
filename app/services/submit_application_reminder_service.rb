@@ -10,7 +10,7 @@ class SubmitApplicationReminderService
 
     return if application.substantive_application_deadline_on < Date.current
 
-    scheduled_mail.map(&:cancel!) if scheduled_mail.present?
+    scheduled_mail.presence&.map(&:cancel!)
 
     schedule_new_mails
   end

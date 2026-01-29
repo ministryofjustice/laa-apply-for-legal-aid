@@ -8,7 +8,7 @@ module Providers
       else
         flash[:notice] = I18n.t "devise.omniauth_callbacks.unauthorised"
         Rails.logger.error "Couldn't login provider"
-        redirect_back(fallback_location: root_path, allow_other_host: false)
+        redirect_back_or_to(root_path, allow_other_host: false)
       end
     end
 

@@ -30,7 +30,7 @@ module Test
     rescue Datastore::Submitter::ApiError => e
       flash[:error] = e.message
     ensure
-      redirect_back(fallback_location: authenticated_root_path)
+      redirect_back_or_to(authenticated_root_path)
     end
 
   private

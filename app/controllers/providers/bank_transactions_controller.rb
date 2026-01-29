@@ -7,7 +7,7 @@ module Providers
 
       respond_to do |format|
         format.js
-        format.html { redirect_back fallback_location: providers_root_path }
+        format.html { redirect_back_or_to(providers_root_path) }
       end
     end
 
