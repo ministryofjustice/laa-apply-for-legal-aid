@@ -33,7 +33,7 @@ RSpec.describe "Application task list page sections, subsections and content", :
           .and have_css(".govuk-body", text: "Use this list to see your progress")
           .and have_css(".govuk-body", text: "You can go back and edit completed sections if they appear as links. More sections will become editable over time.")
           .and have_css(".govuk-body", text: "Name: John Doe")
-          .and have_css(".govuk-body", text: /Reference number: L-[\w]{3}-[\w]{3}/)
+          .and have_css(".govuk-body", text: /Reference number: L-\w{3}-\w{3}/)
       end
 
       scenario "I can view the application task list in it's initial state" do

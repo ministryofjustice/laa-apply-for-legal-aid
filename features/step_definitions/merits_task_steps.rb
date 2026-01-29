@@ -38,7 +38,7 @@ Then("the organisation result list on page returns a {string} message") do |stri
 end
 
 # NOTE: this step does not work unless put after the step "the organisation suggestions include {string}" :(
-Then(/^organisation suggestions has (\d+) result[s]?$/) do |count|
+Then(/^organisation suggestions has (\d+) results?$/) do |count|
   expect(page).to have_css(".organisation-item", visible: :visible, count:)
 end
 
@@ -56,7 +56,7 @@ When("the organisation suggestions include {string}") do |string|
   end
 end
 
-Then(/^I can see the highlighted search term "(.*)" (\d+) time[s]?$/) do |string, count|
+Then(/^I can see the highlighted search term "(.*)" (\d+) times?$/) do |string, count|
   expect(page).to have_css("mark", visible: :visible, text: string, count:)
 end
 
