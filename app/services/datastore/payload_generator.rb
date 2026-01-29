@@ -36,7 +36,7 @@ module Datastore
     end
 
     def application_content
-      @application_content ||= { application_content: transformer.call(legal_aid_application_hash) }
+      @application_content ||= { application_content: legal_aid_application_hash }
     end
 
     def legal_aid_application_hash
