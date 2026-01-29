@@ -20,7 +20,7 @@ module Datastore
     def payload
       {
         laa_reference:,
-        application_status:,
+        status:,
         application_content:,
         individuals:,
       }
@@ -32,7 +32,7 @@ module Datastore
 
     # Valid values at time of writing: "APPLICATION_IN_PROGRESS", "APPLICATION_SUBMITTED"
     # NOTE: sending an invalid value results in a 400 from datastore
-    def application_status
+    def status
       Constants.status_value(legal_aid_application.summary_state)
     end
 
