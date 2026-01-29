@@ -70,7 +70,7 @@
       <% end %>
 
       <% if @legal_aid_application.ccms_submission.present? %>
-        <%= govuk_summary_card(title: "CFE Submission (#{@legal_aid_application.ccms_submission.id})") do |card|
+        <%= govuk_summary_card(title: "CCMS Submission (#{@legal_aid_application.ccms_submission.id})") do |card|
               card.with_summary_list do |summary_list|
                 summary_list.with_row do |row|
                   row.with_key { "State" }
@@ -98,7 +98,7 @@
         <% if @legal_aid_application.ccms_submission.submission_history.present? %>
           <h2 class="govuk-heading-l">CCMS Submission histories</h2>
           <% @legal_aid_application.ccms_submission.submission_history.order(:created_at).each do |submission_history| %>
-            <%= govuk_summary_card(title: "CFE Submission (#{@legal_aid_application.ccms_submission.id})") do |card|
+            <%= govuk_summary_card(title: "CCMS Submission (#{@legal_aid_application.ccms_submission.id})") do |card|
                   if submission_history.request.present?
                     card.with_action { govuk_link_to("Download XML Request", download_xml_request_admin_legal_aid_applications_submission_path(submission_history)) }
                   end
