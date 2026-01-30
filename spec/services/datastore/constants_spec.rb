@@ -4,7 +4,7 @@ RSpec.describe Datastore::Constants do
     subject(:status_value) { described_class.status_value(key) }
 
     it "returns the expected value for :in_progress" do
-      expect(described_class.status_value(:in_progress)).to eq("APPLICATION_IN_PROGRESS")
+      expect(described_class.status_value(:in_progress)).to eq("IN_PROGRESS")
     end
 
     it "returns the expected value for :submitted" do

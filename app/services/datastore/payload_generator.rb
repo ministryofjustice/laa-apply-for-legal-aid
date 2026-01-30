@@ -20,8 +20,9 @@ module Datastore
     def payload
       {
         laa_reference:,
-        application_status:,
+        status:,
         application_content:,
+        individuals:,
       }
     end
 
@@ -31,12 +32,22 @@ module Datastore
 
     # Valid values at time of writing: "APPLICATION_IN_PROGRESS", "APPLICATION_SUBMITTED"
     # NOTE: sending an invalid value results in a 400 from datastore
-    def application_status
+    def status
       Constants.status_value(legal_aid_application.summary_state)
     end
 
     def application_content
-      @application_content ||= transformer.call(legal_aid_application_hash)
+      @application_content ||= { application_content: legal_aid_application_hash }
+    end
+
+    # TMP/TODO: Curently just supplying client/application but this may be in future used to also provide
+    # partner, opponents and involved children?!
+    def individuals
+      [individuals_hash]
+    end
+
+    def individuals_hash
+      IndividualPolymorphJsonBuilder.build(legal_aid_application.applicant).as_json
     end
 
     def legal_aid_application_hash
