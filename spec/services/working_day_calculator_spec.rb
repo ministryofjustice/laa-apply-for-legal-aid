@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe WorkingDayCalculator, vcr: { cassette_name: "gov_uk_bank_holiday_api" } do
+RSpec.describe WorkingDayCalculator do
   let(:day) { Date.parse("16-Dec-2025") }
   let(:working_day) { described_class.new(day) }
 
@@ -16,6 +16,18 @@ RSpec.describe WorkingDayCalculator, vcr: { cassette_name: "gov_uk_bank_holiday_
       7 => seven_working_days_later,
       -2 => two_working_days_before,
     }
+  end
+
+  let(:bank_holidays_cache) { Redis.new(url: Rails.configuration.x.redis.bank_holidays_url) }
+
+  before do
+    bank_holidays_cache.flushdb
+    stub_bankholiday_success
+  end
+
+  after do
+    bank_holidays_cache.flushdb
+    bank_holidays_cache.quit
   end
 
   describe "#working_days_from_now" do
@@ -42,6 +54,37 @@ RSpec.describe WorkingDayCalculator, vcr: { cassette_name: "gov_uk_bank_holiday_
       result = described_class.working_days_from_now(number)
       expected = working_day.add_working_days(number)
       expect(result).to eq(expected)
+    end
+  end
+
+  describe ".working_days_between" do
+    subject(:working_days_between) { described_class.working_days_between(start_date, end_date) }
+
+    context "when two dates with no holidays or weekends between them" do
+      let(:start_date) { Date.parse("1-Dec-2025") }
+      let(:end_date) { Date.parse("5-Dec-2025") }
+
+      it "returns expected number of working days between two dates" do
+        expect(working_days_between).to eq(4)
+      end
+    end
+
+    context "when two dates with weekends between them" do
+      let(:start_date) { Date.parse("5-Dec-2025") }
+      let(:end_date) { Date.parse("8-Dec-2025") }
+
+      it "returns expected number of working days between two dates" do
+        expect(working_days_between).to eq(1)
+      end
+    end
+
+    context "when two dates with bank holidays between them" do
+      let(:start_date) { Date.parse("24-Dec-2025") }
+      let(:end_date) { Date.parse("29-Dec-2025") }
+
+      it "returns expected number of working days between two dates" do
+        expect(working_days_between).to eq(1)
+      end
     end
   end
 
