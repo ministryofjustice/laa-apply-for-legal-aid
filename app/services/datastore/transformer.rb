@@ -18,9 +18,9 @@ module Datastore
       # this is temporary to test whether the API is reposing with 403 due to a modsec ruke related to characters, if so modsec rules of APIs need loosening
       # on one [public] environment at least so we can develop more quickly. Long term and in production and staging we should be
       # using an internal routing to the API [which may avoid ]
-      @hash = @hash.deep_transform_values do |value|
-        value.is_a?(String) ? value.tr(";", ",") : value
-      end
+      # @hash = @hash.deep_transform_values do |value|
+      #   value.is_a?(String) ? value.tr(";", ",") : value
+      # end
 
       @hash
     end
