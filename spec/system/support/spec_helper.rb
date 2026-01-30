@@ -38,7 +38,7 @@ RSpec.configure do |config|
   config.after(:each, type: :system) do |example|
     if example.exception &&
         (example.metadata[:js] || ENV["BROWSER"].present?)
-      puts browser_logs
+      abort browser_logs
     end
   end
 
