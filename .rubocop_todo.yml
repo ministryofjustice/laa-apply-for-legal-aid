@@ -25,7 +25,3 @@ RSpec/AnyInstance:
     - 'spec/services/ccms/submitters/obtain_case_reference_service_spec.rb'
     - 'spec/services/ccms/submitters/obtain_document_id_service_spec.rb'
     - 'spec/services/metrics/send_metrics_spec.rb'
-RSpec/Output:
-  Exclude:
-    - 'spec/i18n_spec.rb'
-    - 'spec/system/support/spec_helper.rb'

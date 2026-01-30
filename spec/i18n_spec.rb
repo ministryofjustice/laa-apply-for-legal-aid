@@ -37,12 +37,13 @@ RSpec.describe "I18n", :i18n do
     max_location_length = key_details.values.map(&:length).max
     format_string = "%<key>-#{max_key_length}s %<location>s"
 
-    puts "\nTranslation keys missing for locale #{locale.inspect}".red
-    puts sprintf(format_string, key: "key", location: "location").red
-    puts sprintf(format_string, key: ("=" * max_key_length), location: ("=" * max_location_length)).red
+    output = sprintf "\nTranslation keys missing for locale #{locale.inspect}".red
+    output += "\n#{sprintf(format_string, key: 'key', location: 'location').red}"
+    output += "\n#{sprintf(format_string, key: ('=' * max_key_length), location: ('=' * max_location_length)).red}"
     key_details.each do |key, location|
-      puts sprintf(format_string, key:, location:).red
+      output += "\n#{sprintf(format_string, key:, location:).red}"
     end
+    abort output
   end
 
   def gather_missing_details(missing_applicant_keys)
