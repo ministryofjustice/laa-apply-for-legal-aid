@@ -8,7 +8,7 @@ RSpec.describe Datastore::Constants do
     end
 
     it "returns the expected value for :submitted" do
-      expect(described_class.status_value(:submitted)).to eq("SUBMITTED")
+      expect(described_class.status_value(:submitted)).to eq("APPLICATION_SUBMITTED")
     end
 
     it "returns nil for :unknown" do

@@ -90,7 +90,7 @@ RSpec.describe Datastore::PayloadGenerator do
     end
 
     it "includes the applications status, at the top-level" do
-      expect(call).to include(status: "SUBMITTED")
+      expect(call).to include(status: "APPLICATION_SUBMITTED")
     end
 
     it "includes the application content as json with transformed keys" do

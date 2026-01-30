@@ -2,7 +2,7 @@ module Datastore
   module Constants
     STATUSES = {
       in_progress: { value: "IN_PROGRESS", label: "In progress" },
-      submitted: { value: "SUBMITTED", label: "Submitted" },
+      submitted: { value: "APPLICATION_SUBMITTED", label: "Submitted" },
     }.freeze
 
     def self.status_value(key)
