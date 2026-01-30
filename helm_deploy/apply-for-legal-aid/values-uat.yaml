@@ -113,10 +113,9 @@ pda:
 ccms_user_api:
   url: "http://user-details-api-service.laa-ccms-user-details-api-dev.svc.cluster.local:8080/api/v1"
 
-# TODO: this is a guess as not yet available
+# TODO: this is internally routing using new ingresses
 data_access_api:
-  url: "https://main-laa-data-access-api-uat.cloud-platform.service.justice.gov.uk/api/v0"
-  # url: "http://laa-data-access-api-service.laa-data-access-api-dev.svc.cluster.local:8080/api/v0"
+  url: "https://laa-data-access-api-staging.internal-non-prod.cloud-platform.service.justice.gov.uk/api/v0"
 
 trueLayer:
   enableMock: "true"
