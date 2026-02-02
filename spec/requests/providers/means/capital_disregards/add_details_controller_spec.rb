@@ -67,10 +67,11 @@ RSpec.describe Providers::Means::CapitalDisregards::AddDetailsController do
 
       context "with valid params" do
         let(:amount) { 1234 }
+        let(:valid_date) { Date.yesterday }
         let(:account_name) { "Account name" }
-        let(:date_received_3i) { "1" }
-        let(:date_received_2i) { "2" }
-        let(:date_received_1i) { "2024" }
+        let(:date_received_3i) { valid_date.day }
+        let(:date_received_2i) { valid_date.month }
+        let(:date_received_1i) { valid_date.year }
 
         it "redirects to the next page" do
           expect(response).to have_http_status(:redirect)
@@ -79,7 +80,7 @@ RSpec.describe Providers::Means::CapitalDisregards::AddDetailsController do
         it "updates the record" do
           expect(application.capital_disregards.first.amount).to eq 1234
           expect(application.capital_disregards.first.account_name).to eq "Account name"
-          expect(application.capital_disregards.first.date_received).to eq Date.new(2024, 2, 1)
+          expect(application.capital_disregards.first.date_received).to eq valid_date
           expect(application.capital_disregards.first.payment_reason).to be_nil
         end
       end
