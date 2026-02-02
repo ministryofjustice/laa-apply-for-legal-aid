@@ -215,6 +215,28 @@ RSpec.describe Applicant do
     end
   end
 
+  describe "#over_17?" do
+    subject(:over_17?) { applicant.over_17? }
+
+    context "when 17 for means test purposes" do
+      let(:applicant) { build(:applicant, age_for_means_test_purposes: 17) }
+
+      it { is_expected.to be true }
+    end
+
+    context "when under 17 for means test purposes" do
+      let(:applicant) { build(:applicant, age_for_means_test_purposes: 16) }
+
+      it { is_expected.to be false }
+    end
+
+    context "when nil for means test purposes" do
+      let(:applicant) { build(:applicant, age_for_means_test_purposes: nil) }
+
+      it { is_expected.to be false }
+    end
+  end
+
   describe "#child?" do
     subject(:child?) { legal_aid_application.applicant.child? }
 
