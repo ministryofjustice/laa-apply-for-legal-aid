@@ -468,7 +468,11 @@ RSpec.describe ApplicationDigest do
       end
 
       context "and delegated_functions used" do
+        let(:bank_holidays_cache) { Redis.new(url: Rails.configuration.x.redis.bank_holidays_url) }
+
         before do
+          bank_holidays_cache.flushdb
+          stub_bankholiday_legacy_success
           # DF used on DA001 and SE014 only - used and reported dates specified in array
           # Good Friday on 2nd April, Easter Monday 5th April
           dates = {
@@ -483,15 +487,18 @@ RSpec.describe ApplicationDigest do
           laa.reload
         end
 
+        after do
+          bank_holidays_cache.flushdb
+          bank_holidays_cache.quit
+        end
+
         # for some reason, just running the test with VCR_RECORD_MODE=all would not create the cassette, so have to do it manually here
         it "returns true and dates" do
-          VCR.use_cassette "ApplicationDigest/create_or_update/delegated_functions/delegated_functions_used/returns_true_and_dates" do
-            application_digest
-            expect(digest.df_used).to be true
-            expect(digest.earliest_df_date).to eq Date.parse("2021-03-29")
-            expect(digest.df_reported_date).to eq Date.parse("2021-04-08")
-            expect(digest.working_days_to_report_df).to eq 7
-          end
+          application_digest
+          expect(digest.df_used).to be true
+          expect(digest.earliest_df_date).to eq Date.parse("2021-03-29")
+          expect(digest.df_reported_date).to eq Date.parse("2021-04-08")
+          expect(digest.working_days_to_report_df).to eq 7
         end
       end
     end
