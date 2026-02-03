@@ -124,10 +124,10 @@ pda:
 ccms_user_api:
   url: "http://user-details-api-service.laa-ccms-user-details-api-prod.svc.cluster.local:8080/api/v1"
 
-# TODO: will need to to use internal cluster uri once netwworking permissions set up
+# TODO: will need to add `NetworkPolicies` to allow our pod to talk to their prod
 data_access_api:
-  url: "https://laa-data-access-api.cloud-platform.service.justice.gov.uk/api/v0"
-  # url: "http://laa-data-access-api-service.laa-data-access-api-production.svc.cluster.local:8080/api/v0"
+  # url: "https://laa-data-access-api.cloud-platform.service.justice.gov.uk/api/v0" # currently no public ingress at all
+  url: "https://laa-data-access-api.internal.cloud-platform.service.justice.gov.uk/api/v0"
 
 trueLayer:
   enableMock: "false"

@@ -125,8 +125,8 @@ ccms_user_api:
 
 # TODO: will need to to use internal cluster uri once netwworking permissions set up
 data_access_api:
-  url: "https://laa-data-access-api-staging.cloud-platform.service.justice.gov.uk/api/v0"
-  # url: "http://laa-data-access-api-service.laa-data-access-api-staging.svc.cluster.local:8080/api/v0"
+  # url: "https://laa-data-access-api-staging.cloud-platform.service.justice.gov.uk/api/v0"
+  url: "https://laa-data-access-api-staging.internal-non-prod.cloud-platform.service.justice.gov.uk/api/v0"
 
 trueLayer:
   enableMock: "true"

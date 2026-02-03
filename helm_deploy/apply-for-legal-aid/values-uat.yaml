@@ -113,10 +113,14 @@ pda:
 ccms_user_api:
   url: "http://user-details-api-service.laa-ccms-user-details-api-dev.svc.cluster.local:8080/api/v1"
 
-# TODO: this is a guess as not yet available
+# TODO: Using staging until or if the datastore team will implement a pipeline that includes
+# a stable main UAT :( . We also need to use internal ingress as the public ingress has been
+# whitelisted to only be available via VPN.
 data_access_api:
-  url: "https://main-laa-data-access-api-uat.cloud-platform.service.justice.gov.uk/api/v0"
-  # url: "http://laa-data-access-api-service.laa-data-access-api-dev.svc.cluster.local:8080/api/v0"
+  # url: "https://main-laa-data-access-api-uat.cloud-platform.service.justice.gov.uk/api/v0" # main UAT external/public ingress, does not work due to whitelisting
+  url: "https://main-internal-laa-data-access-api-uat.internal-non-prod.cloud-platform.service.justice.gov.uk/api/v0" # main UAT internal ingress
+  # url: "https://laa-data-access-api-staging.cloud-platform.service.justice.gov.uk/api/v0" # staging external/public ingress, does not work due to whitelisting
+  # url: "https://laa-data-access-api-staging.internal-non-prod.cloud-platform.service.justice.gov.uk/api/v0"
 
 trueLayer:
   enableMock: "true"
