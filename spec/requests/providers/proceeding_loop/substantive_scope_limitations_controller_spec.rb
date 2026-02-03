@@ -111,8 +111,9 @@ RSpec.describe "SubstantiveScopeLimitationsController", :vcr do
               }
             end
 
-            it "shows an error" do
-              expect(response.body).to include(I18n.t("providers.proceeding_loop.enter_limitation_note_error", scope_limitation: "High Court-limited steps (resp)"))
+            it "ticks the affected box and shows an error" do
+              expect(response.body).to include(I18n.t("providers.proceeding_loop.enter_limitation_note_error", scope_limitation: "High Court-limited steps (resp)")).twice
+                                         .and include('value="APL13" checked="checked"')
             end
           end
         end

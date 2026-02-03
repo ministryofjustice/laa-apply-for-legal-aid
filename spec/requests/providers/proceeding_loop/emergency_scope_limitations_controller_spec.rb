@@ -103,8 +103,9 @@ RSpec.describe "EmergencyScopeLimitationsController", :vcr do
             }
           end
 
-          it "shows an error" do
-            expect(response.body).to include(I18n.t("providers.proceeding_loop.enter_valid_hearing_date_error", scope_limitation: "Hearing/Adjournment"))
+          it "ticks the affected box and shows an error" do
+            expect(response.body).to include(I18n.t("providers.proceeding_loop.enter_valid_hearing_date_error", scope_limitation: "Hearing/Adjournment")).twice
+                                       .and include('value="CV027" checked="checked"')
           end
         end
       end
