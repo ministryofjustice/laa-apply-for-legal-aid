@@ -114,6 +114,20 @@ To install the git hooks locally, run `overcommit --install`. If you don't want 
 
 Once the hooks are installed, if you need to you can skip them with the `-n` flag: `git commit -n`
 
+#### DevSecOps pre-commit hook
+
+We use the Ministry of Justice pre-commit hooks for scanning hardcoded secrets and credentials. More information can be found [here] (https://github.com/ministryofjustice/devsecops-hooks).
+
+To set-up locally:
+
+Install prek
+```
+brew install prek
+```
+Launch Docker Desktop locally
+
+Now, when you commit, .pre-commit-config.yaml containing the pre-commit hook should run.
+
 ### Run the application server
 
 ```
