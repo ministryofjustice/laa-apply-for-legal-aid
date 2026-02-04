@@ -12,7 +12,7 @@
       <div class="deselect-group" data-deselect-ctrl="#emergency-scope-none-selected-true-field">
         <% @form.scopes.each_with_index do |scope, index| %>
           <% emergency_scope_limitation = form.object.model.scope_limitations.find_by(code: scope["code"], scope_type: :emergency)
-             checked = emergency_scope_limitation.present? %>
+             checked = emergency_scope_limitation.present? || @form.scope_codes&.include?(scope["code"]) %>
 
           <%= form.hidden_field :"meaning_#{scope['code']}", value: scope["meaning"] %>
           <%= form.hidden_field :"description_#{scope['code']}", value: scope["description"] %>
