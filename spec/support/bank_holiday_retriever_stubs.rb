@@ -9,6 +9,15 @@ def stub_bankholiday_success
     )
 end
 
+def stub_bankholiday_legacy_success
+  stub_request(:get, %r{#{Rails.configuration.x.bank_holidays_url}})
+    .to_return(
+      status: 200,
+      body: BankHolidaysFixture.legacy_data.to_json,
+      headers: { "Content-Type" => "application/json; charset=utf-8" },
+    )
+end
+
 def stub_bankholiday_not_found
   stub_request(:get, %r{#{Rails.configuration.x.bank_holidays_url}})
     .to_return(

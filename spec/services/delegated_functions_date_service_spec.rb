@@ -1,13 +1,14 @@
 require "rails_helper"
 
 RSpec.describe DelegatedFunctionsDateService do
-  describe "sets date on proceeding records", :vcr do
+  describe "sets date on proceeding records" do
     subject(:call) { described_class.call(laa) }
 
     let(:laa) { create(:legal_aid_application) }
     let(:df_used?) { true }
     let(:df_date) { Date.new(2021, 5, 10) }
     let(:reported_date) { Date.new(2021, 5, 13) }
+    let(:bank_holidays_cache) { Redis.new(url: Rails.configuration.x.redis.bank_holidays_url) }
 
     before do
       create(:proceeding, :da001,
@@ -16,6 +17,13 @@ RSpec.describe DelegatedFunctionsDateService do
              used_delegated_functions_on: df_date,
              used_delegated_functions_reported_on: reported_date)
       create(:proceeding, :se013, legal_aid_application: laa)
+      bank_holidays_cache.flushdb
+      stub_bankholiday_legacy_success
+    end
+
+    after do
+      bank_holidays_cache.flushdb
+      bank_holidays_cache.quit
     end
 
     around do |example|
