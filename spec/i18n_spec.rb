@@ -30,6 +30,8 @@ RSpec.describe "I18n", :i18n do
   end
 
   def print_missing_keys(missing_applicant_keys)
+    return "No keys missing" if missing_applicant_keys.empty?
+
     key_details = gather_missing_details(missing_applicant_keys)
     max_key_length = key_details.keys.map(&:length).max
     max_location_length = key_details.values.map(&:length).max
