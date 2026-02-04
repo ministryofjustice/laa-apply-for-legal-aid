@@ -455,9 +455,19 @@ module CCMS
             let(:second_appeal) { false }
             let(:court_type) { "court_of_appeal" }
 
-            it "sets the ECF_FLAG value to false" do
-              block = XmlExtractor.call(request_xml, :global_merits, "ECF_FLAG")
-              expect(block).to have_boolean_response false
+            it "excludes the PROCEEDING_CASE_OWNER_SCU block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "PROCEEDING_CASE_OWNER_SCU")
+              expect(block).not_to be_present
+            end
+
+            it "excludes the ROUTING_SCU block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "ROUTING_SCU")
+              expect(block).not_to be_present
+            end
+
+            it "excludes the CASE_OWNER_SCU block" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_SCU")
+              expect(block).not_to be_present
             end
 
             it "sets MERITS_ROUTING" do
@@ -490,29 +500,34 @@ module CCMS
             let(:second_appeal) { true }
             let(:court_type) { "court_of_appeal" }
 
-            it "sets the ECF_FLAG value to true" do
-              block = XmlExtractor.call(request_xml, :global_merits, "ECF_FLAG")
+            it "sets the PROCEEDING_CASE_OWNER_SCU value to true" do
+              block = XmlExtractor.call(request_xml, :global_merits, "PROCEEDING_CASE_OWNER_SCU")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets ROUTING_SCU value to true" do
+              block = XmlExtractor.call(request_xml, :global_merits, "ROUTING_SCU")
+              expect(block).to have_boolean_response true
+            end
+
+            it "sets CASE_OWNER_SCU value to true" do
+              block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_SCU")
               expect(block).to have_boolean_response true
             end
 
             it "sets MERITS_ROUTING" do
               block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING")
-              expect(block).to have_text_response "ECF"
+              expect(block).to have_text_response "SCU"
             end
 
             it "sets MERITS_ROUTING_NAME" do
               block = XmlExtractor.call(request_xml, :global_merits, "MERITS_ROUTING_NAME")
-              expect(block).to have_text_response "ECF Team"
+              expect(block).to have_text_response "Special Cases Unit"
             end
 
             it "sets CASE_OWNER_STD_FAMILY_MERITS to false" do
               block = XmlExtractor.call(request_xml, :global_merits, "CASE_OWNER_STD_FAMILY_MERITS")
               expect(block).to have_boolean_response false
-            end
-
-            it "sets ApplicationAmendmentType to ECF" do
-              block = XmlExtractor.call(request_xml, :application_amendment_type)
-              expect(block.children.text).to eq "ECF"
             end
 
             context "when the application is passported" do
