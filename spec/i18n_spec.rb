@@ -25,9 +25,7 @@ RSpec.describe "I18n", :i18n do
           leaf.data[:occurrences].first.path.include? "views#{path}" if leaf.data[:occurrences]
         end
       end
-      print_missing_keys(missing_applicant_keys) unless missing_applicant_keys.empty?
-      expect(missing_applicant_keys).to be_empty,
-                                        "Missing #{missing_applicant_keys.count} i18n keys, run `i18n-tasks missing' to show them"
+      expect(missing_applicant_keys).to be_empty, print_missing_keys(missing_applicant_keys)
     end
   end
 
@@ -43,7 +41,7 @@ RSpec.describe "I18n", :i18n do
     key_details.each do |key, location|
       output += "\n#{sprintf(format_string, key:, location:).red}"
     end
-    abort output
+    output
   end
 
   def gather_missing_details(missing_applicant_keys)
