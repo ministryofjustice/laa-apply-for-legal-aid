@@ -861,7 +861,6 @@ DEPENDENCIES
   omniauth-oauth2 (>= 1.7.1)
   omniauth-rails_csrf_protection (~> 2.0)
   omniauth_openid_connect
-  ostruct
   overcommit
   pagy
   pg
