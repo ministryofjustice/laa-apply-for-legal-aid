@@ -12,7 +12,7 @@ RSpec.describe Flow::Steps::ProviderStart::NoNationalInsuranceNumbersStep, type:
   describe "#forward" do
     subject(:forward_step) { described_class.forward.call(legal_aid_application) }
 
-    it { is_expected.to eq :applicant_employed }
+    it { is_expected.to eq :about_financial_means }
 
     it "sets the state machine" do
       forward_step
