@@ -21,7 +21,7 @@ module CheckAnswersHelper
     value.is_a?(TrueClass) || value.is_a?(FalseClass)
   end
 
-  def build_ostruct(label, text)
+  def build_item_struct(label, text)
     ItemStruct.new(label, text, nil)
   end
 end
