@@ -31,49 +31,49 @@ module PolicyDisregardsHelper
   end
 
   def england_infected_blood_support(policy_disregards)
-    build_ostruct(
+    build_item_struct(
       t("england_infected_blood_support", scope: "shared.forms.policy_disregards.form.providers.policy_disregards"),
       policy_disregards.england_infected_blood_support,
     )
   end
 
   def vaccine_damage_payments(policy_disregards)
-    build_ostruct(
+    build_item_struct(
       t("vaccine_damage_payments", scope: "shared.forms.policy_disregards.form.providers.policy_disregards"),
       policy_disregards.vaccine_damage_payments,
     )
   end
 
   def variant_creutzfeldt_jakob_disease(policy_disregards)
-    build_ostruct(
+    build_item_struct(
       t("variant_creutzfeldt_jakob_disease", scope: "shared.forms.policy_disregards.form.providers.policy_disregards"),
       policy_disregards.variant_creutzfeldt_jakob_disease,
     )
   end
 
   def criminal_injuries_compensation_scheme(policy_disregards)
-    build_ostruct(
+    build_item_struct(
       t("criminal_injuries_compensation_scheme", scope: "shared.forms.policy_disregards.form.providers.policy_disregards"),
       policy_disregards.criminal_injuries_compensation_scheme,
     )
   end
 
   def national_emergencies_trust(policy_disregards)
-    build_ostruct(
+    build_item_struct(
       t("national_emergencies_trust", scope: "shared.forms.policy_disregards.form.providers.policy_disregards"),
       policy_disregards.national_emergencies_trust,
     )
   end
 
   def we_love_manchester_emergency_fund(policy_disregards)
-    build_ostruct(
+    build_item_struct(
       t("we_love_manchester_emergency_fund", scope: "shared.forms.policy_disregards.form.providers.policy_disregards"),
       policy_disregards.we_love_manchester_emergency_fund,
     )
   end
 
   def london_emergencies_trust(policy_disregards)
-    build_ostruct(
+    build_item_struct(
       t("london_emergencies_trust", scope: "shared.forms.policy_disregards.form.providers.policy_disregards"),
       policy_disregards.london_emergencies_trust,
     )
