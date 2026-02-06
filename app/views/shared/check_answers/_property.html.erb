@@ -41,16 +41,16 @@
               row.with_key(text: t("shared.check_answers.assets.property.outstanding_mortgage"))
               row.with_value { gds_number_to_currency(@legal_aid_application.outstanding_mortgage_amount) }
             end
+          end
 
-            summary_list.with_row(html_attributes: { id: "app-check-your-answers__shared_ownership" }) do |row|
-              row.with_key(text: t("shared.check_answers.assets.property.shared_ownership#{individual}"))
-              row.with_value { @legal_aid_application.shared_ownership.blank? ? "" : t("shared.forms.shared_ownership_form.#{@legal_aid_application.shared_ownership}") }
-            end
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__shared_ownership" }) do |row|
+            row.with_key(text: t("shared.check_answers.assets.property.shared_ownership#{individual}"))
+            row.with_value { @legal_aid_application.shared_ownership.blank? ? "" : t("shared.forms.shared_ownership_form.#{@legal_aid_application.shared_ownership}") }
+          end
 
-            summary_list.with_row(html_attributes: { id: "app-check-your-answers__percentage_home" }) do |row|
-              row.with_key(text: t("shared.check_answers.assets.property.percentage_home#{individual}"))
-              row.with_value { number_to_percentage(@legal_aid_application.percentage_home, precision: 0) }
-            end
+          summary_list.with_row(html_attributes: { id: "app-check-your-answers__percentage_home" }) do |row|
+            row.with_key(text: t("shared.check_answers.assets.property.percentage_home#{individual}"))
+            row.with_value { number_to_percentage(@legal_aid_application.percentage_home, precision: 0) }
           end
         end
       end %>
