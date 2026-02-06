@@ -3,11 +3,15 @@ require "rails_helper"
 module Providers
   module ApplicationMeritsTask
     RSpec.describe RemoveInvolvedChildController do
-      let(:application) { create(:legal_aid_application) }
+      let(:application) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[da001 se003]) }
       let(:provider) { application.provider }
       let!(:child) { create(:involved_child, legal_aid_application: application) }
 
-      before { login_as provider }
+      before do
+        create(:legal_framework_merits_task_list, :da001_as_defendant_se003, legal_aid_application: application)
+        application.legal_framework_merits_task_list.mark_as_complete!(:application, :children_application)
+        login_as provider
+      end
 
       describe "show GET /providers/applications/:legal_aid_application_id/remove_involved_child/:id" do
         subject(:get_request) { get providers_legal_aid_application_remove_involved_child_path(application, child) }
@@ -40,6 +44,22 @@ module Providers
           it "redirects along the flow" do
             patch_request
             expect(response).to have_http_status(:redirect)
+          end
+
+          context "and no children remain" do
+            it "sets the children_application task to not_started" do
+              patch_request
+              expect(application.reload.legal_framework_merits_task_list).to have_not_started_task(:application, :children_application)
+            end
+          end
+
+          context "and children remain" do
+            before { create(:involved_child, legal_aid_application: application) }
+
+            it "leaves the children_application task as completed" do
+              patch_request
+              expect(application.reload.legal_framework_merits_task_list).to have_completed_task(:application, :children_application)
+            end
           end
         end
 

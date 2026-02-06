@@ -11,6 +11,7 @@ module Providers
 
         if form.valid?
           involved_child&.destroy! if form.remove_involved_child?
+          reset_task_to_not_started unless legal_aid_application.involved_children.any?
           return go_forward
         end
 
@@ -40,6 +41,10 @@ module Providers
         return {} unless params[:binary_choice_form]
 
         params.expect(binary_choice_form: [:remove_involved_child])
+      end
+
+      def reset_task_to_not_started
+        legal_aid_application.legal_framework_merits_task_list.mark_as_not_started!(:application, :children_application)
       end
     end
   end
