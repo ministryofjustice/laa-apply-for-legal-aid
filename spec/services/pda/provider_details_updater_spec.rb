@@ -346,5 +346,59 @@ RSpec.describe PDA::ProviderDetailsUpdater do
         expect { call }.to raise_error(PDA::ProviderDetailsUpdater::ApiError, "API Call Failed retrieving office schedules: (500) An error has occurred")
       end
     end
+
+    # This replicates a real world error encountered when CCMS was down
+    context "when there is an error calling the CCMS user details endpoint" do
+      before do
+        stub_provider_user_failure_for(provider.silas_id, status: 500, body: { error: "Internal server error" }.to_json)
+      end
+
+      context "and the provider does not have existing ccms details" do
+        before { provider.update!(ccms_contact_id: nil, username: nil) }
+
+        it "raises ApiError" do
+          expect { call }.to raise_error(CCMSUser::UserDetails::ApiError, "API Call Failed: status 500, body {\"error\":\"Internal server error\"}")
+        end
+      end
+
+      context "and the provider has existing ccms details" do
+        before { provider.update!(ccms_contact_id: 12_345, username: "existing_username") }
+
+        it "does not raise an error" do
+          expect { call }.not_to raise_error
+        end
+
+        it "logs that the CCMS user details are unavailable and continues to update other details" do
+          allow(Rails.logger).to receive(:warn)
+          call
+
+          expect(Rails.logger)
+            .to have_received(:warn)
+              .with("#{described_class} - API Call Failed: status 500, body {\"error\":\"Internal server error\"}! Existing CCMS details will be used.")
+              .at_least(:once)
+
+          expect(provider.reload).to have_attributes(ccms_contact_id: 12_345, username: "existing_username")
+        end
+      end
+    end
+
+    context "when the user cannot be found" do
+      before do
+        stub_provider_user_failure_for(provider.silas_id, status: 404, body:)
+      end
+
+      it "raises UserNotFound" do
+        expect { call }.to raise_error(CCMSUser::UserDetails::UserNotFound, "No CCMS username found for #{provider.email}")
+      end
+
+      it "logs that the CCMS user details are unavailable and continues to update other details" do
+        allow(Rails.logger).to receive(:info)
+        call
+      rescue StandardError
+        expect(Rails.logger)
+          .to have_received(:info)
+            .with(/No provider details found for #{provider.email}/)
+      end
+    end
   end
 end
