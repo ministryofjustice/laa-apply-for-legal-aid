@@ -54,7 +54,8 @@ RSpec.describe PagesController, :clamav do
 
       it "has expected content" do
         expect(page)
-          .to have_content("Sorry the service is unavailable")
+          .to have_content("Sorry, there is a problem")
+          .and have_link("Online Support (opens in new tab)", href: "https://legalaidlearning.justice.gov.uk/online-support-2/")
       end
     end
 
