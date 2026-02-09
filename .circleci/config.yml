@@ -16,28 +16,10 @@ references:
         kubectl config set-context ${K8S_CLUSTER_NAME_LIVE} --cluster=${K8S_CLUSTER_NAME_LIVE} --user=circleci --namespace=${K8S_NAMESPACE}
         kubectl config use-context ${K8S_CLUSTER_NAME_LIVE}
 
-  install_gems: &install_gems
-    run:
-      name: Install ruby gems
-      command: |
-        bundle config set --local path 'vendor/bundle'
-        bundle install --jobs=4 && bundle clean
-
   update_packages: &update_packages
     run:
       name: Update packages
       command: sudo apt-get update
-
-  restore_gems_cache: &restore_gems_cache
-    restore_cache:
-      keys:
-        - v4.0.1-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
-
-  save_gems_cache: &save_gems_cache
-    save_cache:
-        key: v4.0.1-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
-        paths:
-          - vendor/bundle
 
 executors:
   basic-executor:
@@ -74,6 +56,24 @@ executors:
       - image: ghcr.io/ministryofjustice/hmpps-clamav:sha-5cd6693
 
 commands:
+  install-ruby-dependencies:
+    description: Install Ruby gem dependencies using Bundler
+    steps:
+      - restore_cache:
+          name: Restoring Ruby gems cache
+          keys:
+            - v4.0.1-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install ruby gems
+          command: |
+            bundle config set --local path 'vendor/bundle'
+            bundle install --jobs=4 && bundle clean
+      - save_cache:
+          name: Saving Ruby gems cache
+          key: v4.0.1-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
   install-js-dependencies:
     description: Install JavaScript dependencies using Yarn
     steps:
@@ -142,9 +142,7 @@ jobs:
     - checkout
     - setup_remote_docker
     - *update_packages
-    - *restore_gems_cache
-    - *install_gems
-    - *save_gems_cache
+    - install-ruby-dependencies
     - install-js-dependencies
     - run:
         name: Run StandardJS
@@ -177,9 +175,7 @@ jobs:
     executor: test-executor
     steps:
     - checkout
-    - *restore_gems_cache
-    - *install_gems
-    - *save_gems_cache
+    - install-ruby-dependencies
     - save_cache:
         key: apply-repo-{{ .Environment.CIRCLE_SHA1 }}
         paths:
@@ -215,9 +211,7 @@ jobs:
     executor: test-executor
     steps:
     - checkout
-    - *restore_gems_cache
-    - *install_gems
-    - *save_gems_cache
+    - install-ruby-dependencies
     - run: bundle exec rails db:prepare
     - install-js-dependencies
     - run: bundle exec rails assets:precompile
