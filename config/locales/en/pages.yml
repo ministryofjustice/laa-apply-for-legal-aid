@@ -2,11 +2,9 @@
 en:
   pages:
     servicedown:
-      title: Sorry, there is a problem
+      title: Sorry the service is unavailable
       warning_html:
-        - Try reloading the page.
-        - If the page still does not load, try again later.
-        - If you keep seeing this page, you can contact %{online_support} from 9am to 5pm, Monday to Friday (closed on bank holidays).
+        - This is due to essential maintenance. You will be able to use the service again as normal tomorrow.
 
     service_out_of_hours:
       title: Sorry, the service is unavailable
