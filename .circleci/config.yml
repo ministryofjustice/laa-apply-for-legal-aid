@@ -23,11 +23,6 @@ references:
         bundle config set --local path 'vendor/bundle'
         bundle install --jobs=4 && bundle clean
 
-  install_js_packages: &install_js_packages
-    run:
-      name: Install Yarn packages
-      command: yarn install --frozen-lockfile --ignore-scripts
-
   update_packages: &update_packages
     run:
       name: Update packages
@@ -38,22 +33,11 @@ references:
       keys:
         - v4.0.1-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
 
-  restore_js_packages_cache: &restore_js_packages_cache
-    restore_cache:
-      keys:
-        - v4.0.1-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
-
   save_gems_cache: &save_gems_cache
     save_cache:
         key: v4.0.1-gems-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
-
-  save_js_packages_cache: &save_js_packages_cache
-    save_cache:
-      key: v4.0.1-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
-      paths:
-        - node_modules
 
 executors:
   basic-executor:
@@ -90,6 +74,24 @@ executors:
       - image: ghcr.io/ministryofjustice/hmpps-clamav:sha-5cd6693
 
 commands:
+  install-js-dependencies:
+    description: Install JavaScript dependencies using Yarn
+    steps:
+      - restore_cache:
+          name: Restoring Yarn packages cache
+          keys:
+            - v4.0.1-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Yarn packages
+          command: |
+            echo "yarn version: $(yarn -v)"
+            yarn install --immutable
+      - save_cache:
+          name: Saving Yarn packages cache
+          key: v4.0.1-yarn-packages-cache-{{ .Environment.CACHE_VERSION }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+
   build-and-push-to-ecr:
     description: Build and push image to ECR repository
     steps:
@@ -143,9 +145,7 @@ jobs:
     - *restore_gems_cache
     - *install_gems
     - *save_gems_cache
-    - *restore_js_packages_cache
-    - *install_js_packages
-    - *save_js_packages_cache
+    - install-js-dependencies
     - run:
         name: Run StandardJS
         command: yarn run standardjs
@@ -185,9 +185,7 @@ jobs:
         paths:
           - ~/project
     - run: bundle exec rails db:prepare
-    - *restore_js_packages_cache
-    - *install_js_packages
-    - *save_js_packages_cache
+    - install-js-dependencies
     - run: bundle exec rails assets:precompile
     - run:
         name: Run ruby tests
@@ -221,9 +219,7 @@ jobs:
     - *install_gems
     - *save_gems_cache
     - run: bundle exec rails db:prepare
-    - *restore_js_packages_cache
-    - *install_js_packages
-    - *save_js_packages_cache
+    - install-js-dependencies
     - run: bundle exec rails assets:precompile
     - browser-tools/install-chrome
     - run:
