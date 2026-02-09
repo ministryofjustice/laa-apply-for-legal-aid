@@ -162,7 +162,7 @@ service_account:
   name: laa-apply-for-legalaid-uat-irsa
 
 maintenance_mode:
-  enabled: "true"
+  enabled: "false"
 
 collect_hmrc_data:
   enabled: "false"
