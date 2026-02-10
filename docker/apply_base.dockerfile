@@ -16,7 +16,7 @@ RUN set -ex
 # - postgresql-dev for pg/activerecord gems
 # - git for installing gems referred to use a git:// uri
 #
-RUN apk --no-cache add --virtual build-dependencies \
+RUN apk add --no-cache --virtual build-dependencies \
                     build-base \
                     libxml2-dev \
                     libxslt-dev \
@@ -24,10 +24,9 @@ RUN apk --no-cache add --virtual build-dependencies \
                     git \
                     curl \
                     yaml-dev \
-&& apk --no-cache add \
+&& apk add --no-cache \
                   postgresql-client \
-                  nodejs \
-                  yarn \
+                  nodejs-current \
                   jq \
                   linux-headers \
                   clamav-daemon \
@@ -39,7 +38,7 @@ RUN apk --no-cache add --virtual build-dependencies \
                   ttf-liberation \
                   bash
 
-# Install Chromium and Puppeteer for PDF generation
+# Install Chromium for use by puppeteer JS package for PDF generation
 # Installs latest Chromium package available on Alpine (Chromium 108)
 RUN apk add --no-cache \
         chromium \
@@ -48,12 +47,15 @@ RUN apk add --no-cache \
         harfbuzz \
         ca-certificates
 
-# Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+# Install expected Yarn version
+RUN corepack enable \
+    && corepack prepare yarn@4.12.0 --activate
+
+# ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+# ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 # Install latest version of Puppeteer
-RUN yarn add puppeteer
+# RUN yarn add puppeteer
 
 # Ensure everything is executable
 RUN chmod +x /usr/local/bin/*

@@ -1,4 +1,4 @@
-FROM ministryofjustice/apply-base:latest-4.0.1
+FROM ministryofjustice/apply-base:test-yarn-bump-1.0
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Apply for civil legal aid team (apply-for-civil-legal-aid@justice.gov.uk)" \
@@ -30,8 +30,17 @@ RUN gem update --system \
 && bundle config build.nokogiri --use-system-libraries \
 && bundle install
 
-COPY package.json yarn.lock ./
-RUN NODE_ENV=production yarn install --prod --frozen-lockfile --ignore-scripts
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn .yarn
+
+# Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+# Install latest version of Puppeteer
+RUN yarn add puppeteer
+
+RUN yarn install --immutable
 
 ####################
 # DEPENDENCIES END #
@@ -77,4 +86,4 @@ ENV TZ=Europe/London
 RUN ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime && echo "$TZ" > /etc/timezone
 
 USER 1000
-CMD "./docker/run"
+CMD ["./docker/run"]
