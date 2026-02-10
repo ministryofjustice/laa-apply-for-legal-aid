@@ -1,5 +1,4 @@
 FROM cimg/ruby:4.0.1-browsers
-LABEL org.opencontainers.image.authors="apply for legal aid team"
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Apply for civil legal aid team (apply-for-civil-legal-aid@justice.gov.uk)" \
