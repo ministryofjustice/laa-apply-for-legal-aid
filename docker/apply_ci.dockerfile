@@ -10,7 +10,12 @@ RUN wget https://mirrors.kernel.org/ubuntu/pool/main/libf/libffi/libffi6_3.2.1-8
 RUN sudo apt-get update
 RUN sudo apt install --no-install-recommends /tmp/libffi6_3.2.1-8_amd64.deb
 RUN sudo apt-get install -y --no-install-recommends \
+                            nodejs \
                             postgresql-client \
                             clamav-daemon \
                             clamav \
                             clamdscan
+
+# activate yarn
+RUN sudo corepack enable \
+ && sudo corepack prepare yarn@4.12.0 --activate
