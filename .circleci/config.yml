@@ -44,7 +44,7 @@ executors:
     resource_class: small
   test-executor:
     docker:
-      - image: ministryofjustice/apply-ci:latest-4.0.1
+      - image: ministryofjustice/apply-ci:test-yarn-bump-1.0
         environment:
           RAILS_ENV: test
           NODE_OPTIONS: --openssl-legacy-provider
@@ -145,6 +145,10 @@ jobs:
     - install-ruby-dependencies
     - install-js-dependencies
     - run:
+        name: Check yarn version
+        command: |
+          echo "yarn version: $(yarn -v)"
+    - run:
         name: Run StandardJS
         command: yarn run standardjs
     - run:
@@ -182,6 +186,10 @@ jobs:
           - ~/project
     - run: bundle exec rails db:prepare
     - install-js-dependencies
+    - run:
+        name: Check yarn version
+        command: |
+          echo "yarn version: $(yarn -v)"
     - run: bundle exec rails assets:precompile
     - run:
         name: Run ruby tests
@@ -216,6 +224,10 @@ jobs:
     - install-js-dependencies
     - run: bundle exec rails assets:precompile
     - browser-tools/install-chrome
+    - run:
+        name: Check yarn version
+        command: |
+          echo "yarn version: $(yarn -v)"
     - run:
         name: Run integration tests
         command: |
