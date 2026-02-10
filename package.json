@@ -34,5 +34,6 @@
     "stylelint": "^16.24.0",
     "stylelint-config-gds": "^2.0.0",
     "stylelint-order": "^7.0.0"
-  }
+  },
+  "packageManager": "yarn@4.12.0"
 }
