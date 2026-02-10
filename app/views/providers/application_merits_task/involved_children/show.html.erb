@@ -1,10 +1,4 @@
-<%= page_template(
-      page_title: t(".page_title", name: @involved_child.full_name),
-      page_heading_options: { margin_bottom: 3 },
-      show_errors_for: @form,
-    ) do %>
-
-  <%= render "providers/application_merits_task/involved_children/form",
-             form: @form,
-             form_path: providers_legal_aid_application_involved_child_path(@legal_aid_application, @form.model) %>
-<% end %>
+<%= render "providers/application_merits_task/involved_children/form",
+           form: @form,
+           page_title: t(".page_title", name: @involved_child.full_name),
+           form_path: providers_legal_aid_application_involved_child_path(@legal_aid_application, @form.model) %>
