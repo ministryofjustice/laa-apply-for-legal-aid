@@ -30,15 +30,14 @@ RUN gem update --system \
 && bundle config build.nokogiri --use-system-libraries \
 && bundle install
 
+ENV NODE_ENV=production
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn .yarn
 
-# Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
+# Tell puppeteer where to find the Chromium executable and not to attempt to download it during installation
+# because we insstalled it in the base image.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
-
-# Install latest version of Puppeteer
-RUN yarn add puppeteer
 
 RUN yarn install --immutable
 
@@ -47,7 +46,6 @@ RUN yarn install --immutable
 ####################
 
 ENV RAILS_ENV=production
-ENV NODE_ENV=production
 ENV RAILS_SERVE_STATIC_FILES=true
 EXPOSE 3002
 
@@ -59,7 +57,7 @@ RUN bundle exec rake assets:precompile SECRET_KEY_BASE=a-real-secret-key-is-not-
 RUN apk del build-dependencies
 
 # Cleanup to save space in the production image
-RUN rm -rf node_modules log/* tmp/* && \
+RUN rm -rf log/* tmp/* && \
     rm -rf /usr/local/bundle/cache && \
     rm -rf .env && \
     find /usr/local/bundle/gems -name "*.c" -delete && \

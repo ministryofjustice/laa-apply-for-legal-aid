@@ -38,7 +38,7 @@ RUN apk add --no-cache --virtual build-dependencies \
                   ttf-liberation \
                   bash
 
-# Install Chromium for use by puppeteer JS package for PDF generation
+# Install Chromium for use by puppeteer JS package which is used by Grover gem for PDF generation
 # Installs latest Chromium package available on Alpine (Chromium 108)
 RUN apk add --no-cache \
         chromium \
@@ -50,12 +50,6 @@ RUN apk add --no-cache \
 # Install expected Yarn version
 RUN corepack enable \
     && corepack prepare yarn@4.12.0 --activate
-
-# ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-# ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
-
-# Install latest version of Puppeteer
-# RUN yarn add puppeteer
 
 # Ensure everything is executable
 RUN chmod +x /usr/local/bin/*
