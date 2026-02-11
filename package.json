@@ -11,7 +11,7 @@
   "dependencies": {
     "@ministryofjustice/frontend": "^5.1.5",
     "@rails/ujs": "^7.1.502",
-    "axios": "^1.12.2",
+    "axios": "^1.13.5",
     "core-js": "^3.45.1",
     "dropzone": "^6.0.0-beta.2",
     "esbuild": "^0.25.9",
