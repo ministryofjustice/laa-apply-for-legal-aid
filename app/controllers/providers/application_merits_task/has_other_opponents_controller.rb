@@ -19,13 +19,20 @@ module Providers
       def destroy
         opponent.destroy!
         flash[:moj_success] = I18n.t("providers.has_other_opponents.show.removed", name: opponent.full_name)
-        return redirect_to providers_legal_aid_application_opponent_type_path(legal_aid_application) unless opponents.any?
+        unless opponents.any?
+          reset_task_to_not_started
+          return redirect_to providers_legal_aid_application_opponent_type_path(legal_aid_application)
+        end
 
         @form = LegalAidApplications::HasOtherOpponentsForm.new(model: legal_aid_application)
         render :show
       end
 
     private
+
+      def reset_task_to_not_started
+        legal_aid_application.legal_framework_merits_task_list.mark_as_not_started!(:application, :opponent_name)
+      end
 
       def task_list_should_update?
         application_has_task_list? && @form.valid? && !draft_selected? && !@form.has_other_opponents?

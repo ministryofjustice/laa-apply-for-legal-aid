@@ -143,6 +143,10 @@ module Providers
         end
 
         context "when an opponent is removed" do
+          before do
+            application.legal_framework_merits_task_list.mark_as_complete!(:application, :opponent_name)
+          end
+
           it "removes one opponent" do
             expect { delete_request }.to change { application.opponents.count }.by(-1)
           end
@@ -162,7 +166,12 @@ module Providers
             expect(response.body).to have_css(".moj-alert__content", text: "You removed #{opponent_one.first_name} #{opponent_one.last_name} as an opponent")
           end
 
-          context "when removing the only opponent on the application" do
+          it "leaves the opponent_name task as completed" do
+            delete_request
+            expect(application.reload.legal_framework_merits_task_list).to have_completed_task(:application, :opponent_name)
+          end
+
+          context "and there are no other remaining opponents" do
             let(:opponents) { [opponent_one] }
 
             it "removes one opponent" do
@@ -177,6 +186,11 @@ module Providers
             it "redirects to opponent type" do
               delete_request
               expect(response).to redirect_to(providers_legal_aid_application_opponent_type_path(application))
+            end
+
+            it "sets the opponent_name task to not_started" do
+              delete_request
+              expect(application.reload.legal_framework_merits_task_list).to have_not_started_task(:application, :opponent_name)
             end
           end
         end
