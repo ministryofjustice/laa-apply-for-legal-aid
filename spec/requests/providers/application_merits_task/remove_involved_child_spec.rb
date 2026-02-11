@@ -10,6 +10,7 @@ module Providers
       before do
         create(:legal_framework_merits_task_list, :da001_as_defendant_se003, legal_aid_application: application)
         application.legal_framework_merits_task_list.mark_as_complete!(:application, :children_application)
+        application.legal_framework_merits_task_list.mark_as_complete!(:SE003, :children_proceeding)
         login_as provider
       end
 
@@ -50,15 +51,17 @@ module Providers
             it "sets the children_application task to not_started" do
               patch_request
               expect(application.reload.legal_framework_merits_task_list).to have_not_started_task(:application, :children_application)
+              expect(application.reload.legal_framework_merits_task_list).to have_task_in_state(:SE003, :children_proceeding, :waiting_for_dependency)
             end
           end
 
           context "and children remain" do
             before { create(:involved_child, legal_aid_application: application) }
 
-            it "leaves the children_application task as completed" do
+            it "leaves the tasks as completed" do
               patch_request
               expect(application.reload.legal_framework_merits_task_list).to have_completed_task(:application, :children_application)
+              expect(application.reload.legal_framework_merits_task_list).to have_completed_task(:SE003, :children_proceeding)
             end
           end
         end
