@@ -30,5 +30,9 @@ module LegalFramework
     def mark_as_not_started!
       @state = :not_started
     end
+
+    def mark_as_waiting!
+      @state = :waiting_for_dependency
+    end
   end
 end

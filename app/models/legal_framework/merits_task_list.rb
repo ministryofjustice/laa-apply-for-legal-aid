@@ -24,6 +24,12 @@ module LegalFramework
       save!
     end
 
+    def mark_as_waiting!(group, task)
+      task_list.mark_as_waiting!(group, task)
+      self.serialized_data = task_list.to_yaml
+      save!
+    end
+
     def can_proceed?
       application_states = task_list.tasks[:application].map(&:state).flatten
       proceeding_states = task_list.tasks[:proceedings].map { |task| task[1][:tasks].map(&:state) }.flatten
@@ -32,7 +38,7 @@ module LegalFramework
     end
 
     def includes_task?(group, task)
-      task_list.tasks[group]&.map(&:name)&.include?(task)
+      task_list.tasks[group]&.map(&:name)&.include?(task) || task_list.tasks[:proceedings].fetch(group, {})[:tasks]&.map(&:name)&.include?(task)
     end
   end
 end
