@@ -4,3 +4,8 @@ tmp/*
 Dockerfile
 README.md
 .cache
+
+node_modules/
+coverage/
+.env.*
+.env
