@@ -1,4 +1,4 @@
-FROM ministryofjustice/apply-base:latest-4.0.1
+FROM ministryofjustice/apply-base:test-yarn-bump-1.0
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Apply for civil legal aid team (apply-for-civil-legal-aid@justice.gov.uk)" \
@@ -30,15 +30,22 @@ RUN gem update --system \
 && bundle config build.nokogiri --use-system-libraries \
 && bundle install
 
-COPY package.json yarn.lock ./
-RUN NODE_ENV=production yarn install --prod --frozen-lockfile --ignore-scripts
+ENV NODE_ENV=production
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn .yarn
+
+# Tell puppeteer where to find the Chromium executable and not to attempt to download it during installation
+# because we insstalled it in the base image.
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+
+RUN yarn install --immutable
 
 ####################
 # DEPENDENCIES END #
 ####################
 
 ENV RAILS_ENV=production
-ENV NODE_ENV=production
 ENV RAILS_SERVE_STATIC_FILES=true
 EXPOSE 3002
 
@@ -50,7 +57,7 @@ RUN bundle exec rake assets:precompile SECRET_KEY_BASE=a-real-secret-key-is-not-
 RUN apk del build-dependencies
 
 # Cleanup to save space in the production image
-RUN rm -rf node_modules log/* tmp/* && \
+RUN rm -rf log/* tmp/* && \
     rm -rf /usr/local/bundle/cache && \
     rm -rf .env && \
     find /usr/local/bundle/gems -name "*.c" -delete && \
@@ -77,4 +84,4 @@ ENV TZ=Europe/London
 RUN ln -snf "/usr/share/zoneinfo/$TZ" /etc/localtime && echo "$TZ" > /etc/timezone
 
 USER 1000
-CMD "./docker/run"
+CMD ["./docker/run"]
