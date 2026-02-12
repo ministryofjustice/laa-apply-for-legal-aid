@@ -1,10 +1,18 @@
-FROM ministryofjustice/apply-base:test-yarn-bump-1.0
+
+#######################################
+# STAGE 1 — BUILD (full dependencies)
+#######################################
+FROM ministryofjustice/apply-base:test-yarn-bump-1.0 as builder
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Apply for civil legal aid team (apply-for-civil-legal-aid@justice.gov.uk)" \
       org.opencontainers.image.title="Apply for civil legal aid" \
       org.opencontainers.image.description="Web service to apply for legal aid in civil matters" \
       org.opencontainers.image.url="https://github.com/ministryofjustice/laa-apply-for-legal-aid"
+
+#######################################
+# STAGE 2 — PRODUCTION RUNTIME
+#######################################
 
 # add non-root user and group with alpine first available uid, 1000
 RUN addgroup -g 1000 -S appgroup \
@@ -30,28 +38,34 @@ RUN gem update --system \
 && bundle config build.nokogiri --use-system-libraries \
 && bundle install
 
+ENV RAILS_ENV=production
 ENV NODE_ENV=production
 COPY package.json yarn.lock .yarnrc.yml ./
 COPY .yarn .yarn
 
 # Tell puppeteer where to find the Chromium executable and not to attempt to download it during installation
-# because we insstalled it in the base image.
+# because we installed it in the base image.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-RUN yarn install --immutable
+RUN yarn install --immutable --production
+RUN yarn workspaces focus --all --production
+# RUN yarn install --immutable --mode=production # errors --mode only accepts skip-build or update-lockfile
 
 ####################
 # DEPENDENCIES END #
 ####################
 
-ENV RAILS_ENV=production
+
 ENV RAILS_SERVE_STATIC_FILES=true
 EXPOSE 3002
 
 COPY . .
 
-RUN bundle exec rake assets:precompile SECRET_KEY_BASE=a-real-secret-key-is-not-needed-here
+RUN NODE_ENV=production \
+    RAILS_ENV=production \
+    SECRET_KEY_BASE=required-to-run-but-not-used \
+    bundle exec rails assets:precompile --trace
 
 # tidy up installation - these are installed in the apply-base image
 RUN apk del build-dependencies
