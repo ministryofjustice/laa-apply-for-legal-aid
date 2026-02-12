@@ -410,4 +410,4 @@ The URL for this service should be set using the environment variable `LEGAL_FRA
 
 ## Troubleshooting
 
-Refer to the specific [README](./docs/troubleshooting.md)
+Refer to the specific [README](./docs/troubleshooting.md).
