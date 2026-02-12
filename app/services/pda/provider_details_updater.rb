@@ -117,6 +117,13 @@ module PDA
 
     def ccms_user
       @ccms_user ||= CCMSUser::UserDetails.call(@provider.silas_id)
+    rescue CCMSUser::UserDetails::ApiError => e
+      if @provider.ccms_contact_id.present? && @provider.username.present?
+        Rails.logger.warn("#{self.class.name} - #{e.message}! Existing CCMS details will be used.")
+        @ccms_user ||= { ccmsUserDetails: { userPartyId: @provider.ccms_contact_id, userName: @provider.username } }.with_indifferent_access
+      else
+        raise
+      end
     end
 
     def pda_conn
