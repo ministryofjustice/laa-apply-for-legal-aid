@@ -38,7 +38,21 @@ module LegalFramework
     end
 
     def includes_task?(group, task)
-      task_list.tasks[group]&.map(&:name)&.include?(task) || task_list.tasks[:proceedings].fetch(group, {})[:tasks]&.map(&:name)&.include?(task)
+      if group == :application
+        task_in_application?(group, task)
+      else
+        task_in_proceedings?(group, task)
+      end
+    end
+
+  private
+
+    def task_in_application?(group, task)
+      task_list.tasks[group]&.map(&:name)&.include?(task)
+    end
+
+    def task_in_proceedings?(group, task)
+      task_list.tasks[:proceedings].fetch(group, {})[:tasks]&.map(&:name)&.include?(task)
     end
   end
 end
