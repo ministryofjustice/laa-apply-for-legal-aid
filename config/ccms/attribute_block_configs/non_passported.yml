@@ -843,7 +843,7 @@ global_means:
     user_defined: false
     br100_meaning: "The proceeding's prospect of success"
     response_type: text
-    generate_block?: "#lead_proceeding_chances_of_success?"
+    generate_block?: "#proceeding_chances_of_success?"
     value: '#ccms_code_prospects_of_success'
   OUT_GB_INFER_C_29WP3_18A:
     generate_block?: false
