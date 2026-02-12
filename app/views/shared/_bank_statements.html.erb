@@ -29,7 +29,24 @@
         html: { id: "file-upload-form" },
       ) do |form| %>
 
-    <%= form.govuk_error_summary %>
+    <% if @form.errors.any? %>
+      <div class="govuk-error-summary" data-module="govuk-error-summary">
+        <div role="alert">
+          <h2 class="govuk-error-summary__title">
+            <%= t("generic.errors.problem_text") %>
+          </h2>
+          <div class="govuk-error-summary__body">
+            <ul class="govuk-list govuk-error-summary__list">
+              <% @form.errors.each do |error| %>
+                <li>
+                  <%= govuk_link_to error.message, "#dropzone-form" %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
 
     <%= render partial: "shared/forms/error_summary_hidden" %>
 

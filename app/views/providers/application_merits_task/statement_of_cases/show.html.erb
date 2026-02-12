@@ -16,7 +16,14 @@
 
       <%= form.govuk_check_boxes_fieldset :choice,
                                           legend: { text: t(".choice.heading") },
+                                          form_group: { class: @form.errors[:upload].any? ? "govuk-form-group--error" : "" },
                                           hint: { text: t(".choice.hint") } do %>
+
+        <% if @form.errors[:upload].any? %>
+          <p class="govuk-error-message" id="choice-error">
+            <span class="govuk-visually-hidden">Error: </span><%= @form.errors[:upload].first %></p>
+        <% end %>
+
         <%= form.govuk_check_box(
               :upload,
               true,

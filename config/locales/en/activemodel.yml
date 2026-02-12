@@ -313,7 +313,7 @@ en:
               blank: Tell us why the police have not been notified
         application_merits_task/statement_of_case:
           attributes:
-            choice:
+            upload:
               blank: Select how you will provide the statement of case
             statement:
               blank: Provide a typed statement of case

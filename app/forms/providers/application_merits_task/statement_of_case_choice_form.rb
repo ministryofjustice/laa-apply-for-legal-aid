@@ -35,7 +35,7 @@ module Providers
       end
 
       def validate_any_checkbox_checked
-        errors.add :choice, :blank unless any_checkbox_checked?
+        errors.add :upload, :blank unless any_checkbox_checked?
       end
 
       def any_checkbox_checked?

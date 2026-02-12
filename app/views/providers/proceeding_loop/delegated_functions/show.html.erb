@@ -9,7 +9,7 @@
     <h1 class="govuk-heading-xl"><%= page_title %></h1>
     <%= form.govuk_radio_buttons_fieldset(:used_delegated_functions,
                                           legend: { size: "m", tag: "h2", text: t(".question") }) do %>
-      <%= form.govuk_radio_button :used_delegated_functions, true, label: { text: t("generic.yes") } do %>
+      <%= form.govuk_radio_button :used_delegated_functions, true, link_errors: true, label: { text: t("generic.yes") } do %>
 
         <%= form.moj_date_picker_field(
               :used_delegated_functions_on,

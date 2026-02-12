@@ -4,11 +4,13 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <div class="govuk-hint govuk-!-padding-bottom-2"><%= t(".hint") %></div>
+  <%= page_template(page_title:, back_link: {}, form:) do %>
+    <div class="govuk-hint govuk-!-padding-bottom-2"><%= t(".hint") %></div>
 
-  <%= form.govuk_text_field :full_name, width: "three-quarters", label: { size: "m", text: t(".name") } %>
+    <%= form.govuk_text_field :full_name, width: "three-quarters", label: { size: "m", text: t(".name") } %>
 
-  <%= form.govuk_date_field :date_of_birth, legend: { text: t(".date_of_birth") }, hint: { text: t(".dob_hint", year: Time.zone.now.year - 7) } %>
+    <%= form.govuk_date_field :date_of_birth, legend: { text: t(".date_of_birth") }, hint: { text: t(".dob_hint", year: Time.zone.now.year - 7) } %>
 
-  <%= next_action_buttons(show_draft: true, form:) %>
+    <%= next_action_buttons(show_draft: true, form:) %>
+  <% end %>
 <% end %>

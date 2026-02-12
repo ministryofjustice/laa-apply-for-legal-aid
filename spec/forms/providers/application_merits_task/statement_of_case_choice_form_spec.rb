@@ -22,8 +22,8 @@ RSpec.describe Providers::ApplicationMeritsTask::StatementOfCaseChoiceForm do
     context "when both upload and typed are blank" do
       it "is invalid" do
         expect(form).not_to be_valid
-        expect(form.errors).to be_added(:choice, :blank)
-        expect(form.errors.messages[:choice]).to include("Select how you will provide the statement of case")
+        expect(form.errors).to be_added(:upload, :blank)
+        expect(form.errors.messages[:upload]).to include("Select how you will provide the statement of case")
       end
     end
 
