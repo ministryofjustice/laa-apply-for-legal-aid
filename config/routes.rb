@@ -409,7 +409,7 @@ Rails.application.routes.draw do
         resource :client_denial_of_allegation, only: %i[show update]
         resource :client_offered_undertakings, only: %i[show update]
         resource :date_client_told_incident, only: %i[show update]
-        resource :has_other_involved_children, only: %i[show update]
+        resource :has_other_involved_children, only: %i[show update destroy]
         resource :in_scope_of_laspo, only: %i[show update]
         resource :has_other_opponent, only: %i[new show update destroy]
         resource :opponent_type, only: %i[show update]

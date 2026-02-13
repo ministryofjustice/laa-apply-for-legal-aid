@@ -874,6 +874,7 @@ en:
     has_other_involved_children:
       show:
         error: Select yes if you need to add another child
+        removed: You removed %{name} as an involved child
     has_other_opponents:
       show:
         removed: You removed %{name} as an opponent
