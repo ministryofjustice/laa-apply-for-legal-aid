@@ -57,6 +57,8 @@ env:
     value: {{ .Values.deploy.host | quote }}
   - name: HOST_ENV
     value: {{ .Values.env | quote }}
+  - name: INFRA_ENV
+    value: production
   - name: BC_LSC_SERVICE_NAME
     valueFrom:
       secretKeyRef:

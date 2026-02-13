@@ -25,6 +25,7 @@ The laa-apply-for-legal-aid system is a web service for solicitors that provide 
     - [How to set up localhost to use the portal](#how-to-set-up-localhost-to-use-the-portal)
     - [Benefits checker](#benefits-checker)
     - [Mock TrueLayer Data](#mock-trueLayer-data)
+    - [Docker compose](#docs/docker-compose.md)
 - [**Admin Portal**](#admin-portal)
 - [**Monitoring & Debugging**](#monitoring--debugging)
 - [**Databases**](#databases)

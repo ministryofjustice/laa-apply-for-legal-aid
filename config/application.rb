@@ -139,14 +139,11 @@ module LaaApplyForLegalAid
     config.x.slack_alert_email = ENV.fetch("SLACK_ALERT_EMAIL", nil)
 
     redis_protocol = ENV.fetch("REDIS_PROTOCOL", "rediss")
-    redis_password = ENV.fetch("REDIS_PASSWORD", nil)
+    redis_password = ENV["REDIS_PASSWORD"].presence&.then { |p| ":#{CGI.escape(p)}" }
     redis_host = ENV.fetch("REDIS_HOST", nil)
+    infra_env = ENV.fetch("INFRA_ENV", "local")
+    redis_url = infra_env == "local" ? "redis://localhost:6379" : "#{redis_protocol}://#{redis_password}@#{redis_host}:6379"
 
-    redis_url = if redis_host.present? && redis_password.present?
-                  "#{redis_protocol}://:#{redis_password}@#{redis_host}:6379"
-                else
-                  "redis://localhost:6379"
-                end
     config.x.redis.base_url = redis_url
     config.x.redis.page_history_url = "#{config.x.redis.base_url}/1"
     config.x.redis.oauth_session_url = "#{config.x.redis.base_url}/2"

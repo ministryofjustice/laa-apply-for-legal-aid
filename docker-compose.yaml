@@ -1,0 +1,59 @@
+# Simplify running the application inside a container locally.
+# WARNING: do not use docker-compose in production environments.
+#
+# Usage:
+#
+# ```shell
+# docker compose build
+# docker compose up
+# open http://0.0.0.0:3000/ OR http://localhost:3000/ in your browser
+# ```
+#
+
+services:
+  database:
+    container_name: laa-apply-for-legalaid-database
+    image: postgres:18.1
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - laa-apply-for-legalaid-db:/var/lib/postgresql
+  clamav:
+    container_name: laa-apply-for-legalaid-clamav
+    image: clamav/clamav-debian:stable
+    ports:
+    - "3310:3310"
+  cache:
+    container_name: laa-apply-for-legalaid-cache
+    image: redis:7.2.1-alpine
+    ports:
+    - "6379:6379"
+
+  web:
+    container_name: laa-apply-for-legalaid-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    platform: linux/amd64
+    command: ./docker/run
+    environment:
+      RAILS_ENV: production
+      RACK_ENV: production
+      INFRA_ENV: docker
+      HOST_ENV: uat
+      FORCE_SSL: false
+    env_file:
+      - .env.docker-compose
+
+    depends_on:
+      - database
+      - clamav
+      - cache
+    ports:
+      - "3002:3002"
+    stdin_open: true
+    tty: true
+
+volumes:
+  laa-apply-for-legalaid-db:
+    name: laa-apply-for-legalaid-db
