@@ -5,7 +5,6 @@ module Flow
         start_involved_children_task: Steps::ProviderMerits::StartInvolvedChildrenTaskStep,
         involved_children: Steps::ProviderMerits::InvolvedChildrenStep,
         has_other_involved_children: Steps::ProviderMerits::HasOtherInvolvedChildrenStep,
-        remove_involved_child: Steps::ProviderMerits::RemoveInvolvedChildStep,
         date_client_told_incidents: Steps::ProviderMerits::DateClientToldIncidentsStep,
         when_contact_was_made: Steps::ProviderMerits::WhenContactWasMadeStep,
         opponent_individuals: Steps::ProviderMerits::OpponentIndividualsStep,

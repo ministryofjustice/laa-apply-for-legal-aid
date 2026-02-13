@@ -400,7 +400,6 @@ Rails.application.routes.draw do
 
       scope module: :application_merits_task do
         resources :involved_children, only: %i[new show update]
-        resources :remove_involved_child, only: %i[show update]
 
         resources :opponent_individuals, only: %i[new show update]
         resources :opponent_new_organisations, only: %i[new show update]
@@ -409,7 +408,7 @@ Rails.application.routes.draw do
         resource :client_denial_of_allegation, only: %i[show update]
         resource :client_offered_undertakings, only: %i[show update]
         resource :date_client_told_incident, only: %i[show update]
-        resource :has_other_involved_children, only: %i[show update]
+        resource :has_other_involved_children, only: %i[show update destroy]
         resource :in_scope_of_laspo, only: %i[show update]
         resource :has_other_opponent, only: %i[new show update destroy]
         resource :opponent_type, only: %i[show update]

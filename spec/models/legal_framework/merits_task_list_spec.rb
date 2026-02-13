@@ -139,6 +139,22 @@ module LegalFramework
 
         it { is_expected.to be_truthy }
       end
+
+      context "when the group is a proceeding" do
+        let(:group) { :SE014 }
+
+        context "and the task exists" do
+          let(:task) { :attempts_to_settle }
+
+          it { is_expected.to be_truthy }
+        end
+
+        context "and the task does not exist" do
+          let(:task) { :bob }
+
+          it { is_expected.to be_falsey }
+        end
+      end
     end
   end
 end

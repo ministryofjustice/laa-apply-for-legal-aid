@@ -42,7 +42,8 @@
                   row.with_cell do
                     govuk_link_to(
                       t("generic.remove"),
-                      providers_legal_aid_application_remove_involved_child_path(@legal_aid_application, involved_child),
+                      providers_legal_aid_application_has_other_involved_children_path(@legal_aid_application, involved_child_id: involved_child.id),
+                      method: :delete,
                       class: "change-link",
                       "aria-label": involved_child.full_name,
                     )
