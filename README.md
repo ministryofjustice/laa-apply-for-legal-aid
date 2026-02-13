@@ -105,6 +105,25 @@ ClamAV (anti-virus) is used to make sure uploaded files do not contain any malwa
 
 see [docs/clamav.md](./docs/clamav.md) for setup and details.
 
+### Pre-commit hooks using DevSecOps
+
+We use the Ministry of Justice pre-commit hooks for scanning hardcoded secrets and credentials. More information can be found [here] (https://github.com/ministryofjustice/devsecops-hooks).
+
+To set-up locally:
+
+Install prek
+```shell
+brew install prek
+```
+
+Install the pre-commit hook
+```shell
+prek install
+```
+Launch Docker Desktop locally
+
+Now, when you commit, .pre-commit-config.yaml containing the pre-commit hook should run.
+
 ### Run the application server
 
 ```
