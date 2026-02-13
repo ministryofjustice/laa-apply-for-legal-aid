@@ -11,6 +11,9 @@ en:
     recorder_circuit_judge: &recorder_circuit_judge Recorder Circuit Judge (HHJ)
     high_court_judge: &high_court_judge High Court Judge (J)
   providers:
+    remove_show: &remove_show
+      page_title: Are you sure you want to remove %{name} from the application?
+      error: Select yes if you want to remove %{name} from the application.
     previous_references:
       show:
         title: Has your client applied for civil legal aid before?
@@ -565,10 +568,6 @@ en:
           existing: You have added %{count}
           table_caption: Children added
           add_another: Do you need to add another child?
-      remove_involved_child:
-        show: &remove_show
-          page_title: Are you sure you want to remove %{name} from the application?
-          error: Select yes if you want to remove %{name} from the application.
       client_is_biological_parent:
         show:
           page_title: Is your client the biological parent of any children involved?
