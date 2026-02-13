@@ -31,8 +31,9 @@ module LegalFramework
       @state = :not_started
     end
 
-    def mark_as_waiting!
+    def mark_as_blocked!(blocker)
       @state = :waiting_for_dependency
+      @dependencies << blocker
     end
   end
 end

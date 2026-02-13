@@ -42,8 +42,8 @@ module LegalFramework
       task(task_group, task_name).mark_as_not_started!
     end
 
-    def mark_as_waiting!(task_group, task_name)
-      task(task_group, task_name).mark_as_waiting!
+    def mark_as_blocked!(task_group, task_name, blocker)
+      task(task_group, task_name).mark_as_blocked!(blocker)
     end
 
     def self.new_from_serialized(yaml_string)

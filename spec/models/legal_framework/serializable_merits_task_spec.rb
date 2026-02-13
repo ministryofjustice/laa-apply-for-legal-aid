@@ -76,6 +76,20 @@ module LegalFramework
       end
     end
 
+    describe "#mark_as_blocked!" do
+      context "when successful" do
+        let(:serialized_merits_task) { described_class.new(:proceeding_children, dependencies: []) }
+
+        before { serialized_merits_task.mark_as_complete! }
+
+        it "marks the task as not started" do
+          serialized_merits_task.mark_as_blocked!(:application_children)
+          expect(serialized_merits_task.state).to eq :waiting_for_dependency
+          expect(serialized_merits_task.dependencies).to eq [:application_children]
+        end
+      end
+    end
+
     describe "#mark_as_ignored!" do
       context "with dependencies" do
         it "raises an exception" do

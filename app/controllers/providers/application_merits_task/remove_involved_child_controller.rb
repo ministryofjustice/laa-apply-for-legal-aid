@@ -49,7 +49,7 @@ module Providers
           proceeding_code = proceeding.ccms_code.upcase.to_sym
           next unless legal_aid_application.legal_framework_merits_task_list.includes_task?(proceeding_code, :children_proceeding)
 
-          legal_aid_application.legal_framework_merits_task_list.mark_as_waiting!(proceeding_code, :children_proceeding)
+          legal_aid_application.legal_framework_merits_task_list.mark_as_blocked!(proceeding_code, :children_proceeding, :children_application)
         end
       end
     end

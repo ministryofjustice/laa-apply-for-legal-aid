@@ -24,8 +24,8 @@ module LegalFramework
       save!
     end
 
-    def mark_as_waiting!(group, task)
-      task_list.mark_as_waiting!(group, task)
+    def mark_as_blocked!(group, task, blocker)
+      task_list.mark_as_blocked!(group, task, blocker)
       self.serialized_data = task_list.to_yaml
       save!
     end
