@@ -1,0 +1,33 @@
+repos:
+  - repo: https://github.com/ministryofjustice/devsecops-hooks
+    rev: v1.4.1 # re-run prek install after changing this
+    hooks:
+      - id: baseline
+  - repo: local
+    hooks:
+      - id: rubocop
+        name: Rubocop
+        language: system
+        entry: bundle exec rubocop --force-exclusion
+      - id: db_anonymizer
+        name: DBAnonymizer
+        language: script
+        entry: ./scripts/migration_hook.rb
+        files: "db\/migrate\/.*rb$"
+      - id: stylelint
+        name: StyleLint
+        entry: yarn run stylelint
+        language: system
+        types: [ scss ]
+        files: "\\.scss"
+      - id: erblint
+        name: ErbLint
+        entry: erb_lint
+        language: system
+        files: "\\.html.erb"
+      - id: standard_js
+        name: StandardJS
+        entry: yarn run standard
+        language: system
+        files: "\\.js"
+        pass_filenames: false
