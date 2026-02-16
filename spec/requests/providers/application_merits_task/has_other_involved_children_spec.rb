@@ -99,6 +99,61 @@ module Providers
           end
         end
       end
+
+      describe "DELETE /providers/:application_id/has_other_involved_children" do
+        subject(:delete_request) { delete providers_legal_aid_application_has_other_involved_children_path(application), params: }
+
+        before { create_list(:involved_child, 2, legal_aid_application: application) }
+
+        let(:involved_child_one) { application.involved_children.first }
+
+        let(:params) do
+          {
+            involved_child_id: involved_child_one.id,
+          }
+        end
+
+        context "when an involved child is removed" do
+          let(:involved_child_two) { application.involved_children.second }
+
+          it "removes one involved_child" do
+            expect { delete_request }.to change { application.involved_children.count }.by(-1)
+          end
+
+          it "leaves the correct number of remaining involved_children" do
+            delete_request
+            expect(application.involved_children.count).to eq 1
+          end
+
+          it "displays the singular number of involved children remaining" do
+            delete_request
+            expect(response.body).to include("You have added 1 child")
+          end
+
+          it "sets the correct flash message" do
+            delete_request
+            expect(response.body).to have_css(".moj-alert__content", text: "You removed #{involved_child_one.full_name} as an involved child")
+          end
+
+          context "when removing the only involved child on the application" do
+            before { application.involved_children.second.destroy! }
+
+            it "removes one involved_child" do
+              expect { delete_request }.to change { application.involved_children.count }.by(-1)
+            end
+
+            it "leaves the correct number of remaining involved children" do
+              delete_request
+              expect(application.reload.involved_children.count).to eq 0
+            end
+
+            it "redirects to new involved child page" do
+              delete_request
+              expect(response).to redirect_to(new_providers_legal_aid_application_involved_child_path(application))
+            end
+          end
+        end
+      end
     end
   end
 end

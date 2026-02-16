@@ -24,6 +24,12 @@ module LegalFramework
       save!
     end
 
+    def mark_as_blocked!(group, task, blocker)
+      task_list.mark_as_blocked!(group, task, blocker)
+      self.serialized_data = task_list.to_yaml
+      save!
+    end
+
     def can_proceed?
       application_states = task_list.tasks[:application].map(&:state).flatten
       proceeding_states = task_list.tasks[:proceedings].map { |task| task[1][:tasks].map(&:state) }.flatten
@@ -32,7 +38,21 @@ module LegalFramework
     end
 
     def includes_task?(group, task)
+      if group == :application
+        task_in_application?(group, task)
+      else
+        task_in_proceedings?(group, task)
+      end
+    end
+
+  private
+
+    def task_in_application?(group, task)
       task_list.tasks[group]&.map(&:name)&.include?(task)
+    end
+
+    def task_in_proceedings?(group, task)
+      task_list.tasks[:proceedings].fetch(group, {})[:tasks]&.map(&:name)&.include?(task)
     end
   end
 end
