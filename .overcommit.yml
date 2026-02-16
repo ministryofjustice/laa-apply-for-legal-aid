@@ -16,6 +16,10 @@ CommitMsg:
     enabled: false
 
 PreCommit:
+  Prek:
+    enabled: true
+    command: ['prek', 'run']
+    requires_files: true
   RuboCop:
     enabled: true
     command: ['bundle', 'exec', 'rubocop'] # Invoke within Bundler context
