@@ -6,10 +6,6 @@
 
 <%= page_template(page_title: t(".h1-heading"), caption: t(".caption"), column_width: "full") do %>
 
-  <%= govuk_inset_text do %>
-    <p class="govuk-body govuk-!-padding-bottom-2"><%= t("generic.cya_inset_text") %></p>
-  <% end %>
-
   <%= render("providers/means/check_income_answers/applicant_income_assessment", read_only: false) %>
 
   <%= render("providers/means/check_income_answers/partner_income_assessment", read_only: false) if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
@@ -22,6 +18,8 @@
 
   <h2 class="govuk-heading-m"><%= t(".what_happens_next.heading") %></h2>
   <p class="govuk-body govuk-!-margin-bottom-6"><%= t(".what_happens_next.text", individual:) %></p>
+
+  <%= govuk_warning_text(text: t("generic.cya_warning_text")) %>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_means_check_income_answers_path,

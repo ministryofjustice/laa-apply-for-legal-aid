@@ -20,7 +20,7 @@ en:
     confirm: Are you sure?
     create_test_applications: Create test applications
     cy: Cymraeg
-    cya_inset_text: You cannot change the answers on this page once you save and continue.
+    cya_warning_text: You cannot change the answers on this page once you save and continue.
     date_of_birth: Date of birth
     destroy: Destroy
     dismiss: Dismiss

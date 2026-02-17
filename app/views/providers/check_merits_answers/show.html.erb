@@ -20,10 +20,6 @@
         form:,
       ) do %>
 
-    <%= govuk_inset_text do %>
-      <p class="govuk-body"><%= t("generic.cya_inset_text") %></p>
-    <% end %>
-
     <%= render(
           "shared/check_answers/merits",
           incident: @legal_aid_application.latest_incident,
@@ -50,6 +46,8 @@
             ) %>
       <% end %>
     <% end %>
+
+    <%= govuk_warning_text(text: t("generic.cya_warning_text")) %>
 
     <%= next_action_buttons_with_form(
           url: continue_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),
