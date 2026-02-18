@@ -17,6 +17,15 @@ updates:
         exclude-patterns:
           - "ruby*"
     open-pull-requests-limit: 10
+  - package-ecosystem: "bundler-gem"
+    directory: "/gems/moj-components"
+    allow:
+      - dependency-type: "all"
+    schedule:
+      interval: weekly
+      day: tuesday
+      time: "21:00"
+      timezone: Europe/London
   - package-ecosystem: "bundler"
     directory: "/"
     allow:
