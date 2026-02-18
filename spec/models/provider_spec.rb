@@ -64,7 +64,6 @@ RSpec.describe Provider do
 
         expect(provider).to have_attributes(
           auth_provider: "govuk",
-          auth_subject_uid:,
           name: "first last",
           silas_id:,
           email: "provider0@example.com",
@@ -80,11 +79,10 @@ RSpec.describe Provider do
       let(:provider) do
         create(:provider,
                auth_provider: "govuk",
-               auth_subject_uid:,
                email: "provider1@example.com",
                username: "CCMS_USERNAME@FIRM.COM",
                name: "Marty Ronan",
-               silas_id:,
+               silas_id: "my-update-silas-id",
                office_codes: "AAAAA")
       end
 
@@ -96,25 +94,17 @@ RSpec.describe Provider do
         expect { described_class.from_omniauth(auth) }.to change { provider.reload.email }.from("provider1@example.com").to("provider0@example.com")
       end
 
-      it "updates the existing silas uuid" do
-        expect { described_class.from_omniauth(auth) }
-          .to change { provider.reload.silas_id }
-            .from(silas_id)
-            .to("my-update-silas-id")
-      end
-
       it "updates the existing office_codes" do
         expect { described_class.from_omniauth(auth) }.to change { provider.reload.office_codes }.from("AAAAA").to("BBBBB")
       end
     end
 
     context "when passed an existing user with multiple office codes as array" do
-      let(:raw_info) { { USER_NAME: "my-update-silas-id", LAA_ACCOUNTS: %w[AAAAA BBBBB] } }
+      let(:raw_info) { { USER_NAME: silas_id, LAA_ACCOUNTS: %w[AAAAA BBBBB] } }
 
       let(:provider) do
         create(:provider,
                auth_provider: "govuk",
-               auth_subject_uid:,
                email: "provider@example.com",
                username: "CCMS_USERNAME@FIRM.COM",
                name: "Marty Ronan",
@@ -151,7 +141,7 @@ RSpec.describe Provider do
       it "logs a claim enrichment missing error" do
         allow(Rails.logger).to receive(:info)
         described_class.from_omniauth(auth)
-        expect(Rails.logger).to have_received(:info).with("from_omniauth: omniauth enountered error \"Claim enrichment missing from OAuth payload\"")
+        expect(Rails.logger).to have_received(:info).with("from_omniauth: omniauth encountered error \"Claim enrichment missing from OAuth payload\"")
       end
 
       it { expect(described_class.from_omniauth(auth)).to be_nil }
