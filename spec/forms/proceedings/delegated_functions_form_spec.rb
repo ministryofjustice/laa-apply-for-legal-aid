@@ -193,13 +193,19 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
       it "does NOT update the proceeding" do
         expect { save_form_draft }.not_to change(proceeding, :used_delegated_functions).from(nil)
       end
+
+      it "is invalid with expected error" do
+        expect(form).not_to be_valid
+        expect(form.errors[:used_delegated_functions]).to include("Select yes if you have used delegated functions for this proceeding")
+        expect(form.errors[:used_delegated_functions_on]).to be_empty
+      end
     end
 
     context "when the date is invalid" do
       let(:used_df?) { true }
       let(:df_date) { (Time.zone.yesterday - 15.months).to_date.to_s(:date_picker) }
 
-      it "is invalid with expected erorr" do
+      it "is invalid with expected error" do
         expect(form).not_to be_valid
         earliest_date = 12.months.ago.strftime("%-d %B %Y")
         expect(form.errors[:used_delegated_functions_on]).to include("The date you used delegated functions cannot be before #{earliest_date}")
@@ -210,7 +216,7 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
       let(:used_df?) { true }
       let(:df_date) { Time.zone.tomorrow.to_date.to_s(:date_picker) }
 
-      it "is invalid with expected erorr" do
+      it "is invalid with expected error" do
         expect(form).not_to be_valid
         expect(form.errors[:used_delegated_functions_on]).to include("The date you used delegated functions must be in the past")
       end

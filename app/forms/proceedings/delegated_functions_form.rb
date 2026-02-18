@@ -26,9 +26,9 @@ module Proceedings
   private
 
     def used_delegated_functions_on_required?
-      return false if used_delegated_functions.to_s == "false" || draft?
+      return false if draft?
 
-      true
+      used_delegated_functions.to_s == "true"
     end
 
     def sync_used_delegated_functions_dates
