@@ -98,7 +98,7 @@ ccms_soa:
   getReferenceDataWsdl: GetReferenceDataDEVWsdl.xml
 
 omniauth_entraid:
-  mock_auth_enabled: true
+  mock_auth_enabled: false
   redirect_uri: https://main-applyforlegalaid-uat.cloud-platform.service.justice.gov.uk/auth/entra_id/callback # overridden for branches (see deploy script)
 
 admin_omniauth_entraid:
