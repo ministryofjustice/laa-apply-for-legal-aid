@@ -1,8 +1,10 @@
 repos:
   - repo: https://github.com/ministryofjustice/devsecops-hooks
-    rev: v1.4.1 # re-run prek install after changing this
+    rev: v1.5.0 # re-run prek install after changing this
     hooks:
       - id: baseline
+        env:
+          STAGE_MODE: 'false'
   - repo: local
     hooks:
       - id: rubocop
