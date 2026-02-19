@@ -32,12 +32,6 @@
       },
     ) do %>
 
-  <% unless @read_only %>
-    <%= govuk_inset_text do %>
-      <p class="govuk-body"><%= t("generic.cya_inset_text") %></p>
-    <% end %>
-  <% end %>
-
   <h2 class="govuk-heading-l"><%= t(".section_client.heading") %></h2>
   <%= render("shared/check_answers/client_details",
              attributes: %i[first_name last_name last_name_at_birth applied_previously date_of_birth national_insurance_number employment_status correspondence_choice address care_of home_address has_partner],
@@ -62,16 +56,20 @@
 
   <% unless @read_only %>
     <%= if @legal_aid_application&.lead_linked_application&.confirm_link == true && @legal_aid_application&.lead_linked_application&.link_type_code == "FC_LEAD"
-          govuk_warning_text(text: t(".copy_case.family_warning"))
+          govuk_inset_text(text: t(".copy_case.family_warning"))
         end %>
 
     <% if @applicant.national_insurance_number? %>
       <h2 class="govuk-heading-m"><%= t(".section_next.heading") %></h2>
 
-      <p class="govuk-body govuk-!-margin-bottom-9">
+      <p class="govuk-body">
         <%= t(".section_next.content") %>
       </p>
     <% end %>
+  <% end %>
+
+  <% unless @read_only %>
+    <%= govuk_warning_text(text: t("generic.cya_warning_text")) %>
   <% end %>
 
   <% if @read_only %>
