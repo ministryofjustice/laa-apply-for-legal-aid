@@ -357,7 +357,6 @@ GEM
       ruby-progressbar (~> 1.8, >= 1.8.1)
       terminal-table (>= 1.5.1)
     ice_nine (0.11.2)
-    iniparse (1.5.0)
     interception (0.5)
     io-console (0.8.2)
     irb (1.16.0)
@@ -484,10 +483,6 @@ GEM
     optimist (3.2.1)
     orm_adapter (0.5.0)
     ostruct (0.6.3)
-    overcommit (0.68.0)
-      childprocess (>= 0.6.3, < 6)
-      iniparse (~> 1.4)
-      rexml (>= 3.3.9)
     pagy (9.4.0)
     parallel (1.27.0)
     parser (3.3.10.1)
@@ -861,7 +856,6 @@ DEPENDENCIES
   omniauth-oauth2 (>= 1.7.1)
   omniauth-rails_csrf_protection (~> 2.0)
   omniauth_openid_connect
-  overcommit
   pagy
   pg
   pg_dump_anonymize

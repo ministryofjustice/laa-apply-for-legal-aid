@@ -1,0 +1,46 @@
+title = "Strict secret detection"
+
+[[rules]]
+id = "generic-password"
+description = "Generic passwords"
+regex = '''(?i)(password|passwd|pwd)\s*[:=]\s*["']?[^"'\\s]+["']?'''
+entropy = 3.0
+
+[[rules]]
+id = "generic-secret"
+description = "Generic secrets"
+regex = '''(?i)(secret|client_secret|private_key)\s*[:=]\s*["']?[^"'\\s]+["']?'''
+entropy = 3.0
+
+[[rules]]
+id = "api-key"
+description = "Generic API keys"
+regex = '''(?i)(api[_-]?key|access[_-]?key)\s*[:=]\s*["']?[A-Za-z0-9_\-]{8,}["']?'''
+entropy = 3.0
+
+[[rules]]
+id = "token"
+description = "Generic authentication tokens"
+regex = '''(?i)(token|auth[_-]?token|bearer)\s*[:=]\s*["']?[A-Za-z0-9\-_\.]{8,}["']?'''
+entropy = 3.0
+
+[[rules]]
+id = "username-password-combo"
+description = "Generic credentials"
+regex = '''(?i)(user(name)?\s*[:=].+password\s*[:=].+)'''
+entropy = 3.0
+
+[[rules]]
+id = "private-key-block"
+description = "Generic encryption keys"
+regex = '''-----BEGIN (RSA|EC|DSA|OPENSSH|PGP) PRIVATE KEY-----'''
+entropy = 3.0
+
+[[rules]]
+id = "guid"
+description = "GUID in code"
+regex = '''(?:\{{0,1}(?:[0-9a-fA-F]){8}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){12}\}{0,1})'''
+entropy = 3.0
+
+[allowlist]
+paths = ["node_modules/*"]
