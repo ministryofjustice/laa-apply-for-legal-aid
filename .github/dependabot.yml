@@ -18,7 +18,8 @@ updates:
           - "ruby*"
     open-pull-requests-limit: 10
   - package-ecosystem: "bundler"
-    labels: "bundler-gems"
+    labels:
+      - "bundler-gems"
     directory: "/gems/moj-components"
     allow:
       - dependency-type: "all"
