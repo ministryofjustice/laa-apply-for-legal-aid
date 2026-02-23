@@ -8,6 +8,7 @@ module Flow
         multiple_employments_interrupts: Steps::ProviderIncome::MultipleEmploymentsInterruptsStep,
         no_nino_interrupts: Steps::ProviderIncome::NoNinoInterruptsStep,
         single_employment_interrupts: Steps::ProviderIncome::SingleEmploymentInterruptsStep,
+        unemployed_but_hmrc_found_data_interrupts: Steps::ProviderIncome::UnemployedButHMRCFoundDataInterruptsStep,
         employment_incomes: Steps::ProviderIncome::EmploymentIncomesStep,
         unexpected_employment_incomes: Steps::ProviderIncome::UnexpectedEmploymentIncomesStep,
         full_employment_details: Steps::ProviderIncome::FullEmploymentDetailsStep,
