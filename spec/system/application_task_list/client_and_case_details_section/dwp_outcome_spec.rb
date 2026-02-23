@@ -18,7 +18,6 @@ RSpec.describe "Client and case details section - DWP outcome", :javascript, :vc
           { name: "DWP outcome", link_enabled: false, status: "Not ready" },
         ]
       end
-
       click_on "Check your answers"
       expect(page).to have_css("h1", text: "Check your answers")
       click_on "Save and continue"
