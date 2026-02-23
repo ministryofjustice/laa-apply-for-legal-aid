@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Flow::Steps::LinkedApplications::MakeLinkStep, type: :request do
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, copy_case:) }
+  let(:copy_case) { nil }
 
   describe "#path" do
     subject { described_class.path.call(legal_aid_application) }
@@ -65,13 +66,28 @@ RSpec.describe Flow::Steps::LinkedApplications::MakeLinkStep, type: :request do
     subject { described_class.carry_on_sub_flow.call(legal_aid_application) }
 
     context "when the applicant has a linked_application" do
-      before { create(:linked_application, associated_application: legal_aid_application) }
+      let(:link_type_code) { "FC_LEAD" }
+      let(:copy_case) { nil }
+
+      before { create(:linked_application, associated_application: legal_aid_application, link_type_code:) }
 
       it { is_expected.to be true }
+
+      context "when the link_type_code is false" do
+        let(:link_type_code) { "false" }
+
+        it { is_expected.to be false }
+      end
     end
 
     context "when the applicant does not have a linked_application" do
       it { is_expected.to be false }
+    end
+
+    context "when the application's proceedings have been copied from another application" do
+      let(:copy_case) { true }
+
+      it { is_expected.to be true }
     end
   end
 end
