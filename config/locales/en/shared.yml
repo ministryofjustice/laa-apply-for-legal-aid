@@ -1018,6 +1018,8 @@ en:
       title_html: You need to apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
       continue_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
       back_to_applications: Back to my applications
+    hmrc_unavailable_interrupts:
+      client_title: We cannot currently check your client's employment records automatically with HMRC
     full_employment_details:
       page_heading_no_data: HMRC has no record of %{individual}'s employment in the last 3 months
       page_heading_multiple_employments: HMRC found a record of %{individual}'s employment

@@ -3,6 +3,7 @@ module Flow
     class ProviderIncome
       STEPS = {
         client_completed_means: Steps::ProviderIncome::ClientCompletedMeansStep,
+        hmrc_unavailable_interrupts: Steps::ProviderIncome::HMRCUnavailableInterruptsStep,
         employment_incomes: Steps::ProviderIncome::EmploymentIncomesStep,
         unexpected_employment_incomes: Steps::ProviderIncome::UnexpectedEmploymentIncomesStep,
         full_employment_details: Steps::ProviderIncome::FullEmploymentDetailsStep,

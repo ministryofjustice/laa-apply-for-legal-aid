@@ -191,6 +191,7 @@ Rails.application.routes.draw do
         get :search, to: "legal_aid_applications#search"
       end
       namespace :means do
+        get "/hmrc_unavailable_interrupt", to: "hmrc_unavailable_interrupts#show", as: "hmrc_unavailable_interrupt"
         resource :cash_outgoing, only: %i[show update]
         resource :full_employment_details, only: %i[show update]
         resource :employment_income, only: %i[show update]
