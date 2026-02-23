@@ -7,22 +7,21 @@
   <%= page_template page_title: t(".page_title", count: pluralize(@legal_aid_application.opponents.count, "opponent").to_s),
                     template: :basic,
                     form: do %>
+    <%= form.govuk_fieldset(legend: { text: page_title, size: "xl", tag: "h1" }) do %>
+      <p class="govuk-body"><%= t(".details_content_para_one") %></p>
+      <ul class="govuk-list govuk-list--bullet">
+        <% t(".details_list").each do |bullet| %>
+          <li><%= bullet %></li>
+        <% end %>
+      </ul>
+      <p class="govuk-body"><%= t(".details_content_para_two") %></p>
+    <% end %>
+
     <%= form.govuk_collection_radio_buttons :has_partner,
                                             yes_no_options,
                                             :value,
                                             :label,
-                                            inline: true,
-                                            legend: { text: t(".page_title"), size: "xl", tag: "h1" } do %>
-
-        <p class="govuk-body"><%= t(".details_content_para_one") %></p>
-        <ul class="govuk-list govuk-list--bullet">
-          <% t(".details_list").each do |bullet| %>
-            <li><%= bullet %></li>
-          <% end %>
-        </ul>
-        <p class="govuk-body"><%= t(".details_content_para_two") %></p>
-
-    <% end %>
+                                            legend: { text: t(".heading"), size: "m", tag: "h2" } %>
 
     <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
