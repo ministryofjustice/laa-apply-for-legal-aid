@@ -1151,7 +1151,8 @@ en:
           page_title: Which of these payments does your client pay?
       has_dependants:
         show:
-          page_title: "Does %{individual} have any dependants?"
+          page_title: Dependants
+          heading: "Does %{individual} have any dependants?"
           info: "A dependant is a child or adult who:"
           list: |
             lives with %{individual}

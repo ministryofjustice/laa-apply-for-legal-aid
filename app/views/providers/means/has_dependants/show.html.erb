@@ -15,32 +15,29 @@
 
   <%= page_template page_title: t(".page_title", individual:), form:, template: :basic do %>
 
+    <%= form.govuk_fieldset(legend: { text: page_title, tag: "h1", size: "xl" }) do %>
+      <p class="govuk-body govuk-!-margin-top-4">
+        <%= t(".info") %>
+      </p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <% t(".list", individual:).each_line do |item| %>
+          <li><%= item %></li>
+        <% end %>
+      </ul>
+
+      <%= govuk_inset_text do %>
+        <p class="govuk-body">
+          <%= t(".extra_info", details:) %>
+        </p>
+      <% end %>
+
+    <% end %>
     <%= form.govuk_collection_radio_buttons :has_dependants,
                                             yes_no_options,
                                             :value,
                                             :label,
-                                            legend: {
-                                              text: t(".page_title", individual:),
-                                              tag: "h1",
-                                              size: "xl",
-                                            } do %>
-        <p class="govuk-body govuk-!-margin-top-4">
-          <%= t(".info") %>
-        </p>
-
-        <ul class="govuk-list govuk-list--bullet">
-          <% t(".list", individual:).each_line do |item| %>
-            <li><%= item %></li>
-          <% end %>
-        </ul>
-
-        <%= govuk_inset_text do %>
-          <p class="govuk-body">
-            <%= t(".extra_info", details:) %>
-          </p>
-        <% end %>
-
-    <% end %>
+                                            legend: { text: t(".heading", individual:), tag: "h2", size: "m" } %>
 
     <%= next_action_buttons(show_draft: true, form:) %>
   <% end %>
