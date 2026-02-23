@@ -193,6 +193,7 @@ Rails.application.routes.draw do
       namespace :means do
         get "/employed_but_no_hmrc_data_interrupt", to: "employed_but_no_hmrc_data_interrupts#show", as: "employed_but_no_hmrc_data_interrupt"
         get "/hmrc_unavailable_interrupt", to: "hmrc_unavailable_interrupts#show", as: "hmrc_unavailable_interrupt"
+        get "/multiple_employments_interrupts", to: "multiple_employments_interrupts#show", as: "multiple_employments_interrupt"
         get "/no_nino_interrupt", to: "no_nino_interrupts#show", as: "no_nino_interrupt"
         resource :cash_outgoing, only: %i[show update]
         resource :full_employment_details, only: %i[show update]
