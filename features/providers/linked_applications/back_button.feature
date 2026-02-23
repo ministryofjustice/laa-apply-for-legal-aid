@@ -45,7 +45,7 @@ Feature: Linking cases back button use
 
     When I choose "No, they have no fixed address"
     And I click "Save and continue"
-    Then I should be on a page with title "Do you want to link this application with another one?"
+    Then I should be on a page with title "Linking cases"
 
     When I choose "Yes, I want to make a family link"
     And I click "Save and continue"
@@ -63,7 +63,7 @@ Feature: Linking cases back button use
 
     When I choose "Yes, the information will be the same"
     And I click "Save and continue"
-    Then I should be on a page with title "Does your client have a partner?"
+    Then I should be on a page with title "Your client's partner"
 
     When I click link "Back"
     Then I should be on a page with title "Do you want to copy the proceedings and merits from L-123-456 to this one?"
@@ -79,7 +79,7 @@ Feature: Linking cases back button use
     And I should not see "L-123-456"
 
     When I click link "Back"
-    Then I should be on a page with title "Do you want to link this application with another one?"
+    Then I should be on a page with title "Linking cases"
 
     When I choose "No"
     And I click "Save and continue"

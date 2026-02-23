@@ -31,7 +31,7 @@ Feature: partner_means_assessment full journey
 
     When I select "The partner makes none of these payments"
     And I click "Save and continue"
-    Then I should be on a page with title "Does your client or their partner have any dependants?"
+    Then I should be on a page with title "Dependants"
 
     When I choose "No"
     And I click "Save and continue"
@@ -136,7 +136,7 @@ Feature: partner_means_assessment full journey
 
     When I choose "No"
     And I click "Save and continue"
-    Then I should be on a page with title "Does your client or their partner have any dependants?"
+    Then I should be on a page with title "Dependants"
 
     When I choose "No"
     And I click "Save and continue"

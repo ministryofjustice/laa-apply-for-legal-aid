@@ -30,7 +30,7 @@ Background: I have started linking and copying a submitted application
 @javascript @vcr @billy
 Scenario: If I change the linked from Family to No
   When I click Check Providers Answers Change link for "linking question"
-  Then I should be on a page with title "Do you want to link this application with another one?"
+  Then I should be on a page with title "Linking cases"
 
   When I choose "No"
   And I click "Save and continue"

@@ -99,7 +99,7 @@ Feature: Bank statement upload journey state_benefit loop feature
     When I select "My client makes none of these payments"
     And I click "Save and continue"
 
-    Then I should be on a page with title matching "Does your client have any dependants?"
+    Then I should be on a page with title matching "Dependants?"
     When I choose "No"
     And I click "Save and continue"
 

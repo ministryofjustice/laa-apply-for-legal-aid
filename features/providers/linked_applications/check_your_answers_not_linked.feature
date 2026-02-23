@@ -27,7 +27,7 @@ Background: I have started an application and not linked or copied it
 @javascript @vcr
 Scenario: When I change it to be a linked case
   When I click Check Providers Answers Change link for "linking question"
-  Then I should be on a page with title "Do you want to link this application with another one?"
+  Then I should be on a page with title "Linking cases"
 
   When I choose "Yes, I want to make a family link"
   And I click "Save and continue"

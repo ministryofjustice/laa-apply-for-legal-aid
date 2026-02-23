@@ -93,7 +93,7 @@ Feature: Completing and checking means answers backwards and forwards
     Then I should be on a page with title "Sort your client's regular payments into categories"
 
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have any dependants?"
+    Then I should be on a page with title "Dependants"
 
     When I choose "No"
     And I click 'Save and continue'
