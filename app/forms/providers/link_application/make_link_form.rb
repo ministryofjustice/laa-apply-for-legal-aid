@@ -9,6 +9,7 @@ module Providers
 
       def save
         if link_type_code == "false"
+          model.associated_application.update!(copy_case: nil, copy_case_id: nil)
           model.update!(confirm_link: false)
           model.associated_application.update!(linked_application_completed: true)
         else

@@ -86,6 +86,16 @@ RSpec.describe Providers::LinkApplication::MakeLinkForm, type: :form do
         call_save
         expect(linked_application.confirm_link).to be false
       end
+
+      context "when the application has its proceedings and merits copied from another application" do
+        before { legal_aid_application.update!(copy_case: true, copy_case_id: linked_application.id) }
+
+        it "resets the linked_application model" do
+          call_save
+          expect(legal_aid_application.reload.copy_case).to be_nil
+          expect(legal_aid_application.copy_case_id).to be_nil
+        end
+      end
     end
 
     context "when the answer is changed from family link to legal link" do
