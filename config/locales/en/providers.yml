@@ -821,18 +821,17 @@ en:
           details_content_para_two: |
             Do not include anyone who is separated from your client in a way that
             is likely to be permanent.
-
       contrary_interests:
         show:
-          page_title: Does the partner have a contrary interest in the proceedings?
-          details_content_para_one: "For example, if they:"
-          details_content_para_two: |
-            We're asking this because your client may still be entitled to a deduction
-            if their partner has a contrary interest. However, we will not assess
-            the partner's means.
+          page_title: Partners with a contrary interest
+          heading: Does the partner have a contrary interest in the proceedings?
+          details_content_para_one: "A partner may have a contrary interest, for example, if they:"
           details_list:
             - are the opponent
             - want a different outcome in the proceedings to your client
+          details_content_para_two: |
+            We need to know, because your client may still be entitled to a deduction if their partner
+            has a contrary interest. However, we will not assess the partner’s means.
       details:
         show:
           page_title: Enter the partner's details
