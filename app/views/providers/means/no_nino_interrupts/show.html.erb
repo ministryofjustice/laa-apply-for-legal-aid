@@ -1,0 +1,11 @@
+<%= page_template(page_title: t("shared.no_nino_interrupts.client_title"), template: :basic, column_width: "full") do %>
+  <%= moj_interruption_card(heading: t("shared.no_nino_interrupts.client_title")) do |card| %>
+    <% card.with_body do %>
+      <p><%= t("shared.no_nino_interrupts.client_paragraph") %></p>
+    <% end %>
+    <% card.with_actions do %>
+      <%= govuk_button_link_to t("generic.continue"), "#", inverse: true, role: "button" %>
+      <%= govuk_link_to t("generic.back_to_your_applications"), home_path, inverse: true %>
+    <% end %>
+  <% end %>
+<% end %>

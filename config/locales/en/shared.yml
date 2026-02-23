@@ -1020,6 +1020,9 @@ en:
       back_to_applications: Back to my applications
     hmrc_unavailable_interrupts:
       client_title: We cannot currently check your client's employment records automatically with HMRC
+    no_nino_interrupts:
+      client_title: We could not check your client's employment record with HMRC
+      client_paragraph: This is because you did not give us your client's National Insurance number.
     full_employment_details:
       page_heading_no_data: HMRC has no record of %{individual}'s employment in the last 3 months
       page_heading_multiple_employments: HMRC found a record of %{individual}'s employment
