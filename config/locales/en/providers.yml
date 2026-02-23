@@ -457,17 +457,18 @@ en:
     link_application:
       make_links:
         show:
+          title: Linking cases
           heading: Do you want to link this application with another one?
-          hint:
-            You can link to another application you've already submitted using this service.
-            Linking to an application that’s already linked to another one will group them together.
+          paragraphs:
+            - You can link to another application you have already submitted using this service.
+            - A family link can be made if you are representing 2 or more family members in the proceedings. This makes sure that the cost limit is shown on one certificate only.
+            - A legal link can be made if your client is involved in more than one court case and needs to have multiple certificates.
+            - Linking to an application that’s already linked to another one will group them together.
           options:
             family_link: Yes, I want to make a family link
-            family_hint:
-              When LAA needs multiple certificates with a shared cost limitation.
-              The cost limit will be on the certificate of the application you submit first.
+            family_hint: A shared cost limit is shown on the certificate of the application you submit first
             legal_link: Yes, I want to make a legal link
-            legal_hint: When LAA needs multiple certificates, each with a separate cost limitation.
+            legal_hint: There will be a separate cost limit on each certificate
       find_link_applications:
         show:
           heading: What is the LAA reference of the application you want to link to?
