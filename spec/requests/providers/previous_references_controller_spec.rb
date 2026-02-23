@@ -23,7 +23,7 @@ RSpec.describe Providers::PreviousReferencesController do
 
       it "shows the previous references page" do
         expect(response).to be_successful
-        expect(unescaped_response_body).to include("Has your client applied for civil legal aid before?")
+        expect(unescaped_response_body).to include("Clients who have applied before")
       end
     end
   end

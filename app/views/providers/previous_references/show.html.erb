@@ -11,15 +11,14 @@
         template: :basic,
         form:,
       ) do %>
+    <%= form.govuk_fieldset(legend: { size: "xl", tag: "h1", text: page_title }) do %>
+      <% t(".paragraphs").each do |para| %>
+        <div class="govuk-body"><%= para %></div>
+      <% end %>
+    <% end %>
 
-    <%= form.govuk_radio_buttons_fieldset(
-          :applied_previously,
-          legend: { size: "xl", text: t(".heading"), tag: "h1" },
-        ) do %>
-
-      <div class="govuk-body"><%= t(".type_of_work_text") %></div>
-      <div class="govuk-body"><%= t(".previous_records_text") %></div>
-
+    <%= form.govuk_radio_buttons_fieldset(:applied_previously,
+                                          legend: { size: "m", text: t(".heading"), tag: "h2" }) do %>
       <%= form.govuk_radio_button :applied_previously, true, label: { text: t("generic.yes") }, link_errors: true do %>
         <%= form.govuk_text_field(
               :previous_reference,
