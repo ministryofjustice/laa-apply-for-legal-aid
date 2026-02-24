@@ -145,5 +145,5 @@ Feature: Non-means-tested applicant journey without use of delegation functions
     Then I should be on a page showing "Application complete"
 
     When I click 'View completed application'
-    Then I should be on a page showing "Application for civil legal aid certificate"
+    Then I should be on a page showing "Completed application for civil legal aid"
     And I should not see "Passported"

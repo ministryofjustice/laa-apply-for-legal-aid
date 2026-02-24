@@ -163,7 +163,7 @@ Feature: Check multiple employment
     Then I should be on a page showing "Application complete"
 
     When I click 'View completed application'
-    Then I should be on a page showing "Application for civil legal aid certificate"
+    Then I should be on a page showing "Completed application for civil legal aid"
 
   @javascript @vcr @hmrc_use_dev_mock
   Scenario: I am able to continue if applicant is unemployed but has income from previous employment
