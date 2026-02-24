@@ -1959,8 +1959,8 @@ en:
     submitted_applications:
       show:
         back_home: Back to your applications
-        heading: Application for civil legal aid certificate
-        print_button: Print certificate
+        heading: Completed application for civil legal aid
+        print_button: Print application
         link_banner_one: This application has been linked with another one since you submitted it.
         link_banner_many: This application has been linked with %{count} other ones since you submitted it.
     review_and_print_applications:
