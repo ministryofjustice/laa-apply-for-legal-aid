@@ -118,9 +118,9 @@ ccms_user_api:
 # whitelisted to only be available via VPN.
 data_access_api:
   # url: "https://main-laa-data-access-api-uat.cloud-platform.service.justice.gov.uk/api/v0" # main UAT external/public ingress, does not work due to whitelisting
-  url: "https://main-internal-laa-data-access-api-uat.internal-non-prod.cloud-platform.service.justice.gov.uk/api/v0" # main UAT internal ingress
+  # url: "https://main-internal-laa-data-access-api-uat.internal-non-prod.cloud-platform.service.justice.gov.uk/api/v0" # main UAT internal ingress
   # url: "https://laa-data-access-api-staging.cloud-platform.service.justice.gov.uk/api/v0" # staging external/public ingress, does not work due to whitelisting
-  # url: "https://laa-data-access-api-staging.internal-non-prod.cloud-platform.service.justice.gov.uk/api/v0"
+  url: "https://laa-data-access-api-staging.internal-non-prod.cloud-platform.service.justice.gov.uk/api/v0"
 
 trueLayer:
   enableMock: "true"

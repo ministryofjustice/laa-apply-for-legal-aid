@@ -37,7 +37,7 @@ module Datastore
     end
 
     def application_content
-      @application_content ||= { application_content: legal_aid_application_hash }
+      @application_content ||= legal_aid_application_hash
     end
 
     # TMP/TODO: Curently just supplying client/application but this may be in future used to also provide
