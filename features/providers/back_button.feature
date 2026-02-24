@@ -145,7 +145,7 @@
 #    Then I click 'Submit and continue'
 #    Then I should be on a page showing "Application complete"
 #    Then I click 'View completed application'
-#    Then I should be on a page showing "Application for civil legal aid certificate"
+#    Then I should be on a page showing "Completed application for civil legal aid"
 #    Then I should be on a page showing "Passported"
 #
 #  @javascript
