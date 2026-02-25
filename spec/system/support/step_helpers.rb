@@ -32,7 +32,8 @@ module StepHelpers
     fill_in("Enter National Insurance number", with: "CB987654A")
 
     click_on "Save and continue"
-    expect(page).to have_css("h1", text: "Has your client applied for civil legal aid before?")
+    expect(page).to have_css("h1", text: "Clients who have applied before")
+    expect(page).to have_css("h2", text: "Has your client applied for civil legal aid before?")
 
     return if step_name == :previous_references
 

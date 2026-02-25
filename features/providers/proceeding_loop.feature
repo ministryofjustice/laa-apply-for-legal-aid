@@ -202,7 +202,7 @@ Feature: Loop through proceeding questions
     And I fill "legal-aid-application-emergency-cost-reasons-field" with "because it cost more"
 
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a partner?"
+    Then I should be on a page with title "Your client's partner"
 
   Scenario: When provider accepts default levels of service
     Given I search for proceeding "Child arrangements order CAO Section 8"
@@ -294,7 +294,7 @@ Feature: Loop through proceeding questions
     And I fill "legal-aid-application-emergency-cost-reasons-field" with "because it cost more"
 
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a partner?"
+    Then I should be on a page with title "Your client's partner"
 
   Scenario: No preselected emergency or substantive levels of service
     Given I search for proceeding "Enforcement order 11J"

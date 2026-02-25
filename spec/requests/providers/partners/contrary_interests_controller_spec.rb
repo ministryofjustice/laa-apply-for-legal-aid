@@ -14,7 +14,7 @@ RSpec.describe Providers::Partners::ContraryInterestsController do
       expect(response).to have_http_status(:ok)
       expect(page).to have_css(
         "h1",
-        text: "Does the partner have a contrary interest in the proceedings?",
+        text: "Partners with a contrary interest",
       )
     end
   end

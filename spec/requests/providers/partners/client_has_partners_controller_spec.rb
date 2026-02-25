@@ -15,7 +15,7 @@ RSpec.describe Providers::Partners::ClientHasPartnersController do
       expect(response).to have_http_status(:ok)
       expect(page).to have_css(
         "h1",
-        text: "Does your client have a partner?",
+        text: "Your client's partner",
       )
     end
   end

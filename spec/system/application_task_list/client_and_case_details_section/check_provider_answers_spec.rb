@@ -28,7 +28,8 @@ RSpec.describe "Client and case details section - Check your answers", :vcr do
       fill_in("Enter National Insurance number", with: "CB987654A")
       click_on "Save and continue"
 
-      expect(page).to have_css("h1", text: "Has your client applied for civil legal aid before?")
+      expect(page).to have_css("h1", text: "Clients who have applied before")
+      expect(page).to have_css("h2", text: "Has your client applied for civil legal aid before?")
       govuk_choose("No")
       click_on "Save and continue"
 
@@ -40,7 +41,8 @@ RSpec.describe "Client and case details section - Check your answers", :vcr do
       govuk_choose "Transport For London, 98 Petty France, London, SW1H 9EA"
       click_on "Use this address"
 
-      expect(page).to have_css("h1", text: "Do you want to link this application with another one?")
+      expect(page).to have_css("h1", text: "Linking cases")
+      expect(page).to have_css("h2", text: "Do you want to link this application with another one?")
       govuk_choose("No")
       click_on "Save and continue"
 

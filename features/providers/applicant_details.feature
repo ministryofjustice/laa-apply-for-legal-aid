@@ -132,7 +132,7 @@ Background: I have started an application and not linked or copied it
     And I enter a emergency cost requested '5000'
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a partner?"
+    Then I should be on a page with title "Your client's partner"
     And I choose "No"
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
@@ -205,7 +205,7 @@ Background: I have started an application and not linked or copied it
     And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a partner?"
+    Then I should be on a page with title "Your client's partner"
     And I choose "No"
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
@@ -348,7 +348,7 @@ Background: I have started an application and not linked or copied it
     And I click 'Save and continue'
     Then I should be on a page showing "What you're applying for"
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a partner?"
+    Then I should be on a page with title "Your client's partner"
     And I choose "No"
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
@@ -432,7 +432,7 @@ Background: I have started an application and not linked or copied it
     And I enter a emergency cost requested '5000'
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a partner?"
+    Then I should be on a page with title "Your client's partner"
     And I choose "No"
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'
@@ -498,7 +498,7 @@ Background: I have started an application and not linked or copied it
     Then I should be on a page showing "What you're applying for"
     Then I should be on a page showing "default substantive cost limit"
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a partner?"
+    Then I should be on a page with title "Your client's partner"
     And I choose "No"
     When I click 'Save and continue'
     Then I should be on a page showing 'Check your answers'

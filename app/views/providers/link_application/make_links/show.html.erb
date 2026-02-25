@@ -6,14 +6,19 @@
     ) do |form| %>
 
   <%= page_template(
-        page_title: t(".heading"),
+        page_title: t(".title"),
         form:,
         template: :basic,
       ) do %>
 
+    <%= form.govuk_fieldset(legend: { size: "xl", tag: "h1", text: page_title }) do %>
+      <% t(".paragraphs").each do |paragraph| %>
+        <div class="govuk-body"><%= paragraph %></div>
+      <% end %>
+    <% end %>
+
     <%= form.govuk_radio_buttons_fieldset(:link_type_code,
-                                          legend: { size: "xl", tag: "h1", text: page_title },
-                                          hint: { text: t(".hint") }) do %>
+                                          legend: { size: "m", tag: "h2", text: t(".heading") }) do %>
 
       <%= form.govuk_radio_button :link_type_code, Providers::LinkApplication::MakeLinkForm.family_link_type_code, label: { text: t(".options.family_link") }, hint: { text: t(".options.family_hint") }, link_errors: true %>
       <%= form.govuk_radio_button :link_type_code, Providers::LinkApplication::MakeLinkForm.legal_link_type_code, label: { text: t(".options.legal_link") }, hint: { text: t(".options.legal_hint") } %>

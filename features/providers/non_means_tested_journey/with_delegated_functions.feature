@@ -75,7 +75,7 @@ Feature: Non-means-tested applicant journey with use of delegation functions
 
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a partner?"
+    Then I should be on a page with title "Your client's partner"
     And I choose "No"
     When I click 'Save and continue'
     Then I should be on a page with title "Check your answers"

@@ -40,7 +40,7 @@ Feature: partner_means_assessment full journey
 
     When I select "None of these assets"
     And I click "Save and continue"
-    Then I should be on a page with title "Is your client or their partner banned from selling or borrowing against their assets?"
+    Then I should be on a page with title "Selling or borrowing against assets"
 
     When I choose "No"
     And I click "Save and continue"
@@ -107,7 +107,7 @@ Feature: partner_means_assessment full journey
     When I select "Land"
     And I fill "land_value" with "20,000"
     And I click "Save and continue"
-    Then I should be on a page with title "Is your client or their partner banned from selling or borrowing against their assets?"
+    Then I should be on a page with title "Selling or borrowing against assets"
 
     When I choose "Yes"
     And I fill "restrictions_details" with "Some details of restrictions"

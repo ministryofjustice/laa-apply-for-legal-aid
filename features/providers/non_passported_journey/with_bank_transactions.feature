@@ -190,7 +190,7 @@ Feature: non_passported_journey with bank transactions
     And I fill "providers-means-housing-benefit-form-housing-benefit-amount-field" with "101"
     And I choose 'Every week'
     And I click 'Save and continue'
-    Then I should be on a page with title "Does your client or their partner have any dependants?"
+    Then I should be on a page with title "Dependants"
 
     When I choose "No"
     And I click "Save and continue"

@@ -68,7 +68,7 @@ Feature: Bank statement upload journey happy path
     And I enter amount "100"
     And I choose "Every week"
     And I click "Save and continue"
-    Then I should be on a page with title "Does your client have any dependants?"
+    Then I should be on a page with title "Dependants"
 
   @javascript
   Scenario: I can upload bank statements and answer transaction questions for non-passported, non-TrueLayer applications on behalf of unemployed clients
@@ -144,4 +144,4 @@ Feature: Bank statement upload journey happy path
     And I enter amount "100"
     And I choose "Every week"
     And I click "Save and continue"
-    Then I should be on a page with title "Does your client have any dependants?"
+    Then I should be on a page with title "Dependants"

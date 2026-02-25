@@ -53,12 +53,12 @@ Feature: Emergency cost override
     And I should see 'Do you want to request a higher emergency cost limit?'
     When I choose 'No'
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a partner?"
+    Then I should be on a page with title "Your client's partner"
     And I choose "No"
     When I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     When I click link "Back"
-    Then I should be on a page with title "Does your client have a partner?"
+    Then I should be on a page with title "Your client's partner"
     When I click link "Back"
     Then I should be on a page showing "What you're applying for"
     Then I should see "Do you want to request a higher emergency cost limit?"
@@ -66,7 +66,7 @@ Feature: Emergency cost override
     And I enter a emergency cost requested '5000'
     And I enter legal aid application emergency cost reasons field 'This is why I require extra funding'
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a partner?"
+    Then I should be on a page with title "Your client's partner"
     When I click 'Save and continue'
     Then I should be on a page showing "Check your answers"
     Then the "Cost limits" list's questions and answers should match:

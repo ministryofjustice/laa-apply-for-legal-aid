@@ -235,7 +235,7 @@ Feature: Checking answers backwards and forwards
     Scenario: I want to add and remove restrictions via the capital check your answers page
       Given I complete the passported journey as far as capital check your answers
       And I click Check Your Answers Change link for 'Restrictions'
-      Then I should be on a page with title 'Is your client banned from selling or borrowing against their assets?'
+      Then I should be on a page with title 'Selling or borrowing against assets'
       Then I choose 'Yes'
       Then I fill "Restrictions details" with 'Restraint or freezing order'
       Then I click 'Save and continue'

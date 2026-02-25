@@ -67,7 +67,7 @@ Feature: Under 18 applicant journey
     Then I should be on a page with title "What you're applying for"
 
     When I click 'Save and continue'
-    Then I should be on a page with title "Does your client have a partner?"
+    Then I should be on a page with title "Your client's partner"
     And I choose "No"
     When I click 'Save and continue'
     Then I should be on a page with title "Check your answers"

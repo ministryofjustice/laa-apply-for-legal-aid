@@ -16,12 +16,14 @@ en:
       error: Select yes if you want to remove %{name} from the application.
     previous_references:
       show:
-        title: Has your client applied for civil legal aid before?
+        title: Clients who have applied before
         heading: Has your client applied for civil legal aid before?
-        type_of_work_text: By this, we mean certificated and licensed work. You do not need to tell us about controlled work and family mediation.
-        previous_records_text: We'll find any previous records to make sure any contributions we calculate are correct.
+        paragraphs:
+          - We need to know if your client has previously applied for certificated or licensed work with the Legal Aid Agency (LAA).
+          - You do not need to tell us about controlled work and family mediation.
+          - This will help us to find any previous records to make sure any contributions we calculate are correct.
         ccms_ref_num: Give the CCMS reference number for any previous application
-        ccms_ref_hint: For example, 300001234567. This is on any letter from the LAA (Legal aid agency).
+        ccms_ref_hint: For example, 300001234567. This is on any letter from the LAA.
     about_financial_means:
       show:
         h1-heading: What you need to do
@@ -455,17 +457,18 @@ en:
     link_application:
       make_links:
         show:
+          title: Linking cases
           heading: Do you want to link this application with another one?
-          hint:
-            You can link to another application you've already submitted using this service.
-            Linking to an application that’s already linked to another one will group them together.
+          paragraphs:
+            - You can link to another application you have already submitted using this service.
+            - A family link can be made if you are representing 2 or more family members in the proceedings. This makes sure that the cost limit is shown on one certificate only.
+            - A legal link can be made if your client is involved in more than one court case and needs to have multiple certificates.
+            - Linking to an application that’s already linked to another one will group them together.
           options:
             family_link: Yes, I want to make a family link
-            family_hint:
-              When LAA needs multiple certificates with a shared cost limitation.
-              The cost limit will be on the certificate of the application you submit first.
+            family_hint: A shared cost limit is shown on the certificate of the application you submit first
             legal_link: Yes, I want to make a legal link
-            legal_hint: When LAA needs multiple certificates, each with a separate cost limitation.
+            legal_hint: There will be a separate cost limit on each certificate
       find_link_applications:
         show:
           heading: What is the LAA reference of the application you want to link to?
@@ -807,27 +810,28 @@ en:
           no_account_selected: None of these
       client_has_partners:
         show:
-          page_title: Does your client have a partner?
+          page_title: Your client's partner
+          heading: Does your client have a partner?
           details_content_para_one: "A partner is someone your client:"
-          details_content_para_two: |
-            Do not include anyone who is separated from your client in a way that
-            is likely to be permanent.
           details_list:
             - is married to
             - is in a civil partnership with
             - normally lives with as a couple, even if they are not living together
               right now - for example, if one person is in hospital, prison or abroad
+          details_content_para_two: |
+            Do not include anyone who is separated from your client in a way that
+            is likely to be permanent.
       contrary_interests:
         show:
-          page_title: Does the partner have a contrary interest in the proceedings?
-          details_content_para_one: "For example, if they:"
-          details_content_para_two: |
-            We're asking this because your client may still be entitled to a deduction
-            if their partner has a contrary interest. However, we will not assess
-            the partner's means.
+          page_title: Partners with a contrary interest
+          heading: Does the partner have a contrary interest in the proceedings?
+          details_content_para_one: "A partner may have a contrary interest, for example, if they:"
           details_list:
             - are the opponent
             - want a different outcome in the proceedings to your client
+          details_content_para_two: |
+            We need to know, because your client may still be entitled to a deduction if their partner
+            has a contrary interest. However, we will not assess the partner’s means.
       details:
         show:
           page_title: Enter the partner's details
@@ -1147,7 +1151,8 @@ en:
           page_title: Which of these payments does your client pay?
       has_dependants:
         show:
-          page_title: "Does %{individual} have any dependants?"
+          page_title: Dependants
+          heading: "Does %{individual} have any dependants?"
           info: "A dependant is a child or adult who:"
           list: |
             lives with %{individual}
@@ -1377,13 +1382,19 @@ en:
             second_home_percentage: Enter the share your client and their partner owns
       restrictions:
         show:
+          title: Selling or borrowing against assets
           client:
+            for_example: |
+              We need to know if your client cannot sell or borrow against
+              their assets. This could be because, for example:
             h1-heading: Is your client banned from selling or borrowing against their assets?
             restrictions_details: Tell us which assets your client cannot sell or borrow against, and why.
           partner:
+            for_example: |
+             We need to know if your client or their partner cannot sell or borrow against
+             their assets. This could be because, for example:
             h1-heading: Is your client or their partner banned from selling or borrowing against their assets?
             restrictions_details: Tell us which assets your client or their partner cannot sell or borrow against, and why.
-          for_example: "For example, because:"
           examples:
             - they're bankrupt
             - their home has been repossessed
