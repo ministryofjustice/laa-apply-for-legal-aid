@@ -21,6 +21,7 @@ module Datastore
         "Content-Type" => "application/json",
         "Accept" => "application/json",
         # "X-Authorization" => Rails.configuration.x.data_access_api.auth_key, TBC
+        "X-Service-Name" => "CIVIL_APPLY",
         "User-Agent" => "CivilApply/#{HostEnv.environment || 'host-env-missing'} Faraday/#{Faraday::VERSION}",
       }
     end
