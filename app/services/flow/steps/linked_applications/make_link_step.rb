@@ -10,7 +10,7 @@ module Flow
             application.proceedings.any? ? :has_other_proceedings : :proceedings_types
           end
         end,
-        carry_on_sub_flow: ->(application) { application&.lead_linked_application.present? || false },
+        carry_on_sub_flow: ->(application) { application.lead_linked_application&.link_type_code.in?(%w[FC_LEAD LEGAL]) || application.copy_case? },
         check_answers: :check_provider_answers,
       )
     end
