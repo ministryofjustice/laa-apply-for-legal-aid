@@ -35,6 +35,10 @@ class Setting < ApplicationRecord
     setting.enable_datastore_submission
   end
 
+  def self.override_admin_out_of_hours?
+    setting.override_admin_out_of_hours
+  end
+
   def self.setting
     Setting.first || Setting.create!
   end
