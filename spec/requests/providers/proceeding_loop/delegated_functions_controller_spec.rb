@@ -593,7 +593,7 @@ RSpec.describe "DelegatedFunctionsController" do
               {
                 proceeding: {
                   used_delegated_functions: true,
-                  used_delegated_functions_on: 28.days.ago.to_date.to_s(:date_picker),
+                  used_delegated_functions_on: 27.days.ago.to_date.to_s(:date_picker),
                 },
               }
             end
