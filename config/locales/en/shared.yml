@@ -992,6 +992,15 @@ en:
       armed_forces: Member of the armed forces
       not_employed: None of the above
     employment_income:
+      page_title: Review %{name}'s employment income
+      supplementary_question: |
+        Do you need to tell us anything else about %{individual_with_determiner}'s employment?
+      employment_hint: |
+        For example, if they get cash in hand pay, have zero-hours contracts,
+        or recently started or ended employment.
+      enter_details: Enter details
+      details_hint: You'll need to upload supporting evidence later.
+    partner_employment_income:
       hmrc-information: HMRC have provided the information on this page.
       page_title: Review %{name}'s employment income
       supplementary_question: |
@@ -1002,6 +1011,12 @@ en:
       enter_details: Enter details
       details_hint: You'll need to upload supporting evidence later.
     unexpected_employment_incomes:
+      page_title: Review the record that HMRC found for %{name}
+      supplementary_question: Tell us about %{individual_with_determiner}'s employment situation
+      supplementary_question_hint: |
+        For example, if they recently ended employment. You can upload evidence,
+        like a P45, later on.
+    partner_unexpected_employment_incomes:
       hmrc-information: HMRC have provided the information on this page.
       page_title: HMRC found a record of %{individual_with_determiner}'s employment
       hmrc_not_employed: |
@@ -1036,6 +1051,16 @@ en:
       client_paragraph_one: You told us your client is not employed, but HMRC has shared information with us based on the National Insurance number you gave.
       client_paragraph_two: You can review this information on the next page.
     full_employment_details:
+      page_heading: "%{individual}'s employment details"
+      enter_details_client: "You must give your client's employment details for the last 3 months, including:"
+      details:
+        - how much they earned before tax
+        - how much National Insurance they paid
+        - how much tax they paid
+        - any benefits in kind they received
+      evidence: You'll need to upload supporting evidence later.
+      employment_details_header: Enter %{individual}'s employment details for the last 3 months
+    partner_full_employment_details:
       page_heading_no_data: HMRC has no record of %{individual}'s employment in the last 3 months
       page_heading_multiple_employments: HMRC found a record of %{individual}'s employment
       page_heading_no_nino: We could not check %{individual}'s employment record with HMRC

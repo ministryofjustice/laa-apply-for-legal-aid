@@ -1,4 +1,6 @@
-<% page_heading = t(".page_heading", individual:).capitalize %>
+<%# Renamed to partner temporarily. Should be removed and use shared/full_employment_details as part of AP-6323 %>
+
+<% page_heading = t(".page_heading_#{suffix}", individual:) %>
 
 <%= form_with(model: @form, url:, method: :patch, local: true) do |form| %>
 
@@ -12,6 +14,8 @@
     <%= form.govuk_fieldset(legend: { size: "xl", tag: "h1", text: page_heading },
                             caption: { text: t("generic.#{client_or_partner}_means_caption"), size: "xl" }) do %>
 
+      <h2 class="govuk-body-l"><%= t(".info_#{suffix}", individual:) %></h2>
+
       <p class="govuk-body"><%= t(".enter_details_#{client_or_partner}") %></p>
       <ul class="govuk-list govuk-list--bullet">
         <% t(".details").each do |bullet| %>
@@ -22,7 +26,7 @@
       <p class="govuk-body"><%= t(".evidence") %></p>
 
       <%= form.govuk_text_area :full_employment_details,
-                               label: { text: t(".employment_details_header", individual:), tag: "h2", size: "l" },
+                               label: { text: t(".employment_details_header", individual:), tag: "h2", size: "m" },
                                rows: 10 %>
       <% end %>
 

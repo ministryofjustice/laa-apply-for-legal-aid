@@ -36,8 +36,7 @@ RSpec.describe Providers::Means::UnexpectedEmploymentIncomesController do
         end
 
         it "displays correct text when applicant is not_employed" do
-          expect(unescaped_response_body).to include(I18n.t("shared.unexpected_employment_incomes.page_title", individual_with_determiner:))
-          expect(unescaped_response_body).to include(I18n.t("shared.unexpected_employment_incomes.hmrc_not_employed", individual_with_determiner:))
+          expect(unescaped_response_body).to include(I18n.t("shared.unexpected_employment_incomes.page_title", individual_with_determiner:, name: applicant.full_name))
         end
       end
     end
