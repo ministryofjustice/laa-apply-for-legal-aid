@@ -8,7 +8,7 @@
 
     <%= form.govuk_check_boxes_fieldset individual,
                                         legend: { text: page_title, size: "xl", tag: "h1" },
-                                        caption: { text: t("generic.#{caption_individual}_means_caption"), size: "l" },
+                                        caption: { text: t("generic.#{caption_individual}_means_caption"), size: "xl" },
                                         hint: { text: t("generic.select_all_that_apply") },
                                         form_group: { class: @form.errors.any? ? "govuk-form-group--error" : "" } do %>
 
