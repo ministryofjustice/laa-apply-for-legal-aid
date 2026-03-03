@@ -77,6 +77,8 @@ RSpec.describe Admin::SettingsController do
       before { allow(CCMS::TurnOnSubmissionsWorker).to receive(:perform_async) }
 
       context "when from false to true" do
+        before { Setting.setting&.update!(enable_ccms_submission: false) }
+
         it "calls CCMS::TurnOnSubmissionsWorker" do
           expect(CCMS::TurnOnSubmissionsWorker).to receive(:perform_async)
           patch_request
