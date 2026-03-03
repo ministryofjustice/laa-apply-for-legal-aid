@@ -54,7 +54,7 @@ class TestProviderPopulator
 private
 
   def populate_provider(username, details)
-    firm_name, email, ccms_contact_id, auth_subject_uid, silas_id = details
+    firm_name, email, ccms_contact_id, silas_id = details
     firm = populate_firm(firm_name)
     return if Provider.exists?(username:)
 
@@ -64,8 +64,7 @@ private
       ccms_contact_id:,
       firm:,
       offices: firm.offices,
-      auth_provider: auth_subject_uid.present? ? "entra_id" : "",
-      auth_subject_uid:,
+      auth_provider: silas_id.present? ? "entra_id" : "",
       silas_id:,
     )
   end
