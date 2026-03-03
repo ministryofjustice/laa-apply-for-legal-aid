@@ -78,12 +78,17 @@ class ApplicationDigest < ApplicationRecord
       case status
       when :employed_journey_not_enabled,
         :provider_not_enabled_for_employed_journey,
-        :applicant_not_employed,
+        :applicant_employed_hmrc_unavailable,
+        :applicant_employed_no_nino,
+        :applicant_unexpected_no_employment_data,
         :applicant_multiple_employments,
+        :applicant_not_employed,
         :applicant_no_hmrc_data,
-        :applicant_unexpected_employment_data
+        :applicant_not_employed_no_nino,
+        :applicant_not_employed_hmrc_unavailable,
+        :applicant_not_employed_no_payments
         false
-      when :applicant_single_employment
+      when :applicant_single_employment, :applicant_unexpected_employment_data
         true
       else
         raise "Unexpected response from HMRC::StatusAnalyser #{status.inspect}"

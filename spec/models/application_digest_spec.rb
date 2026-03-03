@@ -71,54 +71,84 @@ RSpec.describe ApplicationDigest do
         before { allow(HMRC::StatusAnalyzer).to receive(:call).with(laa).and_return(hmrc_status) }
 
         context "when HMRC::StatusAnalyzer runs succesfully" do
+          subject(:hmrc_data_used) { digest.hmrc_data_used }
+
           before { application_digest }
 
           context "and provider not enabled for employed journey" do
             let(:hmrc_status) { :provider_not_enabled_for_employed_journey }
 
-            it "returns false" do
-              expect(digest.hmrc_data_used).to be false
+            it { is_expected.to be false }
+          end
+
+          context "and provider says applicant is employed" do
+            context "and applicant has no national insurance number" do
+              let(:hmrc_status) { :applicant_employed_no_nino }
+
+              it { is_expected.to be false }
+            end
+
+            context "and HMRC data unavailable" do
+              let(:hmrc_status) { :applicant_employed_hmrc_unavailable }
+
+              it { is_expected.to be false }
+            end
+
+            context "but no employment data available" do
+              let(:hmrc_status) { :applicant_unexpected_no_employment_data }
+
+              it { is_expected.to be false }
+            end
+
+            context "and single employment" do
+              let(:hmrc_status) { :applicant_single_employment }
+
+              it { is_expected.to be true }
+            end
+
+            context "and multiple employments" do
+              let(:hmrc_status) { :applicant_multiple_employments }
+
+              it { is_expected.to be false }
             end
           end
 
-          context "and applicant not employed" do
-            let(:hmrc_status) { :applicant_not_employed }
+          context "and provider says applicant is not employed" do
+            context "and applicant not employed" do
+              let(:hmrc_status) { :applicant_not_employed }
 
-            it "returns false" do
-              expect(digest.hmrc_data_used).to be false
+              it { is_expected.to be false }
+            end
+
+            context "and there are no payments" do
+              let(:hmrc_status) { :applicant_not_employed_no_payments }
+
+              it { is_expected.to be false }
+            end
+
+            context "and applicant has no national insurance number" do
+              let(:hmrc_status) { :applicant_not_employed_no_nino }
+
+              it { is_expected.to be false }
+            end
+
+            context "and HMRC data unavailable" do
+              let(:hmrc_status) { :applicant_not_employed_hmrc_unavailable }
+
+              it { is_expected.to be false }
+            end
+
+            context "and unexpected data" do
+              let(:hmrc_status) { :applicant_unexpected_employment_data }
+
+              it { is_expected.to be true }
             end
           end
 
           context "but no hmrc data" do
             let(:hmrc_status) { :applicant_no_hmrc_data }
 
-            it "returns false" do
-              expect(digest.hmrc_data_used).to be false
-            end
-          end
-
-          context "and multiple employments" do
-            let(:hmrc_status) { :applicant_multiple_employments }
-
-            it "returns false" do
-              expect(digest.hmrc_data_used).to be false
-            end
-          end
-
-          context "and unexpected data" do
-            let(:hmrc_status) { :applicant_unexpected_employment_data }
-
-            it "returns true" do
-              expect(digest.hmrc_data_used).to be false
-            end
-          end
-
-          context "and single employment" do
-            let(:hmrc_status) { :applicant_single_employment }
-
-            it "returns true" do
-              expect(digest.hmrc_data_used).to be true
-            end
+            it { is_expected.to be false }
           end
         end
 
