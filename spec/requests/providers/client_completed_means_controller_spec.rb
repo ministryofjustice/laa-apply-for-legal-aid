@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::ClientCompletedMeansController do
-  let(:legal_aid_application) { create(:legal_aid_application, applicant:, partner:) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_transaction_period, applicant:, partner:) }
   let(:applicant) { create(:applicant, :employed, has_partner:) }
   let(:has_partner) { false }
   let(:partner) { nil }
@@ -96,12 +96,100 @@ RSpec.describe Providers::ClientCompletedMeansController do
       context "when the continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
-        context "and employment income data was received from HMRC" do
-          let(:legal_aid_application) { create(:legal_aid_application, :with_single_employment, applicant:, partner:) }
+        context "and provider says applicant is employed" do
+          before { applicant.update!(employed: true) }
 
-          it "redirects to the employment income page" do
-            patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_means_employment_income_path(legal_aid_application))
+          context "and HMRC is unavailable" do
+            it { is_expected.to redirect_to(providers_legal_aid_application_means_hmrc_unavailable_interrupt_path(legal_aid_application)) }
+          end
+
+          context "and HMRC data is available" do
+            before do
+              create(:hmrc_response, :use_case_one, legal_aid_application:, owner: legal_aid_application.applicant)
+            end
+
+            context "but client has no national insurance number" do
+              let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_no_nino, :with_transaction_period) }
+              let(:applicant) { legal_aid_application.applicant }
+
+              it { is_expected.to redirect_to(providers_legal_aid_application_means_no_nino_interrupt_path(legal_aid_application)) }
+            end
+
+            context "and no employment income data was received from HMRC" do
+              it { is_expected.to redirect_to(providers_legal_aid_application_means_employed_but_no_hmrc_data_interrupt_path(legal_aid_application)) }
+            end
+
+            context "and employment income data for a single job was received from HMRC" do
+              before { create(:employment, :with_payments_in_transaction_period, legal_aid_application:, owner_id: applicant.id, owner_type: applicant.class) }
+
+              it { is_expected.to redirect_to(providers_legal_aid_application_means_single_employment_interrupt_path(legal_aid_application)) }
+            end
+
+            context "and employment income data for multiple jobs was received from HMRC" do
+              before { create_list(:employment, 2, :with_payments_in_transaction_period, legal_aid_application:, owner_id: applicant.id, owner_type: applicant.class) }
+
+              it { is_expected.to redirect_to(providers_legal_aid_application_means_multiple_employments_interrupt_path(legal_aid_application)) }
+            end
+          end
+        end
+
+        context "and provider says applicant is not employed" do
+          before { applicant.update!(employed: false) }
+
+          context "and HMRC is unavailable" do
+            context "and the client is not uploading bank statements" do
+              it { is_expected.to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application)) }
+            end
+
+            context "and the client is uploading bank statements" do
+              let(:legal_aid_application) do
+                create(:legal_aid_application, :with_client_uploading_bank_statements, :with_transaction_period, applicant:, partner:)
+              end
+
+              it { is_expected.to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application)) }
+            end
+          end
+
+          context "and HMRC data is available" do
+            before do
+              create(:hmrc_response, :use_case_one, legal_aid_application:, owner: legal_aid_application.applicant)
+            end
+
+            context "but client has no national insurance number" do
+              let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_no_nino, :with_transaction_period) }
+
+              context "and the client is not uploading bank statements" do
+                it { is_expected.to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application)) }
+              end
+
+              context "and the client is uploading bank statements" do
+                let(:legal_aid_application) do
+                  create(:legal_aid_application, :with_client_uploading_bank_statements, :with_applicant_no_nino, :with_transaction_period, applicant:, partner:)
+                end
+
+                it { is_expected.to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application)) }
+              end
+            end
+
+            context "and no employment income data was received from HMRC" do
+              context "and the client is not uploading bank statements" do
+                it { is_expected.to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application)) }
+              end
+
+              context "and the client is uploading bank statements" do
+                let(:legal_aid_application) do
+                  create(:legal_aid_application, :with_client_uploading_bank_statements, :with_transaction_period, applicant:, partner:)
+                end
+
+                it { is_expected.to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application)) }
+              end
+            end
+
+            context "and unexpected employment data was received from HMRC" do
+              before { create(:employment, :with_payments_in_transaction_period, legal_aid_application:, owner_id: applicant.id, owner_type: applicant.class) }
+
+              it { is_expected.to redirect_to(providers_legal_aid_application_means_unemployed_but_hmrc_found_data_interrupt_path(legal_aid_application)) }
+            end
           end
         end
 
@@ -112,43 +200,6 @@ RSpec.describe Providers::ClientCompletedMeansController do
 
           it "raises an error" do
             expect { patch_request }.to raise_error RuntimeError, "Unexpected hmrc status :xxx"
-          end
-        end
-
-        context "and no employment income data was received from HMRC" do
-          it "redirects to the no employed income page" do
-            patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_means_full_employment_details_path(legal_aid_application))
-          end
-        end
-
-        context "and employment income data for multiple jobs was received from HMRC" do
-          let(:legal_aid_application) { create(:legal_aid_application, :with_multiple_employments, applicant:, partner:) }
-
-          it "redirects to the no employed income page" do
-            patch_request
-            expect(response).to redirect_to(providers_legal_aid_application_means_full_employment_details_path(legal_aid_application))
-          end
-        end
-
-        context "and transactions exist, and applicant is not employed" do
-          let(:submit_button) { { continue_button: "Continue" } }
-          let(:transaction_type) { create(:transaction_type, :pension) }
-          let(:applicant) { create(:applicant, :not_employed) }
-          let(:legal_aid_application) do
-            create(:legal_aid_application, applicant:, transaction_types: [transaction_type])
-          end
-
-          it "redirects to next page" do
-            expect(patch_request).to redirect_to(providers_legal_aid_application_means_identify_types_of_income_path(legal_aid_application))
-          end
-
-          context "when application is using bank upload journey" do
-            let(:legal_aid_application) { create(:legal_aid_application, :with_client_uploading_bank_statements, applicant:, partner:) }
-
-            it "redirects to the receives state benefit page" do
-              expect(patch_request).to redirect_to(providers_legal_aid_application_means_receives_state_benefits_path(legal_aid_application))
-            end
           end
         end
       end
