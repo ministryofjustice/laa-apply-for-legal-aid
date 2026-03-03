@@ -41,10 +41,6 @@ module HMRC
       :applicant_unexpected_employment_data if eligible_employment_payments.any?
     end
 
-    def applicant_not_employed?
-      !applicant.employed?
-    end
-
     def no_employment_payments?
       eligible_employment_payments.empty?
     end
