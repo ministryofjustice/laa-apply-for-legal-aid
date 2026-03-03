@@ -380,8 +380,8 @@ RSpec.describe HMRC::MockInterfaceResponseService do
 
   context "when the mock response owner is set to a partner that is available to the mock response service" do
     let(:applicant) { create(:applicant, first_name: "Langley", last_name: "Yorke", national_insurance_number: "MN212451D", date_of_birth: "1992-07-22") }
-    let(:partner) { create(:partner, first_name: "Ida", last_name: "Paisley", national_insurance_number: "OE726113A", date_of_birth: "1987-11-24") }
-    let(:application) { create(:legal_aid_application, applicant:, partner:) }
+    let(:partner) { create(:partner, first_name: "Ida", last_name: "Paisley", national_insurance_number: "OE726113A", date_of_birth: "1987-11-24", legal_aid_application: application) }
+    let(:application) { create(:legal_aid_application, applicant:) }
     let(:owner) { partner }
 
     it "returns data for the partner, _not_ the applicant" do
