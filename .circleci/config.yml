@@ -58,7 +58,7 @@ references:
 executors:
   basic-executor:
     docker:
-      - image: cimg/base:2020.01
+      - image: cimg/base:2026.03
   basic-ruby-executor:
     docker:
       - image: cimg/ruby:4.0.1-browsers
@@ -67,7 +67,7 @@ executors:
           TZ: "Europe/London"
   cloud-platform-executor:
     docker:
-      - image: ministryofjustice/cloud-platform-tools:2.7.0
+      - image: ministryofjustice/cloud-platform-tools:2.11.2
         environment:
           TZ: Europe/London
   notification-executor:
