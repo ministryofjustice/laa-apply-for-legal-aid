@@ -24,7 +24,8 @@ module Admin
                                 enable_ccms_submission
                                 collect_hmrc_data
                                 collect_dwp_data
-                                enable_datastore_submission])
+                                enable_datastore_submission
+                                override_admin_out_of_hours])
     end
 
     def setting

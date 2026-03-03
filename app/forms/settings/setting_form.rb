@@ -8,7 +8,8 @@ module Settings
                   :enable_ccms_submission,
                   :collect_hmrc_data,
                   :collect_dwp_data,
-                  :enable_datastore_submission
+                  :enable_datastore_submission,
+                  :override_admin_out_of_hours
 
     validates :mock_true_layer_data,
               :manually_review_all_cases,
@@ -17,6 +18,7 @@ module Settings
               :collect_hmrc_data,
               :collect_dwp_data,
               :enable_datastore_submission,
+              :override_admin_out_of_hours,
               presence: true
   end
 end

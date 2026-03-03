@@ -16,6 +16,7 @@ RSpec.describe Setting do
         expect(rec.collect_hmrc_data?).to be false
         expect(rec.collect_dwp_data?).to be true
         expect(rec.enable_datastore_submission?).to be false
+        expect(rec.override_admin_out_of_hours?).to be false
       end
     end
 
@@ -31,6 +32,7 @@ RSpec.describe Setting do
           collect_hmrc_data: true,
           collect_dwp_data: true,
           enable_datastore_submission: true,
+          override_admin_out_of_hours: false,
         )
       end
 
@@ -45,6 +47,7 @@ RSpec.describe Setting do
         expect(rec.collect_hmrc_data?).to be true
         expect(rec.collect_dwp_data?).to be true
         expect(rec.enable_datastore_submission?).to be true
+        expect(rec.override_admin_out_of_hours?).to be false
       end
     end
   end
@@ -62,6 +65,7 @@ RSpec.describe Setting do
       expect(described_class.collect_hmrc_data?).to be false
       expect(described_class.collect_dwp_data?).to be true
       expect(described_class.enable_datastore_submission?).to be false
+      expect(described_class.override_admin_out_of_hours?).to be false
     end
   end
 end

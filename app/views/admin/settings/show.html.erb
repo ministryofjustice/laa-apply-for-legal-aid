@@ -76,6 +76,16 @@
           legend: { text: t(".labels.enable_datastore_submission") },
         ) %>
 
+    <%= form.govuk_collection_radio_buttons(
+          :override_admin_out_of_hours,
+          yes_no_options,
+          :value,
+          :label,
+          inline: true,
+          hint: { text: t(".hints.override_admin_out_of_hours") },
+          legend: { text: t(".labels.override_admin_out_of_hours") },
+        ) %>
+
     <%= form.govuk_submit(t("generic.submit")) %>
   <% end %>
 <% end %>
