@@ -15,6 +15,9 @@ Feature: Bank statement upload journey state_benefit loop feature
     And I should see "hello_world.pdf Uploaded"
 
     When I click "Save and continue"
+    Then I should be on a page with title matching "HMRC has provided information about your client's employment"
+
+    When I click link "Continue"
     Then I should be on a page with title matching "Review .*'s employment income"
     And I should be on a page showing "Do you need to tell us anything else about your client's employment?"
 

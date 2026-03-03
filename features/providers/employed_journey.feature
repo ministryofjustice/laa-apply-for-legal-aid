@@ -5,7 +5,9 @@ Scenario: Completing the means journey for an employed applicant with HMRC data
   Given I start the means review journey with employment income for a single job from HMRC
   Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
   When I click 'Continue'
-  Then I should be on the 'employment_income' page showing 'HMRC have provided the information on this page.'
+  Then I should be on the 'single_employment_interrupt' page showing "HMRC has provided information about your client's employment"
+  When I click link 'Continue'
+  Then I should be on the 'employment_income' page showing "Review .*'s employment income"
   When I click 'Save and continue'
   Then I should be on the 'employment_income' page showing "Select yes if you need to tell us anything else about your client's employment"
   When I choose 'Yes'
@@ -38,7 +40,9 @@ Scenario: Completing the means journey for an employed applicant with no HMRC da
   And the feature flag for collect_hmrc_data is enabled
   Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
   When I click 'Continue'
-  Then I should be on the 'full_employment_details' page showing "HMRC has no record of your client's employment in the last 3 months"
+  Then I should be on the 'employed_but_no_hmrc_data_interrupt' page showing "HMRC has no record of your client's employment in the last 3 months"
+  When I click link 'Continue'
+  Then I should be on the 'full_employment_details' page showing "Your client's employment details"
   When I click 'Save and continue'
   Then I should be on the 'full_employment_details' page showing "Enter your client's employment details"
   Then I fill "legal aid application full employment details error" with "all the details about employment"
@@ -67,7 +71,9 @@ Scenario: Completing the means journey for an employed applicant with multiple j
   And the feature flag for collect_hmrc_data is enabled
   Then I should be on the 'client_completed_means' page showing 'Your client has shared their financial information'
   When I click 'Continue'
-  Then I should be on the 'full_employment_details' page showing "HMRC says your client had more than one job in the last 3 months."
+  Then I should be on the 'multiple_employments_interrupt' page showing "HMRC says your client had more than one job in the last 3 months"
+  When I click link 'Continue'
+  Then I should be on the 'full_employment_details' page showing "Your client's employment details"
   When I click 'Save and continue'
   Then I should be on the 'full_employment_details' page showing "Enter your client's employment details"
   Then I fill "legal aid application full employment details error" with "all the details about employment"

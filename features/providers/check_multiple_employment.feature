@@ -11,7 +11,10 @@ Feature: Check multiple employment
     Then I should be on a page showing "Continue Ida Paisley's financial assessment"
 
     When I click 'Continue'
-    Then I should be on a page showing "HMRC found a record of your client's employment"
+    Then I should be on a page showing "HMRC says your client had more than one job in the last 3 months"
+
+    When I click link "Continue"
+    Then I should be on a page showing "Your client's employment details"
 
     When I fill "legal-aid-application-full-employment-details-field" with "Paisley also earns 50 gbp"
     And I click 'Save and continue'
