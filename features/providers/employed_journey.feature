@@ -43,9 +43,7 @@ Scenario: Completing the means journey for an employed applicant with no HMRC da
   Then I should be on the 'employed_but_no_hmrc_data_interrupt' page showing "HMRC has no record of your client's employment in the last 3 months"
   When I click link 'Continue'
   Then I should be on the 'full_employment_details' page showing "Your client's employment details"
-  When I click 'Save and continue'
-  Then I should be on the 'full_employment_details' page showing "Enter your client's employment details"
-  Then I fill "legal aid application full employment details error" with "all the details about employment"
+  Then I fill "legal aid application full employment details field" with "all the details about employment"
   And I click 'Save and continue'
 
   Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
@@ -74,9 +72,7 @@ Scenario: Completing the means journey for an employed applicant with multiple j
   Then I should be on the 'multiple_employments_interrupt' page showing "HMRC says your client had more than one job in the last 3 months"
   When I click link 'Continue'
   Then I should be on the 'full_employment_details' page showing "Your client's employment details"
-  When I click 'Save and continue'
-  Then I should be on the 'full_employment_details' page showing "Enter your client's employment details"
-  Then I fill "legal aid application full employment details error" with "all the details about employment"
+  Then I fill "legal aid application full employment details field" with "all the details about employment"
   And I click 'Save and continue'
 
   Then I should be on the 'identify_types_of_income' page showing "Which of these payments does your client get?"
