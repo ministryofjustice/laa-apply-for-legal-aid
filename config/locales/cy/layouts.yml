@@ -38,6 +38,7 @@ cy:
         reports: stropeR
         user_admin: nimda resU
         your_applications: snoitacilppa ruoY
+        site_banner: rennab etiS
     header:
       legal_aid_agency: Legal Aid Agency
     logout:
