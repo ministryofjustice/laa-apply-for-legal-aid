@@ -5,7 +5,13 @@ Dockerfile
 README.md
 .cache
 
+# Ignore assets that should be build as part of build stage
 node_modules/
+public/
+
+# Ignore simplecov results, that are unneeded
 coverage/
+
+# Ignore local environment variable files that probably contain secrets
 .env.*
 .env
