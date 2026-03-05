@@ -1039,7 +1039,7 @@ en:
     hmrc_unavailable_interrupts:
       title: We cannot currently check %{individual}'s employment records automatically with HMRC
     multiple_employments_interrupts:
-      client_title: HMRC says your client had more than one job in the last 3 months
+      title: HMRC says %{individual} had more than one job in the last 3 months
     no_nino_interrupts:
       title: We could not check %{individual}'s employment record with HMRC
       paragraph: This is because you did not give us %{individual}'s National Insurance number.
