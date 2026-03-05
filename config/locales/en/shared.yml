@@ -1037,7 +1037,7 @@ en:
       client_title: HMRC has no record of your client's employment in the last 3 months
       client_paragraph: You told us your client is employed but HMRC could not confirm this.
     hmrc_unavailable_interrupts:
-      client_title: We cannot currently check your client's employment records automatically with HMRC
+      title: We cannot currently check %{individual}'s employment records automatically with HMRC
     multiple_employments_interrupts:
       client_title: HMRC says your client had more than one job in the last 3 months
     no_nino_interrupts:

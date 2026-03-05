@@ -1,5 +1,5 @@
-<%= page_template(page_title: t("shared.hmrc_unavailable_interrupts.client_title"), template: :basic, column_width: "full") do %>
-  <%= moj_interruption_card(heading: t("shared.hmrc_unavailable_interrupts.client_title")) do |card| %>
+<%= page_template(page_title: t("shared.hmrc_unavailable_interrupts.title", individual: t("generic.client")), template: :basic, column_width: "full") do %>
+  <%= moj_interruption_card(heading: t("shared.hmrc_unavailable_interrupts.title", individual: t("generic.client"))) do |card| %>
     <% card.with_actions do %>
       <%= govuk_button_link_to t("generic.continue"), providers_legal_aid_application_means_full_employment_details_path, inverse: true, role: "button" %>
       <%= govuk_link_to t("generic.back_to_your_applications"), home_path, inverse: true %>
