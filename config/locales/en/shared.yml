@@ -1034,8 +1034,8 @@ en:
       continue_in_ccms_html: Apply using <abbr title='Client and Cost Management System'>CCMS</abbr>
       back_to_applications: Back to my applications
     employed_but_no_hmrc_data_interrupts:
-      client_title: HMRC has no record of your client's employment in the last 3 months
-      client_paragraph: You told us your client is employed but HMRC could not confirm this.
+      title: HMRC has no record of %{individual}'s employment in the last 3 months
+      paragraph: You told us %{individual} is employed but HMRC could not confirm this.
     hmrc_unavailable_interrupts:
       title: We cannot currently check %{individual}'s employment records automatically with HMRC
     multiple_employments_interrupts:

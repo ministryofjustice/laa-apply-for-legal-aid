@@ -382,6 +382,7 @@ Rails.application.routes.draw do
       end
 
       namespace :partners do
+        get "/employed_but_no_hmrc_data_interrupt", to: "employed_but_no_hmrc_data_interrupts#show", as: "employed_but_no_hmrc_data_interrupt"
         get "/hmrc_unavailable_interrupt", to: "hmrc_unavailable_interrupts#show", as: "hmrc_unavailable_interrupt"
         get "/no_nino_interrupt", to: "no_nino_interrupts#show", as: "no_nino_interrupt"
         resource :details, only: %i[show update]
