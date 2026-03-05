@@ -386,6 +386,7 @@ Rails.application.routes.draw do
         get "/hmrc_unavailable_interrupt", to: "hmrc_unavailable_interrupts#show", as: "hmrc_unavailable_interrupt"
         get "/multiple_employments_interrupts", to: "multiple_employments_interrupts#show", as: "multiple_employments_interrupt"
         get "/no_nino_interrupt", to: "no_nino_interrupts#show", as: "no_nino_interrupt"
+        get "/single_employment_interrupt", to: "single_employment_interrupts#show", as: "single_employment_interrupt"
         resource :details, only: %i[show update]
         resource :about_financial_means, only: %i[show update]
         resources :employed, only: %i[index create]
