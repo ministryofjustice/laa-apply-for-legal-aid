@@ -4,6 +4,7 @@ module Flow
       STEPS = {
         client_has_partners: Steps::Partner::ClientHasPartnersStep,
         contrary_interests: Steps::Partner::ContraryInterestsStep,
+        partner_no_nino_interrupts: Steps::Partner::NoNinoInterruptsStep,
         partner_hmrc_unavailable_interrupts: Steps::Partner::HMRCUnavailableInterruptsStep,
         partner_details: Steps::Partner::DetailsStep,
         partner_about_financial_means: Steps::Partner::AboutFinancialMeansStep,

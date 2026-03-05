@@ -383,6 +383,7 @@ Rails.application.routes.draw do
 
       namespace :partners do
         get "/hmrc_unavailable_interrupt", to: "hmrc_unavailable_interrupts#show", as: "hmrc_unavailable_interrupt"
+        get "/no_nino_interrupt", to: "no_nino_interrupts#show", as: "no_nino_interrupt"
         resource :details, only: %i[show update]
         resource :about_financial_means, only: %i[show update]
         resources :employed, only: %i[index create]
