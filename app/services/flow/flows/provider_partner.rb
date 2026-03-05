@@ -9,6 +9,7 @@ module Flow
         partner_multiple_employments_interrupts: Steps::Partner::MultipleEmploymentsInterruptsStep,
         partner_no_nino_interrupts: Steps::Partner::NoNinoInterruptsStep,
         partner_single_employment_interrupts: Steps::Partner::SingleEmploymentInterruptsStep,
+        partner_unemployed_but_hmrc_found_data_interrupts: Steps::Partner::UnemployedButHMRCFoundDataInterruptsStep,
         partner_details: Steps::Partner::DetailsStep,
         partner_about_financial_means: Steps::Partner::AboutFinancialMeansStep,
         partner_employed: Steps::Partner::EmployedStep,
