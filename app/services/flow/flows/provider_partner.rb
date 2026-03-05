@@ -5,6 +5,7 @@ module Flow
         client_has_partners: Steps::Partner::ClientHasPartnersStep,
         contrary_interests: Steps::Partner::ContraryInterestsStep,
         partner_employed_but_no_hmrc_data_interrupts: Steps::Partner::EmployedButNoHMRCDataInterruptsStep,
+        partner_multiple_employments_interrupts: Steps::Partner::MultipleEmploymentsInterruptsStep,
         partner_hmrc_unavailable_interrupts: Steps::Partner::HMRCUnavailableInterruptsStep,
         partner_no_nino_interrupts: Steps::Partner::NoNinoInterruptsStep,
         partner_details: Steps::Partner::DetailsStep,
