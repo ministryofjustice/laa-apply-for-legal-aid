@@ -1000,16 +1000,6 @@ en:
         or recently started or ended employment.
       enter_details: Enter details
       details_hint: You'll need to upload supporting evidence later.
-    partner_employment_income:
-      hmrc-information: HMRC have provided the information on this page.
-      page_title: Review %{name}'s employment income
-      supplementary_question: |
-        Do you need to tell us anything else about %{individual_with_determiner}'s employment?
-      employment_hint: |
-        For example, if they get cash in hand pay, have zero-hours contracts,
-        or recently started or ended employment.
-      enter_details: Enter details
-      details_hint: You'll need to upload supporting evidence later.
     unexpected_employment_incomes:
       page_title: Review the record that HMRC found for %{name}
       supplementary_question: Tell us about %{individual_with_determiner}'s employment situation
