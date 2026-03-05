@@ -1041,8 +1041,8 @@ en:
     multiple_employments_interrupts:
       client_title: HMRC says your client had more than one job in the last 3 months
     no_nino_interrupts:
-      client_title: We could not check your client's employment record with HMRC
-      client_paragraph: This is because you did not give us your client's National Insurance number.
+      title: We could not check %{individual}'s employment record with HMRC
+      paragraph: This is because you did not give us %{individual}'s National Insurance number.
     single_employment_interrupts:
       client_title: HMRC has provided information about your client's employment
       client_paragraph: We used your client's National Insurance number to get the information. You can review this on the next page.
