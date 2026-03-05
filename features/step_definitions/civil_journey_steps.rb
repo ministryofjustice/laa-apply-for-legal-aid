@@ -429,9 +429,13 @@ Given("I start the means review journey with employment income for a single job 
     :provider_assessing_means,
   )
 
-  create :employment, :with_payments_in_transaction_period, legal_aid_application: @legal_aid_application,
-                                                            owner_id: @legal_aid_application.applicant.id,
-                                                            owner_type: "Applicant"
+  create(
+    :employment,
+    :with_payments_in_transaction_period,
+    legal_aid_application: @legal_aid_application,
+    owner_id: @legal_aid_application.applicant.id,
+    owner_type: "Applicant",
+  )
 
   create(:hmrc_response, :use_case_one, legal_aid_application: @legal_aid_application, owner: @legal_aid_application.applicant)
 
@@ -471,12 +475,20 @@ Given("I start the means review journey with employment income for multiple jobs
     :with_transaction_period,
     :provider_assessing_means,
   )
-  create :employment, :with_payments_in_transaction_period, legal_aid_application: @legal_aid_application,
-                                                            owner_id: @legal_aid_application.applicant.id,
-                                                            owner_type: "Applicant"
-  create :employment, :with_payments_in_transaction_period, legal_aid_application: @legal_aid_application,
-                                                            owner_id: @legal_aid_application.applicant.id,
-                                                            owner_type: "Applicant"
+  create(
+    :employment,
+    :with_payments_in_transaction_period,
+    legal_aid_application: @legal_aid_application,
+    owner_id: @legal_aid_application.applicant.id,
+    owner_type: "Applicant",
+  )
+  create(
+    :employment,
+    :with_payments_in_transaction_period,
+    legal_aid_application: @legal_aid_application,
+    owner_id: @legal_aid_application.applicant.id,
+    owner_type: "Applicant",
+  )
 
   create(:hmrc_response, :use_case_one, legal_aid_application: @legal_aid_application, owner: @legal_aid_application.applicant)
 

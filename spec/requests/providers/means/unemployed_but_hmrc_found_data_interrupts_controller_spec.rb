@@ -4,7 +4,7 @@ RSpec.describe Providers::Means::UnemployedButHMRCFoundDataInterruptsController 
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
 
-  describe "GET /providers/applications/:id/unemployed_but_hmrc_found_data_interrupt" do
+  describe "GET /providers/applications/:id/means/unemployed_but_hmrc_found_data_interrupt" do
     subject(:get_request) { get providers_legal_aid_application_means_unemployed_but_hmrc_found_data_interrupt_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do

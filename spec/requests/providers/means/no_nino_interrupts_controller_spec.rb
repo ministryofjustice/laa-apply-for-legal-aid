@@ -4,7 +4,7 @@ RSpec.describe Providers::Means::NoNinoInterruptsController do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
 
-  describe "GET /providers/applications/:id/no_nino_interrupt" do
+  describe "GET /providers/applications/:id/means/no_nino_interrupt" do
     subject(:get_request) { get providers_legal_aid_application_means_no_nino_interrupt_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do

@@ -4,7 +4,7 @@ RSpec.describe Providers::Means::SingleEmploymentInterruptsController do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
 
-  describe "GET /providers/applications/:id/single_employment_interrupt" do
+  describe "GET /providers/applications/:id/means/single_employment_interrupt" do
     subject(:get_request) { get providers_legal_aid_application_means_single_employment_interrupt_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do

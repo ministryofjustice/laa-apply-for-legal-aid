@@ -4,7 +4,7 @@ RSpec.describe Providers::Means::HMRCUnavailableInterruptsController do
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:provider) { legal_aid_application.provider }
 
-  describe "GET /providers/applications/:id/hmrc_unavailable_interrupt" do
+  describe "GET /providers/applications/:id/means/hmrc_unavailable_interrupt" do
     subject(:get_request) { get providers_legal_aid_application_means_hmrc_unavailable_interrupt_path(legal_aid_application) }
 
     context "when the provider is not authenticated" do
