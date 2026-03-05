@@ -105,14 +105,24 @@ ClamAV (anti-virus) is used to make sure uploaded files do not contain any malwa
 
 see [docs/clamav.md](./docs/clamav.md) for setup and details.
 
-### Overcommit
+### Pre-commit hooks using DevSecOps
 
-Overcommit is a gem which adds git pre-commit hooks to your project. Pre-commit hooks run various
-lint checks before making a commit. Checks are configured on a project-wide basis in .overcommit.yml.
+We use the Ministry of Justice pre-commit hooks for scanning hardcoded secrets and credentials. More information can be found [here] (https://github.com/ministryofjustice/devsecops-hooks).
 
-To install the git hooks locally, run `overcommit --install`. If you don't want the git hooks installed, just don't run this command.
+To set-up locally:
 
-Once the hooks are installed, if you need to you can skip them with the `-n` flag: `git commit -n`
+Install prek
+```shell
+brew install prek
+```
+
+Install the pre-commit hook
+```shell
+prek install
+```
+Launch Docker Desktop locally
+
+Now, when you commit, .pre-commit-config.yaml containing the pre-commit hook should run.
 
 ### Run the application server
 
