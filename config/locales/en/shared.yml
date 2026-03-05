@@ -1044,8 +1044,8 @@ en:
       title: We could not check %{individual}'s employment record with HMRC
       paragraph: This is because you did not give us %{individual}'s National Insurance number.
     single_employment_interrupts:
-      client_title: HMRC has provided information about your client's employment
-      client_paragraph: We used your client's National Insurance number to get the information. You can review this on the next page.
+      title: HMRC has provided information about %{individual}'s employment
+      paragraph: We used %{individual}'s National Insurance number to get the information. You can review this on the next page.
     unemployed_but_hmrc_found_data_interrupts:
       client_title: HMRC found a record of your client's employment
       client_paragraph_one: You told us your client is not employed, but HMRC has shared information with us based on the National Insurance number you gave.
