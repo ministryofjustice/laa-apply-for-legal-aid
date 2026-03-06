@@ -5085,7 +5085,7 @@ proceeding_merits:
     user_defined: false
     generate_block?: false
   LEAD_PROCEEDING:
-    value: true
+    value: "#proceeding_lead_proceeding"
     br100_meaning: Lead Proceeding
     response_type: boolean
     user_defined: true

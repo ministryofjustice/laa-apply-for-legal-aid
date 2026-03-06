@@ -403,7 +403,6 @@ module CCMS
             [:global_merits, "MERITS_DECLARATION_SCREEN"],
             [:global_merits, "MERITS_EVIDENCE_PROVIDED"],
             [:proceeding_means, "SCOPE_LIMIT_IS_DEFAULT"],
-            [:proceeding_merits, "LEAD_PROCEEDING"],
             [:proceeding_merits, "SCOPE_LIMIT_IS_DEFAULT"],
             [:global_merits, "CASE_OWNER_STD_FAMILY_MERITS"],
           ]
