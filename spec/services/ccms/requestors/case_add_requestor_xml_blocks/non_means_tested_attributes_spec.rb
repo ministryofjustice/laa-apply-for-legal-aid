@@ -63,6 +63,43 @@ module CCMS
         #   expect(File.exist?(filename)).to be true
         # end
 
+        context "with multiple proceedings" do
+          let(:legal_aid_application) do
+            create(
+              :legal_aid_application,
+              :with_proceedings,
+              :with_under_18_applicant_and_no_partner,
+              :with_skipped_benefit_check_result,
+              :with_non_means_tested_state_machine,
+              :with_cfe_empty_result,
+              :with_merits_statement_of_case,
+              :with_opponent,
+              :with_parties_mental_capacity,
+              :with_domestic_abuse_summary,
+              :with_incident,
+              :with_chances_of_success,
+              :with_merits_submitted,
+              prospect: success_prospect,
+              explicit_proceedings: %i[da001 se013],
+              set_lead_proceeding: :da001,
+              provider:,
+              office:,
+            )
+          end
+
+          it "only sets the LEAD_PROCEEDING value to true for the lead proceeding" do
+            block = XmlExtractor.call(xml, :proceeding_merits, :LEAD_PROCEEDING)
+            # because there are multiple LEAD_PROCEEDING blocks in the single, proceeding_merits, namespace
+            # and race conditions mean we cannot guarantee the sequence of proceedings, we need to check for
+            # the presence of both true and false responses
+            # The pattern is
+            # Attribute ResponseType ResponseValue UserDefinedInd
+            # so only the ResponseValue should change
+            expect(block.text.squish).to include("LEAD_PROCEEDING boolean true true")
+                                           .and include("LEAD_PROCEEDING boolean false true")
+          end
+        end
+
         context "with means entity config" do
           it "omits VALUABLE_POSSESSION entity" do
             entity_block = XmlExtractor.call(xml, :valuable_possessions_entity)
