@@ -84,7 +84,6 @@ commands:
       - run:
           name: Install Yarn packages
           command: |
-            echo "yarn version: $(yarn -v)"
             yarn install --immutable
       - save_cache:
           name: Saving Yarn packages cache
@@ -145,10 +144,6 @@ jobs:
     - install-ruby-dependencies
     - install-js-dependencies
     - run:
-        name: Check yarn version
-        command: |
-          echo "yarn version: $(yarn -v)"
-    - run:
         name: Run StandardJS
         command: yarn run standardjs
     - run:
@@ -186,10 +181,6 @@ jobs:
           - ~/project
     - run: bundle exec rails db:prepare
     - install-js-dependencies
-    - run:
-        name: Check yarn version
-        command: |
-          echo "yarn version: $(yarn -v)"
     - run: bundle exec rails assets:precompile
     - run:
         name: Run ruby tests
@@ -224,10 +215,6 @@ jobs:
     - install-js-dependencies
     - run: bundle exec rails assets:precompile
     - browser-tools/install-chrome
-    - run:
-        name: Check yarn version
-        command: |
-          echo "yarn version: $(yarn -v)"
     - run:
         name: Run integration tests
         command: |

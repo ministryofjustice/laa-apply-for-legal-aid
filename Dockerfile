@@ -19,7 +19,6 @@ ENV RAILS_ENV=production \
 COPY .ruby-version Gemfile Gemfile.lock ./
 COPY gems/moj-components ./gems/moj-components
 
-# TOOD: Get this bundle install working, replacing above
 RUN gem install bundler -v $(cat Gemfile.lock | tail -1 | tr -d " ") && \
     bundler -v && \
     bundle config set frozen 'true' && \
