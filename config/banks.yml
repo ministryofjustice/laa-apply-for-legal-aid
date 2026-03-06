@@ -21,7 +21,8 @@ banks:
 - ob-natwest
 - ob-rbs
 - ob-revolut
-- ob-santander
+- ob-santander-personal
+- ob-santander-business
 - ob-tsb
 - ob-tesco
 - ob-ulster
