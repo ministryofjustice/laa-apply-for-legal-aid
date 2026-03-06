@@ -424,13 +424,11 @@ module CCMS
         end
       end
 
-      # :nocov:
       def generate_merits_proceeding_entity(xml, sequence_no)
         xml.__send__(:"common:SequenceNumber", sequence_no)
         xml.__send__(:"common:EntityName", "PROCEEDING")
         proceedings.reverse_each { |proceeding| generate_merits_proceeding_instance(xml, proceeding) }
       end
-      # :nocov:
 
       def generate_merits_proceeding_instance(xml, proceeding)
         xml.__send__(:"common:Instances") do
