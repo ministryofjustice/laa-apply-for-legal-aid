@@ -6,7 +6,7 @@ FactoryBot.define do
     username { "#{Faker::Internet.username}_#{Random.rand(1...999).to_s.rjust(3, '0')}" }
     ccms_contact_id { 111_111_111 }
     email { Faker::Internet.email }
-
+    auth_provider { "entra_id" }
     transient do
       with_office_selected { true }
     end

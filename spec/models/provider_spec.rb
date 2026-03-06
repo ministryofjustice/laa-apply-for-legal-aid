@@ -39,7 +39,7 @@ RSpec.describe Provider do
       OmniAuth::AuthHash.new(
         {
           provider: "govuk",
-          uid: auth_subject_uid,
+          uid: SecureRandom.uuid,
           info: {
             first_name: "first", last_name: "last", email: "provider0@example.com", description: "desc", roles: "a,b"
           },
@@ -51,7 +51,6 @@ RSpec.describe Provider do
     end
 
     let(:raw_info) { { USER_NAME: silas_id, LAA_ACCOUNTS: "AAAAB" } }
-    let(:auth_subject_uid) { SecureRandom.uuid }
     let(:silas_id) { "51cdbbb4-75d2-48d0-aaac-fa67f013c50a" }
 
     context "when passed a new user" do
@@ -121,7 +120,6 @@ RSpec.describe Provider do
       let(:provider) do
         create(:provider,
                auth_provider: "govuk",
-               auth_subject_uid:,
                email: "provider@example.com",
                username: "CCMS_USERNAME@FIRM.COM",
                name: "Marty Ronan",

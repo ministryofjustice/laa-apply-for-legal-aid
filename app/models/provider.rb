@@ -1,7 +1,6 @@
 class Provider < ApplicationRecord
   class RawInfoNotFound < StandardError; end
 
-  encrypts :auth_subject_uid, deterministic: true
   encrypts :silas_id, deterministic: true
 
   devise :trackable, :reauthable, :timeoutable

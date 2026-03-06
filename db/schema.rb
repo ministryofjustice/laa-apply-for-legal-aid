@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_01_26_075308) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_02_150718) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -960,7 +960,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_26_075308) do
 
   create_table "providers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "auth_provider", default: "", null: false
-    t.string "auth_subject_uid"
     t.integer "ccms_contact_id"
     t.boolean "cookies_enabled"
     t.datetime "cookies_saved_at"
@@ -980,9 +979,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_01_26_075308) do
     t.string "type"
     t.datetime "updated_at", precision: nil, null: false
     t.string "username"
-    t.index ["auth_subject_uid", "auth_provider"], name: "index_providers_on_auth_subject_uid_and_auth_provider", unique: true
     t.index ["firm_id"], name: "index_providers_on_firm_id"
     t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"
+    t.index ["silas_id", "auth_provider"], name: "index_providers_on_silas_id_and_auth_provider", unique: true
     t.index ["type"], name: "index_providers_on_type"
     t.index ["username"], name: "index_providers_on_username", unique: true
   end
