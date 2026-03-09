@@ -26,6 +26,10 @@ RSpec.describe Providers::Partners::NoNinoInterruptsController do
       it "shows the correct content" do
         expect(unescaped_response_body).to include("We could not check the partner's employment record with HMRC")
       end
+
+      it "shows the correct link to the next step" do
+        expect(unescaped_response_body).to include(providers_legal_aid_application_partners_full_employment_details_path)
+      end
     end
   end
 end

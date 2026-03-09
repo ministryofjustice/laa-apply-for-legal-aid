@@ -26,6 +26,10 @@ RSpec.describe Providers::Partners::UnemployedButHMRCFoundDataInterruptsControll
       it "shows the correct content" do
         expect(unescaped_response_body).to include("HMRC found a record of the partner's employment")
       end
+
+      it "shows the correct link to the next step" do
+        expect(unescaped_response_body).to include(providers_legal_aid_application_partners_unexpected_employment_income_path)
+      end
     end
   end
 end
