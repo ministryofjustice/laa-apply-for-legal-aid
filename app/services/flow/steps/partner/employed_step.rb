@@ -6,8 +6,6 @@ module Flow
         forward: lambda do |application|
           if application.partner.self_employed? || application.partner.armed_forces?
             :partner_use_ccms_employment
-          elsif application.partner.employed? && !application.partner.has_national_insurance_number?
-            :partner_full_employment_details
           else
             :partner_bank_statements
           end

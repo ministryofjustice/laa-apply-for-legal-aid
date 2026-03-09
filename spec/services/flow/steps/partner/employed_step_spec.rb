@@ -27,7 +27,7 @@ RSpec.describe Flow::Steps::Partner::EmployedStep, type: :request do
     context "when partner is employed and has no nino" do
       let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_employed_partner_no_nino) }
 
-      it { is_expected.to be :partner_full_employment_details }
+      it { is_expected.to be :partner_bank_statements }
     end
 
     context "when partner is not_employed" do
