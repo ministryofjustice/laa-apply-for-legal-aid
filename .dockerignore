@@ -1,17 +1,46 @@
-.git*
+# dotfiles
+.bundle/
+.byebug_history
+.DS_Store
+.DS_Store/
+.env*
+.git/
+.github
+.idea
+.yarn-integrity
+.cache
+.vscode
+.circle
+
+# local setup/install related
+Brewfile
+README.md
+docs/
+
+# secrets supplied via CI/CD if necessary
+config/master.key
+
+# helm and infrastructure orchestration files, not needed
+helm_deploy/
+
+# temp/local dirs and files
 log/*
 tmp/*
-Dockerfile
-README.md
-.cache
+storage/*
+coverage/
 
-# Ignore assets that should be build as part of build stage
+# docker files only needed by "builder" containers
+Dockerfile
+docker-compose.yml
+
+# Ignore assets that should be built as part of build stage
 node_modules/
 public/
 
-# Ignore simplecov results, that are unneeded
-coverage/
+# dependencies and assets will be pulled and compiled at build time
+/app/assets/builds/*
+!/app/assets/builds/.keep
+vendor/bundle/
+vendor/cache
 
-# Ignore local environment variable files that probably contain secrets
-.env.*
-.env
+yarn-debug.log*
