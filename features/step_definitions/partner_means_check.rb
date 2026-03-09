@@ -7,6 +7,8 @@ Given("I complete the journey as far as regular outgoings") do
     :provider_confirming_applicant_eligibility,
   )
 
+  create :hmrc_response, :use_case_one, legal_aid_application: @legal_aid_application, owner: @legal_aid_application.partner
+
   login_as @legal_aid_application.provider
 
   visit(providers_legal_aid_application_means_regular_outgoings_path(@legal_aid_application))
