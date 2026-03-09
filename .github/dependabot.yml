@@ -47,19 +47,18 @@ updates:
         exclude-patterns:
           - "rubocop*"
     open-pull-requests-limit: 10
-  # Removed until shai-hulud threat has abated
-  # - package-ecosystem: "npm"
-  #   directory: "/"
-  #   schedule:
-  #     interval: weekly
-  #     day: tuesday
-  #     time: "21:15"
-  #     timezone: Europe/London
-  #   groups:
-  #     moj-frontend:
-  #       patterns:
-  #         - "*frontend*"
-  #     npm:
-  #       patterns:
-  #         - "*"
-  #   open-pull-requests-limit: 10
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: tuesday
+      time: "21:15"
+      timezone: Europe/London
+    groups:
+      moj-frontend:
+        patterns:
+          - "*frontend*"
+      npm:
+        patterns:
+          - "*"
+    open-pull-requests-limit: 10
