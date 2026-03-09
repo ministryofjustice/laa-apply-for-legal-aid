@@ -26,6 +26,10 @@ RSpec.describe Providers::Partners::HMRCUnavailableInterruptsController do
       it "shows the correct content" do
         expect(unescaped_response_body).to include("We cannot currently check the partner's employment records automatically with HMRC")
       end
+
+      it "shows the correct link to the next step" do
+        expect(unescaped_response_body).to include(providers_legal_aid_application_partners_full_employment_details_path)
+      end
     end
   end
 end

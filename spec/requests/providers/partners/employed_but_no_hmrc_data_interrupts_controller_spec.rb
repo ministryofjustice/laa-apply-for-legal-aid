@@ -26,6 +26,10 @@ RSpec.describe Providers::Partners::EmployedButNoHMRCDataInterruptsController do
       it "shows the correct content" do
         expect(unescaped_response_body).to include("HMRC has no record of the partner's employment in the last 3 months")
       end
+
+      it "shows the correct link to the next step" do
+        expect(unescaped_response_body).to include(providers_legal_aid_application_partners_full_employment_details_path)
+      end
     end
   end
 end
