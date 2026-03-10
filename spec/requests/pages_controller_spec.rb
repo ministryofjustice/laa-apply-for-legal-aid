@@ -113,6 +113,8 @@ RSpec.describe PagesController, :clamav do
     let(:token) { citizen_access_token.token }
     let(:citizen_access_request) { get citizens_legal_aid_application_path(token) }
     let(:landing_page_request) { get root_path }
+    let(:admin_landing_page_request) { get "/admin" }
+    let(:admin_user) { create(:admin_user) }
 
     before do
       allow(Rails.configuration.x.business_hours).to receive_messages(start: "7:00", end: "21:30")
@@ -143,6 +145,25 @@ RSpec.describe PagesController, :clamav do
       it "displays expected content" do
         landing_page_request
         expect(response.body).to include("This service is available daily from 7am to 9:30pm. It is not available on bank holidays.")
+      end
+
+      it "blocks admin traffic" do
+        sign_in admin_user
+        admin_landing_page_request
+        expect(response).to render_template("pages/service_out_of_hours")
+        expect(response.body).to include("This service is available daily from 7am to 9:30pm. It is not available on bank holidays.")
+      end
+
+      context "when override_admin_out_of_hours setting is true" do
+        before do
+          Setting.setting.update!(override_admin_out_of_hours: true)
+        end
+
+        it "allows admin traffic" do
+          sign_in admin_user
+          admin_landing_page_request
+          expect(response).to render_template("admin/legal_aid_applications/index")
+        end
       end
     end
 

@@ -19,6 +19,10 @@ module Admin
 
   private
 
+    def skip_out_of_hours?
+      Setting.override_admin_out_of_hours?
+    end
+
     def set_scope
       @scope = :admin
     end

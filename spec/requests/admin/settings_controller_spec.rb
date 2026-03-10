@@ -44,6 +44,7 @@ RSpec.describe Admin::SettingsController do
           home_address: "true",
           collect_dwp_data: "true",
           enable_datastore_submission: "true",
+          override_admin_out_of_hours: "true",
         },
       }
     end
@@ -60,6 +61,7 @@ RSpec.describe Admin::SettingsController do
       expect(setting.collect_hmrc_data?).to be(true)
       expect(setting.collect_dwp_data?).to be(true)
       expect(setting.enable_datastore_submission?).to be(true)
+      expect(setting.override_admin_out_of_hours?).to be(true)
     end
 
     it "creates settings if they do not exist" do
@@ -75,6 +77,8 @@ RSpec.describe Admin::SettingsController do
       before { allow(CCMS::TurnOnSubmissionsWorker).to receive(:perform_async) }
 
       context "when from false to true" do
+        before { Setting.setting&.update!(enable_ccms_submission: false) }
+
         it "calls CCMS::TurnOnSubmissionsWorker" do
           expect(CCMS::TurnOnSubmissionsWorker).to receive(:perform_async)
           patch_request

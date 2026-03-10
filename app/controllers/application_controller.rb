@@ -18,7 +18,7 @@ private
 
   def skip_out_of_hours?
     # these are the only pages on the citizen path that are not namespaced as /citizen
-    return true if non_standard_citizen_path?
+    return true if non_standard_citizen_path? || non_standard_admin_path?
 
     false
   end
@@ -44,5 +44,12 @@ private
       request.path.include?("auth/true_layer"),
       request.path.include?("error/assessment_already_completed"),
     ].any?
+  end
+
+  def non_standard_admin_path?
+    [
+      request.path.include?("auth/admin_entra_id/callback"),
+      request.path.include?("admin_users/sign_in"),
+    ].any? && Setting.override_admin_out_of_hours?
   end
 end

@@ -1080,6 +1080,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_02_150718) do
     t.boolean "enable_datastore_submission", default: false, null: false
     t.boolean "manually_review_all_cases", default: true
     t.boolean "mock_true_layer_data", default: false, null: false
+    t.boolean "override_admin_out_of_hours", default: false, null: false
     t.datetime "updated_at", precision: nil, null: false
   end
 
