@@ -36,8 +36,8 @@ RSpec.describe Providers::Partners::UnexpectedEmploymentIncomesController do
         end
 
         it "displays correct text when partner is not_employed" do
-          expect(unescaped_response_body).to include(I18n.t("shared.unexpected_employment_incomes.page_title", individual_with_determiner:))
-          expect(unescaped_response_body).to include(I18n.t("shared.unexpected_employment_incomes.hmrc_not_employed", individual_with_determiner:))
+          expect(unescaped_response_body).to include(I18n.t("shared.partner_unexpected_employment_incomes.page_title", individual_with_determiner:))
+          expect(unescaped_response_body).to include(I18n.t("shared.partner_unexpected_employment_incomes.hmrc_not_employed", individual_with_determiner:))
         end
       end
     end

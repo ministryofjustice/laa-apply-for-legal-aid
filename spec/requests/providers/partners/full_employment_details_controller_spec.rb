@@ -70,7 +70,7 @@ RSpec.describe Providers::Partners::FullEmploymentDetailsController do
         end
 
         it "displays the correct page content" do
-          expect(response.body).to include(html_compare(I18n.t("shared.full_employment_details.page_heading_no_nino", individual: "the partner")))
+          expect(response.body).to include(html_compare(I18n.t("shared.partner_full_employment_details.page_heading_no_nino", individual: "the partner")))
         end
       end
     end

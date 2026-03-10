@@ -13,6 +13,9 @@ Feature: Check pending employment
     When I click 'Continue'
     Then I should be on a page showing "HMRC has no record of your client's employment in the last 3 months"
 
+    When I click link "Continue"
+    Then I should be on a page showing "Your client's employment details"
+
     When I fill "legal-aid-application-full-employment-details-field" with "Pending"
     And I click 'Save and continue'
     Then I should be on a page showing "Which of these payments does your client get?"

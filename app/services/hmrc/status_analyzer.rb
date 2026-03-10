@@ -19,19 +19,26 @@ module HMRC
     end
 
     def call
-      return :applicant_not_employed if applicant_not_employed? && no_employment_payments?
+      applicant.employed? ? employed_status : not_employed_status
+    end
 
-      return :applicant_unexpected_employment_data if applicant_not_employed? && eligible_employment_payments.any?
+  private
 
+    def employed_status
+      return :applicant_employed_no_nino unless applicant.has_national_insurance_number?
+      return :applicant_employed_hmrc_unavailable if applicant.hmrc_responses.empty?
+      return :applicant_unexpected_no_employment_data if no_employment_payments?
       return :applicant_multiple_employments if has_multiple_employments?
-
-      return :applicant_no_hmrc_data unless hmrc_employment_income?
 
       :applicant_single_employment
     end
 
-    def applicant_not_employed?
-      !applicant.employed
+    def not_employed_status
+      return :applicant_not_employed_no_nino unless applicant.has_national_insurance_number?
+      return :applicant_not_employed_hmrc_unavailable if applicant.hmrc_responses.empty?
+      return :applicant_not_employed_no_payments if no_employment_payments?
+
+      :applicant_unexpected_employment_data if eligible_employment_payments.any?
     end
 
     def no_employment_payments?

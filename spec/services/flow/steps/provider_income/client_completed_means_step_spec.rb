@@ -14,51 +14,95 @@ RSpec.describe Flow::Steps::ProviderIncome::ClientCompletedMeansStep, type: :req
 
     before { allow(HMRC::StatusAnalyzer).to receive(:call).with(legal_aid_application).and_return(status) }
 
-    context "when status is applicant_multiple_employments" do
-      let(:status) { :applicant_multiple_employments }
+    context "when status is applicant_not_employed_no_nino" do
+      let(:status) { :applicant_not_employed_no_nino }
 
-      it { is_expected.to eq :full_employment_details }
-    end
-
-    context "when HMRC returns an applicant_no_hmrc_data status" do
-      let(:status) { :applicant_no_hmrc_data }
-
-      it { is_expected.to eq :full_employment_details }
-    end
-
-    context "when HMRC returns an applicant_single_employment status" do
-      let(:status) { :applicant_single_employment }
-
-      it { is_expected.to eq :employment_incomes }
-    end
-
-    context "when HMRC returns an applicant_unexpected_employment_data status" do
-      let(:status) { :applicant_unexpected_employment_data }
-
-      it { is_expected.to eq :unexpected_employment_incomes }
-    end
-
-    context "when HMRC returns an applicant_not_employed status" do
-      let(:status) { :applicant_not_employed }
-
-      context "when application has attached bank statement(s)" do
+      context "and application has attached bank statement(s)" do
         before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true) }
 
         it { is_expected.to eq :receives_state_benefits }
       end
 
-      context "when application does not have attached bank statement(s)" do
+      context "and application does not have attached bank statement(s)" do
         before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false) }
 
         it { is_expected.to eq :identify_types_of_incomes }
       end
+    end
 
-      context "when HMRC returns an unexpected status" do
-        let(:status) { :unexpected_status }
+    context "when status is applicant_not_employed_hmrc_unavailable" do
+      let(:status) { :applicant_not_employed_hmrc_unavailable }
 
-        it "raises error" do
-          expect { forward_step }.to raise_error(StandardError, "Unexpected hmrc status :unexpected_status")
-        end
+      context "and application has attached bank statement(s)" do
+        before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true) }
+
+        it { is_expected.to eq :receives_state_benefits }
+      end
+
+      context "and application does not have attached bank statement(s)" do
+        before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false) }
+
+        it { is_expected.to eq :identify_types_of_incomes }
+      end
+    end
+
+    context "when status is applicant_not_employed_no_payments" do
+      let(:status) { :applicant_not_employed_no_payments }
+
+      context "and application has attached bank statement(s)" do
+        before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(true) }
+
+        it { is_expected.to eq :receives_state_benefits }
+      end
+
+      context "and application does not have attached bank statement(s)" do
+        before { allow(legal_aid_application).to receive(:uploading_bank_statements?).and_return(false) }
+
+        it { is_expected.to eq :identify_types_of_incomes }
+      end
+    end
+
+    context "when status is applicant_unexpected_no_employment_data" do
+      let(:status) { :applicant_unexpected_no_employment_data }
+
+      it { is_expected.to eq :employed_but_no_hmrc_data_interrupts }
+    end
+
+    context "when status is applicant_employed_hmrc_unavailable" do
+      let(:status) { :applicant_employed_hmrc_unavailable }
+
+      it { is_expected.to eq :hmrc_unavailable_interrupts }
+    end
+
+    context "when status is applicant_employed_no_nino" do
+      let(:status) { :applicant_employed_no_nino }
+
+      it { is_expected.to eq :no_nino_interrupts }
+    end
+
+    context "when status is applicant_unexpected_employment_data" do
+      let(:status) { :applicant_unexpected_employment_data }
+
+      it { is_expected.to eq :unemployed_but_hmrc_found_data_interrupts }
+    end
+
+    context "when status is applicant_multiple_employments" do
+      let(:status) { :applicant_multiple_employments }
+
+      it { is_expected.to eq :multiple_employments_interrupts }
+    end
+
+    context "when status is applicant_single_employment" do
+      let(:status) { :applicant_single_employment }
+
+      it { is_expected.to eq :single_employment_interrupts }
+    end
+
+    context "when HMRC returns an unexpected status" do
+      let(:status) { :unexpected_status }
+
+      it "raises error" do
+        expect { forward_step }.to raise_error(StandardError, "Unexpected hmrc status :unexpected_status")
       end
     end
   end

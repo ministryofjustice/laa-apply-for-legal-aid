@@ -321,9 +321,9 @@ RSpec.describe "Providers::BankStatementsController" do
           end
         end
 
-        context "when HMRC response status is applicant_no_hmrc_data" do
+        context "when HMRC response status is applicant_not_employed_hmrc_unavailable" do
           before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_no_hmrc_data
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed_hmrc_unavailable
           end
 
           it "redirects to the next page" do
@@ -354,9 +354,9 @@ RSpec.describe "Providers::BankStatementsController" do
           end
         end
 
-        context "when HMRC response status is applicant_not_employed" do
+        context "when HMRC response status is applicant_not_employed_no_payments" do
           before do
-            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed
+            allow(HMRC::StatusAnalyzer).to receive(:call).and_return :applicant_not_employed_no_payments
           end
 
           it "redirects to the next page" do

@@ -2,22 +2,14 @@
               url: providers_legal_aid_application_means_unexpected_employment_income_path(@legal_aid_application),
               method: :patch,
               local: true) do |form| %>
-  <% unless @form.errors.any?
-       notification_banner_title = t("generic.important")
-       notification_banner_text = t(".hmrc-information")
-     end %>
 
-  <%= page_template(page_title: t(".page_title", name: individual.full_name, individual_with_determiner:),
+  <%= page_template(page_title: t(".page_title", name: individual.full_name),
                     template: :basic,
-                    notification_banner_title:,
-                    notification_banner_text:,
                     form:) do %>
 
     <%= form.govuk_radio_buttons_fieldset(:has_extra_employment_information_details,
-                                          caption: { text: t("generic.#{individual_type}_means_caption"), size: "l" },
+                                          caption: { text: t("generic.#{individual_type}_means_caption"), size: "xl" },
                                           legend: { size: "xl", tag: "h1", text: page_title }) do %>
-
-      <p class="govuk-body-l"> <%= t(".hmrc_not_employed", individual_with_determiner:) %> </p>
 
       <%= render "shared/means/employment_income_table" %>
 

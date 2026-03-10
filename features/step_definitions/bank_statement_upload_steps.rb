@@ -4,10 +4,15 @@ Given "I have completed a non-passported employed application with bank statemen
     :with_proceedings,
     :with_employed_applicant,
     :with_non_passported_state_machine,
+    :with_transaction_period,
     :provider_confirming_applicant_eligibility,
   )
 
-  create :employment, legal_aid_application: @legal_aid_application, owner_id: @legal_aid_application.applicant.id, owner_type: "Applicant"
+  create :employment, :with_payments_in_transaction_period, legal_aid_application: @legal_aid_application,
+                                                            owner_id: @legal_aid_application.applicant.id,
+                                                            owner_type: "Applicant"
+
+  create :hmrc_response, :use_case_one, legal_aid_application: @legal_aid_application, owner: @legal_aid_application.applicant
 
   login_as @legal_aid_application.provider
 

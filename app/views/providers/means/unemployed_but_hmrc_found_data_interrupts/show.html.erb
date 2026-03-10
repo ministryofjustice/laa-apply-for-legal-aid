@@ -1,0 +1,12 @@
+<%= page_template(page_title: t("shared.unemployed_but_hmrc_found_data_interrupts.client_title"), template: :basic, column_width: "full") do %>
+  <%= moj_interruption_card(heading: t("shared.unemployed_but_hmrc_found_data_interrupts.client_title")) do |card| %>
+    <% card.with_body do %>
+      <p class="govuk-body"><%= t("shared.unemployed_but_hmrc_found_data_interrupts.client_paragraph_one") %></p>
+      <p class="govuk-body"><%= t("shared.unemployed_but_hmrc_found_data_interrupts.client_paragraph_two") %></p>
+    <% end %>
+    <% card.with_actions do %>
+      <%= govuk_button_link_to t("generic.continue"), providers_legal_aid_application_means_unexpected_employment_income_path, inverse: true, role: "button" %>
+      <%= govuk_link_to t("generic.back_to_your_applications"), home_path, inverse: true %>
+    <% end %>
+  <% end %>
+<% end %>

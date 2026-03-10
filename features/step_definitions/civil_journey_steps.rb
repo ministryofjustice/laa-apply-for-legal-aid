@@ -425,10 +425,19 @@ Given("I start the means review journey with employment income for a single job 
     :with_employed_applicant,
     :with_proceedings,
     :with_non_passported_state_machine,
+    :with_transaction_period,
     :provider_assessing_means,
   )
 
-  create :employment, legal_aid_application: @legal_aid_application, owner_id: @legal_aid_application.applicant.id, owner_type: "Applicant"
+  create(
+    :employment,
+    :with_payments_in_transaction_period,
+    legal_aid_application: @legal_aid_application,
+    owner_id: @legal_aid_application.applicant.id,
+    owner_type: "Applicant",
+  )
+
+  create(:hmrc_response, :use_case_one, legal_aid_application: @legal_aid_application, owner: @legal_aid_application.applicant)
 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
@@ -447,6 +456,8 @@ Given("I start the means review journey with no employment income from HMRC") do
     applicant: build(:applicant, :employed),
   )
 
+  create(:hmrc_response, :use_case_one, legal_aid_application: @legal_aid_application, owner: @legal_aid_application.applicant)
+
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
@@ -461,11 +472,25 @@ Given("I start the means review journey with employment income for multiple jobs
     :with_employed_applicant,
     :with_proceedings,
     :with_non_passported_state_machine,
+    :with_transaction_period,
     :provider_assessing_means,
   )
+  create(
+    :employment,
+    :with_payments_in_transaction_period,
+    legal_aid_application: @legal_aid_application,
+    owner_id: @legal_aid_application.applicant.id,
+    owner_type: "Applicant",
+  )
+  create(
+    :employment,
+    :with_payments_in_transaction_period,
+    legal_aid_application: @legal_aid_application,
+    owner_id: @legal_aid_application.applicant.id,
+    owner_type: "Applicant",
+  )
 
-  create :employment, legal_aid_application: @legal_aid_application, owner_id: @legal_aid_application.applicant.id, owner_type: "Applicant"
-  create :employment, :example1_usecase1, legal_aid_application: @legal_aid_application, owner_id: @legal_aid_application.applicant.id, owner_type: "Applicant"
+  create(:hmrc_response, :use_case_one, legal_aid_application: @legal_aid_application, owner: @legal_aid_application.applicant)
 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(

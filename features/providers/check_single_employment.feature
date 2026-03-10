@@ -10,6 +10,9 @@ Feature: Check single employment
     Then I should be on a page showing "Continue Langley Yorke's financial assessment"
 
     When I click 'Continue'
+    Then I should be on a page showing "HMRC has provided information about your client's employment"
+
+    When I click link "Continue"
     Then I should be on a page showing "Review Langley Yorke's employment income"
 
     When I choose "Yes"

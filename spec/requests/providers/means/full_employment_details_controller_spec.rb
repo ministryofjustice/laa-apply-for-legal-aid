@@ -25,95 +25,19 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController do
         request
       end
 
-      context "when HMRC collection is on" do
-        context "when the no job data is returned" do
-          let(:before_actions) { create(:hmrc_response, :nil_response, legal_aid_application_id: application.id, owner_id: applicant.id, owner_type: applicant.class) }
-
-          it "returns http success" do
-            expect(response).to have_http_status(:ok)
-          end
-
-          it "displays the 'no data' message" do
-            expect(response.body).to include(html_compare("HMRC has no record of your client's employment in the last 3 months"))
-          end
-        end
-
-        context "when the HMRC response is pending" do
-          let(:before_actions) { create(:hmrc_response, :processing, legal_aid_application_id: application.id, owner_id: applicant.id, owner_type: applicant.class) }
-
-          it "returns http success" do
-            expect(response).to have_http_status(:ok)
-          end
-
-          it "displays the 'no data' message" do
-            expect(response.body).to include(html_compare("HMRC has no record of your client's employment in the last 3 months"))
-          end
-
-          describe "Sending a message to Sentry" do
-            let(:before_actions) do
-              create(:hmrc_response, :processing, legal_aid_application_id: application.id, owner_id: applicant.id, owner_type: applicant.class)
-              allow(Sentry).to receive(:capture_message)
-            end
-
-            it "sends the message to Sentry and is successful" do
-              expect(response).to have_http_status(:ok)
-              expect(Sentry).to have_received(:capture_message).with(/HMRC response still pending/)
-            end
-          end
-        end
-
-        context "when the applicant has multiple jobs" do
-          let(:before_actions) do
-            create(:hmrc_response, :multiple_employments_usecase1, legal_aid_application_id: application.id, owner_id: applicant.id, owner_type: applicant.class)
-            create_list(:employment, 2, legal_aid_application: application, owner_id: applicant.id, owner_type: applicant.class)
-          end
-
-          it "returns http success" do
-            expect(response).to have_http_status(:ok)
-          end
-
-          it "displays the 'multiple job' message" do
-            expect(response.body).to include(html_compare("HMRC found a record of your client's employment"))
-            expect(response.body).to include(html_compare("HMRC says your client had more than one job in the last 3 months."))
-          end
-        end
-
-        context "when applicant has no national insurance number" do
-          let(:application) { create(:legal_aid_application, :with_applicant_no_nino) }
-
-          it "returns http success" do
-            expect(response).to have_http_status(:ok)
-          end
-
-          it "displays the correct page content" do
-            expect(response.body).to include(html_compare("We could not check your client's employment record with HMRC"))
-          end
-        end
+      it "returns http success" do
+        expect(response).to have_http_status(:ok)
       end
 
-      context "when HMRC collection is off" do
-        let(:enable_hmrc_collection) { false }
-
-        context "and the applicant has a national insurance number" do
-          it "returns http success" do
-            expect(response).to have_http_status(:ok)
-          end
-
-          it "displays the 'no data' message" do
-            expect(response.body).to include(html_compare("Enter details of your client's employment in the last 3 months"))
-          end
+      describe "Sending a message to Sentry" do
+        let(:before_actions) do
+          create(:hmrc_response, :processing, legal_aid_application_id: application.id, owner_id: applicant.id, owner_type: applicant.class)
+          allow(Sentry).to receive(:capture_message)
         end
 
-        context "and applicant has no national insurance number" do
-          let(:application) { create(:legal_aid_application, :with_applicant_no_nino) }
-
-          it "returns http success" do
-            expect(response).to have_http_status(:ok)
-          end
-
-          it "displays the correct page content" do
-            expect(response.body).to include(html_compare("Enter details of your client's employment in the last 3 months"))
-          end
+        it "sends the message to Sentry and is successful" do
+          expect(response).to have_http_status(:ok)
+          expect(Sentry).to have_received(:capture_message).with(/HMRC response still pending/)
         end
       end
     end

@@ -2,19 +2,13 @@
               url:,
               method: :patch,
               local: true) do |form| %>
-  <% unless @form.errors.any?
-       notification_banner_title = t("generic.important")
-       notification_banner_text = t(".hmrc-information")
-     end %>
 
   <%= page_template(page_title: t(".page_title", name: individual.full_name),
                     template: :basic,
-                    notification_banner_title:,
-                    notification_banner_text:,
                     form:) do %>
 
     <%= form.govuk_radio_buttons_fieldset(:has_extra_employment_information,
-                                          caption: { text: t("generic.#{individual_type}_means_caption"), size: "l" },
+                                          caption: { text: t("generic.#{individual_type}_means_caption"), size: "xl" },
                                           legend: { size: "xl", tag: "h1", text: page_title }) do %>
 
       <%= render "shared/means/employment_income_table" %>
