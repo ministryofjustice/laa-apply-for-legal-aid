@@ -24,5 +24,9 @@ module ApplicationMeritsTask
     def ccms_opponent_relationship_to_case
       "Child"
     end
+
+    def display_name
+      "#{first_name} #{last_name}".strip
+    end
   end
 end

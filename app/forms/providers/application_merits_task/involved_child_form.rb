@@ -3,7 +3,7 @@ module Providers
     class InvolvedChildForm < BaseForm
       form_for ::ApplicationMeritsTask::InvolvedChild
 
-      BASE_ATTRIBUTES = %i[full_name].freeze
+      BASE_ATTRIBUTES = %i[first_name last_name].freeze
 
       MODEL_ATTRIBUTES = BASE_ATTRIBUTES + %i[date_of_birth].freeze # Used in controller parameter handling
 
@@ -18,7 +18,8 @@ module Providers
         squish_whitespaces(:full_name)
       end
 
-      validates :full_name, presence: true, unless: :draft?
+      validates :first_name, presence: true, unless: :draft?
+      validates :last_name, presence: true, unless: :draft?
       validates :date_of_birth, presence: true, unless: :draft_and_not_partially_complete_date?
       validates :date_of_birth, date: { not_in_the_future: true }, allow_nil: true
 
