@@ -1546,13 +1546,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ministryofjustice/frontend@npm:^5.1.5":
-  version: 5.2.1
-  resolution: "@ministryofjustice/frontend@npm:5.2.1"
+"@ministryofjustice/frontend@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "@ministryofjustice/frontend@npm:9.0.0"
   peerDependencies:
-    govuk-frontend: ^5.8.0
+    govuk-frontend: ^6.0.0
     moment: 2.30.1
-  checksum: 10c0/f4d9c6b9f0511dcbaa1f0fe6d01165510565261aa6ec94b31b7b740f2b4d70ceac5cbb15df5af52afdf94ee1be7b5e953a884f88d033b274b5507744853c62af
+  checksum: 10c0/6b08112f34a564c516692ae14de2422decefdc6b26963b3922c47442a3a3ee18b8e034c3f3bedc15b881e017b0a3e8465ace50aa7526a5a90d4d56adf1e623f5
   languageName: node
   linkType: hard
 
@@ -3870,10 +3870,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^5.11.2":
-  version: 5.14.0
-  resolution: "govuk-frontend@npm:5.14.0"
-  checksum: 10c0/dcb1116003bb4a8ff167434bb30a779d6deafecb10687d044d5c560c0a7ff2053b8666000831c18ad3bcf4aa310678bf3c0cc40d734570b2b81c44853ddd388a
+"govuk-frontend@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "govuk-frontend@npm:6.1.0"
+  checksum: 10c0/543a8c6b1d709ec938e396fa3be923171637ab9b724f03618fa1bdc52023b6aa27fb42932b9e81df3fc134b0473442d42478dbf3e4b18e2bae00dbfe95363e96
   languageName: node
   linkType: hard
 
@@ -4577,7 +4577,7 @@ __metadata:
     "@babel/core": "npm:^7.28.4"
     "@babel/plugin-transform-runtime": "npm:^7.28.3"
     "@babel/preset-env": "npm:^7.28.3"
-    "@ministryofjustice/frontend": "npm:^5.1.5"
+    "@ministryofjustice/frontend": "npm:^9.0.0"
     "@rails/ujs": "npm:^7.1.502"
     axios: "npm:^1.13.5"
     babel-plugin-dynamic-import-node: "npm:^2.3.3"
@@ -4585,7 +4585,7 @@ __metadata:
     core-js: "npm:^3.45.1"
     dropzone: "npm:^6.0.0-beta.2"
     esbuild: "npm:^0.27.3"
-    govuk-frontend: "npm:^5.11.2"
+    govuk-frontend: "npm:^6.1.0"
     jquery: "npm:^4.0.0"
     js-search: "npm:^2.0.1"
     moment: "npm:^2.30.1"
