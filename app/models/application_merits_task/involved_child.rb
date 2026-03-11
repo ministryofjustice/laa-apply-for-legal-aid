@@ -1,6 +1,7 @@
 module ApplicationMeritsTask
   class InvolvedChild < ApplicationRecord
-    include NameSplitHelper
+    self.ignored_columns += %w[full_name]
+
     include CCMSOpponentIdGenerator
 
     belongs_to :legal_aid_application
@@ -23,6 +24,10 @@ module ApplicationMeritsTask
 
     def ccms_opponent_relationship_to_case
       "Child"
+    end
+
+    def full_name
+      "#{first_name} #{last_name}".strip
     end
   end
 end

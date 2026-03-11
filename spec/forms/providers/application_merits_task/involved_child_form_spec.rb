@@ -7,10 +7,12 @@ module Providers
 
       let(:earliest_date) { Date.new(2000, 1, 1) }
       let(:dob) { Faker::Date.between(from: earliest_date, to: Date.current) }
-      let(:full_name) { Faker::Name.name }
+      let(:first_name) { Faker::Name.first_name }
+      let(:last_name) { Faker::Name.last_name }
       let(:params) do
         {
-          full_name:,
+          first_name: first_name,
+          last_name: last_name,
           date_of_birth_3i: dob.day.to_s,
           date_of_birth_2i: dob.month.to_s,
           date_of_birth_1i: dob.year.to_s,
@@ -25,18 +27,19 @@ module Providers
         end
 
         context "when missing name" do
-          let(:full_name) { "" }
+          let(:last_name) { "" }
 
           it "returns false" do
             expect(described_form).not_to be_valid
-            expect(described_form.errors[:full_name]).to eq ["Enter the child's full name"]
+            expect(described_form.errors[:last_name]).to eq ["Enter the child's last name"]
           end
         end
 
         context "when missing date of birth" do
           let(:params) do
             {
-              full_name:,
+              first_name: first_name,
+              last_name: last_name,
               date_of_birth_3i: "",
               date_of_birth_2i: "",
               date_of_birth_1i: "",
@@ -52,7 +55,8 @@ module Providers
         context "with invalid date of birth" do
           let(:params) do
             {
-              full_name:,
+              first_name: first_name,
+              last_name: last_name,
               date_of_birth_3i: "32",
               date_of_birth_2i: "2",
               date_of_birth_1i: "2021",

@@ -57,7 +57,7 @@ RSpec.describe Providers::ResumesController do
         let(:partial_record) { create(:involved_child, legal_aid_application: application, date_of_birth: nil) }
 
         it do
-          application.update!(provider_step: "involved_children", provider_step_params: { application_merits_task_involved_child: { full_name: partial_record.full_name }, id: "new" })
+          application.update!(provider_step: "involved_children", provider_step_params: { application_merits_task_involved_child: { last_name: partial_record.last_name, first_name: partial_record.first_name }, id: "new" })
           request
           expect(response).to redirect_to("/providers/applications/#{application.id}/involved_children/#{partial_record.id}?locale=en")
         end
@@ -65,7 +65,7 @@ RSpec.describe Providers::ResumesController do
 
       context "when saved as draft and adding a new involved child" do
         it do
-          application.update!(provider_step: "involved_children", provider_step_params: { application_merits_task_involved_child: { full_name: nil }, id: "new" })
+          application.update!(provider_step: "involved_children", provider_step_params: { application_merits_task_involved_child: { last_name: nil }, id: "new" })
           request
           expect(response).to redirect_to("/providers/applications/#{application.id}/involved_children/new?locale=en")
         end

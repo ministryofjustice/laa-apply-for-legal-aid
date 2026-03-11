@@ -34,7 +34,8 @@ Feature: Merits task list
     And I fill "Police notified details" with "Foo bar"
     When I click 'Save and continue'
     Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'
-    When I fill "Full Name" with "John Doe Jr"
+    When I fill "Last name" with "Doe Jr"
+    And I fill "First name" with "John"
     And I enter a 'date_of_birth' for a 14 year old
     When I click 'Save and continue'
     Then I should be on the 'has_other_involved_children' page showing 'You have added 1 child'
@@ -125,7 +126,8 @@ Feature: Merits task list
     And I fill "Police notified details" with "Foo bar"
     When I click 'Save and continue'
     Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'
-    When I fill "Full Name" with "John Doe Jr"
+    When I fill "First name" with "John"
+    And I fill "Last name" with "Doe Jr"
     And I enter a 'date_of_birth' for a 14 year old
     When I click 'Save and continue'
     Then I should be on the 'has_other_involved_children' page showing 'You have added 1 child'
@@ -166,7 +168,8 @@ Feature: Merits task list
     And I fill "Police notified details" with "Foo bar"
     When I click 'Save and continue'
     Then I should be on the 'involved_children/new' page showing 'Enter details of the children involved in this application'
-    When I fill "Full Name" with "John Doe Jr"
+    When I fill "Last name" with "Doe Jr"
+    And I fill "First name" with "John"
     And I enter a 'date_of_birth' for a 14 year old
     When I click 'Save and continue'
     Then I should be on the 'has_other_involved_children' page showing 'You have added 1 child'
