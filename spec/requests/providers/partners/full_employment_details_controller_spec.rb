@@ -29,7 +29,7 @@ RSpec.describe Providers::Partners::FullEmploymentDetailsController do
           expect(response).to have_http_status(:ok)
         end
 
-        it "displays the 'no data' message" do
+        it "displays the correct page content" do
           expect(response.body).to include(html_compare("The partner's employment details"))
         end
       end
@@ -41,7 +41,7 @@ RSpec.describe Providers::Partners::FullEmploymentDetailsController do
           expect(response).to have_http_status(:ok)
         end
 
-        it "displays the 'no data' message" do
+        it "displays the correct page content" do
           expect(response.body).to include(html_compare("The partner's employment details"))
         end
       end
@@ -56,7 +56,7 @@ RSpec.describe Providers::Partners::FullEmploymentDetailsController do
           expect(response).to have_http_status(:ok)
         end
 
-        it "displays the 'multiple job' message" do
+        it "displays the correct page content" do
           expect(response.body).to include(html_compare("The partner's employment details"))
         end
       end
