@@ -7,7 +7,10 @@
   <%= page_template(page_title:, back_link: {}, form:) do %>
     <div class="govuk-hint govuk-!-padding-bottom-2"><%= t(".hint") %></div>
 
-    <%= form.govuk_text_field :full_name, width: "three-quarters", label: { size: "m", text: t(".name") } %>
+    <%= form.govuk_fieldset legend: { text: t("generic.name") } do %>
+      <%= form.govuk_text_field :first_name, label: { text: t(".first_name") }, width: "three-quarters" %>
+      <%= form.govuk_text_field :last_name, label: { text: t(".last_name") }, width: "three-quarters" %>
+    <% end %>
 
     <%= form.govuk_date_field :date_of_birth, legend: { text: t(".date_of_birth") }, hint: { text: t(".dob_hint", year: Time.zone.now.year - 7) } %>
 

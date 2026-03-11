@@ -1,4 +1,4 @@
 <%= render "providers/application_merits_task/involved_children/form",
            form: @form,
-           page_title: t(".page_title", name: @involved_child.full_name),
+           page_title: t(".page_title", name: @involved_child.display_name),
            form_path: providers_legal_aid_application_involved_child_path(@legal_aid_application, @form.model) %>
