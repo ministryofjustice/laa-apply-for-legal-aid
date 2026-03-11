@@ -220,8 +220,10 @@ en:
               blank: Enter the date of birth
               date_not_valid: Enter a valid date of birth
               date_is_in_the_future: Date of birth must be in the past
-            full_name:
-              blank: Enter the child's full name
+            first_name:
+              blank: Enter the child's first name
+            last_name:
+              blank: Enter the child's last name
         application_merits_task/allegation:
           attributes:
             denies_all:

@@ -10,7 +10,7 @@ RSpec.describe Flow::Steps::ProviderMerits::InvolvedChildrenStep, type: :request
     let(:id) { "new" }
     let(:params) do
       { _method: "patch",
-        application_merits_task_involved_child: { "full_name" => partial_record&.full_name, "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
+        application_merits_task_involved_child: { "last_name" => partial_record&.last_name, "first_name" => partial_record&.first_name, "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
         draft_button: "Save and come back later",
         locale: "en",
         id: }

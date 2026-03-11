@@ -20,7 +20,7 @@ module Providers
           it "displays the form to add new children" do
             get_request
             expect(response.body).to include("Enter details of the children involved in this application")
-            expect(response.body).to include("Full name")
+            expect(response.body).to include("First name")
             expect(response.body).to include("Date of birth")
           end
         end
@@ -62,11 +62,12 @@ module Providers
         subject(:patch_request) { patch providers_legal_aid_application_involved_child_path(application, child), params: }
 
         let(:child) { create(:involved_child, legal_aid_application: application) }
-        let(:new_full_name) { "#{child.full_name} Junior" }
+        let(:new_last_name) { "Junior" }
 
         let(:params) do
           { application_merits_task_involved_child: {
-            full_name: new_full_name,
+            first_name: child.first_name,
+            last_name: new_last_name,
             "date_of_birth(3i)": "4",
             "date_of_birth(2i)": "6",
             "date_of_birth(1i)": "2020",
@@ -79,7 +80,7 @@ module Providers
           context "with valid parameters" do
             it "updates the child record" do
               patch_request
-              expect(child.reload.full_name).to eq new_full_name
+              expect(child.reload.last_name).to eq new_last_name
               expect(child.reload.date_of_birth).to eq Date.new(2020, 6, 4)
             end
 
@@ -87,27 +88,18 @@ module Providers
               patch_request
               expect(response).to have_http_status(:redirect)
             end
-
-            context "with trailing whitespaces" do
-              let(:new_full_name) { "  John    Doe  " }
-
-              it "removes excess whitespaces" do
-                patch_request
-                expect(child.reload.full_name).to eq "John Doe"
-              end
-            end
           end
 
           context "with invalid params" do
-            let(:new_full_name) { "" }
+            let(:new_last_name) { "" }
 
             it "does not update the child record" do
-              expect { patch_request }.not_to change(child, :full_name)
+              expect { patch_request }.not_to change(child, :last_name)
             end
 
             it "renders the show page" do
               patch_request
-              expect(response.body).to include(html_compare(child.full_name))
+              expect(response.body).to include(html_compare(child.last_name))
             end
           end
         end
