@@ -9,12 +9,12 @@
     "postinstall": "rm -rf node_modules/resolve/test/resolver/multirepo node_modules/eslint-plugin-react/node_modules/resolve/test/resolver/multirepo"
   },
   "dependencies": {
-    "@ministryofjustice/frontend": "^5.1.5",
+    "@ministryofjustice/frontend": "^9.0.0",
     "@rails/ujs": "^7.1.502",
     "axios": "^1.13.5",
     "core-js": "^3.45.1",
     "dropzone": "^6.0.0-beta.2",
-    "govuk-frontend": "^5.11.2",
+    "govuk-frontend": "^6.1.0",
     "jquery": "^4.0.0",
     "js-search": "^2.0.1",
     "moment": "^2.30.1",
