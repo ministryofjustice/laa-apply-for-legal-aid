@@ -12,6 +12,11 @@ After("@hmrc_use_dev_mock") do
   allow(Rails.configuration.x).to receive(:hmrc_use_dev_mock).and_call_original
 end
 
+After("@cleanup_locale") do
+  Setting.setting.update!(allow_welsh_translation: false)
+  I18n.locale = I18n.default_locale
+end
+
 Before("not @clamav") do
   stdout = "/some/file/path.pdf: OK"
   stderr = ""
