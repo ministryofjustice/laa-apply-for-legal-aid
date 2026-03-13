@@ -14,34 +14,58 @@ RSpec.describe Flow::Steps::Partner::BankStatementsStep, type: :request do
 
     before { allow(HMRC::StatusAnalyzer).to receive(:call).with(legal_aid_application).and_return(status) }
 
-    context "when status is partner_multiple_employments" do
-      let(:status) { :partner_multiple_employments }
+    context "when status is partner_not_employed_no_nino" do
+      let(:status) { :partner_not_employed_no_nino }
 
-      it { is_expected.to eq :partner_full_employment_details }
+      it { is_expected.to eq :partner_receives_state_benefits }
     end
 
-    context "when status is partner_no_hmrc_data" do
-      let(:status) { :partner_no_hmrc_data }
+    context "when status is partner_not_employed_hmrc_unavailable" do
+      let(:status) { :partner_not_employed_hmrc_unavailable }
 
-      it { is_expected.to eq :partner_full_employment_details }
+      it { is_expected.to eq :partner_receives_state_benefits }
     end
 
-    context "when status is partner_single_employment" do
-      let(:status) { :partner_single_employment }
+    context "when status is partner_not_employed_no_payments" do
+      let(:status) { :partner_not_employed_no_payments }
 
-      it { is_expected.to eq :partner_employment_incomes }
+      it { is_expected.to eq :partner_receives_state_benefits }
+    end
+
+    context "when status is partner_unexpected_no_employment_data" do
+      let(:status) { :partner_unexpected_no_employment_data }
+
+      it { is_expected.to eq :partner_employed_but_no_hmrc_data_interrupts }
+    end
+
+    context "when status is partner_employed_hmrc_unavailable" do
+      let(:status) { :partner_employed_hmrc_unavailable }
+
+      it { is_expected.to eq :partner_hmrc_unavailable_interrupts }
+    end
+
+    context "when status is partner_employed_no_nino" do
+      let(:status) { :partner_employed_no_nino }
+
+      it { is_expected.to eq :partner_no_nino_interrupts }
     end
 
     context "when status is partner_unexpected_employment_data" do
       let(:status) { :partner_unexpected_employment_data }
 
-      it { is_expected.to eq :partner_unexpected_employment_incomes }
+      it { is_expected.to eq :partner_unemployed_but_hmrc_found_data_interrupts }
     end
 
-    context "when status is partner_not_employed" do
-      let(:status) { :partner_not_employed }
+    context "when status is partner_multiple_employments" do
+      let(:status) { :partner_multiple_employments }
 
-      it { is_expected.to eq :partner_receives_state_benefits }
+      it { is_expected.to eq :partner_multiple_employments_interrupts }
+    end
+
+    context "when status is partner_single_employment" do
+      let(:status) { :partner_single_employment }
+
+      it { is_expected.to eq :partner_single_employment_interrupts }
     end
 
     context "when status is unexpected" do
