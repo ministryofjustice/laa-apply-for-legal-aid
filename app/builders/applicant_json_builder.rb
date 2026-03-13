@@ -30,7 +30,14 @@ class ApplicantJsonBuilder < BaseJsonBuilder
       applied_previously:,
       previous_reference:,
       relationship_to_children:,
+      relationship_to_involved_children:,
       addresses: addresses.map { |a| AddressJsonBuilder.build(a).as_json },
     }
+  end
+
+private
+
+  def relationship_to_involved_children
+    relationship_to_children&.upcase
   end
 end
