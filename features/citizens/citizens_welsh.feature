@@ -1,3 +1,4 @@
+@cleanup_locale
 Feature: Citizen journey in Welsh
 
   @javascript
