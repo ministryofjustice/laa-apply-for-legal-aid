@@ -35,5 +35,8 @@
     "stylelint-config-gds": "^2.0.0",
     "stylelint-order": "^8.0.0"
   },
+  "resolutions": {
+    "minimatch": ">=10.2.1"
+  },
   "packageManager": "yarn@4.12.0"
 }
