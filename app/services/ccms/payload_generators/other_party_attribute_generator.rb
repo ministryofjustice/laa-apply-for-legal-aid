@@ -87,7 +87,6 @@ module CCMS
       end
 
       def append_involved_child
-        first_name, last_name = other_party.split_full_name
         xml.__send__(:"casebio:OtherParty") do
           xml.__send__(:"casebio:OtherPartyID", "OPPONENT_#{other_party.generate_ccms_opponent_id}")
           xml.__send__(:"casebio:SharedInd", false)
@@ -95,8 +94,8 @@ module CCMS
             xml.__send__(:"casebio:Person") do
               xml.__send__(:"casebio:Name") do
                 xml.__send__(:"common:Title", "")
-                xml.__send__(:"common:Surname", last_name)
-                xml.__send__(:"common:FirstName", first_name)
+                xml.__send__(:"common:Surname", other_party.last_name)
+                xml.__send__(:"common:FirstName", other_party.first_name)
               end
               xml.__send__(:"casebio:DateOfBirth", other_party.date_of_birth.strftime("%F"))
               xml.__send__(:"casebio:Address")
