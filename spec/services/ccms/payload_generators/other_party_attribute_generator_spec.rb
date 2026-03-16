@@ -90,7 +90,7 @@ module CCMS
         end
 
         context "with an involved child" do
-          let(:other_party) { create(:involved_child, full_name: "Billy Elliot", date_of_birth: Date.new(2020, 1, 1)) }
+          let(:other_party) { create(:involved_child, first_name: "Billy", last_name: "Elliot", date_of_birth: Date.new(2020, 1, 1)) }
 
           before do
             allow(CCMS::OpponentId).to receive(:next_serial_id).and_return(777_777)
