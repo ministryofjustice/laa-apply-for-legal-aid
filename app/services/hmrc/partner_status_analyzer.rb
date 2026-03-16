@@ -11,25 +11,30 @@ module HMRC
     attr_reader :legal_aid_application
 
     def call
-      return :partner_not_employed if partner_not_employed? && no_employment_payments?
-
-      return :partner_unexpected_employment_data if partner_not_employed? && eligible_employment_payments.any?
-
-      return :partner_multiple_employments if has_multiple_employments?
-
-      return :partner_no_hmrc_data unless hmrc_employment_income?
-
-      :partner_single_employment
+      partner.employed? ? employed_status : not_employed_status
     end
 
   private
 
-    def partner_not_employed?
-      !partner.employed
+    def employed_status
+      return :partner_employed_no_nino unless partner.has_national_insurance_number?
+      return :partner_employed_hmrc_unavailable if partner.hmrc_responses.empty?
+      return :partner_unexpected_no_employment_data if no_employment_payments?
+      return :partner_multiple_employments if has_multiple_employments?
+
+      :partner_single_employment
+    end
+
+    def not_employed_status
+      return :partner_not_employed_no_nino unless partner.has_national_insurance_number?
+      return :partner_not_employed_hmrc_unavailable if partner.hmrc_responses.empty?
+      return :partner_not_employed_no_payments if no_employment_payments?
+
+      :partner_unexpected_employment_data if eligible_employment_payments.any?
     end
 
     def no_employment_payments?
-      partner.eligible_employment_payments.empty?
+      eligible_employment_payments.empty?
     end
   end
 end

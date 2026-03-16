@@ -138,9 +138,7 @@ RSpec.describe Providers::Partners::EmployedController do
         post_request
       end
 
-      it "redirects to the full employment details page" do
-        expect(response).to redirect_to(providers_legal_aid_application_partners_full_employment_details_path(legal_aid_application))
-      end
+      it { is_expected.to redirect_to(providers_legal_aid_application_partners_bank_statements_path(legal_aid_application)) }
     end
   end
 end
