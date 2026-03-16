@@ -129,21 +129,21 @@ module CCMS
               )
           end
 
-          it "generates FAMILY_PROSPECTS_OF_SUCCESS attribute for SE003 for the lead proceeding" do
+          it "does not generate FAMILY_PROSPECTS_OF_SUCCESS attribute for SE003 for the lead proceeding" do
             xml_nodeset = XmlExtractor.call(request_xml, :proceeding_merits, nil, "P_66000001")
 
             expect(xml_nodeset)
-              .to have_xml_attributes(
+              .not_to have_xml_attributes(
                 PROCEEDING_NAME: "SE003",
                 FAMILY_PROSPECTS_OF_SUCCESS: "Good",
               )
           end
 
-          it "generates FAMILY_PROSPECTS_OF_SUCCESS attribute for SE014" do
+          it "does not generate FAMILY_PROSPECTS_OF_SUCCESS attribute for SE014" do
             xml_nodeset = XmlExtractor.call(request_xml, :proceeding_merits, nil, "P_66000003")
 
             expect(xml_nodeset)
-              .to have_xml_attributes(
+              .not_to have_xml_attributes(
                 PROCEEDING_NAME: "SE014",
                 FAMILY_PROSPECTS_OF_SUCCESS: "Good",
               )
@@ -166,8 +166,17 @@ module CCMS
             end
           end
 
-          it_behaves_like "FAMILY_PROSPECTS_OF_SUCCESS attribute omitter"
           it_behaves_like "FAM_PROSP_X attribute omitter"
+
+          it "generates FAMILY_PROSPECTS_OF_SUCCESS for DA004" do
+            xml_nodeset = XmlExtractor.call(request_xml, :proceeding_merits, nil, "P_66000002")
+
+            expect(xml_nodeset)
+              .to have_xml_attributes(
+                PROCEEDING_NAME: "DA004",
+                FAMILY_PROSPECTS_OF_SUCCESS: "Good",
+              )
+          end
         end
 
         context "with multiple proceedings with different chances of success object" do
@@ -194,7 +203,7 @@ module CCMS
             expect(xml_nodeset)
               .to have_xml_attributes(
                 PROCEEDING_NAME: "DA001",
-                FAMILY_PROSPECTS_OF_SUCCESS: "Marginal",
+                FAMILY_PROSPECTS_OF_SUCCESS: "Good",
               )
           end
 
@@ -204,7 +213,7 @@ module CCMS
             expect(xml_nodeset)
               .to have_xml_attributes(
                 PROCEEDING_NAME: "DA002",
-                FAMILY_PROSPECTS_OF_SUCCESS: "Marginal", # TODO: AP-5975 - This is the lead proceedings value. is that correct?
+                FAMILY_PROSPECTS_OF_SUCCESS: "Marginal",
               )
           end
 
@@ -214,7 +223,7 @@ module CCMS
             expect(xml_nodeset)
               .to have_xml_attributes(
                 PROCEEDING_NAME: "DA004",
-                FAMILY_PROSPECTS_OF_SUCCESS: "Marginal", # TODO: AP-5975 - This is the lead proceedings value. is that correct?
+                FAMILY_PROSPECTS_OF_SUCCESS: "Poor",
               )
           end
         end
