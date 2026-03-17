@@ -57,10 +57,6 @@ COPY . .
 RUN SECRET_KEY_BASE=dummy \
     bundle exec rails assets:precompile
 
-# ---  Copy first favicon to public root if it exists, as some browsers look for it there by default, resulting in 404s if it does not exist
-RUN favicon=$(find public/assets/images -maxdepth 1 -name 'favicon*.ico' | head -n 1) && \
-    [ -n "$favicon" ] && cp "$favicon" public/favicon.ico
-
 # --- Prune dev dependencies ---
 RUN yarn workspaces focus --all --production
 
