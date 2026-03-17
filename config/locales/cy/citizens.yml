@@ -29,9 +29,6 @@ cy:
         hint: .yteicos gnidliub ro knab rehtona htiw evah uoy stnuocca yna fo sliated
           erahS
         error: sknab rehto htiw stnuocca evah uoy fi sey tceleS
-      new:
-        hint: .stnuocca sgnivas edulcni ton oD
-        field_set_header: "?enilno ssecca tonnac uoy stnuocca tnerruc evah uoy oD"
     banks:
       index:
         title: knab ruoy tceleS
@@ -88,9 +85,6 @@ cy:
             sliated ni-ngis gniknab enilno ruoy ees
             sliated tnuocca knab ruoy erots
         terms_of_service_html:  Dear <a href="https://truelayer.com/legal/enduser_tos/">ycilop ycavirp dna ecivres fo smret s'reyaleurT</a>.
-    has_offline_accounts:
-      new:
-        error: enilno ssecca tonnac uoy stnuocca tnerruc evah uoy fi sey tceleS
     legal_aid_applications:
       index:
         case_reference: ":ecnerefer esaC"

@@ -160,7 +160,7 @@ Rails.application.routes.draw do
     resources :banks, only: %i[index create]
     resources :accounts, only: [:index]
     resources :gather_transactions, only: [:index]
-    resources :additional_accounts, only: %i[index create new update]
+    resources :additional_accounts, only: %i[index create]
     resources :check_answers, only: [:index] do
       patch :reset, on: :collection
       patch :continue, on: :collection
