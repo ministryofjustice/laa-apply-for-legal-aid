@@ -36,6 +36,7 @@ docker-compose.yml
 # Ignore assets that should be built as part of build stage
 node_modules/
 public/
+!public/favicon.ico
 !public/robots.txt
 
 # dependencies and assets will be pulled and compiled at build time
