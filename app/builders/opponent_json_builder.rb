@@ -33,14 +33,20 @@ private
 
   def first_name
     object.opposable.first_name if object.opposable.respond_to?(:first_name)
+  rescue NameError
+    nil
   end
 
   def last_name
     object.opposable.last_name if object.opposable.respond_to?(:last_name)
+  rescue NameError
+    nil
   end
 
   def organisation_name
     object.opposable.name if object.opposable.respond_to?(:name)
+  rescue NameError
+    nil
   end
 
   # Full object for Civil Apply "rehydration", eventually

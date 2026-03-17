@@ -79,4 +79,22 @@ RSpec.describe OpponentJsonBuilder do
       )
     end
   end
+
+  context "when the opponent type is not recognized" do
+    let(:opponent) { ApplicationMeritsTask::Opponent.build(opposable_type: "Foobar") }
+
+    it "maps the opponent_type to nil" do
+      expect(json[:opponent_type]).to be_nil
+    end
+
+    it "includes nil for first_name, last_name, and organisation_name" do
+      expect(json[:first_name]).to be_nil
+      expect(json[:last_name]).to be_nil
+      expect(json[:organisation_name]).to be_nil
+    end
+
+    it "excludes an opposable object with the expected keys" do
+      expect(json[:opposable]).to be_nil
+    end
+  end
 end
