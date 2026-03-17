@@ -3,7 +3,7 @@ Feature: Bank statement upload journey state_benefit loop feature
   Scenario: I can add multiple state benefits for a non-passported, non-TrueLayer applications on behalf of employed clients
     Given csrf is enabled
     And I have completed a non-passported employed application with bank statements as far as the open banking consent page
-    Then I should be on a page showing "Does your client use online banking?"
+    Then I should be on a page showing "Does your client use online banking for all of their bank accounts"
 
     When I choose "No"
     And I click "Save and continue"
