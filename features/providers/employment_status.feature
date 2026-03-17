@@ -30,7 +30,7 @@ Feature: Employment status
       | applicant-armed-forces-true-field | false |
 
     When I click "Save and continue"
-    Then I should be on a page with title "Does your client use online banking?"
+    Then I should be on a page with title "Does your client use online banking for all of their bank accounts"
 
   @javascript @vcr
   Scenario: Partner employment status page behaves as expected

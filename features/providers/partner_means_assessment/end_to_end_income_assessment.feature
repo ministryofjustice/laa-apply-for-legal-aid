@@ -43,7 +43,7 @@ Feature: partner_means_assessment full journey
     Given csrf is enabled
     And I have completed a non-passported unemployed application with bank statements as far as the open banking consent page
     And I have added a partner
-    Then I should be on a page showing "Does your client use online banking?"
+    Then I should be on a page showing "Does your client use online banking for all of their bank accounts"
 
     When I choose "No"
     And I click "Save and continue"
