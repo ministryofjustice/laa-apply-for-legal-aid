@@ -14,6 +14,6 @@ Grover.configure do |config|
       left: "10mm",
       right: "20mm",
     },
-    launch_args: %w[--no-sandbox --disable-gpu],
+    launch_args: %w[--no-sandbox --disable-gpu --disable-setuid-sandbox],
   }
 end
