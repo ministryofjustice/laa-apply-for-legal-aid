@@ -45,7 +45,8 @@ RUN apk add --no-cache \
         nss \
         freetype \
         harfbuzz \
-        ca-certificates
+        ca-certificates \
+        ttf-freefont
 
 # Install expected Yarn version
 RUN corepack enable \
