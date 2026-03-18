@@ -167,7 +167,8 @@ google_tag_manager:
 
 checkFinancialEligibility:
   # this is routed using internal K8s addresses as it is only referred to in service calls
-  civil_host: "http://cfe-civil.cfe-civil-production.svc.cluster.local"
+  # civil_host: "http://cfe-civil.cfe-civil-production.svc.cluster.local"
+  civil_host: "http://ap-6657-ingress-upda-cfe-civil.cfe-civil-uat.svc.cluster.local"
 
 email_domain:
   suffix: "@justice"
