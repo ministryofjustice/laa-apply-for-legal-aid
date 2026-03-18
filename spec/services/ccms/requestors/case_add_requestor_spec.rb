@@ -64,8 +64,6 @@ module CCMS
         let(:office) { create(:office, ccms_id: "4727432767") }
         let(:savings_amount) { create(:savings_amount, :all_nil) }
         let(:requestor) { described_class.new(submission, {}) }
-        let(:involved_child1) { legal_aid_application.reload.involved_children.find_by(first_name: "First", last_name: "TestChild") }
-        let(:involved_child2) { legal_aid_application.reload.involved_children.find_by(first_name: "Second", last_name: "TestChild") }
 
         let(:request_xml) { requestor.__send__(:request_xml) }
         let(:expected_request_xml) { ccms_data_from_file("case_add_request.xml") }
@@ -74,8 +72,8 @@ module CCMS
         before do
           create(:cfe_v3_result, submission: cfe_submission)
           create(:chances_of_success, :with_optional_text, proceeding:)
-          create(:involved_child, full_name: "First TestChild", date_of_birth: Date.parse("2019-01-20"), legal_aid_application:)
-          create(:involved_child, full_name: "Second TestChild", date_of_birth: Date.parse("2020-02-15"), legal_aid_application:)
+          create(:involved_child, first_name: "First", last_name: "TestChild", date_of_birth: Date.parse("2019-01-20"), legal_aid_application:)
+          create(:involved_child, first_name: "Second", last_name: "TestChild", date_of_birth: Date.parse("2020-02-15"), legal_aid_application:)
           legal_aid_application.reload
           legal_aid_application.update!(opponents:)
           allow(Rails.configuration.x.ccms_soa).to receive_messages(client_username: "FakeUser", client_password: "FakePassword", client_password_type: "password_type")
