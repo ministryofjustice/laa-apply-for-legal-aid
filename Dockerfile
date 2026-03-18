@@ -2,7 +2,7 @@
 ##############################################################################
 # STAGE 1 — BUILD (full dependencies)
 ##############################################################################
-FROM ministryofjustice/apply-base:latest-4.0.1 AS dependencies
+FROM ministryofjustice/apply-base:chromium-v1.0 AS dependencies
 
 WORKDIR /usr/src/app
 
@@ -63,7 +63,7 @@ RUN yarn workspaces focus --all --production
 #######################################
 # STAGE 3 — PRODUCTION RUNTIME
 #######################################
-FROM ministryofjustice/apply-base:latest-4.0.1 AS production
+FROM ministryofjustice/apply-base:chromium-v1.0 AS production
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Apply for civil legal aid team (apply-for-civil-legal-aid@justice.gov.uk)" \
