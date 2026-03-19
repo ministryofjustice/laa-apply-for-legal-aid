@@ -1,0 +1,30 @@
+name: "Test sending a slack message"
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  test-slack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send slack message
+        uses: slackapi/slack-github-action@v3.0.1
+        with:
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_BOT_TOKEN }}
+          payload: |
+            {
+              "channel": 'G9FJZ8H17',
+              "text": "Joel testing slack github action",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Joel testing slack github action\nThis is the next line\nand the next line"
+                  }
+                }
+              ]
+            }
