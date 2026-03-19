@@ -3,7 +3,7 @@ Feature: Bank statement upload journey happy path
   Scenario: I can upload bank statements and answer transaction questions for non-passported, non-TrueLayer applications on behalf of employed clients
     Given csrf is enabled
     And I have completed a non-passported employed application with bank statements as far as the open banking consent page
-    Then I should be on a page showing "Does your client use online banking?"
+    Then I should be on a page showing "Does your client use online banking for all of their bank accounts"
 
     When I choose "No"
     And I click "Save and continue"
@@ -77,7 +77,7 @@ Feature: Bank statement upload journey happy path
   Scenario: I can upload bank statements and answer transaction questions for non-passported, non-TrueLayer applications on behalf of unemployed clients
     Given csrf is enabled
     And I have completed a non-passported unemployed application with bank statements as far as the open banking consent page
-    Then I should be on a page showing "Does your client use online banking?"
+    Then I should be on a page showing "Does your client use online banking for all of their bank accounts"
 
     When I choose "No"
     And I click "Save and continue"

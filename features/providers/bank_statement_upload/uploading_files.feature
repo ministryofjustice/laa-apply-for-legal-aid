@@ -5,7 +5,7 @@ Feature: Bank statement file upload
   Scenario: Uploading a file
     Given csrf is enabled
     And I have completed a non-passported employed application with bank statements as far as the open banking consent page
-    And I should be on a page showing "Does your client use online banking?"
+    And I should be on a page showing "Does your client use online banking for all of their bank accounts"
 
     When I choose 'No'
     And I click 'Save and continue'
@@ -49,7 +49,7 @@ Feature: Bank statement file upload
   Scenario: Deleting a file
     Given csrf is enabled
     And I have completed a non-passported employed application with bank statements as far as the open banking consent page
-    And I should be on a page showing "Does your client use online banking?"
+    And I should be on a page showing "Does your client use online banking for all of their bank accounts"
 
     When I choose 'No'
     And I click 'Save and continue'
