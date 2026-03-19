@@ -19,7 +19,8 @@
                                               hint: { text: t("shared.forms.date_input_fields.date_of_birth_hint") } %>
 
     <%= form.govuk_radio_buttons_fieldset(:has_national_insurance_number,
-                                          legend: { text: t(".has_national_insurance_number") }) do %>
+                                          legend: { text: t(".has_national_insurance_number") },
+                                          hint: { text: t(".hint") }) do %>
       <%= form.govuk_radio_button(
             :has_national_insurance_number,
             true,
