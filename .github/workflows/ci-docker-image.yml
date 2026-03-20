@@ -20,13 +20,15 @@ jobs:
         run: |
           docker push ministryofjustice/apply-ci:latest
           docker push ministryofjustice/apply-ci:latest-$(cat .ruby-version)
-      - name: Slack Notification on failure
+      - name: Slack Notification on failure to apply-devtest channel
         if: failure()
-        uses: slackapi/slack-github-action@v2.1.1
+        uses: slackapi/slack-github-action@af78098f536edbc4de71162a307590698245be95 #v3.0.1
         with:
-          channel-id: 'apply-devtest'
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_BOT_TOKEN }}
           payload: |
             {
+              "channel": 'G9FJZ8H17',
               "text": "GitHub apply-ci docker image Action build result: ${{ job.status }}",
               "blocks": [
                 {
@@ -38,5 +40,3 @@ jobs:
                 }
               ]
             }
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
