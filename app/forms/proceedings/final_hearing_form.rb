@@ -8,8 +8,8 @@ module Proceedings
                   :details,
                   :proceeding_id
 
-    validates :work_type, inclusion: { in: %i[substantive emergency] }
-    validates :listed, inclusion: { in: %w[true false] }
+    validates :work_type, inclusion: { in: [:substantive, :emergency, "substantive", "emergency"] }
+    validates :listed, inclusion: { in: [true, false, "true", "false"] }
     validates :details, presence: true, if: :details_required?
     validates :date, presence: true, if: :date_required?
 
@@ -35,11 +35,11 @@ module Proceedings
     end
 
     def date_required?
-      listed.to_s == "true"
+      listed.to_s.in? [true, "true"]
     end
 
     def details_required?
-      listed.to_s == "false"
+      listed.to_s.in? [false, "false"]
     end
   end
 end

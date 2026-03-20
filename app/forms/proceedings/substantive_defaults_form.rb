@@ -11,12 +11,12 @@ module Proceedings
     attr_accessor :accepted_substantive_defaults,
                   :additional_params
 
-    validates :accepted_substantive_defaults, presence: true, unless: :draft?
+    validates :accepted_substantive_defaults, inclusion: ["true", "false", true, false], unless: :draft?
 
     def initialize(*args)
       super
       @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], false))
-      self.additional_params = default_scope["additional_params"]
+      self.additional_params = @defaults.dig("default_scope", "additional_params")
     end
 
     def default_level_of_service
