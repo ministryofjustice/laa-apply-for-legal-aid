@@ -77,19 +77,19 @@ jobs:
         sed -i 's/"security-severity": "undefined"/"security-severity": "0"/g' snyk-open.sarif
 
     - name: Upload static code analysis result to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@72d2d850d1f91d4e1e024f4cf4276fd16bb68462 #--v4.30.7 @7/10/2025
+      uses: github/codeql-action/upload-sarif@b1bff81932f5cdfc8695c7752dcee935dcd061c8 #v4.33.0
       with:
         sarif_file: snyk-code.sarif
         category: snyk-code
 
     - name: Upload open source dependencies test result to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@72d2d850d1f91d4e1e024f4cf4276fd16bb68462 #--v4.30.7 @7/10/2025
+      uses: github/codeql-action/upload-sarif@b1bff81932f5cdfc8695c7752dcee935dcd061c8 #v4.33.0
       with:
         sarif_file: snyk-open.sarif
         category: snyk-open
 
     - name: Upload container test result to GitHub Code Scanning
-      uses: github/codeql-action/upload-sarif@72d2d850d1f91d4e1e024f4cf4276fd16bb68462 #--v4.30.7 @7/10/2025
+      uses: github/codeql-action/upload-sarif@b1bff81932f5cdfc8695c7752dcee935dcd061c8 #v4.33.0
       with:
         sarif_file: snyk-container.sarif
         category: snyk-container
