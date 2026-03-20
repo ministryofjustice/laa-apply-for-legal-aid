@@ -34,6 +34,7 @@
         govuk_button_to(
           t("generic.create_test_applications"),
           create_test_applications_admin_legal_aid_applications_path,
+          data: { confirm: "This will create 6000 records, are you sure?" },
           method: :post,
         )
       end %>
