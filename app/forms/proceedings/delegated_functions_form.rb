@@ -6,7 +6,7 @@ module Proceedings
 
     attr_accessor :used_delegated_functions, :used_delegated_functions_on
 
-    validates :used_delegated_functions, presence: true, unless: :draft?
+    validates :used_delegated_functions, inclusion: [true, false, "true", "false"], unless: :draft?
 
     validates :used_delegated_functions_on,
               date: {

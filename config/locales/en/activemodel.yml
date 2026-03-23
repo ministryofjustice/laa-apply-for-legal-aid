@@ -711,7 +711,7 @@ en:
               blank: Enter a valid hearing date
               date_not_valid: Enter a valid hearing date in the correct format
             used_delegated_functions:
-              blank: Select yes if you have used delegated functions for this proceeding
+              inclusion: Select yes if you have used delegated functions for this proceeding
             used_delegated_functions_on:
               nothing_selected: Select proceedings you've used delegated functions for
               none_and_proceeding_selected: Select proceedings you've used delegated functions for or I have not used delegated functions
