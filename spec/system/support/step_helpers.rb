@@ -53,7 +53,43 @@ module StepHelpers
 
     expect(page).to have_css("h1", text: "Linking cases")
 
-    nil if step_name == :link_application
+    return if step_name == :link_application
+
+    govuk_choose("No")
+    click_on "Save and continue"
+
+    expect(page).to have_css("h1", text: "What does your client want legal aid for?")
+
+    return if step_name == :proceedings
+
+    fill_in("proceeding-search-input", with: "da004")
+    govuk_choose("Non-molestation order", match: :prefer_exact)
+    click_on "Save and continue"
+
+    govuk_choose "No"
+    click_on "Save and continue"
+
+    govuk_choose "Applicant, claimant or petitioner"
+    click_on "Save and continue"
+
+    govuk_choose "No"
+    click_on "Save and continue"
+
+    govuk_choose "Yes"
+    click_on "Save and continue"
+
+    click_on "Save and continue"
+
+    expect(page).to have_css("h1", text: "Your client's partner")
+
+    return if step_name == :partner
+
+    govuk_choose "No"
+    click_on "Save and continue"
+
+    expect(page).to have_css("h1", text: "Check your answers")
+
+    nil if step_name == :check_your_answers
   end
 
   def create_an_application_and_complete_client_details(with_partner)

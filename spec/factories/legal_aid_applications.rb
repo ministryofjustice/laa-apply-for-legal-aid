@@ -10,7 +10,7 @@ FactoryBot.define do
       applicant { build(:applicant, with_bank_accounts:) }
     end
 
-    trait :with_complete_applicant do
+    trait :with_complete_applicant_and_proceedings do
       applicant do
         build(:applicant,
               has_national_insurance_number: true,
@@ -20,6 +20,28 @@ FactoryBot.define do
               correspondence_address_choice: "home",
               addresses: [build(:address, location: "home", lookup_used: true)],
               employed: nil)
+      end
+
+      after(:create) do |application|
+        proceeding = create(
+          :proceeding,
+          :da004,
+          lead_proceeding: true,
+          substantive_cost_limitation: 25_000,
+          delegated_functions_cost_limitation: 2_250,
+          used_delegated_functions_on: nil,
+          used_delegated_functions_reported_on: nil,
+          used_delegated_functions: false,
+          emergency_level_of_service: nil,
+          emergency_level_of_service_name: nil,
+          emergency_level_of_service_stage: nil,
+          substantive_level_of_service: 3,
+          substantive_level_of_service_stage: 8,
+          accepted_emergency_defaults: nil,
+          accepted_substantive_defaults: true,
+        )
+
+        application.proceedings << proceeding
       end
     end
 
