@@ -11,7 +11,7 @@ Feature: Pathways from check your answers
     Then I should be on a page showing "What is your client's employment status?"
     When I select "None of the above"
     And I click 'Save and continue'
-    Then I should be on a page with title "Does your client use online banking?"
+    Then I should be on a page with title "Does your client use online banking for all of their bank accounts"
 
   @javascript @vcr
   Scenario: I do not use delegated functions for a passported journey
@@ -57,7 +57,7 @@ Feature: Pathways from check your answers
     Then I should be on a page showing 'Do you want to make a substantive application now?'
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I should be on a page with title "Does your client use online banking?"
+    Then I should be on a page with title "Does your client use online banking for all of their bank accounts"
 
   @javascript @vcr
   Scenario: I use delegated functions and a substantive application for a passported journey

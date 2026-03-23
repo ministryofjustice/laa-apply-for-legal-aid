@@ -9,7 +9,7 @@ Feature: non_passported_journey waiting for applicant
     Then I should be on a page showing "What is your client's employment status?"
     When I select "None of the above"
     And I click 'Save and continue'
-    Then I should be on a page with title "Does your client use online banking?"
+    Then I should be on a page with title "Does your client use online banking for all of their bank accounts"
     When I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on a page with title "Share bank statements with online banking"
