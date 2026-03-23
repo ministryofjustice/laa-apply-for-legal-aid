@@ -69,13 +69,12 @@ module TaskStatus
       end
     end
 
-    # TODO: this will need to include all prior task list items to this
     def previous_task_status_items
       [
         Applicants,
         MakeLink,
-        # ProceedingsTypes
         # ClientHasPartners
+        ProceedingsTypes,
       ]
     end
   end
