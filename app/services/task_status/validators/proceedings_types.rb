@@ -45,7 +45,7 @@ module TaskStatus
 
       def emergency_defaults_forms
         proceedings.filter_map do |proceeding|
-          next unless proceeding.uses_emergency_certificate?
+          next if !proceeding.used_delegated_functions? || proceeding.special_children_act?
 
           Proceedings::EmergencyDefaultsForm.new(model: proceeding)
         end
@@ -53,22 +53,28 @@ module TaskStatus
 
       def emergency_level_of_service_forms
         proceedings.filter_map do |proceeding|
+          next unless proceeding.used_delegated_functions?
+
           Proceedings::EmergencyLevelOfServiceForm.new(model: proceeding) unless proceeding.accepted_emergency_defaults?
         end
       end
 
       def final_hearings_emergency_forms
         proceedings.filter_map do |proceeding|
-          next unless proceeding.emergency_full_representation?
+          next unless emergency_changed_to_full_rep?(proceeding)
 
-          Proceedings::FinalHearingForm.new(model: proceeding.emergency_final_hearing,
-                                            listed: proceeding.emergency_final_hearing&.listed,
-                                            date: proceeding.emergency_final_hearing&.date)
+          Proceedings::FinalHearingForm.new(model: proceeding.emergency_final_hearing)
         end
+      end
+
+      def emergency_changed_to_full_rep?(proceeding)
+        proceeding.emergency_full_representation? && !proceeding.accepted_emergency_defaults?
       end
 
       def emergency_scope_limitations
         proceedings.map do |proceeding|
+          next unless proceeding.used_delegated_functions?
+
           proceeding.scope_limitations.emergency.any? unless proceeding.accepted_emergency_defaults?
         end
       end
@@ -85,13 +91,15 @@ module TaskStatus
         end
       end
 
+      def substantive_changed_to_full_rep?(proceeding)
+        proceeding.substantive_full_representation? && !proceeding.accepted_substantive_defaults?
+      end
+
       def final_hearings_substantive_forms
         proceedings.filter_map do |proceeding|
-          next unless proceeding.substantive_full_representation?
+          next unless substantive_changed_to_full_rep?(proceeding)
 
-          Proceedings::FinalHearingForm.new(model: proceeding.substantive_final_hearing,
-                                            listed: proceeding.substantive_final_hearing&.listed,
-                                            date: proceeding.substantive_final_hearing&.date)
+          Proceedings::FinalHearingForm.new(model: proceeding.substantive_final_hearing)
         end
       end
 
