@@ -14,7 +14,7 @@ module TaskStatus
   private
 
     def not_started?
-      applicants_validator.valid? && application.proceedings.empty?
+      applicants_validator.valid? && application.linked_application_completed? && application.proceedings.empty?
     end
 
     def in_progress?
