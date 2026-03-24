@@ -26,6 +26,47 @@ RSpec.describe Flow::Steps::ProviderMerits::InvolvedChildrenStep, type: :request
 
         it { is_expected.to eq new_providers_legal_aid_application_involved_child_path(legal_aid_application) }
       end
+
+      context "with a partial record that only matches on first name" do
+        let(:partial_record) { create(:involved_child, legal_aid_application:, last_name: nil) }
+        let(:params) do
+          { _method: "patch",
+            application_merits_task_involved_child: { "last_name" => "", "first_name" => partial_record&.first_name, "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
+            draft_button: "Save and come back later",
+            locale: "en",
+            id: }
+        end
+
+        it { is_expected.to eq providers_legal_aid_application_involved_child_path(legal_aid_application, partial_record) }
+      end
+
+      context "with a partial record that only matches on last name" do
+        let(:partial_record) { create(:involved_child, legal_aid_application:, first_name: nil) }
+        let(:params) do
+          { _method: "patch",
+            application_merits_task_involved_child: { "last_name" => partial_record&.last_name, "first_name" => "", "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
+            draft_button: "Save and come back later",
+            locale: "en",
+            id: }
+        end
+
+        it { is_expected.to eq providers_legal_aid_application_involved_child_path(legal_aid_application, partial_record) }
+      end
+
+      context "with a partial record with nil first name and last name" do
+        let(:partial_record) { create(:involved_child, first_name: nil, last_name: nil) }
+        let(:params) do
+          { _method: "patch",
+            application_merits_task_involved_child: { "last_name" => "", "first_name" => "", "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
+            draft_button: "Save and come back later",
+            locale: "en",
+            id: }
+        end
+
+        before { legal_aid_application.involved_children << partial_record }
+
+        it { is_expected.to eq providers_legal_aid_application_involved_child_path(legal_aid_application, partial_record) }
+      end
     end
 
     context "when involved_child_id is an id" do
