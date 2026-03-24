@@ -229,8 +229,6 @@ env:
         key: bucket_name
   - name: ADMIN_ALLOW_RESET
     value: {{ .Values.admin.allowReset | quote }}
-  - name: ADMIN_ALLOW_CREATE_TEST_APPLICATIONS
-    value: {{ .Values.admin.allowCreateTestApplications | quote }}
   - name: GOOGLE_TAG_MANAGER_TRACKING_ID
     value: {{ .Values.google_tag_manager.trackingId | quote }}
   - name: KUBERNETES_DEPLOYMENT
