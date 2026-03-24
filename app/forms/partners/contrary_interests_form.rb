@@ -4,7 +4,7 @@ module Partners
 
     attr_accessor :partner_has_contrary_interest
 
-    validates :partner_has_contrary_interest, inclusion: %w[true false], unless: :draft?
+    validates :partner_has_contrary_interest, inclusion: [true, false, "true", "false"], unless: :draft?
 
     def partner_has_contrary_interest?
       partner_has_contrary_interest.eql?("true")
