@@ -13,36 +13,56 @@ module TaskStatus
 
   private
 
+    # OPTIMISE: causes call to CheckProviderAnswers.new(application).call which is expensive as it needs to check all prior tasks, but this is the only way to determine if the task can be started or not as the DWP outcome task is dependent on the Check your answers task being completed
     def not_ready?
-      !check_provider_answers_completed?
+      return @not_ready if defined?(@not_ready)
+
+      @not_ready = !check_provider_answers_completed?
     end
 
+    # OPTIMISE: causes call to CheckProviderAnswers.new(application).call which is expensive as it needs to check all prior tasks, but this is the only way to determine if the task can be started or not as the DWP outcome task is dependent on the Check your answers task being completed
     def not_started?
-      check_provider_answers_completed? && application.dwp_result_confirmed.nil?
+      return @not_started if defined?(@not_started)
+
+      @not_started = check_provider_answers_completed? && application.dwp_result_confirmed.nil?
     end
 
     def in_progress?
-      application.dwp_result_confirmed == false && !dwp_override_validator.valid?
+      return @in_progress if defined?(@in_progress)
+
+      @in_progress = application.dwp_result_confirmed == false && !dwp_override_validator_valid?
     end
 
     def completed?
-      provider_confirmed_dwp_result? || provider_overrode_dwp_result?
+      return @completed if defined?(@completed)
+
+      @completed = provider_confirmed_dwp_result? || provider_overrode_dwp_result?
     end
 
     def provider_confirmed_dwp_result?
-      application.dwp_result_confirmed == true && application.dwp_override.nil?
+      return @provider_confirmed_dwp_result if defined?(@provider_confirmed_dwp_result)
+
+      @provider_confirmed_dwp_result = application.dwp_result_confirmed == true && application.dwp_override.nil?
     end
 
     def provider_overrode_dwp_result?
-      application.dwp_result_confirmed == false && dwp_override_validator.valid?
+      return @provider_overrode_dwp_result if defined?(@provider_overrode_dwp_result)
+
+      @provider_overrode_dwp_result = application.dwp_result_confirmed == false && dwp_override_validator_valid?
     end
 
     def check_provider_answers_completed?
-      CheckProviderAnswers.new(application).call.completed?
+      return @check_provider_answers_completed if defined?(@check_provider_answers_completed)
+
+      @check_provider_answers_completed =
+        CheckProviderAnswers.new(application).call.completed?
     end
 
-    def dwp_override_validator
-      @dwp_override_validator ||= Validators::DWPOverride.new(application)
+    def dwp_override_validator_valid?
+      return @dwp_override_validator_valid if defined?(@dwp_override_validator_valid)
+
+      @dwp_override_validator_valid =
+        Validators::DWPOverride.new(application).valid?
     end
   end
 end

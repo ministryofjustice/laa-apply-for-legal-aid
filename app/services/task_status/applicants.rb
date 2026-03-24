@@ -13,7 +13,9 @@ module TaskStatus
   private
 
     def completed?
-      applicants_validator.valid?
+      return @completed if defined?(@completed)
+
+      @completed = applicants_validator.valid?
     end
 
     def applicants_validator
