@@ -12,28 +12,28 @@
     "@ministryofjustice/frontend": "^9.0.0",
     "@rails/ujs": "^7.1.502",
     "axios": "^1.13.5",
-    "core-js": "^3.45.1",
+    "core-js": "^3.49.0",
     "dropzone": "^6.0.0-beta.2",
     "govuk-frontend": "^6.1.0",
     "jquery": "^4.0.0",
     "js-search": "^2.0.1",
     "moment": "^2.30.1",
-    "puppeteer": "^24.39.1",
-    "sanitize-html": "^2.17.1"
+    "puppeteer": "^24.40.0",
+    "sanitize-html": "^2.17.2"
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
     "@babel/plugin-transform-runtime": "^7.28.3",
-    "@babel/preset-env": "^7.28.3",
+    "@babel/preset-env": "^7.29.2",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-macros": "^3.1.0",
-    "esbuild": "^0.27.3",
+    "esbuild": "^0.27.4",
     "postcss": "^8.5.8",
-    "sass": "^1.92.1",
+    "sass": "^1.98.0",
     "standard": "^17.1.2",
-    "stylelint": "^16.8.0",
+    "stylelint": "^17.5.0",
     "stylelint-config-gds": "^2.0.0",
-    "stylelint-order": "^8.0.0"
+    "stylelint-order": "^8.1.1"
   },
   "resolutions": {
     "minimatch": ">=10.2.1"
