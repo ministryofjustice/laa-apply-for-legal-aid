@@ -85,7 +85,6 @@ module LaaApplyForLegalAid
     config.x.govuk_notify_api_key = ENV.fetch("GOVUK_NOTIFY_API_KEY", nil)
 
     config.x.admin_portal.allow_reset = ENV["ADMIN_ALLOW_RESET"] == "true"
-    config.x.admin_portal.allow_create_test_applications = ENV["ADMIN_ALLOW_CREATE_TEST_APPLICATIONS"] == "true"
     config.x.admin_portal.show_form = ENV["ADMIN_SHOW_FORM"] == "true"
 
     config.x.email_domain.suffix = ENV.fetch("APPLY_EMAIL", nil)

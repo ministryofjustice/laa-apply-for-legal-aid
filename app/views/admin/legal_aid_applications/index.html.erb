@@ -30,14 +30,6 @@
     </div>
   </div>
 
-  <%= if create_test_applications_enabled?
-        govuk_button_to(
-          t("generic.create_test_applications"),
-          create_test_applications_admin_legal_aid_applications_path,
-          method: :post,
-        )
-      end %>
-
   <%= if @applications.present? && destroy_enabled?
         govuk_button_to(
           t(".delete_all"),
