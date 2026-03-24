@@ -837,6 +837,7 @@ en:
           page_title: Enter the partner's details
           has_national_insurance_number: Does the partner have a National Insurance number?
           nino_label: Enter National Insurance number
+          hint: We may use it to check employment and benefit details with HMRC and DWP, and other processes covered by our privacy policy
       use_ccms_employment:
         index:
           warning_list_title: "You cannot use this service if your client's partner is:"
@@ -874,6 +875,7 @@ en:
       show:
         page_title: Does your client have a National Insurance number?
         nino_label: Enter National Insurance number
+        hint: We may use it to check employment and benefit details with HMRC and DWP, and other processes covered by our privacy policy
     has_other_involved_children:
       show:
         error: Select yes if you need to add another child
