@@ -69,6 +69,40 @@ module Providers
           end
         end
       end
+
+      describe "#save" do
+        subject(:save_form) { described_form.save }
+
+        let(:involved_child) { create(:involved_child) }
+        let(:form_params) do
+          {
+            first_name: first_name,
+            last_name: last_name,
+            date_of_birth_3i: dob.day.to_s,
+            date_of_birth_2i: dob.month.to_s,
+            date_of_birth_1i: dob.year.to_s,
+          }
+        end
+        let(:params) { form_params.merge(model: involved_child) }
+
+        context "when the first_name param contains leading and trailing whitespace" do
+          let(:first_name) { " Lee Ann " }
+
+          it "creates an involved child with the leading and trailing whitespace removed from the first name" do
+            save_form
+            expect(involved_child).to have_attributes(first_name: "Lee Ann")
+          end
+        end
+
+        context "when the last_name param contains leading and trailing whitespace" do
+          let(:last_name) { " Smith Rogers " }
+
+          it "creates an involved child with the leading and trailing whitespace removed from the last name" do
+            save_form
+            expect(involved_child).to have_attributes(last_name: "Smith Rogers")
+          end
+        end
+      end
     end
   end
 end

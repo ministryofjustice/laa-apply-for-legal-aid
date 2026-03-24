@@ -15,7 +15,7 @@ module Providers
       attr_writer :date_of_birth
 
       before_validation do
-        squish_whitespaces(:full_name)
+        squish_whitespaces(:first_name, :last_name)
       end
 
       validates :first_name, presence: true, unless: :draft?
