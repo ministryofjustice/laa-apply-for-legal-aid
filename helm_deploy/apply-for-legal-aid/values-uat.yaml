@@ -137,7 +137,6 @@ clamav:
 admin:
   allowAdminPassword: true
   allowReset: "true"
-  allowCreateTestApplications: "true"
   showForm: "true"
 
 google_tag_manager:
