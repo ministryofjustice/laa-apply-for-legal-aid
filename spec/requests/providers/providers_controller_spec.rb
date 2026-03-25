@@ -3,9 +3,11 @@ require Rails.root.join("spec/services/pda/provider_details_request_stubs")
 
 RSpec.describe Providers::ProvidersController do
   let(:provider) { create(:provider) }
+  let(:address_string) { "Test firm, Test address line 1, Test address line 2, Test city, TE5T1NG" }
 
   before do
     stub_provider_user_for(provider.silas_id)
+    stub_provider_offices_address_for(provider.selected_office.code)
 
     login_as provider
   end
@@ -26,6 +28,47 @@ RSpec.describe Providers::ProvidersController do
         .to have_content(provider.name)
         .and have_content(provider.email)
         .and have_content(provider.selected_office.code)
+        .and have_content(address_string)
+    end
+  end
+
+  context "when office-address is not found" do
+    before do
+      stub_provider_offices_address_failure_for(provider.selected_office.code, status: 204)
+
+      get providers_provider_path
+    end
+
+    it "renders" do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "displays the header" do
+      expect(page).to have_css("h1", text: "Your profile")
+    end
+
+    it "displays placeholder text" do
+      expect(page).to have_content("Office address not found")
+    end
+  end
+
+  context "when office-address returns internal server error" do
+    before do
+      stub_provider_offices_address_failure_for(provider.selected_office.code, status: 500)
+
+      get providers_provider_path
+    end
+
+    it "renders" do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "displays the header" do
+      expect(page).to have_css("h1", text: "Your profile")
+    end
+
+    it "displays placeholder text" do
+      expect(page).to have_content("Office address not available")
     end
   end
 
