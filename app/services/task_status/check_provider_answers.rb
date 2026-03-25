@@ -28,31 +28,43 @@ module TaskStatus
   private
 
     def not_started?
-      startable? && !application.reviewed?(:check_provider_answers)
+      return @not_started if defined?(@not_started)
+
+      @not_started = startable? && !application.reviewed?(:check_provider_answers)
     end
 
     def in_progress?
-      startable? && application.review_in_progress?(:check_provider_answers)
+      return @in_progress if defined?(@in_progress)
+
+      @in_progress = startable? && application.review_in_progress?(:check_provider_answers)
     end
 
     def review?
-      startable? && application.requires_review?(:check_provider_answers)
+      return @review if defined?(@review)
+
+      @review = startable? && application.requires_review?(:check_provider_answers)
     end
 
     def completed?
-      startable? && application.review_completed?(:check_provider_answers)
+      return @completed if defined?(@completed)
+
+      @completed = startable? && application.review_completed?(:check_provider_answers)
     end
 
     def startable?
-      previous_tasks_completed?
+      return @startable if defined?(@startable)
+
+      @startable = previous_tasks_completed?
     end
 
     def previous_tasks_completed?
-      previous_task_statuses.all?(&:completed?)
+      return @previous_tasks_completed if defined?(@previous_tasks_completed)
+
+      @previous_tasks_completed = previous_task_statuses.all?(&:completed?)
     end
 
     def previous_task_statuses
-      previous_task_status_items.map do |task_status|
+      @previous_task_statuses ||= previous_task_status_items.map do |task_status|
         task_status.send(:new, application).call
       end
     end
