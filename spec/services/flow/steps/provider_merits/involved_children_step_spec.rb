@@ -67,6 +67,36 @@ RSpec.describe Flow::Steps::ProviderMerits::InvolvedChildrenStep, type: :request
 
         it { is_expected.to eq providers_legal_aid_application_involved_child_path(legal_aid_application, partial_record) }
       end
+
+      context "when the first_name param contains leading whitespace" do
+        let(:partial_record) { create(:involved_child, legal_aid_application:, first_name: "Lee Ann", last_name: "Conway") }
+        let(:params) do
+          { _method: "patch",
+            application_merits_task_involved_child: { "last_name" => "Conway", "first_name" => " Lee Ann", "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
+            draft_button: "Save and come back later",
+            locale: "en",
+            id: }
+        end
+
+        before { legal_aid_application.involved_children << partial_record }
+
+        it { is_expected.to eq providers_legal_aid_application_involved_child_path(legal_aid_application, partial_record) }
+      end
+
+      context "when the last_name param contains trailing whitespace" do
+        let(:partial_record) { create(:involved_child, legal_aid_application:, first_name: "Clare", last_name: "Smith Rogers") }
+        let(:params) do
+          { _method: "patch",
+            application_merits_task_involved_child: { "last_name" => "Smith Rogers ", "first_name" => "Clare", "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
+            draft_button: "Save and come back later",
+            locale: "en",
+            id: }
+        end
+
+        before { legal_aid_application.involved_children << partial_record }
+
+        it { is_expected.to eq providers_legal_aid_application_involved_child_path(legal_aid_application, partial_record) }
+      end
     end
 
     context "when involved_child_id is an id" do

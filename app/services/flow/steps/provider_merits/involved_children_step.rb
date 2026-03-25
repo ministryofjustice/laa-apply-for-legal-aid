@@ -7,8 +7,8 @@ module Flow
           case involved_child_id
           when "new"
             partial_record = ApplicationMeritsTask::InvolvedChild.find_by(
-              first_name: params.deep_symbolize_keys[:application_merits_task_involved_child][:first_name].presence,
-              last_name: params.deep_symbolize_keys[:application_merits_task_involved_child][:last_name].presence,
+              first_name: params.deep_symbolize_keys[:application_merits_task_involved_child][:first_name].presence&.squish,
+              last_name: params.deep_symbolize_keys[:application_merits_task_involved_child][:last_name].presence&.squish,
               legal_aid_application_id: application.id,
             )
             if partial_record
