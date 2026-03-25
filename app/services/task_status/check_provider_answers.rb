@@ -73,8 +73,9 @@ module TaskStatus
     def previous_task_status_items
       [
         Applicants,
-        # MakeLink,
+        MakeLink,
         # ProceedingsTypes
+        # ClientHasPartners
       ]
     end
   end
