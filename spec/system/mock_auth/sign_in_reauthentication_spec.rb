@@ -1,7 +1,7 @@
 require "system_helper"
 require Rails.root.join("db/seeds/test_provider_populator")
 
-# NOTE: this uses the mocked auth enabled flow (manual login) because use of the mocked oAuth flow
+# NOTE: this uses the mocked auth enabled flow (manual login) because use of the mocked OAuth flow
 # causes transparent reauthentication and therefore forced reauthentication is not testable using it.
 # In real life the SiLAS authentication would have expired (12 hours after SiLAS sign in), leading to our users
 # session death requiring a fresh EntraId/SiLAS sign in. This would be hard or impossible to emulate

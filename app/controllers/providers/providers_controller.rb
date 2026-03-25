@@ -4,13 +4,13 @@ module Providers
 
     def show
       @provider = current_provider
-      @address_string = address_string
+      @office_address = office_address if @provider.selected_office.present?
       @ccms_user_details = ccms_user["ccmsUserDetails"]
     end
 
   private
 
-    def address_string
+    def office_address
       address = PDA::OfficeAddressRetriever.call(@provider.selected_office.code)
 
       [

@@ -32,6 +32,26 @@ RSpec.describe Providers::ProvidersController do
     end
   end
 
+  # Can currently happen if user signs in, does not select an office then clicks profile link
+  context "when office-address is not selected yet" do
+    before do
+      provider.update!(selected_office: nil)
+      get providers_provider_path
+    end
+
+    it "renders" do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "displays the header" do
+      expect(page).to have_css("h1", text: "Your profile")
+    end
+
+    it "does not display" do
+      expect(page).to have_no_content("Office address")
+    end
+  end
+
   context "when office-address is not found" do
     before do
       stub_provider_offices_address_failure_for(provider.selected_office.code, status: 204)
@@ -47,7 +67,7 @@ RSpec.describe Providers::ProvidersController do
       expect(page).to have_css("h1", text: "Your profile")
     end
 
-    it "displays placeholder text" do
+    it "displays message text to indicate office address not found" do
       expect(page).to have_content("Office address not found")
     end
   end
@@ -67,7 +87,7 @@ RSpec.describe Providers::ProvidersController do
       expect(page).to have_css("h1", text: "Your profile")
     end
 
-    it "displays placeholder text" do
+    it "displays message text to indicate office address not available" do
       expect(page).to have_content("Office address not available")
     end
   end
