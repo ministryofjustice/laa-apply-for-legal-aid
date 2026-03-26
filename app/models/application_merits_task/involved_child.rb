@@ -1,7 +1,5 @@
 module ApplicationMeritsTask
   class InvolvedChild < ApplicationRecord
-    self.ignored_columns += %w[full_name]
-
     include CCMSOpponentIdGenerator
 
     belongs_to :legal_aid_application
