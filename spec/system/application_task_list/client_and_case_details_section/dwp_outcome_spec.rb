@@ -44,6 +44,9 @@ RSpec.describe "Client and case details section - DWP outcome", :javascript, :vc
 
       click_on "DWP outcome"
 
+      expect(page).to have_css("h1", text: "DWP records show that your client does not get a passporting benefit. Is this correct?")
+      click_on "This is not correct"
+
       expect(page).to have_css("h1", text: "Check your client's details")
       click_on "Save and continue"
 
