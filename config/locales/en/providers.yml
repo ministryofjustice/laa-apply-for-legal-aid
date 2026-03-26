@@ -559,7 +559,8 @@ en:
         new:
           page_title: Enter details of the children involved in this application
         form:
-          name: Full name
+          first_name: First name
+          last_name: Last name
           date_of_birth: Date of birth
           dob_hint: For example, 31 3 %{year}.
           hint: Add one child at a time. You can add more later.

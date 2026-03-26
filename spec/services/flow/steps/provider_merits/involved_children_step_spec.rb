@@ -10,7 +10,7 @@ RSpec.describe Flow::Steps::ProviderMerits::InvolvedChildrenStep, type: :request
     let(:id) { "new" }
     let(:params) do
       { _method: "patch",
-        application_merits_task_involved_child: { "full_name" => partial_record&.full_name, "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
+        application_merits_task_involved_child: { "last_name" => partial_record&.last_name, "first_name" => partial_record&.first_name, "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
         draft_button: "Save and come back later",
         locale: "en",
         id: }
@@ -25,6 +25,77 @@ RSpec.describe Flow::Steps::ProviderMerits::InvolvedChildrenStep, type: :request
         let(:partial_record) { nil }
 
         it { is_expected.to eq new_providers_legal_aid_application_involved_child_path(legal_aid_application) }
+      end
+
+      context "with a partial record that only matches on first name" do
+        let(:partial_record) { create(:involved_child, legal_aid_application:, last_name: nil) }
+        let(:params) do
+          { _method: "patch",
+            application_merits_task_involved_child: { "last_name" => "", "first_name" => partial_record&.first_name, "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
+            draft_button: "Save and come back later",
+            locale: "en",
+            id: }
+        end
+
+        it { is_expected.to eq providers_legal_aid_application_involved_child_path(legal_aid_application, partial_record) }
+      end
+
+      context "with a partial record that only matches on last name" do
+        let(:partial_record) { create(:involved_child, legal_aid_application:, first_name: nil) }
+        let(:params) do
+          { _method: "patch",
+            application_merits_task_involved_child: { "last_name" => partial_record&.last_name, "first_name" => "", "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
+            draft_button: "Save and come back later",
+            locale: "en",
+            id: }
+        end
+
+        it { is_expected.to eq providers_legal_aid_application_involved_child_path(legal_aid_application, partial_record) }
+      end
+
+      context "with a partial record with nil first name and last name" do
+        let(:partial_record) { create(:involved_child, first_name: nil, last_name: nil) }
+        let(:params) do
+          { _method: "patch",
+            application_merits_task_involved_child: { "last_name" => "", "first_name" => "", "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
+            draft_button: "Save and come back later",
+            locale: "en",
+            id: }
+        end
+
+        before { legal_aid_application.involved_children << partial_record }
+
+        it { is_expected.to eq providers_legal_aid_application_involved_child_path(legal_aid_application, partial_record) }
+      end
+
+      context "when the first_name param contains leading whitespace" do
+        let(:partial_record) { create(:involved_child, legal_aid_application:, first_name: "Lee Ann", last_name: "Conway") }
+        let(:params) do
+          { _method: "patch",
+            application_merits_task_involved_child: { "last_name" => "Conway", "first_name" => " Lee Ann", "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
+            draft_button: "Save and come back later",
+            locale: "en",
+            id: }
+        end
+
+        before { legal_aid_application.involved_children << partial_record }
+
+        it { is_expected.to eq providers_legal_aid_application_involved_child_path(legal_aid_application, partial_record) }
+      end
+
+      context "when the last_name param contains trailing whitespace" do
+        let(:partial_record) { create(:involved_child, legal_aid_application:, first_name: "Clare", last_name: "Smith Rogers") }
+        let(:params) do
+          { _method: "patch",
+            application_merits_task_involved_child: { "last_name" => "Smith Rogers ", "first_name" => "Clare", "date_of_birth(3i)" => "", "date_of_birth(2i)" => "", "date_of_birth(1i)" => "" },
+            draft_button: "Save and come back later",
+            locale: "en",
+            id: }
+        end
+
+        before { legal_aid_application.involved_children << partial_record }
+
+        it { is_expected.to eq providers_legal_aid_application_involved_child_path(legal_aid_application, partial_record) }
       end
     end
 
