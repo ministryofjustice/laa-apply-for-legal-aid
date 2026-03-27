@@ -114,8 +114,88 @@ RSpec.describe ProceedingJsonBuilder do
   context "when the proceeding has a blank matter type" do
     let(:proceeding) { create(:proceeding, :domestic_abuse, matter_type: "") }
 
-    it "maps the matter_type to nil" do
+    it "maps the matter_type to an empty string" do
       expect(json[:matter_type_enum]).to eq("")
+    end
+  end
+
+  context "when the proceeding has substantive level of service of full representation" do
+    let(:proceeding) { create(:proceeding, :domestic_abuse, substantive_level_of_service_name: "Full Representation") }
+
+    it "maps the substantive_level_of_service_name to FULL_REPRESENTATION" do
+      expect(json[:substantive_level_of_service_name_enum]).to eq("FULL_REPRESENTATION")
+    end
+  end
+
+  context "when the proceeding has substantive level of service of family help (higher)" do
+    let(:proceeding) { create(:proceeding, :domestic_abuse, substantive_level_of_service_name: "Family Help (Higher)") }
+
+    it "maps the substantive_level_of_service_name to FAMILY_HELP_HIGHER" do
+      expect(json[:substantive_level_of_service_name_enum]).to eq("FAMILY_HELP_HIGHER")
+    end
+  end
+
+  context "when the proceeding has an unknown substantive level of service name" do
+    let(:proceeding) { create(:proceeding, :domestic_abuse, substantive_level_of_service_name: "Unknown Substantive Level of Service (USLS)") }
+
+    it "maps the substantive_level_of_service_name to a normalized version of the original string, removing parenthetical content" do
+      expect(json[:substantive_level_of_service_name_enum]).to eq("UNKNOWN_SUBSTANTIVE_LEVEL_OF_SERVICE")
+    end
+  end
+
+  context "when the proceeding has a blank substantive level of service name" do
+    let(:proceeding) { create(:proceeding, :domestic_abuse, substantive_level_of_service_name: "") }
+
+    it "maps the substantive_level_of_service_name to an empty string" do
+      expect(json[:substantive_level_of_service_name_enum]).to eq("")
+    end
+  end
+
+  context "when the proceeding has a nil substantive level of service name" do
+    let(:proceeding) { create(:proceeding, :domestic_abuse, substantive_level_of_service_name: nil) }
+
+    it "maps the substantive_level_of_service_name to nil" do
+      expect(json[:substantive_level_of_service_name_enum]).to be_nil
+    end
+  end
+
+  context "when the proceeding has emergency level of service name of full representation" do
+    let(:proceeding) { create(:proceeding, :domestic_abuse, emergency_level_of_service_name: "Full Representation") }
+
+    it "maps the emergency_level_of_service_name to FULL_REPRESENTATION" do
+      expect(json[:emergency_level_of_service_name_enum]).to eq("FULL_REPRESENTATION")
+    end
+  end
+
+  context "when the proceeding has emergency level of service name of family help (higher)" do
+    let(:proceeding) { create(:proceeding, :domestic_abuse, emergency_level_of_service_name: "Family Help (Higher)") }
+
+    it "maps the emergency_level_of_service_name to FAMILY_HELP_HIGHER" do
+      expect(json[:emergency_level_of_service_name_enum]).to eq("FAMILY_HELP_HIGHER")
+    end
+  end
+
+  context "when the proceeding has an unknown emergency level of service name" do
+    let(:proceeding) { create(:proceeding, :domestic_abuse, emergency_level_of_service_name: "Unknown Emergency Level of Service (UELS)") }
+
+    it "maps the emergency_level_of_service_name to a normalized version of the original string, removing parenthetical content" do
+      expect(json[:emergency_level_of_service_name_enum]).to eq("UNKNOWN_EMERGENCY_LEVEL_OF_SERVICE")
+    end
+  end
+
+  context "when the proceeding has a blank emergency level of service name" do
+    let(:proceeding) { create(:proceeding, :domestic_abuse, emergency_level_of_service_name: "") }
+
+    it "maps the emergency_level_of_service_name to an empty string" do
+      expect(json[:emergency_level_of_service_name_enum]).to eq("")
+    end
+  end
+
+  context "when the proceeding has a nil emergency level of service name" do
+    let(:proceeding) { create(:proceeding, :domestic_abuse, emergency_level_of_service_name: nil) }
+
+    it "maps the emergency_level_of_service_name to nil" do
+      expect(json[:emergency_level_of_service_name_enum]).to be_nil
     end
   end
 end
