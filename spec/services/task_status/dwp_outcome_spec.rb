@@ -4,7 +4,7 @@ RSpec.describe TaskStatus::DWPOutcome do
   describe "#call" do
     subject(:task_status) { described_class.new(application).call }
 
-    let(:application) { create(:application, :with_complete_applicant, dwp_result_confirmed:, dwp_override:) }
+    let(:application) { create(:application, :with_complete_applicant, linked_application_completed: true, dwp_result_confirmed:, dwp_override:) }
     let(:dwp_override) { nil }
     let(:dwp_result_confirmed) { nil }
 

@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe TaskStatus::CheckProviderAnswers do
   subject(:instance) { described_class.new(application) }
 
-  let(:application) { create(:application, applicant:) }
+  let(:application) { create(:application, applicant:, linked_application_completed: true) }
 
   let(:complete_applicant) do
     create(
