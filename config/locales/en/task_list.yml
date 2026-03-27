@@ -17,6 +17,7 @@ en:
       merits:
         requirement_unknown: Once the proceedings have been selected, the relevant tasks will appear in this section.
     status:
+      not_needed: Not needed
       cannot_start: Cannot start yet
       completed: Completed
       in_progress: In progress
