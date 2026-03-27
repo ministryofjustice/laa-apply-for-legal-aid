@@ -43,7 +43,7 @@ RSpec.describe ApplicationDigest do
         expect(digest.date_started).to eq creation_date
         expect(digest.date_submitted).to eq submission_date
         expect(digest.days_to_submission).to eq 4
-        expect(digest.matter_types).to eq "Domestic Abuse;Section 8 orders"
+        expect(digest.matter_types).to eq "domestic abuse (DA);section 8 children (S8)"
         expect(digest.proceedings).to eq "DA001;SE013;SE014"
         expect(digest.applicant_age).to eq laa.applicant.age
         expect(digest.non_means_tested).to be false
@@ -417,7 +417,7 @@ RSpec.describe ApplicationDigest do
           expect(digest.date_started).to eq creation_date
           expect(digest.date_submitted).to eq submission_date
           expect(digest.days_to_submission).to eq 4
-          expect(digest.matter_types).to eq "Domestic Abuse;Section 8 orders"
+          expect(digest.matter_types).to eq "domestic abuse (DA);section 8 children (S8)"
           expect(digest.proceedings).to eq "DA001;SE013;SE014"
         end
       end

@@ -36,6 +36,38 @@ class ProceedingJsonBuilder < BaseJsonBuilder
       # nested relations below this line
       scope_limitations: scope_limitations.map { |sl| ScopeLimitationJsonBuilder.build(sl).as_json },
       final_hearings: final_hearings.map { |fh| FinalHearingJsonBuilder.build(fh).as_json },
+
+      # transformed data below this line
+      category_of_law_enum:,
+      matter_type_enum:,
     }
+  end
+
+private
+
+  def category_of_law_enum
+    category_of_law&.upcase
+  end
+
+  def matter_type_enum
+    case matter_type
+    when /special children act/i
+      "SPECIAL_CHILDREN_ACT"
+    when /public law family/i
+      "PUBLIC_LAW_FAMILY"
+    when /section 8 children/i
+      "SECTION_8_CHILDREN"
+    when /domestic abuse/i
+      "DOMESTIC_ABUSE"
+    else
+      normalize(matter_type)
+    end
+  end
+
+  # This could be used to convert existing matter types as well as being a fallback for any matter types.
+  # The normalization process is to remove any parenthetical content, replace spaces with underscores and upcase the result,
+  # which is the general format of the enums expected by datastore.
+  def normalize(str)
+    str.gsub(/\s*\(.*?\)/, "").parameterize(separator: "_").upcase
   end
 end

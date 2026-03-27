@@ -236,7 +236,7 @@ module Reports
               expect(value_for("DWP Overridden")).to eq "No"
               expect(value_for("Case Type")).to eq "Passported"
               expect(value_for("Single/Multi Proceedings")).to eq "Single"
-              expect(value_for("Matter types")).to eq "Domestic Abuse"
+              expect(value_for("Matter types")).to eq "domestic abuse (DA)"
               expect(value_for("Proceeding types selected")).to match(/^Non-molestation order/)
               expect(value_for("Delegated functions used")).to eq "Yes"
               expect(value_for("Delegated functions dates")).to eq "2020-01-01"
@@ -323,7 +323,7 @@ module Reports
 
             it "generates multiple proceedings content" do
               expect(value_for("Single/Multi Proceedings")).to eq "Multi"
-              expect(value_for("Matter types")).to eq "Domestic Abuse, Section 8 orders"
+              expect(value_for("Matter types")).to eq "domestic abuse (DA), section 8 children (S8)"
               expect(value_for("Proceeding types selected")).to eq expected_proceeding_types
             end
           end

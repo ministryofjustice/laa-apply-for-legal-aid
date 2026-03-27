@@ -65,7 +65,7 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form do
            used_delegated_functions_on: 10.days.ago,
            used_delegated_functions_reported_on: Time.zone.today,
            name: "inherent_jurisdiction_high_court_injunction",
-           matter_type: "Domestic Abuse",
+           matter_type: "domestic abuse (DA)",
            category_of_law: "Family",
            category_law_code: "MAT",
            ccms_matter_code: "MINJN",
