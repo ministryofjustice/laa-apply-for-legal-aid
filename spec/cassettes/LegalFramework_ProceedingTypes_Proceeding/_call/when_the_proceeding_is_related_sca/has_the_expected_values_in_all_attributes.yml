@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Faraday v2.13.1
+      - Faraday v2.14.1
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -21,7 +21,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Tue, 10 Jun 2025 11:38:50 GMT
+      - Fri, 27 Mar 2026 17:03:12 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -45,9 +45,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 12df85f7469ba771dd2229fcc346f96b
+      - d602c9443b6da92f0fd97abd93dd46fb
       X-Runtime:
-      - '0.011227'
+      - '0.009804'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
@@ -61,5 +61,5 @@ http_interactions:
         hearing","description":"Limited to all steps up to and including final hearing
         and any action necessary to implement (but not enforce) the order."}},"service_levels":[{"level":3,"name":"Full
         Representation","stage":8,"proceeding_default":true}]}'
-  recorded_at: Tue, 10 Jun 2025 11:38:50 GMT
-recorded_with: VCR 6.3.1
+  recorded_at: Fri, 27 Mar 2026 17:03:12 GMT
+recorded_with: VCR 6.4.0
