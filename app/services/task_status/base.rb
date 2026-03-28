@@ -12,8 +12,9 @@ module TaskStatus
 
     delegate :applicant, :passported?, :non_passported?, :non_means_tested?, to: :application
 
-    def initialize(application)
+    def initialize(application, status_results)
       @application = application
+      @status_results = status_results
     end
 
     # :nocov:
@@ -21,5 +22,22 @@ module TaskStatus
       raise "Implement in subclass"
     end
     # :nocov:
+
+  private
+
+    def previous_tasks_completed?
+      return @previous_tasks_completed if defined?(@previous_tasks_completed)
+
+      @previous_tasks_completed = previous_task_statuses.all?(&:completed?)
+    end
+
+    def previous_task_statuses
+      @status_results.slice(*previous_task_status_items).values
+    end
+
+    # Override in subclass if there are previous tasks to check, otherwise will return an empty array and previous_tasks_completed? will return true
+    def previous_task_status_items
+      @previous_task_status_items ||= []
+    end
   end
 end

@@ -8,6 +8,8 @@ module TaskStatus
       status.in_progress! if in_progress?
       status.completed! if completed?
 
+      # TODO: can these two lines be moved to super class and removed from all subclasses
+      @status_results[self.class] = status
       status
     end
 
@@ -18,7 +20,7 @@ module TaskStatus
     end
 
     def cannot_start?
-      !Applicants.new(application).call.completed?
+      !previous_tasks_completed?
     end
 
     def in_progress?
@@ -27,6 +29,12 @@ module TaskStatus
 
     def completed?
       application.linked_application_completed?
+    end
+
+    def previous_task_status_items
+      @previous_task_status_items ||= [
+        Applicants,
+      ]
     end
   end
 end

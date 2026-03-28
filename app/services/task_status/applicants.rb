@@ -7,6 +7,8 @@ module TaskStatus
       status.not_started! unless applicant
       status.completed! if completed?
 
+      # TODO: can these two lines be moved to super class and removed from all subclasses
+      @status_results[self.class] = status
       status
     end
 

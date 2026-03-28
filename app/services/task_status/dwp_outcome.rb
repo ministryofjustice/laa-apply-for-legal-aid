@@ -8,6 +8,8 @@ module TaskStatus
       status.in_progress! if in_progress?
       status.completed! if completed?
 
+      # TODO: can these two lines be moved to super class and removed from all subclasses
+      @status_results[self.class] = status
       status
     end
 
@@ -52,7 +54,8 @@ module TaskStatus
     def check_provider_answers_completed?
       return @check_provider_answers_completed if defined?(@check_provider_answers_completed)
 
-      @check_provider_answers_completed = CheckProviderAnswers.new(application).call.completed?
+      @check_provider_answers_completed =
+        @status_results[CheckProviderAnswers]&.completed?
     end
 
     def dwp_override_validator

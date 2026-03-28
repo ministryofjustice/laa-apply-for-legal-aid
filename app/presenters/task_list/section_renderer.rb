@@ -8,13 +8,14 @@ module TaskList
 
     delegate :t!, to: I18n
 
-    def initialize(application, name:, tasks:, index:, body_override: nil, display_section_header: true)
+    def initialize(application, name:, tasks:, index:, body_override: nil, display_section_header: true, status_results: {})
       @application = application
       @name = name
       @tasks = tasks
       @index = index
       @body_override = body_override
       @display_section_header = display_section_header
+      @status_results = status_results
     end
 
     # :nocov:
@@ -57,7 +58,7 @@ module TaskList
       @items ||= displayable_items.map do |name|
         name = name.call(application) if name.respond_to?(:call)
 
-        Task::Base.build(application, name)
+        Task::Base.build(application, name, @status_results)
       end
     end
 

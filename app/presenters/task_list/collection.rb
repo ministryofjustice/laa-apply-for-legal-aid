@@ -12,6 +12,7 @@ module TaskList
       @view = view
       @application = application
       @show_index = show_index
+      @status_results = {}
 
       super(collection)
     end
@@ -47,6 +48,7 @@ module TaskList
               index: show_index ? index : nil,
               body_override: subtasks[:body_override]&.call(application),
               display_section_header: subindex.eql?(1),
+              status_results: @status_results,
             )
           end
         else
@@ -56,6 +58,7 @@ module TaskList
             tasks: tasks,
             index: show_index ? index : nil,
             body_override: tasks[:body_override]&.call(application),
+            status_results: @status_results,
           )
         end
       }.flatten
