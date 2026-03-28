@@ -22,6 +22,8 @@ module TaskStatus
       status.review! if review?
       status.completed! if completed?
 
+      # TODO: can these two lines be moved to super class and removed from all subclasses
+      @status_results[self.class] = status
       status
     end
 
@@ -55,18 +57,6 @@ module TaskStatus
       return @startable if defined?(@startable)
 
       @startable = previous_tasks_completed?
-    end
-
-    def previous_tasks_completed?
-      return @previous_tasks_completed if defined?(@previous_tasks_completed)
-
-      @previous_tasks_completed = previous_task_statuses.all?(&:completed?)
-    end
-
-    def previous_task_statuses
-      @previous_task_statuses ||= previous_task_status_items.map do |task_status|
-        task_status.send(:new, application).call
-      end
     end
 
     def previous_task_status_items

@@ -6,7 +6,7 @@ RSpec.describe Task::Base do
   describe ".build" do
     context "with an existing named class" do
       it "builds an instance of the named class" do
-        task = described_class.build(application, "applicants")
+        task = described_class.build(application, "applicants", status_results: {})
 
         expect(task).to be_instance_of(Task::Applicants)
         expect(task.application).to eq(application)
@@ -15,7 +15,7 @@ RSpec.describe Task::Base do
 
     context "without an existing named class" do
       it "builds an instance of the base class" do
-        task = described_class.build(application, "foobar")
+        task = described_class.build(application, "foobar", status_results: {})
 
         expect(task).to be_a(described_class)
         expect(task.application).to eq(application)
@@ -26,7 +26,7 @@ RSpec.describe Task::Base do
   describe "#render" do
     context "when instantiated with an existing task status class" do
       let(:page) { Capybara::Node::Simple.new(instance.render) }
-      let(:instance) { described_class.build(application, "applicants") }
+      let(:instance) { described_class.build(application, "applicants", status_results: {}) }
 
       context "when status allows links to be enabled" do
         before { allow(instance.status).to receive(:enabled?).and_return(true) }
@@ -89,7 +89,7 @@ RSpec.describe Task::Base do
     end
 
     context "when instantiated without an existing task status class" do
-      let(:instance) { described_class.build(application, "foobar") }
+      let(:instance) { described_class.build(application, "foobar", status_results: {}) }
 
       it "raises error" do
         expect { instance.render }.to raise_error("TaskStatus::Foobar not implemented! Follow task list pattern or overide in subclass.")
@@ -99,7 +99,7 @@ RSpec.describe Task::Base do
 
   describe "#path" do
     context "when instantiated by a sub class" do
-      let(:instance) { described_class.build(application, "applicants") }
+      let(:instance) { described_class.build(application, "applicants", status_results: {}) }
 
       it "returns the result of calling path as defined in the subclass" do
         expect(instance.path).to be_instance_of(String)
@@ -107,7 +107,7 @@ RSpec.describe Task::Base do
     end
 
     context "when instantiated by the base class" do
-      let(:instance) { described_class.build(application, "foobar") }
+      let(:instance) { described_class.build(application, "foobar", status_results: {}) }
 
       it "raises error" do
         expect { instance.path }.to raise_error("Task::Foobar.path not implemented. Implement in subclass.")
@@ -117,7 +117,7 @@ RSpec.describe Task::Base do
 
   describe "#status" do
     context "when instantiated with an existing task status class" do
-      let(:instance) { described_class.build(application, "applicants") }
+      let(:instance) { described_class.build(application, "applicants", status_results: {}) }
 
       it "returns task status value object" do
         expect(instance.status).to be_instance_of(TaskStatus::ValueObject)
@@ -125,7 +125,7 @@ RSpec.describe Task::Base do
     end
 
     context "when instantiated without an existing task status class" do
-      let(:instance) { described_class.build(application, "foobar") }
+      let(:instance) { described_class.build(application, "foobar", status_results: {}) }
 
       it "raises error" do
         expect { instance.status }.to raise_error("TaskStatus::Foobar not implemented! Follow task list pattern or overide in subclass.")

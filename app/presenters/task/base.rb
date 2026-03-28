@@ -6,13 +6,13 @@ module Task
     include ActionView::Context
     include Rails.application.routes.url_helpers
 
-    def self.build(application, name)
+    def self.build(application, name, status_results)
       class_name = "Task::#{name.camelize}"
 
       if const_defined?(class_name)
-        class_name.constantize.new(application, name:)
+        class_name.constantize.new(application, name:, status_results:)
       else
-        new(application, name:)
+        new(application, name:, status_results:)
       end
     end
 
@@ -21,9 +21,10 @@ module Task
     delegate :t!, to: I18n
     delegate :completed?, to: :status
 
-    def initialize(application, name:)
+    def initialize(application, name:, status_results:)
       @application = application
       @name = name
+      @status_results = status_results
     end
 
     def render
@@ -49,7 +50,8 @@ module Task
       task_status_klass = "TaskStatus::#{name.camelize}"
 
       if self.class.const_defined?(task_status_klass)
-        @status = task_status_klass.constantize.new(application).call
+        task_status = task_status_klass.constantize.new(application, @status_results)
+        @status = task_status.call
       else
         raise "#{task_status_klass} not implemented! Follow task list pattern or overide in subclass."
       end

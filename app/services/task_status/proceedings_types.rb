@@ -8,6 +8,8 @@ module TaskStatus
       status.not_started! if not_started?
       status.completed! if completed?
 
+      # TODO: can these two lines be moved to super class and removed from all subclasses
+      @status_results[self.class] = status
       status
     end
 
@@ -16,7 +18,7 @@ module TaskStatus
     def not_started?
       return @not_started if defined?(@not_started)
 
-      @not_started = applicants_validator.valid? && application.linked_application_completed? && application.proceedings.empty?
+      @not_started = previous_tasks_completed? && application.proceedings.empty?
     end
 
     def in_progress?
@@ -31,12 +33,15 @@ module TaskStatus
       @completed = proceedings_types_validator.valid?
     end
 
-    def applicants_validator
-      @applicants_validator ||= Validators::Applicants.new(application)
-    end
-
     def proceedings_types_validator
       @proceedings_types_validator ||= Validators::ProceedingsTypes.new(application)
+    end
+
+    def previous_task_status_items
+      @previous_task_status_items ||= [
+        Applicants,
+        MakeLink,
+      ]
     end
   end
 end
