@@ -3,7 +3,7 @@ require Rails.root.join("spec/services/pda/provider_details_request_stubs")
 
 RSpec.describe Providers::ProvidersController do
   let(:provider) { create(:provider) }
-  let(:address_string) { "Test firm, Test address line 1, Test address line 2, Test city, TE5T1NG" }
+  let(:address_string) { "Test Firm, Test Address Line 1, Test Address Line 2, Test City, TE5T1NG" }
 
   before do
     stub_provider_user_for(provider.silas_id)

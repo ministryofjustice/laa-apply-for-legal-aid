@@ -14,12 +14,12 @@ module Providers
       address = PDA::OfficeAddressRetriever.call(@provider.selected_office.code)
 
       [
-        address.firm_name,
-        address.address_line_one,
-        address.address_line_two,
-        address.address_line_three,
-        address.address_line_four,
-        address.city,
+        address.firm_name.downcase.titleize,
+        address.address_line_one.downcase.titleize,
+        address.address_line_two&.downcase&.titleize,
+        address.address_line_three&.downcase&.titleize,
+        address.address_line_four&.downcase&.titleize,
+        address.city.titleize,
         address.post_code,
       ].compact.join(", ")
     rescue PDA::OfficeAddressRetriever::NotFoundError
