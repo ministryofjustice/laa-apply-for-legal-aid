@@ -113,6 +113,7 @@ class LegalAidApplicationJsonBuilder < BaseJsonBuilder
       proceeding_merits:
         proceedings.map do |p|
           {
+            proceeding_id: p.id,
             opponents_application: OpponentsApplicationJsonBuilder.build(p.opponents_application).as_json,
             attempts_to_settle: AttemptsToSettleJsonBuilder.build(p.attempts_to_settle).as_json,
             specific_issue: SpecificIssueJsonBuilder.build(p.specific_issue).as_json,
