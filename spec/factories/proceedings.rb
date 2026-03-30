@@ -89,12 +89,16 @@ FactoryBot.define do
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
       name { "inherent_jurisdiction_high_court_injunction" }
-      matter_type { "Domestic Abuse" }
+      matter_type { "domestic abuse (DA)" }
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
       client_involvement_type_ccms_code { "A" }
       client_involvement_type_description { "Applicant/Claimant/Petitioner" }
+    end
+
+    trait :domestic_abuse do
+      da001
     end
 
     trait :da002 do
@@ -116,7 +120,7 @@ FactoryBot.define do
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
       name { "variation_or_discharge_under_section_protection_from_harassment_act" }
-      matter_type { "Domestic Abuse" }
+      matter_type { "domestic abuse (DA)" }
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
@@ -140,7 +144,7 @@ FactoryBot.define do
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
       name { "occupation_order" }
-      matter_type { "Domestic Abuse" }
+      matter_type { "domestic abuse (DA)" }
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
@@ -164,7 +168,7 @@ FactoryBot.define do
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
       name { "extend_variation_or_discharge_part_iv" }
-      matter_type { "Domestic Abuse" }
+      matter_type { "domestic abuse (DA)" }
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
@@ -188,7 +192,7 @@ FactoryBot.define do
       used_delegated_functions_on { Faker::Date.between(from: 10.days.ago, to: 2.days.ago) }
       used_delegated_functions_reported_on { Time.zone.today }
       name { "nonmolestation_order" }
-      matter_type { "Domestic Abuse" }
+      matter_type { "domestic abuse (DA)" }
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "MINJN" }
@@ -220,6 +224,10 @@ FactoryBot.define do
       client_involvement_type_description { "Applicant/Claimant/Petitioner" }
     end
 
+    trait :section_8_children do
+      se003
+    end
+
     trait :se004 do
       lead_proceeding { false }
       ccms_code { "SE004" }
@@ -236,7 +244,7 @@ FactoryBot.define do
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
       name { "specified_issue_order_s8" }
-      matter_type { "Section 8 orders" }
+      matter_type { "section 8 children (S8)" }
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "KSEC8" }
@@ -260,7 +268,7 @@ FactoryBot.define do
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
       name { "child_arrangements_order_contact" }
-      matter_type { "Section 8 orders" }
+      matter_type { "section 8 children (S8)" }
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "KSEC8" }
@@ -284,7 +292,7 @@ FactoryBot.define do
       used_delegated_functions_on { nil }
       used_delegated_functions_reported_on { nil }
       name { "child_arrangements_order_residence" }
-      matter_type { "Section 8 orders" }
+      matter_type { "section 8 children (S8)" }
       category_of_law { "Family" }
       category_law_code { "MAT" }
       ccms_matter_code { "KSEC8" }
@@ -316,7 +324,7 @@ FactoryBot.define do
     used_delegated_functions_on { nil }
     used_delegated_functions_reported_on { nil }
     name { "CAO contact-Appeal" }
-    matter_type { "Section 8 orders" }
+    matter_type { "section 8 children (S8)" }
     category_of_law { "Family" }
     category_law_code { "MAT" }
     ccms_matter_code { "KSEC8" }
@@ -345,6 +353,10 @@ FactoryBot.define do
     after(:create) do |proceeding, evaluator|
       create(:scope_limitation, :substantive, proceeding:) unless evaluator.no_scope_limitations
     end
+  end
+
+  trait :special_children_act do
+    pb003
   end
 
   trait :pb007 do
@@ -407,6 +419,10 @@ FactoryBot.define do
     ccms_matter_code { "KPBLB" }
     client_involvement_type_ccms_code { "A" }
     client_involvement_type_description { "Applicant/Claimant/Petitioner" }
+  end
+
+  trait :public_law_family do
+    pbm05
   end
 
   trait :pbm16 do

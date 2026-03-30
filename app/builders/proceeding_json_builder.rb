@@ -36,6 +36,60 @@ class ProceedingJsonBuilder < BaseJsonBuilder
       # nested relations below this line
       scope_limitations: scope_limitations.map { |sl| ScopeLimitationJsonBuilder.build(sl).as_json },
       final_hearings: final_hearings.map { |fh| FinalHearingJsonBuilder.build(fh).as_json },
+
+      # transformed data below this line
+      category_of_law_enum:,
+      matter_type_enum:,
+      emergency_level_of_service_name_enum:,
+      substantive_level_of_service_name_enum:,
     }
+  end
+
+private
+
+  def category_of_law_enum
+    category_of_law&.upcase
+  end
+
+  def matter_type_enum
+    case matter_type
+    when /special children act/i
+      "SPECIAL_CHILDREN_ACT"
+    when /public law family/i
+      "PUBLIC_LAW_FAMILY"
+    when /section 8 children/i
+      "SECTION_8_CHILDREN"
+    when /domestic abuse/i
+      "DOMESTIC_ABUSE"
+    else
+      normalize(matter_type)
+    end
+  end
+
+  def substantive_level_of_service_name_enum
+    level_of_service_name_enum(substantive_level_of_service_name)
+  end
+
+  def emergency_level_of_service_name_enum
+    level_of_service_name_enum(emergency_level_of_service_name)
+  end
+
+  def level_of_service_name_enum(level_of_service_name)
+    case level_of_service_name
+    when /full representation/i
+      "FULL_REPRESENTATION"
+    when /family help \(higher\)/i
+      "FAMILY_HELP_HIGHER"
+    else
+      normalize(level_of_service_name)
+    end
+  end
+
+  # The normalization process is to remove any parenthetical content, replace spaces with underscores and upcase the result,
+  # which is the general format of the enums expected by datastore.
+  def normalize(str)
+    return nil if str.nil?
+
+    str.gsub(/\s*\(.*?\)/, "").parameterize(separator: "_").upcase
   end
 end

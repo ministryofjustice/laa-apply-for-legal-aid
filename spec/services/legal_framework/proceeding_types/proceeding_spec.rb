@@ -31,7 +31,7 @@ RSpec.describe LegalFramework::ProceedingTypes::Proceeding, :vcr do
       response = call
       expect(response.ccms_category_law).to eq "Family"
       expect(response.ccms_category_law_code).to eq "MAT"
-      expect(response.ccms_matter).to eq "Domestic abuse"
+      expect(response.ccms_matter).to eq "domestic abuse (DA)"
       expect(response.ccms_matter_code).to eq "MINJN"
       expect(response.cost_limitations).to eq expected_cost_limitations
       expect(response.default_scope_limitations).to eq expected_default_scope_limitations
