@@ -49,18 +49,30 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                                 substantive_cost_limitation:,
                                 client_involvement_type_ccms_code: "A",
                                 client_involvement_type_description: "Applicant/claimant/petitioner",
-                                used_delegated_functions: true,
-                                used_delegated_functions_on: 5.days.ago,
-                                accepted_emergency_defaults: true,
-                                accepted_substantive_defaults: true,
-                                emergency_level_of_service: "3",
-                                substantive_level_of_service: "3",
+                                used_delegated_functions: proceeding_two_used_delegated_functions,
+                                used_delegated_functions_on: proceeding_two_used_delegated_functions_on,
+                                accepted_emergency_defaults: proceeding_two_accepted_emergency_defaults,
+                                accepted_substantive_defaults: proceeding_two_accepted_substantive_defaults,
+                                emergency_level_of_service: proceeding_two_emergency_level_of_service,
+                                substantive_level_of_service: proceeding_two_substantive_level_of_service,
                                 emergency_level_of_service_name: "Full Representation",
                                 emergency_level_of_service_stage: "8")
   end
 
+  let(:proceeding_two_used_delegated_functions) { true }
+  let(:proceeding_two_used_delegated_functions_on) { 5.days.ago }
+  let(:proceeding_two_accepted_emergency_defaults) { true }
+  let(:proceeding_two_accepted_substantive_defaults) { true }
+  let(:proceeding_two_emergency_level_of_service) { "3" }
+  let(:proceeding_two_substantive_level_of_service) { "3" }
+
+  let(:emergency_final_hearing_proceeding) { proceeding_one }
+  let(:substantive_final_hearing_proceeding) { proceeding_one }
+  let(:emergency_scope_limitation_proceeding) { proceeding_one }
+  let(:substantive_scope_limitation_proceeding) { proceeding_one }
+
   let(:emergency_final_hearing) do
-    create(:final_hearing, proceeding: proceeding_one,
+    create(:final_hearing, proceeding: emergency_final_hearing_proceeding,
                            work_type: :emergency,
                            listed: emergency_final_hearing_listed,
                            date: emergency_final_hearing_date,
@@ -68,15 +80,15 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
   end
 
   let(:substantive_final_hearing) do
-    create(:final_hearing, proceeding: proceeding_one,
+    create(:final_hearing, proceeding: substantive_final_hearing_proceeding,
                            work_type: :substantive,
                            listed: substantive_final_hearing_listed,
                            date: substantive_final_hearing_date,
                            details: substantive_final_hearing_details)
   end
 
-  let(:emergency_scope_limitation) { create(:scope_limitation, :emergency, proceeding: proceeding_one) }
-  let(:substantive_scope_limitation) { create(:scope_limitation, :substantive, proceeding: proceeding_one) }
+  let(:emergency_scope_limitation) { create(:scope_limitation, :emergency, proceeding: emergency_scope_limitation_proceeding) }
+  let(:substantive_scope_limitation) { create(:scope_limitation, :substantive, proceeding: substantive_scope_limitation_proceeding) }
   let(:client_involvement_type_ccms_code) { "A" }
   let(:client_involvement_type_description) { "Applicant/claimant/petitioner" }
   let(:used_delegated_functions) { true }
@@ -110,9 +122,6 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
         substantive_scope_limitation
         substantive_final_hearing
         emergency_final_hearing
-
-        create(:final_hearing, proceeding: proceeding_two, work_type: :substantive, listed: true)
-        create(:final_hearing, proceeding: proceeding_two, work_type: :emergency, listed: true)
       end
 
       context "when client involvement type has not been answered for each proceeding" do
@@ -178,15 +187,25 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                 let(:emergency_level_of_service) { "3" }
                 let(:emergency_level_of_service_name) { "Full Representation" }
 
-                it { is_expected.to be_valid }
+                it "does not require a final hearing when only one level of service is available" do
+                  expect(validator).to be_valid
+                end
+              end
 
-                context "and final hearing has not been chosen for each proceeding" do
+              context "when proceeding two reaches emergency full representation" do
+                let(:accepted_emergency_defaults) { true }
+                let(:proceeding_two_accepted_emergency_defaults) { false }
+                let(:emergency_scope_limitation_proceeding) { proceeding_two }
+
+                context "and final hearing has not been chosen for proceeding two" do
                   let(:emergency_final_hearing) { nil }
 
                   it { is_expected.not_to be_valid }
                 end
 
-                context "and final hearing is listed" do
+                context "and final hearing is listed for proceeding two" do
+                  let(:emergency_final_hearing_proceeding) { proceeding_two }
+
                   context "with a hearing date" do
                     it { is_expected.to be_valid }
                   end
@@ -198,7 +217,8 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                   end
                 end
 
-                context "and final hearing is not listed" do
+                context "and final hearing is not listed for proceeding two" do
+                  let(:emergency_final_hearing_proceeding) { proceeding_two }
                   let(:emergency_final_hearing_listed) { false }
 
                   context "with a reason" do
@@ -256,15 +276,25 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
             let(:substantive_level_of_service) { "3" }
             let(:substantive_level_of_service_name) { "Full Representation" }
 
-            it { is_expected.to be_valid }
+            it "does not require a final hearing when only one level of service is available" do
+              expect(validator).to be_valid
+            end
+          end
 
-            context "and final hearing has not been chosen for each proceeding" do
+          context "when proceeding two reaches substantive full representation" do
+            let(:accepted_substantive_defaults) { true }
+            let(:proceeding_two_accepted_substantive_defaults) { false }
+            let(:substantive_scope_limitation_proceeding) { proceeding_two }
+
+            context "and final hearing has not been chosen for proceeding two" do
               let(:substantive_final_hearing) { nil }
 
               it { is_expected.not_to be_valid }
             end
 
-            context "and final hearing is listed" do
+            context "and final hearing is listed for proceeding two" do
+              let(:substantive_final_hearing_proceeding) { proceeding_two }
+
               context "with a hearing date" do
                 it { is_expected.to be_valid }
               end
@@ -276,7 +306,8 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
               end
             end
 
-            context "and final hearing is not listed" do
+            context "and final hearing is not listed for proceeding two" do
+              let(:substantive_final_hearing_proceeding) { proceeding_two }
               let(:substantive_final_hearing_listed) { false }
 
               context "with a reason" do
