@@ -16,55 +16,53 @@ module TaskStatus
       delegate :proceedings, to: :application
 
       def forms
+        proceedings.flat_map { |proceeding| forms_for(proceeding) } << emergency_cost_override_form
+      end
+
+      def forms_for(proceeding)
+        emergency_level_form = emergency_level_of_service_form(proceeding)
+        substantive_level_form = substantive_level_of_service_form(proceeding)
         [
-          client_involvement_type_forms,
-          delegated_functions_forms,
-          emergency_defaults_forms,
-          emergency_level_of_service_forms,
-          final_hearings_emergency_forms,
+          client_involvement_type_form(proceeding),
+          delegated_functions_form(proceeding),
+          emergency_defaults_form(proceeding),
+          emergency_level_form,
+          emergency_final_hearings_form(proceeding, emergency_level_form),
           # emergency_scope_limitation_forms - doesn't use validator in the same way,
-          substantive_defaults_forms,
-          substantive_level_of_service_forms,
-          final_hearings_substantive_forms,
+          substantive_defaults_form(proceeding),
+          substantive_level_form,
+          substantive_final_hearings_form(proceeding, substantive_level_form),
           # substantive_scope_limitation_forms - doesn't use validator in the same way,
-          emergency_cost_override_form,
         ].flatten.compact
       end
 
-      def client_involvement_type_forms
-        proceedings.filter_map do |proceeding|
-          Proceedings::ClientInvolvementTypeForm.new(model: proceeding)
-        end
+      def client_involvement_type_form(proceeding)
+        Proceedings::ClientInvolvementTypeForm.new(model: proceeding)
       end
 
-      def delegated_functions_forms
-        proceedings.filter_map do |proceeding|
-          Proceedings::DelegatedFunctionsForm.new(model: proceeding)
-        end
+      def delegated_functions_form(proceeding)
+        Proceedings::DelegatedFunctionsForm.new(model: proceeding)
       end
 
-      def emergency_defaults_forms
-        proceedings.filter_map do |proceeding|
-          next if !proceeding.used_delegated_functions? || proceeding.special_children_act?
+      def emergency_defaults_form(proceeding)
+        return if !proceeding.used_delegated_functions? || proceeding.special_children_act?
 
-          Proceedings::EmergencyDefaultsForm.new(model: proceeding)
-        end
+        Proceedings::EmergencyDefaultsForm.new(model: proceeding)
       end
 
-      def emergency_level_of_service_forms
-        proceedings.filter_map do |proceeding|
-          next unless proceeding.used_delegated_functions?
+      def emergency_level_of_service_form(proceeding)
+        return unless proceeding.used_delegated_functions?
+        return if proceeding.accepted_emergency_defaults?
 
-          Proceedings::EmergencyLevelOfServiceForm.new(model: proceeding) unless proceeding.accepted_emergency_defaults?
-        end
+        Proceedings::EmergencyLevelOfServiceForm.new(model: proceeding)
       end
 
-      def final_hearings_emergency_forms
-        proceedings.filter_map do |proceeding|
-          next unless emergency_changed_to_full_rep?(proceeding)
+      def emergency_final_hearings_form(proceeding, emergency_level_form)
+        return unless proceeding.used_delegated_functions?
+        return unless emergency_changed_to_full_rep?(proceeding)
+        return unless emergency_level_form&.levels_of_service.to_a.length > 1
 
-          Proceedings::FinalHearingForm.new(model: proceeding.emergency_final_hearing)
-        end
+        Proceedings::FinalHearingForm.new(model: proceeding.emergency_final_hearing)
       end
 
       def emergency_changed_to_full_rep?(proceeding)
@@ -79,28 +77,25 @@ module TaskStatus
         end
       end
 
-      def substantive_defaults_forms
-        proceedings.filter_map do |proceeding|
-          Proceedings::SubstantiveDefaultsForm.new(model: proceeding)
-        end
+      def substantive_defaults_form(proceeding)
+        Proceedings::SubstantiveDefaultsForm.new(model: proceeding)
       end
 
-      def substantive_level_of_service_forms
-        proceedings.filter_map do |proceeding|
-          Proceedings::SubstantiveLevelOfServiceForm.new(model: proceeding) unless proceeding.accepted_substantive_defaults?
-        end
+      def substantive_level_of_service_form(proceeding)
+        return if proceeding.accepted_substantive_defaults?
+
+        Proceedings::SubstantiveLevelOfServiceForm.new(model: proceeding)
       end
 
       def substantive_changed_to_full_rep?(proceeding)
         proceeding.substantive_full_representation? && !proceeding.accepted_substantive_defaults?
       end
 
-      def final_hearings_substantive_forms
-        proceedings.filter_map do |proceeding|
-          next unless substantive_changed_to_full_rep?(proceeding)
+      def substantive_final_hearings_form(proceeding, substantive_level_form)
+        return unless substantive_changed_to_full_rep?(proceeding)
+        return unless substantive_level_form&.levels_of_service.to_a.length > 1
 
-          Proceedings::FinalHearingForm.new(model: proceeding.substantive_final_hearing)
-        end
+        Proceedings::FinalHearingForm.new(model: proceeding.substantive_final_hearing)
       end
 
       def substantive_scope_limitations
