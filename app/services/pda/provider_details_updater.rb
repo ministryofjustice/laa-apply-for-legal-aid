@@ -6,13 +6,18 @@ module PDA
     APPLICABLE_CATEGORIES_OF_LAW = %w[MAT].freeze
     APPLICABLE_AREAS_OF_LAW = ["LEGAL HELP"].freeze
 
-    def initialize(provider, office_code)
+    attr_reader :connection
+
+    delegate :get, to: :connection
+
+    def initialize(provider, office_code, connection: PDA::Connection.new)
       @provider = provider
       @office_code = office_code
+      @connection = connection
     end
 
-    def self.call(provider, office_code)
-      new(provider, office_code).call
+    def self.call(provider, office_code, **)
+      new(provider, office_code, **).call
     end
 
     def call
@@ -100,7 +105,7 @@ module PDA
     end
 
     def office_schedules_response
-      @office_schedules_response ||= pda_conn.get("provider-offices/#{@office_code}/schedules")
+      @office_schedules_response ||= get("provider-offices/#{@office_code}/schedules")
     end
 
     def ccms_contact_id
@@ -124,17 +129,6 @@ module PDA
       else
         raise
       end
-    end
-
-    def pda_conn
-      @pda_conn ||= Faraday.new(url: Rails.configuration.x.pda.url, headers: pda_headers)
-    end
-
-    def pda_headers
-      {
-        "accept" => "application/json",
-        "X-Authorization" => Rails.configuration.x.pda.auth_key,
-      }
     end
   end
 end

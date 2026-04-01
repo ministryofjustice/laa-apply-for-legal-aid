@@ -5,12 +5,12 @@ def stub_provider_offices
   stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-users/test-user/provider-offices})
     .to_return(
       status: 200,
-      body: provider_offices_json,
+      body: provider_user_offices_json,
       headers: { "Content-Type" => "application/json; charset=utf-8" },
     )
 end
 
-def provider_offices_json
+def provider_user_offices_json
   {
     firm: {
       ccmsFirmId: 99_999,
@@ -89,6 +89,37 @@ def provider_firm_offices_json
         firmOfficeCode: "2A222B",
       },
     ],
+  }.to_json
+end
+
+#################
+# offices
+#################
+def stub_provider_offices_address_for(office_code)
+  stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-offices/#{office_code}})
+  .to_return(
+    status: 200,
+    body: provider_offices_json,
+    headers: { "Content-Type" => "application/json; charset=utf-8" },
+  )
+end
+
+def provider_offices_json
+  {
+    firm: {
+      ccmsFirmId: 99_999,
+      firmId: 1639,
+      firmName: "Test firm",
+      firmNumber: "1639",
+    },
+    office: {
+      addressLine1: "Test address line 1",
+      addressLine2: "Test address line 2",
+      addressLine3: nil,
+      addressLine4: nil,
+      city: "Test city",
+      postCode: "TE5T1NG",
+    },
   }.to_json
 end
 
@@ -727,5 +758,10 @@ end
 
 def stub_provider_user_failure_for(uuid, status:, body: nil)
   stub_request(:get, %r{#{Rails.configuration.x.ccms_user_api.url}/user-details/silas/#{uuid}})
+    .to_return(status:, body:)
+end
+
+def stub_provider_offices_address_failure_for(office_code, status:, body: nil)
+  stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-offices/#{office_code}})
     .to_return(status:, body:)
 end

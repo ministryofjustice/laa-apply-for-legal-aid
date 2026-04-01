@@ -27,4 +27,5 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "PLF"
   inflect.acronym "S8"
   inflect.acronym "DA"
+  inflect.acronym "LLP"
 end
