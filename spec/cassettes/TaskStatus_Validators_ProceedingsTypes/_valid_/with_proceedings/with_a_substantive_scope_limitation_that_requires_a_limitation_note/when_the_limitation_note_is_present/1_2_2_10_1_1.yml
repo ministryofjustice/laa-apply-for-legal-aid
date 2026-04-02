@@ -1,0 +1,407 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/SE013A
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 02 Apr 2026 08:19:05 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1099'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"edb99a9f7c537816f3a552f3e80f45df"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 8bf62916ac155b27d0b55ab11f4b569d
+      X-Runtime:
+      - '0.010965'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"ccms_code":"SE013A","meaning":"Child arrangements
+        order (CAO) - contact - appeal","ccms_category_law_code":"MAT","ccms_matter_code":"KSEC8","name":"cao_contact_appeal","description":"to
+        be represented on an application for a child arrangements order-who the child(ren)
+        spend time with. Appeals only.","sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"section
+        8 children (S8)","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"5000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"CV079","meaning":"Counsel''s
+        Opinion","description":"Limited to obtaining external Counsel''s Opinion or
+        the opinion of an external solicitor with higher court advocacy rights on
+        the information already available."},"delegated_functions":{"code":"CV118","meaning":"Hearing","description":"Limited
+        to all steps up to and including the hearing on [see additional limitation
+        notes]"}},"service_levels":[{"level":3,"name":"Full Representation","stage":8,"proceeding_default":true}]}'
+  recorded_at: Thu, 02 Apr 2026 08:19:05 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"SE013A","delegated_functions_used":false,"client_involvement_type":"A"}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 02 Apr 2026 08:19:05 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '477'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"69abb2177cf5ad632e996def6df90721"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 1108e140a5da881a9b6fefadf3e1bd09
+      X-Runtime:
+      - '0.005073'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"SE013A","delegated_functions_used":false,"client_involvement_type":"A"},"default_level_of_service":{"level":3,"name":"Full
+        Representation","stage":8},"default_scope":{"code":"CV079","meaning":"Counsel''s
+        Opinion","description":"Limited to obtaining external Counsel''s Opinion or
+        the opinion of an external solicitor with higher court advocacy rights on
+        the information already available.","additional_params":[]}}'
+  recorded_at: Thu, 02 Apr 2026 08:19:05 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_scopes
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"SE013A","delegated_functions_used":false,"client_involvement_type":"A","level_of_service_code":3}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 02 Apr 2026 08:19:05 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '7945'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"0f85ba4246ee54d05bd0fde22919813b"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - dbdfd72f199f457933825c84611828d0
+      X-Runtime:
+      - '0.030975'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJzdWNjZXNzIjp0cnVlLCJyZXF1ZXN0ZWRfcGFyYW1zIjp7InByb2NlZWRpbmdfdHlwZV9jY21zX2NvZGUiOiJTRTAxM0EiLCJkZWxlZ2F0ZWRfZnVuY3Rpb25zX3VzZWQiOmZhbHNlLCJjbGllbnRfaW52b2x2ZW1lbnRfdHlwZSI6IkEiLCJsZXZlbF9vZl9zZXJ2aWNlX2NvZGUiOjN9LCJsZXZlbF9vZl9zZXJ2aWNlIjp7ImxldmVsIjozLCJuYW1lIjoiRnVsbCBSZXByZXNlbnRhdGlvbiIsInN0YWdlIjo4LCJzY29wZV9saW1pdGF0aW9ucyI6W3siY29kZSI6IkFQTDY1IiwibWVhbmluZyI6IkFwcGVhbCBmYW1pbHkgY291cnQtQyBvcGluaW9uIChBcHApIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIHJlcHJlc2VudGF0aW9uIGFzIGFuIGFwcGVsbGFudCBvbiBhbiBhcHBlYWwgaW4gdGhlIGZhbWlseSBjb3VydCBMSU1JVEVEIHRvIG9idGFpbmluZyBDb3Vuc2Vs4oCZcyBvcGluaW9uIG9uIHRoZSBtZXJpdHMgb2YgYW4gYXBwZWFsLiIsImFkZGl0aW9uYWxfcGFyYW1zIjpbXX0seyJjb2RlIjoiQVBMNjYiLCJtZWFuaW5nIjoiQXBwZWFsIGZhbWlseSBjb3VydC1DIG9waW5pb24gKFJlc3ApIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIHJlcHJlc2VudGF0aW9uIGFzIHJlc3BvbmRlbnQgb24gYW4gYXBwZWFsIGluIHRoZSBmYW1pbHkgY291cnQgTElNSVRFRCB0byBvYnRhaW5pbmcgY291bnNlbOKAmXMgb3BpbmlvbiBvbiB0aGUgbWVyaXRzIG9mIGRlZmVuZGluZyB0aGUgYXBwZWFsLiIsImFkZGl0aW9uYWxfcGFyYW1zIjpbXX0seyJjb2RlIjoiQVBMNjkiLCJtZWFuaW5nIjoiQXBwZWFsIGZhbWlseSBjcnQtZmluYWwgaGVhcmluZyAoQXBwKSIsImRlc2NyaXB0aW9uIjoiTGltaXRlZCB0byByZXByZXNlbnRhdGlvbiBhcyBhcHBlbGxhbnQgb24gYW4gYXBwZWFsIGluIHRoZSBmYW1pbHkgY291cnQsIHVwIHRvIGFuZCBpbmNsdWRpbmcgdGhlIGZpbmFsIGhlYXJpbmcgb2YgdGhlIGFwcGVhbC4iLCJhZGRpdGlvbmFsX3BhcmFtcyI6W119LHsiY29kZSI6IkFQTDcwIiwibWVhbmluZyI6IkFwcGVhbCBmYW1pbHkgY3J0LWZpbmFsIGhlYXJpbmcgKFJlcCkiLCJkZXNjcmlwdGlvbiI6IkxpbWl0ZWQgdG8gcmVwcmVzZW50YXRpb24gb24gYW4gYXBwZWFsIGluIHRoZSBmYW1pbHkgY291cnQsIHVwIHRvIGFuIGluY2x1ZGluZyB0aGUgZmluYWwgaGVhcmluZyBvZiB0aGUgYXBwZWFsLiIsImFkZGl0aW9uYWxfcGFyYW1zIjpbXX0seyJjb2RlIjoiQVBMNjciLCJtZWFuaW5nIjoiQXBwZWFsIGZhbWlseSBjcnQtbGltaXRlZCBzdGVwcyAoQXBwKSIsImRlc2NyaXB0aW9uIjoiTGxpbWl0ZWQgdG8gYmUgcmVwcmVzZW50ZWQgYXMgYXBwZWxsYW50IG9uIGFuIGFwcGVhbCBpbiB0aGUgZmFtaWx5IGNvdXJ0IExJTUlURUQgVE8iLCJhZGRpdGlvbmFsX3BhcmFtcyI6W3sibmFtZSI6ImxpbWl0YXRpb25fbm90ZSIsInR5cGUiOiJ0ZXh0IiwibWFuZGF0b3J5Ijp0cnVlfV19LHsiY29kZSI6IkFQTDY4IiwibWVhbmluZyI6IkFwcGVhbCBmYW1pbHkgY3J0LWxpbWl0ZWQgc3RlcHMgKFJlc3ApIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIGJlIHJlcHJlc2VudGVkIGFzIHJlc3BvbmRlbnQgdG8gYW4gYXBwZWFsIGluIHRoZSBmYW1pbHkgY291cnQsIExJTUlURUQgVE8iLCJhZGRpdGlvbmFsX3BhcmFtcyI6W3sibmFtZSI6ImxpbWl0YXRpb25fbm90ZSIsInR5cGUiOiJ0ZXh0IiwibWFuZGF0b3J5Ijp0cnVlfV19LHsiY29kZSI6IkFQTDA3IiwibWVhbmluZyI6IkFwcGVhbC1wYXBlciBhcHAgZm9yIHBlcm0iLCJkZXNjcmlwdGlvbiI6IkxpbWl0ZWQgdG8gbWFraW5nIGFuIGFwcGxpY2F0aW9uIGZvciBwZXJtaXNzaW9uIHRvIGFwcGVhbCBvbiB0aGUgcGFwZXJzLCBpbmNsdWRpbmcgcHJlcGFyYXRpb24gb2YgYW4gYXBwZWxsYW50J3Mgbm90aWNlIGFuZCBhIHNrZWxldG9uIGFyZ3VtZW50LiIsImFkZGl0aW9uYWxfcGFyYW1zIjpbXX0seyJjb2RlIjoiQ1YwNzkiLCJtZWFuaW5nIjoiQ291bnNlbCdzIE9waW5pb24iLCJkZXNjcmlwdGlvbiI6IkxpbWl0ZWQgdG8gb2J0YWluaW5nIGV4dGVybmFsIENvdW5zZWwncyBPcGluaW9uIG9yIHRoZSBvcGluaW9uIG9mIGFuIGV4dGVybmFsIHNvbGljaXRvciB3aXRoIGhpZ2hlciBjb3VydCBhZHZvY2FjeSByaWdodHMgb24gdGhlIGluZm9ybWF0aW9uIGFscmVhZHkgYXZhaWxhYmxlLiIsImFkZGl0aW9uYWxfcGFyYW1zIjpbXX0seyJjb2RlIjoiQVBMNTEiLCJtZWFuaW5nIjoiQ291cnQgb2YgQXBwZWFsLUNvdW5zZWwncyBPcGluaW9uIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIHJlcHJlc2VudGF0aW9uIG9uIGFuIGFwcGVhbCB0byB0aGUgQ291cnQgb2YgQXBwZWFsLCBsaW1pdGVkIHRvIG9idGFpbmluZyBDb3Vuc2VsJ3MgT3BpbmlvbiBvbiB0aGUgbWVyaXRzIG9mIGFuIGFwcGVhbC4iLCJhZGRpdGlvbmFsX3BhcmFtcyI6W119LHsiY29kZSI6IkFQTDE1IiwibWVhbmluZyI6IkNvdXJ0IG9mIEFwcGVhbC1Db3Vuc2VsJ3MgT3BpbmlvbiAoUmVzcCkiLCJkZXNjcmlwdGlvbiI6IkxpbWl0ZWQgdG8gcmVwcmVzZW50YXRpb24gYXMgcmVzcG9uZGVudCBvbiBhbiBhcHBlYWwgdG8gdGhlIENvdXJ0IG9mIEFwcGVhbCwgbGltaXRlZCB0byBvYnRhaW5pbmcgQ291bnNlbCdzIE9waW5pb24gb24gdGhlIG1lcml0cyBvZiBkZWZlbmRpbmcgdGhlIGFwcGVhbC4iLCJhZGRpdGlvbmFsX3BhcmFtcyI6W119LHsiY29kZSI6IkFQTDU0IiwibWVhbmluZyI6IkNvdXJ0IG9mIEFwcGVhbC1maW5hbCBoZWFyaW5nIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIHJlcHJlc2VudGF0aW9uIG9uIGFuIGFwcGVhbCB0byB0aGUgQ291cnQgb2YgQXBwZWFsLCB1cCB0byBhbmQgaW5jbHVkaW5nIHRoZSBmaW5hbCBoZWFyaW5nIG9mIHRoZSBhcHBlYWwuIiwiYWRkaXRpb25hbF9wYXJhbXMiOltdfSx7ImNvZGUiOiJBUEwyMiIsIm1lYW5pbmciOiJDb3VydCBvZiBBcHBlYWwtZmluYWwgaGVhcmluZyAocmVzcCkiLCJkZXNjcmlwdGlvbiI6IkxpbWl0ZWQgdG8gcmVwcmVzZW50YXRpb24gYXMgcmVzcG9uZGVudCBvbiBhbiBhcHBlYWwgdG8gdGhlIENvdXJ0IG9mIEFwcGVhbCwgdXAgdG8gYW5kIGluY2x1ZGluZyB0aGUgZmluYWwgaGVhcmluZyBvZiB0aGUgYXBwZWFsLiIsImFkZGl0aW9uYWxfcGFyYW1zIjpbXX0seyJjb2RlIjoiQVBMNTMiLCJtZWFuaW5nIjoiQ291cnQgb2YgQXBwZWFsLWxpbWl0ZWQgc3RlcHMiLCJkZXNjcmlwdGlvbiI6IkxpbWl0ZWQgdG8gcmVwcmVzZW50YXRpb24gb24gYW4gYXBwZWFsIHRvIHRoZSBDb3VydCBvZiBBcHBlYWwgbGltaXRlZCB0byIsImFkZGl0aW9uYWxfcGFyYW1zIjpbeyJuYW1lIjoibGltaXRhdGlvbl9ub3RlIiwidHlwZSI6InRleHQiLCJtYW5kYXRvcnkiOnRydWV9XX0seyJjb2RlIjoiQVBMMjAiLCJtZWFuaW5nIjoiQ291cnQgb2YgQXBwZWFsLWxpbWl0ZWQgc3RlcHMgKHJlc3ApIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIHJlcHJlc2VudGF0aW9uIGFzIHJlc3BvbmRlbnQgb24gYW4gYXBwZWFsIHRvIHRoZSBDb3VydCBvZiBBcHBlYWwsIGxpbWl0ZWQgdG8iLCJhZGRpdGlvbmFsX3BhcmFtcyI6W3sibmFtZSI6ImxpbWl0YXRpb25fbm90ZSIsInR5cGUiOiJ0ZXh0IiwibWFuZGF0b3J5Ijp0cnVlfV19LHsiY29kZSI6IkFQTDUyIiwibWVhbmluZyI6IkNvdXJ0IG9mIEFwcGVhbC1vcmFsIGFwcCBmb3IgcGVybSIsImRlc2NyaXB0aW9uIjoiTGltaXRlZCB0byByZXByZXNlbnRhdGlvbiBvbiBhbiBhcHBlYWwgdG8gdGhlIENvdXJ0IG9mIEFwcGVhbCwgbGltaXRlZCB0byBhbGwgc3RlcHMgdXAgdG8gYW5kIGluY2x1ZGluZyB0aGUgaGVhcmluZyBvZiBhbiBhcHBsaWNhdGlvbiBmb3IgcGVybWlzc2lvbiB0byBhcHBlYWwuIiwiYWRkaXRpb25hbF9wYXJhbXMiOltdfSx7ImNvZGUiOiJBUEwxOCIsIm1lYW5pbmciOiJDb3VydCBvZiBBcHBlYWwtb3JhbCBhcHAgZm9yIHBlcm0gKHJlc3ApIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIHJlcHJlc2VudGF0aW9uIGFzIHJlc3BvbmRlbnQgb24gYW4gYXBwZWFsIHRvIHRoZSBDb3VydCBvZiBBcHBlYWwsIGxpbWl0ZWQgdG8gYWxsIHN0ZXBzIHVwIHRvIGFuZCBpbmNsdWRpbmcgdGhlIGhlYXJpbmcgb2YgYW4gYXBwbGljYXRpb24gZm9yIHBlcm1pc3Npb24gdG8gYXBwZWFsLiIsImFkZGl0aW9uYWxfcGFyYW1zIjpbXX0seyJjb2RlIjoiQVBMMTYiLCJtZWFuaW5nIjoiQ291cnQgb2YgQXBwZWFsLXBhcGVyIGFwcCBmb3IgcGVybSIsImRlc2NyaXB0aW9uIjoiTGltaXRlZCB0byByZXByZXNlbnRhdGlvbiBvbiBhbiBhcHBlYWwgdG8gdGhlIENvdXJ0IG9mIEFwcGVhbCwgbGltaXRlZCB0byBtYWtpbmcgYW4gYXBwbGljYXRpb24gZm9yIHBlcm1pc3Npb24gdG8gYXBwZWFsIG9uIHRoZSBwYXBlcnMsIGluY2x1ZGluZyBwcmVwYXJhdGlvbiBvZiBhbiBhcHBlbGxhbnQncyBub3RpY2UgYW5kIHNrZWxldG9uIGFyZ3VtZW50LiIsImFkZGl0aW9uYWxfcGFyYW1zIjpbXX0seyJjb2RlIjoiQ1YxMTgiLCJtZWFuaW5nIjoiSGVhcmluZyIsImRlc2NyaXB0aW9uIjoiTGltaXRlZCB0byBhbGwgc3RlcHMgdXAgdG8gYW5kIGluY2x1ZGluZyB0aGUgaGVhcmluZyBvbiBbc2VlIGFkZGl0aW9uYWwgbGltaXRhdGlvbiBub3Rlc10iLCJhZGRpdGlvbmFsX3BhcmFtcyI6W3sibmFtZSI6ImhlYXJpbmdfZGF0ZSIsInR5cGUiOiJkYXRlIiwibWFuZGF0b3J5Ijp0cnVlfV19LHsiY29kZSI6IkNWMDI3IiwibWVhbmluZyI6IkhlYXJpbmcvQWRqb3Vybm1lbnQiLCJkZXNjcmlwdGlvbiI6IkxpbWl0ZWQgdG8gYWxsIHN0ZXBzIChpbmNsdWRpbmcgYW55IGFkam91cm5tZW50IHRoZXJlb2YpIHVwIHRvIGFuZCBpbmNsdWRpbmcgdGhlIGhlYXJpbmcgb24iLCJhZGRpdGlvbmFsX3BhcmFtcyI6W3sibmFtZSI6ImhlYXJpbmdfZGF0ZSIsInR5cGUiOiJkYXRlIiwibWFuZGF0b3J5Ijp0cnVlfV19LHsiY29kZSI6IkFQTDQ5IiwibWVhbmluZyI6IkhpZ2ggQ291cnQtQ291bnNlbCdzIE9waW5pb24iLCJkZXNjcmlwdGlvbiI6IkxpbWl0ZWQgdG8gcmVwcmVzZW50YXRpb24gb24gYW4gYXBwZWFsIHRvIHRoZSBIaWdoIENvdXJ0LCBsaW1pdGVkIHRvIG9idGFpbmluZyBDb3Vuc2VsJ3MgT3BpbmlvbiBvbiB0aGUgbWVyaXRzIG9mIGFuIGFwcGVhbC4iLCJhZGRpdGlvbmFsX3BhcmFtcyI6W119LHsiY29kZSI6IkFQTDExIiwibWVhbmluZyI6IkhpZ2ggQ291cnQtQ291bnNlbCdzIE9waW5pb24gKHJlc3ApIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIHJlcHJlc2VudGF0aW9uIGFzIHJlc3BvbmRlbnQgb24gYW4gYXBwZWFsIHRvIHRoZSBIaWdoIENvdXJ0LCBsaW1pdGVkIHRvIG9idGFpbmluZyBDb3Vuc2VsJ3MgT3BpbmlvbiBvbiB0aGUgbWVyaXRzIG9mIGRlZmVuZGluZyB0aGUgYXBwZWFsLiIsImFkZGl0aW9uYWxfcGFyYW1zIjpbXX0seyJjb2RlIjoiQVBMNDgiLCJtZWFuaW5nIjoiSGlnaCBDb3VydC1maW5hbCBoZWFyaW5nIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIHJlcHJlc2VudGF0aW9uIG9uIGFuIGFwcGVhbCB0byB0aGUgSGlnaCBDb3VydCwgdXAgdG8gYW5kIGluY2x1ZGluZyB0aGUgZmluYWwgaGVhcmluZyBvZiB0aGUgYXBwZWFsLiIsImFkZGl0aW9uYWxfcGFyYW1zIjpbXX0seyJjb2RlIjoiQVBMMDkiLCJtZWFuaW5nIjoiSGlnaCBDb3VydC1maW5hbCBoZWFyaW5nIChyZXNwKSIsImRlc2NyaXB0aW9uIjoiTGltaXRlZCB0byByZXByZXNlbnRhdGlvbiBhcyByZXNwb25kZW50IG9uIGFuIGFwcGVhbCB0byB0aGUgSGlnaCBDb3VydCwgdXAgdG8gYW5kIGluY2x1ZGluZyB0aGUgZmluYWwgaGVhcmluZyBvZiB0aGUgYXBwZWFsLiIsImFkZGl0aW9uYWxfcGFyYW1zIjpbXX0seyJjb2RlIjoiQVBMNTAiLCJtZWFuaW5nIjoiSGlnaCBDb3VydC1saW1pdGVkIHN0ZXBzIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIHJlcHJlc2VudGF0aW9uIG9uIGFuIGFwcGVhbCB0byB0aGUgSGlnaCBDb3VydCwgbGltaXRlZCB0byIsImFkZGl0aW9uYWxfcGFyYW1zIjpbeyJuYW1lIjoibGltaXRhdGlvbl9ub3RlIiwidHlwZSI6InRleHQiLCJtYW5kYXRvcnkiOnRydWV9XX0seyJjb2RlIjoiQVBMMTMiLCJtZWFuaW5nIjoiSGlnaCBDb3VydC1saW1pdGVkIHN0ZXBzIChyZXNwKSIsImRlc2NyaXB0aW9uIjoiTGltaXRlZCB0byByZXByZXNlbnRhdGlvbiBhcyByZXNwb25kZW50IG9uIGFuIGFwcGVhbCB0byB0aGUgSGlnaCBDb3VydCwgbGltaXRlZCB0byIsImFkZGl0aW9uYWxfcGFyYW1zIjpbeyJuYW1lIjoibGltaXRhdGlvbl9ub3RlIiwidHlwZSI6InRleHQiLCJtYW5kYXRvcnkiOnRydWV9XX0seyJjb2RlIjoiQVBMNTUiLCJtZWFuaW5nIjoiSnVkZ2UgZnJvbSBESi1Db3Vuc2VsJ3MgT3BpbmlvbiIsImRlc2NyaXB0aW9uIjoiTGltaXRlZCB0byByZXByZXNlbnRhdGlvbiBvbiBhbiBhcHBlYWwgdG8gdGhlIEp1ZGdlIGFnYWluc3QgYSBkZWNpc2lvbiBvZiB0aGUgRGlzdHJpY3QgSnVkZ2Ugb3IgTWFzdGVyLCBsaW1pdGVkIHRvIG9idGFpbmluZyBDb3Vuc2VsJ3MgT3BpbmlvbiBvbiB0aGUgbWVyaXRzIG9mIGFuIGFwcGVhbC4iLCJhZGRpdGlvbmFsX3BhcmFtcyI6W119LHsiY29kZSI6IkFQTDI3IiwibWVhbmluZyI6Ikp1ZGdlIGZyb20gREotQ291bnNlbCdzIE9waW5pb24gKHJlc3ApIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIHJlcHJlc2VudGF0aW9uIGFzIHJlc3BvbmRlbnQgb24gYW4gYXBwZWFsIHRvIHRoZSBKdWRnZSBhZ2FpbnN0IGEgZGVjaXNpb24gb2YgdGhlIERpc3RyaWN0IEp1ZGdlIG9yIE1hc3RlciwgbGltaXRlZCB0byBvYnRhaW5pbmcgQ291bnNlbCdzIE9waW5pb24gb24gdGhlIG1lcml0cyBvZiBkZWZlbmRpbmcgdGhlIGFwcGVhbC4iLCJhZGRpdGlvbmFsX3BhcmFtcyI6W119LHsiY29kZSI6IkFQTDU3IiwibWVhbmluZyI6Ikp1ZGdlIGZyb20gREotZmluYWwgaGVhcmluZyIsImRlc2NyaXB0aW9uIjoiTGltaXRlZCB0byByZXByZXNlbnRhdGlvbiBvbiBhbiBhcHBlYWwgdG8gdGhlIEp1ZGdlIGFnYWluc3QgYSBkZWNpc2lvbiBvZiB0aGUgRGlzdHJpY3QgSnVkZ2Ugb3IgTWFzdGVyLCB1cCB0byBhbmQgaW5jbHVkaW5nIHRoZSBmaW5hbCBoZWFyaW5nIG9mIHRoZSBhcHBlYWwuIiwiYWRkaXRpb25hbF9wYXJhbXMiOltdfSx7ImNvZGUiOiJBUEwzMSIsIm1lYW5pbmciOiJKdWRnZSBmcm9tIERKLWZpbmFsIGhlYXJpbmcgKHJlc3ApIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIHJlcHJlc2VudGF0aW9uIGFzIHJlc3BvbmRlbnQgb24gYW4gYXBwZWFsIHRvIHRoZSBKdWRnZSBhZ2FpbnN0IGEgZGVjaXNpb24gb2YgdGhlIERpc3RyaWN0IEp1ZGdlIG9yIE1hc3RlciwgdXAgdG8gYW5kIGluY2x1ZGluZyB0aGUgZmluYWwgaGVhcmluZyBvZiB0aGUgYXBwZWFsLiIsImFkZGl0aW9uYWxfcGFyYW1zIjpbXX0seyJjb2RlIjoiQVBMNTYiLCJtZWFuaW5nIjoiSnVkZ2UgZnJvbSBESi1saW1pdGVkIHN0ZXBzIiwiZGVzY3JpcHRpb24iOiJMaW1pdGVkIHRvIHJlcHJlc2VudGF0aW9uIG9uIGFuIGFwcGVhbCB0byB0aGUgSnVkZ2UgYWdhaW5zdCBhIGRlY2lzaW9uIG9mIHRoZSBEaXN0cmljdCBKdWRnZSBvciBNYXN0ZXIsIGxpbWl0ZWQgdG8iLCJhZGRpdGlvbmFsX3BhcmFtcyI6W3sibmFtZSI6ImxpbWl0YXRpb25fbm90ZSIsInR5cGUiOiJ0ZXh0IiwibWFuZGF0b3J5Ijp0cnVlfV19LHsiY29kZSI6IkFQTDI5IiwibWVhbmluZyI6Ikp1ZGdlIGZyb20gREotbGltaXRlZCBzdGVwcyAocmVzcCkiLCJkZXNjcmlwdGlvbiI6IkxpbWl0ZWQgdG8gcmVwcmVzZW50YXRpb24gYXMgcmVzcG9uZGVudCBvbiBhbiBhcHBlYWwgdG8gdGhlIEp1ZGdlIGFnYWluc3QgYSBkZWNpc2lvbiBvZiB0aGUgRGlzdHJpY3QgSnVkZ2Ugb3IgTWFzdGVyLCBsaW1pdGVkIHRvIiwiYWRkaXRpb25hbF9wYXJhbXMiOlt7Im5hbWUiOiJsaW1pdGF0aW9uX25vdGUiLCJ0eXBlIjoidGV4dCIsIm1hbmRhdG9yeSI6dHJ1ZX1dfV19fQ==
+  recorded_at: Thu, 02 Apr 2026 08:19:05 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"SE014","delegated_functions_used":true,"client_involvement_type":"A"}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 02 Apr 2026 08:19:05 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '478'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"e3662e528ef090ff8b1405f4c4132dfd"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - d94eaf2caf5a9601928e73f0687911eb
+      X-Runtime:
+      - '0.006566'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"SE014","delegated_functions_used":true,"client_involvement_type":"A"},"default_level_of_service":{"level":1,"name":"Family
+        Help (Higher)","stage":1},"default_scope":{"code":"CV117","meaning":"Interim
+        order inc. return date","description":"Limited to all steps necessary to apply
+        for an interim order; where application is made without notice to include
+        representation on the return date.","additional_params":[]}}'
+  recorded_at: Thu, 02 Apr 2026 08:19:05 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"SE014","delegated_functions_used":false,"client_involvement_type":"A"}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 02 Apr 2026 08:19:05 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '540'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"1886b353521eb91de6839b95785fe23e"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 941e53daadb7a44cf930a958f8f7ca3e
+      X-Runtime:
+      - '0.004595'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"SE014","delegated_functions_used":false,"client_involvement_type":"A"},"default_level_of_service":{"level":1,"name":"Family
+        Help (Higher)","stage":1},"default_scope":{"code":"FM059","meaning":"FHH Children","description":"Limited
+        to Family Help (Higher) and to all steps necessary to negotiate and conclude
+        a settlement. To include the issue of proceedings and representation in those
+        proceedings save in relation to or at a contested final hearing.","additional_params":[]}}'
+  recorded_at: Thu, 02 Apr 2026 08:19:05 GMT
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/SE013A
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 02 Apr 2026 08:19:06 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '320'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"634b8c627a1b078b5d1fffcb51ca2121"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 27b9e75d9f8e2202fb75f00241c66492
+      X-Runtime:
+      - '0.002305'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
+        of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
+        party"}]}'
+  recorded_at: Thu, 02 Apr 2026 08:19:06 GMT
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/SE014
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 02 Apr 2026 08:19:06 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '320'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"634b8c627a1b078b5d1fffcb51ca2121"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 9c9112d981d756332370844b1b58f697
+      X-Runtime:
+      - '0.002148'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
+        of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
+        party"}]}'
+  recorded_at: Thu, 02 Apr 2026 08:19:06 GMT
+recorded_with: VCR 6.4.0

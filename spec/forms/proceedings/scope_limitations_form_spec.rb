@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Proceedings::ScopeLimitationsForm, :vcr, type: :form do
-  subject(:form) { described_class.call(scopes, model: proceeding) }
+  subject(:form) { described_class.call(scopes, model: proceeding, scope_type: scope_type.to_s) }
 
   let(:scopes) do
     [{ "code" => "FM007", "meaning" => "Blood Tests or DNA Tests", "description" => "Limited to all steps up to and including the obtaining of blood tests or DNA tests and thereafter a solicitor's report.", "additional_params" => [] },
