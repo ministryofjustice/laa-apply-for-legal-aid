@@ -4,10 +4,6 @@ module TaskStatus
       def valid?
         return false if proceedings.empty?
 
-        return false if emergency_scope_limitations.any?(false)
-
-        return false if substantive_scope_limitations.any?(false)
-
         super
       end
 
@@ -28,11 +24,11 @@ module TaskStatus
           emergency_defaults_form(proceeding),
           emergency_level_form,
           emergency_final_hearings_form(proceeding, emergency_level_form),
-          # emergency_scope_limitation_forms - doesn't use validator in the same way,
+          emergency_scope_limitations_form(proceeding),
           substantive_defaults_form(proceeding),
           substantive_level_form,
           substantive_final_hearings_form(proceeding, substantive_level_form),
-          # substantive_scope_limitation_forms - doesn't use validator in the same way,
+          substantive_scope_limitations_form(proceeding),
         ].flatten.compact
       end
 
@@ -69,12 +65,16 @@ module TaskStatus
         proceeding.emergency_full_representation? && !proceeding.accepted_emergency_defaults?
       end
 
-      def emergency_scope_limitations
-        proceedings.map do |proceeding|
-          next unless proceeding.used_delegated_functions?
+      def emergency_scopes(proceeding)
+        JSON.parse(LegalFramework::ProceedingTypes::Scopes.call(proceeding, true))["level_of_service"]["scope_limitations"]
+      end
 
-          proceeding.scope_limitations.emergency.any? unless proceeding.accepted_emergency_defaults?
-        end
+      def emergency_scope_limitations_form(proceeding)
+        return unless proceeding.used_delegated_functions?
+        return if proceeding.accepted_emergency_defaults?
+        return if proceeding.emergency_level_of_service.blank?
+
+        Proceedings::ScopeLimitationsForm.call(emergency_scopes(proceeding), model: proceeding, scope_type: :emergency)
       end
 
       def substantive_defaults_form(proceeding)
@@ -98,10 +98,15 @@ module TaskStatus
         Proceedings::FinalHearingForm.new(model: proceeding.substantive_final_hearing)
       end
 
-      def substantive_scope_limitations
-        proceedings.map do |proceeding|
-          proceeding.scope_limitations.substantive.any? unless proceeding.accepted_substantive_defaults?
-        end
+      def substantive_scopes(proceeding)
+        JSON.parse(LegalFramework::ProceedingTypes::Scopes.call(proceeding, false))["level_of_service"]["scope_limitations"]
+      end
+
+      def substantive_scope_limitations_form(proceeding)
+        return if proceeding.accepted_substantive_defaults?
+        return if proceeding.substantive_level_of_service.blank?
+
+        Proceedings::ScopeLimitationsForm.call(substantive_scopes(proceeding), model: proceeding, scope_type: :substantive)
       end
 
       def emergency_cost_override_form

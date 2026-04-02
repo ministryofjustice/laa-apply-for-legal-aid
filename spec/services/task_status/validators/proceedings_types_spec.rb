@@ -56,7 +56,8 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                                 emergency_level_of_service: proceeding_two_emergency_level_of_service,
                                 substantive_level_of_service: proceeding_two_substantive_level_of_service,
                                 emergency_level_of_service_name: "Full Representation",
-                                emergency_level_of_service_stage: "8")
+                                emergency_level_of_service_stage: "8",
+                                no_scope_limitations: true)
   end
 
   let(:proceeding_two_used_delegated_functions) { true }
@@ -166,17 +167,15 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
             end
 
             context "and emergency level of service has been answered for each proceeding" do
-              context "and emergency level of service is family help (higher)" do
-                let(:emergency_level_of_service) { "1" }
-                let(:emergency_level_of_service_name) { "Family Help (Higher)" }
+              context "when proceeding two uses emergency family help (higher)" do
+                let(:accepted_emergency_defaults) { true }
+                let(:proceeding_two_accepted_emergency_defaults) { false }
+                let(:proceeding_two_emergency_level_of_service) { "1" }
+                let(:emergency_scope_limitation_proceeding) { proceeding_two }
 
                 it { is_expected.to be_valid }
 
-                context "and the emergency scope limitations have been answered for each proceeding" do
-                  it { is_expected.to be_valid }
-                end
-
-                context "and the emergency scope limitations have not been answered for each proceeding" do
+                context "and the emergency scope limitations have not been answered for proceeding two" do
                   let(:emergency_scope_limitation) { nil }
 
                   it { is_expected.not_to be_valid }
@@ -255,17 +254,15 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
         end
 
         context "and substantive level of service has been answered for each proceeding" do
-          context "and substantive level of service is family help (higher)" do
-            let(:substantive_level_of_service) { "1" }
-            let(:substantive_level_of_service_name) { "Family Help (Higher)" }
+          context "when proceeding two uses substantive family help (higher)" do
+            let(:accepted_substantive_defaults) { true }
+            let(:proceeding_two_accepted_substantive_defaults) { false }
+            let(:proceeding_two_substantive_level_of_service) { "1" }
+            let(:substantive_scope_limitation_proceeding) { proceeding_two }
 
             it { is_expected.to be_valid }
 
-            context "and the substantive scope limitations have been answered for each proceeding" do
-              it { is_expected.to be_valid }
-            end
-
-            context "and the substantive scope limitations have not been answered for each proceeding" do
+            context "and the substantive scope limitations have not been answered for proceeding two" do
               let(:substantive_scope_limitation) { nil }
 
               it { is_expected.not_to be_valid }
@@ -369,6 +366,105 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
           let(:substantive_cost_override) { nil }
           let(:substantive_cost_reasons) { nil }
           let(:substantive_cost_requested) { nil }
+
+          it { is_expected.not_to be_valid }
+        end
+      end
+
+      context "with an emergency scope limitation that requires a hearing date" do
+        let(:application) do
+          create(:application,
+                 emergency_cost_override: false,
+                 substantive_cost_override: false)
+        end
+
+        let(:proceeding_one) do
+          create(:proceeding, :se013,
+                 legal_aid_application: application,
+                 client_involvement_type_ccms_code: "A",
+                 client_involvement_type_description: "Applicant/claimant/petitioner",
+                 used_delegated_functions: true,
+                 used_delegated_functions_on: 5.days.ago,
+                 accepted_emergency_defaults: false,
+                 accepted_substantive_defaults: true,
+                 emergency_level_of_service: "1",
+                 emergency_level_of_service_name: "Family Help (Higher)",
+                 no_scope_limitations: true)
+        end
+
+        let(:emergency_scope_limitation) do
+          create(:scope_limitation,
+                 proceeding: proceeding_one,
+                 scope_type: :emergency,
+                 code: "CV027",
+                 meaning: "Hearing/Adjournment",
+                 description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+                 hearing_date: emergency_hearing_date)
+        end
+
+        let(:emergency_hearing_date) { Date.current }
+
+        before do
+          proceeding_one
+          emergency_scope_limitation
+        end
+
+        context "when the hearing date is present" do
+          it { is_expected.to be_valid }
+        end
+
+        context "when the hearing date is missing" do
+          let(:emergency_hearing_date) { nil }
+
+          it { is_expected.not_to be_valid }
+        end
+      end
+
+      context "with a substantive scope limitation that requires a limitation note" do
+        let(:application) do
+          create(:application,
+                 emergency_cost_override: false,
+                 substantive_cost_override: false)
+        end
+
+        let(:proceeding_one) do
+          create(:proceeding, :se013a,
+                 legal_aid_application: application,
+                 client_involvement_type_ccms_code: "A",
+                 client_involvement_type_description: "Applicant/claimant/petitioner",
+                 used_delegated_functions: false,
+                 used_delegated_functions_on: nil,
+                 accepted_substantive_defaults: false,
+                 accepted_emergency_defaults: true,
+                 substantive_level_of_service: "3",
+                 substantive_level_of_service_name: "Full Representation",
+                 substantive_level_of_service_stage: "8",
+                 no_scope_limitations: true)
+        end
+
+        let(:substantive_scope_limitation) do
+          create(:scope_limitation,
+                 proceeding: proceeding_one,
+                 scope_type: :substantive,
+                 code: "APL13",
+                 meaning: "High Court-limited steps (resp)",
+                 description: "Limited to representation as respondent on an appeal to the High Court, limited to",
+                 limitation_note: substantive_limitation_note)
+        end
+
+        let(:substantive_limitation_note) { "some note" }
+
+        before do
+          proceeding_one
+          substantive_scope_limitation
+        end
+
+        context "when the limitation note is present" do
+          it { is_expected.to be_valid }
+        end
+
+        context "when the limitation note is missing" do
+          let(:substantive_limitation_note) { nil }
 
           it { is_expected.not_to be_valid }
         end

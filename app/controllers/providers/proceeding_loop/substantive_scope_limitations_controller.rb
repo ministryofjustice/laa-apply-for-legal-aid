@@ -17,7 +17,7 @@ module Providers
     private
 
       def form
-        @form ||= Proceedings::ScopeLimitationsForm.call(scopes, model: proceeding)
+        @form ||= Proceedings::ScopeLimitationsForm.call(scopes, model: proceeding, scope_type: :substantive)
       end
 
       def proceeding

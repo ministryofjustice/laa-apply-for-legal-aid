@@ -48,6 +48,7 @@ RSpec.describe "Proceedings types section", :vcr do
       expect(page).to have_css("h1", text: "What does your client want legal aid for?")
 
       fill_in("proceeding-search-input", with: "se014")
+      sleep(2)
       govuk_choose("Child arrangements order (CAO) - residence", match: :prefer_exact)
       click_on "Save and continue"
 
