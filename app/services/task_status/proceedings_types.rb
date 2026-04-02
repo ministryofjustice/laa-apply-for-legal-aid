@@ -14,15 +14,21 @@ module TaskStatus
   private
 
     def not_started?
-      applicants_validator.valid? && application.linked_application_completed? && application.proceedings.empty?
+      return @not_started if defined?(@not_started)
+
+      @not_started = applicants_validator.valid? && application.linked_application_completed? && application.proceedings.empty?
     end
 
     def in_progress?
-      application.proceedings.any?
+      return @in_progress if defined?(@in_progress)
+
+      @in_progress = application.proceedings.any?
     end
 
     def completed?
-      proceedings_types_validator.valid?
+      return @completed if defined?(@completed)
+
+      @completed = proceedings_types_validator.valid?
     end
 
     def applicants_validator
