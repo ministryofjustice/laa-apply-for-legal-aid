@@ -36,7 +36,8 @@
     "stylelint-order": "^8.1.1"
   },
   "resolutions": {
-    "minimatch": ">=10.2.1"
+    "minimatch": ">=10.2.1",
+    "picomatch": ">=4.0.4"
   },
   "packageManager": "yarn@4.12.0"
 }
