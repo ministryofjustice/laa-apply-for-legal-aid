@@ -17,13 +17,28 @@ module TaskStatus
       @status_results = status_results
     end
 
-    # :nocov:
     def call
-      raise "Implement in subclass"
+      status = build_status
+
+      perform(status)
+      record(status)
+
+      status
     end
-    # :nocov:
 
   private
+
+    def build_status
+      ValueObject.new
+    end
+
+    def record(status)
+      @status_results[self.class] = status
+    end
+
+    def perform(status)
+      raise NotImplementedError, "Subclasses of TaskStatus::Base must implement the perform method"
+    end
 
     def previous_tasks_completed?
       return @previous_tasks_completed if defined?(@previous_tasks_completed)

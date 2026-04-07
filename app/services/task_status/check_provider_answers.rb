@@ -13,21 +13,15 @@ module TaskStatus
     # *3 "Save and come back later/Save and got to task list" will be considered to make the CYA "In progress"
     #
 
-    def call
-      status = ValueObject.new
+  private
 
+    def perform(status)
       status.not_ready!
       status.not_started! if not_started?
       status.in_progress! if in_progress?
       status.review! if review?
       status.completed! if completed?
-
-      # TODO: can these two lines be moved to super class and removed from all subclasses
-      @status_results[self.class] = status
-      status
     end
-
-  private
 
     def not_started?
       return @not_started if defined?(@not_started)
