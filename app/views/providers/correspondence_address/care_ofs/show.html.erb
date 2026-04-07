@@ -19,10 +19,12 @@
         <%= form.govuk_text_field(
               :care_of_first_name,
               label: { text: t(".care_of_first_name") },
+              width: "three-quarters",
             ) %>
         <%= form.govuk_text_field(
               :care_of_last_name,
               label: { text: t(".care_of_last_name") },
+              width: "three-quarters",
             ) %>
       <% end %>
       <%= form.govuk_radio_button(:care_of, "organisation", link_errors: true, label: { text: t(".yes_organisation") }) do %>
@@ -30,6 +32,7 @@
               :care_of_organisation_name,
               label: { text: t(".care_of_organisation_name") },
               hint: { text: t(".care_of_organisation_name_hint") },
+              width: "three-quarters",
             ) %>
       <% end %>
       <%= form.govuk_radio_button :care_of, "no", label: { text: t("generic.no") }, hint: { text: t(".no_hint") } %>
