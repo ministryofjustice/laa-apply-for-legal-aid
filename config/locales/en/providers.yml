@@ -241,11 +241,15 @@ en:
             office_hint: For example, a provider's office
       care_ofs:
         show:
-          heading: Do you want to add a 'care of' recipient for your client's mail?
+          heading: "'Care of' recipient"
+          paragraph_1: "Your client's mail is being sent to:"
+          paragraph_2: "Add a 'care of' recipient if someone else is handling your client's mail."
+          question: Do you want to add a 'care of' recipient for your client's mail?
           yes_person: Yes, a person
           care_of_first_name: First name
           care_of_last_name: Last name
-          care_of_organisation_name: Organisation name
+          care_of_organisation_name: Organisation, team, or department name
+          care_of_organisation_name_hint: Enter a name only, not another address
           yes_organisation: Yes, an organisation
           no_hint: Correspondence will be addressed to the client
     confirm_multiple_delegated_functions_dates:
