@@ -74,10 +74,6 @@ class Proceeding < ApplicationRecord
     used_delegated_functions? && !special_children_act?
   end
 
-  def uses_emergency_certificate?
-    !special_children_act?
-  end
-
   def family_help_higher?
     emergency_level_of_service.to_i.eql?(1)
   end
