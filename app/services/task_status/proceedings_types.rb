@@ -1,19 +1,13 @@
 module TaskStatus
   class ProceedingsTypes < Base
-    def call
-      status = ValueObject.new
+  private
 
+    def perform(status)
       status.cannot_start!
       status.in_progress! if in_progress?
       status.not_started! if not_started?
       status.completed! if completed?
-
-      # TODO: can these two lines be moved to super class and removed from all subclasses
-      @status_results[self.class] = status
-      status
     end
-
-  private
 
     def not_started?
       return @not_started if defined?(@not_started)

@@ -1,19 +1,13 @@
 module TaskStatus
   class MakeLink < Base
-    def call
-      status = ValueObject.new
+  private
 
+    def perform(status)
       status.not_started! if not_started?
       status.cannot_start! if cannot_start?
       status.in_progress! if in_progress?
       status.completed! if completed?
-
-      # TODO: can these two lines be moved to super class and removed from all subclasses
-      @status_results[self.class] = status
-      status
     end
-
-  private
 
     def not_started?
       application.linked_application_completed.nil?
