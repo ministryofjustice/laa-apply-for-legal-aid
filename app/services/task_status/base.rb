@@ -43,11 +43,9 @@ module TaskStatus
     def previous_tasks_completed?
       return @previous_tasks_completed if defined?(@previous_tasks_completed)
 
-      @previous_tasks_completed = previous_task_statuses.all?(&:completed?)
-    end
-
-    def previous_task_statuses
-      @status_results.slice(*previous_task_status_items).values
+      @previous_tasks_completed = previous_task_status_items.all? do |task_class|
+        @status_results[task_class]&.completed?
+      end
     end
 
     # Override in subclass if there are previous tasks to check, otherwise will return an empty array and previous_tasks_completed? will return true

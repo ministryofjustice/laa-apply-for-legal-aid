@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Task::CheckProviderAnswers do
-  subject(:instance) { described_class.new(application, name: "check_provider_applicants") }
+  subject(:instance) { described_class.new(application, name: "check_provider_applicants", status_results: {}) }
 
   let(:application) { create(:legal_aid_application) }
 

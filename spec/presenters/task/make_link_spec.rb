@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Task::MakeLink do
-  subject(:instance) { described_class.new(application, name: "make_link") }
+  subject(:instance) { described_class.new(application, name: "make_link", status_results: {}) }
 
   let(:application) { create(:legal_aid_application) }
 
