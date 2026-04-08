@@ -192,7 +192,7 @@ RSpec.describe Proceeding do
   describe "#substantive_final_hearing" do
     subject { proceeding.substantive_final_hearing }
 
-    context "when there is already an substantive final hearing" do
+    context "when there is already a substantive final hearing" do
       let(:final_hearing) { create(:final_hearing, proceeding: proceeding, work_type: :substantive) }
 
       before do

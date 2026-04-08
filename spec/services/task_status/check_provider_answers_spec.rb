@@ -18,8 +18,6 @@ RSpec.describe TaskStatus::CheckProviderAnswers do
     end
 
     context "with all previous tasks completed but CYA never having been reviewed" do
-      let(:applicant) { complete_applicant }
-
       before do
         application.reviewed.delete(:check_provider_answers)
         application.save!
