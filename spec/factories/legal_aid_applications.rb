@@ -19,7 +19,8 @@ FactoryBot.define do
               previous_reference: nil,
               correspondence_address_choice: "home",
               addresses: [build(:address, location: "home", lookup_used: true)],
-              employed: nil)
+              employed: nil,
+              has_partner: false)
       end
 
       after(:create) do |application|
