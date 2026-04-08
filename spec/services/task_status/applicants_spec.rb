@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe TaskStatus::Applicants do
-  subject(:instance) { described_class.new(application) }
+  subject(:instance) { described_class.new(application, status_results: {}) }
 
   let(:application) { create(:application, applicant:) }
 

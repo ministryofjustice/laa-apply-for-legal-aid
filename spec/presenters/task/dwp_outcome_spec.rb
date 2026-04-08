@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Task::DWPOutcome do
-  subject(:instance) { described_class.new(application, name: "dwp_outcome") }
+  subject(:instance) { described_class.new(application, name: "dwp_outcome", status_results: {}) }
 
   let(:application) { create(:legal_aid_application, :with_applicant) }
 

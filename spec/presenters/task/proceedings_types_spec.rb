@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Task::ProceedingsTypes do
-  subject(:path) { described_class.new(application, name: "proceedings_types").path }
+  subject(:path) { described_class.new(application, name: "proceedings_types", status_results: {}).path }
 
   describe "#path" do
     include Rails.application.routes.url_helpers

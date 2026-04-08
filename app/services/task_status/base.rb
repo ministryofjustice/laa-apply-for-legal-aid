@@ -37,22 +37,19 @@ module TaskStatus
     end
 
     def perform(status)
-      raise NotImplementedError, "Subclasses of TaskStatus::Base must implement the perform method"
+      raise NotImplementedError, "Subclasses of #{self.class.superclass.name} must implement the perform method"
     end
 
     def previous_tasks_completed?
       return @previous_tasks_completed if defined?(@previous_tasks_completed)
 
-      @previous_tasks_completed = previous_task_statuses.all?(&:completed?)
+      @previous_tasks_completed = previous_task_status_items.all? do |task_class|
+        @status_results[task_class]&.completed?
+      end
     end
 
-    def previous_task_statuses
-      @status_results.slice(*previous_task_status_items).values
-    end
-
-    # Override in subclass if there are previous tasks to check, otherwise will return an empty array and previous_tasks_completed? will return true
     def previous_task_status_items
-      @previous_task_status_items ||= []
+      raise NotImplementedError, "Subclasses of #{self.class.superclass.name} must implement the previous_task_status_items method in order to check for previous task completion"
     end
   end
 end
