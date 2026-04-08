@@ -3,9 +3,14 @@ on:
   schedule:
     - cron:  '30 5 * * *'
   workflow_dispatch:
+
+permissions: {}
+
 jobs:
   build-push:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Login to Docker Hub
         uses: docker/login-action@b45d80f862d83dbcd57f89517bcf500b2ab88fb2
