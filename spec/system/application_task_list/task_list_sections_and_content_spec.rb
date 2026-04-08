@@ -12,10 +12,11 @@ RSpec.describe "Application task list page sections, subsections and content", :
             last_name: "Doe",
             date_of_birth: 21.years.ago,
             has_national_insurance_number: nil,
-            national_insurance_number: nil)
+            national_insurance_number: nil,
+            has_partner: false)
     end
 
-    context "with an application completed as far as national insurance numnber" do
+    context "with an application completed as far as national insurance number" do
       let(:application) do
         create(
           :application,
