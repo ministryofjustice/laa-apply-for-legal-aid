@@ -23,12 +23,6 @@ module TaskStatus
       @not_started = proceeding_types_validator && application.applicant&.has_partner.nil?
     end
 
-    def in_progress?
-      return @in_progress if defined?(@in_progress)
-
-      @in_progress = proceeding_types_validator && !partner_validator
-    end
-
     def completed?
       return @completed if defined?(@completed)
 
