@@ -37,7 +37,7 @@ Feature: Linking cases back button use
     And I click find address
     And I choose an address 'Transport For London, 98 Petty France, London, SW1H 9EA'
     And I click 'Use this address'
-    Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+    Then I should be on a page with title "'Care of' recipient"
 
     When I choose "No"
     And I click "Save and continue"

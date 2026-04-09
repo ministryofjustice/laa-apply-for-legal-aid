@@ -105,7 +105,7 @@ en:
             care_of_last_name:
               blank: Enter the recipient's last name
             care_of_organisation_name:
-              blank: Enter the organisation name
+              blank: Enter the organisation, team or department name
         applicant:
           attributes:
             date_of_birth:

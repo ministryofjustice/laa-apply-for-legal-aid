@@ -124,7 +124,7 @@ Feature: Checking client details answers backwards and forwards
     When I click 'Find address'
     And I choose an address 'C P S, 102 Petty France, London, SW1H 9EA'
     And I click 'Use this address'
-    Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+    Then I should be on a page with title "'Care of' recipient"
     When I choose "No"
     And I click "Save and continue"
     Then I should be on a page with title "Check your answers"
@@ -148,7 +148,7 @@ Feature: Checking client details answers backwards and forwards
     Then I enter postcode 'XX1 1XX'
     Then I click 'Save and continue'
 
-    Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+    Then I should be on a page with title "'Care of' recipient"
     When I choose "No"
     And I click "Save and continue"
     Then I should be on a page with title "Check your answers"
@@ -194,7 +194,7 @@ Feature: Checking client details answers backwards and forwards
     And I click 'Find address'
     And I choose an address 'British Transport Police, 98 Petty France, London, SW1H 9EA'
     And I click 'Use this address'
-    Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+    Then I should be on a page with title "'Care of' recipient"
 
     When I choose "Yes, a person"
     And I enter First name "Brian"
@@ -269,7 +269,7 @@ Feature: Checking client details answers backwards and forwards
     And I enter city 'London'
     And I enter a postcode 'SW1H 9EA'
     And I click 'Save and continue'
-    Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+    Then I should be on a page with title "'Care of' recipient"
 
     When I choose "Yes, a person"
     And I enter First name "Brian"
@@ -345,7 +345,7 @@ Feature: Checking client details answers backwards and forwards
     And I enter city 'London'
     And I enter a postcode 'SW1H 9EA'
     And I click 'Save and continue'
-    Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+    Then I should be on a page with title "'Care of' recipient"
 
     When I choose "Yes, a person"
     And I enter First name "Brian"
@@ -377,7 +377,7 @@ Feature: Checking client details answers backwards and forwards
     And I click 'Find address'
     And I choose an address 'C P S, 102 Petty France, London, SW1H 9EA'
     And I click 'Use this address'
-    Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+    Then I should be on a page with title "'Care of' recipient"
 
     When I choose "Yes, a person"
     And I enter First name "Brian"
@@ -478,7 +478,7 @@ Feature: Checking client details answers backwards and forwards
     Then I enter city 'Fake City'
     Then I enter postcode 'XX1 1XX'
     Then I click 'Save and continue'
-    Then I should be on a page with title "Do you want to add a 'care of' recipient for your client's mail?"
+    Then I should be on a page with title "'Care of' recipient"
     When I choose "No"
     And I click "Save and continue"
     Then I should be on a page showing 'Check your answers'

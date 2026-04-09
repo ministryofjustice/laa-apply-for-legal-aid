@@ -128,7 +128,7 @@ RSpec.describe Addresses::CareOfForm, type: :form do
 
       it "adds custom blank error message" do
         error_messages = instance.errors.messages.values.flatten
-        expect(error_messages).to include("Enter the organisation name")
+        expect(error_messages).to include("Enter the organisation, team or department name")
       end
     end
   end

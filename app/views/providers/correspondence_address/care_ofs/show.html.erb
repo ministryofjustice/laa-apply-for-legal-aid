@@ -4,26 +4,35 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <%= page_template(
-        page_title: t(".heading"),
-        template: :basic,
-        form:,
-      ) do %>
-    <%= form.govuk_radio_buttons_fieldset(:care_of, legend: { size: "xl", tag: "h1", text: page_title }) do %>
+  <%= page_template(page_title: t(".heading"), form:) do %>
+    <p class="govuk-body"><%= t(".paragraph_1") %></p>
+
+    <%= govuk_inset_text do %>
+      <%= @legal_aid_application.applicant.full_name %><br>
+      <%= address_with_line_breaks(@address) %>
+    <% end %>
+
+    <p class="govuk-body"><%= t(".paragraph_2") %></p>
+
+    <%= form.govuk_radio_buttons_fieldset(:care_of, legend: { size: "m", tag: "h2", text: t(".question") }) do %>
       <%= form.govuk_radio_button(:care_of, "person", link_errors: true, label: { text: t(".yes_person") }) do %>
         <%= form.govuk_text_field(
               :care_of_first_name,
               label: { text: t(".care_of_first_name") },
+              width: "three-quarters",
             ) %>
         <%= form.govuk_text_field(
               :care_of_last_name,
               label: { text: t(".care_of_last_name") },
+              width: "three-quarters",
             ) %>
       <% end %>
       <%= form.govuk_radio_button(:care_of, "organisation", link_errors: true, label: { text: t(".yes_organisation") }) do %>
         <%= form.govuk_text_field(
               :care_of_organisation_name,
               label: { text: t(".care_of_organisation_name") },
+              hint: { text: t(".care_of_organisation_name_hint") },
+              width: "three-quarters",
             ) %>
       <% end %>
       <%= form.govuk_radio_button :care_of, "no", label: { text: t("generic.no") }, hint: { text: t(".no_hint") } %>
