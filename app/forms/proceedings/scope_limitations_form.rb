@@ -10,8 +10,23 @@ module Proceedings
              :validate_hearing_dates,
              :validate_limitation_notes
 
+    def initialize(attributes = {})
+      super
+
+      selected_scope_limitations = model.scope_limitations.where(scope_type:)
+      @scope_codes = selected_scope_limitations.pluck(:code)
+
+      selected_scope_limitations.each do |scope_limitation|
+        code = scope_limitation.code
+        __send__(:"meaning_#{code}=", scope_limitation.meaning) if respond_to?(:"meaning_#{code}=")
+        __send__(:"description_#{code}=", scope_limitation[:description]) if respond_to?(:"description_#{code}=")
+        __send__(:"hearing_date_#{code}=", scope_limitation.hearing_date&.to_s(:date_picker)) if respond_to?(:"hearing_date_#{code}=")
+        __send__(:"limitation_note_#{code}=", scope_limitation.limitation_note) if respond_to?(:"limitation_note_#{code}=")
+      end
+    end
+
     class << self
-      def call(scopes, model:)
+      def call(scopes, model:, scope_type:)
         scopes.each do |scope|
           code = scope["code"]
           populate_attr_accessors(code)
@@ -25,7 +40,7 @@ module Proceedings
             end
           end
         end
-        new({ scopes:, model: })
+        new(scopes:, model:, scope_type:)
       end
 
       def populate_attr_accessors(code)

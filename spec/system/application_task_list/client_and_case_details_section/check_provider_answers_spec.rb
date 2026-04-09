@@ -6,44 +6,42 @@ RSpec.describe "Client and case details section - Check your answers", :vcr do
     end
 
     scenario "I can complete the task list's Check your answers item" do
-      fill_in_client_and_case_details_until_step(:has_national_insurance_number)
-
-      expect(page).to have_css("h1", text: "Does your client have a National Insurance number?")
+      fill_in_client_and_case_details_until_step(:proceedings)
 
       @legal_aid_application ||= LegalAidApplication.find(id_from_current_page_url)
       visit providers_legal_aid_application_task_list_path(@legal_aid_application)
 
       expect_section_with_task_list_items("Client and case details") do
         [
-          { name: "Client details", link_enabled: true, status: "In progress" },
-          { name: "Link to another application", link_enabled: false, status: "Cannot start yet" },
+          { name: "Client details", link_enabled: false, status: "Completed" },
+          { name: "Link to another application", link_enabled: false, status: "Completed" },
+          { name: "Proceedings", link_enabled: true, status: "Not started" },
           { name: "Check your answers", link_enabled: false, status: "Not ready yet" },
+          { name: "DWP outcome", link_enabled: false, status: "Not ready yet" },
         ]
       end
 
-      click_link "Client details"
+      click_on "Proceedings"
+
+      fill_in("proceeding-search-input", with: "da004")
+      govuk_choose("Non-molestation order", match: :prefer_exact)
       click_on "Save and continue"
 
-      govuk_choose("Yes")
-      fill_in("Enter National Insurance number", with: "CB987654A")
+      govuk_choose "No"
       click_on "Save and continue"
 
-      expect(page).to have_css("h1", text: "Clients who have applied before")
-      expect(page).to have_css("h2", text: "Has your client applied for civil legal aid before?")
-      govuk_choose("No")
+      govuk_choose "Applicant, claimant or petitioner"
       click_on "Save and continue"
 
-      govuk_choose("My client's UK home address")
+      govuk_choose "No"
       click_on "Save and continue"
 
-      fill_in("Postcode", with: "SW1H 9EA")
-      click_on "Find address"
-      govuk_choose "Transport For London, 98 Petty France, London, SW1H 9EA"
-      click_on "Use this address"
+      govuk_choose "Yes"
+      click_on "Save and continue"
 
-      expect(page).to have_css("h1", text: "Linking cases")
-      expect(page).to have_css("h2", text: "Do you want to link this application with another one?")
-      govuk_choose("No")
+      click_on "Save and continue"
+
+      govuk_choose "No"
       click_on "Save and continue"
 
       visit providers_legal_aid_application_task_list_path(@legal_aid_application)
@@ -52,7 +50,9 @@ RSpec.describe "Client and case details section - Check your answers", :vcr do
         [
           { name: "Client details", link_enabled: false, status: "Completed" },
           { name: "Link to another application", link_enabled: false, status: "Completed" },
+          { name: "Proceedings", link_enabled: false, status: "Completed" },
           { name: "Check your answers", link_enabled: true, status: "Not started" },
+          { name: "DWP outcome", link_enabled: false, status: "Not ready yet" },
         ]
       end
 
@@ -65,7 +65,9 @@ RSpec.describe "Client and case details section - Check your answers", :vcr do
         [
           { name: "Client details", link_enabled: false, status: "Completed" },
           { name: "Link to another application", link_enabled: false, status: "Completed" },
+          { name: "Proceedings", link_enabled: false, status: "Completed" },
           { name: "Check your answers", link_enabled: true, status: "In progress" },
+          { name: "DWP outcome", link_enabled: false, status: "Not ready yet" },
         ]
       end
 
@@ -77,8 +79,10 @@ RSpec.describe "Client and case details section - Check your answers", :vcr do
       expect_section_with_task_list_items("Client and case details") do
         [
           { name: "Client details", link_enabled: false, status: "Completed" },
-          # { name: "Link to another application", link_enabled: false, status: "Completed" }, # TODO: fix as part of 6091
+          { name: "Link to another application", link_enabled: false, status: "Completed" },
+          { name: "Proceedings", link_enabled: false, status: "Completed" },
           { name: "Check your answers", link_enabled: false, status: "Completed" },
+          { name: "DWP outcome", link_enabled: true, status: "Not started" },
         ]
       end
 
@@ -92,8 +96,10 @@ RSpec.describe "Client and case details section - Check your answers", :vcr do
       expect_section_with_task_list_items("Client and case details") do
         [
           { name: "Client details", link_enabled: false, status: "Completed" },
-          # { name: "Link to another application", link_enabled: false, status: "Completed" }, # TODO: fix as part of 6091
+          { name: "Link to another application", link_enabled: false, status: "Completed" },
+          { name: "Proceedings", link_enabled: false, status: "Completed" },
           { name: "Check your answers", link_enabled: true, status: "Review" },
+          { name: "DWP outcome", link_enabled: false, status: "Not ready yet" },
         ]
       end
 
@@ -105,8 +111,10 @@ RSpec.describe "Client and case details section - Check your answers", :vcr do
       expect_section_with_task_list_items("Client and case details") do
         [
           { name: "Client details", link_enabled: false, status: "Completed" },
-          # { name: "Link to another application", link_enabled: false, status: "Completed" }, # TODO: fix as part of 6091
+          { name: "Link to another application", link_enabled: false, status: "Completed" },
+          { name: "Proceedings", link_enabled: false, status: "Completed" },
           { name: "Check your answers", link_enabled: false, status: "Completed" },
+          { name: "DWP outcome", link_enabled: true, status: "Not started" },
         ]
       end
     end

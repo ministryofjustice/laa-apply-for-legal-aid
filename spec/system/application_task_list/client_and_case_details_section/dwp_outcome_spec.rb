@@ -3,9 +3,7 @@ RSpec.describe "Client and case details section - DWP outcome", :javascript, :vc
   feature "View and amend the DWP outcome section" do
     before do
       login_as_a_provider
-      fill_in_client_and_case_details_until_step(:make_link)
-      govuk_choose("No")
-      click_on "Save and continue"
+      fill_in_client_and_case_details_until_step(:partner)
     end
 
     scenario "I can complete the task list's DWP outcome item" do
@@ -15,7 +13,7 @@ RSpec.describe "Client and case details section - DWP outcome", :javascript, :vc
       expect_section_with_task_list_items("Client and case details") do
         [
           { name: "Check your answers", link_enabled: true, status: "Not started" },
-          { name: "DWP outcome", link_enabled: false, status: "Not ready" },
+          { name: "DWP outcome", link_enabled: false, status: "Not ready yet" },
         ]
       end
       click_on "Check your answers"
