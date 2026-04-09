@@ -1,0 +1,921 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:37:22 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1331'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"82a4e7b3a11c8dd645180a8309989800"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 64c3d1f7911dea5353da0a20397ed6f7
+      X-Runtime:
+      - '0.005426'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"ccms_code":"DA004","meaning":"Non-molestation order","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","name":"nonmolestation_order","description":"to
+        be represented on an application for a non-molestation order.","sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"domestic
+        abuse (DA)","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings)."},"delegated_functions":{"code":"CV117","meaning":"Interim
+        order inc. return date","description":"Limited to all steps necessary to apply
+        for an interim order; where application is made without notice to include
+        representation on the return date."}},"service_levels":[{"level":3,"name":"Full
+        Representation","stage":8,"proceeding_default":true}]}'
+  recorded_at: Thu, 09 Apr 2026 15:37:22 GMT
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:37:22 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1331'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"82a4e7b3a11c8dd645180a8309989800"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - ad555da35521fb7cc3cf999b2021efd9
+      X-Runtime:
+      - '0.009632'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"ccms_code":"DA004","meaning":"Non-molestation order","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","name":"nonmolestation_order","description":"to
+        be represented on an application for a non-molestation order.","sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"domestic
+        abuse (DA)","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings)."},"delegated_functions":{"code":"CV117","meaning":"Interim
+        order inc. return date","description":"Limited to all steps necessary to apply
+        for an interim order; where application is made without notice to include
+        representation on the return date."}},"service_levels":[{"level":3,"name":"Full
+        Representation","stage":8,"proceeding_default":true}]}'
+  recorded_at: Thu, 09 Apr 2026 15:37:22 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_scopes
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"DA004","delegated_functions_used":true,"client_involvement_type":"A","level_of_service_code":3}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:37:22 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1622'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"5cb81d0b5c30be0e006d4ba352304f2b"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - d14f40f160179c5935088e1ab40df939
+      X-Runtime:
+      - '0.008666'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA004","delegated_functions_used":true,"client_involvement_type":"A","level_of_service_code":3},"level_of_service":{"level":3,"name":"Full
+        Representation","stage":8,"scope_limitations":[{"code":"CV079","meaning":"Counsel''s
+        Opinion","description":"Limited to obtaining external Counsel''s Opinion or
+        the opinion of an external solicitor with higher court advocacy rights on
+        the information already available.","additional_params":[]},{"code":"CV118","meaning":"Hearing","description":"Limited
+        to all steps up to and including the hearing on [see additional limitation
+        notes]","additional_params":[{"name":"hearing_date","type":"date","mandatory":true}]},{"code":"CV027","meaning":"Hearing/Adjournment","description":"Limited
+        to all steps (including any adjournment thereof) up to and including the hearing
+        on","additional_params":[{"name":"hearing_date","type":"date","mandatory":true}]},{"code":"CV117","meaning":"Interim
+        order inc. return date","description":"Limited to all steps necessary to apply
+        for an interim order; where application is made without notice to include
+        representation on the return date.","additional_params":[]},{"code":"FM054","meaning":"Overseas
+        applicant (forced marriage)","description":"Limited where the applicant is
+        overseas, to their return to the jurisdiction and thereafter a solicitor''s
+        report","additional_params":[]},{"code":"AA009","meaning":"Warrant of arrest
+        FLA","description":"As to an order under Part IV Family Law Act 1996 limited
+        to an application for the issue of a warrant of arrest.","additional_params":[]}]}}'
+  recorded_at: Thu, 09 Apr 2026 15:37:22 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:37:22 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '708'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"05375658d64485716c2575dd3e911e59"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a53f34450596d5df766695d6f38eac3e
+      X-Runtime:
+      - '0.004232'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"},"default_level_of_service":{"level":3,"name":"Full
+        Representation","stage":8},"default_scope":{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings).","additional_params":[]}}'
+  recorded_at: Thu, 09 Apr 2026 15:37:22 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_scopes
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A","level_of_service_code":3}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:37:22 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2101'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"607af38910362a3060b3c421d9bd769e"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 93c7eead851019e6c22cc44818642b7f
+      X-Runtime:
+      - '0.012193'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A","level_of_service_code":3},"level_of_service":{"level":3,"name":"Full
+        Representation","stage":8,"scope_limitations":[{"code":"CV079","meaning":"Counsel''s
+        Opinion","description":"Limited to obtaining external Counsel''s Opinion or
+        the opinion of an external solicitor with higher court advocacy rights on
+        the information already available.","additional_params":[]},{"code":"CV118","meaning":"Hearing","description":"Limited
+        to all steps up to and including the hearing on [see additional limitation
+        notes]","additional_params":[{"name":"hearing_date","type":"date","mandatory":true}]},{"code":"CV027","meaning":"Hearing/Adjournment","description":"Limited
+        to all steps (including any adjournment thereof) up to and including the hearing
+        on","additional_params":[{"name":"hearing_date","type":"date","mandatory":true}]},{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings).","additional_params":[]},{"code":"CV117","meaning":"Interim
+        order inc. return date","description":"Limited to all steps necessary to apply
+        for an interim order; where application is made without notice to include
+        representation on the return date.","additional_params":[]},{"code":"FM054","meaning":"Overseas
+        applicant (forced marriage)","description":"Limited where the applicant is
+        overseas, to their return to the jurisdiction and thereafter a solicitor''s
+        report","additional_params":[]},{"code":"AA009","meaning":"Warrant of arrest
+        FLA","description":"As to an order under Part IV Family Law Act 1996 limited
+        to an application for the issue of a warrant of arrest.","additional_params":[]}]}}'
+  recorded_at: Thu, 09 Apr 2026 15:37:23 GMT
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:40:13 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1331'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"82a4e7b3a11c8dd645180a8309989800"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - fc1d12b86981b69da42f3617b1ea0428
+      X-Runtime:
+      - '0.026485'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"ccms_code":"DA004","meaning":"Non-molestation order","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","name":"nonmolestation_order","description":"to
+        be represented on an application for a non-molestation order.","sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"domestic
+        abuse (DA)","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings)."},"delegated_functions":{"code":"CV117","meaning":"Interim
+        order inc. return date","description":"Limited to all steps necessary to apply
+        for an interim order; where application is made without notice to include
+        representation on the return date."}},"service_levels":[{"level":3,"name":"Full
+        Representation","stage":8,"proceeding_default":true}]}'
+  recorded_at: Thu, 09 Apr 2026 15:40:13 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:40:13 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '708'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"05375658d64485716c2575dd3e911e59"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 12c657248fed664807f511fd23c80041
+      X-Runtime:
+      - '0.005177'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"},"default_level_of_service":{"level":3,"name":"Full
+        Representation","stage":8},"default_scope":{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings).","additional_params":[]}}'
+  recorded_at: Thu, 09 Apr 2026 15:40:13 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_scopes
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A","level_of_service_code":3}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:40:13 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2101'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"607af38910362a3060b3c421d9bd769e"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - ad3e95a70252a65deab22dc0ee4be048
+      X-Runtime:
+      - '0.008632'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A","level_of_service_code":3},"level_of_service":{"level":3,"name":"Full
+        Representation","stage":8,"scope_limitations":[{"code":"CV079","meaning":"Counsel''s
+        Opinion","description":"Limited to obtaining external Counsel''s Opinion or
+        the opinion of an external solicitor with higher court advocacy rights on
+        the information already available.","additional_params":[]},{"code":"CV118","meaning":"Hearing","description":"Limited
+        to all steps up to and including the hearing on [see additional limitation
+        notes]","additional_params":[{"name":"hearing_date","type":"date","mandatory":true}]},{"code":"CV027","meaning":"Hearing/Adjournment","description":"Limited
+        to all steps (including any adjournment thereof) up to and including the hearing
+        on","additional_params":[{"name":"hearing_date","type":"date","mandatory":true}]},{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings).","additional_params":[]},{"code":"CV117","meaning":"Interim
+        order inc. return date","description":"Limited to all steps necessary to apply
+        for an interim order; where application is made without notice to include
+        representation on the return date.","additional_params":[]},{"code":"FM054","meaning":"Overseas
+        applicant (forced marriage)","description":"Limited where the applicant is
+        overseas, to their return to the jurisdiction and thereafter a solicitor''s
+        report","additional_params":[]},{"code":"AA009","meaning":"Warrant of arrest
+        FLA","description":"As to an order under Part IV Family Law Act 1996 limited
+        to an application for the issue of a warrant of arrest.","additional_params":[]}]}}'
+  recorded_at: Thu, 09 Apr 2026 15:40:13 GMT
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_types/DA004
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:41:03 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1331'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"82a4e7b3a11c8dd645180a8309989800"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 8626aa3da82501ea16d89313d354419b
+      X-Runtime:
+      - '0.007205'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"ccms_code":"DA004","meaning":"Non-molestation order","ccms_category_law_code":"MAT","ccms_matter_code":"MINJN","name":"nonmolestation_order","description":"to
+        be represented on an application for a non-molestation order.","sca_core":false,"sca_related":false,"ccms_category_law":"Family","ccms_matter":"domestic
+        abuse (DA)","cost_limitations":{"substantive":{"start_date":"1970-01-01","value":"25000.0"},"delegated_functions":{"start_date":"2021-09-13","value":"2250.0"}},"default_scope_limitations":{"substantive":{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings)."},"delegated_functions":{"code":"CV117","meaning":"Interim
+        order inc. return date","description":"Limited to all steps necessary to apply
+        for an interim order; where application is made without notice to include
+        representation on the return date."}},"service_levels":[{"level":3,"name":"Full
+        Representation","stage":8,"proceeding_default":true}]}'
+  recorded_at: Thu, 09 Apr 2026 15:41:03 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:41:03 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '708'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"05375658d64485716c2575dd3e911e59"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 33cb1340a8f80ccf9259e41593223133
+      X-Runtime:
+      - '0.005228'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"},"default_level_of_service":{"level":3,"name":"Full
+        Representation","stage":8},"default_scope":{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings).","additional_params":[]}}'
+  recorded_at: Thu, 09 Apr 2026 15:41:03 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_scopes
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A","level_of_service_code":3}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:41:03 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '2101'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"607af38910362a3060b3c421d9bd769e"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - a8be7b0f49c86c7f6da027b700a6a97e
+      X-Runtime:
+      - '0.011267'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A","level_of_service_code":3},"level_of_service":{"level":3,"name":"Full
+        Representation","stage":8,"scope_limitations":[{"code":"CV079","meaning":"Counsel''s
+        Opinion","description":"Limited to obtaining external Counsel''s Opinion or
+        the opinion of an external solicitor with higher court advocacy rights on
+        the information already available.","additional_params":[]},{"code":"CV118","meaning":"Hearing","description":"Limited
+        to all steps up to and including the hearing on [see additional limitation
+        notes]","additional_params":[{"name":"hearing_date","type":"date","mandatory":true}]},{"code":"CV027","meaning":"Hearing/Adjournment","description":"Limited
+        to all steps (including any adjournment thereof) up to and including the hearing
+        on","additional_params":[{"name":"hearing_date","type":"date","mandatory":true}]},{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings).","additional_params":[]},{"code":"CV117","meaning":"Interim
+        order inc. return date","description":"Limited to all steps necessary to apply
+        for an interim order; where application is made without notice to include
+        representation on the return date.","additional_params":[]},{"code":"FM054","meaning":"Overseas
+        applicant (forced marriage)","description":"Limited where the applicant is
+        overseas, to their return to the jurisdiction and thereafter a solicitor''s
+        report","additional_params":[]},{"code":"AA009","meaning":"Warrant of arrest
+        FLA","description":"As to an order under Part IV Family Law Act 1996 limited
+        to an application for the issue of a warrant of arrest.","additional_params":[]}]}}'
+  recorded_at: Thu, 09 Apr 2026 15:41:03 GMT
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/DA004
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:41:03 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '320'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"634b8c627a1b078b5d1fffcb51ca2121"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 0f14f980fcf5287beca76e69c1e554df
+      X-Runtime:
+      - '0.002025'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
+        of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
+        party"}]}'
+  recorded_at: Thu, 09 Apr 2026 15:41:03 GMT
+- request:
+    method: post
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
+    body:
+      encoding: UTF-8
+      string: '{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"}'
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:41:14 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '708'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"05375658d64485716c2575dd3e911e59"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 68531dc2cad00c544b78584256acba9c
+      X-Runtime:
+      - '0.005950'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"requested_params":{"proceeding_type_ccms_code":"DA004","delegated_functions_used":false,"client_involvement_type":"A"},"default_level_of_service":{"level":3,"name":"Full
+        Representation","stage":8},"default_scope":{"code":"AA019","meaning":"Injunction
+        FLA-to final hearing","description":"As to proceedings under Part IV Family
+        Law Act 1996 limited to all steps up to and including obtaining and serving
+        a final order and in the event of breach leading to the exercise of a power
+        of arrest to representation on the consideration of the breach by the court
+        (but excluding applying for a warrant of arrest, if not attached, and representation
+        in contempt proceedings).","additional_params":[]}}'
+  recorded_at: Thu, 09 Apr 2026 15:41:14 GMT
+- request:
+    method: get
+    uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types/DA004
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.14.1
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 09 Apr 2026 15:41:15 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '320'
+      Connection:
+      - keep-alive
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Vary:
+      - Accept, Origin
+      Etag:
+      - W/"634b8c627a1b078b5d1fffcb51ca2121"
+      Cache-Control:
+      - max-age=0, private, must-revalidate
+      X-Request-Id:
+      - 5189912c11c46364ab94b97d1444b72a
+      X-Runtime:
+      - '0.001921'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
+        of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
+        party"}]}'
+  recorded_at: Thu, 09 Apr 2026 15:41:15 GMT
+recorded_with: VCR 6.4.0
