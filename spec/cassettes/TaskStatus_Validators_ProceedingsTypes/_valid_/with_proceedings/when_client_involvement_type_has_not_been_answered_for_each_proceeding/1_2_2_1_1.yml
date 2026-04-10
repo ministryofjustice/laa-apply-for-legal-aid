@@ -21,7 +21,7 @@ http_interactions:
       message: Bad Request
     headers:
       Date:
-      - Thu, 02 Apr 2026 08:18:57 GMT
+      - Fri, 10 Apr 2026 10:50:21 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -43,9 +43,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 6b35da242139651165195734f45add30
+      - 90d25a6ec77f44957b7ab86d23a61a4c
       X-Runtime:
-      - '0.003652'
+      - '0.002712'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
@@ -53,7 +53,7 @@ http_interactions:
       string: '{"success":false,"errors":["The property ''#/client_involvement_type''
         value nil did not match one of the following values: A, D, W, Z, I in schema
         file://#"]}'
-  recorded_at: Thu, 02 Apr 2026 08:18:57 GMT
+  recorded_at: Fri, 10 Apr 2026 10:50:21 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -75,7 +75,7 @@ http_interactions:
       message: Bad Request
     headers:
       Date:
-      - Thu, 02 Apr 2026 08:18:57 GMT
+      - Fri, 10 Apr 2026 10:50:21 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -97,9 +97,9 @@ http_interactions:
       Cache-Control:
       - no-cache
       X-Request-Id:
-      - 42b6791ee5179f48ef72cb3a24d0573d
+      - 04f846270fdc4eeeae18cbda7b4662da
       X-Runtime:
-      - '0.003199'
+      - '0.002969'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
@@ -107,7 +107,7 @@ http_interactions:
       string: '{"success":false,"errors":["The property ''#/client_involvement_type''
         value nil did not match one of the following values: A, D, W, Z, I in schema
         file://#"]}'
-  recorded_at: Thu, 02 Apr 2026 08:18:57 GMT
+  recorded_at: Fri, 10 Apr 2026 10:50:21 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -129,7 +129,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 02 Apr 2026 08:18:57 GMT
+      - Fri, 10 Apr 2026 10:50:21 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -153,9 +153,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - 3fa4058c62070759c62935fb63eeb56c
+      - 5d5cdd3d3ef274b89a78fcd40fc4279d
       X-Runtime:
-      - '0.006745'
+      - '0.005155'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
@@ -165,7 +165,7 @@ http_interactions:
         order inc. return date","description":"Limited to all steps necessary to apply
         for an interim order; where application is made without notice to include
         representation on the return date.","additional_params":[]}}'
-  recorded_at: Thu, 02 Apr 2026 08:18:57 GMT
+  recorded_at: Fri, 10 Apr 2026 10:50:21 GMT
 - request:
     method: post
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/proceeding_type_defaults
@@ -187,7 +187,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 02 Apr 2026 08:18:58 GMT
+      - Fri, 10 Apr 2026 10:50:21 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
@@ -211,9 +211,9 @@ http_interactions:
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - c29999e0b002cec2148c0d56e9ca7ba3
+      - 8b47d2c049519928054a7162cda9a7f4
       X-Runtime:
-      - '0.005005'
+      - '0.007134'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
@@ -223,5 +223,5 @@ http_interactions:
         to Family Help (Higher) and to all steps necessary to negotiate and conclude
         a settlement. To include the issue of proceedings and representation in those
         proceedings save in relation to or at a contested final hearing.","additional_params":[]}}'
-  recorded_at: Thu, 02 Apr 2026 08:18:58 GMT
+  recorded_at: Fri, 10 Apr 2026 10:50:21 GMT
 recorded_with: VCR 6.4.0

@@ -26,7 +26,7 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                         meaning: "Inherent jurisdiction high court injunction",
                         description: "to be represented on an application for an injunction, order or declaration under the inherent jurisdiction of the court.",
                         substantive_cost_limitation:,
-                        delegated_functions_cost_limitation: rand(1...1_000_000.0).round(2),
+                        delegated_functions_cost_limitation:,
                         name: "inherent_jurisdiction_high_court_injunction",
                         matter_type: "Domestic Abuse",
                         category_of_law: "Family",
@@ -107,6 +107,7 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
   let(:substantive_final_hearing_listed) { true }
   let(:substantive_final_hearing_details) { "Reason for not listing" }
   let(:substantive_cost_limitation) { 25_000 }
+  let(:delegated_functions_cost_limitation) { 2_250 }
 
   it_behaves_like "a task status validator"
 
@@ -144,105 +145,123 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
       end
 
       context "when delegated functions question has been answered for each proceeding" do
-        it { is_expected.to be_valid }
+        let(:used_delegated_functions) { true }
+        let(:used_delegated_functions_on) { 5.days.ago }
 
-        context "and emergency certificate is not used" do
+        context "and emergency defaults not accepted for each proceeding" do
+          let(:accepted_emergency_defaults) { false }
+
           it { is_expected.to be_valid }
         end
 
-        context "and emergency certificate is used" do
-          context "and emergency default question has not been answered for each proceeding" do
-            let(:accepted_emergency_defaults) { nil }
+        context "and emergency defaults accepted for each proceeding" do
+          let(:accepted_emergency_defaults) { true }
+
+          it { is_expected.to be_valid }
+        end
+
+        context "and emergency defaults question not answered for each proceeding" do
+          let(:accepted_emergency_defaults) { nil }
+
+          it { is_expected.not_to be_valid }
+        end
+
+        context "when emergency defaults not accepted for each proceeding" do
+          let(:accepted_emergency_defaults) { false }
+
+          context "and the emergency level of service has not been answered for each proceeding" do
+            let(:emergency_level_of_service) { nil }
 
             it { is_expected.not_to be_valid }
           end
 
-          context "and emergency defaults question has been answered for each proceeding and is false" do
-            let(:accepted_emergency_defaults) { false }
+          context "and the emergency level of service has been answered for each proceeding" do
+            let(:emergency_level_of_service) { "3" }
 
-            context "and the emergency level of service has not been answered for each proceeding" do
-              let(:emergency_level_of_service) { nil }
+            it { is_expected.to be_valid }
+          end
+
+          context "when proceeding two uses emergency family help (higher)" do
+            let(:accepted_emergency_defaults) { true }
+            let(:proceeding_two_accepted_emergency_defaults) { false }
+            let(:proceeding_two_emergency_level_of_service) { "1" }
+
+            context "and the emergency scope limitations have been answered for proceeding two" do
+              let(:emergency_scope_limitation) { create(:scope_limitation, :emergency, proceeding: proceeding_two) }
+
+              it { is_expected.to be_valid }
+            end
+
+            context "and the emergency scope limitations have not been answered for proceeding two" do
+              let(:emergency_scope_limitation) { nil }
+
+              it { is_expected.not_to be_valid }
+            end
+          end
+
+          context "when emergency level of service is full representation" do
+            let(:emergency_level_of_service) { "3" }
+            let(:emergency_level_of_service_name) { "Full Representation" }
+
+            it "does not require a final hearing when only one level of service is available" do
+              expect(validator).to be_valid
+            end
+          end
+
+          context "when proceeding two reaches emergency full representation" do
+            let(:accepted_emergency_defaults) { true }
+            let(:proceeding_two_accepted_emergency_defaults) { false }
+            let(:emergency_scope_limitation_proceeding) { proceeding_two }
+
+            context "and final hearing has not been chosen for proceeding two" do
+              let(:emergency_final_hearing) { nil }
 
               it { is_expected.not_to be_valid }
             end
 
-            context "and emergency level of service has been answered for each proceeding" do
-              context "when proceeding two uses emergency family help (higher)" do
-                let(:accepted_emergency_defaults) { true }
-                let(:proceeding_two_accepted_emergency_defaults) { false }
-                let(:proceeding_two_emergency_level_of_service) { "1" }
-                let(:emergency_scope_limitation_proceeding) { proceeding_two }
+            context "and final hearing is listed for proceeding two" do
+              let(:emergency_final_hearing_proceeding) { proceeding_two }
+
+              context "with a hearing date" do
+                let(:emergency_final_hearing_date) { 2.days.ago }
 
                 it { is_expected.to be_valid }
-
-                context "and the emergency scope limitations have not been answered for proceeding two" do
-                  let(:emergency_scope_limitation) { nil }
-
-                  it { is_expected.not_to be_valid }
-                end
               end
 
-              context "and emergency level of service is full representation" do
-                let(:emergency_level_of_service) { "3" }
-                let(:emergency_level_of_service_name) { "Full Representation" }
+              context "without a hearing date" do
+                let(:emergency_final_hearing_date) { nil }
 
-                it "does not require a final hearing when only one level of service is available" do
-                  expect(validator).to be_valid
-                end
+                it { is_expected.not_to be_valid }
+              end
+            end
+
+            context "and final hearing is not listed for proceeding two" do
+              let(:emergency_final_hearing_proceeding) { proceeding_two }
+              let(:emergency_final_hearing_listed) { false }
+
+              context "with a reason" do
+                let(:emergency_final_hearing_details) { "Some reason" }
+
+                it { is_expected.to be_valid }
               end
 
-              context "when proceeding two reaches emergency full representation" do
-                let(:accepted_emergency_defaults) { true }
-                let(:proceeding_two_accepted_emergency_defaults) { false }
-                let(:emergency_scope_limitation_proceeding) { proceeding_two }
+              context "without a reason" do
+                let(:emergency_final_hearing_details) { nil }
 
-                context "and final hearing has not been chosen for proceeding two" do
-                  let(:emergency_final_hearing) { nil }
-
-                  it { is_expected.not_to be_valid }
-                end
-
-                context "and final hearing is listed for proceeding two" do
-                  let(:emergency_final_hearing_proceeding) { proceeding_two }
-
-                  context "with a hearing date" do
-                    it { is_expected.to be_valid }
-                  end
-
-                  context "without a hearing date" do
-                    let(:emergency_final_hearing_date) { nil }
-
-                    it { is_expected.not_to be_valid }
-                  end
-                end
-
-                context "and final hearing is not listed for proceeding two" do
-                  let(:emergency_final_hearing_proceeding) { proceeding_two }
-                  let(:emergency_final_hearing_listed) { false }
-
-                  context "with a reason" do
-                    it { is_expected.to be_valid }
-                  end
-
-                  context "without a reason" do
-                    let(:emergency_final_hearing_details) { nil }
-
-                    it { is_expected.not_to be_valid }
-                  end
-                end
+                it { is_expected.not_to be_valid }
               end
             end
           end
         end
       end
 
-      context "when substantive default question has not been answered for each proceeding" do
+      context "when accepted substantive default question has not been answered for each proceeding" do
         let(:accepted_substantive_defaults) { nil }
 
         it { is_expected.not_to be_valid }
       end
 
-      context "when substantive defaults question has been answered for each proceeding and is false" do
+      context "when accepted substantive default question has been answered for each proceeding and is false" do
         let(:accepted_substantive_defaults) { false }
 
         it { is_expected.to be_valid }
@@ -322,18 +341,22 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
       end
 
       context "when emergency cost is overridable" do
-        context "and emergency cost override form has been answered for each proceeding" do
-          context "and yes has been selected" do
-            it { is_expected.to be_valid }
-          end
+        let(:delegated_functions_cost_limitation) { 5_000 }
 
-          context "and no has been selected" do
-            let(:emergency_cost_override) { false }
-            let(:emergency_cost_reasons) { nil }
-            let(:emergency_cost_requested) { nil }
+        context "and emergency cost override form has been answered yes for each proceeding" do
+          let(:emergency_cost_override) { true }
+          let(:emergency_cost_reasons) { "some reason" }
+          let(:emergency_cost_requested) { 5_000 }
 
-            it { is_expected.to be_valid }
-          end
+          it { is_expected.to be_valid }
+        end
+
+        context "and emergency cost override form has been answered no for each proceeding" do
+          let(:emergency_cost_override) { false }
+          let(:emergency_cost_reasons) { nil }
+          let(:emergency_cost_requested) { nil }
+
+          it { is_expected.to be_valid }
         end
 
         context "and emergency cost override form has not been answered for each proceeding" do
@@ -348,18 +371,20 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
       context "when substantive cost is overridable" do
         let(:substantive_cost_limitation) { 15_000 }
 
-        context "and substantive cost override form has been answered for each proceeding" do
-          context "and yes has been selected" do
-            it { is_expected.to be_valid }
-          end
+        context "and substantive cost override form has been answered yes for each proceeding" do
+          let(:substantive_cost_override) { true }
+          let(:substantive_cost_reasons) { "Some reason" }
+          let(:substantive_cost_requested) { 5_000 }
 
-          context "and no has been selected" do
-            let(:substantive_cost_override) { false }
-            let(:substantive_cost_reasons) { nil }
-            let(:substantive_cost_requested) { nil }
+          it { is_expected.to be_valid }
+        end
 
-            it { is_expected.to be_valid }
-          end
+        context "and substantive cost override form has been answered no for each proceeding" do
+          let(:substantive_cost_override) { false }
+          let(:substantive_cost_reasons) { nil }
+          let(:substantive_cost_requested) { nil }
+
+          it { is_expected.to be_valid }
         end
 
         context "and substantive cost override form has not been answered for each proceeding" do
@@ -402,14 +427,14 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                  hearing_date: emergency_hearing_date)
         end
 
-        let(:emergency_hearing_date) { Date.current }
-
         before do
           proceeding_one
           emergency_scope_limitation
         end
 
         context "when the hearing date is present" do
+          let(:emergency_hearing_date) { Date.current }
+
           it { is_expected.to be_valid }
         end
 
@@ -452,14 +477,14 @@ RSpec.describe TaskStatus::Validators::ProceedingsTypes, :vcr do
                  limitation_note: substantive_limitation_note)
         end
 
-        let(:substantive_limitation_note) { "some note" }
-
         before do
           proceeding_one
           substantive_scope_limitation
         end
 
         context "when the limitation note is present" do
+          let(:substantive_limitation_note) { "some note" }
+
           it { is_expected.to be_valid }
         end
 
