@@ -2,8 +2,8 @@ module TaskList
   class Subsection < SectionRenderer
     attr_reader :sub_name
 
-    def initialize(application, name:, sub_name:, tasks:, index:, body_override: nil, display_section_header: true)
-      super(application, name:, tasks:, index:, body_override:, display_section_header:)
+    def initialize(application, name:, sub_name:, tasks:, index:, body_override: nil, display_section_header: true, status_results: {})
+      super(application, name:, tasks:, index:, body_override:, display_section_header:, status_results:)
 
       @sub_name = sub_name
     end

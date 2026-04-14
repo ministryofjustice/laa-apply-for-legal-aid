@@ -1,16 +1,12 @@
 module TaskStatus
   class Applicants < Base
-    def call
-      status = ValueObject.new
+  private
 
+    def perform(status)
       status.in_progress!
       status.not_started! unless applicant
       status.completed! if completed?
-
-      status
     end
-
-  private
 
     def completed?
       return @completed if defined?(@completed)

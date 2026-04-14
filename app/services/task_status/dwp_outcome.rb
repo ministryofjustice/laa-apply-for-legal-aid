@@ -1,14 +1,10 @@
 module TaskStatus
   class DWPOutcome < Base
-    def call
-      status = ValueObject.new
-
+    def perform(status)
       status.not_ready! if not_ready?
       status.not_started! if not_started?
       status.in_progress! if in_progress?
       status.completed! if completed?
-
-      status
     end
 
   private
@@ -52,7 +48,8 @@ module TaskStatus
     def check_provider_answers_completed?
       return @check_provider_answers_completed if defined?(@check_provider_answers_completed)
 
-      @check_provider_answers_completed = CheckProviderAnswers.new(application).call.completed?
+      @check_provider_answers_completed =
+        @status_results[CheckProviderAnswers]&.completed?
     end
 
     def dwp_override_validator

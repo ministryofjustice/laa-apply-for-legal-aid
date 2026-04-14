@@ -13,19 +13,15 @@ module TaskStatus
     # *3 "Save and come back later/Save and got to task list" will be considered to make the CYA "In progress"
     #
 
-    def call
-      status = ValueObject.new
+  private
 
+    def perform(status)
       status.not_ready!
       status.not_started! if not_started?
       status.in_progress! if in_progress?
       status.review! if review?
       status.completed! if completed?
-
-      status
     end
-
-  private
 
     def not_started?
       return @not_started if defined?(@not_started)
@@ -55,18 +51,6 @@ module TaskStatus
       return @startable if defined?(@startable)
 
       @startable = previous_tasks_completed?
-    end
-
-    def previous_tasks_completed?
-      return @previous_tasks_completed if defined?(@previous_tasks_completed)
-
-      @previous_tasks_completed = previous_task_statuses.all?(&:completed?)
-    end
-
-    def previous_task_statuses
-      @previous_task_statuses ||= previous_task_status_items.map do |task_status|
-        task_status.send(:new, application).call
-      end
     end
 
     def previous_task_status_items
