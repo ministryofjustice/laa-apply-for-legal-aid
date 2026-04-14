@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Task::Partner do
-  subject(:instance) { described_class.new(application, name: "partner") }
+  subject(:instance) { described_class.new(application, name: "partner", status_results: {}) }
 
   let(:application) { create(:legal_aid_application) }
 
