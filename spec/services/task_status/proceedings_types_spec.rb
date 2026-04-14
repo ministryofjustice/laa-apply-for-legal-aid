@@ -1,9 +1,10 @@
 require "rails_helper"
 
 RSpec.describe TaskStatus::ProceedingsTypes do
-  subject(:instance) { described_class.new(application) }
+  subject(:instance) { described_class.new(application, status_results) }
 
   let(:application) { create(:application, applicant:) }
+  let(:status_results) { {} }
 
   let(:applicant) do
     create(
@@ -22,13 +23,23 @@ RSpec.describe TaskStatus::ProceedingsTypes do
     subject(:status) { instance.call }
 
     context "with partially completed link section" do
-      before { application.update!(linked_application_completed: false) }
+      let(:status_results) do
+        {
+          TaskStatus::Applicants => TaskStatus::ValueObject.new.completed!,
+          TaskStatus::MakeLink => TaskStatus::ValueObject.new.in_progress!,
+        }
+      end
 
       it { is_expected.to be_cannot_start }
     end
 
     context "with completed link section" do
-      before { application.update!(linked_application_completed: true) }
+      let(:status_results) do
+        {
+          TaskStatus::Applicants => TaskStatus::ValueObject.new.completed!,
+          TaskStatus::MakeLink => TaskStatus::ValueObject.new.completed!,
+        }
+      end
 
       it { is_expected.to be_not_started }
     end
