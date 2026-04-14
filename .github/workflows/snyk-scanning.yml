@@ -24,7 +24,7 @@ jobs:
           --tag laa-apply-for-legalaid:scan \
           --file Dockerfile .
 
-    - name: Static code analysis using Snyk
+    - name: Static ruby code analysis using Snyk
       continue-on-error: true
       uses: snyk/actions/ruby@9adf32b1121593767fc3c057af55b55db032dc04
       env:
@@ -33,7 +33,7 @@ jobs:
         command: code test
         args: --sarif-file-output=snyk-code.sarif --severity-threshold=high --policy-path=.snyk
 
-    - name: Test open source dependencies using Snyk
+    - name: Scan ruby dependencies using Snyk
       continue-on-error: true
       uses: snyk/actions/ruby@9adf32b1121593767fc3c057af55b55db032dc04
       env:
@@ -42,7 +42,7 @@ jobs:
         command: test
         args: --sarif-file-output=snyk-open.sarif --all-projects --severity-threshold=high --policy-path=.snyk
 
-    - name: Monitor open source dependencies using Snyk
+    - name: Monitor ruby dependencies using Snyk
       continue-on-error: true
       uses: snyk/actions/ruby@9adf32b1121593767fc3c057af55b55db032dc04
       env:
