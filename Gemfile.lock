@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/thoughtbot/action_dispatch-testing-integration-capybara.git
   revision: 1a20f3a3f719c7a3a8617cfc2821e760cbd54681
-  tag: v0.2.0
   specs:
     action_dispatch-testing-integration-capybara (0.2.0)
       actionpack
@@ -800,7 +799,6 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.7.5)
-    zlib (3.2.3)
 
 PLATFORMS
   arm64-darwin-24
@@ -905,7 +903,6 @@ DEPENDENCIES
   view_component
   webmock
   webrick
-  zlib (>= 3.2.3)
 
 CHECKSUMS
   aasm (5.5.2) sha256=a3b874b33d9cbb3be4a2c77185c340a07fb46d7cd31911cbc49337e31d12612f
@@ -1201,10 +1198,9 @@ CHECKSUMS
   websocket-extensions (0.1.5) sha256=1c6ba63092cda343eb53fc657110c71c754c56484aad42578495227d717a8241
   xpath (3.2.0) sha256=6dfda79d91bb3b949b947ecc5919f042ef2f399b904013eb3ef6d20dd3a4082e
   zeitwerk (2.7.5) sha256=d8da92128c09ea6ec62c949011b00ed4a20242b255293dd66bf41545398f73dd
-  zlib (3.2.3) sha256=5bd316698b32f31a64ab910a8b6c282442ca1626a81bbd6a1674e8522e319c20
 
 RUBY VERSION
-  ruby 4.0.1p0
+  ruby 4.0.2
 
 BUNDLED WITH
   4.0.5

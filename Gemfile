@@ -99,10 +99,6 @@ gem "strong_migrations"
 # Only used for test suite and for mocking certain Provider Data API calls when mock_auth_enabled
 gem "webmock"
 
-# Temporary explicit gem bump to address security vulnerability in ruby bundled zlib gem.
-# see https://www.ruby-lang.org/en/news/2026/03/05/buffer-overflow-zlib-cve-2026-27820/,
-gem "zlib", ">= 3.2.3"
-
 group :development, :test do
   gem "awesome_print", "~> 1.9.2"
   gem "byebug"
@@ -136,7 +132,7 @@ end
 
 group :test do
   gem "action_dispatch-testing-integration-capybara",
-      github: "thoughtbot/action_dispatch-testing-integration-capybara", tag: "v0.2.0",
+      github: "thoughtbot/action_dispatch-testing-integration-capybara",
       require: "action_dispatch/testing/integration/capybara/rspec"
   gem "axe-core-cucumber"
   gem "capybara", ">= 3.36.0", "< 4.0"
