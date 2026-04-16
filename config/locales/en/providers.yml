@@ -2004,6 +2004,8 @@ en:
           non_means_tested: You'll need to keep a copy of it on file, along with any evidence you included.
           special_children_act: You'll need to keep a copy of the application on file, along with any evidence you included.
         back_to_your_applications: Back to your applications
+        office_address_not_found: Office address not found
+        office_address_not_available: Office address not available
     substantive_applications:
       show:
         heading: Do you want to make a substantive application now?

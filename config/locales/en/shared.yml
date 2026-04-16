@@ -903,6 +903,7 @@ en:
         client_name: Client
         case_reference_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
         ccms_reference_html: <abbr title='Client and Cost Management System'>CCMS</abbr> reference
+        office: Office
       partner_income:
         income-heading: The partner's income
         outgoings-heading: The partner's outgoings
