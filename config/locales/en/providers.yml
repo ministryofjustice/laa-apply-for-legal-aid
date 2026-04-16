@@ -1909,8 +1909,6 @@ en:
         email: Email address
         office_code: Office code
         office_address: Office address
-        office_address_not_found: Office address not found
-        office_address_not_available: Office address not available
         name: Name
         page_title: Your profile
         role: Permission

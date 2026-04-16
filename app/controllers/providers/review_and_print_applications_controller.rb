@@ -1,6 +1,7 @@
 module Providers
   class ReviewAndPrintApplicationsController < ProviderBaseController
     include TransactionTypeSettable
+    include OfficeAddressHandling
 
     authorize_with_policy_method :show_submitted_application?
     helper_method :display_employment_income?
@@ -8,6 +9,8 @@ module Providers
     def show
       @source_application = @legal_aid_application.copy_case? ? LegalAidApplication.find(legal_aid_application.copy_case_id) : @legal_aid_application
       @read_only = true
+      @provider = current_provider
+      @office_address = office_address if @provider.selected_office.present?
     end
 
     def continue
