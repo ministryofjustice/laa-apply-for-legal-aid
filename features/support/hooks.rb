@@ -58,7 +58,7 @@ ensure
 end
 
 Before("@stub_office_address_retriever") do
-  office_address = PDA::OfficeAddressRetriever::OfficeAddressStruct.new("0X00000", JSON.parse(provider_offices_json))
+  office_address = PDA::OfficeAddressStruct.new("0X00000", JSON.parse(provider_offices_json))
   double = instance_double(PDA::OfficeAddressRetriever, call: office_address)
   allow(PDA::OfficeAddressRetriever).to receive(:new).and_return(double)
 end

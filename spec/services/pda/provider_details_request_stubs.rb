@@ -123,6 +123,133 @@ def provider_offices_json
   }.to_json
 end
 
+def stub_provider_addresses_for(office_codes)
+  stub_request(:post, %r{#{Rails.configuration.x.pda.url}/provider-offices}).with(body: { officeCodes: office_codes }.to_json)
+  .to_return(
+    status: 200,
+    body: provider_addresses_json,
+    headers: { "Content-Type" => "application/json; charset=utf-8" },
+  )
+end
+
+def provider_addresses_json
+  [
+    {
+      firm: {
+        ccmsFirmId: 99_999,
+        firmId: 1639,
+        firmName: "Test firm",
+        firmNumber: "1639",
+      },
+      offices: [
+        {
+          firmOfficeCode: "4A497U",
+          addressLine1: "Office 1 address line 1",
+          addressLine2: "Office 1 address line 2",
+          addressLine3: nil,
+          addressLine4: nil,
+          city: "Test city 1",
+          postCode: "TE5T1NG",
+        },
+        {
+          firmOfficeCode: "4A497V",
+          addressLine1: "Office 2 address line 1",
+          addressLine2: "Office 2 address line 2",
+          addressLine3: nil,
+          addressLine4: nil,
+          city: "Test city 2",
+          postCode: "TE5T2NG",
+        },
+      ],
+    },
+  ].to_json
+end
+
+def stub_provider_addresses_for_multiple_firms(office_codes = %w[4A497U 4A497V])
+  stub_request(:post, %r{#{Rails.configuration.x.pda.url}/provider-offices}).with(body: { officeCodes: office_codes }.to_json)
+  .to_return(
+    status: 200,
+    body: provider_addresses_multiple_firms_json(office_codes),
+    headers: { "Content-Type" => "application/json; charset=utf-8" },
+  )
+end
+
+def provider_addresses_multiple_firms_json(office_codes = %w[4A497U 4A497V])
+  [
+    {
+      firm: {
+        ccmsFirmId: 99_999,
+        firmId: 1639,
+        firmName: "Test firm 1",
+        firmNumber: "1639",
+      },
+      offices: [
+        {
+          firmOfficeCode: office_codes[0],
+          addressLine1: "Office 1 address line 1",
+          addressLine2: "Office 1 address line 2",
+          addressLine3: nil,
+          addressLine4: nil,
+          city: "Test city 1",
+          postCode: "TE5T1NG",
+        },
+      ],
+    },
+    {
+      firm: {
+        ccmsFirmId: 99_999,
+        firmId: 1640,
+        firmName: "Test firm 2",
+        firmNumber: "1640",
+      },
+      offices: [
+        {
+          firmOfficeCode: office_codes[1],
+          addressLine1: "Office 2 address line 1",
+          addressLine2: "Office 2 address line 2",
+          addressLine3: nil,
+          addressLine4: nil,
+          city: "Test city 2",
+          postCode: "TE5T2NG",
+        },
+      ],
+    },
+  ].to_json
+end
+
+def stub_provider_addresses_for_single_office_found(office_codes)
+  stub_request(:post, %r{#{Rails.configuration.x.pda.url}/provider-offices}).with(body: { officeCodes: office_codes }.to_json)
+  .to_return(
+    status: 200,
+    body: provider_addresses_single_office_found_json,
+    headers: { "Content-Type" => "application/json; charset=utf-8" },
+  )
+end
+
+def provider_addresses_single_office_found_json
+  [
+    {
+      firm: {
+        ccmsFirmId: 99_999,
+        firmId: 1639,
+        firmName: "Test firm",
+        firmNumber: "1639",
+      },
+      offices: [
+        {
+          firmOfficeCode: "4A497U",
+          addressLine1: "Office 1 address line 1",
+          addressLine2: "Office 1 address line 2",
+          addressLine3: nil,
+          addressLine4: nil,
+          city: "Test city 1",
+          postCode: "TE5T1NG",
+        },
+      ],
+    },
+  ].to_json
+end
+
 ###################
 # office schedules
 ###################
@@ -763,5 +890,10 @@ end
 
 def stub_provider_offices_address_failure_for(office_code, status:, body: nil)
   stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-offices/#{office_code}})
+    .to_return(status:, body:)
+end
+
+def stub_provider_offices_addresses_failure_for(status:, body: nil)
+  stub_request(:post, %r{#{Rails.configuration.x.pda.url}/provider-offices})
     .to_return(status:, body:)
 end
