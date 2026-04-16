@@ -92,6 +92,7 @@ Rails.application.routes.draw do
   get "/feedback/thanks", to: "feedback#thanks"
   resources :errors, only: [:show], path: :error
   resources :problem, only: :index
+  resources :session_expired, only: :show
 
   namespace :admin do
     root to: "legal_aid_applications#index"
