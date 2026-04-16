@@ -1,6 +1,6 @@
 Feature: Non-means-tested applicant journey without use of delegation functions
 
-  @javascript @stub_pda_provider_details @vcr @billy
+  @javascript @stub_pda_provider_details @vcr @billy @stub_office_address_retriever
   Scenario: Completes an application for applicant that is under 18
     Given I am logged in as a provider
 

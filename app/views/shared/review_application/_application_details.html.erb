@@ -16,5 +16,12 @@
       </dt>
       <dd><%= @legal_aid_application.case_ccms_reference %></dd>
     <% end %>
+
+    <% if @office_address %>
+      <dt>
+        <strong><%= t(".office") %>:</strong>
+      </dt>
+      <dd><%= @office_address %></dd>
+    <% end %>
   </dl>
 </div>
