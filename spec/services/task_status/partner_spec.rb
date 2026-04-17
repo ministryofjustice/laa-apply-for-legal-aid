@@ -60,8 +60,6 @@ RSpec.describe TaskStatus::Partner do
       end
 
       context "when the partner question was answered yes" do
-        # let(:application) { create(:legal_aid_application, :with_proceedings, :at_checking_applicant_details, :with_applicant_and_partner) }
-
         before { application.applicant.update!(has_partner: true) }
 
         context "and the partner object is not present" do
@@ -79,7 +77,7 @@ RSpec.describe TaskStatus::Partner do
         end
 
         context "and the partner details are complete" do
-          before { application.applicant.update!(partner_has_contrary_interest: false) }
+          let(:application) { create(:application, :with_applicant_and_partner_with_no_contrary_interest, :with_multiple_proceedings_inc_section8) }
 
           it { is_expected.to be_completed }
         end
