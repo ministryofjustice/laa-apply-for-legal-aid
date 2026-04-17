@@ -20,7 +20,7 @@ RSpec.describe TaskStatus::Validators::Partner do
     end
 
     context "when the partner has a contrary interest" do
-      before { legal_aid_application.applicant.update!(partner_has_contrary_interest: true) }
+      let(:legal_aid_application) { create(:application, :with_applicant_and_partner_with_contrary_interest) }
 
       it { is_expected.to be_valid }
     end
