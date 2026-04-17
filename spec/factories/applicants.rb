@@ -120,6 +120,11 @@ FactoryBot.define do
       partner_has_contrary_interest { false }
     end
 
+    trait :with_partner_with_contrary_interest do
+      has_partner { true }
+      partner_has_contrary_interest { true }
+    end
+
     trait :no_nino do
       national_insurance_number { nil }
       has_national_insurance_number { false }

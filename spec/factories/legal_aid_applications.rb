@@ -129,6 +129,13 @@ FactoryBot.define do
       partner { build(:partner) }
     end
 
+    trait :with_applicant_and_partner_with_contrary_interest do
+      transient do
+        with_bank_accounts { 0 }
+      end
+      applicant { build(:applicant, :with_address, :with_partner_with_contrary_interest, with_bank_accounts:) }
+    end
+
     trait :with_applicant_and_partner_with_no_contrary_interest do
       transient do
         with_bank_accounts { 0 }
