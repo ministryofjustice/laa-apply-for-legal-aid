@@ -1,4 +1,5 @@
 require "rails_helper"
+require Rails.root.join("spec/services/pda/provider_details_request_stubs")
 
 RSpec.describe Providers::ReviewAndPrintApplicationsController do
   let(:application) do
@@ -14,8 +15,12 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController do
   end
   let(:provider) { application.provider }
   let(:smtl) { create(:legal_framework_merits_task_list, :da001_da004_se014, legal_aid_application: application) }
+  let(:address_string) { "Test Firm, Test Address Line 1, Test Address Line 2, Test City, TE5T1NG" }
 
-  before { allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl) }
+  before do
+    allow(LegalFramework::MeritsTasksService).to receive(:call).with(application).and_return(smtl)
+    stub_provider_offices_address_for(provider.selected_office.code)
+  end
 
   describe "GET /providers/applications/:id/review_and_print_application" do
     subject(:request) { get providers_legal_aid_application_review_and_print_application_path(application) }
@@ -29,17 +34,53 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        request
       end
 
       it "returns http success" do
+        request
         expect(response).to have_http_status(:ok)
       end
 
       it "renders the confirm client declaration page" do
+        request
         expect(response).to render_template("providers/review_and_print_applications/show")
         expect(response.body).to include("Print and submit your application")
         expect(response.body).to include("Client declaration")
+      end
+
+      it "displays office address" do
+        request
+        expect(page).to have_content(address_string)
+      end
+
+      context "when office-address is not found" do
+        before do
+          stub_provider_offices_address_failure_for(provider.selected_office.code, status: 204)
+          request
+        end
+
+        it "renders" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "displays message text to indicate office address not found" do
+          expect(page).to have_content("Office address not found")
+        end
+      end
+
+      context "when office-address returns internal server error" do
+        before do
+          stub_provider_offices_address_failure_for(provider.selected_office.code, status: 500)
+          request
+        end
+
+        it "renders" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "displays message text to indicate office address not available" do
+          expect(page).to have_content("Office address not available")
+        end
       end
 
       context "when the application is an sca application" do
@@ -54,6 +95,7 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController do
         end
 
         it "does not render the client declaration" do
+          request
           expect(response).to render_template("providers/review_and_print_applications/show")
           expect(response.body).to include("Print and submit your application")
           expect(response.body).not_to include("Client declaration")
