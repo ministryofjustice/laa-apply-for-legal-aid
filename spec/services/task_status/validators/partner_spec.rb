@@ -4,13 +4,21 @@ require_relative "task_status_validator_shared_examples"
 RSpec.describe TaskStatus::Validators::Partner do
   subject(:validator) { described_class.new(legal_aid_application) }
 
-  let(:legal_aid_application) { create(:application, :with_applicant_and_partner_with_no_contrary_interest) }
-
-  it_behaves_like "a task status validator"
+  it_behaves_like "a task status validator" do
+    let(:legal_aid_application) { create(:application) }
+  end
 
   describe "#valid?" do
     context "with an applicant and partner with no contrary interest" do
+      let(:legal_aid_application) { create(:application, :with_applicant_and_partner_with_no_contrary_interest) }
+
       it { is_expected.to be_valid }
+
+      context "when the partner details are incomplete" do
+        before { legal_aid_application.partner.update!(first_name: nil) }
+
+        it { is_expected.not_to be_valid }
+      end
     end
 
     context "when the partner contrary interest question is not answered" do
@@ -20,7 +28,7 @@ RSpec.describe TaskStatus::Validators::Partner do
     end
 
     context "when the partner has a contrary interest" do
-      before { legal_aid_application.applicant.update!(partner_has_contrary_interest: true) }
+      let(:legal_aid_application) { create(:application, :with_applicant_and_partner_with_contrary_interest) }
 
       it { is_expected.to be_valid }
     end
