@@ -3,7 +3,7 @@ RSpec.describe "Client and case details section - DWP outcome", :javascript, :vc
   feature "View and amend the DWP outcome section" do
     before do
       login_as_a_provider
-      fill_in_client_and_case_details_until_step(:partner)
+      fill_in_client_and_case_details_until_step(:check_your_answers)
     end
 
     scenario "I can complete the task list's DWP outcome item" do

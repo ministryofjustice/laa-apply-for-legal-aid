@@ -31,6 +31,7 @@ RSpec.describe TaskStatus::CheckProviderAnswers do
           TaskStatus::Applicants => TaskStatus::ValueObject.new.completed!,
           TaskStatus::MakeLink => TaskStatus::ValueObject.new.completed!,
           TaskStatus::ProceedingsTypes => TaskStatus::ValueObject.new.completed!,
+          TaskStatus::Partner => TaskStatus::ValueObject.new.completed!,
         }
       end
 

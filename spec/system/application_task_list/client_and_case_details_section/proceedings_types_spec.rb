@@ -21,6 +21,7 @@ RSpec.describe "Proceedings types section", :vcr do
           { name: "Client details", link_enabled: false, status: "Completed" },
           { name: "Link to another application", link_enabled: true, status: "Not started" },
           { name: "Proceedings", link_enabled: false, status: "Cannot start yet" },
+          { name: "Partner", link_enabled: false, status: "Cannot start yet" },
           { name: "Check your answers", link_enabled: false, status: "Not ready yet" },
           { name: "DWP outcome", link_enabled: false, status: "Not ready yet" },
         ]
@@ -39,6 +40,7 @@ RSpec.describe "Proceedings types section", :vcr do
           { name: "Client details", link_enabled: false, status: "Completed" },
           { name: "Link to another application", link_enabled: false, status: "Completed" },
           { name: "Proceedings", link_enabled: true, status: "Not started" },
+          { name: "Partner", link_enabled: false, status: "Cannot start yet" },
           { name: "Check your answers", link_enabled: false, status: "Not ready yet" },
           { name: "DWP outcome", link_enabled: false, status: "Not ready yet" },
         ]
@@ -61,6 +63,7 @@ RSpec.describe "Proceedings types section", :vcr do
           { name: "Client details", link_enabled: false, status: "Completed" },
           { name: "Link to another application", link_enabled: false, status: "Completed" },
           { name: "Proceedings", link_enabled: true, status: "In progress" },
+          { name: "Partner", link_enabled: false, status: "Cannot start yet" },
           { name: "Check your answers", link_enabled: false, status: "Not ready yet" },
           { name: "DWP outcome", link_enabled: false, status: "Not ready yet" },
         ]
@@ -130,7 +133,8 @@ RSpec.describe "Proceedings types section", :vcr do
           { name: "Client details", link_enabled: false, status: "Completed" },
           { name: "Link to another application", link_enabled: false, status: "Completed" },
           { name: "Proceedings", link_enabled: false, status: "Completed" },
-          { name: "Check your answers", link_enabled: true, status: "Not started" },
+          { name: "Partner", link_enabled: true, status: "Not started" },
+          { name: "Check your answers", link_enabled: false, status: "Not ready yet" },
           { name: "DWP outcome", link_enabled: false, status: "Not ready yet" },
         ]
       end
