@@ -807,3 +807,8 @@ def stub_provider_offices_address_failure_for(office_code, status:, body: nil)
   stub_request(:get, %r{#{Rails.configuration.x.pda.url}/provider-offices/#{office_code}})
     .to_return(status:, body:)
 end
+
+def stub_provider_offices_addresses_failure_for(status:, body: nil)
+  stub_request(:post, %r{#{Rails.configuration.x.pda.url}/provider-offices})
+    .to_return(status:, body:)
+end
