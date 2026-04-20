@@ -1,4 +1,4 @@
-<h2 class="govuk-heading-l"><%= t(".case-details-heading") %></h2>
+<h3 class="govuk-heading-m"><%= t(".case-details-heading") %></h3>
 
 <%= render("shared/check_answers/merits/latest_incident_details", read_only:, incident:) if incident %>
 
@@ -35,13 +35,13 @@
 <% @legal_aid_application.proceedings.each do |proceeding| %>
   <% next if merits_task_list_empty_for?(@legal_aid_application, proceeding) %>
 
-  <h2 class="govuk-heading-l"><%= proceeding.meaning %></h2>
+  <h3 class="govuk-heading-m"><%= proceeding.meaning %></h3>
   <%= render("shared/check_answers/merits/merits_proceeding_section", read_only:, proceeding:) %>
 <% end %>
 
 <% if @legal_aid_application.uploaded_evidence_collection %>
   <section class="print-no-break">
-    <h2 class="govuk-heading-l"><%= t(".evidence_upload_heading") %></h2>
+    <h3 class="govuk-heading-m"><%= t(".evidence_upload_heading") %></h3>
     <%= render("shared/check_answers/merits/supporting_evidence", read_only:) %>
   </section>
 <% end %>

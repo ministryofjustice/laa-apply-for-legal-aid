@@ -71,6 +71,10 @@ class BaseStateMachine < ApplicationRecord
                   to: :checking_applicant_details
     end
 
+    event :force_check_applicant_details do
+      transitions to: :checking_applicant_details
+    end
+
     event :applicant_details_checked do
       transitions from: %i[
                     provider_entering_means
@@ -157,6 +161,10 @@ class BaseStateMachine < ApplicationRecord
                   ],
                   to: :checking_merits_answers,
                   guard: :non_means_tested?
+    end
+
+    event :force_check_merits_answers do
+      transitions to: :checking_merits_answers
     end
 
     event :generate_reports do

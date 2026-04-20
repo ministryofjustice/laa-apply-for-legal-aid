@@ -184,6 +184,10 @@ Rails.application.routes.draw do
       resource :resume, only: %w[show]
       resource :task_list, only: %i[show] # if ENV.fetch("EDITABLE_APPLICATIONS", "false") == "true"
 
+      namespace :editing do
+        resource :confirmation, only: %i[show destroy]
+      end
+
       collection do
         get :submitted, to: "legal_aid_applications#submitted"
         get :in_progress, to: "legal_aid_applications#in_progress"

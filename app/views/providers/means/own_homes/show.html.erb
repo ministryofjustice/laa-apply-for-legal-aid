@@ -5,10 +5,7 @@
       method: :patch,
       local: true,
     ) do |form| %>
-    <%= page_template(page_title: t(heading),
-                      form:,
-                      template: :basic) do %>
-
+    <%= page_template(page_title: t(heading), template: :basic, form:) do %>
       <% options = [
            [:mortgage, t(".mortgage")],
            [:owned_outright, t(".owned_outright")],
