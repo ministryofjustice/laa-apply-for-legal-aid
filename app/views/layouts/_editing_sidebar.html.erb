@@ -1,0 +1,20 @@
+<aside class="app-aside_bar--blue" aria-label="Edit a previous section sidebar">
+<h2 class="app-aside_bar--heading govuk-heading-s">Edit a previous section</h2>
+  <ul class="govuk-list">
+    <% if display_editing_sidebar_for.include?(:client_details) %>
+      <li class="app-aside_bar--li"><%= govuk_link_to("Client and case details", "#") %></li>
+    <% end %>
+
+    <% if display_editing_sidebar_for.include?(:financial_assessment) %>
+      <li class="app-aside_bar--li"><%= govuk_link_to("Financial assessment", "#") %></li>
+    <% end %>
+
+    <% if display_editing_sidebar_for.include?(:capital_and_assets) %>
+      <li class="app-aside_bar--li"><%= govuk_link_to("Capital and assets", "#") %></li>
+    <% end %>
+
+    <% if display_editing_sidebar_for.include?(:merits) %>
+      <li class="app-aside_bar--li"><%= govuk_link_to("Merits", "#") %></li>
+    <% end %>
+  </ul>
+</aside>
