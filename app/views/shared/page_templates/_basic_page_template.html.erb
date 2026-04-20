@@ -11,4 +11,9 @@
         end %>
     <%= content %>
   </div>
+  <% unless display_editing_sidebar_for.empty? %>
+    <div class="govuk-grid-column-one-third app-grid-column--sticky">
+      <%= render("layouts/editing_sidebar", display_editing_sidebar_for: display_editing_sidebar_for) %>
+    </div>
+   <% end %>
 </div>

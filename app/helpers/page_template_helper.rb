@@ -52,8 +52,11 @@ module PageTemplateHelper
     show_errors_for: nil,
     caption: nil,
     page_heading_options: {},
+    display_editing_sidebar_for: [],
     &content
   )
+    raise "column_width must be \"two-thirds\" if you are displaying a side-bar" if display_editing_sidebar_for.any? && column_width != "two-thirds"
+
     template = :default unless template.eql?(:basic)
     content_for(:navigation) { back_link(**back_link) unless back_link == :none }
     has_errors = form&.object&.errors || show_errors_for&.errors
@@ -76,6 +79,7 @@ module PageTemplateHelper
       form:,
       show_errors_for:,
       page_heading_options:,
+      display_editing_sidebar_for:,
     )
   end
 
