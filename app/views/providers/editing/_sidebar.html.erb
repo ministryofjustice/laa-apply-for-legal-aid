@@ -1,0 +1,20 @@
+<aside class="app-aside_bar--blue" role="complementary" aria-label="Edit a previous section sidebar">
+<h2 class="app-aside_bar--heading govuk-heading-s">Edit a previous section</h2>
+  <ul class="govuk-list">
+    <% if editing_sidebar_items.include?(:client_details) %>
+      <li class="app-aside_bar--li"><%= govuk_link_to(t(".client_details"), providers_legal_aid_application_editing_confirmation_path(@legal_aid_application, return_to_section: :client_details)) %></li>
+    <% end %>
+
+    <% if editing_sidebar_items.include?(:financial_assessment)  && @legal_aid_application.non_passported? %>
+      <li class="app-aside_bar--li"><%= govuk_link_to(t(".financial_assessment"), providers_legal_aid_application_editing_confirmation_path(@legal_aid_application, return_to_section: :financial_assessment)) %></li>
+    <% end %>
+
+    <% if editing_sidebar_items.include?(:capital_and_assets) && !@legal_aid_application.non_means_tested? %>
+      <li class="app-aside_bar--li"><%= govuk_link_to(t(".capital_and_assets"), providers_legal_aid_application_editing_confirmation_path(@legal_aid_application, return_to_section: :capital_and_assets)) %></li>
+    <% end %>
+
+    <% if editing_sidebar_items.include?(:merits) %>
+      <li class="app-aside_bar--li"><%= govuk_link_to(t(".merits"), providers_legal_aid_application_editing_confirmation_path(@legal_aid_application, return_to_section: :merits)) %></li>
+    <% end %>
+  </ul>
+</aside>

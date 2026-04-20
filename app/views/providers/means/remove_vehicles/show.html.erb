@@ -4,8 +4,10 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <%= page_template page_title: t(".page_title", estimated_value: gds_number_to_currency(@vehicle.estimated_value)), form:, template: :basic do %>
-
+  <%= page_template(page_title: t(".page_title", estimated_value: gds_number_to_currency(@vehicle.estimated_value)),
+                    editing_sidebar_items: editing_sidebar_items_for("remove_vehicles"),
+                    template: :basic,
+                    form:) do %>
     <%= form.govuk_collection_radio_buttons :remove_vehicle,
                                             yes_no_options,
                                             :value,

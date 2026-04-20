@@ -3,7 +3,7 @@
 <% bank_statement_upload = @legal_aid_application.client_uploading_bank_statements? %>
 
 <section class="applicant">
-  <h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
+  <h3 class="govuk-heading-m"><%= t(".income-heading") %></h3>
 
   <%= render("shared/check_answers/bank_statements", partner: false, read_only:) if bank_statement_upload %>
 

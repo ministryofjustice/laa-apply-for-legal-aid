@@ -37,6 +37,8 @@
 
     <p class="govuk-body"><%= t(".audit") %></p>
 
+    <%= govuk_warning_text(text: t(".warning")) %>
+
     <%= print_button @legal_aid_application.special_children_act_proceedings? ? t(".print_button_sca") : t(".print_button") %>
 
     <%= next_action_buttons_with_form(

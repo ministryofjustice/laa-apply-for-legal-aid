@@ -4,7 +4,7 @@
           <dt>
             <strong><%= t(".applicant") %>:</strong>
           </dt>
-          <dd><%= @legal_aid_application.applicant.full_name %></dd>
+          <dd><%= @legal_aid_application.applicant&.full_name %></dd>
 
           <dt>
             <strong><%= t(".start_date") %>:</strong>

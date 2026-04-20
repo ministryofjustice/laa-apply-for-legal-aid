@@ -1,0 +1,27 @@
+<%= page_template(page_title: t(".page_title"), back_link: :none) do %>
+      <div class="govuk-panel__body">
+        <p class="govuk-body"><%= t(".paragraph_one_html", section_title: t(".section_title.#{@return_to_section}")) %></p>
+        <p class="govuk-body"><%= t(".paragraph_two") %></p>
+
+        <% if @sections_to_be_deleted.size > 1 %>
+          <p class="govuk-body"><%= t(".paragraph_three.multiple_items") %></p>
+          <ul class="govuk-list govuk-list--bullet">
+            <% @sections_to_be_deleted.each do |section| %>
+              <li><%= t(".section_title.#{section}").downcase %></li>
+            <% end %>
+          </ul>
+        <% elsif @sections_to_be_deleted.size == 1 %>
+          <p class="govuk-body"><%= t(".paragraph_three.single_item_html", section_title: t(".section_title.#{@sections_to_be_deleted.first}").downcase) %></p>
+        <% end %>
+      </div>
+
+      <div class="govuk-button-group">
+        <%= form_for(@legal_aid_application, url: providers_legal_aid_application_editing_confirmation_path(return_to_section: @return_to_section), method: :delete) do |form| %>
+          <%= form.govuk_submit(
+                t(".yes_button"),
+                warning: true,
+              ) %>
+          <%= govuk_link_to t(".cancel"), back_path %>
+        <% end %>
+      </div>
+<% end %>

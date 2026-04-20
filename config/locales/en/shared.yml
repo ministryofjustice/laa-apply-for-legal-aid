@@ -932,6 +932,10 @@ en:
           heading: Client declaration
           signature: "Client signature:"
           date: "Date:"
+        client-details-section-editing-heading: Client and case details
+        financial-assessment-editing-heading: Financial assessment
+        capital-section-editing-heading: Capital and assests
+        merits-section-editing-heading: Merits
         capital-section-heading: Your client's capital
         capital-section-heading_with_partner: Your client and their partner's capital
     means:

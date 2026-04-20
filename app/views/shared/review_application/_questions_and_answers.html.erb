@@ -29,6 +29,10 @@
   </section>
 
   <% unless @legal_aid_application.non_means_tested? || @legal_aid_application.passported? %>
+    <div class="app-heading-inline-link">
+      <h2 class="govuk-heading-l"><%= t(".financial-assessment-editing-heading") %></h2>
+      <%= govuk_link_to t("shared.review_application.questions_and_answers.go_back_to_edit"), providers_legal_aid_application_editing_confirmation_path(return_to_section: :financial_assessment) %>
+    </div>
     <%= render("providers/means/check_income_answers/applicant_income_assessment", read_only: true) %>
 
     <%= render("providers/means/check_income_answers/partner_income_assessment", read_only: true) if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
