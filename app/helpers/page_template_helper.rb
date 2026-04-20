@@ -52,11 +52,9 @@ module PageTemplateHelper
     show_errors_for: nil,
     caption: nil,
     page_heading_options: {},
-    display_editing_sidebar_for: [],
+    editing_sidebar_items: [],
     &content
   )
-    raise "column_width must be \"two-thirds\" if you are displaying a side-bar" if display_editing_sidebar_for.any? && column_width != "two-thirds"
-
     template = :default unless template.eql?(:basic)
     content_for(:navigation) { back_link(**back_link) unless back_link == :none }
     has_errors = form&.object&.errors || show_errors_for&.errors
@@ -64,6 +62,10 @@ module PageTemplateHelper
     content = capture(&content) if content
     content_for(:caption) if caption
     content_for(:language_switcher) { language_links if show_language_switcher? }
+
+    editing_sidebar_items = editing_sidebar_items_for(request.path.split("/").last) if editing_sidebar_items.empty?
+    raise "column_width must be \"two-thirds\" if you are displaying a side-bar" if editing_sidebar_items.any? && column_width != "two-thirds"
+
     render(
       "shared/page_templates/#{template}_page_template",
       page_title:,
@@ -79,7 +81,7 @@ module PageTemplateHelper
       form:,
       show_errors_for:,
       page_heading_options:,
-      display_editing_sidebar_for:,
+      editing_sidebar_items:,
     )
   end
 

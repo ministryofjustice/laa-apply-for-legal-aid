@@ -29,6 +29,10 @@ class PassportedStateMachine < BaseStateMachine
                   to: :checking_passported_answers
     end
 
+    event :force_check_passported_answers do
+      transitions from: :all, to: :checking_passported_answers
+    end
+
     event :complete_passported_means do
       transitions from: :checking_passported_answers, to: :provider_entering_merits
     end
