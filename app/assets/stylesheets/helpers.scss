@@ -68,3 +68,10 @@
   position: sticky;
   top: 1%;
 }
+
+
+.app-heading-inline-link {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}

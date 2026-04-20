@@ -5,7 +5,10 @@
       local: true,
     ) do |form| %>
 
-  <%= page_template page_title:, page_heading_options: { margin_bottom: 5 }, form: do %>
+  <%= page_template(page_title:,
+                    editing_sidebar_items: editing_sidebar_items_for("dependants"),
+                    page_heading_options: { margin_bottom: 5 },
+                    form:) do %>
     <% individual = if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
                       "your client or their partner"
                     else

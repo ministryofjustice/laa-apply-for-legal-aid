@@ -9,6 +9,7 @@
 
   <%= page_template(
         page_title: t(".page_title", name: @capital_disregard.name),
+        editing_sidebar_items: editing_sidebar_items_for("capital_disregards/add_details"),
         template: :basic,
         form:,
       ) do %>

@@ -4,8 +4,11 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <%= page_template page_title:, template: :basic, form: do %>
 
+  <%= page_template(page_title:,
+                    template: :basic,
+                    editing_sidebar_items: editing_sidebar_items_for("vehicle_details"),
+                    form:) do %>
     <%= form.govuk_fieldset legend: { size: "xl", tag: "h1", text: page_title } do %>
       <p class="govuk-body"><%= t(".multi_vehicle") %></p>
 

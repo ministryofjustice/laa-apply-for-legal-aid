@@ -4,7 +4,10 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <%= page_template page_title:, form:, template: :basic do %>
+  <%= page_template(page_title:,
+                    editing_sidebar_items: editing_sidebar_items_for("remove_state_benefits"),
+                    template: :basic,
+                    form:) do %>
     <span class="govuk-caption-xl"><%= caption %></span>
     <%= form.govuk_collection_radio_buttons :remove_state_benefit,
                                             yes_no_options,

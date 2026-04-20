@@ -4,7 +4,10 @@
       method: :patch,
       local: true,
     ) do |form| %>
-  <%= page_template(page_title:, back_link: {}, form:) do %>
+  <%= page_template(page_title:,
+                    editing_sidebar_items: editing_sidebar_items_for("involved_children"),
+                    back_link: {},
+                    form:) do %>
     <div class="govuk-hint govuk-!-padding-bottom-2"><%= t(".hint") %></div>
 
     <%= form.govuk_fieldset legend: { text: t("generic.name") } do %>
