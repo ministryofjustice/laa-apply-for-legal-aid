@@ -55,6 +55,6 @@ en:
   session_expired:
     show:
       title: For your security, we signed you out
-      para_1: This is because you were signed in for more than 12 hours.
-      para_2: This is because you were inactive for an hour.
+      timeout: This is because you were signed in for more than 12 hours.
+      reauthenticate: This is because you were inactive for an hour.
       sign_in: Sign in again to continue using the service.

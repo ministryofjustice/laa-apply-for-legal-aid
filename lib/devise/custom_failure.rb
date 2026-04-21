@@ -1,9 +1,8 @@
 class CustomFailure < Devise::FailureApp
   def redirect_url
-    if warden_message == :timeout
-      session_expired_path # (reason: :timeout)
-    elsif warden_message == :reauthenticate
-      session_expired_path # (reason: :reauthenticate)
+    case warden_message
+    when :timeout || :reauthenticate
+      session_expired_path(reason: warden_message)
     else
       super
     end
