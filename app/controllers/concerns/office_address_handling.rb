@@ -2,7 +2,7 @@ module OfficeAddressHandling
 private
 
   def office_address
-    address = PDA::OfficeAddressRetriever.call(@provider.selected_office.code)
+    address = PDA::OfficeAddressRetriever.call(current_provider.selected_office.code)
 
     [
       address.firm_name.downcase.titleize,
