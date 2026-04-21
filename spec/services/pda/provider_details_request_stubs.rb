@@ -123,16 +123,16 @@ def provider_offices_json
   }.to_json
 end
 
-def stub_provider_addresses_for(office_codes)
+def stub_provider_addresses_for(office_codes = %w[4A497U 4A497V])
   stub_request(:post, %r{#{Rails.configuration.x.pda.url}/provider-offices}).with(body: { officeCodes: office_codes }.to_json)
   .to_return(
     status: 200,
-    body: provider_addresses_json,
+    body: provider_addresses_json(office_codes),
     headers: { "Content-Type" => "application/json; charset=utf-8" },
   )
 end
 
-def provider_addresses_json
+def provider_addresses_json(office_codes = %w[4A497U 4A497V])
   [
     {
       firm: {
@@ -143,7 +143,7 @@ def provider_addresses_json
       },
       offices: [
         {
-          firmOfficeCode: "4A497U",
+          firmOfficeCode: office_codes[0],
           addressLine1: "Office 1 address line 1",
           addressLine2: "Office 1 address line 2",
           addressLine3: nil,
@@ -152,7 +152,7 @@ def provider_addresses_json
           postCode: "TE5T1NG",
         },
         {
-          firmOfficeCode: "4A497V",
+          firmOfficeCode: office_codes[1],
           addressLine1: "Office 2 address line 1",
           addressLine2: "Office 2 address line 2",
           addressLine3: nil,
@@ -221,12 +221,12 @@ def stub_provider_addresses_for_single_office_found(office_codes)
   stub_request(:post, %r{#{Rails.configuration.x.pda.url}/provider-offices}).with(body: { officeCodes: office_codes }.to_json)
   .to_return(
     status: 200,
-    body: provider_addresses_single_office_found_json,
+    body: provider_addresses_single_office_found_json(office_codes),
     headers: { "Content-Type" => "application/json; charset=utf-8" },
   )
 end
 
-def provider_addresses_single_office_found_json
+def provider_addresses_single_office_found_json(office_codes = %w[4A497U])
   [
     {
       firm: {
@@ -237,7 +237,7 @@ def provider_addresses_single_office_found_json
       },
       offices: [
         {
-          firmOfficeCode: "4A497U",
+          firmOfficeCode: office_codes[0],
           addressLine1: "Office 1 address line 1",
           addressLine2: "Office 1 address line 2",
           addressLine3: nil,
