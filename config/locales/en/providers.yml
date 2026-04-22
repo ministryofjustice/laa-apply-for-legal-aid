@@ -110,7 +110,7 @@ en:
         income_hint_text: We calculated these calendar monthly figures using the information you and your client provided.
         capital_calculation: Capital calculation
         capital_hint_text: We calculated these figures based on the information you provided about your client and their partner.
-        client_eligibility_calculation: How we calculated your client's financial eligibility
+        client_eligibility_calculation: How we calculated your client's eligibility
       bank_statements:
         title: "%{individual} bank statements"
         uploaded: Uploaded bank statements
