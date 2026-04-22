@@ -1,5 +1,5 @@
 Feature: Check single employment
-  @javascript @vcr @hmrc_use_dev_mock
+  @javascript @vcr @hmrc_use_dev_mock @stub_office_address_retriever
   Scenario: I am able to complete an application for an employed applicant with a single employer
     Given I am logged in as a provider
     And csrf is enabled

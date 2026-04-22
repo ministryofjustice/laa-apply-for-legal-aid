@@ -17,6 +17,9 @@ en:
       no_results: We could not find any addresses for that postcode. Enter the address manually.
       unsuccessful: Sorry, there is a problem with the service. Please enter the address manually.
       service_unavailable: Sorry, there is a problem with the service. Please enter the address manually.
+    office_address:
+      not_found: Office address not found
+      not_available: Office address not available
     title_prefix: Error
     messages:
       already_confirmed: was already confirmed, please try signing in

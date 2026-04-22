@@ -1,5 +1,5 @@
 Feature: passported_journey completes application
-  @javascript @vcr
+  @javascript @vcr @stub_office_address_retriever
   Scenario: Receives benefits and completes the application happy path no back button
     Given csrf is enabled
     Given I complete the passported journey as far as check your answers for client details

@@ -1,4 +1,4 @@
-@javascript
+@javascript @stub_office_address_retriever
 Feature: Review and print your application
 
   Scenario: For a non-passported bank statement upload journey with a partner

@@ -1,5 +1,5 @@
 Feature: Checking ccms means does NOT auto grant for non passported applications
-  @javascript @vcr
+  @javascript @vcr @stub_office_address_retriever
   Scenario: I am able to create a non passported application with cap Contribs > £3k and without restrictions
     Given The means questions have been answered by the applicant
     And Bank transactions exist
@@ -131,7 +131,7 @@ Feature: Checking ccms means does NOT auto grant for non passported applications
     Then I click 'View completed application'
     Then the application must be manually reviewed in CCMS
 
-@javascript @vcr
+@javascript @vcr @stub_office_address_retriever
   Scenario: I am able to create a non passported application without Income or Cap Contribs and with no restrictions
     Given The means questions have been answered by the applicant
     And Bank transactions exist
