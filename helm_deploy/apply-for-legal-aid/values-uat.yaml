@@ -168,8 +168,8 @@ collect_hmrc_data:
 
 # Force reauthentication 24 hours (UAT only) from last sign in, inline with SiLAS/EntraID
 session:
-   reauthenticate_after_minutes: "1440"
-   idle_timeout_after_minutes: "60"
+   reauthenticate_after_minutes: "5"
+   idle_timeout_after_minutes: "1"
 
 business_hours:
   start: "7:00"
