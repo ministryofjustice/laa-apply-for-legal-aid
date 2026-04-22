@@ -19,7 +19,8 @@ FactoryBot.define do
               previous_reference: nil,
               correspondence_address_choice: "home",
               addresses: [build(:address, location: "home", lookup_used: true)],
-              employed: nil)
+              employed: nil,
+              has_partner: false)
       end
 
       after(:create) do |application|
@@ -126,6 +127,13 @@ FactoryBot.define do
       end
       applicant { build(:applicant, :with_address, :with_partner, with_bank_accounts:) }
       partner { build(:partner) }
+    end
+
+    trait :with_applicant_and_partner_with_contrary_interest do
+      transient do
+        with_bank_accounts { 0 }
+      end
+      applicant { build(:applicant, :with_address, :with_partner_with_contrary_interest, with_bank_accounts:) }
     end
 
     trait :with_applicant_and_partner_with_no_contrary_interest do

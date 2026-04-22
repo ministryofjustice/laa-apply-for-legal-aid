@@ -5,6 +5,7 @@ module TaskStatus
     attr_accessor :value
 
     STATUSES = [
+      NOT_NEEDED = StatusData.new(:not_needed, nil),
       CANNOT_START = StatusData.new(:cannot_start, nil),
       NOT_READY = StatusData.new(:not_ready, "grey"),
       NOT_STARTED = StatusData.new(:not_started, "blue"),

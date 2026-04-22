@@ -57,8 +57,8 @@ module TaskStatus
       [
         Applicants,
         MakeLink,
-        # ClientHasPartners
         ProceedingsTypes,
+        Partner,
       ]
     end
   end

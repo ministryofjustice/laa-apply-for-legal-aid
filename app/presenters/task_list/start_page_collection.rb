@@ -40,6 +40,7 @@ module TaskList
         applicants: true, # Steps::ProviderStart::ApplicantsStep
         make_link: true, # Steps::ProviderStart::MakeLinkStep
         proceedings_types: true, # Steps::ProviderStart::ProceedingsTypesStep
+        partner: true, # Steps::ProviderStart::PartnerStep
         check_provider_answers: true, # Steps::ProviderStart::CheckProviderAnswersStep
         dwp_outcome: true, # Steps::ProviderDWPOverride::ReceivedBenefitConfirmationsStep
       },

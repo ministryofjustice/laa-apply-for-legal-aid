@@ -6,6 +6,8 @@ RSpec.describe TaskStatus::ValueObject do
   it "defines getter and setter methods for each status" do
     expect(object)
       .to respond_to(
+        :not_needed!,
+        :not_needed?,
         :cannot_start!,
         :cannot_start?,
         :not_ready!,
@@ -52,6 +54,9 @@ RSpec.describe TaskStatus::ValueObject do
 
       object.completed!
       expect(object.colour).to be_nil
+
+      object.not_needed!
+      expect(object.colour).to be_nil
     end
   end
 
@@ -70,6 +75,11 @@ RSpec.describe TaskStatus::ValueObject do
   describe "#enabled?" do
     it "returns false when cannot_start" do
       object.cannot_start!
+      expect(object).not_to be_enabled
+    end
+
+    it "returns false when not_needed" do
+      object.not_needed!
       expect(object).not_to be_enabled
     end
 

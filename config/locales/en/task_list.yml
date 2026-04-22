@@ -17,6 +17,7 @@ en:
       merits:
         requirement_unknown: Once the proceedings have been selected, the relevant tasks will appear in this section.
     status:
+      not_needed: Not needed
       cannot_start: Cannot start yet
       completed: Completed
       in_progress: In progress
@@ -29,6 +30,7 @@ en:
       make_link: Link to another application
       capital_introductions: Capital assessment
       check_benefits: DWP outcome
+      partner: Partner details
       check_income_answers: Check your income assessment answers
       check_capital_answers: Check your capital assessment answers (non-passported)
       check_passported_answers: Check your capital assessment answers (passported)
