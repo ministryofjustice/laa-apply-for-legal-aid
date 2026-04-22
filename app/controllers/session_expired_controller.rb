@@ -1,7 +1,7 @@
 class SessionExpiredController < ApplicationController
   before_action :update_locale
   def show
-    @reason ||= :timeout unless reason_params[:reason]&.to_sym
+    @reason = :timeout unless reason_params[:reason]&.to_sym
   end
 
   def reason_params
