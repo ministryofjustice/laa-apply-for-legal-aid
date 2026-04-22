@@ -908,6 +908,7 @@ en:
         income-heading: The partner's income
         outgoings-heading: The partner's outgoings
       questions_and_answers:
+
         client_details_heading: Client
         partner_details_heading: Partner
         linking_and_copying_heading: Cases linked to this one
@@ -938,6 +939,7 @@ en:
         merits-section-editing-heading: Merits
         capital-section-heading: Your client's capital
         capital-section-heading_with_partner: Your client and their partner's capital
+        go_back_to_edit: Go back to edit
     means:
       employment_income_table:
         inset_text: We used your client's National Insurance number to get this information from HMRC.
