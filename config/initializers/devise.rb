@@ -4,8 +4,8 @@
 # Many of these configuration options can be set straight in your model.
 
 Devise.setup do |config|
+  require "devise/controllers/custom_failure"
   require "devise/models/reauthable"
-  require "devise/custom_failure"
 
   # ==> Configuration for custom devise extension :reauthable
   # The time you want to timeout the user session after their last sign in,
@@ -311,7 +311,7 @@ Devise.setup do |config|
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   # end
   config.warden do |manager|
-    manager.failure_app = CustomFailure
+    manager.failure_app = Devise::Controllers::CustomFailure
   end
 
   # ==> Mountable engine configurations
