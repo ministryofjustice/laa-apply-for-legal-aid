@@ -68,6 +68,19 @@ After("@stub_office_address_retriever") do
   allow(PDA::OfficeAddressRetriever).to receive(:new).and_call_original
 end
 
+Before("@stub_offices_addresses_retriever") do
+  office_address_one = PDA::OfficeAddressStruct.new("0X395U", JSON.parse(provider_offices_json_ox395u))
+  office_address_two = PDA::OfficeAddressStruct.new("2N078D", JSON.parse(provider_offices_json_2n078d))
+  office_address_three = PDA::OfficeAddressStruct.new("A123456", JSON.parse(provider_offices_json_a123456))
+  double = instance_double(PDA::OfficesAddressesRetriever, call: [office_address_one, office_address_two, office_address_three])
+  allow(PDA::OfficesAddressesRetriever).to receive(:new).and_return(double)
+end
+
+After("@stub_office_addresses_retriever") do
+  # unstub
+  allow(PDA::OfficesAddressesRetriever).to receive(:new).and_call_original
+end
+
 Around("@stub_bank_holidays") do |_scenario, block|
   stub_bankholiday_success
 

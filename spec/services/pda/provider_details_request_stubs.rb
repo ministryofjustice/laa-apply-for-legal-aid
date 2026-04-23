@@ -123,6 +123,63 @@ def provider_offices_json
   }.to_json
 end
 
+def provider_offices_json_ox395u
+  {
+    firm: {
+      ccmsFirmId: 99_999,
+      firmId: 1639,
+      firmName: "Test firm",
+      firmNumber: "1639",
+    },
+    office: {
+      addressLine1: "0X395U address line 1",
+      addressLine2: "Test address line 2",
+      addressLine3: nil,
+      addressLine4: nil,
+      city: "Test city",
+      postCode: "TE5T1NG",
+    },
+  }.to_json
+end
+
+def provider_offices_json_2n078d
+  {
+    firm: {
+      ccmsFirmId: 99_999,
+      firmId: 1639,
+      firmName: "Test firm",
+      firmNumber: "1639",
+    },
+    office: {
+      addressLine1: "2N078D address line 1",
+      addressLine2: "Test address line 2",
+      addressLine3: nil,
+      addressLine4: nil,
+      city: "Test city",
+      postCode: "TE5T1NG",
+    },
+  }.to_json
+end
+
+def provider_offices_json_a123456
+  {
+    firm: {
+      ccmsFirmId: 99_999,
+      firmId: 1639,
+      firmName: "Test firm",
+      firmNumber: "1639",
+    },
+    office: {
+      addressLine1: "A123456 address line 1",
+      addressLine2: "Test address line 2",
+      addressLine3: nil,
+      addressLine4: nil,
+      city: "Test city",
+      postCode: "TE5T1NG",
+    },
+  }.to_json
+end
+
 def stub_provider_addresses_for(office_codes = %w[4A497U 4A497V])
   stub_request(:post, %r{#{Rails.configuration.x.pda.url}/provider-offices}).with(body: { officeCodes: office_codes }.to_json)
   .to_return(
