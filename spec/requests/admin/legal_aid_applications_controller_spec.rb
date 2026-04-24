@@ -39,6 +39,26 @@ RSpec.describe Admin::LegalAidApplicationsController do
       expect(response.body).to include(admin_settings_path)
     end
 
+    context "with english locale" do
+      let(:params) { { locale: "en" } }
+
+      it "updates the locale" do
+        get_request
+        expect(response.body).to include("Search")
+        expect(response.body).not_to include("hcraeS")
+      end
+    end
+
+    context "with welsh locale" do
+      let(:params) { { locale: "cy" } }
+
+      it "updates the locale" do
+        get_request
+        expect(response.body).to include("hcraeS")
+        expect(response.body).not_to include("Search")
+      end
+    end
+
     context "with pagination" do
       it "shows current total information" do
         get_request
