@@ -43,6 +43,7 @@ module Editing
     def sections_to_clean
       @sections_to_clean ||= Editing.sections.keys[@clean_from_index..] || []
       @sections_to_clean.unshift(:dwp_data) if @reset_to_section.to_sym == :client_details
+      @sections_to_clean.push(:post_merits_data)
       @sections_to_clean
     end
 
@@ -64,6 +65,10 @@ module Editing
     # TODO: ticket for writing this cleaner
     def clean_merits
       MeritsCleaner.new(legal_aid_application).call
+    end
+
+    def clean_post_merits_data
+      PostMeritsDataCleaner.new(legal_aid_application).call
     end
   end
 end
