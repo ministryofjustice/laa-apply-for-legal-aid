@@ -55,3 +55,9 @@ en:
       title: Sorry, there is a problem with the service
       ccms_or_try_later_html: <a href=%{url}>Use CCMS to complete your application</a> or try again later.
       answers_saved: We've saved your answers.
+  session_expired:
+    show:
+      title: For your security, we signed you out
+      timeout: This is because you were inactive for an hour.
+      reauthenticate: This is because you were signed in for more than 12 hours.
+      sign_in: Sign in again to continue using the service.

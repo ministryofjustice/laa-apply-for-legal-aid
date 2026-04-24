@@ -4,6 +4,7 @@
 # Many of these configuration options can be set straight in your model.
 
 Devise.setup do |config|
+  require "devise/controllers/custom_failure"
   require "devise/models/reauthable"
 
   # ==> Configuration for custom devise extension :reauthable
@@ -309,6 +310,9 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   # end
+  config.warden do |manager|
+    manager.failure_app = Devise::Controllers::CustomFailure
+  end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
