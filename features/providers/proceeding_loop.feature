@@ -1,11 +1,11 @@
-@javascript @stub_pda_provider_details @vcr @billy
+@javascript @stub_pda_provider_details @stub_offices_addresses_retriever @vcr @billy
 Feature: Loop through proceeding questions
 
   Background:
     Given I am logged in as a provider
     And I visit the application service
     And I click link "Start"
-    Then I choose '0X395U'
+    Then I choose 'Test Firm, 0x395u Address Line 1, Test Address Line 2, Test City, TE5T1NG'
     Then I click 'Save and continue'
     And I click link "Make a new application"
     Then I should be on the 'providers/declaration' page showing 'Declaration'

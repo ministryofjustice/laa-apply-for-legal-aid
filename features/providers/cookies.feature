@@ -15,7 +15,7 @@ Feature: Cookies
     When I click link 'Go back'
     Then I should be on a page showing 'Check your answers'
 
-  @stub_pda_provider_details
+  @stub_pda_provider_details @stub_offices_addresses_retriever
   Scenario: I am able to update my cookie preferences via the cookies banner and Hide the notice
     Given I start the journey without cookie preferences
 
@@ -25,7 +25,7 @@ Feature: Cookies
     When I click link 'Hide'
     Then I should not see "You've accepted analytics cookies."
 
-  @stub_pda_provider_details
+  @stub_pda_provider_details @stub_offices_addresses_retriever
   Scenario: I am able to view the cookies page from the cookies banner and save changes
     Given I start the journey without cookie preferences
 
@@ -36,7 +36,7 @@ Feature: Cookies
     And I click 'Save changes'
     Then I should be on a page showing 'Your cookie settings were saved'
 
-  @stub_pda_provider_details
+  @stub_pda_provider_details @stub_offices_addresses_retriever
   Scenario: I am able to Accept analytics cookie and then change my cookie preferences via the cookies banner
     Given I start the journey without cookie preferences
 
@@ -47,7 +47,7 @@ Feature: Cookies
     When I click link "change your cookie settings"
     Then I should be on a page with title 'Cookies on Apply for civil legal aid'
 
-  @stub_pda_provider_details
+  @stub_pda_provider_details @stub_offices_addresses_retriever
   Scenario: I am able to Reject analytics cookie and then change my cookie preferences via the cookies banner
     Given I start the journey without cookie preferences
 
@@ -58,12 +58,12 @@ Feature: Cookies
     When I click link "change your cookie settings"
     Then I should be on a page with title 'Cookies on Apply for civil legal aid'
 
-  @stub_pda_provider_details
+  @stub_pda_provider_details @stub_offices_addresses_retriever
   Scenario: I am able to return to my legal aid applications
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
-    Then I choose '0X395U'
+    Then I choose 'Test Firm, 0x395u Address Line 1, Test Address Line 2, Test City, TE5T1NG'
     Then I click 'Save and continue'
 
     And I click link "Make a new application"
@@ -74,7 +74,7 @@ Feature: Cookies
 
     Then I am on the legal aid applications page
 
-  @stub_pda_provider_details
+  @stub_pda_provider_details @stub_offices_addresses_retriever
   Scenario: I am prompted to update my cookie preferences via the cookies banner if they have expired
     Given I start the journey with expired cookie preferences
 

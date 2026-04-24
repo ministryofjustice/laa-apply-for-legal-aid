@@ -1,9 +1,14 @@
 module Providers
   class SelectOfficesController < ProviderBaseController
+    include OfficeAddressHandling
+
     legal_aid_application_not_required!
+
+    OfficeAddressCollectionItem = Struct.new(:code, :address)
 
     def show
       initialize_page_history
+      @office_addresses = office_addresses
       @form = Providers::OfficeForm.new(model: current_provider)
     end
 
@@ -22,6 +27,7 @@ module Providers
           redirect_to providers_invalid_schedules_path
         end
       else
+        @office_addresses = office_addresses
         render :show
       end
     rescue CCMSUser::UserDetails::UserNotFound => e
@@ -55,6 +61,28 @@ module Providers
 
     def provider
       @provider ||= form_params[:model]
+    end
+
+    def silas_office_codes
+      @silas_office_codes ||= current_provider.silas_office_codes
+    end
+
+    def office_addresses
+      @office_addresses ||= silas_office_codes.map do |silas_office_code|
+        office_address_struct = pda_addresses.find { |pda_address| pda_address.code == silas_office_code }
+        office_address = if office_address_struct
+                           one_line_office_address(office_address_struct)
+                         else
+                           I18n.t("errors.office_address.not_found")
+                         end
+        OfficeAddressCollectionItem.new(code: silas_office_code, address: office_address)
+      end
+    end
+
+    def pda_addresses
+      @pda_addresses ||= PDA::OfficesAddressesRetriever.call(silas_office_codes)
+    rescue StandardError
+      []
     end
   end
 end

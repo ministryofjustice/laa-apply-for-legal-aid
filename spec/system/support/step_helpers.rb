@@ -8,7 +8,7 @@ module StepHelpers
     visit "/"
     click_on "Start"
 
-    govuk_choose("0X395U")
+    govuk_choose("Test Firm, Office 1 Address Line 1, Office 1 Address Line 2, Test City 1, TE5T1NG")
     click_on "Save and continue"
     click_on "Make a new application"
 

@@ -4,7 +4,7 @@ Background: I have started an application and not linked or copied it
   Given I am logged in as a provider
   And I have created and submitted an application with the application reference 'L-123-456'
 
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_pda_provider_details @stub_offices_addresses_retriever
   Scenario: Completes the application using address lookup with multiple proceedings
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
@@ -147,7 +147,7 @@ Background: I have started an application and not linked or copied it
     Then I should be on a page showing 'Delegated functions' with a date of 2 days ago using '%-d %B %Y' format
     Then I should be on a page showing 'Delegated functions' with a date of 35 days ago using '%-d %B %Y' format
 
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_pda_provider_details @stub_offices_addresses_retriever
   Scenario: Completes the application using address lookup
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
@@ -231,7 +231,7 @@ Background: I have started an application and not linked or copied it
     Then I click 'Send link'
     Then I am on the application confirmation page
 
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_pda_provider_details @stub_offices_addresses_retriever
   Scenario: Completes the application using address lookup with building number name
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
@@ -271,7 +271,7 @@ Background: I have started an application and not linked or copied it
     And I click "Save and continue"
     And I should be on a page showing "What does your client want legal aid for?"
 
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_pda_provider_details @stub_offices_addresses_retriever
   Scenario: Completes the application using manual address
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
@@ -373,7 +373,7 @@ Background: I have started an application and not linked or copied it
     Then I click 'Send link'
     Then I am on the application confirmation page
 
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_pda_provider_details @stub_offices_addresses_retriever
   Scenario: I can see that the applicant receives benefits
     Given I start the journey as far as the applicant page
     And a "bank holiday" exists in the database
@@ -439,7 +439,7 @@ Background: I have started an application and not linked or copied it
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
 
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_pda_provider_details @stub_offices_addresses_retriever
   Scenario: I can see that the applicant does not receive benefits
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'Paul'
@@ -525,7 +525,7 @@ Background: I have started an application and not linked or copied it
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client receives a passporting benefit"
 
-  @javascript @vcr @billy @stub_pda_provider_details
+  @javascript @vcr @billy @stub_pda_provider_details @stub_offices_addresses_retriever
   Scenario: Allows return to, and proceed from, Delegated Function date view
     Given I start the journey as far as the applicant page
     Then I enter name 'Test', 'User'
