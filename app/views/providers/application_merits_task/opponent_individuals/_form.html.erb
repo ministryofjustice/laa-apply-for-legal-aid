@@ -5,7 +5,10 @@
       local: true,
     ) do |form| %>
 
-  <%= page_template(page_title: t(".h1-heading"), back_link: {}, form:) do %>
+  <%= page_template(page_title: t(".h1-heading"),
+                    back_link: {},
+                    editing_sidebar_items: editing_sidebar_items_for("opponent_individuals"),
+                    form:) do %>
     <%= form.govuk_text_field(
           :first_name,
           label: { text: t(".first_name"), size: "m" },

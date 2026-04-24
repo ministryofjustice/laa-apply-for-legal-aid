@@ -294,7 +294,7 @@ en:
       show:
         banner_text: The merits information was copied from %{application_ref}.
         h1-heading: Check your answers
-        caption: Merits assessment
+        caption: Merits
         confirm_separate_representation_required: I confirm my client wants separate representation
     confirm_client_declarations:
       show:
@@ -366,7 +366,7 @@ en:
 
     check_passported_answers:
       show:
-        caption: Capital assessment
+        caption: Capital and assets
         h1-heading: Check your answers
         h2-heading: Your client's capital
         h2-heading_with_partner: Your client and their partner's capital
@@ -376,7 +376,7 @@ en:
       index:
         title: Check your answers
         title_truelayer: Your application
-        caption: Client details and what they are applying for
+        caption: Client and case details
         copy_case:
           heading: The proceedings information was copied from %{application_ref}.
           family_warning: As you have made a family link, the cost limit will be on the certificate of the application you submitted first.
@@ -779,6 +779,25 @@ en:
             label: *supreme_court
           other_court:
             label: *other_court
+
+    editing:
+      confirmations:
+        show:
+          page_title: Going back will delete some of your answers
+          paragraph_one_html: If you go back to the <strong>'%{section_title}'</strong> Check your answers page, all answers you gave after that page will be deleted. 
+          paragraph_two: This is because later questions depend on earlier answers.
+          paragraph_three: "Answers from these sections will be deleted:"
+          section_title:
+            client_details: Client and case details
+            financial_assessment: Financial assessment
+            capital_and_assets: Capital and assets
+            merits: Merits
+          warning: You cannot undo this action.
+          yes_button: Delete anwsers and go back
+          cancel: Cancel
+        destroy:
+          success: Answers you entered on later pages have been deleted.
+
     partners:
       about_financial_means:
         show:
@@ -1202,11 +1221,12 @@ en:
       check_income_answers:
         show:
           h1-heading: Check your answers
-          caption: Means assessment
+          caption: Financial assessment
           what_happens_next:
             heading: What happens next
             text: You'll need to answer questions about %{individual}'s capital so we can calculate their financial eligibility for legal aid.
         applicant_income_assessment:
+          financial-assessment-editing-heading: Financial assessment
           income-heading: Your client's income
           outgoings-heading: Your client's outgoings
         partner_income_assessment:
@@ -1502,7 +1522,7 @@ en:
           page_title: "Are you sure you want to remove %{name}?"
     check_capital_answers:
       show:
-        caption: Capital assessment
+        caption: Capital and assets
         h1-heading: Check your answers
         capital-section-heading: Your client's capital
         capital-section-heading_with_partner: Your client and their partner's capital
@@ -1997,6 +2017,7 @@ en:
             Print the application and get the person acting for %{applicant_name} to sign it. For example,
             a litigation friend, a professional children's guardian or a parental order reporter.
         audit: You may need to show this if you're audited by the LAA in the future.
+        warning: You cannot change your answers once you submit and continue
         keep_a_copy:
           means_tested: You'll need to keep a copy of it on file, along with any evidence you used to determine your client's financial situation.
           non_means_tested: You'll need to keep a copy of it on file, along with any evidence you included.

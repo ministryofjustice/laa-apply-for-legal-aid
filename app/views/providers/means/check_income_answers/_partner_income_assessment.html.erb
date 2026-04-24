@@ -1,7 +1,7 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
 <section class="partner">
-  <h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
+  <h3 class="govuk-heading-m"><%= t(".income-heading") %></h3>
 
   <%= render("shared/check_answers/bank_statements", partner: true, read_only:) %>
 
@@ -23,7 +23,7 @@
 
   <%= render("shared/check_answers/student_finance", partner: true, read_only:) %>
 
-  <h2 class="govuk-heading-l"><%= t(".outgoings-heading") %></h2>
+  <h3 class="govuk-heading-m"><%= t(".outgoings-heading") %></h3>
 
   <%= render("shared/check_answers/payments_summary", partner: true, credit: false, read_only:) %>
 

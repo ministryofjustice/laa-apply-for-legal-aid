@@ -62,3 +62,16 @@
   content: counter(list) ". ";
 }
 // stylelint-enable declaration-no-important
+
+.app-grid-column--sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 1%;
+}
+
+
+.app-heading-inline-link {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}

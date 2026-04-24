@@ -3,7 +3,11 @@
 <% bank_statement_upload = @legal_aid_application.client_uploading_bank_statements? %>
 
 <section class="applicant">
-  <h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
+  <div class="app-heading-inline-link">
+    <h2 class="govuk-heading-l"><%= t(".financial-assessment-editing-heading") %></h2>
+    <%= govuk_link_to t("shared.review_application.questions_and_answers.go_back_to_edit"), providers_legal_aid_application_editing_confirmation_path(return_to_section: :financial_assessment) %>
+  </div>
+  <h3 class="govuk-heading-m"><%= t(".income-heading") %></h3>
 
   <%= render("shared/check_answers/bank_statements", partner: false, read_only:) if bank_statement_upload %>
 
@@ -28,7 +32,7 @@
 
   <%= render("shared/check_answers/student_finance", partner: false, read_only:) %>
 
-  <h2 class="govuk-heading-l"><%= t(".outgoings-heading") %></h2>
+  <h3 class="govuk-heading-m"><%= t(".outgoings-heading") %></h3>
 
   <!--  Outgoing payments-->
   <%= render("shared/check_answers/payments_summary", credit: false, partner: false, read_only:) %>

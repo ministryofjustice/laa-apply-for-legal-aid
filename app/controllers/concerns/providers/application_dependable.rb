@@ -30,6 +30,9 @@ module Providers
       end
       delegate :applicant, to: :legal_aid_application
 
+      # TODO: the presence of this helper_method breaks forms like the select_office due to the editor_helper and a lack of an application Id
+      helper_method :legal_aid_application
+
     private
 
       def set_legal_aid_application
