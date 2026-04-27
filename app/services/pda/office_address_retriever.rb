@@ -31,7 +31,7 @@ module PDA
   private
 
     def address
-      @address ||= OfficeAddressStruct.new(office_code, office_address_hash || {})
+      @address ||= OfficeAddress.new(office_code, office_address_hash || {})
     end
 
     def office_address_hash

@@ -26,7 +26,7 @@ module PDA
           firms.each do |firm|
             office = firm["offices"].detect { |office| office["firmOfficeCode"] == office_code }
             if office
-              addresses << OfficeAddressStruct.new(office_code, { "firm" => firm["firm"], "office" => office })
+              addresses << OfficeAddress.new(office_code, { "firm" => firm["firm"], "office" => office })
               break
             end
           end

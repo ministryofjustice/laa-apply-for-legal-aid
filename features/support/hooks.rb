@@ -58,7 +58,7 @@ ensure
 end
 
 Before("@stub_office_address_retriever") do
-  office_address = PDA::OfficeAddressStruct.new("0X00000", JSON.parse(provider_offices_json))
+  office_address = PDA::OfficeAddress.new("0X00000", JSON.parse(provider_offices_json))
   double = instance_double(PDA::OfficeAddressRetriever, call: office_address)
   allow(PDA::OfficeAddressRetriever).to receive(:new).and_return(double)
 end
@@ -69,9 +69,9 @@ After("@stub_office_address_retriever") do
 end
 
 Before("@stub_offices_addresses_retriever") do
-  office_address_one = PDA::OfficeAddressStruct.new("0X395U", JSON.parse(provider_offices_json_ox395u))
-  office_address_two = PDA::OfficeAddressStruct.new("2N078D", JSON.parse(provider_offices_json_2n078d))
-  office_address_three = PDA::OfficeAddressStruct.new("A123456", JSON.parse(provider_offices_json_a123456))
+  office_address_one = PDA::OfficeAddress.new("0X395U", JSON.parse(provider_offices_json_ox395u))
+  office_address_two = PDA::OfficeAddress.new("2N078D", JSON.parse(provider_offices_json_2n078d))
+  office_address_three = PDA::OfficeAddress.new("A123456", JSON.parse(provider_offices_json_a123456))
   double = instance_double(PDA::OfficesAddressesRetriever, call: [office_address_one, office_address_two, office_address_three])
   allow(PDA::OfficesAddressesRetriever).to receive(:new).and_return(double)
 end

@@ -12,12 +12,12 @@ RSpec.describe PDA::OfficesAddressesRetriever do
         stub_provider_addresses_for(office_codes)
       end
 
-      it "returns an OfficeAddressStruct array with the expected data" do
+      it "returns an OfficeAddress array with the expected data" do
         result = call
 
         expect(result)
           .to be_a(Array)
-          .and all(be_a(PDA::OfficeAddressStruct))
+          .and all(be_a(PDA::OfficeAddress))
 
         expect(result.first).to have_attributes(
           code: office_codes.first,
@@ -50,12 +50,12 @@ RSpec.describe PDA::OfficesAddressesRetriever do
         stub_provider_addresses_for_multiple_firms(office_codes)
       end
 
-      it "returns an OfficeAddressStruct array with the expected data" do
+      it "returns an OfficeAddress array with the expected data" do
         result = call
 
         expect(result)
           .to be_a(Array)
-          .and all(be_a(PDA::OfficeAddressStruct))
+          .and all(be_a(PDA::OfficeAddress))
 
         expect(result.first).to have_attributes(
           code: office_codes.first,
@@ -88,12 +88,12 @@ RSpec.describe PDA::OfficesAddressesRetriever do
         stub_provider_addresses_for_single_office_found(office_codes)
       end
 
-      it "returns an OfficeAddressStruct array with the expected data" do
+      it "returns an OfficeAddress array with the expected data" do
         result = call
 
         expect(result)
           .to be_a(Array)
-          .and all(be_a(PDA::OfficeAddressStruct))
+          .and all(be_a(PDA::OfficeAddress))
 
         expect(result.size).to eq(1)
 
@@ -168,10 +168,10 @@ RSpec.describe PDA::OfficesAddressesRetriever do
         stub_provider_addresses_for(office_codes)
       end
 
-      it "returns an array of OfficeAddressStructs, same as instance call" do
+      it "returns an array of OfficeAddresses, same as instance call" do
         expect(call)
           .to be_a(Array)
-          .and all(be_a(PDA::OfficeAddressStruct))
+          .and all(be_a(PDA::OfficeAddress))
       end
     end
   end

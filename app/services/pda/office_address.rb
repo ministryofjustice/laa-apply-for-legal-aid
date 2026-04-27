@@ -1,5 +1,5 @@
 module PDA
-  class OfficeAddressStruct
+  class OfficeAddress
     attr_reader :code, :firm_name, :address_line_one, :address_line_two, :address_line_three, :address_line_four, :county, :city, :post_code
 
     def initialize(office_code, office_address_hash = {})
