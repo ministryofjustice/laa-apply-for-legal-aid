@@ -22,13 +22,12 @@ module PDA
 
       addresses = []
       if response.status == 200
-        @office_codes.each do |office_code|
-          firms.each do |firm|
-            office = firm["offices"].detect { |office| office["firmOfficeCode"] == office_code }
-            if office
-              addresses << OfficeAddress.new(office_code, { "firm" => firm["firm"], "office" => office })
-              break
-            end
+        provider_offices.each do |provider_office|
+          firm = provider_office["firm"]
+          offices = provider_office["offices"]
+
+          offices.each do |office|
+            addresses << OfficeAddress.new(office["firmOfficeCode"], { "firm" => firm, "office" => office })
           end
         end
       end
@@ -39,8 +38,8 @@ module PDA
       raise
     end
 
-    def firms
-      @firms || JSON.parse(response.body)
+    def provider_offices
+      @provider_offices ||= JSON.parse(response.body)
     end
 
   private
