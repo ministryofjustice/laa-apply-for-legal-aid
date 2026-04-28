@@ -51,6 +51,8 @@ ingress:
       SecRule MULTIPART_INVALID_HEADER_FOLDING "!@eq 0" "id:300010,phase:2,t:none,log,deny,status:400, msg:`Multipart request body failed custom  validation: DB %{MULTIPART_INVALID_HEADER_FOLDING}.`"
       SecRule MULTIPART_FILE_LIMIT_EXCEEDED "!@eq 0" "id:300011,phase:2,t:none,log,deny,status:400, msg:`Multipart request body failed custom  validation: DB %{MULTIPART_FILE_LIMIT_EXCEEDED}.`"
       SecRule REQUEST_FILENAME "^.*address_selection.*" "id:300012,ctl:ruleRemoveById=949110, msg:`Request filename anonmaly score exception for address selection failed custom validation: REQUEST_FILENAME %{REQUEST_FILENAME}.`"
+      SecRule ARGS_NAMES "@rx (?i)^(password|secret)$" "id:300013,phase:2,pass,nolog,setvar:tx.has_password=1"
+      SecRule TX:has_password "@eq 1" "id:300014,phase:5,pass,nolog,ctl:auditLogParts=-H"
   path: /
   hosts:
     - "apply-for-legal-aid.service.justice.gov.uk"
