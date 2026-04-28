@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::Partners::ClientHasPartnersController do
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:provider) { legal_aid_application.provider }
 
   before { login_as provider }
@@ -39,6 +39,18 @@ RSpec.describe Providers::Partners::ClientHasPartnersController do
       it "redirects to the next page" do
         expect(response).to have_http_status(:redirect)
       end
+
+      context "and the client already has a partner record" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner_with_no_contrary_interest) }
+
+        it "does not delete the partner record" do
+          expect(legal_aid_application.reload.partner).not_to be_nil
+        end
+
+        it "does not reset the partner_has_contrary_interest flag" do
+          expect(legal_aid_application.reload.applicant.partner_has_contrary_interest).to be false
+        end
+      end
     end
 
     context "when no chosen" do
@@ -46,6 +58,18 @@ RSpec.describe Providers::Partners::ClientHasPartnersController do
 
       it "redirects to the next page" do
         expect(response).to have_http_status(:redirect)
+      end
+
+      context "and the client already has a partner record" do
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner_with_no_contrary_interest) }
+
+        it "deletes the partner record" do
+          expect(legal_aid_application.reload.partner).to be_nil
+        end
+
+        it "resets the partner_has_contrary_interest flag" do
+          expect(legal_aid_application.reload.applicant.partner_has_contrary_interest).to be_nil
+        end
       end
     end
 
