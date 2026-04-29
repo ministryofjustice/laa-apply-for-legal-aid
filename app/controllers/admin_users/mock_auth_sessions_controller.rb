@@ -2,6 +2,10 @@ module AdminUsers
   class MockAuthSessionsController < MockAuthSessionsBaseController
   protected
 
+    def mock_auth_match?
+      mock_auth_session_params[:email] == mock_username && mock_auth_session_params[:password] == mock_password
+    end
+
     def mock_username
       Rails.configuration.x.admin_omniauth.mock_username
     end

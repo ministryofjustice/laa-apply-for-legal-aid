@@ -14,7 +14,7 @@ RSpec.describe "The sign in lifespan and timeout works" do
     Rails.application.reload_routes!
   end
 
-  let(:provider_email) { "martin.ronan@example.com" }
+  let(:provider_email) { "test@test.com" }
 
   after do
     allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_call_original
