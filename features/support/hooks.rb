@@ -99,6 +99,14 @@ After("@mock_auth_enabled") do |_scenario, _block|
   Rails.application.reload_routes!
 end
 
+Before("@mock_auth_array_is_set") do |_scenario, _block|
+  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_array).and_return("test1@example.com:password1,test2@example.com:password2")
+end
+
+After("@mock_auth_array_is_set") do |_scenario, _block|
+  allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_array).and_call_original
+end
+
 Before("@mock_admin_auth_enabled") do |_scenario, _block|
   allow(Rails.configuration.x.admin_omniauth).to receive(:mock_auth_enabled).and_return(true)
   Rails.application.reload_routes!

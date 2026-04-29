@@ -1,7 +1,6 @@
 class MockAuthSessionsBaseController < Devise::SessionsController
   def create
-    if mock_auth_session_params[:email] == mock_username &&
-        mock_auth_session_params[:password] == mock_password
+    if mock_auth_match?
       flash[:notice] = I18n.t "devise.sessions.signed_in"
       sign_in_and_redirect user, event: :authentication
     else
