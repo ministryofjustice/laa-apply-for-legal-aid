@@ -5,9 +5,12 @@ module Editing
     end
 
     def call
-      # rubocop:disable Rails/Output
-      puts "deleting DWP data for legal aid application #{legal_aid_application.id}"
-      # rubocop:enable Rails/Output
+      legal_aid_application.update!(dwp_result_confirmed: nil)
+      legal_aid_application.dwp_override&.destroy!
+      legal_aid_application.benefit_check_result&.destroy!
+
+      legal_aid_application.applicant&.update!(shared_benefit_with_partner: nil)
+      legal_aid_application.partner&.update!(shared_benefit_with_applicant: nil)
     end
 
   private

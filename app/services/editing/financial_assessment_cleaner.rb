@@ -15,6 +15,7 @@ module Editing
 
     attr_reader :legal_aid_application
 
+    # TODO: truelayer/open banking data should also be removed, but this is not yet implemented. ticket?
     def destroy_financial_assessment_data!
       # "bank_statements"
       legal_aid_application.attachments.bank_statement_evidence.each(&:destroy!)
@@ -30,10 +31,9 @@ module Editing
       legal_aid_application.dependants.each(&:destroy!)
     end
 
+    # TODO: employment attributes and no_cash_income|outgoings attributes should be moved to the applicant for consistency. ticket?
     def update_legal_aid_application_data!
       # "substantive_application", "does-client-use-online-banking", "extra_employment_information", "extra_employment_information_details", "full_employment_details"
-      #
-      # TODO: employment data, no_cash_income|outgoings should be moved to the applicant for consistency. ticket?
       legal_aid_application&.update!(
         extra_employment_information: nil,
         extra_employment_information_details: nil,
