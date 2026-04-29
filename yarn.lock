@@ -4604,7 +4604,7 @@ __metadata:
     jquery: "npm:^4.0.0"
     js-search: "npm:^2.0.1"
     moment: "npm:^2.30.1"
-    postcss: "npm:^8.5.9"
+    postcss: "npm:^8.5.11"
     puppeteer: "npm:^24.42.0"
     sanitize-html: "npm:^2.17.3"
     sass: "npm:^1.99.0"
@@ -5403,6 +5403,17 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10c0/5127cc7c91ed7a133a1b7318012d8bfa112da9ef092dddf369ae699a1f10ebbd89b1b9f25f3228795b84585c72aabd5ced5fc11f2ba467eedf7b081a66fad024
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.5.11":
+  version: 8.5.12
+  resolution: "postcss@npm:8.5.12"
+  dependencies:
+    nanoid: "npm:^3.3.11"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10c0/5baebaf574c567bc1b3d61197f38af4ce5920b8f611c887fb6bc3dcc14af00253c169dbf19897bc889cce0b0d9818ab5eb4ea0caedf02b0bab10da8a43ce8c12
   languageName: node
   linkType: hard
 
