@@ -4,7 +4,9 @@
     <% if editing_links %>
       <div class="app-heading-inline-link">
         <h2 class="govuk-heading-l"><%= t(".client-details-section-editing-heading") %></h2>
-        <%= govuk_link_to t(".go_back_to_edit"), providers_legal_aid_application_editing_confirmation_path(return_to_section: :client_details) %>
+        <%= govuk_link_to(t(".go_back_to_edit"),
+                          providers_legal_aid_application_editing_confirmation_path(return_to_section: :client_details),
+                          visually_hidden_suffix: t(".client-details-section-editing-heading").downcase) %>
       </div>
     <% end %>
 
@@ -42,7 +44,9 @@
     <% if editing_links %>
       <div class="app-heading-inline-link">
         <h2 class="govuk-heading-l"><%= t(".financial-assessment-editing-heading") %></h2>
-        <%= govuk_link_to t("shared.review_application.questions_and_answers.go_back_to_edit"), providers_legal_aid_application_editing_confirmation_path(return_to_section: :financial_assessment) %>
+        <%= govuk_link_to(t(".go_back_to_edit"),
+                          providers_legal_aid_application_editing_confirmation_path(return_to_section: :financial_assessment),
+                          visually_hidden_suffix: t(".financial-assessment-editing-heading").downcase) %>
       </div>
     <% end %>
 
@@ -64,13 +68,15 @@
     <% if editing_links %>
       <div class="app-heading-inline-link">
         <h2 class="govuk-heading-l"><%= t(".capital-section-editing-heading") %></h2>
-        <%= govuk_link_to t(".go_back_to_edit"), providers_legal_aid_application_editing_confirmation_path(return_to_section: :capital_and_assets) %>
+        <%= govuk_link_to(t(".go_back_to_edit"),
+                          providers_legal_aid_application_editing_confirmation_path(return_to_section: :capital_and_assets),
+                          visually_hidden_suffix: t(".capital-section-editing-heading").downcase) %>
       </div>
     <% end %>
 
     <h3 class="govuk-heading-m"><%= t(".capital-section-heading#{individual}") %></h3>
 
-    <%= render "shared/check_answers/assets", read_only: true, individual: %>
+    <%= render "shared/check_answers/assets", read_only: true, individual: individual %>
   <% end %>
 
   <section class="merits page_break_before">
@@ -78,7 +84,9 @@
     <% if editing_links %>
       <div class="app-heading-inline-link">
         <h2 class="govuk-heading-l"><%= t(".merits-section-editing-heading") %></h2>
-        <%= govuk_link_to t(".go_back_to_edit"), providers_legal_aid_application_check_merits_answers_path(@legal_aid_application) %>
+        <%= govuk_link_to(t(".go_back_to_edit"),
+                          providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),
+                          visually_hidden_suffix: t(".merits-section-editing-heading").downcase) %>
       </div>
     <% end %>
 
