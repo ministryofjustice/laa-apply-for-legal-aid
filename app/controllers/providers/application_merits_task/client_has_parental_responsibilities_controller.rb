@@ -11,7 +11,11 @@ module Providers
         @form = Providers::ApplicationMeritsTask::ParentalResponsibilitiesForm.new(form_params)
         if @form.relationship_to_children.eql?("false") && !draft_selected?
           @form.save!
-          return redirect_to providers_legal_aid_application_client_is_child_subject_path(legal_aid_application)
+          if applicant.under_18?
+            return redirect_to providers_legal_aid_application_client_is_child_subject_path(legal_aid_application)
+          else
+            return redirect_to providers_legal_aid_application_client_check_parental_answer_path(legal_aid_application)
+          end
         end
 
         render :show unless update_task_save_continue_or_draft(:application, :client_relationship_to_children, reshow_check_client: legal_aid_application.merits_parental_responsibilities_all_rejected?)

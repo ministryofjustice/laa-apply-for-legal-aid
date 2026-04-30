@@ -96,9 +96,22 @@ module Providers
                 expect(legal_aid_application.legal_framework_merits_task_list).to have_not_started_task(:application, :client_relationship_to_children)
               end
 
-              it "redirects to the is_client_child_subject page" do
-                patch_request
-                expect(response).to redirect_to providers_legal_aid_application_client_is_child_subject_path(legal_aid_application)
+              context "when applicant is under 18" do
+                before { applicant.update!(age_for_means_test_purposes: 17) }
+
+                it "redirects to the is_client_child_subject page" do
+                  patch_request
+                  expect(response).to redirect_to providers_legal_aid_application_client_is_child_subject_path(legal_aid_application)
+                end
+              end
+
+              context "when applicant is 18 or over" do
+                before { applicant.update!(age_for_means_test_purposes: 18) }
+
+                it "redirects to the check_parental_answer page" do
+                  patch_request
+                  expect(response).to redirect_to providers_legal_aid_application_client_check_parental_answer_path(legal_aid_application)
+                end
               end
             end
 
