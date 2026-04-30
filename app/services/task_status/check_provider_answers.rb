@@ -54,11 +54,23 @@ module TaskStatus
     end
 
     def previous_task_status_items
+      @previous_task_status_items ||= application.non_means_tested? ? non_means_tested_items : means_tested_items
+    end
+
+    def means_tested_items
       [
         Applicants,
         MakeLink,
         ProceedingsTypes,
         Partner,
+      ]
+    end
+
+    def non_means_tested_items
+      [
+        Applicants,
+        MakeLink,
+        ProceedingsTypes,
       ]
     end
   end
