@@ -21,7 +21,17 @@ RSpec.describe Task::DWPOutcome do
     end
 
     context "when the applicant is under 18" do
-      before { application.applicant.update!(age_for_means_test_purposes: 17) }
+      before { application.applicant.update!(age_for_means_test_purposes: 17, national_insurance_number: nil) }
+
+      it "returns the correct step" do
+        expect(instance.path).to eql providers_legal_aid_application_confirm_non_means_tested_applications_path(application)
+      end
+    end
+
+    context "when the application is an sca application" do
+      let(:application) { create(:legal_aid_application, :with_applicant, :with_multiple_sca_proceedings) }
+
+      before { application.applicant.update!(national_insurance_number: nil) }
 
       it "returns the correct step" do
         expect(instance.path).to eql providers_legal_aid_application_confirm_non_means_tested_applications_path(application)
