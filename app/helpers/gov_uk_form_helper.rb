@@ -33,4 +33,13 @@ module GovUkFormHelper
     class_text.compact!
     args.merge(class: class_text.join(" "))
   end
+
+  def govuk_heading_class(level)
+    {
+      1 => "govuk-heading-xl",
+      2 => "govuk-heading-l",
+      3 => "govuk-heading-m",
+      4 => "govuk-heading-s",
+    }.fetch(level)
+  end
 end
