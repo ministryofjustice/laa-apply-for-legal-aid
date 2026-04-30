@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Providers::Partners::ClientHasPartnersController do
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
   let(:provider) { legal_aid_application.provider }
 
   before { login_as provider }
@@ -23,9 +23,9 @@ RSpec.describe Providers::Partners::ClientHasPartnersController do
   describe "PATCH /providers/:application_id/client_has_partner" do
     subject(:patch_has_partner) { patch providers_legal_aid_application_client_has_partner_path(legal_aid_application), params: }
 
-    before { patch_has_partner }
-
     context "when form submitted with Save as draft button" do
+      before { patch_has_partner }
+
       let(:params) { { applicant: { has_partner: "" }, draft_button: "Save and come back later" } }
 
       it "redirects to the list of applications" do
@@ -34,6 +34,8 @@ RSpec.describe Providers::Partners::ClientHasPartnersController do
     end
 
     context "when yes chosen" do
+      before { patch_has_partner }
+
       let(:params) { { applicant: { has_partner: "true" } } }
 
       it "redirects to the next page" do
@@ -42,6 +44,8 @@ RSpec.describe Providers::Partners::ClientHasPartnersController do
     end
 
     context "when no chosen" do
+      before { patch_has_partner }
+
       let(:params) { { applicant: { has_partner: "false" } } }
 
       it "redirects to the next page" do
@@ -50,11 +54,41 @@ RSpec.describe Providers::Partners::ClientHasPartnersController do
     end
 
     context "when no answer chosen" do
+      before { patch_has_partner }
+
       let(:params) { { applicant: { has_partner: "" }, continue_button: "Save and continue" } }
 
       it "stays on the page if there is a validation error" do
         expect(response).to have_http_status(:ok)
         expect(page).to have_error_message("Select yes if the client has a partner")
+      end
+    end
+
+    context "when there is already a partner record" do
+      let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner_with_no_contrary_interest) }
+
+      context "when yes chosen" do
+        let(:params) { { applicant: { has_partner: "true" } } }
+
+        it "does not delete the partner record" do
+          expect { patch_has_partner }.not_to change { legal_aid_application.reload.partner }
+        end
+
+        it "does not reset the partner_has_contrary_interest flag" do
+          expect { patch_has_partner }.not_to change { legal_aid_application.reload.applicant.partner_has_contrary_interest }
+        end
+      end
+
+      context "when no chosen" do
+        let(:params) { { applicant: { has_partner: "false" } } }
+
+        it "deletes the partner record" do
+          expect { patch_has_partner }.to change { legal_aid_application.reload.partner }.from(legal_aid_application.partner).to(nil)
+        end
+
+        it "resets the partner_has_contrary_interest flag" do
+          expect { patch_has_partner }.to change { legal_aid_application.reload.applicant.partner_has_contrary_interest }.from(false).to(nil)
+        end
       end
     end
   end
