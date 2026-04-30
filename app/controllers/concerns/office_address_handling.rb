@@ -8,7 +8,7 @@ private
       office_address_struct.address_line_two&.downcase&.titleize,
       office_address_struct.address_line_three&.downcase&.titleize,
       office_address_struct.address_line_four&.downcase&.titleize,
-      office_address_struct.city.titleize,
+      office_address_struct.city&.titleize,
       office_address_struct.post_code,
     ].compact.join(", ")
   end
