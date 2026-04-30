@@ -1,12 +1,12 @@
 
 Feature: Search proceedings
 
-  @javascript @stub_pda_provider_details @vcr @billy
+  @javascript @stub_pda_provider_details @stub_offices_addresses_retriever @vcr @billy
   Scenario: No results returned is seen on screen when invalid proceeding search entered
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
-    Then I choose '0X395U'
+    Then I choose 'Test Firm, 0x395u Address Line 1, Test Address Line 2, Test City, TE5T1NG'
     Then I click 'Save and continue'
     And I click link "Make a new application"
     Then I should be on the 'providers/declaration' page showing 'Declaration'
@@ -39,12 +39,12 @@ Feature: Search proceedings
     When I search for proceeding 'cakes'
     Then the proceeding type result list on page returns a "No results found." message
 
-  @javascript @stub_pda_provider_details @vcr @billy
+  @javascript @stub_pda_provider_details @stub_offices_addresses_retriever @vcr @billy
   Scenario: I am able to clear proceeding on the proceeding page
     Given I am logged in as a provider
     Given I visit the application service
     And I click link "Start"
-    Then I choose '0X395U'
+    Then I choose 'Test Firm, 0x395u Address Line 1, Test Address Line 2, Test City, TE5T1NG'
     Then I click 'Save and continue'
     And I click link "Make a new application"
     Then I should be on the 'providers/declaration' page showing 'Declaration'

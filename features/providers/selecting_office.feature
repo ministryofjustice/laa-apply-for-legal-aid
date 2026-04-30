@@ -1,31 +1,31 @@
 @stub_bank_holidays
 Feature: Selecting office
 
-  @javascript @stub_office_schedules_and_user
+  @javascript @stub_office_schedules_and_user @stub_offices_addresses_retriever
   Scenario: I am able to select an office
     Given I am logged in as a provider with silas_id "51cdbbb4-75d2-48d0-aaac-fa67f013c50a"
     When I visit the select office page
-    And I choose '0X395U'
+    And I choose 'Test Firm, 0x395u Address Line 1, Test Address Line 2, Test City, TE5T1NG'
     And I click 'Save and continue'
     Then I should be on a page showing 'Your applications'
 
-  @javascript @stub_office_schedules_and_user
+  @javascript @stub_office_schedules_and_user @stub_offices_addresses_retriever
   Scenario: I am unable to select an office that does not exist in PDA
     Given I am logged in as a provider
     Then I visit the select office page
-    Then I choose 'A123456'
+    Then I choose 'Test Firm, A123456 Address Line 1, Test Address Line 2, Test City, TE5T1NG'
     Then I click 'Save and continue'
     Then I should be on a page showing 'The office you selected does not have a family contract with the Legal Aid Agency (LAA).'
 
-  @javascript @stub_office_schedules_and_user
+  @javascript @stub_office_schedules_and_user @stub_offices_addresses_retriever
   Scenario: I am still able to see the invalid schedule interrupt page even when never having selected an office
     Given I am logged in as a provider but have never selected an office
     Then I visit the select office page
-    Then I choose 'A123456'
+    Then I choose 'Test Firm, A123456 Address Line 1, Test Address Line 2, Test City, TE5T1NG'
     Then I click 'Save and continue'
     Then I should be on a page showing 'The office you selected does not have a family contract with the Legal Aid Agency (LAA).'
 
-  @javascript @stub_office_schedules_and_user
+  @javascript @stub_office_schedules_and_user @stub_offices_addresses_retriever
   Scenario: I am still able to see my profile page even when never having selected an office
     Given I am logged in as a provider but have never selected an office
     When I visit the My profile page
@@ -34,17 +34,17 @@ Feature: Selecting office
     When I click link "Apply for civil legal aid"
     Then I should be on a page showing 'Select the account number of the office handling this application'
 
-  @javascript @stub_office_schedules_and_user
+  @javascript @stub_office_schedules_and_user @stub_offices_addresses_retriever
   Scenario: I am unable to bypass selecting an office
     Given I am logged in as a provider but have never selected an office
     When I visit the in progress applications page
     Then I should be on a page showing 'Select the account number of the office handling this application'
 
- @javascript @stub_office_schedules_but_ccms_user_not_found
+ @javascript @stub_office_schedules_but_ccms_user_not_found @stub_offices_addresses_retriever
   Scenario: I am presented with a user not found interrupt page when no matching CCMS user can found for my silas credentials
     Given I am logged in as a provider but have never selected an office
     When I visit the select office page
-    And I choose '0X395U'
+    And I choose 'Test Firm, 0x395u Address Line 1, Test Address Line 2, Test City, TE5T1NG'
     And I click 'Save and continue'
     Then I should be on a page with title 'Sorry, there was a problem getting your account information'
     And I should be on a page showing 'Contact our support team if this problem continues.'
@@ -59,7 +59,7 @@ Feature: Selecting office
     When I visit the My profile page
     Then I should be on a page showing 'Your profile'
 
-  @javascript @mock_auth_enabled @vcr_turned_off
+  @javascript @mock_auth_enabled @vcr_turned_off @stub_offices_addresses_retriever
   Scenario: I am forced to select an office again after sign out and sign in
     Given I visit the root page
     And I should see "Providers can use this service to apply for civil legal aid for their clients"
@@ -71,7 +71,7 @@ Feature: Selecting office
     And I click 'Sign in'
     Then I should be on a page showing 'Select the account number of the office handling this application'
 
-    When I choose "0X395U"
+    When I choose "Test Firm, 0x395u Address Line 1, Test Address Line 2, Test City, TE5T1NG"
     And I click "Save and continue"
     Then I should be on a page with title "Your applications"
 
@@ -89,11 +89,11 @@ Feature: Selecting office
     When I visit the in progress applications page
     Then I should be on a page showing 'Select the account number of the office handling this application'
 
-  @javascript @mock_auth_enabled @vcr_turned_off
+  @javascript @mock_auth_enabled @vcr_turned_off @stub_offices_addresses_retriever
   Scenario: I am able to select an office when mock auth is enabled
     Given I am logged in as a provider with silas_id "51cdbbb4-75d2-48d0-aaac-fa67f013c50a"
     When I visit the select office page
-    And I choose '0X395U'
+    And I choose 'Test Firm, 0x395u Address Line 1, Test Address Line 2, Test City, TE5T1NG'
     And I click 'Save and continue'
     Then I should be on a page showing 'Your applications'
 

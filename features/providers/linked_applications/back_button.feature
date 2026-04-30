@@ -1,12 +1,12 @@
 Feature: Linking cases back button use
-  @javascript @vcr @stub_pda_provider_details
+  @javascript @vcr @stub_offices_addresses_retriever @stub_pda_provider_details
   Scenario: Complete flow reversion with back button
     Given I am logged in as a provider
     And I have created and submitted an application with the application reference 'L-123-456'
 
     When I visit the application service
     And I click link "Start"
-    And I choose '0X395U'
+    And I choose 'Test Firm, 0x395u Address Line 1, Test Address Line 2, Test City, TE5T1NG'
     And I click 'Save and continue'
     And I click link "Make a new application"
     Then I should be on the 'providers/declaration' page showing 'Declaration'

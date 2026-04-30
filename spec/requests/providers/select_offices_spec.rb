@@ -20,6 +20,38 @@ RSpec.describe "provider selects office" do
     }.to_json
   end
 
+  let(:offices_body) do
+    [
+      {
+        firm: {
+          ccmsFirmId: 1639,
+          firmId: 12_345,
+          firmName: "firm name",
+        },
+        offices: [
+          {
+            firmOfficeCode: "0X395U",
+            addressLine1: "Office 1 address line 1",
+            addressLine2: "Office 1 address line 2",
+            addressLine3: nil,
+            addressLine4: nil,
+            city: "Test city 1",
+            postCode: "TE5T1NG",
+          },
+          {
+            firmOfficeCode: "2N078D",
+            addressLine1: "Office 2 address line 1",
+            addressLine2: "Office 2 address line 2",
+            addressLine3: nil,
+            addressLine4: nil,
+            city: "Test city 2",
+            postCode: "TE5T2NG",
+          },
+        ],
+      },
+    ].to_json
+  end
+
   let(:devolved_powers_status) { "Yes - Excluding JR Proceedings" }
 
   let(:schedules) do
@@ -68,6 +100,8 @@ RSpec.describe "provider selects office" do
 
   before do
     stub_bankholiday_success
+    stub_request(:post, "#{Rails.configuration.x.pda.url}/provider-offices")
+      .to_return(body: offices_body, status: 200)
   end
 
   around do |example|
@@ -87,17 +121,57 @@ RSpec.describe "provider selects office" do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        get_request
       end
 
       it "returns http success" do
+        get_request
         expect(response).to have_http_status(:ok)
       end
 
       it "displays the offices of the provider from SILAS" do
+        get_request
         expect(unescaped_response_body).to include("0X395U")
         expect(unescaped_response_body).to include("2N078D")
         expect(unescaped_response_body).to include("A123456")
+      end
+
+      it "displays the office addresses of the provider from PDA" do
+        get_request
+        expect(unescaped_response_body).to include("Firm Name, Office 1 Address Line 1, Office 1 Address Line 2, Test City 1, TE5T1NG")
+        expect(unescaped_response_body).to include("Firm Name, Office 2 Address Line 1, Office 2 Address Line 2, Test City 2, TE5T2NG")
+        expect(unescaped_response_body).to include("Office address not found")
+      end
+
+      context "when PDA does not find any office addresses" do
+        before do
+          stub_provider_offices_addresses_failure_for(status: 204)
+
+          get_request
+        end
+
+        it "renders" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "displays message text to indicate office address not found" do
+          expect(page).to have_content("Office address not found").exactly(3).times
+        end
+      end
+
+      context "when PDA returns an internal server error" do
+        before do
+          stub_provider_offices_addresses_failure_for(status: 500)
+
+          get_request
+        end
+
+        it "renders" do
+          expect(response).to have_http_status(:ok)
+        end
+
+        it "displays message text to indicate office address not found" do
+          expect(page).to have_content("Office address not found").exactly(3).times
+        end
       end
     end
   end

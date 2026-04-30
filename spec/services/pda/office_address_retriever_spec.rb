@@ -12,11 +12,11 @@ RSpec.describe PDA::OfficeAddressRetriever do
         stub_provider_offices_address_for(office_code)
       end
 
-      it "returns an OfficeAddressStruct with the expected data" do
+      it "returns an OfficeAddress with the expected data" do
         result = call
 
         expect(result)
-          .to be_a(described_class::OfficeAddressStruct)
+          .to be_a(PDA::OfficeAddress)
 
         expect(result).to have_attributes(
           code: office_code,
@@ -89,9 +89,9 @@ RSpec.describe PDA::OfficeAddressRetriever do
         stub_provider_offices_address_for(office_code)
       end
 
-      it "returns an OfficeAddressStruct, same as instance call" do
+      it "returns an OfficeAddress, same as instance call" do
         expect(call)
-          .to be_a(described_class::OfficeAddressStruct)
+          .to be_a(PDA::OfficeAddress)
       end
     end
   end

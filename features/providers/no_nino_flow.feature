@@ -1,6 +1,6 @@
 Feature: No national insurance number for applicant
 
-  @javascript @stub_pda_provider_details @vcr @billy
+  @javascript @stub_pda_provider_details @stub_offices_addresses_retriever @vcr @billy
   Scenario: I can see that the applicant receives benefits
     Given I start the journey as far as the applicant page
     And a "bank holiday" exists in the database
