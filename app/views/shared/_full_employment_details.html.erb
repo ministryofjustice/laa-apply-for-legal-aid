@@ -9,8 +9,7 @@
         back_link: { text: t("generic.back") },
       ) do %>
 
-    <%= form.govuk_fieldset(legend: { size: "xl", tag: "h1", text: page_heading },
-                            caption: { text: t("generic.#{client_or_partner}_means_caption"), size: "xl" }) do %>
+    <%= form.govuk_fieldset(legend: { size: "xl", tag: "h1", text: page_heading }) do %>
 
       <p class="govuk-body"><%= t(".enter_details", individual:) %></p>
       <ul class="govuk-list govuk-list--bullet">

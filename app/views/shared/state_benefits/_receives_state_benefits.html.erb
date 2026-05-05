@@ -6,7 +6,6 @@
     ) do |form| %>
 
   <%= page_template page_title:, template: :basic, form: do %>
-    <span class="govuk-caption-xl"><%= caption %></span>
     <%= form.govuk_collection_radio_buttons :receives_state_benefits,
                                             yes_no_options,
                                             :value,
