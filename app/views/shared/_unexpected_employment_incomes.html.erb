@@ -8,7 +8,6 @@
                     form:) do %>
 
     <%= form.govuk_radio_buttons_fieldset(:has_extra_employment_information_details,
-                                          caption: { text: t("generic.#{individual_type}_means_caption"), size: "xl" },
                                           legend: { size: "xl", tag: "h1", text: page_title }) do %>
 
       <%= render "shared/means/employment_income_table" %>
