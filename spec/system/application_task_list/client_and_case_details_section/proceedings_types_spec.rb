@@ -75,13 +75,13 @@ RSpec.describe "Proceedings types section", :vcr do
       govuk_choose("No")
       click_on "Save and continue"
 
-      expect(page).to have_css("h2", text: "What is your client's role in this proceeding?")
-      govuk_choose("Applicant, claimant or petitioner")
-      click_on "Save and continue"
-
       expect(page).to have_css("h2", text: "Have you used delegated functions for this proceeding?")
       govuk_choose("Yes")
       fill_in "Date you used delegated functions", with: 5.days.ago.to_date.to_s(:date_picker)
+      click_on "Save and continue"
+
+      expect(page).to have_css("h2", text: "What is your client's role in this proceeding?")
+      govuk_choose("Applicant, claimant or petitioner")
       click_on "Save and continue"
 
       expect(page).to have_css("h2", text: "Do you want to use the default level of service and scope for the emergency application?")

@@ -110,7 +110,21 @@ RSpec.describe "ClientInvolvementTypeController" do
 
         it "redirects to next page" do
           post_cit
-          expect(response).to have_http_status(:redirect)
+          expect(response).to redirect_to(providers_legal_aid_application_substantive_default_path(application.id, proceeding.id))
+        end
+
+        context "when the provider has used delegated functions for the proceeding" do
+          let(:application) do
+            create(:legal_aid_application,
+                   :with_proceedings,
+                   :with_delegated_functions_on_proceedings,
+                   df_options: { DA001: 10.days.ago })
+          end
+
+          it "redirects to next page" do
+            post_cit
+            expect(response).to redirect_to(providers_legal_aid_application_emergency_default_path(application.id, proceeding.id))
+          end
         end
 
         context "and pre-existing data is present" do

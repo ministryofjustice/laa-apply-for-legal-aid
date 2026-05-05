@@ -69,10 +69,10 @@ module StepHelpers
     govuk_choose "No"
     click_on "Save and continue"
 
-    govuk_choose "Applicant, claimant or petitioner"
+    govuk_choose "No"
     click_on "Save and continue"
 
-    govuk_choose "No"
+    govuk_choose "Applicant, claimant or petitioner"
     click_on "Save and continue"
 
     govuk_choose "Yes"

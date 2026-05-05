@@ -76,7 +76,7 @@ RSpec.describe Providers::HasOtherProceedingsController, :vcr do
       let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
 
       it "redirects to the delegated functions page" do
-        expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application, Query::IncompleteProceedings.call(legal_aid_application).in_order_of_addition.first))
+        expect(response).to redirect_to(providers_legal_aid_application_delegated_function_path(legal_aid_application, Query::IncompleteProceedings.call(legal_aid_application).in_order_of_addition.first))
       end
     end
 
@@ -95,17 +95,17 @@ RSpec.describe Providers::HasOtherProceedingsController, :vcr do
       context "when there are incomplete proceedings" do
         let(:proceeding) { Query::IncompleteProceedings.call(legal_aid_application).in_order_of_addition.first }
 
-        it "redirects to the client involvement type" do
-          expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application, proceeding))
+        it "redirects to the delegated functions page" do
+          expect(response).to redirect_to(providers_legal_aid_application_delegated_function_path(legal_aid_application, proceeding))
         end
       end
 
       context "and has deleted the domestic abuse proceeding but left the section 8" do
         let(:legal_aid_application) { create(:legal_aid_application, :at_checking_applicant_details, :with_proceedings, explicit_proceedings: [:se014], set_lead_proceeding: false) }
 
-        it "redirects to the first incomplete proceedings client involvement type page" do
+        it "redirects to the first incomplete proceedings delegated functions page" do
           proceeding_id = Query::IncompleteProceedings.call(legal_aid_application).in_order_of_addition.first.id
-          expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
+          expect(response).to redirect_to(providers_legal_aid_application_delegated_function_path(legal_aid_application.id, proceeding_id))
         end
       end
     end
@@ -124,9 +124,9 @@ RSpec.describe Providers::HasOtherProceedingsController, :vcr do
         let(:legal_aid_application) { create(:legal_aid_application, :with_proceedings, assign_lead_proceeding: false, explicit_proceedings: [:se013]) }
         let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
 
-        it "redirects to the first incomplete proceedings client involvement type page" do
+        it "redirects to the first incomplete proceedings delegated functions page" do
           proceeding_id = Query::IncompleteProceedings.call(legal_aid_application).in_order_of_addition.first.id
-          expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
+          expect(response).to redirect_to(providers_legal_aid_application_delegated_function_path(legal_aid_application.id, proceeding_id))
         end
       end
 
@@ -148,9 +148,9 @@ RSpec.describe Providers::HasOtherProceedingsController, :vcr do
 
       let(:params) { { legal_aid_application: { has_other_proceeding: "false" } } }
 
-      it "redirects to the first incomplete proceedings client involvement type page" do
+      it "redirects to the first incomplete proceedings delegated functions page" do
         proceeding_id = Query::IncompleteProceedings.call(legal_aid_application).in_order_of_addition.first.id
-        expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(legal_aid_application.id, proceeding_id))
+        expect(response).to redirect_to(providers_legal_aid_application_delegated_function_path(legal_aid_application.id, proceeding_id))
       end
     end
   end

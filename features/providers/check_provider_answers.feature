@@ -448,12 +448,12 @@ Feature: Checking client details answers backwards and forwards
     Then I should be on a page showing 'Do you want to add another proceeding?'
     Then I choose 'No'
     Then I click 'Save and continue'
-    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client's role in this proceeding?'
-    When I choose 'Applicant, claimant or petitioner'
-    And I click 'Save and continue'
     Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
     When I choose 'No'
     When I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client's role in this proceeding?'
+    When I choose 'Applicant, claimant or petitioner'
+    And I click 'Save and continue'
     Then I should see 'Proceeding 1\nNon-molestation order'
     And I should see 'Do you want to use the default level of service and scope for the substantive application?'
     When I choose 'Yes'
@@ -508,12 +508,13 @@ Feature: Checking client details answers backwards and forwards
     And the Substantive scope limitation Final hearing heading for DA004 should not be bold
 
     When I click Check Your Answers summary card Change link for "DA004"
-    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client's role in this proceeding?'
 
-    When I click "Save and continue"
     Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
-
     When I click 'Save and continue'
+
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client's role in this proceeding?'
+    When I click "Save and continue"
+
     Then I should see 'Proceeding 1\nNon-molestation order'
     And I should see 'Do you want to use the default level of service and scope for the emergency application?'
 

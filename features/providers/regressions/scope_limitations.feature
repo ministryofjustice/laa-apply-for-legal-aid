@@ -78,14 +78,15 @@ Feature: Scope limitations not being set
     When I choose 'No'
     And I click 'Save and continue'
 
-    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence\nWhat is your client's role in this proceeding?'
-    When I choose 'Applicant, claimant or petitioner'
-    And I click 'Save and continue'
-
     Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence\nHave you used delegated functions for this proceeding?'
     When I choose 'Yes'
     And I enter the 'delegated functions on' date of 2 days ago using the date picker field
     When I click 'Save and continue'
+
+    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence\nWhat is your client's role in this proceeding?'
+    When I choose 'Applicant, claimant or petitioner'
+    And I click 'Save and continue'
+
     Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence'
     And I should see 'Do you want to use the default level of service and scope for the emergency application?'
     When I choose 'No'
@@ -110,6 +111,6 @@ Feature: Scope limitations not being set
     When I choose 'No'
     And I click 'Save and continue'
     # at this point proceeding one is incomplete and should be resumed
-    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence\nWhat is your client's role in this proceeding?'
-    When I choose 'Applicant, claimant or petitioner'
-    And I click 'Save and continue'
+    Then I should see 'Proceeding 1 of 3\nChild arrangements order \(CAO\) - residence\nHave you used delegated functions for this proceeding?'
+    And I enter the 'delegated functions on' date of 2 days ago using the date picker field
+    When I click 'Save and continue'

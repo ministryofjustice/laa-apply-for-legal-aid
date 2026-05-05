@@ -1,7 +1,7 @@
 module Flow
   class ProceedingLoop
-    LOOP_CONTROLLERS = %w[client_involvement_type
-                          delegated_functions
+    LOOP_CONTROLLERS = %w[delegated_functions
+                          client_involvement_type
                           confirm_delegated_functions_date
                           emergency_defaults
                           emergency_level_of_service
@@ -33,17 +33,17 @@ module Flow
           if @application.checking_answers? && next_incomplete_proceeding.nil?
             :limitations
           else
-            :client_involvement_type
+            :delegated_functions
           end
         when "substantive_scope_limitations"
           if @application.checking_answers?
             :limitations
           else
-            :client_involvement_type
+            :delegated_functions
           end
-        when "client_involvement_type"
-          :delegated_functions
         when "delegated_functions", "confirm_delegated_functions_date"
+          :client_involvement_type
+        when "client_involvement_type"
           current_proceeding.used_delegated_functions? && !current_proceeding.special_children_act? ? :emergency_defaults : :substantive_defaults
         when "emergency_defaults"
           current_proceeding.accepted_emergency_defaults ? :substantive_defaults : :emergency_level_of_service
@@ -52,7 +52,7 @@ module Flow
             if @application.checking_answers? && next_incomplete_proceeding.nil?
               :limitations
             else
-              :client_involvement_type
+              :delegated_functions
             end
           else
             :substantive_level_of_service
