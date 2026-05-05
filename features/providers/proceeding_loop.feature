@@ -64,7 +64,7 @@ Feature: Loop through proceeding questions
     And I should be on a page showing "What is your client's role in this proceeding?"
     And I should see "Applicant, claimant or petitioner"
     And I should see "Defendant or respondent"
-    And I should see "A child subject of the proceeding"
+    And I should not see "A child subject of the proceeding"
     And I should see "Intervenor"
     And I should see "Joined party"
 

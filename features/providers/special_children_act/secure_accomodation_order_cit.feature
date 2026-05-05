@@ -45,7 +45,7 @@ Feature: Adding an SCA Secure Accommodation Order proceeding sets all client_inv
 
     Then I should be on a page with title "Child assessment order"
     And I should see "Respondent"
-    And I should see "A child subject of the proceeding"
+    And I should not see "A child subject of the proceeding"
 
     When I click link "Back"
     Then I should be on a page showing 'Do you want to add another proceeding?'

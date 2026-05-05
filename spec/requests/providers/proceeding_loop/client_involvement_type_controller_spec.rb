@@ -29,9 +29,11 @@ def client_involvement_types_da001_response
 end
 
 RSpec.describe "ClientInvolvementTypeController" do
-  let(:application) { create(:legal_aid_application, :with_proceedings) }
+  let(:application) { create(:legal_aid_application, :with_proceedings, applicant:) }
+  let(:applicant) { create(:applicant, date_of_birth:) }
   let(:proceeding) { application.proceedings.first }
   let(:provider) { application.provider }
+  let(:date_of_birth) { 18.years.ago }
 
   before do
     stub_request(:get, %r{#{Rails.configuration.x.legal_framework_api_host}/client_involvement_types/DA001})
@@ -65,6 +67,18 @@ RSpec.describe "ClientInvolvementTypeController" do
         expect(response.body).to include("Proceeding 1")
         expect(response.body).to include("Inherent jurisdiction high court injunction")
         expect(unescaped_response_body).to include("What is your client's role in this proceeding?")
+      end
+
+      it "does not display the child option" do
+        expect(unescaped_response_body).not_to include("A child subject of the proceeding")
+      end
+
+      context "when applicant is under 18" do
+        let(:date_of_birth) { 17.years.ago }
+
+        it "displays the child option" do
+          expect(unescaped_response_body).to include("A child subject of the proceeding")
+        end
       end
     end
   end
