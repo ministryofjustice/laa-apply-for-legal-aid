@@ -227,7 +227,7 @@ Background: I have started an application and not linked or copied it
     Then I should be on a page showing "We'll use this to send your client a link to the service."
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
-    Then I am on the About the Financial Assessment page
+    Then I am on the Email address confirmation page
     Then I click 'Send link'
     Then I am on the application confirmation page
 
@@ -369,7 +369,7 @@ Background: I have started an application and not linked or copied it
     Then I should be on a page with title "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
-    Then I am on the About the Financial Assessment page
+    Then I am on the Email address confirmation page
     Then I click 'Send link'
     Then I am on the application confirmation page
 

@@ -1,6 +1,6 @@
 Feature: Change applicant email address
   @javascript @vcr
-  Scenario: I want to change the email address from the about financial assessment page
+  Scenario: I want to change the email address from the Email address confirmation page
     Given I complete the journey as far as check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
@@ -19,12 +19,12 @@ Feature: Change applicant email address
     Then I should be on a page with title "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
-    Then I am on the About the Financial Assessment page
+    Then I am on the Email address confirmation page
     And I click link 'Change'
     Then I should be on a page showing 'Email address'
     Then I fill 'email' with 'testagain@test.com'
     Then I click 'Save and continue'
-    Then I am on the About the Financial Assessment page
+    Then I am on the Email address confirmation page
     Then I should be on a page showing 'testagain@test.com'
 
   @javascript @vcr
@@ -47,7 +47,7 @@ Feature: Change applicant email address
     Then I should be on a page showing "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
-    Then I am on the About the Financial Assessment page
+    Then I am on the Email address confirmation page
     And I should see 'test@test.com'
     When I click 'Send link'
     Then I should be on a page showing "We've shared your application with your client"
@@ -56,7 +56,7 @@ Feature: Change applicant email address
     Then I should be on a page showing "Enter your client's email address"
     Then I fill 'email' with 'testagain@test.com'
     Then I click 'Save and continue'
-    Then I am on the About the Financial Assessment page
+    Then I am on the Email address confirmation page
     And I should see 'testagain@test.com'
     When I click 'Send link'
     Then I should be on a page showing "We've shared your application with your client"
@@ -71,7 +71,7 @@ Feature: Change applicant email address
     Then I should be on a page showing "Enter your client's email address"
     Then I fill 'email' with 'test@test.com'
     Then I click 'Save and continue'
-    Then I am on the About the Financial Assessment page
+    Then I am on the Email address confirmation page
     And I should see 'test@test.com'
     When I click 'Send link'
     Then I should be on a page showing "We've shared your application with your client"

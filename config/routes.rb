@@ -277,8 +277,8 @@ Rails.application.routes.draw do
         post :reset, on: :collection
         patch :continue, on: :collection
       end
-      resource :about_the_financial_assessment, only: %i[show update]
       resource :email_address, only: %i[show update]
+      resource :email_address_confirmation, only: %i[show update]
       resource :application_confirmation, only: :show
       resource :applicant_bank_account, only: %i[show update]
       resource :offline_account, only: %i[show update]

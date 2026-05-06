@@ -1,5 +1,5 @@
 module Providers
-  class AboutTheFinancialAssessmentsController < ProviderBaseController
+  class EmailAddressConfirmationsController < ProviderBaseController
     def show
       redirect_to start_after_means_complete_path if legal_aid_application.provider_entering_merits? || legal_aid_application.provider_assessing_means?
 

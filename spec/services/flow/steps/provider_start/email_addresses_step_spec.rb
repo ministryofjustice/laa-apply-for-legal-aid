@@ -12,6 +12,6 @@ RSpec.describe Flow::Steps::ProviderStart::EmailAddressesStep, type: :request do
   describe "#forward" do
     subject { described_class.forward }
 
-    it { is_expected.to eq :about_the_financial_assessments }
+    it { is_expected.to eq :email_address_confirmations }
   end
 end

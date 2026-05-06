@@ -49,7 +49,7 @@ module Flow
         bank_statements: Steps::ProviderStart::BankStatementsStep,
         # provider_means_state_benefits is called here
         email_addresses: Steps::ProviderStart::EmailAddressesStep,
-        about_the_financial_assessments: Steps::ProviderStart::AboutTheFinancialAssessmentsStep,
+        email_address_confirmations: Steps::ProviderStart::EmailAddressConfirmationsStep,
         application_confirmations: Steps::ProviderStart::ApplicationConfirmationsStep,
         use_ccms: Steps::ProviderStart::UseCCMSStep,
         use_ccms_employment: Steps::ProviderStart::UseCCMSEmploymentStep,
