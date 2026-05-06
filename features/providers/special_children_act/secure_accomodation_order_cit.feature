@@ -49,7 +49,7 @@ Feature: Adding an SCA Secure Accommodation Order proceeding sets all client_inv
     And I click 'Save and continue'
 
     Then I should be on a page with title "Child assessment order"
-    And I should see "Respondent"
+    And I should see "Your client must be the respondent because they are over 18."
     And I should not see "A child subject of the proceeding"
 
     When I click link "Back"
