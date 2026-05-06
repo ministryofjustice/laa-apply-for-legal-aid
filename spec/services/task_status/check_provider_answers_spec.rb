@@ -60,6 +60,25 @@ RSpec.describe TaskStatus::CheckProviderAnswers do
         end
 
         it { is_expected.to be_completed }
+
+        context "with a non-means tested application" do
+          let(:application) { create(:application, :with_complete_applicant_and_proceedings, :with_multiple_sca_proceedings, linked_application_completed: true) }
+
+          let(:status_results) do
+            {
+              TaskStatus::Applicants => TaskStatus::ValueObject.new.completed!,
+              TaskStatus::MakeLink => TaskStatus::ValueObject.new.completed!,
+              TaskStatus::ProceedingsTypes => TaskStatus::ValueObject.new.completed!,
+            }
+          end
+
+          before do
+            application.reviewed[:check_provider_answers] = { status: "completed", at: Time.current }
+            application.save!
+          end
+
+          it { is_expected.to be_completed }
+        end
       end
 
       context "and previous forms revisited" do
