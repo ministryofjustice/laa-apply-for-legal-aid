@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_19_083101) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_06_121138) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -148,6 +148,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_19_083101) do
     t.string "extra_employment_information_details"
     t.integer "failed_attempts", default: 0, null: false
     t.string "first_name"
+    t.string "full_employment_details"
     t.boolean "has_national_insurance_number"
     t.boolean "has_partner"
     t.string "last_name"
