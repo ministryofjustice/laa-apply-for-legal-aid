@@ -427,7 +427,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def employment_evidence_required?
-    applicant.extra_employment_information_details.present? || full_employment_details.present?
+    applicant.extra_employment_information_details.present? || applicant.full_employment_details.present?
   end
 
   def employment_payments
@@ -685,7 +685,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def manual_client_employment_information?
-    applicant&.extra_employment_information? || full_employment_details.present?
+    applicant&.extra_employment_information? || applicant&.full_employment_details.present?
   end
 
   def manual_partner_employment_information?
