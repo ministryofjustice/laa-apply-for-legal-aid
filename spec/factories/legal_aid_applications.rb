@@ -89,10 +89,6 @@ FactoryBot.define do
       employments { build_list(:employment, 3, owner_id: applicant.id, owner_type: applicant.class) }
     end
 
-    trait :with_full_employment_information do
-      full_employment_details { Faker::Lorem.paragraph(sentence_count: 2) }
-    end
-
     trait :with_applicant_and_address do
       transient do
         with_bank_accounts { 0 }
