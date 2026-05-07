@@ -37,7 +37,7 @@ Feature: partner_means_assessment means check
     When I click link "Continue"
     Then I should be on a page showing "Your client's employment details"
 
-    When I fill "legal-aid-application-full-employment-details-field" with "Paisley also earns 50 gbp"
+    When I fill "applicant-full-employment-details-field" with "Paisley also earns 50 gbp"
     And I click 'Save and continue'
     Then I should be on a page showing "Which of these payments does your client get?"
 
