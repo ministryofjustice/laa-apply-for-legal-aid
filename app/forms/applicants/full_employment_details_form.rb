@@ -1,6 +1,6 @@
-module LegalAidApplications
+module Applicants
   class FullEmploymentDetailsForm < BaseForm
-    form_for LegalAidApplication
+    form_for Applicant
 
     attr_accessor :full_employment_details
 
