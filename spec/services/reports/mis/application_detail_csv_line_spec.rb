@@ -35,7 +35,6 @@ module Reports
                :with_proceedings,
                :with_delegated_functions_on_proceedings,
                :with_multiple_employments,
-               :with_full_employment_information,
                explicit_proceedings: [:da004],
                set_lead_proceeding: :da004,
                df_options: { DA004: [used_delegated_functions_on, used_delegated_functions_reported_on] },
@@ -629,7 +628,7 @@ module Reports
 
             context "when the applicant has multiple jobs" do
               let(:legal_aid_application) { application_with_multiple_employments }
-              let(:applicant) { create(:applicant, :employed) }
+              let(:applicant) { create(:applicant, :employed, full_employment_details: "some text") }
 
               it "returns the expected data" do
                 expect(value_for("HMRC data")).to eq "No"

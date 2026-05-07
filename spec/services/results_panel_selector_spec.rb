@@ -82,7 +82,8 @@ RSpec.describe ResultsPanelSelector do
       let(:cfe_result) { create(:cfe_v6_result, :eligible) }
 
       before do
-        allow(legal_aid_application).to receive_messages(has_restrictions?: false, policy_disregards?: false, capital_disregards?: false, full_employment_details: "test details")
+        allow(legal_aid_application).to receive_messages(has_restrictions?: false, policy_disregards?: false, capital_disregards?: false)
+        allow(applicant).to receive(:full_employment_details).and_return("test details")
       end
 
       it "returns the correct capital specific partial" do
@@ -94,7 +95,8 @@ RSpec.describe ResultsPanelSelector do
       let(:cfe_result) { create(:cfe_v6_result, :with_income_contribution_required) }
 
       before do
-        allow(legal_aid_application).to receive_messages(has_restrictions?: false, policy_disregards?: false, capital_disregards?: false, full_employment_details: "test details")
+        allow(legal_aid_application).to receive_messages(has_restrictions?: false, policy_disregards?: false, capital_disregards?: false)
+        allow(applicant).to receive(:full_employment_details).and_return("test details")
       end
 
       it "returns the income_contribution name" do
@@ -106,7 +108,8 @@ RSpec.describe ResultsPanelSelector do
       let(:cfe_result) { create(:cfe_v6_result, :partially_eligible_with_capital_contribution_required) }
 
       before do
-        allow(legal_aid_application).to receive_messages(has_restrictions?: false, policy_disregards?: false, capital_disregards?: false, full_employment_details: "test details")
+        allow(legal_aid_application).to receive_messages(has_restrictions?: false, policy_disregards?: false, capital_disregards?: false)
+        allow(applicant).to receive(:full_employment_details).and_return("test details")
       end
 
       it "returns the correct capital specific partial" do
