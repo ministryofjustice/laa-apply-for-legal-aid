@@ -7,7 +7,7 @@
    else
      individual_with_determiner = t("generic.client")
      url = providers_legal_aid_application_means_full_employment_details_path(@legal_aid_application)
-     content = @legal_aid_application.full_employment_details
+     content = @legal_aid_application.applicant.full_employment_details
    end %>
 
 <% if content %>
