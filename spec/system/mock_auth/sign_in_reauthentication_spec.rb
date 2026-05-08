@@ -7,21 +7,21 @@ require Rails.root.join("db/seeds/test_provider_populator")
 # session death requiring a fresh EntraId/SiLAS sign in. This would be hard or impossible to emulate
 # here so we use mock auth to exercise the `reauthable` hooks module, as a minimun.
 #
-RSpec.describe "The sign in lifespan and timeout works" do
+RSpec.describe "The sign in lifespan and idle timeout works" do
   before do
     stub_provider_user_for("51cdbbb4-75d2-48d0-aaac-fa67f013c50a")
     allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_return(true)
     Rails.application.reload_routes!
   end
 
-  let(:provider_email) { "martin.ronan@example.com" }
-
   after do
     allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_call_original
     Rails.application.reload_routes!
   end
 
-  feature "with idle timeouts disabled and business hours extended" do
+  let(:provider_email) { "martin.ronan@example.com" }
+
+  feature "with idle timeouts disabled" do
     before do
       allow(Provider).to receive(:timeout_in).and_return(99_999.minutes) # stub/disable idle timeout
     end
@@ -45,8 +45,19 @@ RSpec.describe "The sign in lifespan and timeout works" do
 
       travel_to Time.zone.local(2025, 11, 4, 19, 31)
 
+      # I am redirected to the custom sign out page
       click_on(provider_email)
-      expect(page).to have_css("h1", text: "Sign in")
+      expect(page)
+        .to have_css("h1", text: "For your security, we signed you out")
+        .and have_content("This is because you were signed in for more than 12 hours")
+
+      # I can sign in again after being signed out by the lifespan expiry
+      click_on(class: "govuk-button", text: "Sign in")
+      fill_in "Email", with: Rails.configuration.x.omniauth_entraid.mock_username
+      fill_in "Password", with: Rails.configuration.x.omniauth_entraid.mock_password
+
+      click_on(class: "govuk-button", text: "Sign in")
+      expect(page).to have_css("h1", text: "Select the account number of the office handling this application")
     end
 
     scenario "I am NOT signed out if session lifespan is NOT exceeded" do
@@ -85,8 +96,19 @@ RSpec.describe "The sign in lifespan and timeout works" do
 
       travel_to Time.zone.local(2025, 11, 4, 8, 30)
 
+      # I am redirected to the custom sign out page
       click_on(provider_email)
-      expect(page).to have_css("h1", text: "Sign in")
+      expect(page)
+        .to have_css("h1", text: "For your security, we signed you out")
+        .and have_content("This is because you were inactive for an hour")
+
+      # I can sign in again after being signed out by the idle timeout expiry
+      click_on(class: "govuk-button", text: "Sign in")
+      fill_in "Email", with: Rails.configuration.x.omniauth_entraid.mock_username
+      fill_in "Password", with: Rails.configuration.x.omniauth_entraid.mock_password
+
+      click_on(class: "govuk-button", text: "Sign in")
+      expect(page).to have_css("h1", text: "Select the account number of the office handling this application")
     end
 
     scenario "I am NOT signed out if session idle timout of 1 hour is NOT exceeded" do

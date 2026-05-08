@@ -1,0 +1,7 @@
+<%= page_template page_title: t(".title"), back_link: :none do %>
+  <p><%= t(".#{@reason}") %></p>
+
+  <p class="govuk-body">
+    <%= govuk_start_button(text: t("generic.sign_in"), href: providers_select_office_path, html_attributes: { id: "sign in" }) %>
+  </p>
+<% end %>

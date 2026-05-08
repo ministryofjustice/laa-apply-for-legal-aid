@@ -1,6 +1,11 @@
 # Each time a record is retrieved from the session (:fetch)
 # we check whether the `current_sign_in_at` is older than the
-# `reauthenticate_in` value. If so, the record is logged out.
+# `reauthenticate_in` value. If so, we throw a :warden exception
+# that is then handled by the custom failure app.
+#
+# NOTE: Do not sign out here as it will prevent the custom failure
+# app triggering, which is responsible for signing out and redirecting
+# to the custom session expired page.
 #
 module Devise
   module Hooks
@@ -12,9 +17,6 @@ module Devise
             record.respond_to?(:reauthenticate?) &&
             record.reauthenticate?
 
-          proxy = Devise::Hooks::Proxy.new(warden)
-
-          Devise.sign_out_all_scopes ? proxy.sign_out : proxy.sign_out(scope)
           throw :warden, scope: scope, message: :reauthenticate
         end
       end
