@@ -164,6 +164,8 @@ en:
             previous_reference:
               blank: Enter the reference number for any previous application
               not_valid: Enter the reference number in the correct format
+            full_employment_details:
+              blank: Enter your client's employment details
         aggregated_cash_income:
           credits:
             attributes:
@@ -503,8 +505,6 @@ en:
               less_than_or_equal_to: The new substantive cost limit cannot be more than £25,000
             substantive_cost_reasons:
               blank: Tell us why you need a higher substantive cost limit
-            full_employment_details:
-              blank: Enter your client's employment details
             own_home:
               blank: Select whether your client owns the home they live in
               blank_with_partner: Select whether your client or their partner own the home your client lives in
