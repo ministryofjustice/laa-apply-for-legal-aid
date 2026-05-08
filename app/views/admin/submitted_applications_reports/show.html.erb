@@ -6,6 +6,6 @@
   <% if @applications.present? %>
     <%= render "submitted_applications", pagy: @pagy %>
   <% else %>
-    <h2><%= t(".no_applications") %></h2>
+    <p class="govuk-body"><%= t(".no_applications") %></p>
   <% end %>
 <% end %>
