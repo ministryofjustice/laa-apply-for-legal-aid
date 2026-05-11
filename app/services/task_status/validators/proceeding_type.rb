@@ -44,10 +44,11 @@ module TaskStatus
 
       def emergency_level_of_service_form
         return @emergency_level_of_service_form if defined?(@emergency_level_of_service_form)
-        return unless proceeding.used_delegated_functions?
-        return if proceeding.accepted_emergency_defaults?
 
-        @emergency_level_of_service_form = Proceedings::EmergencyLevelOfServiceForm.new(model: proceeding)
+        @emergency_level_of_service_form =
+          if proceeding.used_delegated_functions? && !proceeding.accepted_emergency_defaults?
+            Proceedings::EmergencyLevelOfServiceForm.new(model: proceeding)
+          end
       end
 
       def emergency_final_hearings_form
@@ -80,9 +81,11 @@ module TaskStatus
 
       def substantive_level_of_service_form
         return @substantive_level_of_service_form if defined?(@substantive_level_of_service_form)
-        return if proceeding.accepted_substantive_defaults?
 
-        @substantive_level_of_service_form = Proceedings::SubstantiveLevelOfServiceForm.new(model: proceeding)
+        @substantive_level_of_service_form =
+          unless proceeding.accepted_substantive_defaults?
+            Proceedings::SubstantiveLevelOfServiceForm.new(model: proceeding)
+          end
       end
 
       def substantive_changed_to_full_rep?
