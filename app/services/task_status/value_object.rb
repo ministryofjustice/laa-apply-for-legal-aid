@@ -46,5 +46,9 @@ module TaskStatus
     def current_status
       STATUSES.find { |status| status.value == value }
     end
+
+    def resolved?
+      completed? || not_needed?
+    end
   end
 end
