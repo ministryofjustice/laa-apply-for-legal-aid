@@ -1,6 +1,12 @@
 require "rails_helper"
+require Rails.root.join("spec/services/datastore/data_access_api_stubs")
+
 RSpec.describe Datastore::Connection do
   subject(:instance) { described_class.new }
+
+  before do
+    stub_successful_refresh_token_request
+  end
 
   it { is_expected.to respond_to :post }
 

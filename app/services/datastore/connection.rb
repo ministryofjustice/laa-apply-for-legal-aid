@@ -2,11 +2,12 @@ module Datastore
   class Connection
     extend Forwardable
 
-    attr_reader :connection
+    attr_reader :connection, :refresh_token
 
     def_delegators :connection, :post
 
-    def initialize
+    def initialize(refresh_token: nil)
+      @refresh_token = refresh_token
       @connection = Faraday.new(url:, headers:)
     end
 
@@ -16,12 +17,16 @@ module Datastore
       Rails.configuration.x.data_access_api.url
     end
 
+    def datastore_token_response
+      @datastore_token_response ||= TokenService.new(refresh_token: refresh_token).call
+    end
+
     def headers
       {
         "Content-Type" => "application/json",
         "Accept" => "application/json",
-        # "X-Authorization" => Rails.configuration.x.data_access_api.auth_key, TBC
         "X-Service-Name" => "CIVIL_APPLY",
+        "Authorization" => "Bearer #{datastore_token_response.access_token}",
         "User-Agent" => "CivilApply/#{HostEnv.environment || 'host-env-missing'} Faraday/#{Faraday::VERSION}",
       }
     end

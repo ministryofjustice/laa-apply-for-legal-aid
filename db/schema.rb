@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_08_091835) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_19_141126) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -551,6 +551,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_08_091835) do
     t.datetime "updated_at", null: false
     t.index ["legal_aid_application_id"], name: "index_employments_on_legal_aid_application_id"
     t.index ["owner_type", "owner_id"], name: "index_employments_on_owner"
+  end
+
+  create_table "entra_id_tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "access_token"
+    t.datetime "created_at", null: false
+    t.datetime "expires_at"
+    t.text "id_token"
+    t.uuid "provider_id", null: false
+    t.text "refresh_token"
+    t.string "scope"
+    t.datetime "updated_at", null: false
+    t.index ["provider_id"], name: "index_entra_id_tokens_on_provider_id"
   end
 
   create_table "feedbacks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -1213,6 +1225,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_08_091835) do
   add_foreign_key "dwp_overrides", "legal_aid_applications"
   add_foreign_key "employment_payments", "employments"
   add_foreign_key "employments", "legal_aid_applications"
+  add_foreign_key "entra_id_tokens", "providers"
   add_foreign_key "final_hearings", "proceedings"
   add_foreign_key "hmrc_responses", "legal_aid_applications"
   add_foreign_key "involved_children", "legal_aid_applications"
