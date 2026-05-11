@@ -1,6 +1,6 @@
 module TaskStatus
   module Validators
-    class DWPOverride < Base
+    class DWPOutcome < Base
     private
 
       def forms
