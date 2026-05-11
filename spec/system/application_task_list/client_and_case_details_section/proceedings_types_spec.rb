@@ -11,7 +11,7 @@ RSpec.describe "Proceedings types section", :vcr do
     #
 
     scenario "I can complete the task list's Proceedings item" do
-      fill_in_client_and_case_details_until_step(:link_application)
+      fill_in_client_and_case_details_until_step(:make_link)
 
       @legal_aid_application ||= LegalAidApplication.find(id_from_current_page_url)
       visit providers_legal_aid_application_task_list_path(@legal_aid_application)

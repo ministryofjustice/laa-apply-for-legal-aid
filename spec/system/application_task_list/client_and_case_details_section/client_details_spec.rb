@@ -10,7 +10,7 @@ RSpec.describe "Client and case details section - Client details", :vcr do
     #
 
     scenario "I can complete the task list's Client details item" do
-      fill_in_client_and_case_details_until_step(:has_national_insurance_number)
+      fill_in_client_and_case_details_until_step(:has_national_insurance_numbers)
 
       @legal_aid_application ||= LegalAidApplication.find(id_from_current_page_url)
       visit providers_legal_aid_application_task_list_path(@legal_aid_application)
