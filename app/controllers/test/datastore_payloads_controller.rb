@@ -4,7 +4,6 @@ module Test
   #
   # The test_datastore_payloads_xxx_path(s) route are defined in development only
   #
-
   class DatastorePayloadsController < ApplicationController
     before_action :authenticate_provider!
     before_action :legal_aid_application
@@ -24,13 +23,20 @@ module Test
     end
 
     def submit
-      datastore_id = Datastore::Submitter.call(legal_aid_application)
+      datastore_id = Datastore::Submitter.call(legal_aid_application, token_object: current_provider.entra_id_token)
 
       flash[:notice] = "Submitted application \"#{legal_aid_application.application_ref}\" to datastore. It was given an id of \"#{datastore_id}\"."
+      redirect_back_or_to(authenticated_root_path)
     rescue Datastore::Submitter::ApiError => e
       flash[:error] = e.message
-    ensure
+
       redirect_back_or_to(authenticated_root_path)
+    rescue Datastore::Connection::RefreshTokenExpired
+      current_provider.entra_id_token.presence&.destroy!
+      sign_out current_provider
+
+      # The most likely reasons for RefreshTokenExpired is reauthenticate period exceeded on the entraid level, so we show that page
+      redirect_to session_expired_path(reason: :reauthenticate)
     end
 
   private

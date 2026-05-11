@@ -104,6 +104,7 @@ module LaaApplyForLegalAid
 
     # datastore API
     config.x.data_access_api.url = ENV.fetch("DATA_ACCESS_API_URL", nil)
+    config.x.data_access_api.auth_scope = ENV.fetch("DATA_ACCESS_API_AUTH_SCOPE", nil)
 
     config.x.metrics_service_host = ENV.fetch("METRICS_SERVICE_HOST", "localhost")
 

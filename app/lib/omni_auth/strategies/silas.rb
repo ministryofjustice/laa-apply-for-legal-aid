@@ -49,6 +49,7 @@ module OmniAuth
             },
             credentials: {
               token: "mock_token_abc123",
+              refresh_token: "mock_refresh_token_abc123",
               expires_at: Time.zone.now.to_i + 1.week,
             },
             extra: {

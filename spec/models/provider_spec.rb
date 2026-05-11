@@ -46,6 +46,10 @@ RSpec.describe Provider do
           extra: {
             raw_info:,
           },
+          credentials: {
+            token: "mock_token_abc123", # TODO: Not used, drop if confirmed not needed
+            refresh_token: "mock_refresh_token_abc123",
+          },
         },
       )
     end
@@ -173,6 +177,68 @@ RSpec.describe Provider do
             expect(announcements.count).to eq 1
           end
         end
+      end
+    end
+  end
+
+  describe "#store_token!" do
+    subject(:store_token!) { provider.store_token!(credentials:) }
+
+    # Note the use of `token`` not `access_token` which mimics real behaviour of OmniAuth::AuthHash
+    let(:credentials) do
+      OmniAuth::AuthHash.new(
+        {
+          id_token: "new_fake_id_token",
+          token: "new_fake_access_token",
+          expires_in: 3666,
+          refresh_token: "new_fake_refresh_token",
+          scope: "new_fake_scope",
+        },
+      )
+    end
+
+    context "when no token exists for the provider" do
+      let(:provider) { create(:provider) }
+
+      before { provider.entra_id_token.presence&.destroy! }
+
+      it "creates a new token for the provider" do
+        expect { store_token! }
+          .to change { provider.reload.entra_id_token }
+            .from(nil)
+            .to(an_instance_of(EntraIdToken))
+
+        expect(provider.entra_id_token)
+          .to have_attributes(
+            id_token: credentials.id_token,
+            access_token: credentials.token,
+            access_token_expires_at: a_value > Time.current,
+            refresh_token: credentials.refresh_token,
+            scope: credentials.scope,
+          )
+      end
+    end
+
+    context "when a token already exists for the provider" do
+      let(:provider) { create(:provider, :with_entra_id_token) }
+
+      it "updates the token object with new token details" do
+        expect { store_token! }
+          .to change { provider.reload.entra_id_token.slice("id_token", "access_token", "access_token_expires_at", "refresh_token", "scope") }
+            .from(
+              "id_token" => "fake_id_token",
+              "access_token" => "fake_access_token",
+              "access_token_expires_at" => a_value > Time.current,
+              "refresh_token" => "fake_refresh_token",
+              "scope" => "fake_scope1 fake_scope2",
+            )
+            .to(
+              "id_token" => "new_fake_id_token",
+              "access_token" => "new_fake_access_token",
+              "access_token_expires_at" => a_value > Time.current,
+              "refresh_token" => "new_fake_refresh_token",
+              "scope" => "new_fake_scope",
+            )
       end
     end
   end

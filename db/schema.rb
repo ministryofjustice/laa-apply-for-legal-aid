@@ -554,6 +554,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_04_124023) do
     t.index ["owner_type", "owner_id"], name: "index_employments_on_owner"
   end
 
+  create_table "entra_id_tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "access_token"
+    t.datetime "access_token_expires_at"
+    t.datetime "created_at", null: false
+    t.text "id_token"
+    t.uuid "provider_id", null: false
+    t.text "refresh_token"
+    t.string "scope"
+    t.datetime "updated_at", null: false
+    t.index ["provider_id"], name: "index_entra_id_tokens_on_provider_id"
+  end
+
   create_table "feedbacks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "browser"
     t.string "browser_version"
@@ -1214,6 +1226,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_04_124023) do
   add_foreign_key "dwp_overrides", "legal_aid_applications"
   add_foreign_key "employment_payments", "employments"
   add_foreign_key "employments", "legal_aid_applications"
+  add_foreign_key "entra_id_tokens", "providers"
   add_foreign_key "final_hearings", "proceedings"
   add_foreign_key "hmrc_responses", "legal_aid_applications"
   add_foreign_key "involved_children", "legal_aid_applications"
