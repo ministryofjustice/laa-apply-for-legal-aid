@@ -2,7 +2,7 @@ module StepHelpers
   # Usage specify one of the step names to complete the steps
   # and leave you on that step's page.
   # e.g.
-  # fill_in_client_and_case_details_until_step(:has_national_insurance_number)
+  # fill_in_client_and_case_details_until_step(:has_national_insurance_numbers)
   #
   def fill_in_client_and_case_details_until_step(step_name)
     visit "/"
@@ -26,7 +26,7 @@ module StepHelpers
     click_on "Save and continue"
     expect(page).to have_css("h1", text: "Does your client have a National Insurance number?")
 
-    return if step_name == :has_national_insurance_number
+    return if step_name == :has_national_insurance_numbers
 
     govuk_choose("Yes")
     fill_in("Enter National Insurance number", with: "CB987654A")
@@ -40,7 +40,7 @@ module StepHelpers
     govuk_choose("No")
     click_on "Save and continue"
 
-    return if step_name == :correspondence_address
+    return if step_name == :correspondence_address_choices
 
     govuk_choose("My client's UK home address")
     click_on("Save and continue")
@@ -53,14 +53,14 @@ module StepHelpers
 
     expect(page).to have_css("h1", text: "Linking cases")
 
-    return if step_name == :link_application
+    return if step_name == :make_link
 
     govuk_choose("No")
     click_on "Save and continue"
 
     expect(page).to have_css("h1", text: "What does your client want legal aid for?")
 
-    return if step_name == :proceedings
+    return if step_name == :proceedings_types
 
     fill_in("proceeding-search-input", with: "da004")
     govuk_choose("Non-molestation order", match: :prefer_exact)
@@ -82,14 +82,14 @@ module StepHelpers
 
     expect(page).to have_css("h1", text: "Your client's partner")
 
-    return if step_name == :partner
+    return if step_name == :client_has_partners
 
     govuk_choose "No"
     click_on "Save and continue"
 
     expect(page).to have_css("h1", text: "Check your answers")
 
-    nil if step_name == :check_your_answers
+    nil if step_name == :check_provider_answers
   end
 
   def create_an_application_and_complete_client_details(with_partner)
