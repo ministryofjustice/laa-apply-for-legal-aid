@@ -1,16 +1,20 @@
 module TaskStatus
   module Validators
-    class ProceedingForms
+    class ProceedingType
       attr_reader :proceeding
 
       def initialize(proceeding)
         @proceeding = proceeding
       end
 
-      def forms
-        return @forms if defined?(@forms)
+      def valid?
+        forms.all?(&:valid?)
+      end
 
-        @forms = [
+    private
+
+      def forms
+        [
           client_involvement_type_form,
           delegated_functions_form,
           emergency_defaults_form,
@@ -23,8 +27,6 @@ module TaskStatus
           substantive_scope_limitations_form,
         ].flatten.compact
       end
-
-    private
 
       def client_involvement_type_form
         Proceedings::ClientInvolvementTypeForm.new(model: proceeding)

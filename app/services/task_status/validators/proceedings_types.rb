@@ -4,16 +4,12 @@ module TaskStatus
       def valid?
         return false if proceedings.empty?
 
-        super
+        proceedings.all? { |proceeding| ProceedingType.new(proceeding).valid? } && emergency_cost_override_form.valid?
       end
 
     private
 
       delegate :proceedings, to: :application
-
-      def forms
-        proceedings.flat_map { |proceeding| TaskStatus::Validators::ProceedingForms.new(proceeding).forms } << emergency_cost_override_form
-      end
 
       def emergency_cost_override_form
         LegalAidApplications::EmergencyCostOverrideForm.new(model: application)
