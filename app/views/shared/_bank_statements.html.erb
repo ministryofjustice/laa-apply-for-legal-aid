@@ -50,8 +50,7 @@
 
     <%= render partial: "shared/forms/error_summary_hidden" %>
 
-    <%= form.govuk_fieldset legend: { text: page_title, tag: "h1", size: "xl" },
-                            caption: { text: caption, size: "l" } do %>
+    <%= form.govuk_fieldset(legend: { text: page_title, tag: "h1", size: "xl" }) do %>
 
       <% t(".info", individual:).each do |item| %>
         <p class="govuk-body"><%= item %></p>
