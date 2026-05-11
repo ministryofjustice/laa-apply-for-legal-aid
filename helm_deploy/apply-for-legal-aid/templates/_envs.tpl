@@ -113,6 +113,11 @@ env:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
         key: omniauthAzureMockPassword
+  - name: OMNIAUTH_ENTRAID_MOCK_ARRAY
+    valueFrom:
+      secretKeyRef:
+        name: uat-mock-user-array
+        key: omniauthAzureMockArray
   {{ end }}
   - name: OMNIAUTH_ENTRAID_CLIENT_ID
     valueFrom:
