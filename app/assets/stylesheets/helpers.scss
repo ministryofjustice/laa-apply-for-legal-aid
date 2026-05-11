@@ -62,3 +62,9 @@
   content: counter(list) ". ";
 }
 // stylelint-enable declaration-no-important
+
+.app-heading-inline-link {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}

@@ -8,7 +8,7 @@
   </h1>
 
   <%= render "shared/review_application/application_details" %>
-  <%= render "shared/review_application/questions_and_answers" %>
+  <%= render "shared/review_application/questions_and_answers", editing_links: !@legal_aid_application.submitted? %>
 
   <div class="no-print govuk-!-padding-top-6">
     <h2 class="govuk-heading-l"><%= @legal_aid_application.special_children_act_proceedings? ? t(".print_your_application_sca") : t(".print_your_application") %></h2>
@@ -36,6 +36,8 @@
     </p>
 
     <p class="govuk-body"><%= t(".audit") %></p>
+
+    <%= govuk_warning_text(text: t(".warning")) %>
 
     <%= print_button @legal_aid_application.special_children_act_proceedings? ? t(".print_button_sca") : t(".print_button") %>
 

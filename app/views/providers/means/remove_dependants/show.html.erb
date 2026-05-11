@@ -4,8 +4,10 @@
       method: :patch,
       local: true,
     ) do |form| %>
-    <%= page_template page_title: t(".page_title", name: @dependant.name), form:, template: :basic do %>
-
+    <%= page_template(page_title: t(".page_title", name: @dependant.name),
+                      editing_sidebar_items: editing_sidebar_items_for("remove_dependants"),
+                      template: :basic,
+                      form:) do %>
     <%= form.govuk_collection_radio_buttons :remove_dependant,
                                             yes_no_options,
                                             :value,

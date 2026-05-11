@@ -4,11 +4,11 @@
               local: true) do |form| %>
 
   <%= page_template(page_title: t(".page_title", name: individual.full_name),
+                    editing_sidebar_items: editing_sidebar_items_for("unexpected_employment_incomes"),
                     template: :basic,
                     form:) do %>
 
     <%= form.govuk_radio_buttons_fieldset(:has_extra_employment_information_details,
-                                          caption: { text: t("generic.#{individual_type}_means_caption"), size: "xl" },
                                           legend: { size: "xl", tag: "h1", text: page_title }) do %>
 
       <%= render "shared/means/employment_income_table" %>

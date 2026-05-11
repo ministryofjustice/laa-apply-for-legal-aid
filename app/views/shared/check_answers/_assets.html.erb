@@ -5,7 +5,7 @@
 
 <%= render "shared/check_answers/vehicles", read_only:, individual: %>
 
-<h2 class="govuk-heading-l print-no-break-after"><%= t(".bank_accounts_heading") %></h2>
+<h3 class="govuk-heading-m print-no-break-after"><%= t(".bank_accounts_heading") %></h3>
 
 <% if @legal_aid_application.non_passported? && !@legal_aid_application.client_uploading_bank_statements? %>
   <!-- non-passported truelayer only -->
@@ -18,7 +18,7 @@
   <% if read_only %>
     <%= render "shared/check_answers/client_online_bank_accounts", read_only: %>
 
-    <h2 class="govuk-heading-l print-no-break-after"><%= t(".total_in_online_bank_accounts_heading") %></h2>
+    <h3 class="govuk-heading-m print-no-break-after"><%= t(".total_in_online_bank_accounts_heading") %></h3>
     <%= render "shared/check_answers/total_in_online_bank_accounts", read_only: %>
   <% end %>
 
@@ -45,7 +45,7 @@
   <%= render "shared/check_answers/offline_savings_accounts", read_only: %>
 <% end %>
 
-<h2 class="govuk-heading-l print-no-break-after"><%= t(".savings_and_assets_heading") %></h2>
+<h3 class="govuk-heading-m print-no-break-after"><%= t(".savings_and_assets_heading") %></h3>
 
 <%#  savings and investments %>
 <%= render("shared/check_answers/savings_and_investments", read_only:, individual:) %>

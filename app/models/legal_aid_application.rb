@@ -639,6 +639,10 @@ class LegalAidApplication < ApplicationRecord
     update!(merits_submitted_at: Time.current, merits_submitted_by: current_provider) unless merits_submitted_at?
   end
 
+  def submitted?
+    merits_submitted_at?
+  end
+
   def summary_state
     return :expired if expired?
     return :submitted if merits_submitted_at
@@ -781,6 +785,21 @@ class LegalAidApplication < ApplicationRecord
     return true unless copy_case?
 
     legal_framework_merits_task_list&.includes_task?(:application, :client_relationship_to_children)
+  end
+
+  def editing_section_started?(section)
+    case section.to_sym
+    when :client_details
+      applicant&.first_name.present? || applicant&.last_name.present?
+    when :financial_assessment
+      non_means_tested? || passported? ? false : benefit_check_result.present?
+    when :capital_and_assets
+      own_home.present?
+    when :merits
+      legal_framework_merits_task_list.present?
+    else
+      false
+    end
   end
 
 private

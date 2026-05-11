@@ -86,6 +86,10 @@ class NonPassportedStateMachine < BaseStateMachine
                   to: :checking_non_passported_means
     end
 
+    event :force_check_non_passported_means do
+      transitions to: :checking_non_passported_means
+    end
+
     event :reset_to_applicant_entering_means do
       transitions from: :use_ccms, to: :applicant_entering_means,
                   after: proc { update!(ccms_reason: nil) }
@@ -97,6 +101,10 @@ class NonPassportedStateMachine < BaseStateMachine
                     assessing_partner_means
                   ],
                   to: :checking_means_income
+    end
+
+    event :force_check_means_income do
+      transitions to: :checking_means_income
     end
   end
 

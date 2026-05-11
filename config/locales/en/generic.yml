@@ -14,14 +14,13 @@ en:
     cancel: Cancel
     change: Change
     client: your client
-    client_means_caption: Client's means assessment
     client_or_partner: your client or their partner
     client_and_partner: your client and their partner
     continue: Continue
     confirm: Are you sure?
     create_test_applications: Create test applications
     cy: Cymraeg
-    cya_warning_text: You cannot change the answers on this page once you save and continue.
+    cya_warning_text: You can come back to change these answers later. If you do, any answers you give on later pages will be deleted.
     date_of_birth: Date of birth
     destroy: Destroy
     dismiss: Dismiss
@@ -51,7 +50,6 @@ en:
     or: or
     optional: Optional
     partner: the partner
-    partner_means_caption: Partner's means assessment
     password: Password
     remove: Remove
     save_and_continue: Save and continue

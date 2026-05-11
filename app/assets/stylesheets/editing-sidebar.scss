@@ -1,0 +1,15 @@
+
+@use "./imports" as *;
+
+.app-aside_bar--blue {
+  padding-top: govuk-spacing(2);
+  border-top: 3px solid govuk-colour("blue");
+
+  .app-aside_bar--heading {
+    margin-bottom: 10px;
+  };
+
+  .app-aside_bar--li {
+    margin-bottom: 10px;
+  };
+}

@@ -1,3 +1,4 @@
+
 <%= form_with(
       model: @form,
       url: form_path,
@@ -5,8 +6,10 @@
       local: true,
     ) do |form| %>
 
-  <%= page_template page_title:, template: :basic, form: do %>
-    <span class="govuk-caption-l"><%= caption %></span>
+  <%= page_template(page_title:,
+                    editing_sidebar_items: editing_sidebar_items_for("state_benefits"),
+                    template: :basic,
+                    form:) do %>
     <%= form.govuk_fieldset legend: { tag: "h1", size: "xl", text: page_title } do %>
       <%= form.hidden_field :transaction_type_id %>
 
