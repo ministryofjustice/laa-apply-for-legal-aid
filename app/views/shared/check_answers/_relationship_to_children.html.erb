@@ -13,7 +13,7 @@
             row.with_action(text: t("generic.change"), href: providers_legal_aid_application_client_has_parental_responsibility_path(@legal_aid_application), visually_hidden_text: t("shared.check_answers.relationship_to_children.parental_responsibilities"))
           end
 
-          if relationship_to_children.eql?("child_subject") || relationship_to_children.nil?
+          if relationship_to_children.eql?("child_subject") || (relationship_to_children.nil? && @legal_aid_application.applicant.under_18?)
             summary_list.with_row do |row|
               row.with_key(text: t("shared.check_answers.relationship_to_children.child_subject"))
               row.with_value(text: yes_no(relationship_to_children.eql?("child_subject")))
