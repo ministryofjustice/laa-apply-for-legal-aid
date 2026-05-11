@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_08_091835) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_11_135738) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -966,6 +966,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_08_091835) do
     t.datetime "current_sign_in_at", precision: nil
     t.inet "current_sign_in_ip"
     t.string "email"
+    t.text "entra_id_access_token"
+    t.text "entra_id_refresh_token"
     t.uuid "firm_id"
     t.datetime "last_sign_in_at", precision: nil
     t.inet "last_sign_in_ip"
@@ -982,7 +984,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_08_091835) do
     t.index ["selected_office_id"], name: "index_providers_on_selected_office_id"
     t.index ["silas_id", "auth_provider"], name: "index_providers_on_silas_id_and_auth_provider", unique: true
     t.index ["type"], name: "index_providers_on_type"
-    t.index ["username"], name: "index_providers_on_username", unique: true
   end
 
   create_table "regular_transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
