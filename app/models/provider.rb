@@ -2,6 +2,8 @@ class Provider < ApplicationRecord
   class RawInfoNotFound < StandardError; end
 
   encrypts :silas_id, deterministic: true
+  encrypts :entra_id_access_token
+  encrypts :entra_id_refresh_token
 
   devise :trackable, :reauthable, :timeoutable
 
@@ -32,6 +34,8 @@ class Provider < ApplicationRecord
         email: auth.info.email,
         office_codes: [office_codes].join(":"),
         selected_office: nil,
+        entra_id_access_token: auth.credentials.token,
+        entra_id_refresh_token: auth.credentials.refresh_token,
       )
     end
   rescue StandardError => e

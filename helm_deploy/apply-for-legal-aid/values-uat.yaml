@@ -116,11 +116,13 @@ ccms_user_api:
 # TODO: Using staging until or if the datastore team will implement a pipeline that includes
 # a stable main UAT :( . We also need to use internal ingress as the public ingress has been
 # whitelisted to only be available via VPN.
+# add `/swagger-ui/index.html` to view the docs
 data_access_api:
   # url: "https://main-laa-data-access-api-uat.cloud-platform.service.justice.gov.uk/api/v0" # main UAT external/public ingress, does not work due to whitelisting
   # url: "https://main-internal-laa-data-access-api-uat.internal-non-prod.cloud-platform.service.justice.gov.uk/api/v0" # main UAT internal ingress
   # url: "https://laa-data-access-api-staging.cloud-platform.service.justice.gov.uk/api/v0" # staging external/public ingress, does not work due to whitelisting
-  url: "https://laa-data-access-api-staging.internal-non-prod.cloud-platform.service.justice.gov.uk/api/v0"
+  # url: "https://laa-data-access-api-staging.internal-non-prod.cloud-platform.service.justice.gov.uk/api/v0"
+  url: "https://apply-authentic-internal-laa-data-access-api-uat.internal-non-prod.cloud-platform.service.justice.gov.uk/api/v0" # test UAT branch for integration authentication with OBO token from provider sign in
 
 trueLayer:
   enableMock: "true"

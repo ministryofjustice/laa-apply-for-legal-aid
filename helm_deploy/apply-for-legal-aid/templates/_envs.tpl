@@ -183,6 +183,11 @@ env:
         key: ccmsUserApiAuthKey
   - name: DATA_ACCESS_API_URL
     value: {{ .Values.data_access_api.url | quote }}
+  - name: DATA_ACCESS_API_AUTH_SCOPE
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: dataAccessApiAuthScope
   - name: TRUE_LAYER_CLIENT_ID
     valueFrom:
       secretKeyRef:

@@ -8,10 +8,10 @@ module Datastore
 
     def_delegators :connection, :post
 
-    def initialize(legal_aid_application, connection: Datastore::Connection.new, persister: Datastore::Persister)
+    def initialize(legal_aid_application, access_token: nil, connection_klass: Datastore::Connection, persister_klass: Datastore::Persister)
       @legal_aid_application = legal_aid_application
-      @connection = connection
-      @persister = persister
+      @connection = connection_klass.new(access_token: access_token)
+      @persister_klass = persister_klass
     end
 
     def self.call(legal_aid_application, **)
@@ -19,7 +19,7 @@ module Datastore
     end
 
     def call
-      persister.call(legal_aid_application, response: response, datastore_id: datastore_id) if persister
+      persister_klass.call(legal_aid_application, response: response, datastore_id: datastore_id) if persister_klass
 
       if response.success?
         datastore_id
