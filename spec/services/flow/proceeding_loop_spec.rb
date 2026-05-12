@@ -279,6 +279,14 @@ RSpec.describe Flow::ProceedingLoop do
       end
 
       it { is_expected.to eq first_proceeding }
+
+      context "when the the user has returned to the confirm_delegated_functions_date page on the second proceeding" do
+        let(:provider_step) { "confirm_delegated_functions_date" }
+
+        before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => second_proceeding.id }) }
+
+        it { is_expected.to eq second_proceeding }
+      end
     end
 
     context "when the user is on the final page of the second proceeding" do

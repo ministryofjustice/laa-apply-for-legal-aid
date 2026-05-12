@@ -42,6 +42,7 @@ RSpec.describe "ConfirmDelegatedFunctionsDateController", :vcr do
     subject(:post_df) { patch "/providers/applications/#{application_id}/confirm_delegated_functions_date/#{proceeding_id}", params: }
 
     let(:params) { { binary_choice_form: { confirm_delegated_functions_date: confirm } } }
+    # let(:proceeding_id) { application.proceedings.find_by(ccms_code: "DA001").id }
     let(:confirm) { "true" }
 
     context "when the provider is not authenticated" do
@@ -58,11 +59,10 @@ RSpec.describe "ConfirmDelegatedFunctionsDateController", :vcr do
       context "when the Continue button is pressed" do
         let(:submit_button) { { continue_button: "Continue" } }
 
-        before { post_df }
-
         context "and the user selected yes" do
           it "redirects to next page" do
-            expect(response.body).to redirect_to(providers_legal_aid_application_client_involvement_type_path(application_id))
+            post_df
+            expect(response.body).to redirect_to(providers_legal_aid_application_client_involvement_type_path(application_id, proceeding_id))
           end
         end
 
@@ -70,7 +70,8 @@ RSpec.describe "ConfirmDelegatedFunctionsDateController", :vcr do
           let(:confirm) { "false" }
 
           it "redirects back to the df page" do
-            expect(response.body).to redirect_to(providers_legal_aid_application_delegated_function_path(application_id))
+            post_df
+            expect(response.body).to redirect_to(providers_legal_aid_application_delegated_function_path(application_id, proceeding_id))
           end
         end
 
@@ -78,15 +79,21 @@ RSpec.describe "ConfirmDelegatedFunctionsDateController", :vcr do
           let(:confirm) { nil }
 
           it "returns http_success" do
+            post_df
             expect(response).to have_http_status(:ok)
           end
 
           it "the response includes the error message" do
+            post_df
             expect(response.body).to include(I18n.t("providers.confirm_delegated_functions_dates.show.error"))
           end
         end
 
         context "when checking answers" do
+          before do
+            application.proceedings.each { |proceeding| proceeding.update!(accepted_substantive_defaults: true, accepted_emergency_defaults: true) }
+          end
+
           let(:application) do
             create(
               :legal_aid_application,
@@ -104,7 +111,8 @@ RSpec.describe "ConfirmDelegatedFunctionsDateController", :vcr do
             let(:confirm) { "true" }
 
             it "continues through the sub flow" do
-              expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(application_id))
+              post_df
+              expect(response).to redirect_to(providers_legal_aid_application_client_involvement_type_path(application_id, proceeding_id))
             end
           end
 
@@ -112,6 +120,7 @@ RSpec.describe "ConfirmDelegatedFunctionsDateController", :vcr do
             let(:confirm) { "false" }
 
             it "redirects to delegated functions page" do
+              post_df
               expect(response).to redirect_to(providers_legal_aid_application_delegated_function_path(application_id, proceeding_id))
             end
           end

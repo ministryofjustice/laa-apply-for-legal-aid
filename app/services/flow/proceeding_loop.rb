@@ -72,6 +72,8 @@ module Flow
       if next_incomplete_proceeding.nil?
         proceeding = if at_final_page_for_proceeding? && current_proceeding_id.present?
                        @application.proceedings.in_order_of_addition[current_proceeding_position + 1]
+                     elsif @application.provider_step == "confirm_delegated_functions_date" && current_proceeding_id.present?
+                       current_proceeding
                      else
                        @application.proceedings.in_order_of_addition.first
                      end
