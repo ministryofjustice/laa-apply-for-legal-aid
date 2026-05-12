@@ -38,16 +38,6 @@ en:
           - details about money they pay out
           - details about any dependants they may have
           - details about their assets
-    about_the_financial_assessments:
-      show:
-        activity: |
-          The link will be active for 7 days for security reasons.
-          Your client can request a new link if they access the service after the link has expired.
-        section_2:
-          heading: Your client's email address
-        secure_link_para: Send an email to your client with a secure link to the online assessment.
-        send_client_link: Send link
-        title: Send your client a link to access the service
     applicant_employed:
       index:
         heading_1: What is your client's employment status?
@@ -441,6 +431,16 @@ en:
         h1-heading: Is %{office_code} your office account number?
         error: Select yes if this is the account number of the office handling this application
         no_another_office: No, another office is handling this application
+    email_address_confirmations:
+      show:
+        activity: |
+          The link will be active for 7 days for security reasons.
+          Your client can request a new link if they access the service after the link has expired.
+        section_2:
+          heading: Your client's email address
+        secure_link_para: Send an email to your client with a secure link to the online assessment.
+        send_client_link: Send link
+        title: Send your client a link to access the service
     home_address:
       statuses:
         show:

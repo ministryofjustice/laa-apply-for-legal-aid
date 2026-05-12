@@ -1541,7 +1541,7 @@ Then("I am on the legal aid applications page") do
   expect(page).to have_content("Your applications")
 end
 
-Then("I am on the About the Financial Assessment page") do
+Then("I am on the Email address confirmation page") do
   expect(page).to have_content("Send your client a link to access the service")
 end
 

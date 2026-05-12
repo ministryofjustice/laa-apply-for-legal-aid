@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "about financial assessments requests" do
+RSpec.describe "email address confirmation requests" do
   let(:application) do
     create(:legal_aid_application,
            :with_proceedings,
@@ -10,8 +10,8 @@ RSpec.describe "about financial assessments requests" do
   end
   let(:application_id) { application.id }
 
-  describe "GET /providers/applications/:legal_aid_application_id/about_the_financial_assessment" do
-    subject(:submit_get) { get "/providers/applications/#{application_id}/about_the_financial_assessment" }
+  describe "GET /providers/applications/:legal_aid_application_id/email_address_confirmation" do
+    subject(:submit_get) { get "/providers/applications/#{application_id}/email_address_confirmation" }
 
     context "when the provider is not authenticated" do
       before { submit_get }
@@ -30,7 +30,7 @@ RSpec.describe "about financial assessments requests" do
       end
 
       it "displays the correct page" do
-        expect(unescaped_response_body).to include(I18n.t("providers.about_the_financial_assessments.show.title"))
+        expect(unescaped_response_body).to include(I18n.t("providers.email_address_confirmations.show.title"))
       end
 
       context "when the application does not exist", :show_exceptions do
@@ -68,8 +68,8 @@ RSpec.describe "about financial assessments requests" do
     end
   end
 
-  describe "PATCH /providers/applications/:legal_aid_application_id/about_the_financial_assessment/submit" do
-    subject(:submit_patch) { patch "/providers/applications/#{application_id}/about_the_financial_assessment", params: }
+  describe "PATCH /providers/applications/:legal_aid_application_id/email_address_confirmations/submit" do
+    subject(:submit_patch) { patch "/providers/applications/#{application_id}/email_address_confirmation", params: }
 
     let(:mocked_email_service) { instance_double(CitizenEmailService) }
     let(:params) { {} }
