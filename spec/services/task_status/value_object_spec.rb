@@ -126,4 +126,21 @@ RSpec.describe TaskStatus::ValueObject do
       expect(object.current_status).to be_nil
     end
   end
+
+  describe "#resolved?" do
+    it "returns true when completed" do
+      object.completed!
+      expect(object).to be_resolved
+    end
+
+    it "returns true when not_needed" do
+      object.not_needed!
+      expect(object).to be_resolved
+    end
+
+    it "returns false when not_started" do
+      object.not_started!
+      expect(object).not_to be_resolved
+    end
+  end
 end

@@ -24,7 +24,7 @@ module TaskStatus
     def in_progress?
       return @in_progress if defined?(@in_progress)
 
-      @in_progress = application.dwp_result_confirmed == false && !dwp_override_validator.valid?
+      @in_progress = application.dwp_result_confirmed == false && !dwp_outcome_validator.valid?
     end
 
     def completed?
@@ -42,7 +42,7 @@ module TaskStatus
     def provider_overrode_dwp_result?
       return @provider_overrode_dwp_result if defined?(@provider_overrode_dwp_result)
 
-      @provider_overrode_dwp_result = application.dwp_result_confirmed == false && dwp_override_validator.valid?
+      @provider_overrode_dwp_result = application.dwp_result_confirmed == false && dwp_outcome_validator.valid?
     end
 
     def check_provider_answers_completed?
@@ -52,8 +52,8 @@ module TaskStatus
         @status_results[CheckProviderAnswers]&.completed?
     end
 
-    def dwp_override_validator
-      @dwp_override_validator ||= Validators::DWPOverride.new(application)
+    def dwp_outcome_validator
+      @dwp_outcome_validator ||= Validators::DWPOutcome.new(application)
     end
   end
 end

@@ -44,7 +44,7 @@ module TaskStatus
       return @previous_tasks_completed if defined?(@previous_tasks_completed)
 
       @previous_tasks_completed = previous_task_status_items.all? do |task_class|
-        @status_results[task_class]&.completed?
+        @status_results[task_class]&.resolved?
       end
     end
 
