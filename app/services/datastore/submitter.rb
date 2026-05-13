@@ -4,13 +4,13 @@ module Datastore
 
     ApiError = Class.new(StandardError)
 
-    attr_reader :legal_aid_application, :connection, :persister
+    attr_reader :legal_aid_application, :connection, :persister_klass
 
     def_delegators :connection, :post
 
-    def initialize(legal_aid_application, access_token: nil, connection_klass: Datastore::Connection, persister_klass: Datastore::Persister)
+    def initialize(legal_aid_application, refresh_token: nil, connection_klass: Datastore::Connection, persister_klass: Datastore::Persister)
       @legal_aid_application = legal_aid_application
-      @connection = connection_klass.new(access_token: access_token)
+      @connection = connection_klass.new(refresh_token: refresh_token)
       @persister_klass = persister_klass
     end
 

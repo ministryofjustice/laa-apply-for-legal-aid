@@ -24,7 +24,7 @@ module Test
     end
 
     def submit
-      datastore_id = Datastore::Submitter.call(legal_aid_application, access_token: current_provider.entra_id_access_token)
+      datastore_id = Datastore::Submitter.call(legal_aid_application, refresh_token: current_provider.entra_id_refresh_token)
 
       flash[:notice] = "Submitted application \"#{legal_aid_application.application_ref}\" to datastore. It was given an id of \"#{datastore_id}\"."
     rescue Datastore::Submitter::ApiError => e
