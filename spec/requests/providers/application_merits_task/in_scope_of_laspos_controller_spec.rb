@@ -50,7 +50,7 @@ RSpec.describe Providers::ApplicationMeritsTask::InScopeOfLasposController do
       end
 
       it "redirects to the next page" do
-        expect(response).to redirect_to(next_flow_step)
+        expect(response).to redirect_to(providers_legal_aid_application_out_of_scope_of_laspo_interrupt_path(legal_aid_application))
       end
     end
 
