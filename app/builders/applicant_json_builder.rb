@@ -21,6 +21,7 @@ class ApplicantJsonBuilder < BaseJsonBuilder
       student_finance_amount:,
       extra_employment_information:,
       extra_employment_information_details:,
+      full_employment_details:,
       last_name_at_birth:,
       changed_last_name:,
       same_correspondence_and_home_address:,

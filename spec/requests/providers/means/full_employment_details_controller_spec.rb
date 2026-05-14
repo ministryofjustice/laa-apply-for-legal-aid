@@ -49,7 +49,7 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController do
     let(:full_employment_details) { Faker::Lorem.paragraph }
     let(:params) do
       {
-        legal_aid_application: {
+        applicant: {
           full_employment_details:,
         },
       }
@@ -67,7 +67,7 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController do
 
         it "updates legal aid application employment details" do
           request
-          expect(application.reload.full_employment_details).to eq full_employment_details
+          expect(applicant.reload.full_employment_details).to eq full_employment_details
         end
 
         context "when the application is using the bank upload journey" do
@@ -91,7 +91,7 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController do
 
           it "displays error" do
             request
-            expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.legal_aid_application.attributes.full_employment_details.blank"))
+            expect(unescaped_response_body).to include(I18n.t("activemodel.errors.models.applicant.attributes.full_employment_details.blank"))
           end
         end
       end
@@ -102,9 +102,9 @@ RSpec.describe Providers::Means::FullEmploymentDetailsController do
         context "when after success" do
           before { login_as provider }
 
-          it "updates the legal_aid_application.full_employment_details" do
+          it "updates the applicants.full_employment_details" do
             request
-            expect(application.reload.full_employment_details).to eq full_employment_details
+            expect(applicant.reload.full_employment_details).to eq full_employment_details
           end
 
           it "redirects to the list of applications" do

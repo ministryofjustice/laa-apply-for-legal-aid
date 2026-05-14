@@ -5,21 +5,25 @@ module Providers
 
       def show
         message_sentry if hmrc_still_pending?
-        @form = LegalAidApplications::FullEmploymentDetailsForm.new(model: legal_aid_application)
+        @form = Applicants::FullEmploymentDetailsForm.new(model: legal_aid_application)
       end
 
       def update
-        @form = LegalAidApplications::FullEmploymentDetailsForm.new(form_params)
+        @form = Applicants::FullEmploymentDetailsForm.new(form_params)
         render :show unless save_continue_or_draft(@form)
       end
 
     private
 
-      def form_params
-        merge_with_model(legal_aid_application) do
-          return {} unless params[:legal_aid_application]
+      def applicant
+        @applicant ||= legal_aid_application.applicant
+      end
 
-          params.expect(legal_aid_application: [:full_employment_details])
+      def form_params
+        merge_with_model(applicant) do
+          return {} unless params[:applicant]
+
+          params.expect(applicant: [:full_employment_details])
         end
       end
 

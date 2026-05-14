@@ -1980,7 +1980,7 @@ RSpec.describe LegalAidApplication do
     end
 
     context "when full employment information has been entered by the provider" do
-      before { laa.update!(full_employment_details: "test details") }
+      before { laa.applicant.update!(full_employment_details: "test details") }
 
       it "returns true" do
         expect(laa.manually_entered_employment_information?).to be true

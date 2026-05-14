@@ -16,7 +16,7 @@ Feature: Check pending employment
     When I click link "Continue"
     Then I should be on a page showing "Your client's employment details"
 
-    When I fill "legal-aid-application-full-employment-details-field" with "Pending"
+    When I fill "applicant-full-employment-details-field" with "This is employment data"
     And I click 'Save and continue'
     Then I should be on a page showing "Which of these payments does your client get?"
     When I select 'Pension'
@@ -57,7 +57,7 @@ Feature: Check pending employment
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on the 'check_income_answers' page showing 'Check your answers'
-    Then I should be on a page showing "Pending"
+    Then I should be on a page showing "This is employment data"
 
     When I click 'Save and continue'
     Then I should be on a page with title "What you need to do"

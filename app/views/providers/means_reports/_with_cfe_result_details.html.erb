@@ -24,7 +24,7 @@
   </section>
 
   <section class="print-no-break">
-    <% if @legal_aid_application.full_employment_details? %>
+    <% if @legal_aid_application.applicant.full_employment_details? %>
       <%= render "shared/check_answers/full_employment_details", individual: "Your client", read_only: true, partner: false %>
     <% end %>
   </section>
