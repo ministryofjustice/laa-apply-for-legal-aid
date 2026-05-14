@@ -1,0 +1,17 @@
+<%= page_template(page_title: t(".title_html"), template: :basic, column_width: "full") do %>
+  <%= moj_interruption_card(heading: t(".title_html")) do |card| %>
+    <% card.with_body do %>
+      <p><%= t(".paragraph") %></p>
+      <p><%= t(".options_text") %></p>
+
+      <%= govuk_list(
+            t(".options_list_html", ccms_url: Rails.configuration.x.laa_landing_page_target_url),
+            type: :bullet,
+          ) %>
+    <% end %>
+
+    <% card.with_actions do %>
+      <%= govuk_button_link_to t(".change"), providers_legal_aid_application_in_scope_of_laspo_path, inverse: true, role: "button" %>
+    <% end %>
+  <% end %>
+<% end %>
