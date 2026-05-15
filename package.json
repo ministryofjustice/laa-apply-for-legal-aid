@@ -19,7 +19,7 @@
     "js-search": "^2.0.1",
     "moment": "^2.30.1",
     "puppeteer": "^24.42.0",
-    "sanitize-html": "^2.17.3"
+    "sanitize-html": "^2.17.4"
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
