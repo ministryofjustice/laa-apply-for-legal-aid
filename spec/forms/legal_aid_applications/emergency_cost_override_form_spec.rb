@@ -41,11 +41,11 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
           end
         end
 
-        context "when the substantive_override is not requested" do
+        context "when the substantive override is not requested" do
           it { is_expected.to be true }
         end
 
-        context "when the substantive_override requested" do
+        context "when the substantive override is requested" do
           let(:substantive_overridden) { "true" }
           let(:substantive_value) { "5,000" }
           let(:substantive_reasons) { "Something, something, argument" }
@@ -61,6 +61,42 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
 
             it "displays the relevant errors" do
               expect(form.errors[:substantive_cost_requested]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.substantive_cost_requested.blank")]
+            end
+          end
+
+          context "but the value is not a number" do
+            let(:substantive_value) { "abc" }
+
+            before { valid? }
+
+            it { is_expected.to be false }
+
+            it "displays the relevant errors" do
+              expect(form.errors[:substantive_cost_requested]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.substantive_cost_requested.not_a_number")]
+            end
+          end
+
+          context "but the value has too many decimals" do
+            let(:substantive_value) { "123.456" }
+
+            before { valid? }
+
+            it { is_expected.to be false }
+
+            it "displays the relevant errors" do
+              expect(form.errors[:substantive_cost_requested]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.substantive_cost_requested.too_many_decimals")]
+            end
+          end
+
+          context "but the value is less than 0" do
+            let(:substantive_value) { "-1" }
+
+            before { valid? }
+
+            it { is_expected.to be false }
+
+            it "displays the relevant errors" do
+              expect(form.errors[:substantive_cost_requested]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.substantive_cost_requested.greater_than_or_equal_to")]
             end
           end
 
@@ -126,11 +162,11 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
           end
         end
 
-        context "when the override is not requested" do
+        context "when the emergency override is not requested" do
           it { is_expected.to be true }
         end
 
-        context "when the override requested" do
+        context "when the emergency override requested" do
           let(:emergency_overridden) { "true" }
           let(:emergency_value) { "5,000" }
           let(:emergency_reasons) { "Something, something, argument" }
@@ -189,11 +225,11 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
           end
         end
 
-        context "when the override is not requested" do
+        context "when emergencyoverride is not requested" do
           it { is_expected.to be true }
         end
 
-        context "when the override requested" do
+        context "when emergency override requested" do
           let(:emergency_overridden) { "true" }
           let(:emergency_value) { "5,000" }
           let(:emergency_reasons) { "Something, something, argument" }
@@ -209,6 +245,42 @@ RSpec.describe LegalAidApplications::EmergencyCostOverrideForm do
 
             it "displays the relevant errors" do
               expect(form.errors[:emergency_cost_requested]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.emergency_cost_requested.blank")]
+            end
+          end
+
+          context "but value is not a number" do
+            let(:emergency_value) { "five thousand" }
+
+            before { valid? }
+
+            it { is_expected.to be false }
+
+            it "displays the relevant errors" do
+              expect(form.errors[:emergency_cost_requested]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.emergency_cost_requested.not_a_number")]
+            end
+          end
+
+          context "but value has too many decimals" do
+            let(:emergency_value) { "5,000.123" }
+
+            before { valid? }
+
+            it { is_expected.to be false }
+
+            it "displays the relevant errors" do
+              expect(form.errors[:emergency_cost_requested]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.emergency_cost_requested.too_many_decimals")]
+            end
+          end
+
+          context "but value is less than the minimum allowed" do
+            let(:emergency_value) { "-1" }
+
+            before { valid? }
+
+            it { is_expected.to be false }
+
+            it "displays the relevant errors" do
+              expect(form.errors[:emergency_cost_requested]).to eq [I18n.t("activemodel.errors.models.legal_aid_application.attributes.emergency_cost_requested.greater_than_or_equal_to")]
             end
           end
 
