@@ -1,5 +1,5 @@
 class FirmJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       created_at:,

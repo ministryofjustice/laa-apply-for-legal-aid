@@ -1,5 +1,5 @@
 class ScheduleJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       office_id:,

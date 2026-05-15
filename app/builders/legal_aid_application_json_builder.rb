@@ -1,5 +1,5 @@
 class LegalAidApplicationJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       application_ref:,

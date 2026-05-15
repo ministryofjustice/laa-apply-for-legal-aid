@@ -1,5 +1,5 @@
 class AttemptsToSettleJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       proceeding_id:,

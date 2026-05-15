@@ -1,5 +1,5 @@
 class IndividualPolymorphJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       first_name:,
       last_name:,

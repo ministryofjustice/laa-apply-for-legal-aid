@@ -1,5 +1,5 @@
 class OrganisationJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       ccms_type_code:,

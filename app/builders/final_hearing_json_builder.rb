@@ -1,5 +1,5 @@
 class FinalHearingJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       work_type:,

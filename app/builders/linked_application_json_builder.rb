@@ -1,5 +1,5 @@
 class LinkedApplicationJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       associated_application_id:,
