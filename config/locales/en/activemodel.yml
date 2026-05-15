@@ -492,17 +492,19 @@ en:
               inclusion: Select yes if you want to request a higher emergency cost limit
             emergency_cost_requested:
               blank: Enter a new emergency cost limit
-              not_a_number: Emergency cost limit must be an amount of money, like 2,500
+              not_a_number: &emergency_cost_requested_not_a_number Emergency cost limit must be an amount of money, like 2,500 or 2,500.99
               greater_than_or_equal_to: The new emergency cost limit cannot be less than 0
+              too_many_decimals: *emergency_cost_requested_not_a_number
             emergency_cost_reasons:
               blank: Tell us why you need a higher emergency cost limit
             substantive_cost_override:
               inclusion: Select yes if you want to request a higher substantive cost limit
             substantive_cost_requested:
               blank: Enter a new substantive cost limit
-              not_a_number: Substantive cost limit must be an amount of money, like 2,500
+              not_a_number: &substantive_cost_requested_not_a_number Substantive cost limit must be an amount of money, like 2,500 or 2,500.99
               greater_than_or_equal_to: The new substantive cost limit cannot be less than 0
               less_than_or_equal_to: The new substantive cost limit cannot be more than £25,000
+              too_many_decimals: *substantive_cost_requested_not_a_number
             substantive_cost_reasons:
               blank: Tell us why you need a higher substantive cost limit
             own_home:
