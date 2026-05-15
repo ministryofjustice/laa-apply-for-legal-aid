@@ -1,6 +1,4 @@
 class LegalAidApplication < ApplicationRecord
-  self.ignored_columns += %i[extra_employment_information extra_employment_information_details full_employment_details]
-
   include Discard::Model
   include Reviewable::Model
   include DelegatedFunctions

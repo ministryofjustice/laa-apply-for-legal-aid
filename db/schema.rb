@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_06_121138) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_08_091835) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -669,9 +669,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_06_121138) do
     t.boolean "emergency_cost_override"
     t.string "emergency_cost_reasons"
     t.decimal "emergency_cost_requested"
-    t.boolean "extra_employment_information"
-    t.string "extra_employment_information_details"
-    t.string "full_employment_details"
     t.boolean "has_dependants"
     t.boolean "has_offline_accounts"
     t.boolean "has_restrictions"
