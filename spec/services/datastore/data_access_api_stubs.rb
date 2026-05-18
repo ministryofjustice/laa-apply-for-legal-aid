@@ -2,7 +2,25 @@ def stub_successful_refresh_token_request
   stub_request(:post, %r{https://login\.microsoftonline\.com/.*/oauth2/v2\.0/token})
     .to_return(
       status: 200,
-      body: { access_token: "fake_access_token" }.to_json,
+      body: {
+        access_token: "fake_access_token",
+        refresh_token: "fake_refresh_token",
+        expires_in: 3600,
+        id_token: "fake_id_token",
+        scope: "fake_scope",
+      }.to_json,
+      headers: { "content-type" => "application/json; charset=utf-8" },
+    )
+end
+
+def stub_failed_refresh_token_request
+  stub_request(:post, %r{https://login\.microsoftonline\.com/.*/oauth2/v2\.0/token})
+    .to_return(
+      status: 400,
+      body: {
+        error: "invalid_grant",
+        error_description: "AADSTS999999: The refresh token has expired due to inactivity...",
+      }.to_json,
       headers: { "content-type" => "application/json; charset=utf-8" },
     )
 end
