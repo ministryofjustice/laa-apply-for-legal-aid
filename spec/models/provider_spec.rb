@@ -46,6 +46,10 @@ RSpec.describe Provider do
           extra: {
             raw_info:,
           },
+          credentials: {
+            token: "mock_token_abc123", # TODO: Not used, drop if confirmed not needed
+            refresh_token: "mock_refresh_token_abc123",
+          },
         },
       )
     end

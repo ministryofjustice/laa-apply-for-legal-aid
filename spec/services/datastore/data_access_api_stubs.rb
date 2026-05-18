@@ -1,5 +1,16 @@
+def stub_successful_refresh_token_request
+  stub_request(:post, %r{https://login\.microsoftonline\.com/.*/oauth2/v2\.0/token})
+    .to_return(
+      status: 200,
+      body: { access_token: "fake_access_token" }.to_json,
+      headers: { "content-type" => "application/json; charset=utf-8" },
+    )
+end
+
 # Realistic stub at time of wrirting - returns 201 with Location header but no body
 def stub_successful_datastore_submission
+  stub_successful_refresh_token_request
+
   stub_request(:post, %r{(http|https).*laa-data-access-api.*\.cloud-platform\.service\.justice\.gov\.uk/api/v0/.*})
      .to_return(
        status: 201,
@@ -9,6 +20,8 @@ def stub_successful_datastore_submission
 end
 
 def stub_bad_request_datastore_submission
+  stub_successful_refresh_token_request
+
   stub_request(:post, %r{(http|https).*laa-data-access-api.*\.cloud-platform\.service\.justice\.gov\.uk/api/v0/.*})
      .to_return(
        status: 400,
@@ -23,6 +36,8 @@ def stub_bad_request_datastore_submission
 end
 
 def stub_unauthorized_datastore_submission
+  stub_successful_refresh_token_request
+
   stub_request(:post, %r{(http|https).*laa-data-access-api.*\.cloud-platform\.service\.justice\.gov\.uk/api/v0/.*})
      .to_return(
        status: 401,
@@ -30,13 +45,15 @@ def stub_unauthorized_datastore_submission
          type: "about:blank",
          title: "Unauthorized",
          status: 401,
-         detail: "Check your request was has been authorized",
+         detail: "Check your request has been authorized",
          instance: "/api/v0/applications",
        }.to_json,
      )
 end
 
 def stub_forbidden_datastore_submission
+  stub_successful_refresh_token_request
+
   stub_request(:post, %r{(http|https).*laa-data-access-api.*\.cloud-platform\.service\.justice\.gov\.uk/api/v0/.*})
      .to_return(
        status: 403,
@@ -51,6 +68,8 @@ def stub_forbidden_datastore_submission
 end
 
 def stub_internal_server_error_datastore_submission
+  stub_successful_refresh_token_request
+
   stub_request(:post, %r{(http|https).*laa-data-access-api.*\.cloud-platform\.service\.justice\.gov\.uk/api/v0/.*})
      .to_return(
        status: 500,

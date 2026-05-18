@@ -6,9 +6,9 @@ RSpec.describe Datastore::Submitter do
   let(:legal_aid_application) { create(:legal_aid_application) }
 
   describe ".call" do
-    subject(:call) { described_class.call(legal_aid_application, persister:) }
+    subject(:call) { described_class.call(legal_aid_application, persister_klass:) }
 
-    let(:persister) { Datastore::Persister }
+    let(:persister_klass) { Datastore::Persister }
 
     context "with successful response" do
       before do
@@ -25,7 +25,7 @@ RSpec.describe Datastore::Submitter do
       end
 
       context "when a persister is NOT supplied" do
-        let(:persister) { nil }
+        let(:persister_klass) { nil }
 
         it "does not persist the datastore_id to the legal_aid_application" do
           expect { call }
@@ -39,7 +39,7 @@ RSpec.describe Datastore::Submitter do
       end
 
       context "when a persister is supplied" do
-        let(:persister) { Datastore::Persister }
+        let(:persister_klass) { Datastore::Persister }
 
         it "persists the datastore_id to the legal_aid_application" do
           expect { call }
@@ -73,7 +73,7 @@ RSpec.describe Datastore::Submitter do
       end
 
       it "raises error" do
-        expect { call }.to raise_error(described_class::ApiError, "Datastore Submission Failed: status 401, body {\"type\":\"about:blank\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Check your request was has been authorized\",\"instance\":\"/api/v0/applications\"}")
+        expect { call }.to raise_error(described_class::ApiError, "Datastore Submission Failed: status 401, body {\"type\":\"about:blank\",\"title\":\"Unauthorized\",\"status\":401,\"detail\":\"Check your request has been authorized\",\"instance\":\"/api/v0/applications\"}")
       end
     end
 
