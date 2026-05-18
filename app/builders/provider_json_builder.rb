@@ -1,5 +1,5 @@
 class ProviderJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       username:,

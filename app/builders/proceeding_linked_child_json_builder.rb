@@ -1,5 +1,5 @@
 class ProceedingLinkedChildJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       involved_child_id:,

@@ -1,6 +1,6 @@
 class BankProviderJsonBuilder < BaseJsonBuilder
   # TODO: AP-6376 DO WE NEED TO SEND THIS AT ALL, IF SO WAIT UNTIL DATATSTORE USED AUTHENTICATION
-  def as_json
+  def attribute_hash
     {
       id:,
       applicant_id:,

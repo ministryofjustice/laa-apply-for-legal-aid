@@ -1,5 +1,5 @@
 class TransactionTypeJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       name:,

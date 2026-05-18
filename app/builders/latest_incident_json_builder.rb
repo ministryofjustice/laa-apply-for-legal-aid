@@ -1,5 +1,5 @@
 class LatestIncidentJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       occurred_on:,

@@ -1,5 +1,5 @@
 class AddressJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       address_line_one:,

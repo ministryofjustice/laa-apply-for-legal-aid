@@ -1,5 +1,5 @@
 class InvolvedChildJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       full_name:,

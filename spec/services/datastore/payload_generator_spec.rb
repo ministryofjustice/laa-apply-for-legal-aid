@@ -102,10 +102,16 @@ RSpec.describe Datastore::PayloadGenerator do
     end
 
     # NOTE: this means as_json cannot return nested objects as ruby objects, instead returning the json of that object.
-    # Worth noting that this is not necssary as when to_json is called amny nested "objects" will be transformed too.
+    # Worth noting that this is not necessary as when to_json is called any nested "objects" will be transformed too.
     it "does not include any unjsonified objects" do
       actual = call
       expect_no_base_json_builder!(actual)
+    end
+
+    it "formats [all] decimals as string" do
+      # Just tests one deterministic decimal value but should apply to all decimals in the payload
+      payload = call
+      expect(payload.to_json).to include("\"substantiveCostLimitation\":\"25000.0\"")
     end
 
     context "when there is one or more nil objects/relations" do
@@ -160,7 +166,7 @@ RSpec.describe Datastore::PayloadGenerator do
       end
     end
 
-    describe "This is not a test" do
+    describe "This is not a test!" do
       it "generate a full json payload for PoC purposes" do
         skip "Skipped payload generation - run \"GENERATE=true rspec <test-path>\" to generate a payload" unless ENV["GENERATE"]
 

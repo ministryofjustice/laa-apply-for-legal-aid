@@ -1,5 +1,5 @@
 class VehicleJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       estimated_value:,

@@ -1,5 +1,5 @@
 class PartnerJsonBuilder < BaseJsonBuilder
-  def as_json
+  def attribute_hash
     {
       id:,
       first_name:,
