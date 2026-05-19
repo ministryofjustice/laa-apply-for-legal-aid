@@ -18,6 +18,8 @@ class Provider < ApplicationRecord
   has_many :actor_permissions, as: :permittable
   has_many :permissions, through: :actor_permissions
 
+  has_one :entra_id_token, dependent: :destroy
+
   delegate :name, to: :firm, prefix: true, allow_nil: true
 
   # Our flow can/should rely on ANY user who is on the external EntraID (and who has a certain role in the auth payload TBC)
@@ -34,9 +36,9 @@ class Provider < ApplicationRecord
         email: auth.info.email,
         office_codes: [office_codes].join(":"),
         selected_office: nil,
-        entra_id_access_token: auth.credentials&.token, # TODO: Not used, drop if confirmed not needed
-        entra_id_refresh_token: auth.credentials&.refresh_token,
       )
+
+      EntraIdToken.store!(record, credentials: auth.credentials)
     end
   rescue StandardError => e
     Rails.logger.info("#{__method__}: omniauth encountered error \"#{e}\"")

@@ -124,6 +124,11 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   dwp_overrides: {},
   employments: {},
   employment_payments: {},
+  entra_id_tokens: {
+    id_token: nil,
+    access_token: nil,
+    refresh_token: nil,
+  },
   feedbacks: {
     done_all_needed_reason: -> { Faker::Lorem.paragraph(sentence_count: 2) },
     difficulty_reason: -> { Faker::Lorem.paragraph(sentence_count: 2) },
