@@ -3,7 +3,9 @@ require "rails_helper"
 RSpec.describe Flow::Steps::ProviderStart::LimitationsStep, type: :request do
   before { allow(Flow::ProceedingLoop).to receive(:next_step).and_return(:client_involvement_type) }
 
-  let(:legal_aid_application) { create(:legal_aid_application) }
+  let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
+  let(:applicant) { create(:applicant, has_partner:) }
+  let(:has_partner) { nil }
 
   describe "#path" do
     subject { described_class.path.call(legal_aid_application) }
@@ -42,6 +44,22 @@ RSpec.describe Flow::Steps::ProviderStart::LimitationsStep, type: :request do
 
     context "when applying for any means proceeding" do
       it { is_expected.to eq :client_has_partners }
+
+      context "when the provider has already answered that the client does have a partner" do
+        let(:has_partner) { true }
+
+        context "when the applicant has a partner" do
+          it { is_expected.to eq :check_provider_answers }
+        end
+      end
+
+      context "when the provider has already answered that the client does not have a partner" do
+        let(:has_partner) { false }
+
+        context "when the applicant does not have a partner" do
+          it { is_expected.to eq :check_provider_answers }
+        end
+      end
     end
 
     context "when applying for a PLF non-means proceeding" do

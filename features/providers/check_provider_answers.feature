@@ -549,10 +549,6 @@ Feature: Checking client details answers backwards and forwards
 
     When I choose "No"
     And I click "Save and continue"
-    Then I should be on a page showing 'Does your client have a partner?'
-
-    When I choose 'No'
-    And I click 'Save and continue'
     Then I should be on a page with title "Check your answers"
 
     And the "DA004" proceeding check your answers section should contain:

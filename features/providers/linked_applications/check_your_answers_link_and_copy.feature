@@ -67,10 +67,6 @@ Scenario: If I change the linked from Family to No
 
   When I choose 'No'
   And I click 'Save and continue'
-  Then I should be on a page showing 'Does your client have a partner?'
-
-  When I choose 'No'
-  And I click 'Save and continue'
   Then I should be on a page showing 'Check your answers'
   And I should see "Non-molestation order"
 
@@ -111,10 +107,6 @@ Scenario: If I change the copied from Yes to No
   Then I should be on a page showing "What you're applying for"
   And I should be on a page showing "default substantive cost limit"
 
-  And I click 'Save and continue'
-  Then I should be on a page showing 'Does your client have a partner?'
-
-  When I choose 'No'
   And I click 'Save and continue'
   Then I should be on a page showing 'Check your answers'
   And I should see "Non-molestation order"
