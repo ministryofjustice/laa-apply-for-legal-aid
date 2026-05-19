@@ -2,12 +2,12 @@ module Datastore
   class Connection
     extend Forwardable
 
-    attr_reader :connection, :refresh_token
+    attr_reader :connection, :access_token
 
     def_delegators :connection, :post
 
-    def initialize(refresh_token: nil)
-      @refresh_token = refresh_token
+    def initialize(access_token: nil)
+      @access_token = access_token
       @connection = Faraday.new(url:, headers:)
     end
 
@@ -18,7 +18,7 @@ module Datastore
     end
 
     def datastore_token_response
-      @datastore_token_response ||= TokenService.new(refresh_token: refresh_token).call
+      @datastore_token_response ||= TokenService.new(access_token: access_token).call
     end
 
     def headers

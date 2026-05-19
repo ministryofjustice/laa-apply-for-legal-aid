@@ -10,8 +10,8 @@ module Datastore
   class TokenService
     TOKEN_URL = "https://login.microsoftonline.com/#{ENV.fetch('OMNIAUTH_ENTRAID_TENANT_ID', nil)}/oauth2/v2.0/token".freeze
 
-    def initialize(refresh_token:)
-      @refresh_token = refresh_token
+    def initialize(access_token:)
+      @access_token = access_token
     end
 
     def call
@@ -25,14 +25,15 @@ module Datastore
 
   private
 
-    attr_reader :refresh_token
+    attr_reader :access_token
 
     def token_request_body
       {
         client_id: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_ID", nil),
         client_secret: ENV.fetch("OMNIAUTH_ENTRAID_CLIENT_SECRET", nil),
-        grant_type: "refresh_token", # we are using the refresh token we got at login to get a new access token for the downstream API, datastore, which is the recommended OBO flow to call downstream APIs on behalf of a user (https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow#daemon-applications---no-user-involved)
-        refresh_token: refresh_token,
+        grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer", # OBO flow grant type
+        requested_token_use: "on_behalf_of",
+        assertion: access_token,
         scope: ENV.fetch("DATA_ACCESS_API_AUTH_SCOPE", nil),
       }
     end
