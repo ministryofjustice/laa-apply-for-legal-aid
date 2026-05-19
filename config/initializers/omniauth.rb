@@ -39,13 +39,13 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     {
       name: :entra_id,
       # OBO authentication flow example:
-      # scope: %W[openid profile email offline_access #{ENV.fetch('OUR_APP_AS_API_AUTH_SCOPE', nil)}], # OnBehalfOf (OBO) authentication flow
+      # scope: %W[openid profile email #{ENV.fetch('OUR_APP_AS_API_AUTH_SCOPE', nil)}], # OnBehalfOf (OBO) authentication flow
       #
       # Authorization code flow example:
-      # scope: %W[openid email #{ENV.fetch('DATA_ACCESS_API_AUTH_SCOPE', nil)}], # Authorization code flow, offline_access for refresh token and data access API scope to get OBO access token for API calls to that API on behalf of the user
+      scope: %W[openid profile email #{ENV.fetch('DATA_ACCESS_API_AUTH_SCOPE', nil)}], # Authorization code flow, offline_access for refresh token and data access API scope to get OBO access token for API calls to that API on behalf of the user
       #
       # Refresh token flow example:
-      scope: %w[openid email offline_access], # offline_access for refresh token and data access API scope to get OBO access token for API calls to that API on behalf of the user
+      # scope: %w[openid email offline_access], # offline_access for refresh token and data access API scope to get OBO access token for API calls to that API on behalf of the user
       prompt: :select_account,
       response_type: :code,
       send_nonce: true,
