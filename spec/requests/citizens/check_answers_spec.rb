@@ -26,7 +26,12 @@ RSpec.describe "check your answers requests" do
   describe "GET /citizens/check_answers" do
     subject(:get_request) { get "/citizens/check_answers" }
 
-    before { get_request }
+    let(:previous_page_visited) { false }
+
+    before do
+      get citizens_additional_accounts_path if previous_page_visited
+      get_request
+    end
 
     it "returns http success" do
       expect(response).to have_http_status(:ok)
@@ -51,6 +56,22 @@ RSpec.describe "check your answers requests" do
       it "finds the firm even though it has special characters" do
         get_request
         expect(unescaped_response_body).to include(firm.name)
+      end
+    end
+
+    context "when a page has been visited before this one" do
+      let(:previous_page_visited) { true }
+
+      it "has a back link to the additional_accounts page" do
+        expect(response.body).to have_back_link(reset_citizens_check_answers_path)
+      end
+    end
+
+    context "when no previous page has been visited" do
+      let(:previous_page_visited) { false }
+
+      it "does not have a back link" do
+        expect(response.body).to have_no_css("a.govuk-back-link")
       end
     end
   end
@@ -85,6 +106,27 @@ RSpec.describe "check your answers requests" do
     it "records when the declaration was accepted" do
       patch_request
       expect(legal_aid_application.reload.declaration_accepted_at).to be_between(2.seconds.ago, Time.current)
+    end
+  end
+
+  describe 'PATCH "/citizens/check_answers/reset"' do
+    subject(:patch_request) { patch "/citizens/check_answers/reset" }
+
+    before do
+      get citizens_additional_accounts_path
+      get citizens_check_answers_path
+    end
+
+    it "resets the application" do
+      expect { patch_request }
+        .to change { legal_aid_application.reload.state }
+        .from("checking_citizen_answers")
+        .to("applicant_entering_means")
+    end
+
+    it "redirects to the previous page" do
+      patch_request
+      expect(response).to redirect_to(citizens_additional_accounts_path(back: true))
     end
   end
 end
