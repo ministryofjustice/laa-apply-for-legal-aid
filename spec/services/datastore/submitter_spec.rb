@@ -6,8 +6,9 @@ RSpec.describe Datastore::Submitter do
   let(:legal_aid_application) { create(:legal_aid_application) }
 
   describe ".call" do
-    subject(:call) { described_class.call(legal_aid_application, persister_klass:) }
+    subject(:call) { described_class.call(legal_aid_application, token_object:, persister_klass:) }
 
+    let(:token_object) { build(:entra_id_token, refresh_token: "fake_refresh_token", expires_at: 1.hour.from_now) }
     let(:persister_klass) { Datastore::Persister }
 
     context "with successful response" do
@@ -94,6 +95,18 @@ RSpec.describe Datastore::Submitter do
 
       it "raises error" do
         expect { call }.to raise_error(described_class::ApiError, "Datastore Submission Failed: status 500, body {\"type\":\"about:blank\",\"title\":\"Internal server error\",\"status\":500,\"detail\":\"An unexpected application error has occurred.\",\"instance\":\"/api/v0/applications\"}")
+      end
+    end
+
+    context "when token object is not provided" do
+      let(:token_object) { nil }
+
+      before do
+        stub_other_failed_refresh_token_request
+      end
+
+      it "encounters connection error and passes it up the chain" do
+        expect { call }.to raise_error(Datastore::Connection::ConnectionError)
       end
     end
   end

@@ -53,5 +53,11 @@ FactoryBot.define do
     trait :with_ccms_apply_role do
       roles { "EMI,PUI_XXCCMS_BILL_PREPARATION,CWA_eFormsFirmAdministrator,CCMS_Apply,PUI_XXCCMS_CROSS_OFFICE_ACCESS,EFORMS,CWA_XXLSC_EM_ACT_MGR_EXT" }
     end
+
+    trait :with_entra_id_token do
+      after(:build) do |provider|
+        build(:entra_id_token, provider:)
+      end
+    end
   end
 end

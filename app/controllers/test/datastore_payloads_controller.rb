@@ -24,13 +24,21 @@ module Test
     end
 
     def submit
-      datastore_id = Datastore::Submitter.call(legal_aid_application, refresh_token: current_provider.entra_id_token&.refresh_token)
+      datastore_id = Datastore::Submitter.call(legal_aid_application, token_object: current_provider.entra_id_token)
 
       flash[:notice] = "Submitted application \"#{legal_aid_application.application_ref}\" to datastore. It was given an id of \"#{datastore_id}\"."
+      redirect_back_or_to(authenticated_root_path)
     rescue Datastore::Submitter::ApiError => e
       flash[:error] = e.message
-    ensure
+
       redirect_back_or_to(authenticated_root_path)
+    rescue Datastore::Connection::ConnectionExpired
+      # clear expired token from database to prevent further failed attempts to use it
+      current_provider.entra_id_token.presence&.destroy!
+      sign_out current_provider
+
+      # TODO: Is this session expired page suitable?
+      redirect_to session_expired_path(reason: :timeout)
     end
 
   private

@@ -5,32 +5,30 @@
 #  1. the data access api registration having an App registration with an Exposed API with a scope defined (e.g. access_as_user) ✅
 #  2. the data access api registration's Exposed API having this App listed as an authorized client, to prevent the client app needing
 #    to seek consent from the user it is acting on behalf of ✅
-#  3. this service requests a new token using the scope defined a 1. above using the refresh token it got at login time ✅
+#  3. this service requests a new token using the scope defined at 1. above using the refresh token it got at login time ✅
 module Datastore
   class TokenService
     TOKEN_URL = "https://login.microsoftonline.com/#{ENV.fetch('OMNIAUTH_ENTRAID_TENANT_ID', nil)}/oauth2/v2.0/token".freeze
 
-    def initialize(refresh_token:)
-      @refresh_token = refresh_token
+    def initialize(token_object:)
+      @token_object = token_object
+      @refresh_token = token_object&.refresh_token
     end
 
     def call
       response = Faraday.post(TOKEN_URL, token_request_body)
       parsed_response = JSON.parse(response.body)
 
-      # TODO?!: if this happens and is caused by an invalid_grant error, that likely means the refresh token
-      # we have is expired/invalid and we need to sign the user in again to get a new refresh token, so we
-      # should handle that case gracefully (e.g. by signing the user out and asking them to sign in again
-      # with a message explaining why)
       raise(TokenExchangeError, parsed_response) unless response.success?
 
-      # TODO: Do we need to store the refresh token returned?
-      TokenResponse.new(parsed_response)
+      token_response = TokenResponse.new(parsed_response)
+      store_new_tokens!(token_response)
+      token_response
     end
 
   private
 
-    attr_reader :refresh_token
+    attr_reader :token_object, :refresh_token
 
     def token_request_body
       {
@@ -40,6 +38,10 @@ module Datastore
         refresh_token: refresh_token,
         scope: ENV.fetch("DATA_ACCESS_API_AUTH_SCOPE", nil),
       }
+    end
+
+    def store_new_tokens!(token_response)
+      token_object.refresh_token!(credentials: token_response)
     end
   end
 

@@ -16,4 +16,11 @@ class EntraIdToken < ApplicationRecord
       expires_at: credentials.expires_in&.seconds&.from_now || 1.hour.from_now, # Default to 1 hour if no expiry provided
     )
   end
+
+  def refresh_token!(credentials:)
+    update!(
+      refresh_token: credentials.refresh_token,
+      expires_at: credentials.expires_in&.seconds&.from_now || 1.hour.from_now, # Default to 1 hour if no expiry provided
+    )
+  end
 end
