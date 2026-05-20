@@ -1,12 +1,10 @@
 <%= page_template(
       page_title: t(".h1-heading"),
-      back_link: {
-        path: reset_citizens_check_answers_path,
-        method: :patch,
-      },
+      back_link: if back_path.present?
+                   { path: reset_citizens_check_answers_path, method: :patch }
+                 end,
       column_width: "full",
     ) do %>
-
   <%= render "bank_accounts" %>
 
   <%= render "shared/applicant_declaration" %>
