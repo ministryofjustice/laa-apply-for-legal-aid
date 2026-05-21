@@ -36,7 +36,8 @@ class Provider < ApplicationRecord
         selected_office: nil,
       )
 
-      EntraIdToken.store!(record, credentials: auth.credentials)
+      datastore_token = Datastore::TokenExchangeService.new(refresh_token: auth.credentials.refresh_token).call
+      EntraIdToken.store!(record, credentials: datastore_token)
     end
   rescue StandardError => e
     Rails.logger.info("#{__method__}: omniauth encountered error \"#{e}\"")
