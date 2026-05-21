@@ -11,7 +11,7 @@ module Flow
           end
         end,
         check_answers: lambda do |application|
-          if application.non_means_tested?
+          if application.non_means_tested? || !application.applicant.has_partner.nil?
             :check_provider_answers
           else
             :client_has_partners
