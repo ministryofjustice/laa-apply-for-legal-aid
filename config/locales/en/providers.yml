@@ -2180,7 +2180,7 @@ en:
       delegated_functions:
         show:
           question: Have you used delegated functions for this proceeding?
-          sca_warning: For special children act, always answer yes and give the delegated functions date now
+          sca_question: When did you use delegated functions for this proceeding?
       final_hearings:
         show:
           question: Has the proceeding been listed for a final contested hearing?

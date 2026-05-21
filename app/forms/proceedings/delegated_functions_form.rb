@@ -6,6 +6,8 @@ module Proceedings
 
     attr_accessor :used_delegated_functions, :used_delegated_functions_on
 
+    before_validation :set_used_delegated_functions_to_true, if: :special_children_act_proceeding?
+
     validates :used_delegated_functions, inclusion: [true, false, "true", "false"], unless: :draft?
 
     validates :used_delegated_functions_on,
@@ -24,6 +26,15 @@ module Proceedings
     set_callback :save, :after, :reset_proceeding_loop, if: :used_delegated_functions_changed?
 
   private
+
+    def special_children_act_proceeding?
+      model.special_children_act?
+    end
+
+    def set_used_delegated_functions_to_true
+      self.used_delegated_functions = true
+      attributes[:used_delegated_functions] = true
+    end
 
     def used_delegated_functions_on_required?
       return false if draft?

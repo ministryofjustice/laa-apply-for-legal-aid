@@ -43,6 +43,34 @@ RSpec.describe Proceedings::DelegatedFunctionsForm, type: :form do
       end
     end
 
+    context "when the proceeding is a special children act proceeding" do
+      let(:proceeding) { create(:proceeding, :special_children_act) }
+      let(:used_df?) { nil }
+      let(:df_date) { Time.zone.yesterday.to_s(:date_picker) }
+
+      it "automatically sets used_delegated_functions to true and updates the proceeding" do
+        expect { save_form }
+          .to change { proceeding.reload.attributes.symbolize_keys }
+            .from(
+              hash_including(
+                {
+                  used_delegated_functions: nil,
+                  used_delegated_functions_on: nil,
+                  used_delegated_functions_reported_on: nil,
+                },
+              ),
+            ).to(
+              hash_including(
+                {
+                  used_delegated_functions: true,
+                  used_delegated_functions_on: Time.zone.yesterday,
+                  used_delegated_functions_reported_on: Time.zone.today,
+                },
+              ),
+            )
+      end
+    end
+
     context "when the user selects nothing" do
       let(:used_df?) { nil }
       let(:df_date) { nil }

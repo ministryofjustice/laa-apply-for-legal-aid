@@ -43,8 +43,7 @@ RSpec.describe "DelegatedFunctionsController" do
           expect(page)
             .to have_content("Proceeding 1")
             .and have_content("Child assessment order")
-            .and have_content("Have you used delegated functions for this proceeding?")
-            .and have_css("strong", text: "For special children act, always answer yes and give the delegated functions date now")
+            .and have_content("When did you use delegated functions for this proceeding?")
         end
       end
     end
