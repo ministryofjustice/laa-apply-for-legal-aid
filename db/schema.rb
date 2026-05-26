@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_08_091835) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_26_064447) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -638,6 +638,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_08_091835) do
     t.index ["legal_aid_application_id"], name: "index_involved_children_on_legal_aid_application_id"
   end
 
+  create_table "legal_aid_application_progressions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.jsonb "derek"
+    t.uuid "legal_aid_application_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["legal_aid_application_id"], name: "idx_on_legal_aid_application_id_a1807b318d"
+  end
+
   create_table "legal_aid_application_transaction_types", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.uuid "legal_aid_application_id"
@@ -1216,6 +1224,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_08_091835) do
   add_foreign_key "final_hearings", "proceedings"
   add_foreign_key "hmrc_responses", "legal_aid_applications"
   add_foreign_key "involved_children", "legal_aid_applications"
+  add_foreign_key "legal_aid_application_progressions", "legal_aid_applications"
   add_foreign_key "legal_aid_applications", "applicants"
   add_foreign_key "legal_aid_applications", "offices"
   add_foreign_key "legal_aid_applications", "providers"

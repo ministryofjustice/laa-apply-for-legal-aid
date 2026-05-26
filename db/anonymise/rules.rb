@@ -154,6 +154,7 @@ NINO_REGEXP = /^[A-CEGHJ-PR-TW-Z]{1}[A-CEGHJ-NPR-TW-Z]{1}[0-9]{6}[A-DFM]{1}$/
   },
   legal_aid_application_transaction_types: {},
   legal_aid_applications: {},
+  legal_aid_application_progressions: {},
   legal_framework_merits_task_lists: {},
   legal_framework_submission_histories: {},
   legal_framework_submissions: {},
