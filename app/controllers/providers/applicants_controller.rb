@@ -8,13 +8,13 @@ module Providers
 
     def create
       @form = Applicants::BasicDetailsForm.new(form_params)
-
       if save_continue_or_draft(@form)
         legal_aid_application.update!(
           applicant:,
           provider_step: edit_applicant_key_point.step,
         )
         replace_last_page_in_history(edit_applicant_path)
+        progression.record_form_progression(@form.class, @form.class::EDIT_DETAILS.section, @form.class::EDIT_DETAILS.task, @form.errors.empty?)
       else
         render :new
       end
@@ -27,6 +27,10 @@ module Providers
         provider: current_provider,
         office: current_provider.selected_office,
       )
+    end
+
+    def progression
+      @progression ||= LegalAidApplicationProgression.find_or_create_by(legal_aid_application:)
     end
 
     def applicant
