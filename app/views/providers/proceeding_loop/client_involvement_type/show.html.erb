@@ -10,9 +10,16 @@
 
     <% if @legal_aid_application.has_sca_secure_accommodation_order_proceeding? %>
       <%= form.govuk_radio_buttons_fieldset :client_involvement_type_ccms_code,
-                                            legend: { size: "m", tag: "h2", text: t(".sao_question") } do %>
+                                            legend: { size: "m", tag: "h2", text: t(".single_option_heading") } do %>
         <p class="govuk-body"><%= t(".sao_text") %></p>
         <%= form.hidden_field :client_involvement_type_ccms_code, value: "W" %>
+        <%= next_action_buttons(form:, show_draft: true) %>
+      <% end %>
+    <% elsif @form.client_involvement_types.one? && @form.client_involvement_types.first.ccms_code == "D" %>
+      <%= form.govuk_radio_buttons_fieldset :client_involvement_type_ccms_code,
+                                            legend: { size: "m", tag: "h2", text: t(".single_option_heading") } do %>
+        <p class="govuk-body"><%= @proceeding.used_delegated_functions? ? t(".respondent_df_text") : t(".respondent_text") %></p>
+        <%= form.hidden_field :client_involvement_type_ccms_code, value: "D" %>
         <%= next_action_buttons(form:, show_draft: true) %>
       <% end %>
     <% else %>

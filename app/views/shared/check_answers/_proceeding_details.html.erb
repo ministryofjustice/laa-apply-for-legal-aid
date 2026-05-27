@@ -3,7 +3,7 @@
         card.with_action do
           unless @show_linked_proceedings || @read_only
             govuk_link_to(t("generic.change"),
-                          providers_legal_aid_application_client_involvement_type_path(@legal_aid_application, proceeding),
+                          providers_legal_aid_application_delegated_function_path(@legal_aid_application, proceeding),
                           id: "app-check-your-answers__#{proceeding.ccms_code.downcase}",
                           visually_hidden_suffix: "#{proceeding.meaning} #{t('.description')}")
           end

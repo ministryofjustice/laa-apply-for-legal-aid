@@ -51,15 +51,15 @@ Feature: Non-means-tested applicant journey without use of delegation functions
 
     When I choose 'No'
     And I click 'Save and continue'
-    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client's role in this proceeding?'
-
-    When I choose 'Applicant, claimant or petitioner'
-    And I click 'Save and continue'
     Then I should see 'Proceeding 1\nNon-molestation order\nHave you used delegated functions for this proceeding?'
 
     When I choose 'No'
     And I click 'Save and continue'
-   Then I should see 'Proceeding 1\nNon-molestation order'
+    Then I should see 'Proceeding 1\nNon-molestation order\nWhat is your client's role in this proceeding?'
+
+    When I choose 'Applicant, claimant or petitioner'
+    And I click 'Save and continue'
+    Then I should see 'Proceeding 1\nNon-molestation order'
     And I should see 'Do you want to use the default level of service and scope for the substantive application?'
 
     When I choose 'Yes'

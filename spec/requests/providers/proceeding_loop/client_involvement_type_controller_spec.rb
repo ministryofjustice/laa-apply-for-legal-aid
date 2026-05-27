@@ -28,16 +28,35 @@ def client_involvement_types_da001_response
   }.to_json
 end
 
+def client_involvement_types_sca_response
+  {
+    success: true,
+    client_involvement_type: [
+      {
+        ccms_code: "D",
+        description: "Defendant/respondent",
+      },
+      {
+        ccms_code: "W",
+        description: "Subject of proceedings (child)",
+      },
+    ],
+  }.to_json
+end
+
 RSpec.describe "ClientInvolvementTypeController" do
-  let(:application) { create(:legal_aid_application, :with_proceedings) }
+  let(:application) { create(:legal_aid_application, :with_proceedings, applicant:) }
+  let(:applicant) { create(:applicant, date_of_birth:) }
   let(:proceeding) { application.proceedings.first }
   let(:provider) { application.provider }
+  let(:date_of_birth) { 18.years.ago }
+  let(:client_involvement_type_response) { client_involvement_types_da001_response }
 
   before do
-    stub_request(:get, %r{#{Rails.configuration.x.legal_framework_api_host}/client_involvement_types/DA001})
+    stub_request(:get, %r{#{Rails.configuration.x.legal_framework_api_host}/client_involvement_types/})
       .to_return(
         status: 200,
-        body: client_involvement_types_da001_response,
+        body: client_involvement_type_response,
         headers: { "Content-Type" => "application/json; charset=utf-8" },
       )
   end
@@ -54,17 +73,70 @@ RSpec.describe "ClientInvolvementTypeController" do
     context "when the provider is authenticated" do
       before do
         login_as provider
-        get_cit
       end
 
       it "returns http success" do
+        get_cit
         expect(response).to have_http_status(:ok)
       end
 
       it "displays the heading" do
+        get_cit
         expect(response.body).to include("Proceeding 1")
         expect(response.body).to include("Inherent jurisdiction high court injunction")
         expect(unescaped_response_body).to include("What is your client's role in this proceeding?")
+      end
+
+      it "does not display the child option" do
+        get_cit
+        expect(unescaped_response_body).not_to include("A child subject of the proceeding")
+      end
+
+      context "when the application is an SCA application" do
+        let(:application) { create(:legal_aid_application, :with_multiple_sca_proceedings, applicant:) }
+        let(:client_involvement_type_response) { client_involvement_types_sca_response }
+
+        it "displays the single option heading" do
+          get_cit
+          expect(unescaped_response_body).to include("Your client's role in this proceeding")
+        end
+
+        it "displays the correct text" do
+          get_cit
+          expect(unescaped_response_body).to include("Your client must be the respondent because they are over 18.")
+        end
+
+        context "when the provider has used delegated functions for the proceeding" do
+          before { proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: Time.zone.today, used_delegated_functions_reported_on: Time.zone.today) }
+
+          it "displays the single option heading" do
+            get_cit
+            expect(unescaped_response_body).to include("Your client's role in this proceeding")
+          end
+
+          it "displays the correct text" do
+            get_cit
+            expect(unescaped_response_body).to include("Your client must be the respondent because they were over 18 when you used delegated functions.")
+          end
+
+          context "when the defendant was under 18 when delegated functions were used" do
+            before { proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: 1.day.ago, used_delegated_functions_reported_on: Time.zone.today) }
+
+            it "displays the child option" do
+              get_cit
+              expect(unescaped_response_body).to include("A child subject of the proceeding")
+            end
+          end
+        end
+      end
+
+      context "when applicant is under 18" do
+        let(:date_of_birth) { 17.years.ago }
+
+        it "displays the child option" do
+          get_cit
+          expect(unescaped_response_body).to include("A child subject of the proceeding")
+        end
       end
     end
   end
@@ -96,7 +168,33 @@ RSpec.describe "ClientInvolvementTypeController" do
 
         it "redirects to next page" do
           post_cit
-          expect(response).to have_http_status(:redirect)
+          expect(response).to redirect_to(providers_legal_aid_application_substantive_default_path(application.id, proceeding.id))
+        end
+
+        context "when the provider has used delegated functions for the proceeding" do
+          let(:application) do
+            create(:legal_aid_application,
+                   :with_proceedings,
+                   :with_delegated_functions_on_proceedings,
+                   df_options: { DA001: 10.days.ago })
+          end
+
+          it "redirects to next page" do
+            post_cit
+            expect(response).to redirect_to(providers_legal_aid_application_emergency_default_path(application.id, proceeding.id))
+          end
+        end
+
+        context "when the provider has not used delegated functions for the proceeding" do
+          let(:application) do
+            create(:legal_aid_application,
+                   :with_proceedings)
+          end
+
+          it "redirects to next page" do
+            post_cit
+            expect(response).to redirect_to(providers_legal_aid_application_substantive_default_path(application.id, proceeding.id))
+          end
         end
 
         context "and pre-existing data is present" do

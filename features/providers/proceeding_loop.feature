@@ -58,18 +58,6 @@ Feature: Loop through proceeding questions
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page with title "Child arrangements order (CAO) - residence - appeal - vary"
-    And I should be on a page showing "Proceeding 1 of 2"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
-    And I should be on a page showing "What is your client's role in this proceeding?"
-    And I should see "Applicant, claimant or petitioner"
-    And I should see "Defendant or respondent"
-    And I should see "A child subject of the proceeding"
-    And I should see "Intervenor"
-    And I should see "Joined party"
-
-    When I choose "Applicant, claimant or petitioner"
-    And I click 'Save and continue'
     And I should be on a page showing "Proceeding 1 of 2"
     And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
     And I should see "Have you used delegated functions for this proceeding?"
@@ -83,6 +71,18 @@ Feature: Loop through proceeding questions
     And I should see "Did you use delegated functions for this proceeding on"
 
     When I choose "Yes"
+    And I click 'Save and continue'
+    Then I should be on a page with title "Child arrangements order (CAO) - residence - appeal - vary"
+    And I should be on a page showing "Proceeding 1 of 2"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
+    And I should be on a page showing "What is your client's role in this proceeding?"
+    And I should see "Applicant, claimant or petitioner"
+    And I should see "Defendant or respondent"
+    And I should not see "A child subject of the proceeding"
+    And I should see "Intervenor"
+    And I should see "Joined party"
+
+    When I choose "Applicant, claimant or petitioner"
     And I click 'Save and continue'
     And I should be on a page showing "Proceeding 1 of 2"
     And I should be on a page showing "Child arrangements order (CAO) - residence - appeal - vary"
@@ -147,19 +147,18 @@ Feature: Loop through proceeding questions
     And the checkbox "Hearing/Adjournment" is checked
     And the field "proceeding-hearing-date-cv027-field" has value "2/2/2025"
     And I click 'Save and continue'
+    Then I should be on a page showing "Proceeding 2 of 2"
+    And I should be on a page showing "Enforcement order 11J"
+    And I should see "Have you used delegated functions for this proceeding?"
 
+    When I choose "No"
+    And I click 'Save and continue'
     Then I should be on a page with title "Enforcement order 11J"
     And I should be on a page showing "Proceeding 2 of 2"
     And I should be on a page showing "Enforcement order 11J"
     And I should be on a page showing "What is your client's role in this proceeding?"
 
     When I choose "Joined party"
-    And I click 'Save and continue'
-    Then I should be on a page showing "Proceeding 2 of 2"
-    And I should be on a page showing "Enforcement order 11J"
-    And I should see "Have you used delegated functions for this proceeding?"
-
-    When I choose "No"
     And I click 'Save and continue'
     Then I should be on a page showing "Proceeding 2 of 2"
     And I should be on a page showing "Enforcement order 11J"
@@ -226,19 +225,19 @@ Feature: Loop through proceeding questions
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page with title "Child arrangements order (CAO) - residence - appeal"
-    And I should be on a page showing "Proceeding 1 of 2"
-    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
-    And I should be on a page showing "What is your client's role in this proceeding?"
-
-    When I choose "Applicant, claimant or petitioner"
-    And I click 'Save and continue'
     And I should be on a page showing "Proceeding 1 of 2"
     And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
     And I should see "Have you used delegated functions for this proceeding?"
 
     When I choose "Yes"
     And I enter the 'delegated functions on' date of 1 day ago using the date picker field
+    And I click 'Save and continue'
+    Then I should be on a page with title "Child arrangements order (CAO) - residence - appeal"
+    And I should be on a page showing "Proceeding 1 of 2"
+    And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
+    And I should be on a page showing "What is your client's role in this proceeding?"
+
+    When I choose "Applicant, claimant or petitioner"
     And I click 'Save and continue'
     And I should be on a page showing "Proceeding 1 of 2"
     And I should be on a page showing "Child arrangements order (CAO) - residence - appeal"
@@ -254,18 +253,18 @@ Feature: Loop through proceeding questions
 
     When I choose "Yes"
     And I click 'Save and continue'
+    Then I should be on a page showing "Proceeding 2 of 2"
+    And I should be on a page showing "Enforcement order 11J"
+    And I should see "Have you used delegated functions for this proceeding?"
+
+    When I choose "No"
+     And I click 'Save and continue'
     Then I should be on a page with title "Enforcement order 11J"
     And I should be on a page showing "Proceeding 2 of 2"
     And I should be on a page showing "Enforcement order 11J"
     And I should be on a page showing "What is your client's role in this proceeding?"
 
     When I choose "Joined party"
-    And I click 'Save and continue'
-    Then I should be on a page showing "Proceeding 2 of 2"
-    And I should be on a page showing "Enforcement order 11J"
-    And I should see "Have you used delegated functions for this proceeding?"
-
-    When I choose "No"
     And I click 'Save and continue'
     Then I should be on a page showing "Proceeding 2 of 2"
     And I should be on a page showing "Enforcement order 11J"
@@ -307,17 +306,17 @@ Feature: Loop through proceeding questions
 
     When I choose "No"
     And I click 'Save and continue'
-    Then I should be on a page with title "Enforcement order 11J"
-    And I should be on a page showing "What is your client's role in this proceeding?"
-
-    When I choose "Applicant, claimant or petitioner"
-    And I click 'Save and continue'
     And I should be on a page showing "Proceeding 1"
     And I should be on a page showing "Enforcement order 11J"
     And I should see "Have you used delegated functions for this proceeding?"
 
     When I choose "Yes"
     And I enter the 'delegated functions on' date of 1 day ago using the date picker field
+    And I click 'Save and continue'
+    Then I should be on a page with title "Enforcement order 11J"
+    And I should be on a page showing "What is your client's role in this proceeding?"
+
+    When I choose "Applicant, claimant or petitioner"
     And I click 'Save and continue'
     And I should be on a page showing "Proceeding 1"
     And I should be on a page showing "Enforcement order 11J"

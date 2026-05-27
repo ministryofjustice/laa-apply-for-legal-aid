@@ -22,20 +22,28 @@ RSpec.describe Flow::ProceedingLoop do
 
       before { allow(legal_aid_application).to receive(:provider_step_params).and_return({}) }
 
-      it { is_expected.to be :client_involvement_type }
+      it { is_expected.to be :delegated_functions }
     end
 
     context "when the user is on the second of three proceedings" do
-      context "and is on the client involvement page" do
-        let(:provider_step) { "client_involvement_type" }
+      context "and is on the delegated functions page" do
+        let(:provider_step) { "delegated_functions" }
 
         before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
 
-        it { is_expected.to be :delegated_functions }
+        it { is_expected.to be :client_involvement_type }
+
+        context "and the delegated_function date is over a month old" do
+          before do
+            legal_aid_application.proceedings.in_order_of_addition.second.update!(used_delegated_functions_on: 35.days.ago)
+          end
+
+          it { is_expected.to be :confirm_delegated_functions_date }
+        end
       end
 
-      context "and is on the delegated_function page" do
-        let(:provider_step) { "delegated_functions" }
+      context "and is on the client_involvement_type page" do
+        let(:provider_step) { "client_involvement_type" }
 
         before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
 
@@ -62,14 +70,6 @@ RSpec.describe Flow::ProceedingLoop do
 
         context "and the proceeding has not used delegated functions" do
           it { is_expected.to be :substantive_defaults }
-        end
-
-        context "and the delegated_function date is over a month old" do
-          before do
-            legal_aid_application.proceedings.in_order_of_addition.second.update!(used_delegated_functions_on: 35.days.ago)
-          end
-
-          it { is_expected.to be :confirm_delegated_functions_date }
         end
       end
 
@@ -101,7 +101,7 @@ RSpec.describe Flow::ProceedingLoop do
         context "and the user accepts the defaults" do
           before { proceeding.update!(accepted_substantive_defaults: true) }
 
-          it { is_expected.to be :client_involvement_type }
+          it { is_expected.to be :delegated_functions }
         end
 
         context "and the user does not accept the defaults" do
@@ -125,7 +125,7 @@ RSpec.describe Flow::ProceedingLoop do
           let(:df_options) { { pb003: [10.days.ago, 10.days.ago], pb007: [10.days.ago, 10.days.ago], DA005: [nil, nil] } }
           let(:proceeding) { legal_aid_application.proceedings.in_order_of_addition.first }
 
-          it { is_expected.to be :client_involvement_type }
+          it { is_expected.to be :delegated_functions }
         end
 
         context "when used_delegated functions_date > one month ago - test for ap-3537" do
@@ -134,7 +134,7 @@ RSpec.describe Flow::ProceedingLoop do
             legal_aid_application.proceedings.in_order_of_addition.second.update!(used_delegated_functions_on: 35.days.ago)
           end
 
-          it { is_expected.to be :client_involvement_type }
+          it { is_expected.to be :delegated_functions }
         end
       end
 
@@ -167,12 +167,12 @@ RSpec.describe Flow::ProceedingLoop do
 
         before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.second.id }) }
 
-        it { is_expected.to be :client_involvement_type }
+        it { is_expected.to be :delegated_functions }
       end
     end
 
     context "when the user is on the final of the three proceedings" do
-      let(:provider_step) { "delegated_functions" }
+      let(:provider_step) { "client_involvement_type" }
 
       before do
         allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => legal_aid_application.proceedings.in_order_of_addition.last.id })
@@ -279,6 +279,14 @@ RSpec.describe Flow::ProceedingLoop do
       end
 
       it { is_expected.to eq first_proceeding }
+
+      context "when the the user has returned to the confirm_delegated_functions_date page on the second proceeding" do
+        let(:provider_step) { "confirm_delegated_functions_date" }
+
+        before { allow(legal_aid_application).to receive(:provider_step_params).and_return({ "id" => second_proceeding.id }) }
+
+        it { is_expected.to eq second_proceeding }
+      end
     end
 
     context "when the user is on the final page of the second proceeding" do

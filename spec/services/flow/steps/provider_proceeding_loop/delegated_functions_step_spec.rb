@@ -4,8 +4,6 @@ RSpec.describe Flow::Steps::ProviderProceedingLoop::DelegatedFunctionsStep, type
   let(:application) { create(:legal_aid_application, :with_proceedings) }
   let(:proceeding) { application.proceedings.first }
 
-  before { allow(application).to receive(:provider_step_params).and_return({ "id" => proceeding.id }) }
-
   describe "#path" do
     subject { described_class.path.call(application) }
 
@@ -15,9 +13,9 @@ RSpec.describe Flow::Steps::ProviderProceedingLoop::DelegatedFunctionsStep, type
   describe "#forward" do
     subject { described_class.forward.call(application) }
 
-    before { allow(Flow::ProceedingLoop).to receive(:next_step).and_return(:substantive_defaults) }
+    before { allow(Flow::ProceedingLoop).to receive(:next_step).and_return(:client_involvement_type) }
 
-    it { is_expected.to eq :substantive_defaults }
+    it { is_expected.to eq :client_involvement_type }
   end
 
   describe "#check_answers" do
