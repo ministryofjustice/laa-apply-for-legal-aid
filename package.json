@@ -11,14 +11,14 @@
   "dependencies": {
     "@ministryofjustice/frontend": "^9.0.0",
     "@rails/ujs": "^7.1.502",
-    "axios": "^1.16.0",
+    "axios": "^1.16.1",
     "core-js": "^3.49.0",
     "dropzone": "^6.0.0-beta.2",
     "govuk-frontend": "^6.1.0",
     "jquery": "^4.0.0",
     "js-search": "^2.0.1",
     "moment": "^2.30.1",
-    "puppeteer": "^24.43.1",
+    "puppeteer": "^25.0.4",
     "sanitize-html": "^2.17.4"
   },
   "devDependencies": {
@@ -28,10 +28,10 @@
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-macros": "^3.1.0",
     "esbuild": "^0.28.0",
-    "postcss": "^8.5.13",
+    "postcss": "^8.5.15",
     "sass": "^1.99.0",
     "standard": "^17.1.2",
-    "stylelint": "^17.9.1",
+    "stylelint": "^17.11.1",
     "stylelint-config-gds": "^2.0.0",
     "stylelint-order": "^8.1.1"
   },
