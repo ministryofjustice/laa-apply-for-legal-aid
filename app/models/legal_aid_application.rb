@@ -68,6 +68,7 @@ class LegalAidApplication < ApplicationRecord
   has_many :discretionary_capital_disregards, -> { where(mandatory: "false") }, class_name: "CapitalDisregard"
   has_many :mandatory_capital_disregards, -> { where(mandatory: "true") }, class_name: "CapitalDisregard"
   has_many :datastore_submissions, -> { order(created_at: :asc) }, class_name: "Datastore::Submission", inverse_of: :legal_aid_application, dependent: :destroy
+  has_one :legal_aid_application_progression
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref
@@ -76,6 +77,7 @@ class LegalAidApplication < ApplicationRecord
 
   validate :validate_document_categories
 
+  delegate :record_form_progression, to: :legal_aid_application_progression, allow_nil: true
   delegate :bank_transactions, :under_18?, to: :applicant, allow_nil: true
   delegate :full_name, :has_partner, :has_partner?, :has_partner_with_no_contrary_interest?, to: :applicant, prefix: true, allow_nil: true
   delegate :shared_benefit_with_applicant, :shared_benefit_with_applicant?, to: :partner, allow_nil: true
