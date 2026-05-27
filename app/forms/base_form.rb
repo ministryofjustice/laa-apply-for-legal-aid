@@ -3,7 +3,10 @@ class BaseForm
   include ActiveModel::Validations::Callbacks
   include ActiveSupport::Callbacks
 
+  EditStruct = Struct.new(:section, :task, :application_path, :uuid)
+
   define_callbacks :save, :validation
+  set_callback :validation, :after, :update_progression
 
   attr_writer :model
 
@@ -112,6 +115,23 @@ class BaseForm
   end
 
 private
+
+  def update_progression
+    return unless self.class.const_defined?("EDIT_DETAILS")
+
+    legal_aid_application = model.is_a?(LegalAidApplication) ? model : model.send(self.class::EDIT_DETAILS.application_path)
+    uuid = self.class::EDIT_DETAILS.uuid.present? ? model.send(self.class::EDIT_DETAILS.uuid) : nil
+    legal_aid_application.create_legal_aid_application_progression if legal_aid_application.legal_aid_application_progression.blank?
+    legal_aid_application.record_form_progression(self.class,
+                                                  self.class::EDIT_DETAILS.section,
+                                                  self.class::EDIT_DETAILS.task,
+                                                  errors.empty?,
+                                                  uuid:)
+  rescue NoMethodError => e
+    Rails.logger.info "#{self.class} raised NoMethodError with #{e.message}"
+  rescue NameError => e
+    Rails.logger.info "#{self.class} raised NameError with #{e.message}"
+  end
 
   def clean_attributes(hash)
     hash.each_with_object({}) do |(k, v), new_hash|
