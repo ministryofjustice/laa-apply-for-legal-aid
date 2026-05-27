@@ -3,6 +3,8 @@ module Providers
     class CopyForm < BaseForm
       form_for LegalAidApplication
 
+      EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :linked_application, application_path: "associated_application")
+
       attr_accessor :copy_case
 
       validates :copy_case, inclusion: [true, false, "true", "false"], unless: :draft?

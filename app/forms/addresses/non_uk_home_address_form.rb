@@ -2,6 +2,8 @@ module Addresses
   class NonUkHomeAddressForm < BaseForm
     form_for Address
 
+    EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :client_details, application_path: "legal_aid_application")
+
     attr_accessor :country_name, :address_line_one, :address_line_two, :city, :county, :postcode
 
     validates :address_line_one, presence: true, unless: :draft?

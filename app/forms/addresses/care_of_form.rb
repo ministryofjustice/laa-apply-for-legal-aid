@@ -2,6 +2,8 @@ module Addresses
   class CareOfForm < BaseForm
     form_for Address
 
+    EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :client_details, application_path: "legal_aid_application")
+
     attr_accessor :care_of, :care_of_first_name, :care_of_last_name, :care_of_organisation_name
 
     validates :care_of, presence: true, unless: :draft?

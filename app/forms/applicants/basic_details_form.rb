@@ -2,6 +2,8 @@ module Applicants
   class BasicDetailsForm < BaseForm
     include DateOfBirthHandling
 
+    EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :client_details, application_path: "legal_aid_application")
+
     ATTRIBUTES = %i[first_name
                     last_name
                     date_of_birth_1i

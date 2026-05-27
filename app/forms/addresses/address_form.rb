@@ -2,6 +2,8 @@ module Addresses
   class AddressForm < BaseForm
     form_for Address
 
+    EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :client_details, application_path: "legal_aid_application")
+
     attr_accessor :address_line_one, :address_line_two, :address_line_three, :city, :county, :postcode, :lookup_postcode, :lookup_error, :location
 
     before_validation :normalise_postcode

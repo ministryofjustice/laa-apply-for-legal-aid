@@ -3,6 +3,7 @@ module Providers
     class FindLinkApplicationForm < BaseForm
       form_for LinkedApplication
 
+      EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :linked_application, application_path: "associated_application")
       APPLICATION_REF_REGEXP = /\AL-[0-9ABCDEFHJKLMNPRTUVWXY]{3}-[0-9ABCDEFHJKLMNPRTUVWXY]{3}\z/i
 
       attr_accessor :search_laa_reference, :legal_aid_application
