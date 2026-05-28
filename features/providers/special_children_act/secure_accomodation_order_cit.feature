@@ -44,17 +44,17 @@ Feature: Adding an SCA Secure Accommodation Order proceeding sets all client_inv
     And I click 'Save and continue'
 
     Then I should be on a page with title "Child assessment order"
-    And I should see "Have you used delegated functions for this proceeding?"
-    When I choose 'No'
+    And I should see "When did you use delegated functions for this proceeding?"
+    When I enter the 'delegated functions on' date of 2 days ago using the date picker field
     And I click 'Save and continue'
 
     Then I should be on a page with title "Child assessment order"
-    And I should see "Your client must be the respondent because they are over 18."
+    And I should see "Your client must be the respondent because they were over 18 when you used delegated functions."
     And I should not see "A child subject of the proceeding"
 
     When I click link "Back"
     Then I should be on a page with title "Child assessment order"
-    And I should see "Have you used delegated functions for this proceeding?"
+    And I should see "When did you use delegated functions for this proceeding?"
 
     When I click link "Back"
     Then I should be on a page showing 'Do you want to add another proceeding?'
@@ -81,9 +81,9 @@ Feature: Adding an SCA Secure Accommodation Order proceeding sets all client_inv
     When I choose "No"
     And I click 'Save and continue'
     Then I should be on a page with title "Child assessment order"
-    And I should see "Have you used delegated functions for this proceeding?"
+    And I should see "When did you use delegated functions for this proceeding?"
 
-    When I choose 'No'
+    When I enter the 'delegated functions on' date of 2 days ago using the date picker field
     And I click 'Save and continue'
     And I should not see "Respondent"
     And I should not see "A child subject of the proceeding"
