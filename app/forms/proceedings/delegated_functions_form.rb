@@ -4,6 +4,8 @@ module Proceedings
 
     form_for Proceeding
 
+    EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :proceedings, application_path: "associated_application")
+
     attr_accessor :used_delegated_functions, :used_delegated_functions_on
 
     before_validation :set_used_delegated_functions_to_true, if: :special_children_act_proceeding?
