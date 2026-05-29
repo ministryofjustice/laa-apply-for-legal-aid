@@ -24,8 +24,9 @@ module Datastore
     # must be exchanged for a new one using the refresh token. If the refresh token is expired then a RefreshTokenExpired error is raised, which
     # should be handled by forcing user sign in again
     def datastore_token
-      if token_object.scope.exclude?(Rails.configuration.x.data_access_api.auth_scope) || token_object.access_token_expires_at < Time.current
-        Rails.logger.info("Existing token scope \"#{token_object.scope}\" does not include required scope \"#{Rails.configuration.x.data_access_api.auth_scope}\". Requesting new token with correct scope.")
+      return MockDatastoreToken.new if Rails.configuration.x.omniauth_entraid.mock_auth_enabled && HostEnv.not_production?
+
+      if token_exhange_required?
         TokenExchangeService.new(token_object: token_object).call
       else
         token_object
@@ -43,6 +44,10 @@ module Datastore
     rescue StandardError => e
       Rails.logger.error("Unexpected error occurred while authenticating with datastore: #{e.message}")
       raise ConnectionError, "Unexpected error occurred while authenticating with datastore: #{e.message}"
+    end
+
+    def token_exhange_required?
+      token_object.scope.exclude?(Rails.configuration.x.data_access_api.auth_scope) || token_object.access_token_expires_at < Time.current
     end
 
     def headers

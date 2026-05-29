@@ -6,5 +6,9 @@ FactoryBot.define do
     access_token_expires_at { 1.hour.from_now } # NOTE: this is randomized between 60 and 90 minutes by entra in reality, for load distribution
     refresh_token { "fake_refresh_token" }
     scope { "fake_scope1 fake_scope2" }
+
+    trait :with_datastore_scope do
+      scope { Rails.configuration.x.data_access_api.auth_scope }
+    end
   end
 end

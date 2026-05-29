@@ -9,6 +9,8 @@ RSpec.describe Datastore::Connection do
   describe "#initialize" do
     subject(:instance) { described_class.new(token_object: token_object) }
 
+    let(:token_object) { build(:entra_id_token, :with_datastore_scope) }
+
     before do
       stub_successful_refresh_token_request
     end
@@ -16,6 +18,54 @@ RSpec.describe Datastore::Connection do
     it { is_expected.to have_attributes(token_object: token_object, connection: an_instance_of(Faraday::Connection)) }
 
     it { is_expected.to delegate_method(:post).to(:connection) }
+  end
+
+  describe "#connection" do
+    let(:token_object) { build(:entra_id_token, :with_datastore_scope) }
+
+    it "initializes a Faraday connection with the correct URL and headers" do
+      allow(Faraday).to receive(:new).and_call_original
+
+      instance
+
+      expect(Faraday).to have_received(:new)
+        .with(
+          url: Rails.configuration.x.data_access_api.url,
+          headers: {
+            "Content-Type" => "application/json",
+            "Accept" => "application/json",
+            "X-Service-Name" => "CIVIL_APPLY",
+            "Authorization" => "Bearer fake_access_token",
+            "User-Agent" => "CivilApply/#{HostEnv.environment || 'host-env-missing'} Faraday/#{Faraday::VERSION}",
+          },
+        )
+    end
+
+    context "when mock auth enabled and not in production environment" do
+      before do
+        allow(Rails.configuration.x.omniauth_entraid).to receive(:mock_auth_enabled).and_return(true)
+        allow(HostEnv).to receive(:not_production?).and_return(true)
+        allow(Rails.configuration.x.data_access_api).to receive(:mock_bearer_token).and_return("mocked_bearer_token")
+      end
+
+      it "initializes a Faraday connection with the correct URL and headers, including mock bearer token" do
+        allow(Faraday).to receive(:new).and_call_original
+
+        instance
+
+        expect(Faraday).to have_received(:new)
+          .with(
+            url: Rails.configuration.x.data_access_api.url,
+            headers: {
+              "Content-Type" => "application/json",
+              "Accept" => "application/json",
+              "X-Service-Name" => "CIVIL_APPLY",
+              "Authorization" => "Bearer mocked_bearer_token",
+              "User-Agent" => "CivilApply/#{HostEnv.environment || 'host-env-missing'} Faraday/#{Faraday::VERSION}",
+            },
+          )
+      end
+    end
   end
 
   describe "#post" do
@@ -104,7 +154,7 @@ RSpec.describe Datastore::Connection do
     end
 
     context "when access token expired and refresh token has expired" do
-      let(:token_object) { build(:entra_id_token, access_token_expires_at: 1.hour.ago) }
+      let(:token_object) { build(:entra_id_token, :with_datastore_scope, access_token_expires_at: 1.hour.ago) }
 
       before do
         stub_expired_refresh_token_request
@@ -123,7 +173,7 @@ RSpec.describe Datastore::Connection do
     end
 
     context "when access token expired and token exchange fails due to other error" do
-      let(:token_object) { build(:entra_id_token, access_token_expires_at: 1.hour.ago) }
+      let(:token_object) { build(:entra_id_token, :with_datastore_scope, access_token_expires_at: 1.hour.ago) }
 
       before do
         stub_other_failed_refresh_token_request

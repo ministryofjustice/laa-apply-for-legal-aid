@@ -188,6 +188,11 @@ env:
       secretKeyRef:
         name: laa-apply-for-legalaid-secrets
         key: dataAccessApiAuthScope
+  - name: DATA_ACCESS_API_MOCK_BEARER_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: laa-apply-for-legalaid-secrets
+        key: dataAccessApiMockBearerToken
   - name: TRUE_LAYER_CLIENT_ID
     valueFrom:
       secretKeyRef:

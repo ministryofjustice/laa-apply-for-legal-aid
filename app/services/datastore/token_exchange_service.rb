@@ -1,4 +1,4 @@
-# Exchanges refresh token acquired at login time for a bear toke scoped with permissions
+# Exchanges refresh token acquired at login time for a bearer token scoped with permissions
 # to submit to the downstream API, data access API.
 #
 # Note that this requires
