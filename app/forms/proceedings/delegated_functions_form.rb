@@ -4,7 +4,7 @@ module Proceedings
 
     form_for Proceeding
 
-    EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :proceedings, application_path: "associated_application")
+    EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :proceedings, uuid: "id", application_path: "legal_aid_application")
 
     attr_accessor :used_delegated_functions, :used_delegated_functions_on
 

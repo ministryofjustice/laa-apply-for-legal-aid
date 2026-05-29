@@ -4,6 +4,8 @@ module Proceedings
 
     form_for Proceeding
 
+    EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :proceedings, uuid: "id", application_path: "legal_aid_application")
+
     attr_accessor :client_involvement_type_ccms_code
 
     before_validation :assign_client_involvement_type_description,

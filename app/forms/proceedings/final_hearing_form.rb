@@ -2,6 +2,8 @@ module Proceedings
   class FinalHearingForm < BaseForm
     form_for FinalHearing
 
+    EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :proceedings, uuid: "id", application_path: "legal_aid_application")
+
     attr_accessor :work_type,
                   :listed,
                   :date,

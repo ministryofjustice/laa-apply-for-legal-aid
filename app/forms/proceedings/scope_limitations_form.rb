@@ -4,6 +4,8 @@ module Proceedings
 
     form_for Proceeding
 
+    EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :proceedings, uuid: "id", application_path: "legal_aid_application")
+
     attr_accessor :draft, :scopes, :scope_codes, :scope_type
 
     validate :validate_scope_selected,

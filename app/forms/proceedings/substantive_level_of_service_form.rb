@@ -2,6 +2,8 @@ module Proceedings
   class SubstantiveLevelOfServiceForm < BaseForm
     form_for Proceeding
 
+    EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :proceedings, uuid: "id", application_path: "legal_aid_application")
+
     attr_accessor :substantive_level_of_service,
                   :levels_of_service
 

@@ -2,6 +2,8 @@ module Proceedings
   class SubstantiveDefaultsForm < BaseForm
     form_for Proceeding
 
+    EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :proceedings, uuid: "id", application_path: "legal_aid_application")
+
     # TODO: dated 3 OCT 2022 @colinbruce Additional data requirements
     # The full method of handling additional data was not implemented for substantive defaults
     # this is because at the time of writing, no default substantive proceedings had additional
