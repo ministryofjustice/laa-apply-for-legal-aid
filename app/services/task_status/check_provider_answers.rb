@@ -1,5 +1,7 @@
 module TaskStatus
   class CheckProviderAnswers < Base
+    include ::DurationLogger
+
     # Check your answers validation/completion logic:
     # Rules:
     #   1. If not all prior sections completed then it is "Not ready yet"
@@ -16,11 +18,13 @@ module TaskStatus
   private
 
     def perform(status)
-      status.not_ready!
-      status.not_started! if not_started?
-      status.in_progress! if in_progress?
-      status.review! if review?
-      status.completed! if completed?
+      log_duration("Time to calculate check provider answers task list status for #{application.id}") do
+        status.not_ready!
+        status.not_started! if not_started?
+        status.in_progress! if in_progress?
+        status.review! if review?
+        status.completed! if completed?
+      end
     end
 
     def not_started?

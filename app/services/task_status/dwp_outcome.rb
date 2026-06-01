@@ -1,10 +1,14 @@
 module TaskStatus
   class DWPOutcome < Base
+    include ::DurationLogger
+
     def perform(status)
-      status.not_ready! if not_ready?
-      status.not_started! if not_started?
-      status.in_progress! if in_progress?
-      status.completed! if completed?
+      log_duration("Time to calculate dwp outcome task list status for #{application.id}") do
+        status.not_ready! if not_ready?
+        status.not_started! if not_started?
+        status.in_progress! if in_progress?
+        status.completed! if completed?
+      end
     end
 
   private

@@ -1,12 +1,14 @@
 module TaskStatus
   class MakeLink < Base
-  private
+    include ::DurationLogger
 
     def perform(status)
-      status.not_started! if not_started?
-      status.cannot_start! if cannot_start?
-      status.in_progress! if in_progress?
-      status.completed! if completed?
+      log_duration("Time to calculate make link task list status for #{application.id}") do
+        status.not_started! if not_started?
+        status.cannot_start! if cannot_start?
+        status.in_progress! if in_progress?
+        status.completed! if completed?
+      end
     end
 
     def not_started?

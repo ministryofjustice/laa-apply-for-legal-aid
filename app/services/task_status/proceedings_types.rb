@@ -1,12 +1,16 @@
 module TaskStatus
   class ProceedingsTypes < Base
+    include ::DurationLogger
+
   private
 
     def perform(status)
-      status.cannot_start!
-      status.in_progress! if in_progress?
-      status.not_started! if not_started?
-      status.completed! if completed?
+      log_duration("Time to calculate proceedings types task list status for #{application.id}") do
+        status.cannot_start!
+        status.in_progress! if in_progress?
+        status.not_started! if not_started?
+        status.completed! if completed?
+      end
     end
 
     def not_started?

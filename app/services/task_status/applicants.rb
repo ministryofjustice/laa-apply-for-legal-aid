@@ -1,11 +1,15 @@
 module TaskStatus
   class Applicants < Base
+    include ::DurationLogger
+
   private
 
     def perform(status)
-      status.in_progress!
-      status.not_started! unless applicant
-      status.completed! if completed?
+      log_duration("Time to calculate applicants task list status for #{application.id}") do
+        status.in_progress!
+        status.not_started! unless applicant
+        status.completed! if completed?
+      end
     end
 
     def completed?

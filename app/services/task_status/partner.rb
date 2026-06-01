@@ -1,13 +1,17 @@
 module TaskStatus
   class Partner < Base
+    include ::DurationLogger
+
   private
 
     def perform(status)
-      status.cannot_start! unless previous_tasks_completed?
-      status.not_started! if not_started?
-      status.in_progress! if in_progress?
-      status.completed! if completed?
-      status.not_needed! if not_needed?
+      log_duration("Time to calculate partner task list status for #{application.id}") do
+        status.cannot_start! unless previous_tasks_completed?
+        status.not_started! if not_started?
+        status.in_progress! if in_progress?
+        status.completed! if completed?
+        status.not_needed! if not_needed?
+      end
     end
 
     def not_needed?
