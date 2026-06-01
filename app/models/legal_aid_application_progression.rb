@@ -50,11 +50,13 @@ class LegalAidApplicationProgression < ApplicationRecord
   def record_form_progression(form, section, task, state, uuid: nil)
     if uuid
       build_uuid_folder(section, task, uuid)
-      sequence = derek.dig(section.to_s, task.to_s, uuid, "forms", form.to_s, "sequence") || next_sequence(section, task, uuid:)
-      derek[section.to_s][task.to_s][uuid]["forms"][form.to_s] = { sequence:, updated_at: Time.zone.now, valid: state }
+      # sequence = derek.dig(section.to_s, task.to_s, uuid, "forms", form.to_s, "sequence") || next_sequence(section, task, uuid:)
+      derek[section.to_s][task.to_s][uuid]["forms"][form.to_s] = { updated_at: Time.zone.now, valid: state }
+      # derek[section.to_s][task.to_s][uuid]["forms"][form.to_s] = { sequence:, updated_at: Time.zone.now, valid: state }
     else
-      sequence = derek.dig(section.to_s, task.to_s, "forms", form.to_s, "sequence") || next_sequence(section, task)
-      derek[section.to_s][task.to_s]["forms"][form.to_s] = { sequence:, updated_at: Time.zone.now, valid: state }
+      # sequence = derek.dig(section.to_s, task.to_s, "forms", form.to_s, "sequence") || next_sequence(section, task)
+      derek[section.to_s][task.to_s]["forms"][form.to_s] = { updated_at: Time.zone.now, valid: state }
+      # derek[section.to_s][task.to_s]["forms"][form.to_s] = { sequence:, updated_at: Time.zone.now, valid: state }
     end
     save!
   end
@@ -69,18 +71,19 @@ class LegalAidApplicationProgression < ApplicationRecord
 
 private
 
-  def next_sequence(section, task, uuid: nil)
-    forms = uuid.nil? ? derek[section.to_s][task.to_s]["forms"] : derek[section.to_s][task.to_s][uuid]["forms"]
-    return 1 if forms == {}
-
-    forms.map { |form| form[1]["sequence"] }.max + 1
-  end
+  # def next_sequence(section, task, uuid: nil)
+  #   forms = uuid.nil? ? derek[section.to_s][task.to_s]["forms"] : derek[section.to_s][task.to_s][uuid]["forms"]
+  #   return 1 if forms == {}
+  #
+  #   forms.map { |form| form[1]["sequence"] }.max + 1
+  # end
 
   def clive
     derek.deep_symbolize_keys
   end
 
   def build_uuid_folder(section, task, uuid)
-    derek[section.to_s][task.to_s][uuid] = { "forms" => {}, "state" => :in_progress } if derek[section.to_s][task.to_s][uuid].nil?
+    derek[section.to_s][task.to_s][uuid] = { "forms" => {} } if derek[section.to_s][task.to_s][uuid].nil?
+    # derek[section.to_s][task.to_s][uuid] = { "forms" => {}, "state" => :in_progress } if derek[section.to_s][task.to_s][uuid].nil?
   end
 end

@@ -2,6 +2,8 @@ module LegalAidApplications
   class EmergencyCostOverrideForm < BaseForm
     form_for LegalAidApplication
 
+    EDIT_DETAILS = EditStruct.new(section: :client_case_details, task: :proceedings, application_path: "legal_aid_application")
+
     attr_accessor :emergency_cost_override, :emergency_cost_requested, :emergency_cost_reasons,
                   :substantive_cost_override, :substantive_cost_requested, :substantive_cost_reasons
 
