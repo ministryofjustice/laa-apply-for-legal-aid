@@ -11,11 +11,11 @@ module TaskStatus
     def completed?
       return @completed if defined?(@completed)
 
-      @completed = applicants_validator.valid?
+      @completed = applicants_model.valid?
     end
 
-    def applicants_validator
-      @applicants_validator ||= Validators::Applicants.new(application)
+    def applicants_model
+      @applicants_model ||= Models::Applicants.new(application)
     end
   end
 end
