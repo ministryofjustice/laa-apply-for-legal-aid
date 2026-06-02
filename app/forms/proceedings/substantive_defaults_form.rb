@@ -10,21 +10,16 @@ module Proceedings
     # data requirements.  If at some point in the future, a new category of law that requires
     # it is  implemented, the functionality can be duplicated from the emergency_defaults form
 
-    attr_accessor :accepted_substantive_defaults,
-                  :additional_params
+    attr_accessor :accepted_substantive_defaults
 
     validates :accepted_substantive_defaults, inclusion: ["true", "false", true, false], unless: :draft?
 
-    def initialize(*args)
-      super
-      log_duration("Time to retrieve substantive defaults from LFA") do
-        @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], false))
-      end
-      self.additional_params = @defaults.dig("default_scope", "additional_params")
+    def defaults
+      @defaults ||= JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(model, false))
     end
 
     def default_level_of_service
-      @default_level_of_service ||= @defaults["default_level_of_service"]
+      @default_level_of_service ||= defaults["default_level_of_service"]
     end
 
     def default_scope
@@ -55,10 +50,6 @@ module Proceedings
       super
     end
     alias_method :save!, :save
-
-    def exclude_from_model
-      %i[additional_params]
-    end
 
   private
 
