@@ -19,6 +19,43 @@ RSpec.describe TaskStatus::Validators::Applicants do
     )
   end
 
+  let(:fake_progression) { instance_double LegalAidApplicationProgression, derek:, record_form_progression: true }
+  let(:derek) do
+    {
+      "client_case_details" => {
+        "client_details" => {
+          "forms" => {
+            "Addresses::ChoiceForm" => {
+              "valid" => address_choice_form_valid,
+              "updated_at" => "2026-06-01T14:43:15.431+01:00",
+            },
+            "Applicants::BasicDetailsForm" => {
+              "valid" => basic_details_form_valid,
+              "updated_at" => "2026-06-01T14:42:57.292+01:00",
+            },
+            "Applicants::PreviousReferenceForm" => {
+              "valid" => previous_reference_form_valid,
+              "updated_at" => "2026-06-01T14:43:12.712+01:00",
+            },
+            "Applicants::HasNationalInsuranceNumberForm" => {
+              "valid" => nation_insurance_form_valid,
+              "updated_at" => "2026-06-01T14:43:02.236+01:00",
+            },
+          },
+          "state" => "in_progress",
+        },
+      },
+    }
+  end
+  let(:address_choice_form_valid) { true }
+  let(:basic_details_form_valid) { true }
+  let(:previous_reference_form_valid) { true }
+  let(:nation_insurance_form_valid) { true }
+
+  before do
+    allow(application).to receive(:legal_aid_application_progression).and_return(fake_progression)
+  end
+
   it_behaves_like "a task status validator"
 
   describe "#valid?" do
@@ -73,12 +110,14 @@ RSpec.describe TaskStatus::Validators::Applicants do
     end
 
     context "with no applicant" do
+      let(:basic_details_form_valid) { false }
       let(:applicant) { nil }
 
       it { is_expected.not_to be_valid }
     end
 
     context "with invalid first_name" do
+      let(:basic_details_form_valid) { false }
       let(:applicant) do
         complete_applicant.update!(first_name: nil)
         complete_applicant
@@ -88,6 +127,7 @@ RSpec.describe TaskStatus::Validators::Applicants do
     end
 
     context "with invalid last_name" do
+      let(:basic_details_form_valid) { false }
       let(:applicant) do
         complete_applicant.update!(last_name: nil)
         complete_applicant
@@ -97,6 +137,7 @@ RSpec.describe TaskStatus::Validators::Applicants do
     end
 
     context "with invalid changed_last_name" do
+      let(:basic_details_form_valid) { false }
       let(:applicant) do
         complete_applicant.update!(changed_last_name: nil)
         complete_applicant
@@ -106,6 +147,7 @@ RSpec.describe TaskStatus::Validators::Applicants do
     end
 
     context "with invalid date_of_birth" do
+      let(:basic_details_form_valid) { false }
       let(:applicant) do
         complete_applicant.update!(date_of_birth: nil)
         complete_applicant
@@ -115,6 +157,7 @@ RSpec.describe TaskStatus::Validators::Applicants do
     end
 
     context "with invalid has_national_insurance_number" do
+      let(:nation_insurance_form_valid) { false }
       let(:applicant) do
         complete_applicant.update!(has_national_insurance_number: nil)
         complete_applicant
@@ -124,6 +167,7 @@ RSpec.describe TaskStatus::Validators::Applicants do
     end
 
     context "with invalid national_insurance_number" do
+      let(:nation_insurance_form_valid) { false }
       let(:applicant) do
         complete_applicant.update!(national_insurance_number: "JA")
         complete_applicant
@@ -133,6 +177,7 @@ RSpec.describe TaskStatus::Validators::Applicants do
     end
 
     context "with invalid applied_previously" do
+      let(:previous_reference_form_valid) { false }
       let(:applicant) do
         complete_applicant.update!(applied_previously: nil)
         complete_applicant
@@ -142,6 +187,7 @@ RSpec.describe TaskStatus::Validators::Applicants do
     end
 
     context "with invalid previous_reference" do
+      let(:previous_reference_form_valid) { false }
       let(:applicant) do
         complete_applicant.update!(applied_previously: true, previous_reference: nil)
         complete_applicant
