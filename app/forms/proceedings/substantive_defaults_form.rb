@@ -1,5 +1,7 @@
 module Proceedings
   class SubstantiveDefaultsForm < BaseForm
+    include ::DurationLogger
+
     form_for Proceeding
 
     # TODO: dated 3 OCT 2022 @colinbruce Additional data requirements
@@ -15,7 +17,9 @@ module Proceedings
 
     def initialize(*args)
       super
-      @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], false))
+      log_duration("Time to retrieve substantive defaults from LFA") do
+        @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], false))
+      end
       self.additional_params = @defaults.dig("default_scope", "additional_params")
     end
 

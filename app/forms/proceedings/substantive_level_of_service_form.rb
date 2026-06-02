@@ -2,6 +2,8 @@ module Proceedings
   class SubstantiveLevelOfServiceForm < BaseForm
     form_for Proceeding
 
+    include ::DurationLogger
+
     attr_accessor :substantive_level_of_service,
                   :levels_of_service
 
@@ -13,7 +15,9 @@ module Proceedings
 
     def initialize(*args)
       super
-      self.levels_of_service = LegalFramework::ProceedingTypes::Proceeding.call(args.first[:model].ccms_code).service_levels
+      log_duration("Time to retrieve substantive levels of service from LFA") do
+        self.levels_of_service = LegalFramework::ProceedingTypes::Proceeding.call(args.first[:model].ccms_code).service_levels
+      end
     end
 
     def save

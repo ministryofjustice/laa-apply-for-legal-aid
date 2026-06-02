@@ -1,5 +1,7 @@
 module Proceedings
   class EmergencyDefaultsForm < BaseForm
+    include ::DurationLogger
+
     form_for Proceeding
 
     attr_accessor :accepted_emergency_defaults,
@@ -19,7 +21,9 @@ module Proceedings
 
     def initialize(*args)
       super
-      @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], true))
+      log_duration("Time to retrieve emergency defaults from LFA") do
+        @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], true))
+      end
       self.additional_params = @defaults.dig("default_scope", "additional_params")
     end
 

@@ -1,6 +1,8 @@
 module TaskStatus
   module Validators
     class ProceedingType
+      include ::DurationLogger
+
       attr_reader :proceeding
 
       def initialize(proceeding)
@@ -64,7 +66,11 @@ module TaskStatus
       end
 
       def emergency_scopes
-        JSON.parse(LegalFramework::ProceedingTypes::Scopes.call(proceeding, true))["level_of_service"]["scope_limitations"]
+        scopes = nil
+        log_duration("Time to retrieve emergency scope limitations from LFA") do
+          scopes = JSON.parse(LegalFramework::ProceedingTypes::Scopes.call(proceeding, true))["level_of_service"]["scope_limitations"]
+        end
+        scopes
       end
 
       def emergency_scope_limitations_form
@@ -100,7 +106,11 @@ module TaskStatus
       end
 
       def substantive_scopes
-        JSON.parse(LegalFramework::ProceedingTypes::Scopes.call(proceeding, false))["level_of_service"]["scope_limitations"]
+        scopes = nil
+        log_duration("Time to retrieve substantive scope limitations from LFA") do
+          scopes = JSON.parse(LegalFramework::ProceedingTypes::Scopes.call(proceeding, false))["level_of_service"]["scope_limitations"]
+        end
+        scopes
       end
 
       def substantive_scope_limitations_form
