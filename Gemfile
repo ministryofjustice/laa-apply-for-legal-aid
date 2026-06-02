@@ -119,6 +119,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "benchmark"
   gem "guard-cucumber"
   gem "guard-livereload"
   gem "guard-rspec"
