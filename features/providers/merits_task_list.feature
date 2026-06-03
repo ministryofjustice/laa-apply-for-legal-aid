@@ -50,7 +50,7 @@ Feature: Merits task list
     And I fill "Reason" with "Because it is opposed."
     And I click 'Save and continue'
     Then I should be on the 'in_scope_of_laspo' page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid"
-    When I choose 'No'
+    When I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Children involved in this application Completed'
     And I should see 'Children involved in this proceeding Not started'
@@ -197,6 +197,12 @@ Feature: Merits task list
     And I click 'Save and continue'
     Then I should be on the 'in_scope_of_laspo' page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid"
     When I choose 'No'
+    And I click 'Save and continue'
+
+    Then I should be on the 'out_of_scope_of_laspo_interrupt' page showing "This proceeding is out of scope"
+    When I click link 'Go back and change your answer'
+    Then I should be on the 'in_scope_of_laspo' page showing "Are the Section 8 proceedings you're applying for in scope of the Legal Aid"
+    When I choose 'Yes'
     And I click 'Save and continue'
     Then I should be on the 'merits_task_list' page showing 'Statement of case Completed'
 

@@ -21,6 +21,7 @@ module Flow
         client_denial_of_allegations: Steps::ProviderMerits::ClientDenialOfAllegationsStep,
         client_offered_undertakings: Steps::ProviderMerits::ClientOfferedUndertakingsStep,
         in_scope_of_laspos: Steps::ProviderMerits::InScopeOfLasposStep,
+        out_of_scope_of_laspo_interrupt: Steps::ProviderMerits::OutOfScopeOfLaspoInterruptStep,
         is_matter_opposed: Steps::ProviderMerits::IsMatterOpposedStep,
         nature_of_urgencies: Steps::ProviderMerits::NatureOfUrgenciesStep,
         matter_opposed_reasons: Steps::ProviderMerits::MatterOpposedReasonsStep,
