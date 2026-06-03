@@ -36,6 +36,8 @@
           if @scope.in?(%i[in_progress submitted voided delete search])
             sn.with_navigation_item(text: t(".service_navigation.your_applications"), href: home_path, active_when: submitted_providers_legal_aid_applications_path)
             sn.with_navigation_item(text: t(".service_navigation.search"), href: search_providers_legal_aid_applications_path)
+          elsif @scope.eql?(:admin) && current_admin_user.report_only?
+            sn.with_navigation_item(text: t(".service_navigation.reports"), href: admin_reports_path)
           elsif @scope.eql?(:admin)
             sn.with_navigation_item(text: t(".service_navigation.applications"), href: admin_root_path, active_when: admin_root_path)
             sn.with_navigation_item(text: t(".service_navigation.edit_settings"), href: admin_settings_path)
