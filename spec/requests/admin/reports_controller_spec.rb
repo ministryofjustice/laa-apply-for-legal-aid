@@ -23,13 +23,19 @@ RSpec.describe Admin::ReportsController do
       expect(response.body).to include(admin_application_details_csv_path(format: :csv))
     end
 
-    context "when the user has reports_only set to true" do
-      let(:admin_user) { create(:admin_user, :report_only) }
+    context "when the user has digest_only set to true" do
+      let(:admin_user) { create(:admin_user, :digest_only) }
 
       it "renders successfully" do
         get_request
         expect(response).to have_http_status(:ok)
         expect(response.body).to include("Admin reports and downloads")
+      end
+
+      it "only renders the application digest" do
+        get_request
+        expect(response.body).to include("Application Digest report")
+        expect(response.body).not_to include("Application Details report")
       end
     end
   end
