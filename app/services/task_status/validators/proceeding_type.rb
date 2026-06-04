@@ -1,6 +1,8 @@
 module TaskStatus
   module Validators
     class ProceedingType
+      include ::DurationLogger
+
       attr_reader :proceeding
 
       def initialize(proceeding)
@@ -8,28 +10,30 @@ module TaskStatus
       end
 
       def valid?
-        forms.all?(&:valid?)
+        log_duration("TaskStatus::Validators::ProceedingType#valid?") do
+          forms.all?(&:valid?)
+        end
       end
 
     private
 
       def forms
         [
-          client_involvement_type_form,
+          client_involvement_type_form, # calls LegalFramework::ClientInvolvementTypes::Proceeding
           delegated_functions_form,
-          emergency_defaults_form,
-          emergency_level_of_service_form,
+          emergency_defaults_form, # calls LegalFramework::ProceedingTypes::Defaults.call
+          emergency_level_of_service_form, # calls LegalFramework::ProceedingTypes::Proceeding.call
           emergency_final_hearings_form,
-          emergency_scope_limitations_form,
-          substantive_defaults_form,
-          substantive_level_of_service_form,
+          emergency_scope_limitations_form, # calls LegalFramework::ProceedingTypes::Scopes.call
+          substantive_defaults_form, # calls LegalFramework::ProceedingTypes::Defaults.call
+          substantive_level_of_service_form, # calls LegalFramework::ProceedingTypes::Proceeding.call
           substantive_final_hearings_form,
-          substantive_scope_limitations_form,
+          substantive_scope_limitations_form, # calls LegalFramework::ProceedingTypes::Scopes.call
         ].flatten.compact
       end
 
       def client_involvement_type_form
-        Proceedings::ClientInvolvementTypeForm.new(model: proceeding)
+        Proceedings::ClientInvolvementTypeForm.new(model: proceeding) # calls LFA
       end
 
       def delegated_functions_form
