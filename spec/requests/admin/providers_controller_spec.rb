@@ -18,6 +18,13 @@ module Admin
         get admin_firm_providers_path(firm_id)
       end
 
+      context "when the user has digest_only set to true" do
+        let(:admin_user) { create(:admin_user, :digest_only) }
+        let(:firm_id) { "0" }
+
+        it_behaves_like "an admin with digest only privileges"
+      end
+
       context "with all firms" do
         let(:firm_id) { "0" }
 

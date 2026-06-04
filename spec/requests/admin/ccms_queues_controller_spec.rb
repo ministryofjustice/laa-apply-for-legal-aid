@@ -10,6 +10,14 @@ RSpec.describe Admin::CCMSQueuesController do
       sign_in admin_user
     end
 
+    context "when the user has digest_only set to true" do
+      let(:admin_user) { create(:admin_user, :digest_only) }
+
+      before { get_index }
+
+      it_behaves_like "an admin with digest only privileges"
+    end
+
     it "renders successfully" do
       get_index
       expect(response).to have_http_status(:ok)
