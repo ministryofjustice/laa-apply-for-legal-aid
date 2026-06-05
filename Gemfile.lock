@@ -138,6 +138,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     base64 (0.3.0)
     bcrypt (3.1.22)
+    benchmark (0.5.0)
     better_html (2.2.0)
       actionview (>= 7.0)
       activesupport (>= 7.0)
@@ -815,6 +816,7 @@ DEPENDENCIES
   awesome_print (~> 1.9.2)
   aws-sdk-s3
   axe-core-cucumber
+  benchmark
   bootsnap (>= 1.1.0)
   browser
   business
@@ -937,6 +939,7 @@ CHECKSUMS
   axiom-types (0.1.1) sha256=c1ff113f3de516fa195b2db7e0a9a95fd1b08475a502ff660d04507a09980383
   base64 (0.3.0) sha256=27337aeabad6ffae05c265c450490628ef3ebd4b67be58257393227588f5a97b
   bcrypt (3.1.22) sha256=1f0072e88c2d705d94aff7f2c5cb02eb3f1ec4b8368671e19112527489f29032
+  benchmark (0.5.0) sha256=465df122341aedcb81a2a24b4d3bd19b6c67c1530713fd533f3ff034e419236c
   better_html (2.2.0) sha256=e68ab66ab09696b708333bbf35e8aa3c107500ba7892f528e2111624bdd8cf76
   bigdecimal (4.1.2) sha256=53d217666027eab4280346fba98e7d5b66baaae1b9c3c1c0ffe89d48188a3fbd
   bindata (2.5.1) sha256=53186a1ec2da943d4cb413583d680644eb810aacbf8902497aac8f191fad9e58

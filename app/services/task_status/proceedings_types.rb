@@ -5,12 +5,10 @@ module TaskStatus
   private
 
     def perform(status)
-      log_duration("TaskStatus::ProceedingsTypes#perform") do
-        status.cannot_start!
-        status.in_progress! if in_progress?
-        status.not_started! if not_started?
-        status.completed! if completed?
-      end
+      status.cannot_start!
+      status.in_progress! if in_progress?
+      status.not_started! if not_started?
+      status.completed! if completed?
     end
 
     def not_started?

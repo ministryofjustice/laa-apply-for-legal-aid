@@ -6,9 +6,13 @@ module TaskStatus
       def valid?
         return false if proceedings.empty?
 
+        results = nil
+
         log_duration("TaskStatus::Validators::ProceedingsTypes#valid?") do
-          proceedings.all? { |proceeding| ProceedingType.new(proceeding).valid? } && emergency_cost_override_form.valid?
+          results = proceedings.all? { |proceeding| ProceedingType.new(proceeding).valid? } && emergency_cost_override_form.valid?
         end
+
+        results
       end
 
     private
