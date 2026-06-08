@@ -1,6 +1,6 @@
 module Admin
   class AdminBaseController < ApplicationController
-    before_action :check_vpn_ipaddr, :authenticate_admin_user!, :set_cache_buster, :set_scope
+    before_action :check_vpn_ipaddr, :authenticate_admin_user!, :set_cache_buster, :set_scope, :redirect_digest_only
 
   protected
 
@@ -31,6 +31,12 @@ module Admin
       response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
       response.headers["Pragma"] = "no-cache"
       response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
+    end
+
+    def redirect_digest_only
+      return if controller_name == "reports"
+
+      redirect_to admin_reports_path if current_admin_user.digest_only?
     end
   end
 end

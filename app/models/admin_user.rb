@@ -1,6 +1,11 @@
 class AdminUser < ApplicationRecord
   encrypts :auth_subject_uid, deterministic: true
 
+  enum :role, {
+    digest_only: :digest_only,
+    full: :full,
+  }
+
   devise(
     :database_authenticatable, :trackable, :lockable,
     authentication_keys: [:username], unlock_strategy: :time

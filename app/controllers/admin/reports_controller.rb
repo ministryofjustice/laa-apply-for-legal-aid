@@ -2,6 +2,7 @@ module Admin
   class ReportsController < AdminBaseController
     def index
       reports
+      reports.slice!(:application_digest_download) if current_admin_user.digest_only?
     end
 
     def download_application_details_report

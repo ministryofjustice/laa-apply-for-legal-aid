@@ -17,6 +17,12 @@ module Admin
     describe "GET admin/firms" do
       before { get admin_firms_path }
 
+      context "when the user has digest_only set to true" do
+        let(:admin_user) { create(:admin_user, :digest_only) }
+
+        it_behaves_like "an admin with digest only privileges"
+      end
+
       it "renders successfully" do
         expect(response).to have_http_status(:ok)
       end

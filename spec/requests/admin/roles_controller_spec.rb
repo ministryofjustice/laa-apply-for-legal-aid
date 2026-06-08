@@ -12,6 +12,14 @@ RSpec.describe Admin::RolesController do
   describe "GET index" do
     subject(:get_request) { get admin_roles_path }
 
+    context "when the user has digest_only set to true" do
+      let(:admin_user) { create(:admin_user, :digest_only) }
+
+      before { get_request }
+
+      it_behaves_like "an admin with digest only privileges"
+    end
+
     it "renders successfully" do
       get_request
       expect(response).to have_http_status(:ok)
