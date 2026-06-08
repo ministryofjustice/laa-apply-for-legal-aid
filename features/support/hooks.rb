@@ -146,3 +146,10 @@ After("@mock_auth_enabled_on_production") do |_scenario, _block|
 
   Rails.application.reload_routes!
 end
+
+Around("@webmock_disabled") do |_scenario, block|
+  WebMock.disable!
+  VCR.turned_off { block.call }
+ensure
+  WebMock.enable!
+end
