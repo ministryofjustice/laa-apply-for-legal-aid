@@ -14,6 +14,7 @@ module Providers
 
     def continue
       unless draft_selected?
+        legal_aid_application.update!(autogranted: legal_aid_application.auto_grant_special_children_act?)
         legal_aid_application.merits_complete!(current_provider)
         legal_aid_application.generate_reports!
       end
