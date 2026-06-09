@@ -165,6 +165,8 @@ class LegalAidApplication < ApplicationRecord
     prefix: true
   )
 
+  AUTOGRANTABLE_PROCEEDING_CCMS_CODES = %w[PB003 PB004 PB006 PB026 PB057 PB059].freeze
+
   def lead_proceeding
     proceedings.find_by(lead_proceeding: true)
   end
@@ -242,7 +244,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def auto_grant_special_children_act?
-    special_children_act_proceedings? && auto_grant_exclusions?
+    valid_special_childrens_act_proceedings? && auto_grant_exclusions?
   end
 
   def auto_grant_exclusions?
@@ -865,5 +867,23 @@ private
 
   def sca_care_order_or_supervision_order_child_subject?
     proceedings.any? { |proceeding| proceeding.ccms_code.in?(%w[PB057 PB059]) && proceeding.client_involvement_type_ccms_code.eql?("W") }
+  end
+
+  def valid_special_childrens_act_proceedings?
+    return false unless special_children_act_proceedings?
+
+    single_autograntable_core_proceeding? || care_order_supervision_order_application?
+  end
+
+  def core_proceedings
+    @core_proceedings ||= proceedings.where(sca_type: "core")
+  end
+
+  def single_autograntable_core_proceeding?
+    core_proceedings.one? && AUTOGRANTABLE_PROCEEDING_CCMS_CODES.include?(core_proceedings.first.ccms_code)
+  end
+
+  def care_order_supervision_order_application?
+    !core_proceedings.empty? && core_proceedings.all? { |proceeding| %w[PB057 PB059].include?(proceeding.ccms_code) }
   end
 end
