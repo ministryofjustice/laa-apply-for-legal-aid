@@ -1513,12 +1513,12 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "#complete_non_passported_means!" do
+  describe "#citizen_completes_means!" do
     let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :checking_citizen_answers) }
 
     it "runs the complete means service and the bank transaction analyser" do
       expect(BankTransactionsAnalyserJob).to receive(:perform_later).with(legal_aid_application)
-      legal_aid_application.complete_non_passported_means!
+      legal_aid_application.citizen_completes_means!
     end
   end
 

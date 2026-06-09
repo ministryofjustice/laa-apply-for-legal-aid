@@ -631,8 +631,8 @@ class LegalAidApplication < ApplicationRecord
     attachments.statement_of_case.any?
   end
 
-  def complete_non_passported_means!
-    state_machine_proxy.complete_non_passported_means!(self)
+  def citizen_completes_means!
+    state_machine_proxy.citizen_completes_means!(self)
   end
 
   def merits_complete!(current_provider)
