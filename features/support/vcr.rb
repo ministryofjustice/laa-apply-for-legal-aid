@@ -29,6 +29,7 @@ VCR.configure do |vcr_config|
   vcr_config.filter_sensitive_data("<OMNIAUTH_ENTRAID_TENANT_ID>") { ENV.fetch("OMNIAUTH_ENTRAID_TENANT_ID", nil) }
   vcr_config.filter_sensitive_data("<PDA_AUTH_KEY>") { ENV.fetch("PDA_AUTH_KEY", nil) }
   vcr_config.filter_sensitive_data("<CCMS_USER_API_AUTH_KEY>") { ENV.fetch("CCMS_USER_API_AUTH_KEY", nil) }
+  vcr_config.filter_sensitive_data("<DATA_ACCESS_API_AUTH_SCOPE>") { ENV.fetch("DATA_ACCESS_API_AUTH_SCOPE", nil) }
 end
 
 VCR.cucumber_tags do |t|

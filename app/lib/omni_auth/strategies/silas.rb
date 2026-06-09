@@ -48,8 +48,11 @@ module OmniAuth
               email: "martin.ronan@example.com",
             },
             credentials: {
+              id_token: "mock_id_token_abc123",
               token: "mock_token_abc123",
-              expires_at: Time.zone.now.to_i + 1.week,
+              refresh_token: "mock_refresh_token_abc123",
+              expires_in: rand(60..90).minutes.in_seconds, # mimics the token lifetime returned by EntraID, which is randomized between 60 and 90 minutes for load distribution
+              scope: "mock_scope_abc123",
             },
             extra: {
               raw_info: {

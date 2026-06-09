@@ -38,7 +38,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     :openid_connect,
     {
       name: :entra_id,
-      scope: %i[openid email],
+      scope: %w[openid email offline_access], # offline_access for refresh token
       prompt: :select_account,
       response_type: :code,
       send_nonce: true,

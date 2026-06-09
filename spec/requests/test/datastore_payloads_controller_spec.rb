@@ -12,7 +12,8 @@ RSpec.describe Test::DatastorePayloadsController do
   end
 
   let(:legal_aid_application) { create(:legal_aid_application, provider:) }
-  let(:provider) { create(:provider) }
+
+  let(:provider) { create(:provider, :with_entra_id_token) }
 
   describe "GET application_as_json" do
     context "when provider not authenticated" do
@@ -145,6 +146,24 @@ RSpec.describe Test::DatastorePayloadsController do
           expect(response)
             .to have_http_status(:redirect)
             .and redirect_to(authenticated_root_path)
+        end
+      end
+
+      context "when access token AND refresh token have expired" do
+        before do
+          provider.entra_id_token.update!(access_token_expires_at: 1.minute.ago)
+          stub_expired_refresh_token_request
+          get "/test/datastore_payloads/#{legal_aid_application.id}/submit", headers: { "HTTP_REFERER" => "/same-page" }
+        end
+
+        it "redirects to session expired page" do
+          expect(response)
+            .to have_http_status(:redirect)
+            .and redirect_to(session_expired_path(reason: :reauthenticate))
+        end
+
+        it "destroys the existing token for the provider" do
+          expect(provider.reload.entra_id_token).not_to be_present
         end
       end
     end
