@@ -1,13 +1,12 @@
 module LegalFramework
   module ProceedingTypes
-    class Scopes
-      PATH = "/proceeding_type_scopes".freeze
-
+    class Scopes < LegalFramework::BaseApiCall
       def self.call(proceeding, emergency)
         new(proceeding, emergency).call
       end
 
       def initialize(proceeding, emergency)
+        super()
         @proceeding = proceeding
         @level_of_service_code = emergency ? proceeding.emergency_level_of_service : proceeding.substantive_level_of_service
         @emergency = emergency
@@ -36,18 +35,8 @@ module LegalFramework
         end
       end
 
-      def conn
-        @conn ||= Faraday.new(url:, headers:)
-      end
-
-      def url
-        "#{Rails.configuration.x.legal_framework_api_host}#{PATH}"
-      end
-
-      def headers
-        {
-          "Content-Type" => "application/json",
-        }
+      def path
+        "/proceeding_type_scopes"
       end
     end
   end
