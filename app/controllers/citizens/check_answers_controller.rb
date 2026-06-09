@@ -6,7 +6,7 @@ module Citizens
 
     def continue
       record_acceptance
-      legal_aid_application.complete_non_passported_means! unless legal_aid_application.provider_assessing_means?
+      legal_aid_application.citizen_completes_means! unless legal_aid_application.provider_assessing_means?
       send_emails
       CitizenCompleteMeansJob.perform_later(legal_aid_application.id)
       current_applicant.forget_me!
