@@ -30,7 +30,7 @@ module Providers
 
     def start_after_means_complete_path
       Flow::KeyPoint.path_for(
-        key_point: :start_after_applicant_completes_means,
+        key_point: :start_after_citizen_completes_means,
         journey: :providers,
         legal_aid_application:,
       )

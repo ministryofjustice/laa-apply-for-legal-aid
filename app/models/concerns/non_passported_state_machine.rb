@@ -50,7 +50,7 @@ class NonPassportedStateMachine < BaseStateMachine
     event :citizen_completes_means do
       transitions from: :checking_citizen_answers, to: :analysing_bank_transactions,
                   after: proc { |legal_aid_application|
-                    ApplicantCompleteMeans.call(legal_aid_application)
+                    CitizenCompleteMeans.call(legal_aid_application)
                     BankTransactionsAnalyserJob.perform_later(legal_aid_application)
                   }
     end

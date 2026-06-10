@@ -283,7 +283,7 @@ Given("I start the means application") do
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
-    key_point: :start_after_applicant_completes_means,
+    key_point: :start_after_citizen_completes_means,
     legal_aid_application: @legal_aid_application,
   )
 end
@@ -304,7 +304,7 @@ Given("I start the means application with bank transactions with no transaction 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
-    key_point: :start_after_applicant_completes_means,
+    key_point: :start_after_citizen_completes_means,
     legal_aid_application: @legal_aid_application,
   )
 end
@@ -325,7 +325,7 @@ Given("I start the means application with bank transactions and have a partner w
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
-    key_point: :start_after_applicant_completes_means,
+    key_point: :start_after_citizen_completes_means,
     legal_aid_application: @legal_aid_application,
   )
 end
@@ -345,7 +345,7 @@ Given("I start the merits application with student finance") do
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
-    key_point: :start_after_applicant_completes_means,
+    key_point: :start_after_citizen_completes_means,
     legal_aid_application: @legal_aid_application,
   )
 end
@@ -414,7 +414,7 @@ Given("I start the means application and the applicant has uploaded transaction 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
-    key_point: :start_after_applicant_completes_means,
+    key_point: :start_after_citizen_completes_means,
     legal_aid_application: @legal_aid_application,
   )
 end
@@ -442,7 +442,7 @@ Given("I start the means review journey with employment income for a single job 
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
-    key_point: :start_after_applicant_completes_means,
+    key_point: :start_after_citizen_completes_means,
     legal_aid_application: @legal_aid_application,
   )
 end
@@ -461,7 +461,7 @@ Given("I start the means review journey with no employment income from HMRC") do
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
-    key_point: :start_after_applicant_completes_means,
+    key_point: :start_after_citizen_completes_means,
     legal_aid_application: @legal_aid_application,
   )
 end
@@ -495,7 +495,7 @@ Given("I start the means review journey with employment income for multiple jobs
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
-    key_point: :start_after_applicant_completes_means,
+    key_point: :start_after_citizen_completes_means,
     legal_aid_application: @legal_aid_application,
   )
 end
@@ -1171,7 +1171,7 @@ Given("The means questions have been answered by the applicant") do
   login_as @legal_aid_application.provider
   visit Flow::KeyPoint.path_for(
     journey: :providers,
-    key_point: :start_after_applicant_completes_means,
+    key_point: :start_after_citizen_completes_means,
     legal_aid_application: @legal_aid_application,
   )
 end
