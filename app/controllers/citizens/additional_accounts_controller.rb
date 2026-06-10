@@ -3,7 +3,7 @@ module Citizens
     def index
       legal_aid_application.update!(has_offline_accounts: nil)
       legal_aid_application.reset_to_applicant_entering_means! if legal_aid_application.use_ccms?
-      legal_aid_application.applicant_enter_means! unless legal_aid_application.applicant_entering_means?
+      legal_aid_application.citizen_enter_means! unless legal_aid_application.applicant_entering_means?
       additional_account_form
     end
 
