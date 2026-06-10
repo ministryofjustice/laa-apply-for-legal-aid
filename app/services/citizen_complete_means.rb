@@ -1,4 +1,4 @@
-class ApplicantCompleteMeans
+class CitizenCompleteMeans
   def self.call(legal_aid_application)
     new(legal_aid_application).call
   end
@@ -21,7 +21,7 @@ private
   def intended_provider_step
     Flow::KeyPoint.step_for(
       journey: :providers,
-      key_point: :start_after_applicant_completes_means,
+      key_point: :start_after_citizen_completes_means,
     )
   end
 end
