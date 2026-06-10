@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_04_124023) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_09_124725) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -668,6 +668,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_04_124023) do
     t.uuid "applicant_id"
     t.boolean "applicant_in_receipt_of_housing_benefit"
     t.string "application_ref"
+    t.boolean "autogranted"
     t.boolean "case_cloned"
     t.datetime "client_declaration_confirmed_at", precision: nil
     t.datetime "completed_at", precision: nil
