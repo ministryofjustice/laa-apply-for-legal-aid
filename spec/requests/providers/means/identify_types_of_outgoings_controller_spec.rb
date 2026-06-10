@@ -190,7 +190,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
           create(:legal_aid_application,
                  :with_applicant,
                  :with_non_passported_state_machine,
-                 :applicant_entering_means,
+                 :citizen_entering_means,
                  transaction_types: income_types)
         end
 
@@ -205,7 +205,7 @@ RSpec.describe Providers::Means::IdentifyTypesOfOutgoingsController do
           create(:legal_aid_application,
                  :with_applicant,
                  :with_non_passported_state_machine,
-                 :applicant_entering_means,
+                 :citizen_entering_means,
                  transaction_types: [])
         end
 

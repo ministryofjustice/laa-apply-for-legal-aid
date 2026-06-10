@@ -100,11 +100,11 @@ class LegalAidApplication < ApplicationRecord
            :provider_used_delegated_functions!,
            :reset!,
            :reset_from_use_ccms!,
-           :reset_to_applicant_entering_means!,
+           :reset_to_citizen_entering_means!,
            :submitted_assessment!,
            :use_ccms!,
            :applicant_details_checked?,
-           :applicant_entering_means?,
+           :citizen_entering_means?,
            :assessment_submitted?,
            :awaiting_applicant?,
            :checking_applicant_details?,
@@ -488,7 +488,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def with_applicant?
-    applicant_entering_means? || awaiting_applicant?
+    citizen_entering_means? || awaiting_applicant?
   end
 
   def submitted_to_ccms?

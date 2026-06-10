@@ -796,7 +796,7 @@ RSpec.describe LegalAidApplication do
     end
 
     context "when provider submitted" do
-      let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :applicant_entering_means) }
+      let(:legal_aid_application) { create(:legal_aid_application, :with_non_passported_state_machine, :citizen_entering_means) }
 
       it "returns true" do
         expect(legal_aid_application.read_only?).to be(true)

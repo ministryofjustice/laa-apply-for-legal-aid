@@ -8,7 +8,7 @@ class NonMeansTestedStateMachine < BaseStateMachine
   # are made to legal_aid_application#checking_answers? or refered to by other "helper"
   # methods :(
 
-  def applicant_entering_means?
+  def citizen_entering_means?
     false
   end
 

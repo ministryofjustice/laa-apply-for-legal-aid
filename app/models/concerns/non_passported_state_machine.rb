@@ -6,7 +6,7 @@ class NonPassportedStateMachine < BaseStateMachine
   aasm do
     state :provider_confirming_applicant_eligibility
     state :awaiting_applicant
-    state :applicant_entering_means
+    state :citizen_entering_means
     state :checking_citizen_answers
     state :analysing_bank_transactions
     state :provider_assessing_means
@@ -34,17 +34,17 @@ class NonPassportedStateMachine < BaseStateMachine
     event :citizen_enter_means do
       transitions from: %i[
                     awaiting_applicant
-                    applicant_entering_means
+                    citizen_entering_means
                     use_ccms
                   ],
-                  to: :applicant_entering_means,
+                  to: :citizen_entering_means,
                   after: proc { |_legal_aid_application|
                     update!(ccms_reason: nil) unless ccms_reason.nil?
                   }
     end
 
     event :check_citizen_answers do
-      transitions from: :applicant_entering_means, to: :checking_citizen_answers
+      transitions from: :citizen_entering_means, to: :checking_citizen_answers
     end
 
     event :citizen_completes_means do
@@ -86,8 +86,8 @@ class NonPassportedStateMachine < BaseStateMachine
                   to: :checking_non_passported_means
     end
 
-    event :reset_to_applicant_entering_means do
-      transitions from: :use_ccms, to: :applicant_entering_means,
+    event :reset_to_citizen_entering_means do
+      transitions from: :use_ccms, to: :citizen_entering_means,
                   after: proc { update!(ccms_reason: nil) }
     end
 
