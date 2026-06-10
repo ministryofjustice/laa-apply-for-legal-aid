@@ -80,7 +80,7 @@ class LegalAidApplication < ApplicationRecord
   delegate :full_name, :has_partner, :has_partner?, :has_partner_with_no_contrary_interest?, to: :applicant, prefix: true, allow_nil: true
   delegate :shared_benefit_with_applicant, :shared_benefit_with_applicant?, to: :partner, allow_nil: true
   delegate :case_ccms_reference, to: :ccms_submission, allow_nil: true
-  delegate :applicant_enter_means!,
+  delegate :citizen_enter_means!,
            :await_applicant!,
            :case_add_requestor,
            :check_applicant_details!,

@@ -31,7 +31,7 @@ class NonPassportedStateMachine < BaseStateMachine
       transitions from: :awaiting_applicant, to: :awaiting_applicant
     end
 
-    event :applicant_enter_means do
+    event :citizen_enter_means do
       transitions from: %i[
                     awaiting_applicant
                     applicant_entering_means
