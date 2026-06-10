@@ -6,7 +6,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
     legal_aid_application.set_transaction_period
   end
 
-  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :citizen_entering_means) }
   let(:provider) { legal_aid_application.provider }
 
   let(:valid_params) do
@@ -78,7 +78,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
           let(:income_types) { create_list(:transaction_type, 3, :credit_with_standard_name) }
           let(:legal_aid_application) do
             create(:legal_aid_application, :with_applicant,
-                   :with_non_passported_state_machine, :applicant_entering_means, transaction_types: income_types)
+                   :with_non_passported_state_machine, :citizen_entering_means, transaction_types: income_types)
           end
 
           it "redirects to the next page" do
@@ -103,7 +103,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
             create(:legal_aid_application,
                    :with_applicant,
                    :with_non_passported_state_machine,
-                   :applicant_entering_means,
+                   :citizen_entering_means,
                    transaction_types: outgoings_categories)
           end
 
@@ -119,7 +119,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
             create(:legal_aid_application,
                    :with_applicant,
                    :with_non_passported_state_machine,
-                   :applicant_entering_means,
+                   :citizen_entering_means,
                    transaction_types: [])
           end
 
@@ -135,7 +135,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
               create(:legal_aid_application,
                      :with_applicant_and_partner,
                      :with_non_passported_state_machine,
-                     :applicant_entering_means,
+                     :citizen_entering_means,
                      transaction_types: [])
             end
 
@@ -161,7 +161,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
         end
 
         context "when the application has a partner with no contrary interest" do
-          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: []) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :citizen_entering_means, transaction_types: []) }
 
           it "redirects to the next page" do
             request
@@ -171,7 +171,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
 
         context "with rent_or_mortgage as an outgoing category and no partner" do
           let(:transaction_type) { create(:transaction_type, :rent_or_mortgage) }
-          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type]) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :citizen_entering_means, transaction_types: [transaction_type]) }
           let(:legal_aid_application_transaction_type) do
             create(:legal_aid_application_transaction_type,
                    legal_aid_application_id: legal_aid_application.id,
@@ -191,7 +191,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
 
         context "with rent_or_mortgage as an outgoing category and with a partner" do
           let(:transaction_type) { create(:transaction_type, :rent_or_mortgage) }
-          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type]) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :citizen_entering_means, transaction_types: [transaction_type]) }
           let(:legal_aid_application_transaction_type) do
             create(:legal_aid_application_transaction_type,
                    legal_aid_application_id: legal_aid_application.id,
@@ -210,7 +210,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
         end
 
         context "without rent or mortgage as an outgoing category but with other income and outgoings categories" do
-          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means, transaction_types:) }
+          let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :citizen_entering_means, transaction_types:) }
           let(:transaction_types) { [create(:transaction_type, :credit_with_standard_name), create(:transaction_type, :debit_with_standard_name)] }
 
           it "redirects to the next page" do
@@ -223,7 +223,7 @@ RSpec.describe Providers::Means::CashOutgoingsController do
           let(:legal_aid_application) do
             create(:legal_aid_application, :with_applicant,
                    :with_non_passported_state_machine,
-                   :applicant_entering_means,
+                   :citizen_entering_means,
                    transaction_types: [])
           end
 

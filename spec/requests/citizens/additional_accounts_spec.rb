@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "citizen additional accounts request test" do
-  let(:application) { create(:application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means) }
+  let(:application) { create(:application, :with_applicant, :with_non_passported_state_machine, :citizen_entering_means) }
 
   before { sign_in_citizen_for_application(application) }
 
@@ -17,7 +17,7 @@ RSpec.describe "citizen additional accounts request test" do
     it "has reset the state and ccms_reason" do
       application.use_ccms!(:no_online_banking)
       get citizens_additional_accounts_path
-      expect(application.reload.state).to eq "applicant_entering_means"
+      expect(application.reload.state).to eq "citizen_entering_means"
       expect(application.ccms_reason).to be_nil
     end
   end
@@ -31,7 +31,7 @@ RSpec.describe "citizen additional accounts request test" do
     it "checks that offline account is reset to nil" do
       get citizens_additional_accounts_path
       expect(application.reload.has_offline_accounts).to be_nil
-      expect(application.state).to eq "applicant_entering_means"
+      expect(application.state).to eq "citizen_entering_means"
     end
   end
 

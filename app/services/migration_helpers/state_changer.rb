@@ -7,7 +7,7 @@ module MigrationHelpers
       [:client_details_answers_checked, :provider_entering_means, %|provider_step not in ('check_benefits', 'open_banking_consents', 'email_addresses', 'about_the_financial_assessments')|],
       [:client_details_answers_checked, :provider_confirming_applicant_eligibility, %|provider_step in ('check_benefits', 'open_banking_consents', 'email_addresses', 'about_the_financial_assessments')|],
       [:provider_assessing_means, :provider_entering_merits, %|provider_step in ('capital_assessment_results', 'start_chances_of_successes', 'date_client_told_incidents', 'respondents', 'statement_of_cases', 'chances_of_success')|],
-      [:provider_submitted, :applicant_entering_means, nil],
+      [:provider_submitted, :citizen_entering_means, nil],
       [:provider_checking_citizens_means_answers, :checking_non_passported_means, nil],
       [:provider_checked_citizens_means_answers, :provider_entering_merits, %|provider_step not in ('capital_assessment_results', 'start_chances_of_successes', 'date_client_told_incidents', 'respondents', 'statement_of_cases', 'chances_of_success')|],
     ].freeze

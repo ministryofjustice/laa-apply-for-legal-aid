@@ -1142,7 +1142,7 @@ Given("I complete the application and view the check your answers page") do
   @legal_aid_application = create(
     :legal_aid_application,
     :with_non_passported_state_machine,
-    :applicant_entering_means,
+    :citizen_entering_means,
     :with_proceedings,
     applicant:,
     explicit_proceedings: [:da001],

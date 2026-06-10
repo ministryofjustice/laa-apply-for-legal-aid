@@ -1,7 +1,7 @@
 module Citizens
   class ConsentsController < CitizenBaseController
     def show
-      @legal_aid_application.reset_to_applicant_entering_means! if @legal_aid_application.use_ccms?
+      @legal_aid_application.reset_to_citizen_entering_means! if @legal_aid_application.use_ccms?
       @form = Applicants::OpenBankingConsentForm.new(model: legal_aid_application)
     end
 

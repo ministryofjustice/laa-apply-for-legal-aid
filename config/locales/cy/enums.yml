@@ -15,7 +15,7 @@ cy:
         easy: ysaE
         very_easy: ysae yreV
       time_taken_satisfaction:
-        great_deal: It was a great deal of time 
+        great_deal: It was a great deal of time
         alot: It was a lot of time
         neither_too_much_nor_too_little: Neither too much or too little time
         moderate: It was a  moderate amount of time
@@ -23,7 +23,7 @@ cy:
     legal_aid_application:
       state:
         applicant_details_checked: dekcehc srewsnA
-        applicant_entering_means: redivorp yb dettimbuS
+        citizen_entering_means: redivorp yb dettimbuS
         awaiting_applicant: redivorp yb dettimbuS
         checking_applicant_details: srewsna gnikcehC
         checking_citizen_answers: srewsna gnikcehc tnacilppA

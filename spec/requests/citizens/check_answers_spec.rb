@@ -12,7 +12,7 @@ RSpec.describe "check your answers requests" do
   let!(:legal_aid_application) do
     create(:legal_aid_application,
            :with_non_passported_state_machine,
-           :applicant_entering_means,
+           :citizen_entering_means,
            :with_everything,
            provider:)
   end
@@ -121,7 +121,7 @@ RSpec.describe "check your answers requests" do
       expect { patch_request }
         .to change { legal_aid_application.reload.state }
         .from("checking_citizen_answers")
-        .to("applicant_entering_means")
+        .to("citizen_entering_means")
     end
 
     it "redirects to the previous page" do
