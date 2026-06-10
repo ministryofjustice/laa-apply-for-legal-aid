@@ -68,11 +68,11 @@
 }
 
 #uploaded-files-table-container {
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .govuk-notification-banner {
-  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 // stylelint-enable declaration-no-important, selector-max-id
