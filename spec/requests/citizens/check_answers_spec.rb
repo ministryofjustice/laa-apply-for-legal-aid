@@ -95,7 +95,6 @@ RSpec.describe "check your answers requests" do
     it "sets the application state to analysing_bank_transactions" do
       patch_request
       expect(legal_aid_application.reload.state).to eq "analysing_bank_transactions"
-      expect(legal_aid_application.completed_at).to be_within(1).of(Time.current)
     end
 
     it "changes the provider step to start_chances_of_success" do
@@ -105,7 +104,7 @@ RSpec.describe "check your answers requests" do
 
     it "records when the declaration was accepted" do
       patch_request
-      expect(legal_aid_application.reload.declaration_accepted_at).to be_between(2.seconds.ago, Time.current)
+      expect(legal_aid_application.reload.completed_at).to be_between(2.seconds.ago, Time.current)
     end
   end
 

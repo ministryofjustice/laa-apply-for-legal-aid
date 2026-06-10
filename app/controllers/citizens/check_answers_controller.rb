@@ -5,7 +5,6 @@ module Citizens
     end
 
     def continue
-      record_acceptance
       legal_aid_application.citizen_completes_means! unless legal_aid_application.provider_assessing_means?
       send_emails
       CitizenCompleteMeansJob.perform_later(legal_aid_application.id)
@@ -19,12 +18,6 @@ module Citizens
     end
 
   private
-
-    def record_acceptance
-      return if legal_aid_application.declaration_accepted_at?
-
-      legal_aid_application.update!(declaration_accepted_at: Time.current)
-    end
 
     def send_emails
       CitizenCompletionEmailService.new(legal_aid_application).send_email
