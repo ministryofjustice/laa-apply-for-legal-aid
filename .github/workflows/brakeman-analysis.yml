@@ -12,6 +12,7 @@ permissions: {}
 
 jobs:
   brakeman:
-    uses: ministryofjustice/laa-reusable-github-actions/.github/workflows/brakeman.yml@0cb7eb8ab4bf643986ab36ecf3ffcdffa9b55214 # main on 01/06/2026
+    # uses: ministryofjustice/laa-reusable-github-actions/.github/workflows/brakeman.yml@0cb7eb8ab4bf643986ab36ecf3ffcdffa9b55214 # main on 01/06/2026
+    uses: ministryofjustice/laa-reusable-github-actions/.github/workflows/brakeman.yml@chore/bump-dependencies-with-node-20
     permissions:
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results

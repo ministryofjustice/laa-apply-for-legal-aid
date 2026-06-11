@@ -3,12 +3,14 @@ on:
   schedule:
     - cron:  '15 6 * * *'
   workflow_dispatch:
+  push:
 
 permissions: {}
 
 jobs:
   run-sast-tooling:
-    uses: ministryofjustice/laa-reusable-github-actions/.github/workflows/sast.yml@8e0e6bbaa7d9075660c044b2e2c934a966c56570 # main as of 03/06/2026
+    # uses: ministryofjustice/laa-reusable-github-actions/.github/workflows/sast.yml@8e0e6bbaa7d9075660c044b2e2c934a966c56570 # main as of 03/06/2026
+    uses: ministryofjustice/laa-reusable-github-actions/.github/workflows/sast.yml@chore/bump-dependencies-with-node-20
     permissions:
       id-token: write
       contents: read
