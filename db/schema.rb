@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_10_150257) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_11_075218) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -676,7 +676,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_10_150257) do
     t.uuid "copy_case_id"
     t.datetime "created_at", precision: nil, null: false
     t.uuid "datastore_id"
-    t.datetime "declaration_accepted_at", precision: nil
     t.datetime "discarded_at", precision: nil
     t.boolean "draft"
     t.boolean "dwp_result_confirmed"
