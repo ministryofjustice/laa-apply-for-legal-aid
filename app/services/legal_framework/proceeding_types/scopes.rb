@@ -1,6 +1,8 @@
 module LegalFramework
   module ProceedingTypes
     class Scopes < LegalFramework::BaseApiCall
+      attr_reader :redis
+
       def self.call(proceeding, emergency)
         new(proceeding, emergency).call
       end
@@ -10,10 +12,11 @@ module LegalFramework
         @proceeding = proceeding
         @level_of_service_code = emergency ? proceeding.emergency_level_of_service : proceeding.substantive_level_of_service
         @emergency = emergency
+        @redis = Redis.new(url: Rails.configuration.x.redis.lfa_url)
       end
 
       def call
-        request.body
+        read_or_store_values { request.body }
       end
 
     private
@@ -37,6 +40,10 @@ module LegalFramework
 
       def path
         "/proceeding_type_scopes"
+      end
+
+      def redis_key
+        "lfa/proceeding/#{@proceeding.ccms_code}/df_#{@emergency}/cit_#{@proceeding.client_involvement_type_ccms_code}/los_#{@level_of_service_code}/scopes"
       end
     end
   end
