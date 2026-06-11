@@ -28,7 +28,7 @@ module Citizens
     def check_not_complete
       return if self.class.view_when_complete
 
-      completed if legal_aid_application&.completed_at?
+      completed if legal_aid_application&.citizen_completed_at?
     end
 
     def completed
