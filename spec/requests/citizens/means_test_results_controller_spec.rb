@@ -22,7 +22,7 @@ RSpec.describe Citizens::MeansTestResultsController do
 
     context "with completed application" do
       let(:complete_application) do
-        legal_aid_application.update!(completed_at: 1.minute.ago)
+        legal_aid_application.update!(citizen_completed_at: 1.minute.ago)
       end
 
       it "returns ok" do

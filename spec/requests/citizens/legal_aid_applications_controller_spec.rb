@@ -7,7 +7,7 @@ RSpec.describe Citizens::LegalAidApplicationsController do
       :with_applicant,
       :with_non_passported_state_machine,
       :awaiting_applicant,
-      completed_at:,
+      citizen_completed_at:,
       applicant: build(:applicant, first_name: "Test", last_name: "Applicant"),
       provider: build(:provider, firm: build(:firm, name: "Test Firm")),
     )
@@ -20,7 +20,7 @@ RSpec.describe Citizens::LegalAidApplicationsController do
     )
   end
 
-  let(:completed_at) { nil }
+  let(:citizen_completed_at) { nil }
   let(:token) { citizen_access_token.token }
 
   describe "GET citizens/applications/:id" do
@@ -45,7 +45,7 @@ RSpec.describe Citizens::LegalAidApplicationsController do
           :with_applicant,
           :with_non_passported_state_machine,
           :checking_citizen_answers,
-          completed_at:,
+          citizen_completed_at:,
           applicant: build(:applicant, first_name: "Test", last_name: "Applicant"),
           provider: build(:provider, firm: build(:firm, name: "Test Firm")),
         )
@@ -68,7 +68,7 @@ RSpec.describe Citizens::LegalAidApplicationsController do
     end
 
     context "when applicant has completed the means assessment" do
-      let(:completed_at) { 1.day.ago }
+      let(:citizen_completed_at) { 1.day.ago }
 
       it "redirects to error page (assessment already completed)" do
         request
@@ -122,7 +122,7 @@ RSpec.describe Citizens::LegalAidApplicationsController do
     context "when applicant has completed the means assessment" do
       subject(:request) do
         get citizens_legal_aid_application_path(citizen_access_token.token)
-        legal_aid_application.update!(completed_at: 1.day.ago)
+        legal_aid_application.update!(citizen_completed_at: 1.day.ago)
         get citizens_legal_aid_applications_path
       end
 

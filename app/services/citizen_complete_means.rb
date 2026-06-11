@@ -12,7 +12,6 @@ class CitizenCompleteMeans
   def call
     legal_aid_application.update!(
       provider_step: intended_provider_step,
-      completed_at: Time.current,
       citizen_completed_at: Time.current,
     )
   end
