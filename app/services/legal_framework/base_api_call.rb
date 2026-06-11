@@ -21,5 +21,17 @@ module LegalFramework
     def headers
       { "Content-Type" => "application/json" }
     end
+
+    def read_or_store_values
+      json = redis.get(redis_key)
+      return json unless json.nil?
+
+      write_to_cache(redis_key, yield)
+      redis.get(redis_key)
+    end
+
+    def write_to_cache(key, data)
+      redis.set(key, data, ex: Rails.configuration.x.legal_framework.cache_duration)
+    end
   end
 end
