@@ -82,6 +82,8 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form do
   let(:form_params) { params.merge(model: proceeding) }
 
   before do
+    # The following may not be needed after the proposed data inversion ticket, 7038
+    Redis.new(url: Rails.configuration.x.redis.lfa_url).flushdb
     stub_request(:post, %r{#{Rails.configuration.x.legal_framework_api_host}/proceeding_type_defaults})
       .to_return(
         status: 200,
