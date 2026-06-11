@@ -35,10 +35,21 @@ RSpec.describe "POST /v1/uploaded_evidence_collections" do
         let(:attachment) { create(:attachment, :uploaded_evidence_collection) }
         let(:legal_aid_application) { create(:legal_aid_application, attachments: [attachment]) }
 
-        it "increments the attachment name" do
+        it "increments the attachment name by adding a digit" do
           post_request
           expect(legal_aid_application.reload.attachments.length).to match(2)
-          expect(legal_aid_application.reload.attachments.order(:attachment_name).last.attachment_name).to match("uploaded_evidence_collection_1")
+          expect(legal_aid_application.reload.attachments.map(&:attachment_name)).to match(%w[uploaded_evidence_collection uploaded_evidence_collection_1])
+        end
+      end
+
+      context "when the application has one attachment already but without a digit at the end" do
+        let(:attachment) { create(:attachment, :uploaded_evidence_collection, attachment_name: "uploaded_evidence_collection_N") }
+        let(:legal_aid_application) { create(:legal_aid_application, attachments: [attachment]) }
+
+        it "increments the attachment name by adding a digit" do
+          post_request
+          expect(legal_aid_application.reload.attachments.length).to match(2)
+          expect(legal_aid_application.reload.attachments.map(&:attachment_name)).to match(%w[uploaded_evidence_collection_N uploaded_evidence_collection_1])
         end
       end
 
@@ -50,7 +61,7 @@ RSpec.describe "POST /v1/uploaded_evidence_collections" do
         it "increments the attachment name" do
           post_request
           expect(legal_aid_application.reload.attachments.length).to match(3)
-          expect(legal_aid_application.reload.attachments.order(:attachment_name).last.attachment_name).to match("uploaded_evidence_collection_2")
+          expect(legal_aid_application.reload.attachments.map(&:attachment_name)).to match(%w[uploaded_evidence_collection uploaded_evidence_collection_1 uploaded_evidence_collection_2])
         end
       end
 

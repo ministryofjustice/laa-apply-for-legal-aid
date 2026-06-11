@@ -48,12 +48,18 @@ module V1
     end
 
     def increment_name(most_recent_name)
-      if most_recent_name == name
-        "#{name}_1"
-      else
-        most_recent_name =~ /^#{name}_(\d+)$/
-        "#{name}_#{Regexp.last_match(1).to_i + 1}"
-      end
+      return "#{name}_1" if most_recent_name == name
+
+      # NOTE: silence Vulnerability scanner, snyk, false positive over ReDOS attack vector.
+      # The scanner thinks name value could be user input, but it is not. It is a
+      # hardcoded string based on the model name.
+      escaped_name = Regexp.escape(name)
+
+      match = most_recent_name.match(/\A#{escaped_name}_(\d+)\z/)
+
+      return "#{name}_1" unless match
+
+      "#{name}_#{match[1].to_i + 1}"
     end
 
     def provider_uploader
