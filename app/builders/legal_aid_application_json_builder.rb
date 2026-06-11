@@ -20,7 +20,7 @@ class LegalAidApplicationJsonBuilder < BaseJsonBuilder
       transaction_period_start_on:,
       transaction_period_finish_on:,
       transactions_gathered:,
-      completed_at:,
+      citizen_completed_at:,
       provider_step_params:,
       own_vehicle:,
       substantive_application_deadline_on:,
