@@ -1,6 +1,6 @@
 module LegalFramework
   module ProceedingTypes
-    class Proceeding
+    class Proceeding < LegalFramework::BaseApiCall
       class Response
         attr_reader :success,
                     :ccms_code,
@@ -41,13 +41,12 @@ module LegalFramework
         end
       end
 
-      PATH = "/proceeding_types/".freeze
-
       def self.call(ccms_code)
         new(ccms_code).call
       end
 
       def initialize(ccms_code)
+        super()
         @ccms_code = ccms_code
       end
 
@@ -57,20 +56,8 @@ module LegalFramework
 
     private
 
-      def request
-        conn.get url
-      end
-
-      def conn
-        @conn ||= Faraday.new(url:, headers:)
-      end
-
-      def url
-        "#{Rails.configuration.x.legal_framework_api_host}#{PATH}#{@ccms_code}"
-      end
-
-      def headers
-        { "Content-Type" => "application/json" }
+      def path
+        "/proceeding_types/#{@ccms_code}"
       end
     end
   end

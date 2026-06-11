@@ -1,13 +1,12 @@
 module LegalFramework
   module ProceedingTypes
-    class Defaults
-      PATH = "/proceeding_type_defaults".freeze
-
+    class Defaults < LegalFramework::BaseApiCall
       def self.call(proceeding, emergency)
         new(proceeding, emergency).call
       end
 
       def initialize(proceeding, emergency)
+        super()
         @proceeding = proceeding
         @emergency = emergency
       end
@@ -34,18 +33,8 @@ module LegalFramework
         end
       end
 
-      def conn
-        @conn ||= Faraday.new(url:, headers:)
-      end
-
-      def url
-        "#{Rails.configuration.x.legal_framework_api_host}#{PATH}"
-      end
-
-      def headers
-        {
-          "Content-Type" => "application/json",
-        }
+      def path
+        "/proceeding_type_defaults"
       end
     end
   end
