@@ -1,0 +1,22 @@
+name: Static Application Security Testing
+on:
+  schedule:
+    - cron:  '15 6 * * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  run-sast-tooling:
+    uses: ministryofjustice/laa-reusable-github-actions/.github/workflows/sast.yml@8e0e6bbaa7d9075660c044b2e2c934a966c56570 # main as of 03/06/2026
+    permissions:
+      id-token: write
+      contents: read
+      security-events: write
+      actions: read
+    with:
+      image_uri: ${{ format('{0}:latest', vars.ECR_REGISTRY_URI) }}
+    secrets:
+      SNYK_CLIENT_ID: ${{ secrets.SNYK_CLIENT_ID }}
+      SNYK_CLIENT_SECRET: ${{ secrets.SNYK_CLIENT_SECRET }}
+      ECR_ROLE_TO_ASSUME: ${{ secrets.ECR_ROLE_TO_ASSUME }}
