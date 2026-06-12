@@ -9,14 +9,26 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
+# we ignore "app/views/shared/check_answers/_assets.html.erb"  because it starting
+# raising a warning, due to keyword arguments being used with assumed default named value.
+# i.e.
+# app/views/shared/check_answers/_assets.html.erb:6: A parse error occurred. Check the
+# syntax of the file. If the file is invalid, correct the error or exclude the file
+# from analysis.
+#
+
 name: "CodeQL"
 
 on:
   push:
     branches: [ main ]
+    paths-ignore:
+        - "app/views/shared/check_answers/_assets.html.erb" # was raising a warning
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ main ]
+    paths-ignore:
+        - "app/views/shared/check_answers/_assets.html.erb" # was raising a warning
   schedule:
     - cron: '5 9 * * 5'
 
