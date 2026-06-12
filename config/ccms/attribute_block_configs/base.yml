@@ -3482,8 +3482,8 @@ global_merits:
     response_type: boolean
     user_defined: false
   CASE_OWNER_SCU:
-    generate_block?: false
-    value: false
+    generate_block?: '#application_ecct_routing?'
+    value: '#second_appeal?'
     br100_meaning: The Case Owner Is SCU
     response_type: boolean
     user_defined: false
@@ -3559,7 +3559,7 @@ global_merits:
     response_type: boolean
     user_defined: false
   ECF_FLAG:
-    value: '#second_appeal?'
+    value: false
     br100_meaning: ECF Flag
     response_type: boolean
     user_defined: true
@@ -3923,8 +3923,8 @@ global_merits:
     response_type: boolean
     user_defined: false
   ROUTING_SCU:
-    generate_block?: false
-    value: false
+    generate_block?: '#application_ecct_routing?'
+    value: '#second_appeal?'
     br100_meaning: The Case Is An SCU Case
     response_type: boolean
     user_defined: false
@@ -4928,11 +4928,11 @@ proceeding_merits:
     response_type: text
     user_defined: false
   PROCEEDING_CASE_OWNER_SCU:
-    value: "#proceeding_proceeding_case_owner_scu"
+    value: '#second_appeal?'
     br100_meaning: The Proceeding Case Owner Is Scu
     response_type: boolean
     user_defined: false
-    generate_block?: false
+    generate_block?: '#application_ecct_routing?'
   PRIVATE_FUNDING_APPLICABLE:
     value: "#proceeding_private_funding_applicable"
     br100_meaning: The Private Funding Of The Proceeding Question Is Applicable

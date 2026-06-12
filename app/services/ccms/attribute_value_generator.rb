@@ -516,11 +516,11 @@ module CCMS
     end
 
     def merits_routing(_options)
-      legal_aid_application&.appeal&.second_appeal? ? "ECF" : "SFM"
+      legal_aid_application&.appeal&.second_appeal? ? "SCU" : "SFM"
     end
 
     def merits_routing_name(_options)
-      legal_aid_application&.appeal&.second_appeal? ? "ECF Team" : "Standard Family Merits"
+      legal_aid_application&.appeal&.second_appeal? ? "Special Cases Unit" : "Standard Family Merits"
     end
   end
 end
