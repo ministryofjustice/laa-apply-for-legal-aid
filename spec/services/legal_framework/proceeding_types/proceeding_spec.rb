@@ -5,14 +5,26 @@ RSpec.describe LegalFramework::ProceedingTypes::Proceeding, :vcr do
 
   let(:ccms_code) { "DA004" }
   let(:uri) { "#{Rails.configuration.x.legal_framework_api_host}/proceeding_types/#{ccms_code}" }
+  let(:clear_cache) { false }
 
   describe ".call" do
     subject(:call) { proceeding.call(ccms_code) }
 
-    before { call }
+    before do
+      Redis.new(url: Rails.configuration.x.redis.lfa_url).flushdb if clear_cache
+      call
+    end
 
-    it "makes one external call" do
-      expect(a_request(:get, uri)).to have_been_made.times(1)
+    context "when the cache is empty" do
+      let(:clear_cache) { true }
+
+      context "and the endpoint is called multiple times" do
+        before { call }
+
+        it "makes a single external call" do
+          expect(a_request(:get, uri)).to have_been_made.times(1)
+        end
+      end
     end
 
     it "returns the expected object" do

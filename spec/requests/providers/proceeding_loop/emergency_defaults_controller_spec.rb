@@ -103,6 +103,7 @@ RSpec.describe "EmergencyDefaultsController" do
 
   let(:proceeding) { application.proceedings.first }
   let(:provider) { application.provider }
+  let(:clear_cache) { false }
 
   describe "GET /providers/applications/:legal_aid_application_id/emergency_defaults/:proceeding_id" do
     subject(:get_ed) { get "/providers/applications/#{application.id}/emergency_defaults/#{proceeding.id}" }
@@ -123,6 +124,7 @@ RSpec.describe "EmergencyDefaultsController" do
           )
 
         login_as provider
+        Redis.new(url: Rails.configuration.x.redis.lfa_url).flushdb if clear_cache
         get_ed
       end
 
@@ -148,18 +150,22 @@ RSpec.describe "EmergencyDefaultsController" do
 
       context "when default scope limitations includes hearing_date as an additional_params" do
         let(:default_scope_response) { da001_defendant_with_df }
+        let(:clear_cache) { true } # expecting non-standard responses
 
         it "renders the hearing date partial" do
           expect(response).to render_template("shared/scope_limitations/_hearing_date")
+          Redis.new(url: Rails.configuration.x.redis.lfa_url).flushdb # clear non-standard response
         end
       end
 
       context "when default scope limitations includes limitation_note as an additional_params" do
         # NOTE: there may not be a default scope with limitation_note additional param
         let(:default_scope_response) { fake_da001_with_limitation_note }
+        let(:clear_cache) { true } # expecting non-standard responses
 
         it "renders the hearing date partial" do
           expect(response).to render_template("shared/scope_limitations/_limitation_note")
+          Redis.new(url: Rails.configuration.x.redis.lfa_url).flushdb # clear non-standard response
         end
       end
     end
