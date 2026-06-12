@@ -288,20 +288,22 @@ module CCMS
       legal_aid_application.outstanding_mortgage_amount
     end
 
-    def ccms_equivalent_prospects_of_success(_options)
-      return unless ccms_equivalent_prospects_of_success_valid?
+    def ccms_equivalent_prospects_of_success(options)
+      proceeding = options[:proceeding]
+      return unless ccms_equivalent_prospects_of_success_valid?(proceeding)
 
-      PROSPECTS_OF_SUCCESS[chances_of_success.success_prospect.to_sym][:text]
+      PROSPECTS_OF_SUCCESS[chances_of_success(proceeding).success_prospect.to_sym][:text]
     end
 
-    def ccms_code_prospects_of_success(_options)
-      return unless ccms_equivalent_prospects_of_success_valid?
+    def ccms_code_prospects_of_success(options)
+      proceeding = options[:proceeding]
+      return unless ccms_equivalent_prospects_of_success_valid?(proceeding)
 
-      PROSPECTS_OF_SUCCESS[chances_of_success.success_prospect.to_sym][:code]
+      PROSPECTS_OF_SUCCESS[chances_of_success(proceeding).success_prospect.to_sym][:code]
     end
 
-    def ccms_equivalent_prospects_of_success_valid?
-      PROSPECTS_OF_SUCCESS[chances_of_success.success_prospect.to_sym].present?
+    def ccms_equivalent_prospects_of_success_valid?(proceeding)
+      PROSPECTS_OF_SUCCESS[chances_of_success(proceeding).success_prospect.to_sym].present?
     end
 
     def client_eligibility(_options)
@@ -495,12 +497,12 @@ module CCMS
       ManualReviewDeterminer.new(legal_aid_application).manual_review_required?
     end
 
-    def lead_proceeding_chances_of_success?(_options)
-      chances_of_success.present?
+    def proceeding_chances_of_success?(options)
+      options[:proceeding]&.chances_of_success&.present?
     end
 
-    def chances_of_success
-      legal_aid_application.lead_proceeding.chances_of_success
+    def chances_of_success(proceeding)
+      proceeding.chances_of_success
     end
 
     def second_appeal?(_options)
