@@ -42,7 +42,7 @@ class PassportedStateMachine < BaseStateMachine
     false
   end
 
-  def applicant_entering_means?
+  def citizen_entering_means?
     false
   end
 

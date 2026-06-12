@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Citizens::ConsentsController do
-  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :applicant_entering_means) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :with_non_passported_state_machine, :citizen_entering_means) }
 
   before { sign_in_citizen_for_application(legal_aid_application) }
 
@@ -37,7 +37,7 @@ RSpec.describe Citizens::ConsentsController do
       end
 
       it "updates application state" do
-        expect(legal_aid_application.reload).to be_applicant_entering_means
+        expect(legal_aid_application.reload).to be_citizen_entering_means
       end
     end
 

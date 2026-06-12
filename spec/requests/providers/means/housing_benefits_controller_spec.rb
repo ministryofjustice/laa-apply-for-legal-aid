@@ -81,7 +81,7 @@ RSpec.describe Providers::Means::HousingBenefitsController do
       it "renders the correct content" do
         _housing_benefit = create(:transaction_type, :housing_benefit)
         transaction_type = create(:transaction_type, :rent_or_mortgage)
-        legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type])
+        legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :citizen_entering_means, transaction_types: [transaction_type])
         laa_transaction_type = create(:legal_aid_application_transaction_type, legal_aid_application_id: legal_aid_application.id,
                                                                                transaction_type_id: transaction_type.id,
                                                                                owner_type: "Applicant", owner_id: legal_aid_application.applicant.id)
@@ -98,7 +98,7 @@ RSpec.describe Providers::Means::HousingBenefitsController do
       it "renders the correct content" do
         _housing_benefit = create(:transaction_type, :housing_benefit)
         transaction_type = create(:transaction_type, :rent_or_mortgage)
-        legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type])
+        legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :citizen_entering_means, transaction_types: [transaction_type])
         laa_transaction_type = create(:legal_aid_application_transaction_type, legal_aid_application_id: legal_aid_application.id,
                                                                                transaction_type_id: transaction_type.id,
                                                                                owner_type: "Partner", owner_id: legal_aid_application.partner.id)
@@ -115,7 +115,7 @@ RSpec.describe Providers::Means::HousingBenefitsController do
       it "renders the correct content" do
         _housing_benefit = create(:transaction_type, :housing_benefit)
         transaction_type = create(:transaction_type, :rent_or_mortgage)
-        legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type])
+        legal_aid_application = create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :citizen_entering_means, transaction_types: [transaction_type])
         laa_transaction_type_applicant = create(:legal_aid_application_transaction_type, legal_aid_application_id: legal_aid_application.id,
                                                                                          transaction_type_id: transaction_type.id,
                                                                                          owner_type: "Applicant", owner_id: legal_aid_application.applicant.id)

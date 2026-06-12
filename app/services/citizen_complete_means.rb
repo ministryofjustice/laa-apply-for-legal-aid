@@ -1,4 +1,4 @@
-class ApplicantCompleteMeans
+class CitizenCompleteMeans
   def self.call(legal_aid_application)
     new(legal_aid_application).call
   end
@@ -13,6 +13,7 @@ class ApplicantCompleteMeans
     legal_aid_application.update!(
       provider_step: intended_provider_step,
       completed_at: Time.current,
+      citizen_completed_at: Time.current,
     )
   end
 
@@ -21,7 +22,7 @@ private
   def intended_provider_step
     Flow::KeyPoint.step_for(
       journey: :providers,
-      key_point: :start_after_applicant_completes_means,
+      key_point: :start_after_citizen_completes_means,
     )
   end
 end

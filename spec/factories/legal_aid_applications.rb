@@ -244,9 +244,9 @@ FactoryBot.define do
       end
     end
 
-    trait :applicant_entering_means do
+    trait :citizen_entering_means do
       before(:create) do |application|
-        application.state_machine_proxy.update!(aasm_state: :applicant_entering_means)
+        application.state_machine_proxy.update!(aasm_state: :citizen_entering_means)
       end
     end
 
@@ -787,7 +787,7 @@ FactoryBot.define do
       populate_vehicle { true }
       with_applicant
       with_non_passported_state_machine
-      applicant_entering_means
+      citizen_entering_means
       with_savings_amount
       with_own_home_mortgaged
       property_value { rand(1...1_000_000.0).round(2) }
@@ -816,7 +816,7 @@ FactoryBot.define do
     trait :with_everything_and_address do
       with_applicant_and_address
       with_non_passported_state_machine
-      applicant_entering_means
+      citizen_entering_means
       with_savings_amount
       with_own_home_mortgaged
       property_value { rand(1...1_000_000.0).round(2) }

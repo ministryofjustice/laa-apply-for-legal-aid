@@ -80,7 +80,7 @@ class LegalAidApplication < ApplicationRecord
   delegate :full_name, :has_partner, :has_partner?, :has_partner_with_no_contrary_interest?, to: :applicant, prefix: true, allow_nil: true
   delegate :shared_benefit_with_applicant, :shared_benefit_with_applicant?, to: :partner, allow_nil: true
   delegate :case_ccms_reference, to: :ccms_submission, allow_nil: true
-  delegate :applicant_enter_means!,
+  delegate :citizen_enter_means!,
            :await_applicant!,
            :case_add_requestor,
            :check_applicant_details!,
@@ -100,11 +100,11 @@ class LegalAidApplication < ApplicationRecord
            :provider_used_delegated_functions!,
            :reset!,
            :reset_from_use_ccms!,
-           :reset_to_applicant_entering_means!,
+           :reset_to_citizen_entering_means!,
            :submitted_assessment!,
            :use_ccms!,
            :applicant_details_checked?,
-           :applicant_entering_means?,
+           :citizen_entering_means?,
            :assessment_submitted?,
            :awaiting_applicant?,
            :checking_applicant_details?,
@@ -488,7 +488,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def with_applicant?
-    applicant_entering_means? || awaiting_applicant?
+    citizen_entering_means? || awaiting_applicant?
   end
 
   def submitted_to_ccms?
@@ -631,8 +631,8 @@ class LegalAidApplication < ApplicationRecord
     attachments.statement_of_case.any?
   end
 
-  def complete_non_passported_means!
-    state_machine_proxy.complete_non_passported_means!(self)
+  def citizen_completes_means!
+    state_machine_proxy.citizen_completes_means!(self)
   end
 
   def merits_complete!(current_provider)

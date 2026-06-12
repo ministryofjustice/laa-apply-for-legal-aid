@@ -1,13 +1,13 @@
 require "rails_helper"
 
 RSpec.describe NonPassportedStateMachine do
-  describe "#applicant_enter_means!" do
-    subject(:event) { legal_aid_application.applicant_enter_means! }
+  describe "#citizen_enter_means!" do
+    subject(:event) { legal_aid_application.citizen_enter_means! }
 
     let(:legal_aid_application) { create(:legal_aid_application, :use_ccms_offline_accounts) }
 
     it "sets state to provider_entering_means" do
-      expect { event }.to change(legal_aid_application, :state).from("use_ccms").to("applicant_entering_means")
+      expect { event }.to change(legal_aid_application, :state).from("use_ccms").to("citizen_entering_means")
     end
 
     it "sets the ccms_reason to nil" do
