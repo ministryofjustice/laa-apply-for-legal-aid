@@ -1756,54 +1756,6 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "#special_children_act_child_subject_over_17?" do
-    let(:laa) { create(:legal_aid_application, applicant:) }
-    let(:applicant) { create(:applicant, age_for_means_test_purposes: 17) }
-    let(:proceeding) { create(:proceeding, :pb059, client_involvement_type_ccms_code:, legal_aid_application: laa) }
-    let(:client_involvement_type_ccms_code) { "W" }
-
-    before { laa.proceedings << proceeding }
-
-    context "with a special childrens act supervision order proceeding" do
-      context "when the client_involvement_type is Applicant" do
-        let(:client_involvement_type_ccms_code) { "A" }
-
-        it "returns false" do
-          expect(laa.special_children_act_child_subject_over_17?).to be false
-        end
-
-        context "when the client_involvement_type is Child Subject" do
-          let(:client_involvement_type_ccms_code) { "W" }
-
-          context "when the applicant is under 17" do
-            let(:applicant) { create(:applicant, age_for_means_test_purposes: 16) }
-
-            it "returns false" do
-              expect(laa.special_children_act_child_subject_over_17?).to be false
-            end
-          end
-
-          context "when the applicant is over 17" do
-            let(:applicant) { create(:applicant, age_for_means_test_purposes: 17) }
-
-            it "returns true" do
-              expect(laa.special_children_act_child_subject_over_17?).to be true
-            end
-          end
-        end
-      end
-    end
-
-    context "without special children act proceedings" do
-      let(:proceeding) { create(:proceeding, :da001, client_involvement_type_ccms_code:, legal_aid_application: laa) }
-
-      it "returns false" do
-        create(:proceeding, :da001, legal_aid_application: laa)
-        expect(laa.special_children_act_proceedings?).to be false
-      end
-    end
-  end
-
   describe "#public_law_family_proceedings?" do
     context "with public law family proceedings" do
       let(:laa) { create(:legal_aid_application, :with_proceedings, explicit_proceedings: %i[pbm32], set_lead_proceeding: :pbm32) }
@@ -2504,20 +2456,24 @@ RSpec.describe LegalAidApplication do
     subject { legal_aid_application.auto_grant_special_children_act? }
 
     let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
-    let(:applicant) { create(:applicant, age_for_means_test_purposes: 16) }
-    let(:proceeding) { create(:proceeding, :pb059, client_involvement_type_ccms_code:, legal_aid_application: legal_aid_application) }
-    let(:client_involvement_type_ccms_code) { "W" }
+    let(:applicant) { create(:applicant) }
+    let(:proceeding) { create(:proceeding, :pb059, legal_aid_application: legal_aid_application) }
 
     before { legal_aid_application.proceedings << proceeding }
 
-    context "when there are special children act proceedings" do
+    it "calls the Autograntable service" do
+      expect(Autograntable).to receive(:call).with(legal_aid_application).and_call_original
+      legal_aid_application.auto_grant_special_children_act?
+    end
+
+    context "when the application has autograntable special childrens act proceedings" do
       it { is_expected.to be true }
+    end
 
-      context "when the applicant is a child subject with a supervision order proceeding and over 17" do
-        let(:applicant) { create(:applicant, age_for_means_test_purposes: 17) }
+    context "when the application does not have autograntable special childrens act proceedings" do
+      let(:proceeding) { create(:proceeding, :da001, legal_aid_application: legal_aid_application) }
 
-        it { is_expected.to be false }
-      end
+      it { is_expected.to be false }
     end
   end
 

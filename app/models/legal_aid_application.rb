@@ -212,10 +212,6 @@ class LegalAidApplication < ApplicationRecord
     proceedings.any? { |proceeding| proceeding.special_children_act? && proceeding.sca_type.eql?("related") }
   end
 
-  def special_children_act_child_subject_over_17?
-    sca_care_order_or_supervision_order_child_subject? && applicant.over_17?
-  end
-
   def client_court_ordered_parental_responsibility?
     applicant.relationship_to_children.eql?("court_order")
   end
@@ -242,19 +238,7 @@ class LegalAidApplication < ApplicationRecord
   end
 
   def auto_grant_special_children_act?
-    special_children_act_proceedings? && auto_grant_exclusions?
-  end
-
-  def auto_grant_exclusions?
-    # If any of these are true then auto-granting should not occur
-    # This list is not definitive, it is accurate for the initial release of SCA, Oct 2024
-    # e.g. when Apply starts handling high-cost cases we could add a test for claims > £25,000
-    [
-      special_children_act_related_proceedings?,
-      client_court_ordered_parental_responsibility?,
-      client_parental_responsibility_agreement?,
-      special_children_act_child_subject_over_17?,
-    ].none?
+    Autograntable.call(self)
   end
 
   def ecct_routing?
@@ -783,6 +767,10 @@ class LegalAidApplication < ApplicationRecord
     legal_framework_merits_task_list&.includes_task?(:application, :client_relationship_to_children)
   end
 
+  def core_proceedings
+    @core_proceedings ||= proceedings.where(sca_type: "core")
+  end
+
 private
 
   def benefit_check_response
@@ -861,9 +849,5 @@ private
 
   def legal_linked_count
     @legal_linked_count ||= LinkedApplication.where(lead_application_id: id, link_type_code: "LEGAL", confirm_link: true).count
-  end
-
-  def sca_care_order_or_supervision_order_child_subject?
-    proceedings.any? { |proceeding| proceeding.ccms_code.in?(%w[PB057 PB059]) && proceeding.client_involvement_type_ccms_code.eql?("W") }
   end
 end

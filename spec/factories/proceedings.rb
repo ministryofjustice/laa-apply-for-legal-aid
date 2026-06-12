@@ -387,6 +387,46 @@ FactoryBot.define do
     end
   end
 
+  trait :pb026 do
+    lead_proceeding { false }
+    ccms_code { "PB026" }
+    meaning { "Emergency protection order" }
+    description { "to be represented on an application for an emergency protection order." }
+    substantive_cost_limitation { 25_000 }
+    delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
+    used_delegated_functions { nil }
+    used_delegated_functions_on { nil }
+    used_delegated_functions_reported_on { nil }
+    name { "emergency_protection_order_sca" }
+    matter_type { "special children act (SCA)" }
+    category_of_law { "Family" }
+    category_law_code { "MAT" }
+    ccms_matter_code { "KPBLW" }
+    client_involvement_type_ccms_code { "A" }
+    client_involvement_type_description { "Applicant/Claimant/Petitioner" }
+    sca_type { "core" }
+  end
+
+  trait :pb057 do
+    lead_proceeding { false }
+    ccms_code { "PB057" }
+    meaning { "Care order" }
+    description { "to be represented on an application for a care order" }
+    substantive_cost_limitation { 25_000 }
+    delegated_functions_cost_limitation { rand(1...1_000_000.0).round(2) }
+    used_delegated_functions { nil }
+    used_delegated_functions_on { nil }
+    used_delegated_functions_reported_on { nil }
+    name { "app_for_care_order_sca" }
+    matter_type { "special children act (SCA)" }
+    category_of_law { "Family" }
+    category_law_code { "MAT" }
+    ccms_matter_code { "KPBLW" }
+    client_involvement_type_ccms_code { "A" }
+    client_involvement_type_description { "Applicant/Claimant/Petitioner" }
+    sca_type { "core" }
+  end
+
   trait :pb059 do
     lead_proceeding { false }
     ccms_code { "PB059" }
