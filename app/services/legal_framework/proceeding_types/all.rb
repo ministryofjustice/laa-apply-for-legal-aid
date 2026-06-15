@@ -29,7 +29,7 @@ module LegalFramework
       end
 
       def call
-        response = request
+        response = show_all_proceedings ? read_or_store_values { request } : request
         parsed_body = JSON.parse(response.body)
         data = show_all_proceedings? ? parsed_body : parsed_body["data"]
         data.map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
@@ -67,10 +67,8 @@ module LegalFramework
         show_all_proceedings? ? "/proceeding_types/all" : "/proceeding_types/filter"
       end
 
-      def headers
-        {
-          "Content-Type" => "application/json",
-        }
+      def redis_key
+        "lfa/proceeding/all"
       end
     end
   end

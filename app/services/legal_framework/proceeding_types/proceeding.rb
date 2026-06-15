@@ -41,8 +41,6 @@ module LegalFramework
         end
       end
 
-      attr_reader :redis
-
       def self.call(ccms_code)
         new(ccms_code).call
       end
@@ -50,7 +48,6 @@ module LegalFramework
       def initialize(ccms_code)
         super()
         @ccms_code = ccms_code
-        @redis = Redis.new(url: Rails.configuration.x.redis.lfa_url)
       end
 
       def call

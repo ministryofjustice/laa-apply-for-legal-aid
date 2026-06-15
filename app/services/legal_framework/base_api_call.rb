@@ -1,5 +1,11 @@
 module LegalFramework
   class BaseApiCall
+    attr_reader :redis
+
+    def initialize
+      @redis = Redis.new(url: Rails.configuration.x.redis.lfa_url)
+    end
+
     def self.call(params = nil)
       params.nil? ? new.call : new(params).call
     end

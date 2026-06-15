@@ -18,12 +18,9 @@ module LegalFramework
         end
       end
 
-      attr_reader :redis
-
       def initialize(ccms_code)
         super()
         @proceeding_code = ccms_code
-        @redis = Redis.new(url: Rails.configuration.x.redis.lfa_url)
       end
 
       def call

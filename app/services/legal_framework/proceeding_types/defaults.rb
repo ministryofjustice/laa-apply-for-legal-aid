@@ -1,8 +1,6 @@
 module LegalFramework
   module ProceedingTypes
     class Defaults < LegalFramework::BaseApiCall
-      attr_reader :redis
-
       def self.call(proceeding, emergency)
         new(proceeding, emergency).call
       end
@@ -11,7 +9,6 @@ module LegalFramework
         super()
         @proceeding = proceeding
         @emergency = emergency
-        @redis = Redis.new(url: Rails.configuration.x.redis.lfa_url)
       end
 
       def call
