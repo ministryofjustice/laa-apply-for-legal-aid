@@ -29,8 +29,8 @@ module LegalFramework
       end
 
       def call
-        response = show_all_proceedings ? read_or_store_values { request } : request
-        parsed_body = JSON.parse(response.body)
+        response = show_all_proceedings? ? read_or_store_values { request.body } : request.body
+        parsed_body = JSON.parse(response)
         data = show_all_proceedings? ? parsed_body : parsed_body["data"]
         data.map { |pt_hash| ProceedingTypeStruct.new(pt_hash) }
       end
