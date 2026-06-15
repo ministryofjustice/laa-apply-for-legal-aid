@@ -11,7 +11,7 @@ module LegalFramework
       end
 
       def call
-        parsed_payload
+        JSON.parse(cached_response).map { |cn_hash| CountryNames.new(cn_hash) }
       end
 
       def path
@@ -20,8 +20,12 @@ module LegalFramework
 
     private
 
-      def parsed_payload
-        JSON.parse(request.body).map { |cn_hash| CountryNames.new(cn_hash) }
+      def cached_response
+        read_or_store_values { request.body }
+      end
+
+      def redis_key
+        "lfa/countries"
       end
     end
   end

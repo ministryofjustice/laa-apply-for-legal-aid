@@ -11,11 +11,19 @@ module LegalFramework
       end
 
       def call
-        JSON.parse(request.body).map { |ot_hash| OrganisationTypeStruct.new(ot_hash) }
+        JSON.parse(cached_response).map { |ot_hash| OrganisationTypeStruct.new(ot_hash) }
+      end
+
+      def cached_response
+        read_or_store_values { request.body }
       end
 
       def path
         "/organisation_types/all"
+      end
+
+      def redis_key
+        "lfa/organisation_types"
       end
     end
   end
