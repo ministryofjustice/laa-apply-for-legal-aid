@@ -16,7 +16,6 @@
 
 .wrap-text {
   word-break: break-all;
-  word-break: break-word;
 }
 
 .only-print,
@@ -26,7 +25,7 @@
 
 .app-print-only {
   display: none !important;
-  page-break-before: always;
+  break-before: page;
 
   @include govuk-media-query($media-type: print) {
     display: inherit !important;
@@ -46,7 +45,7 @@
 }
 
 .page_break_before {
-  page-break-before: always;
+  break-before: page;
 }
 
 .show-empty {
