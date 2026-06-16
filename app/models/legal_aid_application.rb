@@ -1,4 +1,6 @@
 class LegalAidApplication < ApplicationRecord
+  self.ignored_columns += %w[declaration_accepted_at]
+
   include Discard::Model
   include Reviewable::Model
   include DelegatedFunctions
