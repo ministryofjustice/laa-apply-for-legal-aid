@@ -8,7 +8,7 @@ module Flow
         home: :providers_home,
         journey_start: :applicants,
         edit_applicant: :applicant_details,
-        start_after_applicant_completes_means: :client_completed_means,
+        start_after_citizen_completes_means: :client_completed_means,
         start_income_update: :capital_introductions,
         start_vehicle_journey: :vehicles,
         check_benefits: :dwp_results,

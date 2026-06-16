@@ -4,7 +4,7 @@ RSpec.describe Flow::KeyPoint do
   subject(:flow_key_point) { described_class.new(journey, key_point) }
 
   let(:journey) { :providers }
-  let(:key_point) { :start_after_applicant_completes_means }
+  let(:key_point) { :start_after_citizen_completes_means }
   let(:step) { :client_completed_means }
   let(:legal_aid_application) { create(:legal_aid_application) }
   let(:flow) do

@@ -25,12 +25,12 @@ module Providers
     end
 
     def ready_for_citizen_to_enter_financial_details?
-      !legal_aid_application.applicant_entering_means?
+      !legal_aid_application.citizen_entering_means?
     end
 
     def start_after_means_complete_path
       Flow::KeyPoint.path_for(
-        key_point: :start_after_applicant_completes_means,
+        key_point: :start_after_citizen_completes_means,
         journey: :providers,
         legal_aid_application:,
       )

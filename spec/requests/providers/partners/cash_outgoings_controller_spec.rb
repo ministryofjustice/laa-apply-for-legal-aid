@@ -6,7 +6,7 @@ RSpec.describe Providers::Partners::CashOutgoingsController do
     legal_aid_application.set_transaction_period
   end
 
-  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means) }
+  let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :citizen_entering_means) }
   let(:provider) { legal_aid_application.provider }
 
   let(:valid_params) do
@@ -90,7 +90,7 @@ RSpec.describe Providers::Partners::CashOutgoingsController do
       end
 
       context "when partner has rent or mortgage as an outgoing category" do
-        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type]) }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :citizen_entering_means, transaction_types: [transaction_type]) }
 
         before do
           legal_aid_application.legal_aid_application_transaction_types << partner_transaction_type
@@ -103,7 +103,7 @@ RSpec.describe Providers::Partners::CashOutgoingsController do
       end
 
       context "when applicant did manual bank upload and selected housing payments" do
-        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type]) }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :citizen_entering_means, transaction_types: [transaction_type]) }
 
         before do
           legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")
@@ -173,7 +173,7 @@ RSpec.describe Providers::Partners::CashOutgoingsController do
       let(:params) { valid_params }
 
       context "when using bank statement upload journey" do
-        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :applicant_entering_means, transaction_types: [transaction_type]) }
+        let(:legal_aid_application) { create(:legal_aid_application, :with_applicant_and_partner, :with_non_passported_state_machine, :citizen_entering_means, transaction_types: [transaction_type]) }
 
         before do
           legal_aid_application.provider.permissions << Permission.find_or_create_by(role: "application.non_passported.bank_statement_upload.*")

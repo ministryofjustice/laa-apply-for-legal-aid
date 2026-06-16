@@ -55,7 +55,7 @@ RSpec.describe "email address confirmation requests" do
         end
         let(:target_path) do
           Flow::KeyPoint.path_for(
-            key_point: :start_after_applicant_completes_means,
+            key_point: :start_after_citizen_completes_means,
             journey: :providers,
             legal_aid_application: application,
           )

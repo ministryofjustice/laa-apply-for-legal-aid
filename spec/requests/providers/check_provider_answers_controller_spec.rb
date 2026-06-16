@@ -120,9 +120,9 @@ RSpec.describe Providers::CheckProviderAnswersController do
         end
       end
 
-      context "when the application is in applicant_entering_means state" do
+      context "when the application is in citizen_entering_means state" do
         before do
-          application.state_machine_proxy.update!(aasm_state: :applicant_entering_means)
+          application.state_machine_proxy.update!(aasm_state: :citizen_entering_means)
           get providers_legal_aid_application_check_provider_answers_path(application)
         end
 

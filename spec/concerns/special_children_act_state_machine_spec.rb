@@ -6,7 +6,7 @@ RSpec.describe SpecialChildrenActStateMachine do
 
   let(:legal_aid_application) { create(:legal_aid_application, :with_sca_state_machine) }
 
-  it { expect(legal_aid_application).not_to be_applicant_entering_means }
+  it { expect(legal_aid_application).not_to be_citizen_entering_means }
   it { expect(legal_aid_application).not_to be_awaiting_applicant }
   it { expect(legal_aid_application).not_to be_provider_assessing_means }
   it { expect(legal_aid_application).not_to be_checking_passported_answers }

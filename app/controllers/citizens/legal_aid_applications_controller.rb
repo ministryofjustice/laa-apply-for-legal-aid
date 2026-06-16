@@ -14,7 +14,7 @@ module Citizens
       if legal_aid_application.checking_citizen_answers?
         continue_applicant_flow
       else
-        legal_aid_application.applicant_enter_means!
+        legal_aid_application.citizen_enter_means!
         start_applicant_flow
       end
     end

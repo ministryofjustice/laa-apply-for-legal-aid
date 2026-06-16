@@ -110,7 +110,7 @@ class BaseStateMachine < ApplicationRecord
                     applicant_details_checked
                     delegated_functions_used
                     provider_confirming_applicant_eligibility
-                    applicant_entering_means
+                    citizen_entering_means
                     provider_assessing_means
                     assessing_partner_means
                     use_ccms
@@ -125,7 +125,7 @@ class BaseStateMachine < ApplicationRecord
 
     event :reset do
       transitions from: :checking_applicant_details, to: :entering_applicant_details
-      transitions from: :checking_citizen_answers, to: :applicant_entering_means
+      transitions from: :checking_citizen_answers, to: :citizen_entering_means
       transitions from: :checking_passported_answers, to: :provider_entering_means
       transitions from: :checking_merits_answers, to: :provider_entering_merits
       transitions from: :provider_entering_merits, to: :provider_entering_merits
