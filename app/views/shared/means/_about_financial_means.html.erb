@@ -1,0 +1,12 @@
+<%= page_template page_title: t(".heading", individual:) do %>
+  <p class="govuk-body"><%= t(".body-text") %></p>
+
+  <%= govuk_list t(".bullets"), type: :bullet %>
+
+  <%= next_action_buttons_with_form(
+        url:,
+        method: :patch,
+        continue_button_text: t("generic.continue"),
+        show_draft: true,
+      ) %>
+<% end %>

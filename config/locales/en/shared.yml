@@ -935,6 +935,16 @@ en:
         capital-section-heading: Your client's capital
         capital-section-heading_with_partner: Your client and their partner's capital
     means:
+      about_financial_means:
+        heading: "%{individual}'s financial assessment"
+        body-text: "You will need to provide:"
+        bullets:
+          - details about their employment status
+          - all of their bank statements from the last 3 months either through
+            online banking or manual upload
+          - details about payments they receive
+          - details about money they pay out
+          - details about any dependants they may have
       employment_income_table:
         inset_text: We used your client's National Insurance number to get this information from HMRC.
         date: Date

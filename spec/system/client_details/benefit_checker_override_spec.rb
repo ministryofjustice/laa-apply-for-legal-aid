@@ -44,7 +44,7 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
       govuk_choose("No")
       click_on "Save and continue"
       expect(page.current_url).to include providers_legal_aid_application_about_financial_means_path(@legal_aid_application)
-      expect(page).to have_css("h1", text: "What you need to do")
+      expect(page).to have_css("h1", text: "Your client's financial assessment")
     end
 
     context "when the client has a partner" do

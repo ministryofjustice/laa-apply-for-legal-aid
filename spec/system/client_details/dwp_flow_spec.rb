@@ -48,7 +48,7 @@ RSpec.describe "Client and case details section - DWP result flows", :vcr do
       click_on "Yes, continue"
       # start of the income means flow
       expect(page.current_url).to eql providers_legal_aid_application_about_financial_means_url(@legal_aid_application)
-      expect(page).to have_css("h1", text: "What you need to do")
+      expect(page).to have_css("h1", text: "Your client's financial assessment")
     end
 
     scenario "when the provider disagrees, they are routed through an interrupt page to the capital introductions via the dwp override path" do
@@ -87,7 +87,7 @@ RSpec.describe "Client and case details section - DWP result flows", :vcr do
       click_on "Yes, continue"
       # start of the income means flow
       expect(page.current_url).to eql providers_legal_aid_application_about_financial_means_url(@legal_aid_application)
-      expect(page).to have_css("h1", text: "What you need to do")
+      expect(page).to have_css("h1", text: "Your client and their partner's financial assessment")
     end
 
     scenario "when the provider disagrees, and the client receives the benefit, they are routed through an interrupt page to the capital introductions via the dwp override path" do

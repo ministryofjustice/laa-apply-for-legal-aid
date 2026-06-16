@@ -24,20 +24,6 @@ en:
           - This will help us to find any previous records to make sure any contributions we calculate are correct.
         ccms_ref_num: Give the CCMS reference number for any previous application
         ccms_ref_hint: For example, 300001234567. This is on any letter from the LAA.
-    about_financial_means:
-      show:
-        h1-heading: What you need to do
-        partner_heading: Complete your client's and their partner's financial assessments
-        no_partner_heading: Complete your client's financial assessment
-        body-text: "As part of the financial assessment, you'll need to provide:"
-        bullets:
-          - details about their employment status
-          - all of their bank statements from the last 3 months either through
-            online banking or manual upload
-          - details about payments they receive
-          - details about money they pay out
-          - details about any dependants they may have
-          - details about their assets
     applicant_employed:
       index:
         heading_1: What is your client's employment status?
@@ -780,19 +766,6 @@ en:
           other_court:
             label: *other_court
     partners:
-      about_financial_means:
-        show:
-          h1-heading: Complete the partner's financial assessment
-          body-text: "You need to:"
-          item-1: 1. Tell us about their employment
-          item-1-body: |
-            Share details about their employment status and review information from
-            HMRC if they are employed.
-          item-2: 2. Tell us about their income and outgoings
-          item-2-body: "We need to know if the partner:"
-          item-2-bullets:
-            - receives certain types of income (for example, benefits)
-            - has certain regular outgoings (for example, childcare)
       bank_statements:
         show:
           h1-heading: Upload the partner's bank statements
