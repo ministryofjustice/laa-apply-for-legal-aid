@@ -1,22 +1,21 @@
 class BankTransactionJsonBuilder < BaseJsonBuilder
-  # TODO: AP-6376 DO WE NEED TO SEND THIS AT ALL, IF SO WAIT UNTIL DATATSTORE USES AUTHENTICATION
   def attribute_hash
     {
       id:,
-      # amount:,
-      # bank_account_id:,
+      amount:,
+      bank_account_id:,
       created_at:,
       currency:,
       description:,
-      # flags:,
+      flags:,
       happened_at:,
-      # merchant:,
-      # meta_data:,
+      merchant:,
+      meta_data:,
       operation:,
-      # running_balance:,
+      running_balance:,
       transaction_type_id:,
       true_layer_id:,
-      # true_layer_response:,
+      true_layer_response:,
       updated_at:,
       transaction_type: TransactionTypeJsonBuilder.build(transaction_type).as_json,
     }

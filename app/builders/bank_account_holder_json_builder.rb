@@ -1,5 +1,4 @@
 class BankAccountHolderJsonBuilder < BaseJsonBuilder
-  # TODO: AP-6376 DO WE NEED TO SEND THIS AT ALL, IF SO WAIT UNTIL DATATSTORE USES AUTHENTICATION
   def attribute_hash
     {
       id:,
@@ -8,7 +7,7 @@ class BankAccountHolderJsonBuilder < BaseJsonBuilder
       created_at:,
       date_of_birth:,
       full_name:,
-      # true_layer_response:,
+      true_layer_response:,
       updated_at:,
     }
   end
