@@ -104,7 +104,7 @@ RSpec.describe "check your answers requests" do
 
     it "records when the declaration was accepted" do
       patch_request
-      expect(legal_aid_application.reload.completed_at).to be_between(2.seconds.ago, Time.current)
+      expect(legal_aid_application.reload.citizen_completed_at).to be_between(2.seconds.ago, Time.current)
     end
   end
 
