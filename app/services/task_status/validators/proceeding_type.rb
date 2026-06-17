@@ -29,7 +29,7 @@ module TaskStatus
       end
 
       def client_involvement_type_form
-        Proceedings::ClientInvolvementTypeForm.new(model: proceeding)
+        Proceedings::ClientInvolvementTypeForm.new(model: proceeding, cit_types: client_involvement_types)
       end
 
       def delegated_functions_form
@@ -65,6 +65,10 @@ module TaskStatus
 
       def emergency_scopes
         JSON.parse(LegalFramework::ProceedingTypes::Scopes.call(proceeding, true))["level_of_service"]["scope_limitations"]
+      end
+
+      def client_involvement_types
+        LegalFramework::ClientInvolvementTypes::Proceeding.call(proceeding.ccms_code)
       end
 
       def emergency_scope_limitations_form

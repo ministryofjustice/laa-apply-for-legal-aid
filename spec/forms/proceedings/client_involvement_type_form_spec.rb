@@ -9,7 +9,31 @@ RSpec.describe Proceedings::ClientInvolvementTypeForm, :vcr, type: :form do
       client_involvement_type_ccms_code: cit,
     }
   end
-  let(:form_params) { params.merge(model: proceeding) }
+  let(:form_params) { params.merge(model: proceeding, cit_types:) }
+  let(:cit_types) do
+    [
+      LegalFramework::ClientInvolvementTypes::Proceeding::ClientInvolvementTypeStruct.new(
+        "ccms_code" => "A",
+        "description" => "Applicant, claimant or petitioner",
+      ),
+      LegalFramework::ClientInvolvementTypes::Proceeding::ClientInvolvementTypeStruct.new(
+        "ccms_code" => "D",
+        "description" => "Defendant or respondent",
+      ),
+      LegalFramework::ClientInvolvementTypes::Proceeding::ClientInvolvementTypeStruct.new(
+        "ccms_code" => "W",
+        "description" => "A child subject of the proceeding",
+      ),
+      LegalFramework::ClientInvolvementTypes::Proceeding::ClientInvolvementTypeStruct.new(
+        "ccms_code" => "I",
+        "description" => "Intervenor",
+      ),
+      LegalFramework::ClientInvolvementTypes::Proceeding::ClientInvolvementTypeStruct.new(
+        "ccms_code" => "Z",
+        "description" => "Joined party",
+      ),
+    ]
+  end
 
   describe "#save" do
     subject(:save_form) { cit_form.save }

@@ -4,7 +4,7 @@ module Proceedings
 
     form_for Proceeding
 
-    attr_accessor :client_involvement_type_ccms_code
+    attr_accessor :client_involvement_type_ccms_code, :all_client_involvement_types
 
     before_validation :assign_client_involvement_type_description,
                       if: -> { client_involvement_type_ccms_code.present? }
@@ -13,6 +13,12 @@ module Proceedings
 
     set_callback :save, :before, :client_involvement_type_changed
     set_callback :save, :after, :reset_proceeding_loop, if: :client_involvement_type_changed?
+
+    def initialize(*args)
+      @all_client_involvement_types = args.first[:cit_types]
+      args.first.delete(:cit_types)
+      super
+    end
 
     def client_involvement_types
       # TODO: AP-6988 Move the logic to remove Child Subject if applicant_over_18? to LFA
@@ -34,10 +40,6 @@ module Proceedings
       all_client_involvement_types.find do |client_involvement_type|
         client_involvement_type.ccms_code == client_involvement_type_ccms_code
       end
-    end
-
-    def all_client_involvement_types
-      @all_client_involvement_types ||= LegalFramework::ClientInvolvementTypes::Proceeding.call(model.ccms_code)
     end
 
     def applicant_date_of_birth
