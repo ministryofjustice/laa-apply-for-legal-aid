@@ -6,7 +6,7 @@ Feature: Pathways from check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
     When I click "Yes, continue"
-    Then I should be on a page showing 'What you need to do'
+    Then I should be on a page showing "Your client's financial assessment"
     When I click 'Continue'
     Then I should be on a page showing "What is your client's employment status?"
     When I select "None of the above"
@@ -19,7 +19,7 @@ Feature: Pathways from check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
     Then I click 'Save and continue'
-    Then I should be on the 'capital_introduction' page showing "What you need to do"
+    Then I should be on the 'capital_introduction' page showing "Your client's capital and assets"
 
   @javascript @vcr
   Scenario: I use delegated functions and will return later
@@ -29,7 +29,7 @@ Feature: Pathways from check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
     When I click "Yes, continue"
-    Then I should be on a page showing 'What you need to do'
+    Then I should be on a page showing "Your client's financial assessment"
     When I click 'Continue'
     Then I should be on a page showing "What is your client's employment status?"
     When I select "None of the above"
@@ -49,7 +49,7 @@ Feature: Pathways from check your answers
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
     When I click "Yes, continue"
-    Then I should be on a page showing 'What you need to do'
+    Then I should be on a page showing "Your client's financial assessment"
     When I click 'Continue'
     Then I should be on a page showing "What is your client's employment status?"
     When I select "None of the above"
@@ -70,7 +70,7 @@ Feature: Pathways from check your answers
     Then I should be on a page showing 'Do you want to make a substantive application now?'
     Then I choose 'Yes'
     Then I click 'Save and continue'
-    Then I should be on the 'capital_introduction' page showing "What you need to do"
+    Then I should be on the 'capital_introduction' page showing "Your client's capital and assets"
 
   @javascript @vcr @billy
   Scenario: I go back and change the proceedings on an application with multiple proceedings

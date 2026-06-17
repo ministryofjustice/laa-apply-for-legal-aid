@@ -6,7 +6,7 @@ Feature: passported_journey completes application
     Then I click 'Save and continue'
     Then I should be on a page showing 'DWP records show that your client receives a passporting benefit'
     Then I click 'Save and continue'
-    Then I should be on a page showing "What you need to do"
+    Then I should be on a page showing "Your client's capital and assets"
     Then I click 'Continue'
     Then I should be on a page showing "Does your client own the home they usually live in?"
     Then I choose "Yes, with a mortgage or loan"
@@ -121,7 +121,7 @@ Feature: passported_journey completes application
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
     When I click "Yes, continue"
-    Then I should be on a page showing "What you need to do"
+    Then I should be on a page showing "Your client's financial assessment"
     And I click link 'Back'
     Then I click link 'This is not correct'
     And I should be on a page showing "Check your client's details"
@@ -133,7 +133,7 @@ Feature: passported_journey completes application
     And I choose 'Yes'
     Then I scroll down
     And I click 'Save and continue'
-    Then I should be on a page showing "What you need to do"
+    Then I should be on a page showing "Your client's capital and assets"
     And I click 'Continue'
     And I should be on a page showing 'Does your client own the home they usually live in?'
 
@@ -151,7 +151,7 @@ Feature: passported_journey completes application
     Then I should be on a page showing 'Which passporting benefit does your client get?'
     Then I choose 'None of these'
     And I click 'Save and continue'
-    Then I should be on a page showing "What you need to do"
+    Then I should be on a page showing "Your client's financial assessment"
     When I click link "Back"
     Then I choose 'Income Support'
     And I click 'Save and continue'
@@ -159,10 +159,10 @@ Feature: passported_journey completes application
     Then I choose "Yes"
     Then I scroll down
     Then I click 'Save and continue'
-    Then I should be on a page showing 'What you need to do'
+    Then I should be on a page showing "Your client's capital and assets"
     When I click link "Back"
     Then I should be on a page showing 'Do you have evidence that your client receives Income Support?'
     Then I choose 'No'
     Then I scroll down
     Then I click 'Save and continue'
-    Then I should be on a page showing "What you need to do"
+    Then I should be on a page showing "Your client's financial assessment"

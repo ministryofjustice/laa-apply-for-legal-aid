@@ -212,7 +212,7 @@ Background: I have started an application and not linked or copied it
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
     Then I click 'Yes, continue'
-    Then I should be on a page showing "What you need to do"
+    Then I should be on a page showing "Your client's financial assessment"
     When I click 'Continue'
     Then I should be on a page showing "What is your client's employment status?"
     When I select "None of the above"
@@ -355,7 +355,7 @@ Background: I have started an application and not linked or copied it
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
     Then I click 'Yes, continue'
-    Then I should be on a page showing "What you need to do"
+    Then I should be on a page showing "Your client's financial assessment"
     When I click 'Continue'
     And I should be on a page showing "What is your client's employment status?"
     And I select "None of the above"
