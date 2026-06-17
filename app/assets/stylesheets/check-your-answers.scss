@@ -1,37 +1,6 @@
 // Recommended - Use these styles for the check your answers pattern
 @use "./imports" as *;
 
-.app-check-your-answers {
-  border-top: 1px solid $govuk-border-colour;
-  @include govuk-font(19);
-  @include govuk-responsive-margin(3, "bottom");
-  @include govuk-responsive-padding(3, "top");
-
-  .govuk-grid-row div:first-child {
-    font-weight: bold;
-  }
-}
-
-.app-check-your-answers--long {
-  border-top: 1px solid $govuk-border-colour;
-  @include govuk-font(19);
-  @include govuk-responsive-margin(3, "bottom");
-  @include govuk-responsive-padding(3, "top");
-
-  .govuk-grid-row div:first-child {
-    width: 50%;
-    font-weight: bold;
-  }
-
-  .govuk-grid-row div:nth-child(2) {
-    width: 25%;
-  }
-
-  .govuk-grid-row div:last-child {
-    width: 25%;
-  }
-}
-
 .govuk-summary-list__row--no-border .govuk-summary-list__key,
 .govuk-summary-list__row--no-border .govuk-summary-list__value,
 .govuk-summary-list__row--no-border .govuk-summary-list__actions {
