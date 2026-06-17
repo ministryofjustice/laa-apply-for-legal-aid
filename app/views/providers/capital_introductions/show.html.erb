@@ -1,17 +1,9 @@
-<%= page_template page_title: t(".h1-heading"), back_link: back_link_unless(providers_legal_aid_application_means_check_income_answers_path) do %>
-  <% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? I18n.t("generic.client_and_partner") : I18n.t("generic.client") %>
+<% individual = @legal_aid_application.applicant.has_partner_with_no_contrary_interest? ? I18n.t("generic.client_and_partner") : I18n.t("generic.client") %>
 
-  <div class="app-counter-list">
-    <h2 class="govuk-heading-m app-counter"><%= t(".capital_list_heading", individual:) %></h2>
-    <div class="govuk-!-padding-left-4">
-      <p class="govuk-body"><%= t(".capital_text") %></p>
-      <ul class="govuk-list govuk-list--bullet">
-        <% t(".capital_items").each do |bullet| %>
-          <li><%= bullet %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
+<%= page_template page_title: t(".heading", individual: individual.capitalize), back_link: back_link_unless(providers_legal_aid_application_means_check_income_answers_path) do %>
+  <p class="govuk-body"><%= t(".capital_text") %></p>
+
+  <%= govuk_list t(".capital_items"), type: :bullet %>
 
   <%= next_action_buttons_with_form(
         url: providers_legal_aid_application_capital_introduction_path,
@@ -19,5 +11,4 @@
         continue_button_text: t("generic.continue"),
         show_draft: true,
       ) %>
-
 <% end %>

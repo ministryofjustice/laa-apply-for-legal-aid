@@ -139,7 +139,7 @@ RSpec.describe "Client and case details section - benefit checker fallback", :vc
         expect(page).to have_css("h1", text: "DWP records show that your client receives a passporting benefit")
 
         click_on "Save and continue"
-        expect(page).to have_css("h1", text: "What you need to do") # on capital_introductions page
+        expect(page).to have_css("h1", text: "Your client's capital and assets") # on capital_introductions page
       end
     end
   end

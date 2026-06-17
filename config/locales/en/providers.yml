@@ -144,9 +144,8 @@ en:
 
     capital_introductions:
       show:
-        h1-heading: What you need to do
-        capital_list_heading: "Tell us about %{individual}'s capital"
-        capital_text: "This includes:"
+        heading: "%{individual}'s capital and assets"
+        capital_text: "You will need to provide information about:"
         capital_items:
           - property
           - vehicles
