@@ -68,6 +68,7 @@ class LegalAidApplication < ApplicationRecord
   has_many :discretionary_capital_disregards, -> { where(mandatory: "false") }, class_name: "CapitalDisregard"
   has_many :mandatory_capital_disregards, -> { where(mandatory: "true") }, class_name: "CapitalDisregard"
   has_many :datastore_submissions, -> { order(created_at: :asc) }, class_name: "Datastore::Submission", inverse_of: :legal_aid_application, dependent: :destroy
+  has_many :sca_core_proceedings, -> { where(sca_type: "core") }, class_name: "Proceeding", inverse_of: :legal_aid_application
 
   before_save :set_open_banking_consent_choice_at
   before_create :create_app_ref
@@ -765,10 +766,6 @@ class LegalAidApplication < ApplicationRecord
     return true unless copy_case?
 
     legal_framework_merits_task_list&.includes_task?(:application, :client_relationship_to_children)
-  end
-
-  def core_proceedings
-    @core_proceedings ||= proceedings.where(sca_type: "core")
   end
 
 private

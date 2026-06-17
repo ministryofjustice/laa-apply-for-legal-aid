@@ -5,7 +5,7 @@ class Autograntable
 
   delegate :special_children_act_proceedings?,
            :proceedings,
-           :core_proceedings,
+           :sca_core_proceedings,
            :applicant,
            :applicant_over_17?,
            :special_children_act_related_proceedings?,
@@ -33,11 +33,11 @@ private
   end
 
   def single_autograntable_core_proceeding?
-    core_proceedings.one? && AUTOGRANTABLE_PROCEEDING_CCMS_CODES.include?(core_proceedings.first.ccms_code)
+    sca_core_proceedings.one? && AUTOGRANTABLE_PROCEEDING_CCMS_CODES.include?(sca_core_proceedings.first.ccms_code)
   end
 
   def care_order_supervision_order_application?
-    !core_proceedings.empty? && core_proceedings.all? { |proceeding| %w[PB057 PB059].include?(proceeding.ccms_code) }
+    !sca_core_proceedings.empty? && sca_core_proceedings.all? { |proceeding| %w[PB057 PB059].include?(proceeding.ccms_code) }
   end
 
   def auto_grant_exclusions?
