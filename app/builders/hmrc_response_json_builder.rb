@@ -1,12 +1,13 @@
+# TODO: AP-7069: Remove :nocov: if we implement or remove class entirely
+# :nocov:
 class HMRCResponseJsonBuilder < BaseJsonBuilder
-  # TODO: AP-6376 DO WE NEED TO SEND THIS AT ALL, IF SO WAIT UNTIL DATATSTORE USES AUTHENTICATION
   def attribute_hash
     {
       id:,
       legal_aid_application_id:,
       submission_id:,
       use_case:,
-      # response:, EXCLUDED FOR NOW AS CONTAINS SESNITVE DATA, AS JSON, THAT WE NEED TO QUERY OUR PERMISSIONS TO SHARE WITH DATASTORE, DECIDE AND OTHERS. ALSO WE NEED AUTHENTICATED COMMUNICATIONS TO SHARE IT SAFELY.
+      response:,
       created_at:,
       updated_at:,
       url:,
@@ -15,3 +16,4 @@ class HMRCResponseJsonBuilder < BaseJsonBuilder
     }
   end
 end
+# :nocov:

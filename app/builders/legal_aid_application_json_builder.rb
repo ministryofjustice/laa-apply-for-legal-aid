@@ -71,7 +71,7 @@ class LegalAidApplicationJsonBuilder < BaseJsonBuilder
       dwp_override: DWPOverrideJsonBuilder.build(dwp_override).as_json,
       legal_framework_merits_task_list: LegalFrameworkMeritsTaskListJsonBuilder.build(legal_framework_merits_task_list).as_json,
       state_machine: StateMachineJsonBuilder.build(state_machine).as_json,
-      hmrc_responses: hmrc_responses.map { |hr| HMRCResponseJsonBuilder.build(hr).as_json },
+      # hmrc_responses: hmrc_responses.map { |hr| HMRCResponseJsonBuilder.build(hr).as_json }, # AP-7069: can either be included here if datastore is MoU compliant, or removed if not.
       employments: employments.map { |e| EmploymentJsonBuilder.build(e).as_json },
 
       # means: this will include open banking data belong to the applicant too, if available
