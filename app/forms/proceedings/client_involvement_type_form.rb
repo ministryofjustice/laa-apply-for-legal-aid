@@ -15,8 +15,7 @@ module Proceedings
     set_callback :save, :after, :reset_proceeding_loop, if: :client_involvement_type_changed?
 
     def client_involvement_types
-      # TODO: AP-6988 Move the logic to remove Child Subject if applicant_over_18? to LFA
-      @client_involvement_types ||= all_client_involvement_types.reject { |cit| cit.ccms_code == "W" if applicant_over_18? }
+      @client_involvement_types ||= LegalFramework::ClientInvolvementTypes::Proceeding.call([model.ccms_code, applicant_age])
     end
 
   private
@@ -44,12 +43,11 @@ module Proceedings
       @applicant_date_of_birth ||= model.legal_aid_application&.applicant&.date_of_birth
     end
 
-    def applicant_over_18?
-      return false unless applicant_date_of_birth
+    def applicant_age
+      return nil unless applicant_date_of_birth
 
       as_of = model.used_delegated_functions_on || Date.current
-      age = AgeCalculator.call(applicant_date_of_birth, as_of)
-      age >= 18
+      AgeCalculator.call(applicant_date_of_birth, as_of)
     end
   end
 end

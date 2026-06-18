@@ -18,9 +18,14 @@ module LegalFramework
         end
       end
 
-      def initialize(ccms_code)
+      def initialize(ccms_code, age)
         super()
         @proceeding_code = ccms_code
+        @age = age
+      end
+
+      def self.call(ccms_code, age = nil)
+        new(ccms_code, age).call
       end
 
       def call
@@ -30,7 +35,7 @@ module LegalFramework
     private
 
       def path
-        "/client_involvement_types/#{@proceeding_code}"
+        "/client_involvement_types/#{@proceeding_code}/#{@age}"
       end
     end
   end
