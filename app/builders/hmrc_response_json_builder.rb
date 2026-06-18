@@ -1,3 +1,5 @@
+# TODO: AP-7069: Remove :nocov: if we implement or remove class entirely
+# :nocov:
 class HMRCResponseJsonBuilder < BaseJsonBuilder
   def attribute_hash
     {
@@ -14,3 +16,4 @@ class HMRCResponseJsonBuilder < BaseJsonBuilder
     }
   end
 end
+# :nocov:
