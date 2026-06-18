@@ -14,8 +14,10 @@ module Proceedings
     validates :accepted_substantive_defaults, inclusion: ["true", "false", true, false], unless: :draft?
 
     def initialize(*args)
+      @defaults = args.first[:defaults]
+      @defaults.deep_stringify_keys! if @defaults.is_a?(Hash)
+      args.first.delete(:defaults)
       super
-      @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], false))
       self.additional_params = @defaults.dig("default_scope", "additional_params")
     end
 

@@ -75,6 +75,10 @@ module TaskStatus
         JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, true))
       end
 
+      def substantive_defaults
+        JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, false))
+      end
+
       def emergency_scope_limitations_form
         return unless proceeding.used_delegated_functions?
         return if proceeding.accepted_emergency_defaults?
@@ -84,7 +88,7 @@ module TaskStatus
       end
 
       def substantive_defaults_form
-        Proceedings::SubstantiveDefaultsForm.new(model: proceeding)
+        Proceedings::SubstantiveDefaultsForm.new(model: proceeding, defaults: substantive_defaults)
       end
 
       def substantive_level_of_service_form

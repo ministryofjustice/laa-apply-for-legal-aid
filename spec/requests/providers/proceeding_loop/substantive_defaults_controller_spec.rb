@@ -1,28 +1,5 @@
 require "rails_helper"
 
-# NOTE: substantive defaults are always not using DF according to code
-def da001_applicant_without_df
-  {
-    success: true,
-    requested_params: {
-      proceeding_type_ccms_code: "DA001",
-      delegated_functions_used: false,
-      client_involvement_type: "A",
-    },
-    default_level_of_service: {
-      level: 3,
-      name: "Full Representation",
-      stage: 8,
-    },
-    default_scope: {
-      code: "AA019",
-      meaning: "Injunction FLA-to final hearing",
-      description: "As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).",
-      additional_params: [],
-    },
-  }.to_json
-end
-
 RSpec.describe "SubstantiveDefaultsController" do
   let(:application) do
     create(:legal_aid_application,
@@ -49,6 +26,29 @@ RSpec.describe "SubstantiveDefaultsController" do
 
   let(:provider) { application.provider }
   let(:default_scope_response) { da001_applicant_without_df }
+
+  # NOTE: substantive defaults are always not using DF according to code
+  def da001_applicant_without_df
+    {
+      success: true,
+      requested_params: {
+        proceeding_type_ccms_code: "DA001",
+        delegated_functions_used: false,
+        client_involvement_type: "A",
+      },
+      default_level_of_service: {
+        level: 3,
+        name: "Full Representation",
+        stage: 8,
+      },
+      default_scope: {
+        code: "AA019",
+        meaning: "Injunction FLA-to final hearing",
+        description: "As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).",
+        additional_params: [],
+      },
+    }.to_json
+  end
 
   describe "GET /providers/applications/:legal_aid_application_id/substantive_defaults/:proceeding_id" do
     subject(:get_sd) { get "/providers/applications/#{application.id}/substantive_defaults/#{proceeding.id}" }

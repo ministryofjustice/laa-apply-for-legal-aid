@@ -4,11 +4,11 @@ module Providers
       before_action :proceeding
 
       def show
-        @form = Proceedings::SubstantiveDefaultsForm.new(model: proceeding)
+        @form = Proceedings::SubstantiveDefaultsForm.new(model: proceeding, defaults:)
       end
 
       def update
-        @form = Proceedings::SubstantiveDefaultsForm.new(form_params)
+        @form = Proceedings::SubstantiveDefaultsForm.new(form_params.merge({ defaults: }))
         render :show unless save_continue_or_draft(@form)
       end
 
@@ -16,6 +16,10 @@ module Providers
 
       def proceeding
         @proceeding ||= Proceeding.find(proceeding_id_param)
+      end
+
+      def defaults
+        @defaults ||= JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, false))
       end
 
       def proceeding_id_param
