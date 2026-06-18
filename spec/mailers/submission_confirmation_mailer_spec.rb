@@ -2,14 +2,16 @@ require "rails_helper"
 
 RSpec.describe SubmissionConfirmationMailer do
   describe ".notify" do
-    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant) }
-    let(:provider) { legal_aid_application.provider }
+    let(:firm) { create(:firm) }
+    let(:provider_creator) { create(:provider, firm:) }
+    let(:provider_submitter) { create(:provider, firm:) }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, provider: provider_creator, merits_submitted_by: provider_submitter) }
     let(:applicant) { legal_aid_application.applicant }
     let(:feedback_url) { "www.example.com/feedback/new" }
     let(:mail) { described_class.notify(legal_aid_application.id, feedback_url) }
 
     it "sends to correct address" do
-      expect(mail.to).to eq([provider.email])
+      expect(mail.to).to eq([provider_submitter.email])
     end
 
     it "is a govuk_notify delivery" do
@@ -23,7 +25,7 @@ RSpec.describe SubmissionConfirmationMailer do
 
     it "has the right personalisation" do
       expect(mail.govuk_notify_personalisation).to eq(
-        provider_name: provider.name,
+        provider_name: provider_submitter.name,
         client_name: applicant.full_name,
         ref_number: legal_aid_application.application_ref,
         feedback_url:,

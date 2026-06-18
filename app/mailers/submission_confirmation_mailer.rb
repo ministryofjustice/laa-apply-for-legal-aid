@@ -6,12 +6,12 @@ class SubmissionConfirmationMailer < BaseApplyMailer
     @legal_aid_application = LegalAidApplication.find(legal_aid_application_id)
     template_name :submission_confirmation
     set_personalisation(
-      provider_name: @legal_aid_application.provider.name,
+      provider_name: provider.name,
       client_name: "#{first_name} #{last_name}",
       ref_number: @legal_aid_application.application_ref,
       feedback_url:,
     )
-    mail to: @legal_aid_application.provider.email
+    mail to: provider.email
   end
 
 private
@@ -22,5 +22,9 @@ private
 
   def last_name
     @legal_aid_application.applicant.last_name
+  end
+
+  def provider
+    @legal_aid_application.merits_submitted_by
   end
 end
