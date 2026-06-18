@@ -39,7 +39,7 @@ module TaskStatus
       def emergency_defaults_form
         return if !proceeding.used_delegated_functions? || proceeding.special_children_act?
 
-        Proceedings::EmergencyDefaultsForm.new(model: proceeding)
+        Proceedings::EmergencyDefaultsForm.new(model: proceeding, defaults: emergency_defaults)
       end
 
       def emergency_level_of_service_form
@@ -69,6 +69,10 @@ module TaskStatus
 
       def client_involvement_types
         LegalFramework::ClientInvolvementTypes::Proceeding.call(proceeding.ccms_code)
+      end
+
+      def emergency_defaults
+        JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, true))
       end
 
       def emergency_scope_limitations_form

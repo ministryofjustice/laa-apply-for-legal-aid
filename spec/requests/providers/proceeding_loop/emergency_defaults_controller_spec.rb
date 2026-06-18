@@ -1,83 +1,5 @@
 require "rails_helper"
 
-def da001_applicant_with_df
-  {
-    success: true,
-    requested_params: {
-      proceeding_type_ccms_code: "DA001",
-      delegated_functions_used: true,
-      client_involvement_type: "A",
-    },
-    default_level_of_service: {
-      level: 3,
-      name: "Full Representation",
-      stage: 8,
-    },
-    default_scope: {
-      code: "CV117",
-      meaning: "Interim order inc. return date",
-      description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
-      additional_params: [],
-    },
-  }.to_json
-end
-
-def da001_defendant_with_df
-  {
-    success: true,
-    requested_params: {
-      proceeding_type_ccms_code: "DA001",
-      delegated_functions_used: true,
-      client_involvement_type: "D",
-    },
-    default_level_of_service: {
-      level: 3,
-      name: "Full Representation",
-      stage: 8,
-    },
-    default_scope: {
-      code: "CV118",
-      meaning: "Hearing",
-      description: "Limited to all steps up to and including the hearing on [see additional limitation notes]",
-      additional_params: [
-        {
-          name: "hearing_date",
-          type: "date",
-          mandatory: true,
-        },
-      ],
-    },
-  }.to_json
-end
-
-def fake_da001_with_limitation_note
-  {
-    success: true,
-    requested_params: {
-      proceeding_type_ccms_code: "DA001",
-      delegated_functions_used: true,
-      client_involvement_type: "D",
-    },
-    default_level_of_service: {
-      level: 3,
-      name: "Full Representation",
-      stage: 8,
-    },
-    default_scope: {
-      code: "APL13",
-      meaning: "Hearing",
-      description: "Limited to all steps up to and including the hearing on [see additional limitation notes]",
-      additional_params: [
-        {
-          name: "limitation_note",
-          type: "text",
-          mandatory: true,
-        },
-      ],
-    },
-  }.to_json
-end
-
 RSpec.describe "EmergencyDefaultsController" do
   let(:application) do
     create(
@@ -103,6 +25,84 @@ RSpec.describe "EmergencyDefaultsController" do
 
   let(:proceeding) { application.proceedings.first }
   let(:provider) { application.provider }
+
+  def da001_applicant_with_df
+    {
+      success: true,
+      requested_params: {
+        proceeding_type_ccms_code: "DA001",
+        delegated_functions_used: true,
+        client_involvement_type: "A",
+      },
+      default_level_of_service: {
+        level: 3,
+        name: "Full Representation",
+        stage: 8,
+      },
+      default_scope: {
+        code: "CV117",
+        meaning: "Interim order inc. return date",
+        description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+        additional_params: [],
+      },
+    }.to_json
+  end
+
+  def da001_defendant_with_df
+    {
+      success: true,
+      requested_params: {
+        proceeding_type_ccms_code: "DA001",
+        delegated_functions_used: true,
+        client_involvement_type: "D",
+      },
+      default_level_of_service: {
+        level: 3,
+        name: "Full Representation",
+        stage: 8,
+      },
+      default_scope: {
+        code: "CV118",
+        meaning: "Hearing",
+        description: "Limited to all steps up to and including the hearing on [see additional limitation notes]",
+        additional_params: [
+          {
+            name: "hearing_date",
+            type: "date",
+            mandatory: true,
+          },
+        ],
+      },
+    }.to_json
+  end
+
+  def fake_da001_with_limitation_note
+    {
+      success: true,
+      requested_params: {
+        proceeding_type_ccms_code: "DA001",
+        delegated_functions_used: true,
+        client_involvement_type: "D",
+      },
+      default_level_of_service: {
+        level: 3,
+        name: "Full Representation",
+        stage: 8,
+      },
+      default_scope: {
+        code: "APL13",
+        meaning: "Hearing",
+        description: "Limited to all steps up to and including the hearing on [see additional limitation notes]",
+        additional_params: [
+          {
+            name: "limitation_note",
+            type: "text",
+            mandatory: true,
+          },
+        ],
+      },
+    }.to_json
+  end
 
   describe "GET /providers/applications/:legal_aid_application_id/emergency_defaults/:proceeding_id" do
     subject(:get_ed) { get "/providers/applications/#{application.id}/emergency_defaults/#{proceeding.id}" }

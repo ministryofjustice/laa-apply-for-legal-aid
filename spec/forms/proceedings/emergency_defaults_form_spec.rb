@@ -1,55 +1,5 @@
 require "rails_helper"
 
-def da001_applicant_with_df
-  {
-    success: true,
-    requested_params: {
-      proceeding_type_ccms_code: "DA001",
-      delegated_functions_used: true,
-      client_involvement_type: "A",
-    },
-    default_level_of_service: {
-      level: 3,
-      name: "Full Representation",
-      stage: 8,
-    },
-    default_scope: {
-      code: "CV117",
-      meaning: "Interim order inc. return date",
-      description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
-      additional_params: [],
-    },
-  }.to_json
-end
-
-def da001_defendant_with_df
-  {
-    success: true,
-    requested_params: {
-      proceeding_type_ccms_code: "DA001",
-      delegated_functions_used: true,
-      client_involvement_type: "D",
-    },
-    default_level_of_service: {
-      level: 3,
-      name: "Full Representation",
-      stage: 8,
-    },
-    default_scope: {
-      code: "CV118",
-      meaning: "Hearing",
-      description: "Limited to all steps up to and including the hearing on [see additional limitation notes]",
-      additional_params: [
-        {
-          name: "hearing_date",
-          type: "date",
-          mandatory: true,
-        },
-      ],
-    },
-  }.to_json
-end
-
 RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form do
   subject(:form) { described_class.new(form_params) }
 
@@ -79,15 +29,56 @@ RSpec.describe Proceedings::EmergencyDefaultsForm, type: :form do
            emergency_level_of_service_stage: nil)
   end
 
-  let(:form_params) { params.merge(model: proceeding) }
+  let(:form_params) { params.merge(model: proceeding, defaults: default_scope_response) }
 
-  before do
-    stub_request(:post, %r{#{Rails.configuration.x.legal_framework_api_host}/proceeding_type_defaults})
-      .to_return(
-        status: 200,
-        body: default_scope_response,
-        headers: { "Content-Type" => "application/json; charset=utf-8" },
-      )
+  def da001_applicant_with_df
+    {
+      success: true,
+      requested_params: {
+        proceeding_type_ccms_code: "DA001",
+        delegated_functions_used: true,
+        client_involvement_type: "A",
+      },
+      default_level_of_service: {
+        level: 3,
+        name: "Full Representation",
+        stage: 8,
+      },
+      default_scope: {
+        code: "CV117",
+        meaning: "Interim order inc. return date",
+        description: "Limited to all steps necessary to apply for an interim order; where application is made without notice to include representation on the return date.",
+        additional_params: [],
+      },
+    }
+  end
+
+  def da001_defendant_with_df
+    {
+      success: true,
+      requested_params: {
+        proceeding_type_ccms_code: "DA001",
+        delegated_functions_used: true,
+        client_involvement_type: "D",
+      },
+      default_level_of_service: {
+        level: 3,
+        name: "Full Representation",
+        stage: 8,
+      },
+      default_scope: {
+        code: "CV118",
+        meaning: "Hearing",
+        description: "Limited to all steps up to and including the hearing on [see additional limitation notes]",
+        additional_params: [
+          {
+            name: "hearing_date",
+            type: "date",
+            mandatory: true,
+          },
+        ],
+      },
+    }
   end
 
   describe "validation" do

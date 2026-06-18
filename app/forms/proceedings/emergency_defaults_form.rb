@@ -18,8 +18,10 @@ module Proceedings
               if: :hearing_date_required?
 
     def initialize(*args)
+      @defaults = args.first[:defaults]
+      @defaults.deep_stringify_keys! if @defaults.is_a?(Hash)
+      args.first.delete(:defaults)
       super
-      @defaults = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(args.first[:model], true))
       self.additional_params = @defaults.dig("default_scope", "additional_params")
     end
 
