@@ -3,11 +3,11 @@ module Providers
     class EmergencyLevelOfServiceController < ProviderBaseController
       before_action :proceeding
       def show
-        @form = Proceedings::EmergencyLevelOfServiceForm.new(model: proceeding)
+        @form = Proceedings::EmergencyLevelOfServiceForm.new(model: proceeding, los:)
       end
 
       def update
-        @form = Proceedings::EmergencyLevelOfServiceForm.new(form_params)
+        @form = Proceedings::EmergencyLevelOfServiceForm.new(form_params.merge({ los: }))
         default = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, true))["default_level_of_service"]["level"].to_s
         changed_to_full_rep = @form.attributes["emergency_level_of_service"] == "3" && @form.attributes["emergency_level_of_service"] != default
         render :show unless save_continue_or_draft(@form, work_type: :emergency, changed_to_full_rep:)
@@ -17,6 +17,10 @@ module Providers
 
       def proceeding
         @proceeding ||= Proceeding.find(proceeding_id_param)
+      end
+
+      def los
+        @los ||= LegalFramework::ProceedingTypes::Proceeding.call(proceeding.ccms_code).service_levels
       end
 
       def proceeding_id_param

@@ -18,8 +18,12 @@ RSpec.describe Proceedings::EmergencyLevelOfServiceForm, :vcr, type: :form do
       emergency_level_of_service:,
     }
   end
+  let(:los) do
+    [{ "level" => 1, "name" => "Family Help (Higher)", "stage" => 1, "proceeding_default" => true },
+     { "level" => 3, "name" => "Full Representation", "stage" => 8, "proceeding_default" => false }]
+  end
 
-  let(:form_params) { params.merge(model: proceeding) }
+  let(:form_params) { params.merge(model: proceeding, los:) }
 
   describe "#save" do
     subject(:save_form) { form.save }
