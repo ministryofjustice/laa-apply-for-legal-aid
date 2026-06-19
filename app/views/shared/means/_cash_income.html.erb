@@ -7,9 +7,8 @@
 
   <%= page_template page_title:, template: :basic, form: do %>
 
-    <%= form.govuk_check_boxes_fieldset :cash_income,
-                                        caption: { text: caption, size: "l" },
-                                        legend: { size: "xl", tag: "h1", text: page_title } do %>
+    <%= form.govuk_check_boxes_fieldset(:cash_income,
+                                        legend: { size: "xl", tag: "h1", text: page_title }) do %>
       <p><%= t(".info") %></p>
       <div id="select-all-that-apply-hint" class="govuk-hint"><%= t("generic.select_all_that_apply") %></div>
       <div class="deselect-group" data-deselect-ctrl="#aggregated-cash-income-none-selected-true-field">
