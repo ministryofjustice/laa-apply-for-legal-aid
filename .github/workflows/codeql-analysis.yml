@@ -22,13 +22,9 @@ name: "CodeQL"
 on:
   push:
     branches: [ main ]
-    paths-ignore:
-        - "app/views/shared/check_answers/_assets.html.erb" # was raising a warning
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ main ]
-    paths-ignore:
-        - "app/views/shared/check_answers/_assets.html.erb" # was raising a warning
   schedule:
     - cron: '5 9 * * 5'
 
@@ -55,6 +51,7 @@ jobs:
       uses: github/codeql-action/init@8aad20d150bbac5944a9f9d289da16a4b0d87c1e #v4.36.2
       with:
         languages: ${{ matrix.language }}
+        config-file: ./.github/workflows/codeql-config.yml
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@8aad20d150bbac5944a9f9d289da16a4b0d87c1e #v4.36.2

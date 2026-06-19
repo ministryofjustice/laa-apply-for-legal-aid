@@ -1,0 +1,4 @@
+name: "Civil Apply CodeQL configuration"
+
+paths-ignore:
+  - "app/views/shared/check_answers/_assets.html.erb" # was raising a warning
