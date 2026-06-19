@@ -611,6 +611,15 @@ en:
       in_scope_of_laspos:
         show:
           page_title: Are the Section 8 proceedings you're applying for in scope of the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO)?
+      out_of_scope_of_laspo_interrupts:
+        show:
+          title_html: This proceeding is out of scope
+          paragraph: Only use this service if the proceeding is in scope of the Legal Aid, Sentencing and Punishment of Offenders Act 2012 (LASPO).
+          change: Go back and change your answer
+          options_text: "You can do one of the following:"
+          options_list_html:
+              - go back and change your answer
+              - submit an exceptional case funding application using <a class="govuk-link govuk-link--inverse" href="%{ccms_url}">CCMS (Client and Cost Management System)</a>
       is_matter_opposed:
         show:
           page_heading: Is the matter opposed by your client?

@@ -423,6 +423,7 @@ Rails.application.routes.draw do
         resource :date_client_told_incident, only: %i[show update]
         resource :has_other_involved_children, only: %i[show update destroy]
         resource :in_scope_of_laspo, only: %i[show update]
+        get "/out_of_scope_of_laspo_interrupt", to: "out_of_scope_of_laspo_interrupts#show", as: "out_of_scope_of_laspo_interrupt"
         resource :has_other_opponent, only: %i[new show update destroy]
         resource :opponent_type, only: %i[show update]
         resource :opponents_mental_capacity, only: %i[show update]
