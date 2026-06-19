@@ -54,6 +54,19 @@ executors:
       - image: cimg/postgres:18.1
       - image: cimg/redis:6.2
       - image: ghcr.io/ministryofjustice/hmpps-clamav:sha-5cd6693
+  e2e-executor:
+    docker:
+      - image: ministryofjustice/apply-ci:latest-4.0.5
+        environment:
+          RAILS_ENV: test
+          NODE_OPTIONS: --openssl-legacy-provider
+          TZ: Europe/London
+          PUPPETEER_SKIP_DOWNLOAD: "true"
+          PUPPETEER_EXECUTABLE_PATH: "/usr/bin/google-chrome"
+          LEGAL_FRAMEWORK_API_HOST: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk
+      - image: cimg/postgres:18.1
+      - image: cimg/redis:6.2
+      - image: ghcr.io/ministryofjustice/hmpps-clamav:sha-5cd6693
 
 commands:
   install-ruby-dependencies:
@@ -205,6 +218,37 @@ jobs:
         paths:
           - coverage_results
 
+  end2end_tests:
+    executor: e2e-executor
+    steps:
+    - checkout
+    - install-ruby-dependencies
+    - attach_workspace:
+        at: ./
+    - run: bundle exec rails db:prepare
+    - install-js-dependencies
+    - run: bundle exec rails assets:precompile
+    - browser-tools/install-chrome
+    - run:
+        name: Run LFA End to End tests
+        command: |
+          TESTFILES=$(circleci tests glob "features/**/*.feature" | circleci tests split --split-by=timings)
+          echo "${TESTFILES}"
+          bundle exec cucumber --tags @end_to_end --format junit,fileattribute=true --out /tmp/test-results/cucumber --format pretty -- ${TESTFILES}
+    - store_artifacts:
+        path: tmp/capybara
+    - store_test_results:
+        path: /tmp/test-results/end2end
+    - run:
+        name: Stash Coverage Results
+        command: |
+          mkdir coverage_results
+          cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}-end2end.json
+    - persist_to_workspace:
+        root: .
+        paths:
+          - coverage_results
+
   integration_tests:
     parallelism: 10
     executor: test-executor
@@ -220,7 +264,7 @@ jobs:
         command: |
           TESTFILES=$(circleci tests glob "features/**/*.feature" | circleci tests split --split-by=timings)
           echo "${TESTFILES}"
-          bundle exec cucumber --format junit,fileattribute=true --out /tmp/test-results/cucumber --format pretty -- ${TESTFILES}
+          bundle exec cucumber --tags "not @end_to_end" --format junit,fileattribute=true --out /tmp/test-results/cucumber --format pretty -- ${TESTFILES}
     - store_artifacts:
         path: tmp/capybara
     - store_test_results:
@@ -317,6 +361,10 @@ workflows:
             - lint_checks
           <<: *generic-slack-fail-post-step
       - integration_tests:
+          requires:
+          - lint_checks
+          <<: *generic-slack-fail-post-step
+      - end2end_tests:
           requires:
           - lint_checks
           <<: *generic-slack-fail-post-step
