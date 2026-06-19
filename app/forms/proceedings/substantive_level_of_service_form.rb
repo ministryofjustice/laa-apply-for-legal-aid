@@ -12,8 +12,9 @@ module Proceedings
     end
 
     def initialize(*args)
+      @levels_of_service = args.first[:los]
+      args.first.delete(:los)
       super
-      self.levels_of_service = LegalFramework::ProceedingTypes::Proceeding.call(args.first[:model].ccms_code).service_levels
     end
 
     def save

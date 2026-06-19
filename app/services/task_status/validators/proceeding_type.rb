@@ -47,7 +47,7 @@ module TaskStatus
 
         @emergency_level_of_service_form =
           if proceeding.used_delegated_functions? && !proceeding.accepted_emergency_defaults?
-            Proceedings::EmergencyLevelOfServiceForm.new(model: proceeding, los: emergency_levels_of_service)
+            Proceedings::EmergencyLevelOfServiceForm.new(model: proceeding, los: levels_of_service)
           end
       end
 
@@ -79,7 +79,7 @@ module TaskStatus
         JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, false))
       end
 
-      def emergency_levels_of_service
+      def levels_of_service
         LegalFramework::ProceedingTypes::Proceeding.call(proceeding.ccms_code).service_levels
       end
 
@@ -100,7 +100,7 @@ module TaskStatus
 
         @substantive_level_of_service_form =
           unless proceeding.accepted_substantive_defaults?
-            Proceedings::SubstantiveLevelOfServiceForm.new(model: proceeding)
+            Proceedings::SubstantiveLevelOfServiceForm.new(model: proceeding, los: levels_of_service)
           end
       end
 
