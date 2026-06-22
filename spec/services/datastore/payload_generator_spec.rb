@@ -148,9 +148,11 @@ RSpec.describe Datastore::PayloadGenerator do
         create(
           :legal_aid_application,
           :at_assessment_submitted,
-          :with_multiple_sca_proceedings,
         )
       end
+      let(:proceeding) { create(:proceeding, :pb059, legal_aid_application:) }
+
+      before { legal_aid_application.proceedings << proceeding }
 
       it "sets auto_grant to true in the payload" do
         payload = call
