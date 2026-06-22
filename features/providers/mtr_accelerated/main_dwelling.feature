@@ -47,7 +47,7 @@ Feature: Main dwelling place changes for MTR-Accelerated measures
 
     When I choose "Yes"
     And I click "Save and continue"
-    Then I should be on a page with title "What you need to do"
+    Then I should be on a page with title "Your client and their partner's capital and assets"
 
     When I click "Continue"
     Then I should be on a page with title "Does your client or their partner own the home your client usually lives in?"

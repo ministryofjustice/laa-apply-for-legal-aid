@@ -7,9 +7,9 @@ Feature: Bank statement file upload
 
     When I select "My client makes none of these payments"
     And I click "Save and continue"
-    Then I should be on a page with title "Complete the partner's financial assessment"
+    Then I should be on a page with title "The partner's financial assessment"
 
-    When I click "Save and continue"
+    When I click "Continue"
     Then I should be on a page with title "What is the partner's employment status?"
 
     When I select "Employed"
@@ -51,9 +51,9 @@ Feature: Bank statement file upload
 
     When I select "My client makes none of these payments"
     And I click "Save and continue"
-    Then I should be on a page with title "Complete the partner's financial assessment"
+    Then I should be on a page with title "The partner's financial assessment"
 
-    When I click "Save and continue"
+    When I click "Continue"
     Then I should be on a page with title "What is the partner's employment status?"
 
     When I select "Employed"

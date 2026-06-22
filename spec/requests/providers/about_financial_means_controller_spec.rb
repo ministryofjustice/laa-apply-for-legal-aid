@@ -21,7 +21,7 @@ RSpec.describe Providers::AboutFinancialMeansController do
 
       it "returns http success" do
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include(I18n.t("providers.about_financial_means.show.h1-heading"))
+        expect(unescaped_response_body).to include(I18n.t("shared.means.about_financial_means.heading", individual: I18n.t("generic.client").capitalize))
       end
     end
   end

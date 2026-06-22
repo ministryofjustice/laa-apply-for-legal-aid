@@ -5,7 +5,7 @@ Feature: non_passported_journey used delegated functions
     And I used delegated functions
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
     When I click "Yes, continue"
-    Then I should be on a page with title "What you need to do"
+    Then I should be on a page with title "Your client's financial assessment"
     When I click "Continue"
     Then I should be on a page with title "What is your client's employment status?"
     When I select "None of the above"

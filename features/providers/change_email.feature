@@ -5,7 +5,7 @@ Feature: Change applicant email address
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
     When I click "Yes, continue"
-    Then I should be on a page showing 'What you need to do'
+    Then I should be on a page showing "Your client's financial assessment"
     When I click "Continue"
     And I should be on a page showing "What is your client's employment status?"
     And I select "None of the above"
@@ -33,7 +33,7 @@ Feature: Change applicant email address
     Then I click 'Save and continue'
     Then I should be on a page showing "DWP records show that your client does not get a passporting benefit. Is this correct?"
     When I click "Yes, continue"
-    Then I should be on a page showing 'What you need to do'
+    Then I should be on a page showing "Your client's financial assessment"
     When I click 'Continue'
     And I should be on a page showing "What is your client's employment status?"
     And I select "None of the above"

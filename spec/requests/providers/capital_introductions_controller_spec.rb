@@ -69,7 +69,7 @@ RSpec.describe Providers::CapitalIntroductionsController do
         end
 
         it "displays the correct content" do
-          expect(response.body).to include(I18n.t("providers.capital_introductions.show.h1-heading", individual: "your client"))
+          expect(unescaped_response_body).to include(I18n.t("providers.capital_introductions.show.heading", individual: "Your client"))
         end
       end
 
@@ -81,7 +81,7 @@ RSpec.describe Providers::CapitalIntroductionsController do
         end
 
         it "displays the correct content" do
-          expect(response.body).to include(I18n.t("providers.capital_introductions.show.h1-heading", individual: "your client and their partner"))
+          expect(unescaped_response_body).to include(I18n.t("providers.capital_introductions.show.heading", individual: "Your client and their partner"))
         end
       end
     end
