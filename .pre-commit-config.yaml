@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/ministryofjustice/devsecops-hooks
-    rev: 89efdaa0c4341073302573a1b759ce72b79c7f7d # v2.0.0 re-run prek install after changing this
+    rev: 5b00ab6401ed59fa55ff76b32cf8027c920cef46 # v2.0.0 re-run prek install after changing this
     hooks:
       - id: baseline
   - repo: local
