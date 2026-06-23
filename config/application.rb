@@ -101,7 +101,7 @@ module LaaApplyForLegalAid
 
     config.x.legal_framework_api_host = ENV.fetch("LEGAL_FRAMEWORK_API_HOST", nil)
     config.x.legal_framework_api_host_for_js = ENV.fetch("LEGAL_FRAMEWORK_API_HOST_JS", config.x.legal_framework_api_host)
-    config.x.legal_framework.cache_duration = 1200
+    config.x.legal_framework.cache_duration = 1.hour.in_seconds
 
     # datastore API
     config.x.data_access_api.url = ENV.fetch("DATA_ACCESS_API_URL", nil)
