@@ -20,6 +20,7 @@
 name: "CodeQL"
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
   pull_request:
@@ -51,7 +52,7 @@ jobs:
       uses: github/codeql-action/init@8aad20d150bbac5944a9f9d289da16a4b0d87c1e #v4.36.2
       with:
         languages: ${{ matrix.language }}
-        config-file: ./.github/workflows/codeql-config.yml
+        config-file: ./config/codeql-config.yml
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@8aad20d150bbac5944a9f9d289da16a4b0d87c1e #v4.36.2
