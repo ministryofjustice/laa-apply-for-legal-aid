@@ -5,7 +5,7 @@ http_interactions:
     uri: https://legal-framework-api-staging.cloud-platform.service.justice.gov.uk/client_involvement_types
     body:
       encoding: UTF-8
-      string: '{"proceeding_type_ccms_code":"DA001","age":null}'
+      string: '{"proceeding_type_ccms_code":"DA001","age":18}'
     headers:
       Content-Type:
       - application/json
@@ -21,11 +21,11 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 24 Jun 2026 07:22:58 GMT
+      - Wed, 24 Jun 2026 07:22:59 GMT
       Content-Type:
       - application/json; charset=utf-8
       Content-Length:
-      - '320'
+      - '255'
       Connection:
       - keep-alive
       X-Frame-Options:
@@ -41,19 +41,18 @@ http_interactions:
       Vary:
       - Accept, Origin
       Etag:
-      - W/"634b8c627a1b078b5d1fffcb51ca2121"
+      - W/"c9f642da922808db366a20b23b2a23a7"
       Cache-Control:
       - max-age=0, private, must-revalidate
       X-Request-Id:
-      - b9fa5baa46c8690757cb8d022fd0b5e4
+      - 5628eedda87203b3bb8090c6487decd8
       X-Runtime:
-      - '0.136825'
+      - '0.009617'
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
     body:
       encoding: UTF-8
-      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"W","description":"Subject
-        of proceedings (child)"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
+      string: '{"success":true,"client_involvement_type":[{"ccms_code":"A","description":"Applicant/claimant/petitioner"},{"ccms_code":"D","description":"Defendant/respondent"},{"ccms_code":"I","description":"Intervenor"},{"ccms_code":"Z","description":"Joined
         party"}]}'
-  recorded_at: Wed, 24 Jun 2026 07:22:57 GMT
+  recorded_at: Wed, 24 Jun 2026 07:22:58 GMT
 recorded_with: VCR 6.4.0
