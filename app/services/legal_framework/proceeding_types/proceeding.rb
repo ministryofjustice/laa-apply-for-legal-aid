@@ -51,13 +51,18 @@ module LegalFramework
       end
 
       def call
-        Response.new(request.body)
+        value = read_or_store_values { request.body }
+        Response.new(value)
       end
 
     private
 
       def path
         "/proceeding_types/#{@ccms_code}"
+      end
+
+      def redis_key
+        "lfa/proceeding/#{@ccms_code}"
       end
     end
   end

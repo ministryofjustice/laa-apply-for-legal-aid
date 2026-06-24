@@ -24,13 +24,18 @@ module LegalFramework
       end
 
       def call
-        JSON.parse(request.body)["client_involvement_type"].map { |cit_hash| ClientInvolvementTypeStruct.new(cit_hash) }
+        values = read_or_store_values { request.body }
+        JSON.parse(values)["client_involvement_type"].map { |cit_hash| ClientInvolvementTypeStruct.new(cit_hash) }
       end
 
     private
 
       def path
         "/client_involvement_types/#{@proceeding_code}"
+      end
+
+      def redis_key
+        "lfa/proceeding/#{@proceeding_code}/cit"
       end
     end
   end

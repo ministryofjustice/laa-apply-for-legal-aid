@@ -101,6 +101,7 @@ module LaaApplyForLegalAid
 
     config.x.legal_framework_api_host = ENV.fetch("LEGAL_FRAMEWORK_API_HOST", nil)
     config.x.legal_framework_api_host_for_js = ENV.fetch("LEGAL_FRAMEWORK_API_HOST_JS", config.x.legal_framework_api_host)
+    config.x.legal_framework.cache_duration = 1.hour.in_seconds
 
     # datastore API
     config.x.data_access_api.url = ENV.fetch("DATA_ACCESS_API_URL", nil)
@@ -150,6 +151,7 @@ module LaaApplyForLegalAid
     config.x.redis.oauth_session_url = "#{config.x.redis.base_url}/2"
     config.x.redis.rack_attack_url = "#{config.x.redis.base_url}/3"
     config.x.redis.bank_holidays_url = "#{config.x.redis.base_url}/4" # TODO: AP-6504 do we need a separate redis db for bank holidays?
+    config.x.redis.lfa_url = "#{config.x.redis.base_url}/5"
 
     config.x.maintenance_mode = ENV.fetch("MAINTENANCE_MODE", nil)&.downcase&.eql?("true")
 

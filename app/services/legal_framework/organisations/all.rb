@@ -13,7 +13,7 @@ module LegalFramework
       end
 
       def call
-        parsed_payload
+        JSON.parse(cached_response).map { |org_hash| OrganisationStruct.new(org_hash) }
       end
 
       def path
@@ -22,8 +22,12 @@ module LegalFramework
 
     private
 
-      def parsed_payload
-        JSON.parse(request.body).map { |org_hash| OrganisationStruct.new(org_hash) }
+      def cached_response
+        read_or_store_values { request.body }
+      end
+
+      def redis_key
+        "lfa/organisations"
       end
     end
   end

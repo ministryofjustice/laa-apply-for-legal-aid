@@ -12,7 +12,7 @@ module LegalFramework
       end
 
       def call
-        request.body
+        read_or_store_values { request.body }
       end
 
     private
@@ -35,6 +35,10 @@ module LegalFramework
 
       def path
         "/proceeding_type_defaults"
+      end
+
+      def redis_key
+        "lfa/proceeding/#{@proceeding.ccms_code}/df_#{@emergency}/cit_#{@proceeding.client_involvement_type_ccms_code}"
       end
     end
   end
