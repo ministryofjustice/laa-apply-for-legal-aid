@@ -112,4 +112,17 @@ RSpec.describe BaseStateMachine do
     it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :partner_self_employed) }
     it { is_expected.to transition_from(:use_ccms).to(:use_ccms).on_event(event, :partner_armed_forces) }
   end
+
+  describe ".submit_to_datastore?" do
+    subject(:submit_to_datastore) { state_machine.submit_to_datastore? }
+
+    before do
+      allow(Setting).to receive(:enable_datastore_submission?).and_return(enable_datastore_submission)
+      allow(HostEnv).to receive(:environment).and_return(:staging)
+    end
+
+    let(:enable_datastore_submission) { true }
+
+    it { is_expected.to be false } # we only send SCA applications, this is overridden in the SCA state machine
+  end
 end
