@@ -8,7 +8,7 @@ permissions: {}
 
 jobs:
   run-sast-tooling:
-    uses: ministryofjustice/laa-reusable-github-actions/.github/workflows/sast.yml@da8dfead60c43877af5a5e72ffa8c72301cac18f # main as of 12/06/2026
+    uses: ministryofjustice/laa-reusable-github-actions/.github/workflows/sast.yml@a0bd8225ca8cc96e57a19223ce21f2ce7230833c # main as of 24/06/2026
     permissions:
       id-token: write
       contents: read
