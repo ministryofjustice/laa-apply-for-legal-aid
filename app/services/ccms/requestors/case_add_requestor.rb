@@ -156,10 +156,6 @@ module CCMS
       def generate_application_amendment_type
         if @legal_aid_application.non_sca_used_delegated_functions?
           "SUBDP"
-        elsif @legal_aid_application.ecct_routing?
-          # the team is currently named ECCT (Exceptional and Complex Cases Team), but were
-          # previously named ECF (Exceptional Case Funding) and that is what CCMS expects
-          "ECF"
         else
           "SUB"
         end
