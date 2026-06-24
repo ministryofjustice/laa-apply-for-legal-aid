@@ -1454,10 +1454,16 @@ RSpec.describe LegalAidApplication do
   end
 
   describe "#generated_reports" do
-    let(:legal_aid_application) { create(:legal_aid_application, :generating_reports) }
+    let(:legal_aid_application) { create(:legal_aid_application, :generating_reports, :with_merits_submitted, :with_sca_state_machine) }
     let(:submit_applications_to_ccms) { true }
+    let(:datastore_submitter) { instance_double(Datastore::Submitter, call: true) }
+    let(:enable_datastore_submission) { true }
 
-    before { allow(Rails.configuration.x.ccms_soa).to receive(:submit_applications_to_ccms).and_return(submit_applications_to_ccms) }
+    before do
+      allow(Rails.configuration.x.ccms_soa).to receive(:submit_applications_to_ccms).and_return(submit_applications_to_ccms)
+      allow(Datastore::Submitter).to receive(:new).and_return(datastore_submitter)
+      allow(Setting).to receive(:enable_datastore_submission?).and_return(enable_datastore_submission)
+    end
 
     it "starts the ccms submission process" do
       expect(legal_aid_application.find_or_create_ccms_submission).to receive(:process_async!)
@@ -1469,6 +1475,22 @@ RSpec.describe LegalAidApplication do
 
       it "does not start the ccms submission process" do
         expect(legal_aid_application.find_or_create_ccms_submission).not_to receive(:process_async!)
+        legal_aid_application.generated_reports!
+      end
+    end
+
+    context "when enable_datastore_submission is set to false" do
+      let(:enable_datastore_submission) { false }
+
+      it "does not start the ccms submission process" do
+        expect(datastore_submitter).not_to receive(:call)
+        legal_aid_application.generated_reports!
+      end
+    end
+
+    context "when enable_datastore_submission is enabled" do
+      it "calls the datastore submitter" do
+        expect(datastore_submitter).to receive(:call)
         legal_aid_application.generated_reports!
       end
     end
