@@ -53,7 +53,7 @@ RSpec.describe "ClientInvolvementTypeController" do
   let(:client_involvement_type_response) { client_involvement_types_da001_response }
 
   before do
-    stub_request(:get, %r{#{Rails.configuration.x.legal_framework_api_host}/client_involvement_types/})
+    stub_request(:post, %r{#{Rails.configuration.x.legal_framework_api_host}/client_involvement_types})
       .to_return(
         status: 200,
         body: client_involvement_type_response,
