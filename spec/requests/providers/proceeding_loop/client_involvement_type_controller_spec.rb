@@ -13,6 +13,30 @@ def client_involvement_types_da001_response
         description: "Defendant/respondent",
       },
       {
+        ccms_code: "I",
+        description: "Intervenor",
+      },
+      {
+        ccms_code: "Z",
+        description: "Joined party",
+      },
+    ],
+  }.to_json
+end
+
+def client_involvement_types_da001_response_child
+  {
+    success: true,
+    client_involvement_type: [
+      {
+        ccms_code: "A",
+        description: "Applicant/claimant/petitioner",
+      },
+      {
+        ccms_code: "D",
+        description: "Defendant/respondent",
+      },
+      {
         ccms_code: "W",
         description: "Subject of proceedings (child)",
       },
@@ -29,6 +53,18 @@ def client_involvement_types_da001_response
 end
 
 def client_involvement_types_sca_response
+  {
+    success: true,
+    client_involvement_type: [
+      {
+        ccms_code: "D",
+        description: "Defendant/respondent",
+      },
+    ],
+  }.to_json
+end
+
+def client_involvement_types_sca_response_child
   {
     success: true,
     client_involvement_type: [
@@ -122,6 +158,8 @@ RSpec.describe "ClientInvolvementTypeController" do
           context "when the defendant was under 18 when delegated functions were used" do
             before { proceeding.update!(used_delegated_functions: true, used_delegated_functions_on: 1.day.ago, used_delegated_functions_reported_on: Time.zone.today) }
 
+            let(:client_involvement_type_response) { client_involvement_types_da001_response_child }
+
             it "displays the child option" do
               get_cit
               expect(unescaped_response_body).to include("A child subject of the proceeding")
@@ -131,6 +169,7 @@ RSpec.describe "ClientInvolvementTypeController" do
       end
 
       context "when applicant is under 18" do
+        let(:client_involvement_type_response) { client_involvement_types_da001_response_child }
         let(:date_of_birth) { 17.years.ago }
 
         it "displays the child option" do

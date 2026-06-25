@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Proceedings::ClientInvolvementTypeForm, :vcr, type: :form do
+RSpec.describe Proceedings::ClientInvolvementTypeForm, type: :form do
   subject(:cit_form) { described_class.new(form_params) }
 
   let(:proceeding) { create(:proceeding, :da001, :with_cit_z) }
