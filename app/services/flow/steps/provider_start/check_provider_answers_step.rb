@@ -4,7 +4,9 @@ module Flow
       CheckProviderAnswersStep = Step.new(
         path: ->(application) { Steps.urls.providers_legal_aid_application_check_provider_answers_path(application) },
         forward: lambda do |application|
-          if application.non_means_tested?
+          if application.return_to_review_and_print?
+            :confirm_client_declarations
+          elsif application.non_means_tested?
             application.change_state_machine_type(application.special_children_act_proceedings? ? "SpecialChildrenActStateMachine" : "NonMeansTestedStateMachine")
             :confirm_non_means_tested_applications
           else

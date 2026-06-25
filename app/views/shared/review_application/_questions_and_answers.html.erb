@@ -1,5 +1,10 @@
 <div class="print-position-correction">
   <section class="client_details print-no-break">
+    <div class="app-heading-inline-link">
+      <h2 class="govuk-heading-l">Client and case details</h2>
+      <%= govuk_link_to "Go back to edit", providers_legal_aid_application_check_provider_answers_path(@legal_aid_application) %>
+    </div>
+
     <h2 class="govuk-heading-l"><%= t(".client_details_heading") %></h2>
     <%= render(
           "shared/check_answers/client_details",

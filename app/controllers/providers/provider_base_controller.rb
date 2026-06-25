@@ -3,6 +3,7 @@ module Providers
     before_action :authenticate_provider!
     before_action :set_cache_buster
     before_action :update_locale
+    before_action :restrict_access_when_editing_application
     include Appointable
     include ApplicationDependable
     include Draftable
@@ -12,6 +13,15 @@ module Providers
     helper_method :display_hmrc_text?, :back_link_unless
 
   private
+
+    def restrict_access_when_editing_application
+      return if self.class.legal_aid_application_not_required?
+      return if params[:legal_aid_application_id].blank?
+      return unless legal_aid_application&.return_to_review_and_print?
+      return if EditingApplicationsAccess.new(legal_aid_application).can_access?(current_step)
+
+      raise StandardError, "Access to #{current_step} is blocked"
+    end
 
     def display_employment_income?
       @legal_aid_application.cfe_result.version >= 4 &&
