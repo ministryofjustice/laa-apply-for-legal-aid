@@ -82,6 +82,7 @@ class NonPassportedStateMachine < BaseStateMachine
                     provider_assessing_means
                     provider_entering_merits
                     checking_means_income
+                    confirming_reviewing_and_printing_application
                   ],
                   to: :checking_non_passported_means
     end
