@@ -901,6 +901,7 @@ en:
     review_application:
       application_details:
         client_name: Client
+        datastore_reference: Datastore reference
         case_reference_html: <abbr title='Legal Aid Agency'>LAA</abbr> reference
         ccms_reference_html: <abbr title='Client and Cost Management System'>CCMS</abbr> reference
         office: Office
