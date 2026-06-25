@@ -27,7 +27,7 @@ module Providers
       end
 
       def applicant_age
-        return false unless applicant_date_of_birth
+        return nil unless applicant_date_of_birth
 
         as_of = proceeding.used_delegated_functions_on || Date.current
         AgeCalculator.call(applicant_date_of_birth, as_of)
