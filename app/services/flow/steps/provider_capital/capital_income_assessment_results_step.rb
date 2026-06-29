@@ -4,7 +4,9 @@ module Flow
       CapitalIncomeAssessmentResultsStep = Step.new(
         path: ->(application) { Steps.urls.providers_legal_aid_application_capital_income_assessment_result_path(application) },
         forward: lambda do |application|
-          if application.copy_case?
+          if application.return_to_review_and_print?
+            :confirm_client_declarations
+          elsif application.copy_case?
             application.evidence_is_required? ? :uploaded_evidence_collections : :check_merits_answers
           else
             :merits_task_lists
