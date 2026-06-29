@@ -96,6 +96,7 @@ class NonPassportedStateMachine < BaseStateMachine
       transitions from: %i[
                     provider_assessing_means
                     assessing_partner_means
+                    confirming_reviewing_and_printing_application
                   ],
                   to: :checking_means_income
     end

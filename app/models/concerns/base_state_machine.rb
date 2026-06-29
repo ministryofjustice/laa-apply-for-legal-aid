@@ -168,6 +168,7 @@ class BaseStateMachine < ApplicationRecord
                     checking_applicant_details
                     checking_merits_answers
                     checking_non_passported_means
+                    provider_assessing_means
                     provider_entering_merits
                   ],
                   to: :confirming_reviewing_and_printing_application
