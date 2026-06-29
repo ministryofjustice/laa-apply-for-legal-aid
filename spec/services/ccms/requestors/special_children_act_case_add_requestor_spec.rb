@@ -69,6 +69,7 @@ module CCMS
         let(:request_created_at) { Time.zone.parse("2020-11-24T11:54:29.000") }
 
         before do
+          legal_aid_application.update!(autogranted: Autograntable.call(legal_aid_application))
           create(:cfe_v6_result, submission: cfe_submission)
           create(:involved_child, first_name: "First", last_name: "TestChild", date_of_birth: Date.parse("2019-01-20"), legal_aid_application:)
           create(:involved_child, first_name: "Second", last_name: "TestChild", date_of_birth: Date.parse("2020-02-15"), legal_aid_application:)
@@ -217,7 +218,10 @@ module CCMS
           end
 
           context "when the parent has a parental responsibility agreement of the children" do
-            before { applicant.update!(relationship_to_children: "parental_responsibility_agreement") }
+            before do
+              applicant.update!(relationship_to_children: "parental_responsibility_agreement")
+              legal_aid_application.update!(autogranted: Autograntable.call(legal_aid_application))
+            end
 
             it "excludes the CLIENT_PARENT_OF_CHILD_PROC" do
               block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_PARENT_OF_CHILD_PROC")
@@ -282,7 +286,10 @@ module CCMS
           end
 
           context "when the parent has court ordered parental responsibility of the children" do
-            before { applicant.update!(relationship_to_children: "court_order") }
+            before do
+              applicant.update!(relationship_to_children: "court_order")
+              legal_aid_application.update!(autogranted: Autograntable.call(legal_aid_application))
+            end
 
             it "sets CLIENT_PARENT_OF_CHILD_PROC" do
               block = XmlExtractor.call(request_xml, :global_merits, "CLIENT_PARENT_OF_CHILD_PROC")
