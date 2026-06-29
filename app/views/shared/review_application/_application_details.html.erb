@@ -17,7 +17,7 @@
       <dd><%= @legal_aid_application.case_ccms_reference %></dd>
     <% end %>
 
-    <% if Setting.enable_datastore_submission? && @legal_aid_application.datastore_id %>
+    <% if @show_datastore_id %>
       <dt>
         <strong><%= t(".datastore_reference") %>:</strong>
       </dt>

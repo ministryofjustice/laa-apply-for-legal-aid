@@ -9,6 +9,11 @@ module Providers
     def show
       @source_application = @legal_aid_application.copy_case? ? LegalAidApplication.find(legal_aid_application.copy_case_id) : @legal_aid_application
       @read_only = true
+      @show_datastore_id = [
+        Setting.enable_datastore_submission?,
+        @legal_aid_application.datastore_id,
+        HostEnv.not_production?,
+      ].all?
     end
   end
 end
