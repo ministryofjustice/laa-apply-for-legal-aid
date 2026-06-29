@@ -1470,6 +1470,11 @@ RSpec.describe LegalAidApplication do
       legal_aid_application.generated_reports!
     end
 
+    it "calls the datastore submitter" do
+      expect(datastore_submitter).to receive(:call)
+      legal_aid_application.generated_reports!
+    end
+
     context "when submit_applications_to_ccms is set to false" do
       let(:submit_applications_to_ccms) { false }
 
@@ -1482,15 +1487,8 @@ RSpec.describe LegalAidApplication do
     context "when enable_datastore_submission is set to false" do
       let(:enable_datastore_submission) { false }
 
-      it "does not start the ccms submission process" do
+      it "does not start the datastore submission process" do
         expect(datastore_submitter).not_to receive(:call)
-        legal_aid_application.generated_reports!
-      end
-    end
-
-    context "when enable_datastore_submission is enabled" do
-      it "calls the datastore submitter" do
-        expect(datastore_submitter).to receive(:call)
         legal_aid_application.generated_reports!
       end
     end
