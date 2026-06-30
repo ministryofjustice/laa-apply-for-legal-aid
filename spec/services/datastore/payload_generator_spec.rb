@@ -152,7 +152,10 @@ RSpec.describe Datastore::PayloadGenerator do
       end
       let(:proceeding) { create(:proceeding, :pb059, legal_aid_application:) }
 
-      before { legal_aid_application.proceedings << proceeding }
+      before do
+        legal_aid_application.proceedings << proceeding
+        legal_aid_application.update!(autogranted: Autograntable.call(legal_aid_application))
+      end
 
       it "sets auto_grant to true in the payload" do
         payload = call

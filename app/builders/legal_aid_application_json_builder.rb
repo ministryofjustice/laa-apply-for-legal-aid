@@ -126,6 +126,6 @@ class LegalAidApplicationJsonBuilder < BaseJsonBuilder
 private
 
   def auto_grant?
-    auto_grant_special_children_act?
+    autogranted?
   end
 end
