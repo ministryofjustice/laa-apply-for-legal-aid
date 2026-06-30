@@ -3,11 +3,11 @@ module Providers
     class SubstantiveLevelOfServiceController < ProviderBaseController
       before_action :proceeding
       def show
-        @form = Proceedings::SubstantiveLevelOfServiceForm.new(model: proceeding)
+        @form = Proceedings::SubstantiveLevelOfServiceForm.new(model: proceeding, los:)
       end
 
       def update
-        @form = Proceedings::SubstantiveLevelOfServiceForm.new(form_params)
+        @form = Proceedings::SubstantiveLevelOfServiceForm.new(form_params.merge({ los: }))
         default = JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, false))["default_level_of_service"]["level"].to_s
         changed_to_full_rep = @form.attributes["substantive_level_of_service"] == "3" && @form.attributes["substantive_level_of_service"] != default
 
@@ -18,6 +18,10 @@ module Providers
 
       def proceeding
         @proceeding ||= Proceeding.find(proceeding_id_param)
+      end
+
+      def los
+        @los ||= LegalFramework::ProceedingTypes::Proceeding.call(proceeding.ccms_code).service_levels
       end
 
       def proceeding_id_param

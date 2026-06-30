@@ -4,11 +4,11 @@ module Providers
       before_action :proceeding
 
       def show
-        @form = Proceedings::ClientInvolvementTypeForm.new(model: proceeding)
+        @form = Proceedings::ClientInvolvementTypeForm.new(model: proceeding, cit_types:)
       end
 
       def update
-        @form = Proceedings::ClientInvolvementTypeForm.new(form_params)
+        @form = Proceedings::ClientInvolvementTypeForm.new(form_params.merge({ cit_types: }))
         render :show unless save_continue_or_draft(@form)
       end
 
@@ -16,6 +16,10 @@ module Providers
 
       def proceeding
         @proceeding = Proceeding.find(proceeding_id_param)
+      end
+
+      def cit_types
+        @cit_types ||= LegalFramework::ClientInvolvementTypes::Proceeding.call(proceeding.ccms_code)
       end
 
       def proceeding_id_param

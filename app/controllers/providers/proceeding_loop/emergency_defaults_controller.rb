@@ -4,11 +4,11 @@ module Providers
       before_action :proceeding
 
       def show
-        @form = Proceedings::EmergencyDefaultsForm.new(model: proceeding)
+        @form = Proceedings::EmergencyDefaultsForm.new(model: proceeding, defaults:)
       end
 
       def update
-        @form = Proceedings::EmergencyDefaultsForm.new(form_params)
+        @form = Proceedings::EmergencyDefaultsForm.new(form_params.merge({ defaults: }))
         render :show unless save_continue_or_draft(@form)
       end
 
@@ -20,6 +20,10 @@ module Providers
 
       def proceeding_id_param
         params.require(:id)
+      end
+
+      def defaults
+        @defaults ||= JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, true))
       end
 
       def form_params

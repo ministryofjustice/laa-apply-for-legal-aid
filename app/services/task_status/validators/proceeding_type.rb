@@ -29,7 +29,7 @@ module TaskStatus
       end
 
       def client_involvement_type_form
-        Proceedings::ClientInvolvementTypeForm.new(model: proceeding)
+        Proceedings::ClientInvolvementTypeForm.new(model: proceeding, cit_types: client_involvement_types)
       end
 
       def delegated_functions_form
@@ -39,7 +39,7 @@ module TaskStatus
       def emergency_defaults_form
         return if !proceeding.used_delegated_functions? || proceeding.special_children_act?
 
-        Proceedings::EmergencyDefaultsForm.new(model: proceeding)
+        Proceedings::EmergencyDefaultsForm.new(model: proceeding, defaults: emergency_defaults)
       end
 
       def emergency_level_of_service_form
@@ -47,7 +47,7 @@ module TaskStatus
 
         @emergency_level_of_service_form =
           if proceeding.used_delegated_functions? && !proceeding.accepted_emergency_defaults?
-            Proceedings::EmergencyLevelOfServiceForm.new(model: proceeding)
+            Proceedings::EmergencyLevelOfServiceForm.new(model: proceeding, los: levels_of_service)
           end
       end
 
@@ -67,6 +67,22 @@ module TaskStatus
         JSON.parse(LegalFramework::ProceedingTypes::Scopes.call(proceeding, true))["level_of_service"]["scope_limitations"]
       end
 
+      def client_involvement_types
+        LegalFramework::ClientInvolvementTypes::Proceeding.call(proceeding.ccms_code)
+      end
+
+      def emergency_defaults
+        JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, true))
+      end
+
+      def substantive_defaults
+        JSON.parse(LegalFramework::ProceedingTypes::Defaults.call(proceeding, false))
+      end
+
+      def levels_of_service
+        LegalFramework::ProceedingTypes::Proceeding.call(proceeding.ccms_code).service_levels
+      end
+
       def emergency_scope_limitations_form
         return unless proceeding.used_delegated_functions?
         return if proceeding.accepted_emergency_defaults?
@@ -76,7 +92,7 @@ module TaskStatus
       end
 
       def substantive_defaults_form
-        Proceedings::SubstantiveDefaultsForm.new(model: proceeding)
+        Proceedings::SubstantiveDefaultsForm.new(model: proceeding, defaults: substantive_defaults)
       end
 
       def substantive_level_of_service_form
@@ -84,7 +100,7 @@ module TaskStatus
 
         @substantive_level_of_service_form =
           unless proceeding.accepted_substantive_defaults?
-            Proceedings::SubstantiveLevelOfServiceForm.new(model: proceeding)
+            Proceedings::SubstantiveLevelOfServiceForm.new(model: proceeding, los: levels_of_service)
           end
       end
 

@@ -12,8 +12,10 @@ module Proceedings
     end
 
     def initialize(*args)
+      @levels_of_service = args.first[:los]
+      @levels_of_service.deep_stringify_keys! if @levels_of_service.is_a?(Hash) # not needed
+      args.first.delete(:los)
       super
-      self.levels_of_service = LegalFramework::ProceedingTypes::Proceeding.call(args.first[:model].ccms_code).service_levels
     end
 
     def save

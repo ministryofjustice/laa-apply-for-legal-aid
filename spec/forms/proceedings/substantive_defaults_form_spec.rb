@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
+RSpec.describe Proceedings::SubstantiveDefaultsForm, type: :form do
   subject(:form) { described_class.new(form_params) }
 
   let(:proceeding) { create(:proceeding, :da001, :without_df_date, :with_cit_z, no_scope_limitations: true) }
@@ -9,7 +9,52 @@ RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
       accepted_substantive_defaults: accepted,
     }
   end
-  let(:form_params) { params.merge(model: proceeding) }
+  let(:form_params) { params.merge(model: proceeding, defaults: default_scope_response) }
+  let(:default_scope_response) { da001_involved_child_no_df }
+
+  def da001_involved_child_no_df
+    {
+      success: true,
+      requested_params: {
+        proceeding_type_ccms_code: "DA001",
+        delegated_functions_used: false,
+        client_involvement_type: "Z",
+      },
+      default_level_of_service: {
+        level: 3,
+        name: "Full Representation",
+        stage: 8,
+      },
+      default_scope: {
+        code: "AA019",
+        meaning: "Injunction FLA-to final hearing",
+        description: "As to proceedings under Part IV Family Law Act 1996 limited to all steps up to and including obtaining and serving a final order and in the event of breach leading to the exercise of a power of arrest to representation on the consideration of the breach by the court (but excluding applying for a warrant of arrest, if not attached, and representation in contempt proceedings).",
+        additional_params: [],
+      },
+    }
+  end
+
+  def pb003_involved_child_no_df
+    {
+      success: true,
+      requested_params: {
+        proceeding_type_ccms_code: "PB003",
+        delegated_functions_used: false,
+        client_involvement_type: "Z",
+      },
+      default_level_of_service: {
+        level: 3,
+        name: "Full Representation",
+        stage: 8,
+      },
+      default_scope: {
+        code: "FM062",
+        meaning: "Final hearing",
+        description: "Limited to all steps up to and including final hearing and any action necessary to implement (but not enforce) the order.",
+        additional_params: [],
+      },
+    }
+  end
 
   describe "#save" do
     subject(:save_form) { form.save }
@@ -123,6 +168,7 @@ RSpec.describe Proceedings::SubstantiveDefaultsForm, :vcr, type: :form do
 
       context "without calling the subject" do
         let(:skip_subject) { true }
+        let(:default_scope_response) { pb003_involved_child_no_df }
 
         it "creates a scope_limitation object" do
           expect(proceeding.substantive_level_of_service).to be_nil
