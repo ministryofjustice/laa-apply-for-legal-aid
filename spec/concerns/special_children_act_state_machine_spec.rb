@@ -51,4 +51,30 @@ RSpec.describe SpecialChildrenActStateMachine do
     it { is_expected.to transition_from(:merits_parental_responsibilities_all_rejected).to(:checking_merits_answers).on_event(event) }
     it { is_expected.to transition_from(:merits_parental_responsibilities).to(:checking_merits_answers).on_event(event) }
   end
+
+  describe ".submit_to_datastore?" do
+    subject(:submit_to_datastore) { state_machine.submit_to_datastore? }
+
+    before do
+      allow(Setting).to receive(:enable_datastore_submission?).and_return(enable_datastore_submission)
+    end
+
+    let(:enable_datastore_submission) { true }
+
+    context "when datastore submissions are not enabled" do
+      let(:enable_datastore_submission) { false }
+
+      it { is_expected.to be false }
+    end
+
+    context "when datastore submissions are enabled" do
+      it { is_expected.to be true }
+
+      context "and on production" do
+        before { allow(HostEnv).to receive(:environment).and_return(:production) }
+
+        it { is_expected.to be false }
+      end
+    end
+  end
 end

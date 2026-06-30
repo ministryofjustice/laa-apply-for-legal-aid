@@ -17,6 +17,13 @@
       <dd><%= @legal_aid_application.case_ccms_reference %></dd>
     <% end %>
 
+    <% if @show_datastore_id %>
+      <dt>
+        <strong><%= t(".datastore_reference") %>:</strong>
+      </dt>
+      <dd><%= @legal_aid_application.datastore_id %></dd>
+    <% end %>
+
     <% if @office_address %>
       <dt>
         <strong><%= t(".office") %>:</strong>

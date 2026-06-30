@@ -3,6 +3,13 @@ class SpecialChildrenActStateMachine < NonMeansTestedStateMachine
     CCMS::Requestors::SpecialChildrenActCaseAddRequestor
   end
 
+  def submit_to_datastore?
+    [
+      Setting.enable_datastore_submission?,
+      HostEnv.not_production?,
+    ].all?
+  end
+
   aasm do
     state :merits_parental_responsibilities
     state :merits_parental_responsibilities_all_rejected

@@ -12,6 +12,10 @@ class BaseStateMachine < ApplicationRecord
     Rails.logger.info "BaseStateMachine::StateChange, laa_id: #{legal_aid_application.id}, event: #{aasm.current_event}, from: #{aasm.from_state}, to: #{aasm.to_state}"
   end
 
+  def submit_to_datastore?
+    false
+  end
+
   VALID_CCMS_REASONS = %i[
     no_online_banking
     no_applicant_consent
@@ -173,6 +177,7 @@ class BaseStateMachine < ApplicationRecord
       transitions from: :generating_reports, to: :submitting_assessment,
                   after: proc { |legal_aid_application|
                            legal_aid_application.find_or_create_ccms_submission.process_async! if Rails.configuration.x.ccms_soa.submit_applications_to_ccms
+                           Datastore::Submitter.call(legal_aid_application, token_object: legal_aid_application.merits_submitted_by.entra_id_token) if submit_to_datastore?
                          }
     end
 
