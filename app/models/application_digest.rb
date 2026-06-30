@@ -48,7 +48,7 @@ class ApplicationDigest < ApplicationRecord
         parental_responsibility_court_order: laa.parental_responsibility_court_order_relationship?,
         child_subject: laa.child_subject_relationship?,
         parental_responsibility_evidence: laa.parental_responsibility_evidence?,
-        autogranted: laa.auto_grant_special_children_act?,
+        autogranted: laa.autogranted?,
         ecct_routed: laa.ecct_routing?,
       }
     end
