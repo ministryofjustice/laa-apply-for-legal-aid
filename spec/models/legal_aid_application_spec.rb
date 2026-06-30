@@ -1519,7 +1519,7 @@ RSpec.describe LegalAidApplication do
   end
 
   describe "#submitted_assessment" do
-    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :checking_merits_answers) }
+    let(:legal_aid_application) { create(:legal_aid_application, :with_applicant, :editing_application) }
     let(:feedback_url) { "http://test/feedback/new" }
 
     before { allow(Rails.configuration.x.ccms_soa).to receive(:submit_applications_to_ccms).and_return(true) }

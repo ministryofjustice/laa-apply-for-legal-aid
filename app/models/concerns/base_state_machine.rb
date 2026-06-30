@@ -50,6 +50,7 @@ class BaseStateMachine < ApplicationRecord
     state :assessment_submitted
     state :use_ccms
     state :delegated_functions_used
+    state :editing_application
 
     after_all_transitions :log_status_change
 
@@ -152,6 +153,7 @@ class BaseStateMachine < ApplicationRecord
                     checked_merits_answers
                     submitting_assessment
                     assessment_submitted
+                    editing_application
                   ],
                   to: :checking_merits_answers
       transitions from: :applicant_details_checked, to: :checking_merits_answers, guard: :non_means_tested?
@@ -163,14 +165,22 @@ class BaseStateMachine < ApplicationRecord
                   guard: :non_means_tested?
     end
 
+    event :start_application_edit_flow do
+      transitions from: %i[
+                    checking_merits_answers
+                    provider_entering_merits
+                  ],
+                  to: :editing_application
+    end
+
     event :generate_reports do
-      transitions from: :checking_merits_answers, to: :generating_reports,
+      transitions from: :editing_application, to: :generating_reports,
                   after: proc { |legal_aid_application|
                     ReportsCreatorWorker.perform_async(legal_aid_application.id)
                     PostSubmissionProcessingJob.perform_later(legal_aid_application.id, "#{Rails.configuration.x.application.host_url}/feedback/new")
                   },
                   guards: [:allow_ccms_submission?]
-      transitions from: :checking_merits_answers, to: :submission_paused
+      transitions from: :editing_application, to: :submission_paused
     end
 
     event :generated_reports do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_16_124216) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_30_110355) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -684,6 +684,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_16_124216) do
     t.boolean "has_dependants"
     t.boolean "has_offline_accounts"
     t.boolean "has_restrictions"
+    t.boolean "in_application_edit_flow", default: false, null: false
     t.boolean "in_scope_of_laspo"
     t.boolean "linked_application_completed"
     t.datetime "merits_submitted_at", precision: nil

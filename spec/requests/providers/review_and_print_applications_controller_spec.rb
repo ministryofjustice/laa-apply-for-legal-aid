@@ -111,7 +111,7 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController do
       create(:legal_aid_application,
              :with_everything,
              :with_proceedings,
-             :checking_merits_answers,
+             :editing_application,
              proceeding_count: 3)
     end
     let(:allow_ccms_submission) { true }

@@ -1,6 +1,7 @@
 module Providers
   class ConfirmClientDeclarationsController < ProviderBaseController
     def show
+      legal_aid_application.start_application_edit_flow! unless legal_aid_application.editing_application?
       @form = LegalAidApplications::ConfirmClientDeclarationForm.new(model: legal_aid_application)
     end
 
