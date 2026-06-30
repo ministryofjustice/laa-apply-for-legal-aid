@@ -238,10 +238,6 @@ class LegalAidApplication < ApplicationRecord
     attachments&.parental_responsibility&.exists?
   end
 
-  def auto_grant_special_children_act?
-    Autograntable.call(self)
-  end
-
   def ecct_routing?
     appeal.present? && appeal.second_appeal?
   end
