@@ -489,7 +489,7 @@ module Reports
       end
 
       def autogranted
-        @line << yesno(laa.auto_grant_special_children_act?)
+        @line << yesno(laa.autogranted?)
       end
 
       def yesno(value)
