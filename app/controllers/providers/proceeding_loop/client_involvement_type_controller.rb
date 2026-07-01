@@ -19,7 +19,18 @@ module Providers
       end
 
       def cit_types
-        @cit_types ||= LegalFramework::ClientInvolvementTypes::Proceeding.call(proceeding.ccms_code)
+        @cit_types ||= LegalFramework::ClientInvolvementTypes::Proceeding.call(proceeding.ccms_code, applicant_age)
+      end
+
+      def applicant_date_of_birth
+        @applicant_date_of_birth ||= legal_aid_application.applicant&.date_of_birth
+      end
+
+      def applicant_age
+        return nil unless applicant_date_of_birth
+
+        as_of = proceeding.used_delegated_functions_on || Date.current
+        AgeCalculator.call(applicant_date_of_birth, as_of)
       end
 
       def proceeding_id_param

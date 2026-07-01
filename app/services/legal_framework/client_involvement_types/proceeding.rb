@@ -18,9 +18,14 @@ module LegalFramework
         end
       end
 
-      def initialize(ccms_code)
+      def self.call(ccms_code, age = nil)
+        new(ccms_code, age).call
+      end
+
+      def initialize(ccms_code, age)
         super()
         @proceeding_code = ccms_code
+        @age = age
       end
 
       def call
@@ -29,8 +34,23 @@ module LegalFramework
 
     private
 
+      def request_body
+        {
+          proceeding_type_ccms_code: @proceeding_code,
+          age: @age,
+        }.to_json
+      end
+
+      def request
+        conn.post do |request|
+          request.url url
+          request.headers["Content-Type"] = "application/json"
+          request.body = request_body
+        end
+      end
+
       def path
-        "/client_involvement_types/#{@proceeding_code}"
+        "/client_involvement_types"
       end
     end
   end
