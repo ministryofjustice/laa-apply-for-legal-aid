@@ -1,4 +1,4 @@
-FROM ruby:4.0.5-alpine3.22
+FROM ruby:4.0.5-alpine3.24
 
 LABEL org.opencontainers.image.vendor="Ministry of Justice" \
       org.opencontainers.image.authors="Apply for civil legal aid team (apply-for-civil-legal-aid@justice.gov.uk)" \
@@ -21,6 +21,7 @@ RUN apk add --no-cache --virtual build-dependencies \
                     libxml2-dev \
                     libxslt-dev \
                     postgresql-dev \
+                    npm \
                     git \
                     curl \
                     yaml-dev \
@@ -48,7 +49,8 @@ RUN apk add --no-cache \
         ca-certificates
 
 # Install expected Yarn version
-RUN corepack enable \
+RUN npm install -g corepack@latest --force \
+    && corepack enable \
     && corepack prepare yarn@4.12.0 --activate
 
 # Ensure everything is executable
