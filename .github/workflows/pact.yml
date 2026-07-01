@@ -62,17 +62,9 @@ jobs:
         run: |
           bundle exec rails pact:consumer:generate
 
-      - name: List any pacts after DEBUG
-        run: |
-          ls -lah spec/pacts
-
       - name: Verify pact generated
         run: |
           find spec/pacts -name '*.json'
-
-      - name: Print pact generated
-        run: |
-          cat spec/pacts/*.json
 
       - name: Publish pacts
         env:
@@ -92,23 +84,11 @@ jobs:
           PACT_BROKER_PASSWORD: ${{ secrets.PACT_BROKER_PASSWORD }}
           GITHUB_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
-          timeout=300
-          interval=10
-          elapsed=0
-
-          until bundle exec pact-broker can-i-deploy \
+          bundle exec pact-broker can-i-deploy \
             --pacticipant laa-apply-for-legal-aid \
             --version "$GITHUB_SHA" \
             --broker-base-url "$PACT_BROKER_BASE_URL" \
             --broker-username "$PACT_BROKER_USERNAME" \
-            --broker-password "$PACT_BROKER_PASSWORD"
-          do
-            if [ "$elapsed" -ge "$timeout" ]; then
-              echo "Timed out waiting for provider verification"
-              exit 1
-            fi
-
-            sleep "$interval"
-            elapsed=$((elapsed + interval))
-          done
-
+            --broker-password "$PACT_BROKER_PASSWORD" \
+            --retry-while-unknown 30 \
+            --retry-interval 10
