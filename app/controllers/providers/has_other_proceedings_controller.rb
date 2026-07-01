@@ -5,6 +5,7 @@ module Providers
     end
 
     def update
+      legal_aid_application.update!(return_to_review_and_print: false)
       @form = LegalAidApplications::HasOtherProceedingsForm.new(form_params)
       @form.draft! if params[:draft_button]
       if @form.save

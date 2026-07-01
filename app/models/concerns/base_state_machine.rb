@@ -50,6 +50,7 @@ class BaseStateMachine < ApplicationRecord
     state :assessment_submitted
     state :use_ccms
     state :delegated_functions_used
+    state :confirming_reviewing_and_printing_application
 
     after_all_transitions :log_status_change
 
@@ -71,6 +72,7 @@ class BaseStateMachine < ApplicationRecord
                     provider_confirming_applicant_eligibility
                     overriding_dwp_result
                     use_ccms
+                    confirming_reviewing_and_printing_application
                   ],
                   to: :checking_applicant_details
     end
@@ -152,6 +154,7 @@ class BaseStateMachine < ApplicationRecord
                     checked_merits_answers
                     submitting_assessment
                     assessment_submitted
+                    confirming_reviewing_and_printing_application
                   ],
                   to: :checking_merits_answers
       transitions from: :applicant_details_checked, to: :checking_merits_answers, guard: :non_means_tested?
@@ -161,6 +164,18 @@ class BaseStateMachine < ApplicationRecord
                   ],
                   to: :checking_merits_answers,
                   guard: :non_means_tested?
+    end
+
+    event :confirm_review_and_print_application do
+      transitions from: %i[
+                    entering_applicant_details
+                    checking_applicant_details
+                    checking_merits_answers
+                    checking_non_passported_means
+                    provider_assessing_means
+                    provider_entering_merits
+                  ],
+                  to: :confirming_reviewing_and_printing_application
     end
 
     event :generate_reports do

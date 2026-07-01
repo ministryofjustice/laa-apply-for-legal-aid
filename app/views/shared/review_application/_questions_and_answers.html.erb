@@ -1,5 +1,10 @@
 <div class="print-position-correction">
   <section class="client_details print-no-break">
+    <div class="app-heading-inline-link">
+      <h2 class="govuk-heading-l">Client and case details</h2>
+      <%= govuk_link_to "Go back to edit", providers_legal_aid_application_check_provider_answers_path(@legal_aid_application) %>
+    </div>
+
     <h2 class="govuk-heading-l"><%= t(".client_details_heading") %></h2>
     <%= render(
           "shared/check_answers/client_details",
@@ -29,6 +34,11 @@
   </section>
 
   <% unless @legal_aid_application.non_means_tested? || @legal_aid_application.passported? %>
+    <div class="app-heading-inline-link">
+      <h2 class="govuk-heading-l">Financial assessment</h2>
+      <%= govuk_link_to "Go back to edit", providers_legal_aid_application_means_check_income_answers_path(@legal_aid_application) %>
+    </div>
+
     <%= render("providers/means/check_income_answers/applicant_income_assessment", read_only: true) %>
 
     <%= render("providers/means/check_income_answers/partner_income_assessment", read_only: true) if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
@@ -41,6 +51,11 @@
     <%= render "shared/check_answers/dependants", read_only: true %>
   <% end %>
 
+  <div class="app-heading-inline-link">
+    <h2 class="govuk-heading-l">Capital and assets</h2>
+    <%= govuk_link_to "Go back to edit", providers_legal_aid_application_check_capital_answers_path(@legal_aid_application) %>
+  </div>
+
   <% unless @legal_aid_application.non_means_tested? %>
     <% individual = @source_application.applicant.has_partner_with_no_contrary_interest? ? "_with_partner" : nil %>
     <h2 class="govuk-heading-l"><%= t(".capital-section-heading#{individual}") %></h2>
@@ -49,6 +64,10 @@
   <% end %>
 
   <section class="merits page_break_before">
+    <div class="app-heading-inline-link">
+      <h2 class="govuk-heading-l">Merits</h2>
+      <%= govuk_link_to "Go back to edit", providers_legal_aid_application_check_merits_answers_path(@legal_aid_application) %>
+    </div>
     <%= render(
           "shared/check_answers/merits",
           incident: @legal_aid_application.latest_incident,

@@ -102,6 +102,7 @@ class LegalAidApplication < ApplicationRecord
            :reset!,
            :reset_from_use_ccms!,
            :reset_to_citizen_entering_means!,
+           :confirm_review_and_print_application!,
            :submitted_assessment!,
            :use_ccms!,
            :applicant_details_checked?,
@@ -128,6 +129,7 @@ class LegalAidApplication < ApplicationRecord
            :rejected_all_parental_responsibilities!,
            :merits_parental_responsibilities?,
            :merits_parental_responsibilities_all_rejected?,
+           :confirming_reviewing_and_printing_application?,
            to: :state_machine_proxy
 
   scope :latest, -> { order(created_at: :desc) }

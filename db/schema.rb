@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_16_124216) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_25_125940) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -707,6 +707,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_16_124216) do
     t.json "provider_step_params"
     t.date "purgeable_on"
     t.string "restrictions_details"
+    t.boolean "return_to_review_and_print", default: false, null: false
     t.text "reviewed"
     t.boolean "separate_representation_required"
     t.string "shared_ownership"
