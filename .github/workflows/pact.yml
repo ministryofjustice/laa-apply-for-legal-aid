@@ -62,9 +62,17 @@ jobs:
         run: |
           bundle exec rails pact:consumer:generate
 
+      - name: List any pacts after DEBUG
+        run: |
+          ls -lah spec/pacts
+
       - name: Verify pact generated
         run: |
           find spec/pacts -name '*.json'
+
+      - name: Print pact generated
+        run: |
+          cat spec/pacts/*.json
 
       - name: Publish pacts
         env:
