@@ -3596,10 +3596,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"govuk-frontend@npm:^6.1.0":
-  version: 6.1.0
-  resolution: "govuk-frontend@npm:6.1.0"
-  checksum: 10c0/543a8c6b1d709ec938e396fa3be923171637ab9b724f03618fa1bdc52023b6aa27fb42932b9e81df3fc134b0473442d42478dbf3e4b18e2bae00dbfe95363e96
+"govuk-frontend@npm:^6.3.0":
+  version: 6.3.0
+  resolution: "govuk-frontend@npm:6.3.0"
+  checksum: 10c0/9e194a762c408c6d0c3f4a4c378d760b75ee7b0e2f2f638671f61e26aa1fd6d580ae259d20e3f739e32a89af996c4aecb0dc6e28d0065b549bd52bff9c716361
   languageName: node
   linkType: hard
 
@@ -4353,7 +4353,7 @@ __metadata:
     core-js: "npm:^3.49.0"
     dropzone: "npm:^6.0.0-beta.2"
     esbuild: "npm:^0.28.1"
-    govuk-frontend: "npm:^6.1.0"
+    govuk-frontend: "npm:^6.3.0"
     jquery: "npm:^4.0.0"
     js-search: "npm:^2.0.1"
     moment: "npm:^2.30.1"
