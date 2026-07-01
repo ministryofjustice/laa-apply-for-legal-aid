@@ -48,7 +48,7 @@ module Backable
   private
 
     def update_page_history
-      return if self.class.skip_back_history_actions.include?(action_name.to_sym)
+      return if page_history_id.nil? || self.class.skip_back_history_actions.include?(action_name.to_sym)
       return unless request.request_method_symbol == :get
 
       process_history
