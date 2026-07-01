@@ -25,8 +25,8 @@ RSpec.describe "All Countries contract", :pact do
     let(:expected_body) do
       match_each(
         {
-          code: match_regex(/^[A-Z]*$/, "ABW"),
-          description: match_any_string("Aruba"),
+          code: match_regex(/^[A-Z]*$/, "AUS"),
+          description: match_any_string("Australia"),
         },
       )
     end
