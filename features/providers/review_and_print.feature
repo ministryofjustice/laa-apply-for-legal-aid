@@ -229,7 +229,7 @@ Feature: Review and print your application
       | h4  | One-off payments your client received |
 
       # This is only in legacy policy disregards (shared/check_answers/_one_link_section.html.erb)
-      | h2  | Payments from scheme or charities |
+      | h4  | Payments from scheme or charities |
 
       # Merits assessment
       | h2  | Merits |

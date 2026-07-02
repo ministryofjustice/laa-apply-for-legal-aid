@@ -69,6 +69,7 @@
         question: t(".policy_disregards_legacy.question#{individual}"),
         answer_hash: policy_disregards_list(@legal_aid_application.policy_disregards),
         read_only:,
+        parent_heading_level: section_heading_level,
       ) %>
 <% end %>
 
