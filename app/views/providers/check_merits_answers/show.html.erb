@@ -50,8 +50,6 @@
       <% end %>
     <% end %>
 
-    <%= govuk_warning_text(text: t("generic.cya_warning_text")) %>
-
     <%= next_action_buttons_with_form(
           url: continue_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),
           method: :patch,
