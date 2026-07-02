@@ -1,4 +1,5 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
+<% card_heading_level = local_assigns[:parent_heading_level] + 1 %>
 
 <% if partner
      individual = "Partner"
@@ -11,7 +12,7 @@
    end %>
 
 <%= govuk_summary_card(title: t(".section_heading"),
-                       heading_level: 3,
+                       heading_level: card_heading_level,
                        html_attributes: { id: "app-check-your-answers__bank_statements_#{individual.downcase}" }) do |card|
       unless read_only
         card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{individual} #{t('.bank_statement_question')}") }

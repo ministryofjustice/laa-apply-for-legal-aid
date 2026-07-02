@@ -1,31 +1,34 @@
+<% parent_heading_level = local_assigns[:parent_heading_level] %>
+<% section_heading_level = parent_heading_level %>
+<% card_heading_level = section_heading_level + 1 %>
 <% read_only = false unless local_assigns.key?(:read_only) %>
 
 <section class="partner">
-  <h2 class="govuk-heading-l"><%= t(".income-heading") %></h2>
+  <%= govuk_heading(section_heading_level, t(".income-heading")) %>
 
-  <%= render("shared/check_answers/bank_statements", partner: true, read_only:) %>
+  <%= render("shared/check_answers/bank_statements", partner: true, read_only:, parent_heading_level: section_heading_level) %>
 
   <% if @legal_aid_application.partner.hmrc_employment_income? %>
     <% if @legal_aid_application.partner.has_multiple_employments? %>
-      <%= render("shared/check_answers/full_employment_details", partner: true, read_only:) %>
+      <%= render("shared/check_answers/full_employment_details", partner: true, read_only:, parent_heading_level: section_heading_level) %>
     <% else %>
-      <%= render("shared/check_answers/employed_income", partner: true, read_only:) %>
+      <%= render("shared/check_answers/employed_income", partner: true, read_only:, parent_heading_level: section_heading_level) %>
     <% end %>
   <% elsif @legal_aid_application.partner.employed? %>
-    <%= render("shared/check_answers/full_employment_details", partner: true, read_only:) %>
+    <%= render("shared/check_answers/full_employment_details", partner: true, read_only:, parent_heading_level: section_heading_level) %>
   <% end %>
 
-  <%= render("shared/check_answers/benefits_income", partner: true, read_only:) %>
+  <%= render("shared/check_answers/benefits_income", partner: true, read_only:, parent_heading_level: section_heading_level) %>
 
-  <%= render("shared/check_answers/payments_summary", partner: true, credit: true, read_only:) %>
+  <%= render("shared/check_answers/payments_summary", partner: true, credit: true, read_only:, parent_heading_level: section_heading_level) %>
 
-  <%= render("shared/check_answers/cash_payments", partner: true, type: :income, read_only:) %>
+  <%= render("shared/check_answers/cash_payments", partner: true, type: :income, read_only:, parent_heading_level: section_heading_level) %>
 
-  <%= render("shared/check_answers/student_finance", partner: true, read_only:) %>
+  <%= render("shared/check_answers/student_finance", partner: true, read_only:, parent_heading_level: section_heading_level) %>
 
-  <h2 class="govuk-heading-l"><%= t(".outgoings-heading") %></h2>
+  <%= govuk_heading(section_heading_level, t(".outgoings-heading")) %>
 
-  <%= render("shared/check_answers/payments_summary", partner: true, credit: false, read_only:) %>
+  <%= render("shared/check_answers/payments_summary", partner: true, credit: false, read_only:, parent_heading_level: section_heading_level) %>
 
-  <%= render("shared/check_answers/cash_payments", partner: true, type: :outgoings, read_only:) %>
+  <%= render("shared/check_answers/cash_payments", partner: true, type: :outgoings, read_only:, parent_heading_level: section_heading_level) %>
 </section>

@@ -280,6 +280,12 @@ FactoryBot.define do
       end
     end
 
+    trait :editing_application do
+      before(:create) do |application|
+        application.state_machine_proxy.update!(aasm_state: :editing_application)
+      end
+    end
+
     trait :checking_non_passported_means do
       before(:create) do |application|
         application.change_state_machine_type("NonPassportedStateMachine")

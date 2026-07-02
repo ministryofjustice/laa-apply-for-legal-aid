@@ -1,3 +1,5 @@
+<% parent_heading_level = 2 %>
+
 <% if @legal_aid_application.cfe_result.version >= 4 %>
   <%= render "proceeding_eligibility", results: @legal_aid_application.cfe_result.results_by_proceeding_type %>
 <% end %>
@@ -19,25 +21,25 @@
 
   <section class="print-no-break">
     <% if @legal_aid_application.applicant.extra_employment_information? %>
-      <%= render "shared/check_answers/employed_income", partner: false, read_only: true %>
+      <%= render "shared/check_answers/employed_income", partner: false, read_only: true, parent_heading_level: %>
     <% end %>
   </section>
 
   <section class="print-no-break">
     <% if @legal_aid_application.applicant.full_employment_details? %>
-      <%= render "shared/check_answers/full_employment_details", individual: "Your client", read_only: true, partner: false %>
+      <%= render "shared/check_answers/full_employment_details", individual: "Your client", read_only: true, partner: false, parent_heading_level: %>
     <% end %>
   </section>
 
   <section class="print-no-break">
     <% if @legal_aid_application.partner&.extra_employment_information? %>
-      <%= render "shared/check_answers/employed_income", partner: true, read_only: true %>
+      <%= render "shared/check_answers/employed_income", partner: true, read_only: true, parent_heading_level: %>
     <% end %>
   </section>
 
   <section class="print-no-break">
     <% if @legal_aid_application.partner&.full_employment_details? %>
-      <%= render "shared/check_answers/full_employment_details", individual: "The partner", read_only: true, partner: true %>
+      <%= render "shared/check_answers/full_employment_details", individual: "The partner", read_only: true, partner: true, parent_heading_level: %>
     <% end %>
   </section>
 
@@ -49,14 +51,20 @@
                          "your client"
                        end %>
   <h2 class="govuk-heading-m print-no-break-after"><%= t("providers.means.check_income_answers.dependants.heading-h2") %></h2>
-  <%= render "shared/check_answers/dependants", individual: individual_text, read_only: true, means_report: true %>
+
+  <%= render "shared/check_answers/dependants", individual: individual_text, read_only: true %>
+
+  <% if @legal_aid_application.dependants.any? %>
+    <%= render "shared/check_answers/dependants_details", individual: individual_text, read_only: true, means_report: true, parent_heading_level: %>
+  <% end %>
+
 <% end %>
 
 <%= render "capital_result" %>
 
 <h2 class="govuk-heading-m print-no-break-after"><%= t(".assets_heading") %></h2>
 <% individual = "_with_partner" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
-<%= render "shared/check_answers/assets", means_report: true, read_only: true, individual: %>
+<%= render "shared/check_answers/assets", means_report: true, read_only: true, individual:, parent_heading_level: %>
 
 <% if @legal_aid_application.uploading_bank_statements? %>
   <%= render "uploaded_bank_statements" %>

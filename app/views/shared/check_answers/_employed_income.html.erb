@@ -1,4 +1,5 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
+<% card_heading_level = local_assigns[:parent_heading_level] + 1 %>
 
 <% if partner
      individual = "partner"
@@ -12,7 +13,7 @@
      url = providers_legal_aid_application_means_employment_income_path(@legal_aid_application)
    end %>
 
-<%= govuk_summary_card(title: t(".heading").upcase_first, heading_level: 3) do |card| %>
+<%= govuk_summary_card(title: t(".heading").upcase_first, heading_level: card_heading_level) do |card| %>
   <% unless read_only %>
     <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": t(".aria_label", individual_with_determiner:)) } %>
   <% end %>

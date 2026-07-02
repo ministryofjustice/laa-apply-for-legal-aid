@@ -1,5 +1,6 @@
 <% read_only = false unless local_assigns.key?(:read_only)
    credit_or_debit = type.eql?(:income) ? :credit : :debit %>
+<% card_heading_level = local_assigns[:parent_heading_level] + 1 %>
 
 <% if partner
      individual = "Partner"
@@ -20,7 +21,7 @@
    end %>
 
 <% if format_transactions(legal_aid_application: @legal_aid_application, credit_or_debit:, regular_or_cash: :cash, individual:).present? %>
-  <%= govuk_summary_card(title: t(".#{type}_heading", individual_with_determiner:), heading_level: 3, html_attributes: { id: "app-check-your-answers__#{individual.downcase}__cash_#{type}" }) do |card|
+  <%= govuk_summary_card(title: t(".#{type}_heading", individual_with_determiner:), heading_level: card_heading_level, html_attributes: { id: "app-check-your-answers__#{individual.downcase}__cash_#{type}" }) do |card|
         unless read_only
           card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{t(".#{type}_heading", individual_with_determiner:)}") }
         end

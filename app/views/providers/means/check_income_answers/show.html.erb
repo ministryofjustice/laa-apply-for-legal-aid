@@ -1,3 +1,5 @@
+<% parent_heading_level = 2 %>
+
 <% individual = if @legal_aid_application.applicant.has_partner_with_no_contrary_interest?
                   t("generic.client_or_partner")
                 else
@@ -6,15 +8,24 @@
 
 <%= page_template(page_title: t(".h1-heading"), caption: t(".caption"), column_width: "full") do %>
 
-  <%= render("providers/means/check_income_answers/applicant_income_assessment", read_only: false) %>
+  <%= render("providers/means/check_income_answers/applicant_income_assessment", read_only: false, parent_heading_level: parent_heading_level) %>
 
-  <%= render("providers/means/check_income_answers/partner_income_assessment", read_only: false) if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+  <% if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
+    <%= render("providers/means/check_income_answers/partner_income_assessment", read_only: false, parent_heading_level: parent_heading_level) %>
+  <% end %>
 
-  <%= render("shared/check_answers/housing_benefit", partner: @legal_aid_application.applicant.has_partner_with_no_contrary_interest?) if @legal_aid_application.housing_payments? %>
+  <% if @legal_aid_application.housing_payments? %>
+    <%= render("shared/check_answers/housing_benefit", partner: @legal_aid_application.applicant.has_partner_with_no_contrary_interest?,
+                                                       parent_heading_level: parent_heading_level) %>
+  <% end %>
 
   <h2 class="govuk-heading-l"><%= t("providers.means.check_income_answers.dependants.heading-h2") %></h2>
 
-  <%= render "shared/check_answers/dependants" %>
+  <%= render "shared/check_answers/dependants", parent_heading_level: parent_heading_level %>
+
+  <% if @legal_aid_application.dependants.any? %>
+    <%= render "shared/check_answers/dependants_details", parent_heading_level: parent_heading_level %>
+  <% end %>
 
   <h2 class="govuk-heading-m"><%= t(".what_happens_next.heading") %></h2>
   <p class="govuk-body govuk-!-margin-bottom-6"><%= t(".what_happens_next.text", individual:) %></p>

@@ -1,4 +1,8 @@
-<%= govuk_summary_card(title: t(".heading"), html_attributes: { id: "app-check-your-answers__is_matter_opposed" }, heading_level: 3) do |card|
+<% card_heading_level = local_assigns[:parent_heading_level] + 1 %>
+
+<%= govuk_summary_card(title: t(".heading"),
+                       html_attributes: { id: "app-check-your-answers__is_matter_opposed" },
+                       heading_level: card_heading_level) do |card|
       unless read_only
         card.with_action do
           govuk_link_to(t("generic.change"),

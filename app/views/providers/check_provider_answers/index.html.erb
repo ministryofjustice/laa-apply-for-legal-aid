@@ -1,3 +1,4 @@
+<% parent_heading_level = 2 %>
 <% if @read_only
      notification_banner_title = t("generic.important")
      notification_banner_text = t(".banner.your_client_needs_to")
@@ -37,22 +38,24 @@
              attributes: %i[first_name last_name last_name_at_birth applied_previously date_of_birth national_insurance_number employment_status correspondence_choice address care_of home_address has_partner],
              applicant: @applicant,
              address: @address,
-             read_only: @read_only) %>
+             read_only: @read_only,
+             parent_heading_level:) %>
 
   <% if @legal_aid_application.applicant_has_partner? %>
     <h2 class="govuk-heading-l"><%= t(".section_partner.heading") %></h2>
     <%= render("shared/check_answers/partner_details",
                attributes: %i[contrary_interest first_name last_name date_of_birth national_insurance_number],
                partner: @partner,
-               read_only: @read_only) %>
+               read_only: @read_only,
+               parent_heading_level:) %>
   <% end %>
 
   <h2 class="govuk-heading-l"><%= t(".section_linking_and_copying.heading") %></h2>
-  <%= render("shared/check_answers/linking_and_copying", read_only: @read_only) %>
+  <%= render("shared/check_answers/linking_and_copying", read_only: @read_only, parent_heading_level:) %>
 
   <h2 class="govuk-heading-l"><%= t(".section_proceeding.heading") %></h2>
   <%= render("shared/check_answers/proceedings") %>
-  <%= render("shared/check_answers/proceeding_details", read_only: @read_only) %>
+  <%= render("shared/check_answers/proceeding_details", read_only: @read_only, parent_heading_level:) %>
 
   <% unless @read_only %>
     <%= if @legal_aid_application&.lead_linked_application&.confirm_link == true && @legal_aid_application&.lead_linked_application&.link_type_code == "FC_LEAD"

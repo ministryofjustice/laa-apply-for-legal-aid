@@ -1,5 +1,6 @@
 <%= page_template page_title: t(".heading"), back_link: :none do %>
   <% @legal_aid_application = legal_aid_application if @legal_aid_application.nil? %>
+  <% parent_heading_level = 2 %>
 
   <%= render "shared/application_ref", legal_aid_application: @legal_aid_application %>
 
@@ -10,6 +11,7 @@
           attributes: %i[first_name last_name last_name_at_birth changed_last_name date_of_birth age means_test national_insurance_number has_partner],
           applicant: @legal_aid_application.applicant,
           read_only: true,
+          parent_heading_level:,
         ) %>
   </section>
 
@@ -21,6 +23,7 @@
             attributes: %i[first_name last_name date_of_birth national_insurance_number],
             partner: @legal_aid_application.partner,
             read_only: true,
+            parent_heading_level:,
           ) %>
     </section>
   <% end %>
@@ -66,5 +69,6 @@
         urgency: @legal_aid_application&.urgency,
         matter_opposition: @legal_aid_application&.matter_opposition,
         read_only: true,
+        parent_heading_level:,
       ) %>
 <% end %>
