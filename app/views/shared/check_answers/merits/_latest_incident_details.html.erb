@@ -1,6 +1,11 @@
+<% card_heading_level = local_assigns[:parent_heading_level] + 1 %>
+
 <% latest_incident_details = incident&.told_on.present? && incident&.occurred_on.present?
    title = latest_incident_details ? t(".latest-incident-heading") : t(".when-contact-was-made-heading") %>
-<%= govuk_summary_card(title: title, html_attributes: { id: "app-check-your-answers__latest_incident_details" }, heading_level: 3) do |card|
+
+<%= govuk_summary_card(title:,
+                       html_attributes: { id: "app-check-your-answers__latest_incident_details" },
+                       heading_level: card_heading_level) do |card|
       url = latest_incident_details ? providers_legal_aid_application_date_client_told_incident_path(@legal_aid_application) : providers_legal_aid_application_when_contact_was_made_path(@legal_aid_application)
       unless read_only
         card.with_action do

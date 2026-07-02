@@ -1,5 +1,7 @@
 <% individual = "_with_partner" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
 
+<% parent_heading_level = 2 %>
+
 <%= page_template(
       page_title: t(".h1-heading"),
       back_link: { path: reset_providers_legal_aid_application_check_passported_answers_path(@legal_aid_application), method: :patch },
@@ -9,7 +11,7 @@
 
   <h2 class="govuk-heading-l"><%= t(".h2-heading#{individual}") %></h2>
 
-  <%= render "shared/check_answers/assets", individual: %>
+  <%= render "shared/check_answers/assets", individual:, parent_heading_level: %>
 
   <h2 class="govuk-heading-m"><%= t(".what_happens_next") %></h2>
 

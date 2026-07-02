@@ -1,8 +1,12 @@
 <% read_only = false unless local_assigns[:read_only] %>
 
-<h2 class="govuk-heading-l print-no-break-after"><%= t(".#{journey_type}.heading") %></h2>
+<% parent_heading_level = local_assigns[:parent_heading_level] %>
+<% section_heading_level = parent_heading_level %>
+<% card_heading_level = local_assigns[:parent_heading_level] + 1 %>
 
-<%= govuk_summary_card(title: t(".#{journey_type}.card_heading"), heading_level: 3, html_attributes: { id: "app-check-your-answers__vehicles" }) do |card|
+<%= govuk_heading(section_heading_level, t(".#{journey_type}.heading")) %>
+
+<%= govuk_summary_card(title: t(".#{journey_type}.card_heading"), heading_level: card_heading_level, html_attributes: { id: "app-check-your-answers__vehicles" }) do |card|
       card.with_action do
         unless read_only
           if @legal_aid_application.vehicles.any?
@@ -24,7 +28,7 @@
 <% if @legal_aid_application.vehicles.any? %>
   <% @legal_aid_application.vehicles.each_with_index do |vehicle, index| %>
     <%= govuk_summary_card(title: t(".providers.vehicle_index", sequence: index + 1),
-                           heading_level: 3,
+                           heading_level: card_heading_level,
                            html_attributes: { id: "vehicle-questions__#{index}" }) do |card|
           card.with_action do
             unless read_only

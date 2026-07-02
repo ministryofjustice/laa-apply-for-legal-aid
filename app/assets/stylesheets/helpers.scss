@@ -51,4 +51,10 @@
 .show-empty {
   min-height: 1px;
 }
+
+.app-heading-inline-link {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+}
 // stylelint-enable declaration-no-important

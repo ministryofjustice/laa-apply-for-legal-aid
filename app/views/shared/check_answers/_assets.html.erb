@@ -1,11 +1,14 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
 <% means_report = false unless local_assigns.key?(:means_report) %>
+<% parent_heading_level = local_assigns[:parent_heading_level] %>
+<% section_heading_level = parent_heading_level %>
+<% card_heading_level = parent_heading_level + 1 %>
 
-<%= render "shared/check_answers/property", read_only:, individual: %>
+<%= render "shared/check_answers/property", read_only:, individual:, parent_heading_level: section_heading_level %>
 
-<%= render "shared/check_answers/vehicles", read_only:, individual: %>
+<%= render "shared/check_answers/vehicles", read_only:, individual:, parent_heading_level: section_heading_level %>
 
-<h2 class="govuk-heading-l print-no-break-after"><%= t(".bank_accounts_heading") %></h2>
+<%= govuk_heading(section_heading_level, t(".bank_accounts_heading"), class: "print-no-break-after") %>
 
 <% if @legal_aid_application.non_passported? && !@legal_aid_application.client_uploading_bank_statements? %>
   <!-- non-passported truelayer only -->
@@ -16,47 +19,48 @@
   they are asked in the income and outgoings section of the flow.
   -->
   <% if read_only %>
-    <%= render "shared/check_answers/client_online_bank_accounts", read_only: %>
+    <%= render "shared/check_answers/client_online_bank_accounts", read_only:, parent_heading_level: section_heading_level %>
 
-    <h2 class="govuk-heading-l print-no-break-after"><%= t(".total_in_online_bank_accounts_heading") %></h2>
-    <%= render "shared/check_answers/total_in_online_bank_accounts", read_only: %>
+    <%= govuk_heading(section_heading_level, t(".total_in_online_bank_accounts_heading"), class: "print-no-break-after") %>
+
+    <%= render "shared/check_answers/total_in_online_bank_accounts", read_only:, parent_heading_level: section_heading_level %>
   <% end %>
 
 <% else %>
   <!-- passported or non-passported bank statement uploaded -->
 
   <%# current and savings accounts balances for client %>
-  <%= render "shared/check_answers/client_bank_accounts", read_only: %>
+  <%= render "shared/check_answers/client_bank_accounts", read_only:, parent_heading_level: section_heading_level %>
 <% end %>
 
 <% if @legal_aid_application&.partner %>
 
     <%# current and savings account balances for partner %>
-    <%= render "shared/check_answers/partner_bank_accounts", read_only: %>
+    <%= render "shared/check_answers/partner_bank_accounts", read_only:, parent_heading_level: section_heading_level %>
 
     <%# joint current and savings account balances for clients with partners %>
     <% if @legal_aid_application.uploading_bank_statements? || !@legal_aid_application.non_passported? %>
-      <%= render "shared/check_answers/joint_bank_accounts", read_only: %>
+      <%= render "shared/check_answers/joint_bank_accounts", read_only:, parent_heading_level: section_heading_level %>
     <% end %>
 <% end %>
 
 <%#  offline savings accounts for non-passported truelayer %>
 <% if @legal_aid_application.non_passported? && !@legal_aid_application.uploading_bank_statements? %>
-  <%= render "shared/check_answers/offline_savings_accounts", read_only: %>
+  <%= render "shared/check_answers/offline_savings_accounts", read_only:, parent_heading_level: section_heading_level %>
 <% end %>
 
-<h2 class="govuk-heading-l print-no-break-after"><%= t(".savings_and_assets_heading") %></h2>
+<%= govuk_heading(section_heading_level, t(".savings_and_assets_heading"), class: "print-no-break-after") %>
 
-<%#  savings and investments %>
-<%= render("shared/check_answers/savings_and_investments", read_only:, individual:) %>
+<%# savings and investments %>
+<%= render("shared/check_answers/savings_and_investments", read_only:, individual:, parent_heading_level: section_heading_level) %>
 
-<%#  other assets %>
-<%= render("shared/check_answers/other_assets", read_only:, individual:) %>
+<%# other assets %>
+<%= render("shared/check_answers/other_assets", read_only:, individual:, parent_heading_level: section_heading_level) %>
 
-<%#  asset restrictions %>
-<%= render("shared/check_answers/restrictions", read_only:, individual:) if @legal_aid_application.own_capital? %>
+<%# asset restrictions %>
+<%= render("shared/check_answers/restrictions", read_only:, individual:, parent_heading_level: section_heading_level) if @legal_aid_application.own_capital? %>
 
-<%#  TODO: legacy policy disregards - to be removed as part of AP-5510 when there are no applications with policy disregards %>
+<%# TODO: legacy policy disregards - to be removed as part of AP-5510 when there are no applications with policy disregards %>
 <% if @legal_aid_application.policy_disregards.present? %>
   <%= render(
         "shared/check_answers/one_link_section",
@@ -68,9 +72,9 @@
       ) %>
 <% end %>
 
-<%#  capital disregards %>
+<%# capital disregards %>
 <% if means_report %>
   <%= render("providers/means_reports/capital_disregards", read_only:, individual:) %>
 <% else %>
-  <%= render("shared/check_answers/capital_disregards", read_only:, individual:) %>
+  <%= render("shared/check_answers/capital_disregards", read_only:, individual:, parent_heading_level: section_heading_level) %>
 <% end %>

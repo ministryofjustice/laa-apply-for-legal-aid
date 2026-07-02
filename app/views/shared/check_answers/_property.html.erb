@@ -1,7 +1,8 @@
 <% read_only = false unless local_assigns.key?(:read_only) %>
+<% card_heading_level = local_assigns[:parent_heading_level] + 1 %>
 
 <%= govuk_summary_card(title: t("shared.check_answers.assets.property.heading_own_home"),
-                       heading_level: 3,
+                       heading_level: card_heading_level,
                        html_attributes: { id: "app-check-your-answers__property_ownership" }) do |card|
       unless read_only
         card.with_action do
@@ -20,7 +21,8 @@
     end %>
 
 <% if @legal_aid_application.own_home? %>
-  <%= govuk_summary_card(title: t("shared.check_answers.assets.property.heading_property_details#{individual}"), heading_level: 3,
+  <%= govuk_summary_card(title: t("shared.check_answers.assets.property.heading_property_details#{individual}"),
+                         heading_level: card_heading_level,
                          html_attributes: { id: "app-check-your-answers__property_details_questions" }) do |card|
         unless read_only
           card.with_action do

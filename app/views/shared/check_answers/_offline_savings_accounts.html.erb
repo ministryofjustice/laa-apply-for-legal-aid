@@ -1,7 +1,9 @@
+<% card_heading_level = local_assigns[:parent_heading_level] + 1 %>
+
 <% read_only = false unless local_assigns[:read_only] %>
 
 <%= govuk_summary_card(title: t(".heading"),
-                       heading_level: 3,
+                       heading_level: card_heading_level,
                        html_attributes: { id: "app-check-your-answers__offline_savings_accounts" }) do |card|
       unless read_only
         card.with_action do

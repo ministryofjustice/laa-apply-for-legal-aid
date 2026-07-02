@@ -1,8 +1,9 @@
 <% capital_disregard_type = capital_disregard.mandatory? ? "mandatory" : "discretionary" %>
 <% capital_disregard_name = t("providers.means.capital_disregards.#{capital_disregard_type}.#{capital_disregard.name}") %>
+<% card_heading_level = local_assigns[:parent_heading_level] + 1 %>
 
 <%= govuk_summary_card(title: t(".#{capital_disregard_type}.heading", count: index + 1),
-                       heading_level: 3,
+                       heading_level: card_heading_level,
                        html_attributes: { id: "#{capital_disregard_type}-capital-disregard-questions_#{index}" }) do |card|
       unless read_only
         card.with_action do

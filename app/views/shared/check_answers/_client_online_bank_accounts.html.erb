@@ -1,5 +1,7 @@
+<% card_heading_level = local_assigns[:parent_heading_level] + 1 %>
+
 <%= govuk_summary_card(title: t(".card_heading"),
-                       heading_level: 3,
+                       heading_level: card_heading_level,
                        html_attributes: { id: "applicant-bank-accounts-details" }) do |card|
       unless read_only
         card.with_action do

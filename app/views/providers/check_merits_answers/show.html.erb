@@ -1,3 +1,5 @@
+<% parent_heading_level = 2 %>
+
 <%= form_with(
       model: @form,
       url: continue_providers_legal_aid_application_check_merits_answers_path(@legal_aid_application),
@@ -32,6 +34,7 @@
           urgency: @legal_aid_application&.urgency,
           matter_opposition: @legal_aid_application&.matter_opposition,
           read_only: false,
+          parent_heading_level:,
         ) %>
 
     <% if @legal_aid_application.special_children_act_proceedings? %>

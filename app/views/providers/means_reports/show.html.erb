@@ -2,6 +2,7 @@
   <% @legal_aid_application = legal_aid_application if @legal_aid_application.nil? %>
   <% @cfe_result = cfe_result if @cfe_result.nil? %>
   <% @manual_review_determiner = manual_review_determiner if @manual_review_determiner.nil? %>
+  <% parent_heading_level = 2 %>
 
   <p class="govuk-body"><%= govuk_tag(text: t(".review_required")) if @manual_review_determiner.manual_review_required? %></p>
 
@@ -15,6 +16,7 @@
         attributes: %i[first_name last_name last_name_at_birth changed_last_name date_of_birth age means_test national_insurance_number care_of home_address],
         applicant: @legal_aid_application.applicant,
         read_only: true,
+        parent_heading_level:,
       ) %>
 
   <% if @legal_aid_application.applicant_has_partner? %>
@@ -24,6 +26,7 @@
           attributes: %i[first_name last_name date_of_birth national_insurance_number],
           partner: @legal_aid_application.partner,
           read_only: true,
+          parent_heading_level:,
         ) %>
   <% end %>
 

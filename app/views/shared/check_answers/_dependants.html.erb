@@ -1,3 +1,4 @@
+<% card_heading_level = local_assigns[:parent_heading_level] + 1 %>
 <% read_only = false unless local_assigns.key?(:read_only) %>
 <% means_report = false unless local_assigns.key?(:means_report) %>
 
@@ -11,7 +12,11 @@
            end
    end %>
 
-<%= govuk_summary_card(title: t("providers.means.check_income_answers.dependants.heading-h3"), html_attributes: { id: "app-check-your-answers__dependants" }) do |card| %>
+<%= govuk_summary_card(
+      title: t("providers.means.check_income_answers.dependants.heading-h3"),
+      html_attributes: { id: "app-check-your-answers__dependants" },
+      heading_level: card_heading_level,
+    ) do |card| %>
   <% unless read_only %>
     <%= card.with_action { govuk_link_to(t("generic.change"), url, "aria-label": "#{t('generic.change')} #{t("shared.check_answers.dependants.#{individual}_has_dependants")}") } %>
   <% end %>
@@ -26,7 +31,8 @@
 <% if @legal_aid_application.dependants %>
   <% @legal_aid_application.dependants.each_with_index do |dependant, index| %>
     <%= govuk_summary_card(title: t(".dependant_name", position: index + 1),
-                           html_attributes: { id: "app-check-your-answers__dependant_#{index + 1}" }) do |card| %>
+                           html_attributes: { id: "app-check-your-answers__dependant_#{index + 1}" },
+                           heading_level: card_heading_level) do |card| %>
       <% unless read_only %>
         <%= card.with_action { govuk_link_to(t("generic.change"), providers_legal_aid_application_means_dependant_path(@legal_aid_application, dependant), "aria-label": "#{t('generic.change')} Dependant #{index + 1}: #{dependant.name}") } %>
       <% end %>

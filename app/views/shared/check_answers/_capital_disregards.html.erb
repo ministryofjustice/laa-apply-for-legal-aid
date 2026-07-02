@@ -1,5 +1,8 @@
+<% parent_heading_level = local_assigns[:parent_heading_level] %>
+<% card_heading_level = parent_heading_level + 1 %>
+
 <%= govuk_summary_card(title: t(".heading#{individual}"),
-                       heading_level: 3,
+                       heading_level: card_heading_level,
                        html_attributes: { id: "app-check-your-answers__capital_disregards" }) do |card|
       card.with_summary_list(actions: !read_only) do |summary_list|
         summary_list.with_row(html_attributes: { id: "app-check-your-mandatory_capital_disregards" }) do |row|
@@ -29,9 +32,9 @@
     end %>
 
 <% @legal_aid_application.mandatory_capital_disregards.each_with_index do |capital_disregard, index| %>
-  <%= render("shared/check_answers/capital_disregard_details", capital_disregard:, index:, read_only:) %>
+  <%= render("shared/check_answers/capital_disregard_details", capital_disregard:, index:, read_only:, parent_heading_level:) %>
 <% end %>
 
 <% @legal_aid_application.discretionary_capital_disregards.each_with_index do |capital_disregard, index| %>
-  <%= render("shared/check_answers/capital_disregard_details", capital_disregard:, index:, read_only:) %>
+  <%= render("shared/check_answers/capital_disregard_details", capital_disregard:, index:, read_only:, parent_heading_level:) %>
 <% end %>

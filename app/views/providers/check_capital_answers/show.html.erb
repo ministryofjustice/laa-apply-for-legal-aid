@@ -1,10 +1,12 @@
+<% parent_heading_level = 2 %>
+
 <% individual = "_with_partner" if @legal_aid_application.applicant.has_partner_with_no_contrary_interest? %>
 
 <%= page_template(page_title: t(".h1-heading"), caption: t(".caption"), column_width: "full") do %>
 
   <h2 class="govuk-heading-l"><%= t(".capital-section-heading#{individual}") %></h2>
 
-  <%= render "shared/check_answers/assets", individual: %>
+  <%= render "shared/check_answers/assets", individual:, parent_heading_level: %>
 
   <h2 class="govuk-heading-m"><%= t(".what_happens_next.heading") %></h2>
   <p class="govuk-body govuk-!-margin-bottom-7"><%= t(".what_happens_next.text") %></p>
