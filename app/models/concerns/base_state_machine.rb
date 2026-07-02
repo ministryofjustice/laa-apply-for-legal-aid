@@ -167,6 +167,7 @@ class BaseStateMachine < ApplicationRecord
 
     event :start_application_edit_flow do
       transitions from: %i[
+                    initiated
                     checking_merits_answers
                     provider_entering_merits
                   ],
