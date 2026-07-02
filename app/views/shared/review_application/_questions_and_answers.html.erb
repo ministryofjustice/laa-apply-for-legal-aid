@@ -49,9 +49,11 @@
                  parent_heading_level:) %>
     <% end %>
 
-    <h3 class="govuk-heading-m"><%= t("providers.means.check_income_answers.dependants.heading-h2") %></h3>
+    <% if @legal_aid_application.dependants.any? %>
+      <h3 class="govuk-heading-m"><%= t("providers.means.check_income_answers.dependants.heading-h2") %></h3>
 
-    <%= render "shared/check_answers/dependants", read_only: true, parent_heading_level: %>
+      <%= render "shared/check_answers/dependants", read_only: true, parent_heading_level: %>
+    <% end %>
   <% end %>
 
   <h2 class="govuk-heading-l"><%= t(".editing-heading.capital-and-assets") %></h2>

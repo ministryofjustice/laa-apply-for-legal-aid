@@ -51,7 +51,13 @@
                          "your client"
                        end %>
   <h2 class="govuk-heading-m print-no-break-after"><%= t("providers.means.check_income_answers.dependants.heading-h2") %></h2>
-  <%= render "shared/check_answers/dependants", individual: individual_text, read_only: true, means_report: true, parent_heading_level: %>
+
+  <%= render "shared/check_answers/dependants", individual: individual_text, read_only: true %>
+
+  <% if @legal_aid_application.dependants.any? %>
+    <%= render "shared/check_answers/dependants_details", individual: individual_text, read_only: true, means_report: true, parent_heading_level: %>
+  <% end %>
+
 <% end %>
 
 <%= render "capital_result" %>

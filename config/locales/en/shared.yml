@@ -385,7 +385,6 @@ en:
         nino: National Insurance number
         has_partner: Does your client have a partner?
       dependants:
-        dependant_name: "Dependant %{position}"
         client_has_dependants: Client has dependants?
         client_with_partner_has_dependants: Client or their partner has dependants?
         add-new: Add dependant
@@ -396,6 +395,8 @@ en:
         in_full_time_education: Are they in full-time education or training?
         income: Do they receive any income?
         assets: Do they have assets worth more than £8,000?
+      dependants_details:
+        dependant_name: "Dependant %{position}"
       emergency_costs:
         heading: Emergency cost limit
         request_higher_limit: Higher cost limit requested
