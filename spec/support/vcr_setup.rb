@@ -14,7 +14,10 @@ VCR.configure do |vcr_config|
 
   vcr_config.ignore_request do |request|
     uri = URI(request.uri).to_s
-    uri.include?("__identify__") || uri =~ /127\.0\.0\.1.*(session|shutdown|status)/
+
+    uri.include?("__identify__")
+      || uri =~ /127\.0\.0\.1.*(session|shutdown|status)/ # ignore chromedriver requests to the local server for session management and shutdown
+      || RSpec.current_example&.metadata&.fetch(:pact, false) # ignore pact test requests to its own mock server
   end
 
   vcr_config.configure_rspec_metadata!

@@ -141,6 +141,8 @@ group :test do
   gem "cucumber-rails", ">= 2.4.0", require: false
   gem "database_cleaner"
   gem "launchy"
+  gem "pact", ">= 2.0.1"
+  gem "pact_broker-client"
   gem "puffing-billy", ">= 4.0.0", require: false
   gem "rack-pjax"
   gem "rails-controller-testing"

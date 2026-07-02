@@ -1,0 +1,94 @@
+# Action to perform the following pact flow
+#
+# Consumer publishes pact
+#         │
+#         ▼
+# Pact Broker webhook
+#         │
+#         ▼
+# Starts provider workflow
+#         │
+#         ▼
+# Provider publishes verification
+#         │
+#         ▼
+# Consumer runs can-i-deploy repeatedly until provider verification is successful/failure or timeout
+
+name: Publish and verify Pacts
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pact-consumer:
+    runs-on: ubuntu-latest
+
+    env:
+      RACK_ENV: test
+      RAILS_ENV: test
+      DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1/apply_for_legal_aid_test"
+
+    services:
+      postgres:
+        image: postgres:18.1-alpine
+        env:
+          POSTGRES_DB: apply_for_legal_aid_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 #--v7.0.0
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@12fd324f1d0b43274fdc8130f6980590a667c455 #--v1.312.0
+        with:
+          bundler-cache: true
+
+      - name: Setup test database
+        run: bin/rails db:prepare
+
+      - name: Run contract tests
+        run: |
+          bundle exec rails pact:consumer:generate
+
+      - name: Verify pact generated
+        run: |
+          find spec/pacts -name '*.json'
+
+      - name: Publish pacts
+        env:
+          PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
+          PACT_BROKER_USERNAME: ${{ secrets.PACT_BROKER_USERNAME }}
+          PACT_BROKER_PASSWORD: ${{ secrets.PACT_BROKER_PASSWORD }}
+          GITHUB_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          GITHUB_HEAD_REF: ${{ github.head_ref }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
+        run: |
+          bundle exec rails pact:consumer:publish
+
+      - name: Verify pacts (can i merge)
+        env:
+          PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
+          PACT_BROKER_USERNAME: ${{ secrets.PACT_BROKER_USERNAME }}
+          PACT_BROKER_PASSWORD: ${{ secrets.PACT_BROKER_PASSWORD }}
+          GITHUB_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          bundle exec pact-broker can-i-deploy \
+            --pacticipant laa-apply-for-legal-aid \
+            --version "$GITHUB_SHA" \
+            --broker-base-url "$PACT_BROKER_BASE_URL" \
+            --broker-username "$PACT_BROKER_USERNAME" \
+            --broker-password "$PACT_BROKER_PASSWORD" \
+            --retry-while-unknown 30 \
+            --retry-interval 10
