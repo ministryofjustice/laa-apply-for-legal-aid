@@ -29,6 +29,7 @@ module CCMS
             set_lead_proceeding: :da001,
             provider:,
             office:,
+            autogranted:,
           )
         end
 
@@ -51,6 +52,7 @@ module CCMS
         let(:domestic_abuse_summary) { legal_aid_application.domestic_abuse_summary }
         let(:ccms_reference) { "300000054005" }
         let(:submission) { create(:submission, :case_ref_obtained, legal_aid_application:, case_ccms_reference: ccms_reference) }
+        let(:autogranted) { false }
 
         before do
           allow(proceeding).to receive(:proceeding_case_id).and_return(55_000_001)

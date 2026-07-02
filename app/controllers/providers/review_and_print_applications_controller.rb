@@ -15,6 +15,7 @@ module Providers
     def continue
       unless draft_selected?
         legal_aid_application.merits_complete!(current_provider)
+        legal_aid_application.update!(autogranted: Autograntable.call(legal_aid_application))
         legal_aid_application.generate_reports!
       end
       continue_or_draft

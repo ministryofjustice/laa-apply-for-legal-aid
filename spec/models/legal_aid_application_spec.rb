@@ -2472,31 +2472,6 @@ RSpec.describe LegalAidApplication do
     end
   end
 
-  describe "auto_grant_special_children_act?" do
-    subject { legal_aid_application.auto_grant_special_children_act? }
-
-    let(:legal_aid_application) { create(:legal_aid_application, applicant:) }
-    let(:applicant) { create(:applicant) }
-    let(:proceeding) { create(:proceeding, :pb059, legal_aid_application: legal_aid_application) }
-
-    before { legal_aid_application.proceedings << proceeding }
-
-    it "calls the Autograntable service" do
-      expect(Autograntable).to receive(:call).with(legal_aid_application).and_call_original
-      legal_aid_application.auto_grant_special_children_act?
-    end
-
-    context "when the application has autograntable special childrens act proceedings" do
-      it { is_expected.to be true }
-    end
-
-    context "when the application does not have autograntable special childrens act proceedings" do
-      let(:proceeding) { create(:proceeding, :da001, legal_aid_application: legal_aid_application) }
-
-      it { is_expected.to be false }
-    end
-  end
-
   describe "ecct_routing?" do
     subject { legal_aid_application.ecct_routing? }
 

@@ -24,7 +24,8 @@ module CCMS
                  provider:,
                  opponents:,
                  domestic_abuse_summary:,
-                 office:)
+                 office:,
+                 autogranted:)
         end
 
         let(:applicant) do
@@ -68,6 +69,7 @@ module CCMS
         let(:request_xml) { requestor.__send__(:request_xml) }
         let(:expected_request_xml) { ccms_data_from_file("case_add_request.xml") }
         let(:request_created_at) { Time.zone.parse("2020-11-24T11:54:29.000") }
+        let(:autogranted) { false }
 
         before do
           create(:cfe_v3_result, submission: cfe_submission)

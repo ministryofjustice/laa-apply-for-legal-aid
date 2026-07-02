@@ -488,7 +488,7 @@ module CCMS
     end
 
     def bypass_manual_review_in_ccms?(_options)
-      !manual_case_review_required? || legal_aid_application.auto_grant_special_children_act?
+      !manual_case_review_required? || legal_aid_application.autogranted
     end
 
     def manual_case_review_required?

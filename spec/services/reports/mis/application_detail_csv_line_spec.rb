@@ -27,7 +27,8 @@ module Reports
                domestic_abuse_summary:,
                ccms_submission:,
                own_vehicle: false,
-               merits_submitted_at: Time.current)
+               merits_submitted_at: Time.current,
+               autogranted:)
       end
 
       let(:application_with_multiple_employments) do
@@ -181,6 +182,7 @@ module Reports
       let(:bonds_val) { 374.22 }
       let(:la_val) { 1102.22 }
       let(:none_selected) { nil }
+      let(:autogranted) { false }
 
       let(:second_home_value) { 156_000 }
       let(:second_home_mortgage) { 56_000 }
@@ -943,7 +945,7 @@ module Reports
 
         describe "autogranted" do
           context "when the application is autogranted" do
-            before { allow(legal_aid_application).to receive(:auto_grant_special_children_act?).and_return(true) }
+            let(:autogranted) { true }
 
             it "sets autogranted? to Yes" do
               expect(value_for("Autogranted?")).to eq "Yes"
@@ -951,8 +953,6 @@ module Reports
           end
 
           context "when the application is not autogranted" do
-            before { allow(legal_aid_application).to receive(:auto_grant_special_children_act?).and_return(false) }
-
             it "sets autogranted? to No" do
               expect(value_for("Autogranted?")).to eq "No"
             end

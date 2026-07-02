@@ -152,6 +152,31 @@ RSpec.describe Providers::ReviewAndPrintApplicationsController do
           expect(application.reload.summary_state).to eq :submitted
         end
 
+        it "calls the Autograntable service" do
+          expect(Autograntable).to receive(:call).with(application)
+          request
+        end
+
+        it "persists the autogranted value of false" do
+          expect { request }.to change { application.reload.autogranted }.from(nil).to(false)
+        end
+
+        context "when the application is autograntable" do
+          let(:application) do
+            create(:legal_aid_application,
+                   :with_everything,
+                   :with_proceedings,
+                   :with_involved_children,
+                   :checking_merits_answers,
+                   explicit_proceedings: %i[pb003])
+          end
+          let(:smtl) { create(:legal_framework_merits_task_list, :pb003_application, legal_aid_application: application) }
+
+          it "persists the autogranted value of true" do
+            expect { request }.to change { application.reload.autogranted }.from(nil).to(true)
+          end
+        end
+
         context "when the Setting.enable_ccms_submission?is turned on" do
           it "transitions to generating_reports state" do
             request

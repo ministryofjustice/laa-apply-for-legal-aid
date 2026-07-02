@@ -25,7 +25,8 @@ module CCMS
                  populate_vehicle: true,
                  with_bank_accounts: 2,
                  provider:,
-                 office:)
+                 office:,
+                 autogranted:)
         end
 
         let(:proceeding) { legal_aid_application.proceedings.detect { |p| p.ccms_code == "DA001" } }
@@ -38,6 +39,7 @@ module CCMS
         let(:requestor) { described_class.new(submission, {}) }
         let(:xml) { requestor.formatted_xml }
         let!(:success_prospect) { :likely }
+        let(:autogranted) { false }
 
         before do
           create(:chances_of_success, success_prospect:, success_prospect_details: "details", proceeding:)
